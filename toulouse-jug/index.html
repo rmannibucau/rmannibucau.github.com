@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ApachEE - Make modern and standard applications</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+        <script src="js/jquery.js"></script>
+        <script src="js/tagcanvas.js"></script>
+	</head>
+
+	<body>
+		<div class="reveal">
+
+			<div class="slides">
+				<section data-markdown>
+                    <script type="text/template">
+                        # JavaEE 6 => "ApachEE"
+                        ### Make Modern but Standard Applications
+                        
+                        [Romain Manni-Bucau](http://rmannibucau.wordpress.com)
+                        
+                        [<img width="15%" src="images/twitter.png">](https://twitter.com/rmannibucau) [<img width="15%" src="images/github.png">](https://github.com/rmannibucau)
+                    </script>
+				</section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Agenda
+
+                        [<img height="15%" src="images/codi_logo.jpg">](http://myfaces.apache.org/extensions/cdi/)
+                        [<img height="15%" src="images/seam_icon_large.png">](http://www.seamframework.org/)
+                        [<img height="15%" src="images/deltaspike-logo.png">](http://incubator.apache.org/deltaspike/)
+                        [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                        [<img height="15%" src="images/arquillian_logo_200px.png">](http://arquillian.org/)
+                    </script>
+				</section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Who am I?
+
+                        [<img height="15%" src="images/rmannibucau.png">](http://rmannibucau.wordpress.com/)
+                        
+                        Java/JavaEE developer at Atos Worldline (mid 2010)
+                        Apache contributor and commiter
+                        
+                        [<img width="15%" src="images/twitter.png">](https://twitter.com/rmannibucau)
+                        [<img width="15%" src="images/github.png">](https://github.com/rmannibucau)
+                    </script>
+				</section>
+
+                <section>
+                    <h2>JavaEE 6 (in 2 words)</h2>
+
+                    <p>JSR 316 -> ~2010, ~30 specs...and profiles</p>
+                    <div>
+                        <canvas width="700%" height="500%" id="javaee-cloud">
+                            <p>Internet Explorer not supported!</p>
+                            <ul>
+                                <li><a href="#">Servlet</a></li>
+                                <li><a href="#">JSP</a></li>
+                                <li><a href="#">EL</a></li>
+                                <li><a href="#">JSTL</a></li>
+                                <li><a href="#">JSF</a></li>
+                                <li><a href="#">JSR-250</a></li>
+                                <li><a href="#">EJB</a></li>
+                                <li><a href="#">JTA</a></li>
+                                <li><a href="#">JPA</a></li>
+                                <li><a href="#">Bean Validation</a></li>
+                                <li><a href="#">Managed Beans</a></li>
+                                <li><a href="#">Interceptors</a></li>
+                                <li><a href="#">CDI</a></li>
+                                <li><a href="#">DI</a></li>
+                                <li><a href="#">JMS</a></li>
+                                <li><a href="#">JavaMail</a></li>
+                                <li><a href="#">Connector</a></li>
+                                <li><a href="#">Web Services</a></li>
+                                <li><a href="#">JAX-WS</a></li>
+                                <li><a href="#">JAX-RPC</a></li>
+                                <li><a href="#">JAX-RS</a></li>
+                                <li><a href="#">JACC</a></li>
+                                <li><a href="#">JASPIC</a></li>
+                            </ul>
+                        </canvas>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                           $('#javaee-cloud').tagcanvas({
+                                textColour : null,
+                                shape: 'vcylinder',
+                                textHeight: 30
+                           })
+                        });
+                    </script>
+				</section>
+
+                <section>
+                    <h2>The Web Profile</h2>
+
+                    <p>Take the best of standards de facto!</p>
+                    <div>
+                        <canvas width="700%" height="500%" id="javaee-cloud-webprofile">
+                            <p>Internet Explorer not supported!</p>
+                            <ul>
+                                <li><a href="#">Servlet</a></li>
+                                <li><a href="#">JSP</a></li>
+                                <li><a href="#">EL</a></li>
+                                <li><a href="#">JSTL</a></li>
+                                <li><a href="#">JSF</a></li>
+                                <li><a href="#">JSR-250</a></li>
+                                <li><a href="#">EJB lite</a></li>
+                                <li><a href="#">JTA</a></li>
+                                <li><a href="#">JPA</a></li>
+                                <li><a href="#">Bean Validation</a></li>
+                                <li><a href="#">Managed Beans</a></li>
+                                <li><a href="#">Interceptors</a></li>
+                                <li><a href="#">CDI</a></li>
+                                <li><a href="#">DI</a></li>                                
+                            </ul>
+                        </canvas>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                           $('#javaee-cloud-webprofile').tagcanvas({
+                                textColour : null,
+                                shape: 'vcylinder',
+                                textHeight: 30
+                           })
+                        });
+                    </script>
+				</section>
+                
+                <section data-markdown>
+                        <script type="text/template">
+                            ## CDI => IoC made standard!
+                                
+                                public class AnotherBean {
+                                    @Inject
+                                    ABean bean;
+                                    
+                                    @Inject @SomeQualifier
+                                    ThirdBean third;
+                                    
+                                    @Inject
+                                    Event<Foo> fooEvent;
+                                    
+                                    @PostConstruct
+                                    public void init() {
+                                        // ...
+                                    }
+                                    
+                                    @Produces
+                                    public Bar produces() {
+                                        return new Bar();
+                                    }
+                                }
+                                
+                            And so on...
+                        </script>
+                    </section>
+
+				<section>
+					<section data-markdown>
+                        <script type="text/template">
+                            # Apache Codi
+
+                            [<img height="15%" src="images/codi_logo.jpg">](http://myfaces.apache.org/extensions/cdi/)
+                        </script>
+                    </section>
+					<section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi
+
+                            [<img height="15%" src="images/myfaces.jpg">](http://myfaces.apache.org)
+
+                            * Subproject of Apache MyFaces (JSF implementation)
+                            * Aims to add to JSF some CDI features
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi :: JPA
+
+                            *Highly "JSE" oriented*
+                            
+                            * ConfigurableDataSource (get the config from CDI)
+
+                                    <property name="openjpa.ConnectionDriverName"
+                                              value="org.apache.myfaces.extensions.cdi
+                                                    .jpa.impl.datasource.ConfigurableDataSource" />
+
+                            * @Transactional, @TransactionScoped
+
+                                    @Transactional
+                                    public void delete(final Entity entity) {
+                                        em.remove(em.merge(entity));
+                                    }
+
+                            * ...
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi :: I18N
+                            
+                            Typed resource bundles
+
+                                public interface MyBundle { // default -> org.foo.my_bundle.properties
+                                    public class MyKey implements BundleKey, MyBundle {} //-> my_key
+                                    
+                                    @Named("secondKey")
+                                    public class MyValue extends BundleValue implements MyBundle {}
+                                }
+
+                                public class MyBean {
+                                    @Inject @Bundle(MyBundle.class) ResourceBundle bundle;
+                                    @Inject MyBundle.MyValue value;
+                                    
+                                    public String valueFromBundle() {
+                                        return bundle.getValue(MyBundle.MyKey.class);
+                                    }
+                                    
+                                    public String directValue() {
+                                        return value.toString();
+                                    }
+                                }                               
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi :: Type safety
+
+                                    @Page(basePath = "admin")
+                                    public interface AppPages extends ViewConfig {
+                                        @Page(navigation = Page.NavigationMode.REDIRECT)
+                                        public class Dashboard implements AppPages {}
+                                    }
+
+                                    // then in controller
+                                    public Class<? extends ViewConfig> goToDashboard() {
+                                        someControllerAction();
+                                        return AppPages.Dashboard.class;
+                                    }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi :: Security
+
+                                @Page(basePath = "secured")
+                                public interface SecuredPages extends ViewConfig {
+                                    @Page(navigation = Page.NavigationMode.REDIRECT) 
+                                    @Secured(AccessVoter.class) // works for "normal" methods too
+                                    public class Dashboard implements SecuredPages {}
+                                }
+
+                                @ApplicationScoped
+                                public class AccessVoter extends AbstractAccessDecisionVoter {
+                                    @Inject UserController user;
+                                    @Inject @Jsf MessageContext mc; // provided by Codi
+                                    
+                                    public void checkPermission(final InvocationContext ic, final Set<SecurityViolation> violations) {
+                                        if (!user.isLoggedIn()) {
+                                            violations.add(newSecurityViolation(mc.message().text("{user_violation}").toText()));
+                                        }
+                                    }
+
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache Codi :: Already too much slides
+
+                            * MessageResolver
+                            * MessageInterpolator
+                            * LocaleResolver
+                            * ....and much more fluent API "string" oriented
+                            * [Codi Documentation](https://cwiki.apache.org/EXTCDI/)
+                        </script>
+                    </section>
+				</section>
+
+                <section>
+					<section data-markdown>
+                        <script type="text/template">
+                            # JBoss Seam
+
+                            [<img height="15%" src="images/seam_icon_large.png">](http://www.seamframework.org/)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## This is designed for Weld!
+                        </script>
+                    </section>
+                    <section>
+                        <h2>Seam :: Modules</h2>
+
+                        <p>Several modules:</p>
+                        <div>
+                            <canvas width="700%" height="500%" id="seam-modules">
+                                <p>Internet Explorer not supported!</p>
+                                <ul>
+                                    <li><a href="#">Solder</a></li>
+                                    <li><a href="#">Catch</a></li>
+                                    <li><a href="#">Config</a></li>
+                                    <li><a href="#">Cron</a></li>
+                                    <li><a href="#">JMS</a></li>
+                                    <li><a href="#">Persistence</a></li>
+                                    <li><a href="#">Remoting</a></li>
+                                    <li><a href="#">REST</a></li>
+                                    <li><a href="#">Security</a></li>
+                                    <li><a href="#">Servlet</a></li>
+                                    <li><a href="#">Social</a></li>
+                                    <li><a href="#">Spring</a></li>
+                                    <li><a href="#">Validation</a></li>
+                                    <li><a href="#">...</a></li>                                
+                                </ul>
+                            </canvas>
+                        </div>
+
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                               $('#seam-modules').tagcanvas({
+                                    textColour : null,
+                                    shape: 'vcylinder',
+                                    textHeight: 30
+                               })
+                            });
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## JBoss Seam :: Solder, basis
+
+                            Basic CDI extensions and tools to your own ones
+
+                                @Requires("javax.persistence.EntityManager") // highly not portable
+                                public class MyBeanDependingOnFoo {}
+
+                            -
+
+                                @Inject Expressions expressions;
+
+                                // then
+                                expressions.evaluateValueExpression("#{fruitBowl.fruitName}");
+
+                            -
+
+                                @Inject @Resource("WEB-INF/beans.xml") URL beansXml;
+
+                            
+                            -
+
+                            * AnnotatedTypeBuilder, AnnotationInstanceProvider, AnnotationInspector...
+                            * BeanManagerAware
+                            * ...
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Solder :: Logging and R. bundles
+
+                                @MessageLogger
+                                public interface CelebritySightingLog {
+                                    @Log @Message("Spotted celebrity %s!")
+                                    void spottedCelebrity(String name);
+                                }
+
+                                // then in beans
+                                @Inject @Category("trains")
+                                private TrainSpotterLog log;
+
+                                // or if you just want the default logger
+                                @Inject
+                                private Logger logger;
+
+                            -
+
+                                @MessageBundle
+                                public interface TrainMessages {
+                                    @Message("No trains spotted due to %s")
+                                    String noTrainsSpotted(String cause);
+                                }
+
+                                // then in beans
+                                @Inject @MessageBundle
+                                private TrainMessages messages;
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Solder :: Service Handler
+
+                                // technical handler
+                                class CustomHandler {
+                                   @Inject MyHelper helper;
+                                  
+                                   @AroundInvoke
+                                   Object handle(InvocationContext ctx) {
+                                      return helper.hanlde(ctx);
+                                   }
+                                }
+
+                                // api
+                                @ServiceHandlerType(CustomHandler.class)
+                                @Retention(RUNTIME)
+                                @Target({TYPE})
+                                @interface CustomService {}
+
+                                // usage
+                                @CustomService
+                                interface MyService {
+                                   public Foo createFoo();
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Solder :: XML
+
+                                <?xml version="1.0" encoding="UTF-8"?>
+                                <beans xmlns="http://java.sun.com/xml/ns/javaee"
+                                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                       xmlns:s="urn:java:ee" 
+                                       xmlns:my="urn:java:org.jboss.solder.config.xml.test.method">
+
+                                   <!-- same for fields exists -->
+                                    <my:MethodBean>
+                                        <my:doStuff>
+                                            <s:Produces/>
+                                            <my:Qualifier1/>
+                                            <s:parameters>
+                                                <s:array dimensions="2">
+                                                    <my:Qualifier2/>
+                                                    <my:MethodValueBean/>
+                                                </s:array>
+                                            </s:parameters>
+                                        </my:doStuff>
+                                    </my:MethodBean>
+                                </beans>
+
+                            A smell of spring....in worse
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Seam :: Security
+
+                            * org.jboss.seam.security.Authenticator
+                            * Custom model (JPA oriented)
+
+                            -
+
+                                    @Entity
+                                    @IdentityEntity(IDENTITY_OBJECT)
+                                    public class IdentityObject implements Serializable {  
+                                        @Id @GeneratedValue private Long id;
+                                        @IdentityProperty(PropertyType.NAME)
+                                        private String name;
+
+                                        @ManyToOne @IdentityProperty(PropertyType.TYPE)
+                                        @JoinColumn(name = "IDENTITY_OBJECT_TYPE_ID")
+                                        private IdentityObjectType type;
+                                    }
+
+                            -
+
+                                    // then
+                                    @Inject IdentitySession identitySession;
+                                    // offers access to model management
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Seam :: Internationalization
+
+                                @Inject
+                                private MessageFactory factory;
+
+                                // then
+                                MessageBuilder builder = factory.info("Bla {0} bla {1} bla", 2013, "green");
+                                return builder.build().getText();
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Seam :: JSF
+
+                                // phase
+                                public void observeRenderResponse(@Observes @RenderResponse PhaseEvent e) {}
+
+                                // temporal
+                                public void observeBefore(@Observes @Before PhaseEvent e) {}
+                                public void observeAfter(@Observes @After PhaseEvent e) {}
+
+                                // both can be combined
+
+                                // component
+                                public void observePrePasswordValidation(@Observes @Component("form:password") PreValidateEvent e) {}
+
+                            * Bunch of events
+                            * @RenderScoped, @ViewScoped
+                            * ...
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## throw new TooMuchSlideException()
+
+                            * Bunch of extension to replace a full JavaEE server (REST, JMS...)
+                            * BVal integration (org.jboss.seam.validation.InjectingConstraintValidatorFactory), method validation
+                            * Spring integration
+                            * ...
+                        </script>
+                    </section>
+			    </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            # Apache DeltaSpike
+
+                            [<img height="15%" src="images/deltaspike-logo.png">](http://incubator.apache.org/deltaspike/)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Why DeltaSpike?
+
+                            <img height="15%" src="images/merge.png">
+
+                            * Common code/features between Seam 3 and Codi
+                            * Promote CDI: unique project - JBoss + CDISource + Apache (to start)
+                            
+                            <img height="15%" src="images/apache_feather.png">
+                            <img height="15%" src="images/jboss_logo.jpg">
+                            <img height="15%" src="images/cdisource.png">
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Modules
+
+                            * utilities
+                            * jpa
+                            * jsf
+                            * security
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: Common extensions
+                            
+                                //
+                                // config
+                                //
+                                
+                                public class MyExtension implements Extension {
+                                    public void observes(final @Observes SomeExtensionEvent event) {
+                                        // injections not available in extensions so here the proposed solution
+                                        final String value = ConfigResolver.getPropertyValue("my-key", "defaultValue");
+                                    }
+                                }
+
+                                public class MyClass {
+                                    @Inject
+                                    @ConfigProperty(name = "key", value = "default")
+                                    private Long maxIterations;
+                                }
+                                
+                                //
+                                // include/exclude of beans
+                                //
+                                
+                                @Exclude(exceptIfProjectStage = ProjectStage.Production.class)
+                                public class ProdBean {
+                                    // some great prod business
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: Exception
+
+                                public class Dangerous {
+                                    @Inject
+                                    private Event<ExceptionToCatchEvent> exceptionEvent;
+                                    
+                                    public void methodThrowingAnException() {
+                                        try {
+                                            doSthgDangerous();
+                                        } catch (final DangerousException ex) {
+                                            exceptionEvent.fire(new ExceptionToCatchEvent(ex));
+                                        }
+                                    }
+                                }
+                                
+                                @ApplicationScoped
+                                @ExceptionHandler
+                                public class AbortingBreadthFirstHandler {
+                                    public void abortHandler(final @BeforeHandles ExceptionEvent<ExceptionToCatchEvent> event) {
+                                        event.abort(); // throwOriginal(), handled()...
+                                    }
+                                }
+                                
+                                
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: Invocation hanlder
+
+                                @InvocationHandlerBinding
+                                @Retention(RUNTIME)
+                                @Target(TYPE)
+                                public @interface PartialBeanBinding {}
+                                
+                                @PartialBeanBinding
+                                @RequestScoped
+                                public class PartialBeanHandler implements InvocationHandler {
+                                    @Inject
+                                    private ABean bean;
+
+                                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                                        return this.testBean.doWhatYouWant(method, args);
+                                    }
+                                }
+                                
+                                @PartialBeanBinding
+                                @RequestScoped
+                                public interface PartialBean {
+                                    String getResult();
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: JMX
+
+                                @ApplicationScoped
+                                @MBean(description = "my mbean")
+                                public class MyMBean {
+                                    
+                                    // Attributes
+
+                                    @JmxManaged(description = "get counter")
+                                    private int counter = 0;
+
+                                    public int getCounter() { return counter; }
+                                    public void setCounter(final int v) { counter = v; }
+
+                                    // Operations
+                                    
+                                    @JmxManaged(description = "multiply counter")
+                                    public int multiply(final int n) {
+                                        return counter * n;
+                                    }
+
+                                    // Notifications
+                                    
+                                    @Inject
+                                    private JmxBroadcaster broadcaster;
+
+                                    public void broadcast() {
+                                        broadcaster.send(new Notification(String.class.getName(), this, 10L));
+                                    }
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: Messages
+
+                                // Message context
+                                public class ABean {
+                                    @Inject
+                                    private MessageContext messageContext;
+                                    
+                                    public String generateMessage() {
+                                        final Message message = messageContext
+                                                .localeResolver(new FixedEnglishLocalResolver())
+                                                .messageResolver(new MyMessageResolver())
+                                                .message().template("{hello}").argument("hans");
+                                        return message.toString();
+                                    }
+                                }
+
+                                @MessageBundle
+                                @MessageContextConfig(localeResolver = FixedEnglishLocalResolver.class) // defaults
+                                public interface SimpleMessage {
+                                    @MessageTemplate("Welcome to %s") // default = method name
+                                    Message welcomeTo(MessageContext optionalMessageContext, String name);
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Core :: Util part
+
+                            Mainly a merge of Codi utility part + solder 
+                                    
+                                    // Project stage
+                                    @Inject
+                                    ProjectStage stage; // UnitTest, Development, SystemTest, IntegrationTest, Staging, Production, Custom
+                                    
+                                    // Bean[Manager]Provider
+                                    final BeanManager bm = BeanmanagerProvider.getInstance().getBeanManager();
+                                    // doesn't work as expected for @Dependent (no clean)
+                                    final MyBean bean = BeanProvider.getContextualReference(MyBean.class);
+                                    final MyBean bean = BeanProvider.getContextualReference("myBean");
+                                    // ...
+                                    
+                                    // Literals
+                                    AnnotationLiteral<Default> defaultLiteral = new DefaultLiteral();
+                                    AnnotationLiteral<Default> dependentLiteral = new DependentScopeLiteral();
+                                    //... for default CDI scopes/qualifiers
+                                    
+                                    // Bean helper classes
+                                    BeanBuilder<T> beanBuilder = new BeanBuilder<T>(beanManager)
+                                                    .readFromType(annotatedType)
+                                                    .beanLifecycle(new MyLifecycle());
+                                    // ImmutableBean, WrappingBeanBuilder...
+                                    
+                                    // Annotations
+                                    AnnotationInstanceProvider.of(MyAnnotation.class);
+                                    
+                                    // AbstractContext...
+                                    // ...
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: CdiCtrl
+
+                            CDI 1.x doesn't provide any way to control a CDI container
+                            in plain JSE mode...so CDI is not usable?...No!
+                            
+                                final CdiContainer cc = CdiContainerLoader.getCdiContainer();
+                                cc.boot();
+                                
+                                cc.getContextControl().startContexts(); // optional
+                                
+                                final BeanManager bm = cc.getBeanManager();
+                                //...
+                                
+                                cdiContainer.getContextControl().stopContexts(); // optional                                
+                                
+                                cc.getContextControl().startContexts(RequestScoped.class);
+                                // ...
+                                
+                                cc.shutdown();
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: JPA
+
+                                // Config
+                                @ApplicationScoped
+                                public class LocalDatabaseConfig implements DataSourceConfig {
+                                    // @Inject ProjectStage stage;
+                                    
+                                    public String getJndiResourceName(String connectionId) { return null; } // JSE so no jndi name
+                                    public String getConnectionClassName(String connectionId) { return "org.foo.DummyJdbcDriver"; }
+                                    public String getJdbcConnectionUrl(String connectionId) { return "jdbc:dummy:mem:test"; }
+                                    public Properties getConnectionProperties(String connectionId) { reutrn new Properties(); } // username...
+                                }
+                                
+                                // then org.apache.deltaspike.jpa.impl.datasource.ConfigurableDataSource used as DataSource
+                                <property name="openjpa.ConnectionDriverName"
+                                          value="org.apache.deltaspike.jpa.impl.datasource.ConfigurableDataSource" />
+                                
+                                // @Transactional
+                                @ApplicationScoped
+                                public class FailedFlushTransactionalBean {
+                                    @Transactional
+                                    public void executeInTransaction() {}
+                                }
+                                
+                                // em is produced somewhere
+                                
+                                // TransactionStrategy
+                                // org.apache.deltaspike.jpa.impl.transaction.ResourceLocalTransactionStrategy
+                                // org.apache.deltaspike.jpa.impl.transaction.BeanManagedUserTransactionStrategy (alternative)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Security
+
+                                @Secured(CustomAccessDecisionVoter.class) // or at method level
+                                public class SecuredBean {
+                                    //...
+                                }
+                                
+                                public class CustomAccessDecisionVoter implements AccessDecisionVoter {
+                                    @Override
+                                    public Set<SecurityViolation> checkPermission(AccessDecisionVoterContext accessDecisionVoterContext) {
+                                        Method method = accessDecisionVoterContext.<InvocationContext>getSource().getMethod();
+
+                                        //...create violations if mandatory
+                                    }
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Security (advanced)
+
+                                @Retention(value = RUNTIME) @Target({TYPE, METHOD})
+                                @SecurityBindingType
+                                public @interface CustomSecurityBinding {}
+                                
+                                @ApplicationScoped
+                                public class CustomAuthorizer {
+                                    @Secures
+                                    @CustomSecurityBinding
+                                    public boolean doSecuredCheck(InvocationContext ic, BeanManager bm, @LoggedIn User u) throws Exception {
+                                        return u.isLoggedIn(); // perform security check
+                                    }
+                                }
+                                
+                                @ApplicationScoped
+                                public class SecuredBean1 {
+                                    @CustomSecurityBinding
+                                    public void doSomething(Thing thing) { thing.doSomething(); }
+                                }
+                                
+                                @Retention(value = RUNTIME) @Target({PARAMETER})
+                                @SecurityParameterBinding
+                                public @interface CurrentThing { }
+                                
+                                // in the app bean
+                                public void doSomething(@CurrentThing Thing thing) { thing.doSomething(); }
+                                
+                                // the authorizer
+                                public boolean check(/* same */, @CurrentThing Thing t) throws Exception {
+                                    return t.accept(u); // perform security check
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: JSF
+
+                            * PhaseEvent
+                            * ViewScope
+                            * Typed Config (in progress)
+                            
+                            -
+                            
+                            Quite the same thing as described before with some renaming (@Page -> @View)
+                            and a bit more powerful (metadata - in progress)
+                        </script>
+                    </section>
+                </section>
+                
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            # JBoss Arquillian
+
+                            [<img height="15%" src="images/arquillian_logo_200px.png">](http://arquillian.org/)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian :: Reminder
+
+                            * Library proposed by JBoss to ease testing
+                            * (Mainly) Java/JavaEE friendly
+                            * Abstract Container management ("start/deploy/undeploy/stop")
+                            * Packaging description ("on the fly" idea)
+                            * Very extensible (and extended)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## SwhrinkWrap :: Reminder
+
+                            * Another library proposed by JBoss to ease testing/packaging
+                            * Mainly a fluent API to describe Archives
+
+                            
+                                    ShrinkWrap.create(JavaArchive.class, "jug.jar")
+                                            .addClass(Greeter.class)
+                                            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian :: Hello JUG!
+
+                                @RunWith(Arquillian.class)
+                                public class GreeterTest {
+                                    // which archive for the test
+                                    @Deployment
+                                    public static JavaArchive createDeployment() {
+                                        return ShrinkWrap.create(JavaArchive.class)
+                                            .addClass(Greeter.class)
+                                            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                                    }
+
+                                    // injection like in business beans
+                                    @Inject
+                                    Greeter greeter;
+
+                                    // test as usual
+                                    @Test
+                                    public void sayHi() {
+                                        assertEquals("Hello, Earthling!", greeter.greet("Earthling"));
+                                    }
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian :: Much more
+
+                            * Run client or server tests
+                            * Selenium (and much more) integration (Graphene, Drone)
+                            * Run clien test and server assertion (Warp)
+                            * Integrate it with Cucumber (@See CukeSpace on github)
+                            * and much more!
+                        </script>
+                    </section>
+                </section>
+                
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            # Apache TomEE
+
+                            [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                        </script>
+                    </section>
+                </section>
+                
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            # Arquillian TomEE
+
+                            [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                            [<img height="15%" src="images/arquillian_logo_200px.png">](http://arquillian.org/)
+                        </script>
+                    </section>
+                </section>
+				
+				<section>
+					<h1>Thanks</h1>
+					<h3>Open to any question (or to drink a beer ;)</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                mouseWheel: true,
+                rollingLinks: true,
+                theme: 'beige',
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme night/serif/simple/beige/sky
+                width: $('body').innerWidth(),
+                height: $('body').innerHeight(),
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>

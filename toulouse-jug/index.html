@@ -67,7 +67,8 @@
                         [<img height="15%" src="images/rmannibucau.png">](http://rmannibucau.wordpress.com/)
                         
                         Java/JavaEE developer at Atos Worldline (mid 2010)
-                        Apache contributor and commiter
+                        
+                        Apache contributor and commiter (2011)
                         
                         [<img width="15%" src="images/twitter.png">](https://twitter.com/rmannibucau)
                         [<img width="15%" src="images/github.png">](https://github.com/rmannibucau)
@@ -158,33 +159,51 @@
 				</section>
                 
                 <section data-markdown>
-                        <script type="text/template">
-                            ## CDI => IoC made standard!
+                    <script type="text/template">
+                        ## CDI => IoC made standard!
+                            
+                            public class AnotherBean {
+                                @Inject // IoC
+                                private ABean bean;
                                 
-                                public class AnotherBean {
-                                    @Inject
-                                    ABean bean;
-                                    
-                                    @Inject @SomeQualifier
-                                    ThirdBean third;
-                                    
-                                    @Inject
-                                    Event<Foo> fooEvent;
-                                    
-                                    @PostConstruct
-                                    public void init() {
-                                        // ...
-                                    }
-                                    
-                                    @Produces
-                                    public Bar produces() {
-                                        return new Bar();
-                                    }
+                                @Inject @SomeQualifier
+                                private ThirdBean third;
+                                
+                                @Inject // small but efficient synch Bus
+                                private Event<Ping> pingEvent;
+                                
+                                @PostConstruct // lifecycle
+                                public void init() {
+                                    pingEvent.fire(new Ping("init done"));
                                 }
                                 
-                            And so on...
-                        </script>
-                    </section>
+                                public void calledOnEvent(@Observes Ping event) {
+                                    // ...pong?
+                                }
+                                
+                                @Produces
+                                @ApplicationScoped // scopes
+                                public Bar produces() {
+                                    return new Bar();
+                                }
+                            }
+                            
+                        And so on...
+                    </script>
+                </section>
+                
+                <section data-markdown>
+                    <script type="text/template">
+                        ## JavaEE 6 :: Others great additions
+                            
+                        * Bean validation
+                        * JAX-RS
+                        * EJBContainer API
+                        * @Asynchronous
+                        * @WebXXX + fragments
+                        * ...
+                    </script>
+                </section>
 
 				<section>
 					<section data-markdown>
@@ -202,6 +221,7 @@
 
                             * Subproject of Apache MyFaces (JSF implementation)
                             * Aims to add to JSF some CDI features
+                            * Doesn't depend on MyFaces
                         </script>
                     </section>
                     <section data-markdown>
@@ -240,8 +260,11 @@
                                 }
 
                                 public class MyBean {
-                                    @Inject @Bundle(MyBundle.class) ResourceBundle bundle;
-                                    @Inject MyBundle.MyValue value;
+                                    @Inject @Bundle(MyBundle.class)
+                                    private ResourceBundle bundle;
+                                    
+                                    @Inject
+                                    private MyBundle.MyValue value;
                                     
                                     public String valueFromBundle() {
                                         return bundle.getValue(MyBundle.MyKey.class);
@@ -319,6 +342,8 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
+                            <img height="45%" src="images/warning.png">
+
                             ## This is designed for Weld!
                         </script>
                     </section>
@@ -347,6 +372,8 @@
                                 </ul>
                             </canvas>
                         </div>
+                        
+                        <p>~ JavaEE in Weld</p>
 
                         <script type="text/javascript">
                             $(document).ready(function() {
@@ -369,7 +396,8 @@
 
                             -
 
-                                @Inject Expressions expressions;
+                                @Inject
+                                private Expressions expressions;
 
                                 // then
                                 expressions.evaluateValueExpression("#{fruitBowl.fruitName}");
@@ -423,7 +451,8 @@
 
                                 // technical handler
                                 class CustomHandler {
-                                   @Inject MyHelper helper;
+                                   @Inject
+                                   private MyHelper helper;
                                   
                                    @AroundInvoke
                                    Object handle(InvocationContext ctx) {
@@ -435,11 +464,11 @@
                                 @ServiceHandlerType(CustomHandler.class)
                                 @Retention(RUNTIME)
                                 @Target({TYPE})
-                                @interface CustomService {}
+                                public @interface CustomService {}
 
                                 // usage
                                 @CustomService
-                                interface MyService {
+                                public interface MyService {
                                    public Foo createFoo();
                                 }
                         </script>
@@ -484,7 +513,9 @@
                                     @Entity
                                     @IdentityEntity(IDENTITY_OBJECT)
                                     public class IdentityObject implements Serializable {  
-                                        @Id @GeneratedValue private Long id;
+                                        @Id @GeneratedValue
+                                        private Long id;
+                                        
                                         @IdentityProperty(PropertyType.NAME)
                                         private String name;
 
@@ -508,8 +539,8 @@
                                 private MessageFactory factory;
 
                                 // then
-                                MessageBuilder builder = factory.info("Bla {0} bla {1} bla", 2013, "green");
-                                return builder.build().getText();
+                                final MessageBuilder builder = factory.info("Bla {0} bla {1} bla", 2013, "green");
+                                final String msg = builder.build().getText();
                         </script>
                     </section>
                     <section data-markdown>
@@ -537,8 +568,8 @@
                         <script type="text/template">
                             ## throw new TooMuchSlideException()
 
-                            * Bunch of extension to replace a full JavaEE server (REST, JMS...)
-                            * BVal integration (org.jboss.seam.validation.InjectingConstraintValidatorFactory), method validation
+                            * Bunch of extensions to replace a full JavaEE server (REST, JMS...)
+                            * BVal integration (org.j.s.validation.InjectingConstraintValidatorFactory) + method validation
                             * Spring integration
                             * ...
                         </script>
@@ -560,6 +591,7 @@
 
                             * Common code/features between Seam 3 and Codi
                             * Promote CDI: unique project - JBoss + CDISource + Apache (to start)
+                            * Ensure portability (tested on a bunch of containers)
                             
                             <img height="15%" src="images/apache_feather.png">
                             <img height="15%" src="images/jboss_logo.jpg">
@@ -569,6 +601,8 @@
                     <section data-markdown>
                         <script type="text/template">
                             ## DeltaSpike :: Modules
+                            
+                            _Today_ it is composed of:
 
                             * utilities
                             * jpa
@@ -738,11 +772,12 @@
                                     final MyBean bean = BeanProvider.getContextualReference(MyBean.class);
                                     final MyBean bean = BeanProvider.getContextualReference("myBean");
                                     // ...
+                                    final Foo foo = new Foo();
+                                    final MyBean bean = BeanProvider.injectFields(foo);
                                     
                                     // Literals
                                     AnnotationLiteral<Default> defaultLiteral = new DefaultLiteral();
-                                    AnnotationLiteral<Default> dependentLiteral = new DependentScopeLiteral();
-                                    //... for default CDI scopes/qualifiers
+                                    //... for default CDI scopes/qualifiers (DependentScopeLiteral...)
                                     
                                     // Bean helper classes
                                     BeanBuilder<T> beanBuilder = new BeanBuilder<T>(beanManager)
@@ -754,7 +789,6 @@
                                     AnnotationInstanceProvider.of(MyAnnotation.class);
                                     
                                     // AbstractContext...
-                                    // ...
                         </script>
                     </section>
                     <section data-markdown>
@@ -774,7 +808,7 @@
                                 
                                 cdiContainer.getContextControl().stopContexts(); // optional                                
                                 
-                                cc.getContextControl().startContexts(RequestScoped.class);
+                                cc.getContextControl().startContexts(RequestScoped.class); // batch friendly ;)
                                 // ...
                                 
                                 cc.shutdown();
@@ -842,8 +876,7 @@
                                 
                                 @ApplicationScoped
                                 public class CustomAuthorizer {
-                                    @Secures
-                                    @CustomSecurityBinding
+                                    @Secures @CustomSecurityBinding
                                     public boolean doSecuredCheck(InvocationContext ic, BeanManager bm, @LoggedIn User u) throws Exception {
                                         return u.isLoggedIn(); // perform security check
                                     }
@@ -855,7 +888,7 @@
                                     public void doSomething(Thing thing) { thing.doSomething(); }
                                 }
                                 
-                                @Retention(value = RUNTIME) @Target({PARAMETER})
+                                @Retention(value = RUNTIME) @Target({ PARAMETER })
                                 @SecurityParameterBinding
                                 public @interface CurrentThing { }
                                 
@@ -880,6 +913,14 @@
                             
                             Quite the same thing as described before with some renaming (@Page -> @View)
                             and a bit more powerful (metadata - in progress)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## DeltaSpike :: Next?
+
+                            * cdi-query import
+                            * more merging
                         </script>
                     </section>
                 </section>
@@ -930,7 +971,7 @@
                                             .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
                                     }
 
-                                    // injection like in business beans
+                                    // injection like in business beans thanks to enrichers
                                     @Inject
                                     Greeter greeter;
 
@@ -944,13 +985,83 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Arquillian :: Much more
+                            ## Arquillian :: Graphene
 
-                            * Run client or server tests
-                            * Selenium (and much more) integration (Graphene, Drone)
-                            * Run clien test and server assertion (Warp)
-                            * Integrate it with Cucumber (@See CukeSpace on github)
-                            * and much more!
+                                @RunWith(Arquillian.class)
+                                public class SimpleServletTest {
+                                    // deployment as usual
+
+                                    @ArquillianResource
+                                    private URL contextRoot;
+
+                                    @Drone
+                                    private WebDriver driver;
+
+                                    @FindBy(id = "content") // you can create a pojo to put all @FindBy and inject it with @Page
+                                    private WebElement content;
+
+                                    @FindBy(xpath = "//div[@id='footer']") // webelements can be button and so on!
+                                    private WebElement footer;
+
+                                    @Before public void openPage() {
+                                        driver.get(contextRoot.toExternalForm() + "simple");
+                                    }
+
+                                    @Test public void checkContent() throws IOException {
+                                        assertEquals("the content", content.getText());
+                                        assertTrue(content.isDisplayed());
+                                    }
+
+                                    @Test public void checkFooter() throws IOException {
+                                        assertEquals("the footer", footer.getText());
+                                    }
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian :: Warp
+
+                                @WarpTest
+                                @RunWith(Arquillian.class)
+                                public class WarpDemoTest {
+                                    @Deployment public static WebArchive war() {
+                                        return SWUtils.myWar();
+                                    }
+
+                                    @ArquillianResource private URL contextRoot;
+
+                                    @Drone private WebDriver driver;
+
+                                    @Test @RunAsClient
+                                    public void validSessionUpdate() throws IOException {
+                                        Warp.execute(new ClientAction() {
+                                            @Override public void action() {
+                                                driver.navigate().to(contextRoot.toExternalForm() + "hello");
+                                            }
+                                        }).verify(new ServerAssertion { // need to be static until Alpha1
+                                            @ArquillianResource private HttpServletRequest request;
+
+                                            @BeforeServlet public void beforeServlet() {
+                                                assertNull(request.getSession().getAttribute("name"));
+                                            }
+
+                                            @AfterServlet public void afterServlet() {
+                                                assertEquals("hello", request.getSession().getAttribute("name"));
+                                            }
+                                        });
+                                    }
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian :: much more
+
+                            * Run cluster of servers
+                            * use it with Cucumber (@See CukeSpace on github)
+                            * use it with Spock!
+                            * ...
                         </script>
                     </section>
                 </section>
@@ -961,6 +1072,231 @@
                             # Apache TomEE
 
                             [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                        </script>
+                    </section>
+                    <section>
+                        <h2>Apache TomEE :: Core Values</h2>
+                        
+                        <img height="15%" src="images/feather-logo.png">
+
+                        <ul>
+                            <li class="fragment">Be small</li>
+                            <ul>
+                                <li class="fragment">&gt; 30M with the WP fragance</li>
+                            </ul>
+                            <li class="fragment">Be Tomcat</li>
+                            <li class="fragment">Be certified</li>
+                            <ul>
+                                <li class="fragment">JavaEE 6 Web Profile (and JAXRS) certified</li>
+                                <li class="fragment">Run on EC2 with default JVM settings</li>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Why?
+                            
+                            <img height="25%" src="images/web.jpeg">
+                            
+                            * JavaEE is not heavy!
+                            * Web Profile! We (almost) did it for years.
+                            * Tomcat == most used server
+                            * Everybody does the same integration work
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Missing in Tomcat
+                            
+                            [<img height="15%" src="images/Tomcat.png">](http://tomcat.apache.org)
+                            
+                            * Transactions
+                            * @Resource
+                            * @PersistenceUnit, @PersistenceContext
+                            * @Inject
+                            * @EJB
+                            * JNDI (java:global, ...)
+                            * @DataSourceDefinition
+                            * Security
+                        </script>
+                    </section>
+                    <section>
+                        <h2>Apache TomEE :: Missing in Tomcat</h2>
+                            
+                        <p><a href="http://tomcat.apache.org"><img height="15%" src="images/Tomcat.png"></a></p>
+                        
+                        <ul>
+                            <li>Transactions</li>
+                            <li>Security</li>
+                            <li>JNDI (java:global, ...)</li>
+                            <li><pre>@Resource</pre></li>
+                            <li><pre>@PersistenceUnit, @PersistenceContext</pre></li>
+                            <li><pre>@Inject</pre></li>
+                            <li><pre>@EJB</pre></li>
+                            <li><pre>@DataSourceDefinition</pre></li>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Stack & Flavors
+                            
+                            * Web profile
+                                * OpenWebBeans
+                                * OpenEJB
+                                * OpenJPA
+                                * MyFaces
+                                * Bean Validation
+                            * JAXRS
+                                * CXF (jaxrs)
+                            * Plus*
+                                * CXF (jaxws)
+                                * ActiveMQ
+                                * Geronimo
+                            * Embedded*
+                                * Classpath ;)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: DataSources
+                            
+                            <img height="15%" src="images/database.png">
+
+                            * Pluggable Pooling
+                                * commons-dbcp
+                                * tomcat-jdbc
+                                * bonecp
+                            * Dynamic DataSource
+                                * Proxy DataSource able to switch between real ones by tx
+                                * "Router" API
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Configuration
+
+                            * Mainly tomee.xml (or resources.xml with placeholders) for extenal stuff
+                            
+                                    <tomee>
+                                        <Resource id="jdbc/my-ds">
+                                            # Properties like format, case insensitive
+                                            JdbDriver = com.mysql.Driver
+                                            JdbcUrl = jdbc:mysql://localhost:3306/demo
+                                            UserName = mysql
+                                            Password = mysql
+                                        </Resource>
+                                    </tomee>
+
+                            * Advanced configuration
+                                * application.properties
+                                    * configuration scoped by application of internal configuration
+                                    * ex: quartz
+                                * openejb-jar.xml (application configuration)...
+                                    * configuration of specific beans (EJBs, JAXRS endpoints...)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: JPA
+
+                            * openejb.jpa.init-entitymanager
+                                * force eager initialization
+                            * openejb.jpa.criteria.log.jpql
+                                * log criteria API queries as JQPL
+                            * openejb.jpa.auto-scan, openejb.jpa.auto-scan.package
+                                * optimized entities scanning (!= JPA provider scanning)
+                            * openejb.jpa.table_prefix
+                            * PUs exposed as MBeans
+                                * updatable "on the fly"
+                        
+                            -
+                            
+                            SQL logging:
+                            
+                                <Resource id="jdbc/my-ds">
+                                    LogSql = true
+                                    ...
+                                </Resource>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Maven Plugin 1/3
+
+                                <plugin>
+                                    <groupId>org.apache.openejb.maven</groupId>
+                                    <artifactId>tomee-maven-plugin</artifactId>
+                                    <version>${tomee.version}</version>
+                                </plugin>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Maven Plugin 2/3
+
+                                <plugin>
+                                    <groupId>org.apache.openejb.maven</groupId>
+                                    <artifactId>tomee-maven-plugin</artifactId>
+                                    <version>${tomee.version}</version>
+                                    <configuration>
+                                        <tomeeClassifier>jaxrs</tomeeClassifier>
+                                        <debugPort>5005</debugPort>
+                                        <config>${project.basedir}/src/test/tomee/conf</config>
+                                        <args>-Xmx512m</args>
+                                        <systemVariables>
+                                            <foo>bar</foo>
+                                        </systemVariables>
+                                        <libs>
+                                            <lib>mysql:mysql-connector-java:5.1.20</lib>
+                                        </libs>
+                                        <webapps>
+                                            <webapp>org.superbiz:my-simple-webapp:1.0.0</webapp>
+                                        </webapps>
+                                    </configuration>
+                                </plugin>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Maven Plugin 3/3
+
+                                <plugin>
+                                    <groupId>org.apache.openejb.maven</groupId>
+                                    <artifactId>tomee-maven-plugin</artifactId>
+                                    <version>${tomee.version}</version>
+                                    <configuration>
+                                        <reloadOnUpdate>true</reloadOnUpdate>
+                                        <synchronizations>
+                                            <synch> <!-- synch resources -->
+                                                <source>${project.basedir}/src/main/webapp</source>
+                                                <target>${project.build.directory}/apache-tomee/webapps/ROOT</target>
+                                                <extensions><extension>.xhtml</extension></extensions>
+                                            </synch>
+                                            <synch> <!-- synch binaries triggering reload because of reloadOnUpdate -->
+                                                <source>${project.build.outputDirectory}</source>
+                                                <target>${project.build.directory}/apache-tomee/webapps/ROOT/WEB-INF/classes</target>
+                                                <updateOnlyExtensions><updateOnlyExtension>.class</updateOnlyExtension></updateOnlyExtensions>
+                                            </synch>
+                                        </synchronizations>
+                                        
+                                        <!-- or -->
+                                        <synchronization> <!-- default fine for webapps -->
+                                          <extensions>
+                                            <extension>.xhtml<extension>
+                                          </extensions>
+                                        </synchronization>
+                                    </configuration>
+                                </plugin>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Apache TomEE :: Advanced stuff
+
+                            * EJB multicast, failover (stateless)
+                            * injection of remote ejbs (@EJB)
+                            * provisioning module (url, maven...)
+                            * ...
                         </script>
                     </section>
                 </section>
@@ -974,7 +1310,146 @@
                             [<img height="15%" src="images/arquillian_logo_200px.png">](http://arquillian.org/)
                         </script>
                     </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: Test before
+
+                                @BeforeClass
+                                public static void start() throws Exception {
+                                    final Properties p = new Properties();
+                                    
+                                    p.setProperty("jdbc/ds", "new://Resource?type=DataSource");
+                                    // ... set file to deploy or use classpath by default
+
+                                    container = EJBContainer.createEJBContainer(p);
+                                }
+
+                                @Before
+                                public void injectAndInit() throws NamingException {
+                                    // magic OpenEJB hook
+                                    container.getContext().bind("inject", this);
+                                }
+                                
+                                @Inject
+                                private Users users;
+                                
+                                @Test
+                                public void findByName() {
+                                    // ...
+                                }
+
+                                @AfterClass
+                                public static void close() {
+                                    container.close();
+                                }
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: Enrichment
+
+                            * Forget conventions and
+                                * cdi enricher
+                                * ejb enricher
+                                * resource enricher
+                                * persistence enricher
+                            
+                            
+                            __That's native!__                           
+                                
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: Configuration
+
+                                <arquillian>
+                                  <container qualifier="tomee-remote" default="true">
+                                    <configuration> <!-- ALL IS OPTIONAL -->
+                                      <property name="httpPort">-1</property> <!-- same for ajpPort and stopPort -->
+                                      <property name="dir">target/tomee-remote</property>
+                                      <property name="appWorkingDir">target/arquillian-remote-working-dir</property>
+                                      <property name="conf">src/test/tomee/conf</property> <!-- same for bin and lib -->
+                                      <property name="portRange">20001-30000</property>
+                                      <property name="cleanOnStartUp">true</property>
+                                      <property name="properties" />
+                                      <property name="serverXml">src/test/tomee/server.xml</property>
+                                      <property name="quickSession">true</property>
+                                      <property name="groupId">org.apache.openejb</property>
+                                      <property name="artifactId">apache-tomee</property>
+                                      <property name="version">LATEST</property>
+                                      <property name="type">zip</property>
+                                      <property name="classifier">jaxrs</property>
+                                      <property name="catalina_opts">-Dmy-test=config</property>
+                                      <property name="removeUnusedWebapps">true</property>
+                                      <property name="debug">false</property>
+                                      <property name="debugPort">5005</property>
+                                    </configuration>
+                                  </container>
+                                </arquillian>
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: Single deployment
+
+                            * Deploy an application at startup...from a ShrinkWrap archive
+                            
+                                    <arquillian>
+                                      <container qualifier="tomee" default="true">
+                                        <configuration>
+                                          <property name="properties">
+                                            openejb.arquillian.predeploy-archives = org.apache.openejb.arquillian.openejb.archive.Archive1
+                                          </property>
+                                        </configuration>
+                                      </container>
+                                    </arquillian>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: Adapters
+
+                            [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                            [<img height="15%" src="images/logo_openejb.gif">](http://tomee.apache.org)
+                            
+                            * TomEE Embedded
+                            * TomEE Remote
+                            * TomEE Webapp
+                            * OpenEJB
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Arquillian TomEE :: OpenEJB adapter
+
+                            * 100% embedded
+                            * no archive dump (ZipExporter)
+                            * 100% Mockito integration
+                            
+                                    @RunWith(Arquillian.class)
+                                    public class ArquillianAndMockitoTest {
+                                        @Mock @Produces private static AnInterface mock;
+                                        @Deployment public static JavaArchive archive() { return SWUtils.jar(); }
+                                        @Test public void test() { /* ... */ }
+                                    }
+                            
+                            * single deployment feature
+                            * working virtual resources
+                        </script>
+                    </section>
                 </section>
+                
+                <section data-markdown>
+					 <script type="text/template">
+                        # Demo!
+
+                        [<img height="15%" src="images/deltaspike-logo.png">](http://incubator.apache.org/deltaspike/)
+                        [<img height="15%" src="images/feather-logo.png">](http://tomee.apache.org)
+                        [<img height="15%" src="images/arquillian_logo_200px.png">](http://arquillian.org/)
+                    </script>
+				</section>
 				
 				<section>
 					<h1>Thanks</h1>

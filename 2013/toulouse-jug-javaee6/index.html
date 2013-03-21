@@ -196,7 +196,7 @@
                 
                 <section data-markdown>
                     <script type="text/template">
-                        ## JavaEE 6 :: Others great additions
+                        ## JavaEE 6 :: Other great additions
                             
                         * Bean validation
                         * JAX-RS
@@ -222,15 +222,15 @@
                             [<img height="15%" src="images/myfaces.jpg">](http://myfaces.apache.org)
 
                             * Subproject of Apache MyFaces (JSF implementation)
-                            * Aims to add to JSF some CDI features
-                            * Doesn't depend on MyFaces
+                            * Adds some CDI features to JSF
+                            * Doesn't depend on MyFaces -> portable!
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ## Apache Codi :: JPA
 
-                            *Highly "JSE" oriented*
+                            *Highly "JavaSE" oriented*
                             
                             * ConfigurableDataSource (get the config from CDI)
 
@@ -290,7 +290,7 @@
                                     }
 
                                     // then in controller
-                                    public Class<? extends ViewConfig> goToDashboard() {
+                                    public Class<? extends AppPages> goToDashboard() {
                                         someControllerAction();
                                         return AppPages.Dashboard.class;
                                     }
@@ -391,7 +391,7 @@
                         <script type="text/template">
                             ## JBoss Seam :: Solder, basis
 
-                            Basic CDI extensions and tools to your own ones
+                            Basic CDI extensions and tools to write your own ones
 
                                 @Requires("javax.persistence.EntityManager") // highly not portable
                                 public class MyBeanDependingOnFoo {}
@@ -1085,7 +1085,7 @@
                         <ul>
                             <li class="fragment">Be small</li>
                             <ul>
-                                <li class="fragment">&gt; 30M with the WP fragance</li>
+                                <li class="fragment">&lt; 30M with the WP fragance</li>
                             </ul>
                             <li class="fragment">Be Tomcat</li>
                             <li class="fragment">Be certified</li>
@@ -1103,24 +1103,8 @@
                             
                             * JavaEE is not heavy!
                             * Web Profile! We (almost) did it for years.
-                            * Tomcat == most used server
+                            * Tomcat == most used server (> 50%)
                             * Everybody does the same integration work
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Apache TomEE :: Missing in Tomcat
-                            
-                            [<img height="15%" src="images/Tomcat.png">](http://tomcat.apache.org)
-                            
-                            * Transactions
-                            * @Resource
-                            * @PersistenceUnit, @PersistenceContext
-                            * @Inject
-                            * @EJB
-                            * JNDI (java:global, ...)
-                            * @DataSourceDefinition
-                            * Security
                         </script>
                     </section>
                     <section>
@@ -1137,6 +1121,7 @@
                             <li><pre>@Inject</pre></li>
                             <li><pre>@EJB</pre></li>
                             <li><pre>@DataSourceDefinition</pre></li>
+                            <li>...</li>
                         </ul>
                     </section>
                     <section data-markdown>
@@ -1299,6 +1284,7 @@
                             * EJB multicast, failover (stateless)
                             * injection of remote ejbs (@EJB)
                             * provisioning module (url, maven...)
+                            * skinny wars (jars.txt)
                             * ...
                         </script>
                     </section>
@@ -1429,7 +1415,7 @@
 
                             * 100% embedded
                             * no archive dump (ZipExporter)
-                            * 100% Mockito integration
+                            * Mockito integration
                             
                                     @RunWith(Arquillian.class)
                                     public class ArquillianAndMockitoTest {
@@ -1456,7 +1442,7 @@
 				
 				<section>
 					<h1>Thanks</h1>
-					<h3>Open to any question (or to drink a beer ;)</h3>
+					<h3>Open to any question (or for a drink ;)</h3>
 				</section>
 
 			</div>

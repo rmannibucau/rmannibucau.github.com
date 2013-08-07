@@ -1,0 +1,9 @@
+org.apache.commons.monitoring
+org.apache.commons.monitoring.aop
+org.apache.commons.monitoring.aspectj
+org.apache.commons.monitoring.cdi
+org.apache.commons.monitoring.counters
+org.apache.commons.monitoring.jdbc
+org.apache.commons.monitoring.reporting
+org.apache.commons.monitoring.spring
+org.apache.commons.monitoring.spring.service

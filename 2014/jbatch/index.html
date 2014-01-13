@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<meta content="Description" name="description">
+<meta content="asciidoctor, slides" name="keywords">
+<title>BatchEE</title>
+<link href="highlight/styles/vs.min.css" rel="stylesheet">
+<script src="highlight/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link href="deck.js/core/deck.core.css" rel="stylesheet">
+<link href="deck.js/extensions/goto/deck.goto.css" rel="stylesheet">
+<link href="deck.js/extensions/menu/deck.menu.css" rel="stylesheet">
+<link href="deck.js/extensions/navigation/deck.navigation.css" rel="stylesheet">
+<link href="deck.js/extensions/status/deck.status.css" rel="stylesheet">
+<link href="deck.js/extensions/hash/deck.hash.css" rel="stylesheet">
+<link href="deck.js/themes/style/web-2.0.css" rel="stylesheet">
+<link href="deck.js/themes/transition/horizontal-slide.css" id="transition-theme-link" rel="stylesheet">
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>BatchEE</h1>
+<span id="author">Romain Manni-Bucau</span>
+<br>
+<span class="monospaced" id="email">&lt;rmannibucau@gmail.com&gt;</span>
+<br>
+<span id="revnumber">version 1.0-SNAPSHOT,</span>
+<span id="revdate">20140113-2333</span>
+</section>
+<section class="slide" id="_jbatch">
+<h2>JBatch</h2>
+<div class="ulist">
+<ul>
+<li>Part of JavaEE 7 but works in JSE (JSR-352)</li>
+<li><strong>Standard</strong> solution for Batches</li>
+<li>(Highly) inspired from spring-batch and IBM solution (lead)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_jbatch_semantic">
+<h2>JBatch semantic</h2>
+<div class="ulist">
+<ul>
+<li><strong>JobOperator</strong> is the handler the user see.</li>
+<li><strong>Job</strong> is a batch composed of <strong>Step</strong>, <strong>Flow</strong> or <strong>Split</strong></li>
+<li>A <strong>Step</strong> is either a <strong>Batchlet</strong> or a <strong>Chunk</strong></li>
+<li>A <strong>Flow</strong> is a sequence of <strong>Step</strong></li>
+<li>A <strong>Split</strong> is a set of <strong>Step</strong> to execute concurrently</li>
+<li>Step can get <strong>Decision</strong> (<strong>Next</strong> on, <strong>Stop</strong> on, <strong>Fail</strong> on, <strong>End</strong> on)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_joboperator_sample">
+<h2>JobOperator sample</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">final JobOperator jobOperator = BatchRuntime.getJobOperator();
+final long id = jobOperator.start("my-batch", myJobParameters);
+
+jobOperator.stop(id);
+
+final JobInstance instance = jobOperator.getJobInstance(id);
+List&lt;JobExecution&gt; exec = jobOperator.getJobExecutions(instance)
+// ...</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_hello_world">
+<h2>Hello world!</h2>
+<div class="paragraph">
+<p>A simple task printing "Hello JBatch!"</p>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">@Named // optional, can be replaced by META-INF/batch.xml
+public class MyTask extends AbstractBatchlet {
+    public String process() throws Exception {
+        System.out.println("Hello JBatch!");
+        return "exit status is ok";
+    }
+}</code></pre>
+</div>
+</div>
+
+<div class="paragraph">
+<p>And its batch definition:</p>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="xml">&lt;job id="hello" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0"&gt;
+  &lt;step id="hi"&gt;
+    &lt;batchlet ref="myTask" /&gt;
+  &lt;/step&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_hello_xxx">
+<h2>Hello XXX!</h2>
+<div class="paragraph">
+<p>Great but how to configure it?</p>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public class MyTask extends AbstractBatchlet {
+    @Inject
+    @BatchProperty // default name = field name
+    private String name;
+
+    public String process() throws Exception {
+        System.out.println("Hello " + name + "!");
+        return "exit status is ok for " + name;
+    }
+}</code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="xml">&lt;batchlet ref="myTask"&gt;
+  &lt;properties&gt;
+    &lt;property name="name" value="#{jobParameters['name']}" /&gt;
+  &lt;/properties&gt;
+&lt;/batchlet&gt;</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_ok_but_if_my_batchlet_lasts_1h">
+<h2>Ok but if my batchlet lasts 1h!</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public class MyTask implements Batchlet {
+    // same as before
+
+    @Override
+    public void stop() {
+        // stop the task here
+    }
+}</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_chunking_yeah">
+<h2>Chunking, yeah!</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code>+-----------+  +------------+  +--------------+  +--------------+
+|   step    |  |   reader   |  |   processor  |  |    writer    |
++-----+-----+  +------+-----+  +-------+------+  +------+-------+
+    +-+               |                |                |
+    | +-----read----&gt;++                |                |
+    | |              ++                |                |
+    | +--------------------process---&gt;++                |
+    | |               |               ++                |
+    | +-------------&gt;++                |                |
+    | |              ++                |                |
+    | +------------------------------&gt;++                |
+    | |               |               ++                |
+    | +-------------------------------------write-----&gt;++
+    | |               |                |               ++
+    +-+               |                |                |</code></pre>
+</div>
+</div>
+
+<div class="paragraph">
+<p>End when reader returns null and grouped by "chunk" ~ "commit interval", timeout or custom policy.</p>
+</div>
+</section>
+
+<section class="slide" id="_some_code_to_make_it_obvious_1_3">
+<h2>Some code to make it obvious 1/3</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="xml">&lt;job id="abatch" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0"&gt;
+  &lt;step id="astep"&gt;
+    &lt;chunk&gt;
+      &lt;reader ref="myReader"&gt;
+        &lt;properties&gt;
+          &lt;property name="foo" value="bar" /&gt;
+        &lt;/properties&gt;
+      &lt;/reader&gt;
+      &lt;processor ref="myProcessor" /&gt;
+      &lt;writer ref="myWriter" /&gt;
+    &lt;/chunk&gt;
+  &lt;/step&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_some_code_to_make_it_obvious_2_3">
+<h2>Some code to make it obvious 2/3</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public interface ItemReader {
+    void open(Serializable checkpoint) throws Exception;
+    void close() throws Exception;
+    Object readItem() throws Exception;
+    Serializable checkpointInfo() throws Exception;
+}</code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public interface ItemProcessor {
+    Object processItem(Object item) throws Exception;
+}</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_some_code_to_make_it_obvious_2_3_2">
+<h2>Some code to make it obvious 2/3</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public interface ItemWriter {
+    void open(Serializable checkpoint) throws Exception;
+    void close() throws Exception;
+    void writeItems(List&lt;Object&gt; items) throws Exception;
+    Serializable checkpointInfo() throws Exception;
+}</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_go_further_with_chunks">
+<h2>Go further with chunks!</h2>
+<div class="paragraph">
+<p>Chunking API is checkpoint aware:</p>
+</div>
+
+<div class="ulist">
+<ul>
+<li>reader and writer can expose their state</li>
+<li>if the batch is restarted the last state is provided to continue the execution</li>
+</ul>
+</div>
+
+<div class="paragraph">
+<p>Exception management is configurable (include/exclude):</p>
+</div>
+
+<div class="ulist">
+<ul>
+<li>retry</li>
+<li>skip</li>
+<li>no rollback</li>
+</ul>
+</div>
+
+<div class="paragraph">
+<p>JTA compliant!</p>
+</div>
+</section>
+
+<section class="slide" id="_partitions">
+<h2>Partitions?</h2>
+<div class="ulist">
+<ul>
+<li>A <strong>partition</strong> is an instance of a step</li>
+<li>A partition has a thread (number of threads for partition*s* configurable)</li>
+<li>Static or dynamic (<strong>ParitionMapper</strong>)</li>
+<li>Observable through <strong>PartitionReducer</strong></li>
+<li>State aware (<strong>PartitionCollector</strong>)</li>
+<li><strong>PartitionAnalyzer</strong> is a kind of aggregator of collector states</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_further_with_flow">
+<h2>Further with flow?</h2>
+<div class="ulist">
+<ul>
+<li>Flow can be static (next attribute) or dynamic using <strong>Decider</strong></li>
+</ul>
+</div>
+
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public interface Decider {
+    String decide(StepExecution[] executions) throws Exception;
+}</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_listeners">
+<h2>Listeners</h2>
+<div class="ulist">
+<ul>
+<li><p>Spys everywhere and configurable</p>
+<div class="ulist">
+<ul>
+<li>job</li>
+<li>steps</li>
+<li>chunk</li>
+<li>reader/processor/writer</li>
+<li>retry/skip (read/process/write)</li>
+</ul>
+</div></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_communicating_between_steps">
+<h2>Communicating between steps</h2>
+<div class="listingblock">
+<div class="content monospaced">
+<pre class="highlight"><code class="java">public class MyTask extends AbstractBatchlet { // any component
+    @Inject
+    private StepContext step;
+
+    @Inject
+    private JobContext job;
+
+    public String process() throws Exception {
+        final String state = step.getStepName() + "#" + job.getJobName();
+        job.setTransientUserData(state); // step.setPersistentUserData
+        return "" + job.getTransientUserData();
+    }
+}</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_next">
+<h2>Next!</h2>
+<div class="quoteblock">
+<blockquote><div class="paragraph">
+<p>I need an implementation!</p>
+</div></blockquote>
+<div class="attribution">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_batchee">
+<h2>BatchEE</h2>
+<div class="ulist">
+<ul>
+<li><p>Apache project providing a JBatch implementation and basic tooling</p>
+<div class="ulist">
+<ul>
+<li>Fork from IBM RI</li>
+<li>Basic components (JDBC, StaX, JPA, BeanIO, ModelMapper, JSefa, Camel&#8230;)</li>
+<li><p>GUI</p>
+<div class="ulist">
+<ul>
+<li>Web (servlet)</li>
+<li>JAX-RS (client/server)</li>
+</ul>
+</div></li>
+<li>Test tools (run a single step, make executino synchronous)</li>
+<li>Maven plugin</li>
+<li>CLI (supporting BARs!)</li>
+<li>In memory/JDBC/JPA persistence</li>
+<li>Security (Shiro supported)</li>
+<li>JSE, CDI, JavaEE, Spring support</li>
+</ul>
+</div></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_batchee_next">
+<h2>BatchEE.next?</h2>
+<div class="ulist">
+<ul>
+<li>Propose a fluent API instead of relying on XML</li>
+<li>Propose components to projects instead of BatchEE</li>
+<li>Integration in TomEE</li>
+<li><p>More on <a href="http://batchee.incubator.apache.org">http://batchee.incubator.apache.org</a></p>
+<div class="ulist">
+<ul>
+<li><a href="http://batchee.incubator.apache.org/extensions.html">http://batchee.incubator.apache.org/extensions.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/gui.html">http://batchee.incubator.apache.org/gui.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/maven.html">http://batchee.incubator.apache.org/maven.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/configuration.html">http://batchee.incubator.apache.org/configuration.html</a></li>
+</ul>
+</div></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_thanks">
+<h2>Thanks</h2>
+<div class="paragraph">
+<p>Test it and send your feedback to JCP and BatchEE! Little demo?</p>
+</div>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<a class="deck-permalink" href="" title="Permalink to this slide">#</a>
+<script src="deck.js/jquery-1.7.2.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/hash/deck.hash.js"></script>
+<script src="deck.js/extensions/menu/deck.menu.js"></script>
+<script src="deck.js/extensions/goto/deck.goto.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+</style>
+</body>
+</html>

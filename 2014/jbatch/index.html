@@ -5,7 +5,7 @@
 <meta content="Asciidoctor 0.1.4" name="generator">
 <meta content="Description" name="description">
 <meta content="asciidoctor, slides" name="keywords">
-<title>BatchEE</title>
+<title>JBatch/BatchEE</title>
 <link href="highlight/styles/vs.min.css" rel="stylesheet">
 <script src="highlight/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>
@@ -27,7 +27,7 @@
 <span class="monospaced" id="email">&lt;rmannibucau@gmail.com&gt;</span>
 <br>
 <span id="revnumber">version 1.0-SNAPSHOT,</span>
-<span id="revdate">20140114-2029</span>
+<span id="revdate">20140116-1125</span>
 </section>
 <section class="slide" id="_jbatch">
 <h2>JBatch</h2>
@@ -400,24 +400,18 @@ assertEquals("OK", executions.iterator().next().getExitStatus());</code></pre>
 <h2>Open BAR, BatchEE way to package a batch!</h2>
 <div class="listingblock">
 <div class="content monospaced">
-<pre class="highlight"><code>├── batch
-│   ├── classes
-│   │   └── mypackage
-│   │       └── MyBatchlet.class
-│   └── jobs
-│       └── META-INF
-│           └── batch-jobs
-│               └── mybatch.xml
-├── libs
-│   ├── domain-1.6.9.jar
-│   └── core-2.6.9.jar
-└── META-INF
-    ├── MANIFEST.MF
-    └── maven
-        └── my-project
-            └── my-project
-                ├── pom.properties
-                └── pom.xml</code></pre>
+<pre class="highlight"><code>└── BATCH-INF
+    ├── batch-jobs
+    │   └── demo.xml
+    ├── batch.xml
+    ├── classes
+    │   ├── org
+    │   │   └── apache
+    │   │       └── demo
+    │   │           └── Task.class
+    │   └── someconfig.properties
+    └── lib
+        └── commons-lang3-3.1.jar</code></pre>
 </div>
 </div>
 </section>

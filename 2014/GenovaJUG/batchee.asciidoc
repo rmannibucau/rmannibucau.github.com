@@ -1,0 +1,330 @@
+== Apache BatchEE
+
+JBatch (JSR-352) made real!
+
+== Reminder: JBatch
+
+* JavaEE 7 API for Batches
+* Highly inspired from Spring-Batch and IBM solution (lead)
+
+image::jbatch.png[]
+
+== BatchEE modules
+
+* JBatch
+** JDBC, JPA, in memory persistence
+** Security support (Shiro)
+* Components
+** JDBC, JPA
+** XML (StAX, JAXB), JSon, BeanIO
+** Camel
+** Groovy
+* GUI
+** Servlet
+** JAX-RS
+* Maven plugin
+** JobOperator
+** Diagram
+* Test helpers
+* CLI
+
+== JobOperator sample
+
+[source,java,numbered]
+-------------------
+final JobOperator jobOperator = BatchRuntime.getJobOperator();
+final long id = jobOperator.start("my-batch", myJobParameters);
+
+jobOperator.stop(id);
+
+final JobInstance instance = jobOperator.getJobInstance(id);
+List<JobExecution> exec = jobOperator.getJobExecutions(instance)
+// ...
+-------------------
+
+== Hello world!
+
+A simple task printing "Hello JBatch!"
+
+[source,java,numbered]
+-------------------
+@Named // optional, can be replaced by META-INF/batch.xml
+public class MyTask extends AbstractBatchlet {
+    public String process() throws Exception {
+        System.out.println("Hello JBatch!");
+        return "exit status is ok";
+    }
+}
+-------------------
+
+And its batch definition:
+
+[source,xml,numbered]
+-------------------
+<job id="hello" version="1.0"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <step id="hi">
+    <batchlet ref="myTask" />
+  </step>
+</job>
+-------------------
+
+== Hello XXX!
+
+Great but how to configure it?
+
+[source,java,numbered]
+-------------------
+public class MyTask extends AbstractBatchlet {
+    @Inject
+    @BatchProperty // default name = field name
+    private String name;
+
+    public String process() throws Exception {
+        System.out.println("Hello " + name + "!");
+        return "exit status is ok for " + name;
+    }
+}
+-------------------
+
+[source,xml,numbered]
+-------------------
+<batchlet ref="myTask">
+  <properties>
+    <property name="name" value="#{jobParameters['name']}" />
+  </properties>
+</batchlet>
+-------------------
+
+== Ok but if my batchlet lasts 1h!
+
+[source,java,numbered]
+-------------------
+public class MyTask implements Batchlet {
+    // same as before
+
+    @Override
+    public void stop() {
+        // stop the task here
+    }
+}
+-------------------
+
+== Chunking, yeah!
+
+```
++-----------+  +------------+  +--------------+  +--------------+
+|   step    |  |   reader   |  |   processor  |  |    writer    |
++-----+-----+  +------+-----+  +-------+------+  +------+-------+
+    +-+               |                |                |
+    | +-----read---->++                |                |
+    | |              ++                |                |
+    | +--------------------process--->++                |
+    | |               |               ++                |
+    | +------------->++                |                |
+    | |              ++                |                |
+    | +------------------------------>++                |
+    | |               |               ++                |
+    | +-------------------------------------write----->++
+    | |               |                |               ++
+    +-+               |                |                |
+```
+
+End when reader returns null and grouped by "chunk" ~ "commit interval", timeout or custom policy.
+
+== Chunking sample
+
+[source,xml,numbered]
+-------------------
+<job id="abatch" version="1.0"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <step id="astep">
+    <chunk>
+      <reader ref="myReader">
+        <properties>
+          <property name="foo" value="bar" />
+        </properties>
+      </reader>
+      <processor ref="myProcessor" />
+      <writer ref="myWriter" />
+    </chunk>
+  </step>
+</job>
+-------------------
+
+== Go further with chunks!
+
+Chunking API is checkpoint aware:
+
+* reader and writer can expose their state
+* if the batch is restarted the last state is provided to continue the execution
+
+Exception management is configurable (include/exclude):
+
+* retry
+* skip
+* no rollback
+
+JTA compliant!
+
+== Partitions?
+
+* A *partition* is an instance of a step
+* A partition has a thread (number of threads for partition*s* configurable)
+* Static or dynamic (*ParitionMapper*)
+* Observable through *PartitionReducer*
+* State aware (*PartitionCollector*)
+* *PartitionAnalyzer* is a kind of aggregator of collector states
+
+== Further with flow?
+
+* Flow can be static (next attribute) or dynamic using *Decider*
+
+[source,java,numbered]
+-------------------
+public interface Decider {
+    String decide(StepExecution[] executions) throws Exception;
+}
+-------------------
+
+== Listeners
+
+* Spys everywhere and configurable
+** job
+** steps
+** chunk
+** reader/processor/writer
+** retry/skip (read/process/write)
+
+== Communicating between steps
+
+[source,java,numbered]
+-------------------
+public class MyTask extends AbstractBatchlet { // any component
+  @Inject
+  private StepContext step;
+
+  @Inject
+  private JobContext job;
+
+  public String process() throws Exception {
+    final String state = step.getStepName();
+    job.setTransientUserData(state);
+    // step.setPersistentUserData can be used
+    return "" + job.getTransientUserData();
+  }
+}
+-------------------
+
+
+== Testing
+
+[source,java,numbered]
+-------------------
+final JobExecution execution = JobLauncher.start("abatch", p);
+
+// or
+JobLauncher lch = new JobLauncher("abatch");
+JobExecution execution = lch.start(config);
+assertEquals(COMPLETED, execution.getBatchStatus());
+
+List<StepExecution> executions = lch.getLastStepExecutions();
+assertEquals(1, executions.size());
+
+StepExecution stepExec = executions.iterator().next();
+assertEquals("OK", stepExec.getExitStatus());
+-------------------
+
+== Open BAR, BatchEE way to package a batch!
+
+```
+└── BATCH-INF
+    ├── batch-jobs
+    │   └── demo.xml
+    ├── batch.xml
+    ├── classes
+    │   ├── org
+    │   │   └── apache
+    │   │       └── demo
+    │   │           └── Task.class
+    │   └── someconfig.properties
+    └── lib
+        └── commons-lang3-3.1.jar
+```
+
+WAR are supported to be integrable with other containers (OpenEJB).
+
+== Use it with BatchEE CLI...
+
+[source,verbatim]
+-------------------
+$ java -jar batchee-cli.jar start -archive demo-1.0.bar -name mybatch
+
+ ____        _       _     ______ ______
+|  _ \      | |     | |   |  ____|  ____|
+| |_) | __ _| |_ ___| |__ | |__  | |__
+|  _ < / _` | __/ __| '_ \|  __| |  __|
+| |_) | (_| | || (__| | | | |____| |____
+|____/ \__,_|\__\___|_| |_|______|______|0.1-incubating-SNAPSHOT
+Admin mode deactivated, use -socket to activate it
+Batch 'mybatch' started with id #0
+>>> Batch in progress...
+
+=========================
+Batch status: COMPLETED
+Exit status:  COMPLETED
+Duration:     0s
+=========================
+
+-------------------
+
+== ... or Maven
+
+* Can be local (Maven JVM) or Remote (JAX-RS)
+
+-------------------
+$ mvn batchee:start -Dbatchee.job=mybatch
+...
+[INFO] --- batchee-maven-plugin:0.1-incubating-SNAPSHOT:start (default-cli) @ simple-batch ---
+[INFO] Started job mybatch, id is #0
+...
+
+$ mvn batchee:diagram -Dbatchee.path=src\main\resources\META-INF\batch-jobs\mybatch.xml
+-------------------
+
+== Diagram Mojo
+
+image::diagram.png[]
+
+* Can be started in interactive mode!
+
+== Admin GUI (Servlet) 1/4
+
+* Just a jar to embed or wrap in a war then http://ip:port/webapp/jbatch
+
+image::newjob.png[]
+image::startjob.png[]
+
+== Admin GUI (Servlet) 2/4
+
+image::home.png[]
+
+== Admin GUI (Servlet) 3/4
+
+image::statusjob.png[]
+
+== Admin GUI (Servlet) 4/4
+
+image::stepstatus.png.png[]
+
+== BatchEE.next?
+
+* Propose a fluent API instead of relying on XML
+* Propose components to projects instead of BatchEE
+* Integration in TomEE
+* More on http://batchee.incubator.apache.org
+** http://batchee.incubator.apache.org/extensions.html
+** http://batchee.incubator.apache.org/gui.html
+** http://batchee.incubator.apache.org/maven.html
+** http://batchee.incubator.apache.org/configuration.html
+

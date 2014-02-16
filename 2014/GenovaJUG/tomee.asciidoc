@@ -1,0 +1,232 @@
+== Reminder: what is JavaEE today?
+
+* Profiles (Web = 0.5.Full)
+* EARs are dead (long live wars)
+* Testable (embedded + Arquillian)
+
+== Apache TomEE in few words
+
+____
+Tomcat + JavaEE
+____
+
+[options="step"]
+* Be *Simple*
+* Be *Small* (30Mo), *Fast* and *Light*
+* JavaEE 6 WP *certified* (JavaEE 7 coming)
+* *Apache* stack
+* Integration we all did for years
+
+
+== 3 Main flavors
+
+[cols="a,a,a,a,a,a", options="header", border="1px"]
+|===
+| |Tomcat |TomEE WP |TomEE JAX-RS | TomEE+ | OpenEJB
+
+|Servlets		|image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[] |
+|JSP			|image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[] |
+|JSF			|		    |image::check.png[] |image::check.png[] |image::check.png[] |
+|JTA			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|JPA			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|CDI			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|JAAS			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|JACC			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|JavaMail		|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|Bean Validation	|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|EJB			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
+|JAX-RS			|		    |			|image::check.png[] |image::check.png[] |image::check.png[]
+|JAX-WS			|		    |			|		    |image::check.png[] |image::check.png[]
+|Connector		|		    |			|		    |image::check.png[] |image::check.png[]
+|JMS			|		    |			|		    |image::check.png[] |image::check.png[]
+|===
+
+== Apache stack
+
+* OpenWebBeans
+* OpenJPA
+* OpenEJB
+* MyFaces
+* BVal
+* CXF
+* ActiveMQ
+
+== Apache TomEE job
+
+____
+Integrate all components!
+____
+
+image::integration.png[]
+
+
+== What is your job?
+
+____
+Write application...not servers.
+____
+
+== TomEE and Testing
+
+* EJBContainer
+* ApplicationComposer
+* Arquillian
+
+== EJBContainer
+
+[source,java,numbered]
+----
+public class MyTest {
+    @BeforeClass
+    public static void start() {
+        container = EJBContainer.createEJBContainer();
+    }
+     
+    @Before
+    public void inject() throws NamingException {
+        // OpenEJB awesomeness
+        container.getContext().bind("inject", this);
+    }
+     
+    @AfterClass
+    public static void stop() {
+        container.close();
+    }
+
+    @EJB
+    private Foo foo;
+
+    @Test
+    public should_return_bar() {
+        assertEquals("bar", foo.bar());
+    }
+}
+----
+
+== ApplicationComposer
+
+Created for OpenEJB testing.
+
+[source,java,numbered]
+----
+@EnableServices("jax-rs")
+@RunWith(ApplicationComposer.class)
+public class JAXRSRoutingTest {
+    @EJB
+    private MyService s;
+
+    @Module
+    @Classes(cdi=true, value={ MyApp.class, MyService.class })
+    public WebApp war() {
+        return new WebApp().contextRoot("app");
+    }
+
+    @Test
+    public void aTest() {
+        // a JAX-RS test http://localhost:4204/app/...
+        // a call to s...
+    }
+}
+----
+
+== Arquillian
+
+3 flavors
+
+* OpenEJB embedded
+* TomEE embedded
+* TomEE remote
+
+== Arquillian test
+
+[source,java,numbered]
+----
+@RunWith(Arquillian.class)
+public class JPATest {
+  @Inject
+  private DAO dao;
+
+  @Deployment
+  public static JavaArchive archive() {
+    return ShrinkWrap.create(JavaArchive.class, "JPATest.jar")
+     .addClasses(Person.class, Persister.class)
+     .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+     .addAsManifestResource(
+       new ClassLoaderAsset("testp.xml")), "persistence.xml");
+  }
+
+  @Test
+  @Transactional(ROLLBACK)
+  public void persist() {
+    dao.persist(new Person("foo"));
+  }
+}
+----
+
+== Arquillian and TomEE
+
+* No need of a container (downloaded)
+* Container customizable (conf, lib, ...)
+* Random port (@ArquillianResource URL)
+
+== TomEE and Maven
+
+* Server build and deployed thanks to Maven
+** All artifacts are on central
+*** Easily integrated with Ant, Maven, Gradle...
+* Maven plugin very advanced (next slide)
+** run/build/debug/...
+
+== TomEE Maven Plugin
+
+[source,xml,numbered]
+----
+<plugin>
+  <groupId>org.apache.openejb.maven</groupId>
+  <artifactId>tomee-maven-plugin</artifactId>
+  <version>1.0.0</version>
+  <configuration>
+    <tomeeVersion>1.6.0</tomeeVersion>
+    <tomeeClassifier>plus</tomeeClassifier>
+    <debugPort>5005</debugPort>
+    <args>-Dfoo=bar</args>
+    <config>${project.basedir}/src/test/tomee/conf</config>
+    <libs>
+      <lib>mysql:mysql-connector-java:5.1.20</lib>
+    </libs>
+    <webapps>
+      <webapp>org.superbiz:myapp:4.3?name=ROOT</webapp>
+    </webapps>
+    <libs>
+      <lib>mysql:mysql-connector-java:5.1.21</lib>
+      <lib>unzip:org.superbiz:mybundle:4.1.0:zip</lib>
+      <lib>remove:openjpa-</lib>
+    </libs>
+    <synchronization>
+      <extensions>
+        <extension>.xhtml</extension>
+      </extensions>
+  </synchronization>
+  </configuration>
+</plugin>
+----
+
+== TomEE tools
+
+* Tomcat ones
+* Jelastic
+* Idea
+* JRebel
+* Metawerx
+* ...
+
+== Tomitribe
+
+____
+Ok TomEE looks good but what about support?
+____
+
+Tomitribe is here now! http://www.tomitribe.com/[www.tomitribe.com]
+
+image::tomitribe.png[]
+

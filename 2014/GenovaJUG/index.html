@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<meta content="Romain Manni-Bucau &lt;rmannibucau@gmail.com&gt; @rmannibucau" name="author">
+<title>3 Apache projects to follow up in 2014!</title>
+<link href="deck.js/core/deck.core.css" rel="stylesheet">
+<link href="deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet">
+<link href="deck.js/themes/style/web-2.0.css" media="screen" rel="stylesheet">
+<link href="deck.js/themes/transition/horizontal-slide.css" media="screen" rel="stylesheet">
+<link href="deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>3 Apache projects to follow up in 2014!</h1>
+<span id="author">Romain Manni-Bucau &lt;rmannibucau@gmail.com&gt; @rmannibucau</span>
+<br>
+<span id="revdate">v0.1 02-16-2014</span>
+</section>
+<section class="slide" id="_who_am_i">
+<h2>Who am I?</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rmannibucau" src="./images/rmannibucau.png">
+</div>
+</div>
+
+<div class="ulist">
+<ul>
+<li>Java/JavaEE developer since 2010</li>
+<li>Committer Apache since 2011</li>
+<li>Working</li>
+</ul>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="swissquote" src="./images/swissquote.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_agenda">
+<h2>Agenda</h2>
+<div class="ulist">
+<ul>
+<li>Apache TomEE</li>
+<li>Apache BatchEE</li>
+<li>Apache Sirona</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_reminder_what_is_javaee_today">
+<h2>Reminder: what is JavaEE today?</h2>
+<div class="ulist">
+<ul>
+<li>Profiles (Web = 0.5.Full)</li>
+<li>EARs are dead (long live wars)</li>
+<li>Testable (embedded + Arquillian)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_apache_tomee_in_few_words">
+<h2>Apache TomEE in few words</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Tomcat + JavaEE</p></div>
+</blockquote>
+</div>
+
+<div class="ulist">
+<ul>
+<li class="slide">Be <strong>Simple</strong></li>
+<li class="slide">Be <strong>Small</strong> (30Mo), <strong>Fast</strong> and <strong>Light</strong></li>
+<li class="slide">JavaEE 6 WP <strong>certified</strong> (JavaEE 7 coming)</li>
+<li class="slide"><strong>Apache</strong> stack</li>
+<li class="slide">Integration we all did for years</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_3_main_flavors">
+<h2>3 Main flavors</h2>
+<table class="tableblock frame-all grid-all" style="width:100%">
+<colgroup>
+<col style="width:16%">
+<col style="width:16%">
+<col style="width:16%">
+<col style="width:16%">
+<col style="width:16%">
+<col style="width:16%">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Tomcat</th>
+<th class="tableblock halign-left valign-top">TomEE WP</th>
+<th class="tableblock halign-left valign-top">TomEE JAX-RS</th>
+<th class="tableblock halign-left valign-top">TomEE+</th>
+<th class="tableblock halign-left valign-top">OpenEJB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>Servlets</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JSP</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JSF</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JTA</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JPA</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>CDI</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JAAS</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JACC</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JavaMail</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>Bean Validation</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>EJB</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JAX-RS</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JAX-WS</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>Connector</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph"><p>JMS</p></div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img alt="check" src="./images/check.png">
+</div>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section class="slide" id="_apache_stack">
+<h2>Apache stack</h2>
+<div class="ulist">
+<ul>
+<li>OpenWebBeans</li>
+<li>OpenJPA</li>
+<li>OpenEJB</li>
+<li>MyFaces</li>
+<li>BVal</li>
+<li>CXF</li>
+<li>ActiveMQ</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_apache_tomee_job">
+<h2>Apache TomEE job</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Integrate all components!</p></div>
+</blockquote>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="integration" src="./images/integration.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_what_is_your_job">
+<h2>What is your job?</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Write application&#8230;not servers.</p></div>
+</blockquote>
+</div>
+</section>
+
+<section class="slide" id="_tomee_other_stength">
+<h2>TomEE other stength</h2>
+<div class="ulist">
+<ul>
+<li>Tomcat (reuse existing Tomcat tools)</li>
+<li><p>
+Very adapted for tests<div class="ulist">
+<ul>
+<li>Arquillian adapters</li>
+<li>ApplicationComposer</li>
+</ul>
+</div></p></li>
+<li>TomEE Maven Plugin</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_tomitribe">
+<h2>Tomitribe</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Ok TomEE looks good but what about support?</p></div>
+</blockquote>
+</div>
+
+<div class="paragraph"><p>Tomitribe is here now! <a href="http://www.tomitribe.com/">www.tomitribe.com</a></p></div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="tomitribe" src="./images/tomitribe.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_thanks_questons">
+<h2>Thanks/Questons!</h2>
+
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/hash/deck.hash.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/menu/deck.menu.js"></script>
+<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/split/deck.split.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>

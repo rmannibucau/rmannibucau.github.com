@@ -37,7 +37,9 @@
 <ul>
 <li>Java/JavaEE developer since 2010</li>
 <li>Committer Apache since 2011</li>
-<li>Working</li>
+<li><a href="http://twitter.com/rmannibucau">@rmannibucau</a></li>
+<li><a href="http://rmannibucau.wordpress.com">rmannibucau.wordpress.com</a></li>
+<li>Working in</li>
 </ul>
 </div>
 
@@ -572,19 +574,126 @@
 </div>
 </section>
 
-<section class="slide" id="_tomee_other_stength">
-<h2>TomEE other stength</h2>
+<section class="slide" id="_tomee_and_testing">
+<h2>TomEE and Testing</h2>
 <div class="ulist">
 <ul>
-<li>Tomcat (reuse existing Tomcat tools)</li>
-<li><p>
-Very adapted for tests<div class="ulist">
-<ul>
-<li>Arquillian adapters</li>
+<li>EJBContainer</li>
 <li>ApplicationComposer</li>
+<li>Arquillian</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_ejbcontainer">
+<h2>EJBContainer</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15&#x000A;16&#x000A;17&#x000A;18&#x000A;19&#x000A;<strong>20</strong>&#x000A;21&#x000A;22&#x000A;23&#x000A;24&#x000A;25</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">MyTest</span> {&#x000A;    <span style="color:#007">@BeforeClass</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#088;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">void</span> start() {&#x000A;        container = EJBContainer.createEJBContainer();&#x000A;    }&#x000A;&#x000A;    <span style="color:#007">@Before</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> inject() <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">NamingException</span> {&#x000A;        <span style="color:#777">// OpenEJB awesomeness</span>&#x000A;        container.getContext().bind(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">inject</span><span style="color:#710">&quot;</span></span>, <span style="color:#950">this</span>);&#x000A;    }&#x000A;&#x000A;    <span style="color:#007">@AfterClass</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#088;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">void</span> stop() {&#x000A;        container.close();&#x000A;    }&#x000A;&#x000A;    <span style="color:#007">@EJB</span>&#x000A;    <span style="color:#088;font-weight:bold">private</span> Foo foo;&#x000A;&#x000A;    <span style="color:#007">@Test</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> should_return_bar() {&#x000A;        assertEquals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">bar</span><span style="color:#710">&quot;</span></span>, foo.bar());&#x000A;    }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_applicationcomposer">
+<h2>ApplicationComposer</h2>
+<div class="paragraph"><p>Created for OpenEJB testing.</p></div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15&#x000A;16&#x000A;17&#x000A;18</pre></td>
+  <td class="code"><pre><span style="color:#007">@EnableServices</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">jax-rs</span><span style="color:#710">&quot;</span></span>)&#x000A;<span style="color:#007">@RunWith</span>(ApplicationComposer.class)&#x000A;<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">JAXRSRoutingTest</span> {&#x000A;    <span style="color:#007">@EJB</span>&#x000A;    <span style="color:#088;font-weight:bold">private</span> MyService s;&#x000A;&#x000A;    <span style="color:#007">@Module</span>&#x000A;    <span style="color:#007">@Classes</span>(cdi=<span style="color:#069">true</span>, value={ MyApp.class, MyService.class })&#x000A;    <span style="color:#088;font-weight:bold">public</span> WebApp war() {&#x000A;        <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> WebApp().contextRoot(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">app</span><span style="color:#710">&quot;</span></span>);&#x000A;    }&#x000A;&#x000A;    <span style="color:#007">@Test</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> aTest() {&#x000A;        <span style="color:#777">// a JAX-RS test http://localhost:4204/app/...</span>&#x000A;        <span style="color:#777">// a call to s...</span>&#x000A;    }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_arquillian">
+<h2>Arquillian</h2>
+<div class="paragraph"><p>3 flavors</p></div>
+
+<div class="ulist">
+<ul>
+<li>OpenEJB embedded</li>
+<li>TomEE embedded</li>
+<li>TomEE remote</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_arquillian_test">
+<h2>Arquillian test</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15&#x000A;16&#x000A;17&#x000A;18&#x000A;19&#x000A;<strong>20</strong></pre></td>
+  <td class="code"><pre><span style="color:#007">@RunWith</span>(Arquillian.class)&#x000A;<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">JPATest</span> {&#x000A;  <span style="color:#007">@Inject</span>&#x000A;  <span style="color:#088;font-weight:bold">private</span> DAO dao;&#x000A;&#x000A;  <span style="color:#007">@Deployment</span>&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#088;font-weight:bold">static</span> JavaArchive archive() {&#x000A;    <span style="color:#080;font-weight:bold">return</span> ShrinkWrap.create(JavaArchive.class, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">JPATest.jar</span><span style="color:#710">&quot;</span></span>)&#x000A;     .addClasses(Person.class, Persister.class)&#x000A;     .addAsManifestResource(EmptyAsset.INSTANCE, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">beans.xml</span><span style="color:#710">&quot;</span></span>)&#x000A;     .addAsManifestResource(&#x000A;       <span style="color:#080;font-weight:bold">new</span> ClassLoaderAsset(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">testp.xml</span><span style="color:#710">&quot;</span></span>)), <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">persistence.xml</span><span style="color:#710">&quot;</span></span>);&#x000A;  }&#x000A;&#x000A;  <span style="color:#007">@Test</span>&#x000A;  <span style="color:#007">@Transactional</span>(ROLLBACK)&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> persist() {&#x000A;    dao.persist(<span style="color:#080;font-weight:bold">new</span> Person(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">foo</span><span style="color:#710">&quot;</span></span>));&#x000A;  }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_arquillian_and_tomee">
+<h2>Arquillian and TomEE</h2>
+<div class="ulist">
+<ul>
+<li>No need of a container (downloaded)</li>
+<li>Container customizable (conf, lib, &#8230;)</li>
+<li>Random port (@ArquillianResource URL)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_tomee_and_maven">
+<h2>TomEE and Maven</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Server build and deployed thanks to Maven<div class="ulist">
+<ul>
+<li><p>
+All artifacts are on central<div class="ulist">
+<ul>
+<li>Easily integrated with Ant, Maven, Gradle&#8230;</li>
 </ul>
 </div></p></li>
-<li>TomEE Maven Plugin</li>
+</ul>
+</div></p></li>
+<li><p>
+Maven plugin very advanced (next slide)<div class="ulist">
+<ul>
+<li>run/build/debug/&#8230;</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_tomee_maven_plugin">
+<h2>TomEE Maven Plugin</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="xml language-xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15&#x000A;16&#x000A;17&#x000A;18&#x000A;19&#x000A;<strong>20</strong>&#x000A;21&#x000A;22&#x000A;23&#x000A;24&#x000A;25&#x000A;26&#x000A;27&#x000A;28</pre></td>
+  <td class="code"><pre><span style="color:#070;font-weight:bold">&lt;plugin&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;groupId&gt;</span>org.apache.openejb.maven<span style="color:#070;font-weight:bold">&lt;/groupId&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;artifactId&gt;</span>tomee-maven-plugin<span style="color:#070;font-weight:bold">&lt;/artifactId&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;version&gt;</span>1.0.0<span style="color:#070;font-weight:bold">&lt;/version&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;configuration&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;tomeeVersion&gt;</span>1.6.0<span style="color:#070;font-weight:bold">&lt;/tomeeVersion&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;tomeeClassifier&gt;</span>plus<span style="color:#070;font-weight:bold">&lt;/tomeeClassifier&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;debugPort&gt;</span>5005<span style="color:#070;font-weight:bold">&lt;/debugPort&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;args&gt;</span>-Dfoo=bar<span style="color:#070;font-weight:bold">&lt;/args&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;config&gt;</span>${project.basedir}/src/test/tomee/conf<span style="color:#070;font-weight:bold">&lt;/config&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;libs&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;lib&gt;</span>mysql:mysql-connector-java:5.1.20<span style="color:#070;font-weight:bold">&lt;/lib&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;/libs&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;webapps&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;webapp&gt;</span>org.superbiz:myapp:4.3?name=ROOT<span style="color:#070;font-weight:bold">&lt;/webapp&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;/webapps&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;libs&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;lib&gt;</span>mysql:mysql-connector-java:5.1.21<span style="color:#070;font-weight:bold">&lt;/lib&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;lib&gt;</span>unzip:org.superbiz:mybundle:4.1.0:zip<span style="color:#070;font-weight:bold">&lt;/lib&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;lib&gt;</span>remove:openjpa-<span style="color:#070;font-weight:bold">&lt;/lib&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;/libs&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;synchronization&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;extensions&gt;</span>&#x000A;        <span style="color:#070;font-weight:bold">&lt;extension&gt;</span>.xhtml<span style="color:#070;font-weight:bold">&lt;/extension&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;/extensions&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/synchronization&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/configuration&gt;</span>&#x000A;<span style="color:#070;font-weight:bold">&lt;/plugin&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_tomee_tools">
+<h2>TomEE tools</h2>
+<div class="ulist">
+<ul>
+<li>Tomcat ones</li>
+<li>Jelastic</li>
+<li>Idea</li>
+<li>JRebel</li>
+<li>Metawerx</li>
+<li>&#8230;</li>
 </ul>
 </div>
 </section>
@@ -606,9 +715,729 @@ Very adapted for tests<div class="ulist">
 </div>
 </section>
 
-<section class="slide" id="_thanks_questons">
-<h2>Thanks/Questons!</h2>
+<section class="slide" id="_apache_batchee">
+<h2>Apache BatchEE</h2>
+<div class="paragraph"><p>JBatch (JSR-352) made real!</p></div>
+</section>
 
+<section class="slide" id="_reminder_jbatch">
+<h2>Reminder: JBatch</h2>
+<div class="ulist">
+<ul>
+<li>JavaEE 7 API for Batches</li>
+<li>Highly inspired from Spring-Batch and IBM solution (lead)</li>
+</ul>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="jbatch" src="./images/jbatch.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_batchee_modules">
+<h2>BatchEE modules</h2>
+<div class="ulist">
+<ul>
+<li><p>
+JBatch<div class="ulist">
+<ul>
+<li>JDBC, JPA, in memory persistence</li>
+<li>Security support (Shiro)</li>
+</ul>
+</div></p></li>
+<li><p>
+Components<div class="ulist">
+<ul>
+<li>JDBC, JPA</li>
+<li>XML (StAX, JAXB), JSon, BeanIO</li>
+<li>Camel</li>
+<li>Groovy</li>
+</ul>
+</div></p></li>
+<li><p>
+GUI<div class="ulist">
+<ul>
+<li>Servlet</li>
+<li>JAX-RS</li>
+</ul>
+</div></p></li>
+<li><p>
+Maven plugin<div class="ulist">
+<ul>
+<li>JobOperator</li>
+<li>Diagram</li>
+</ul>
+</div></p></li>
+<li>Test helpers</li>
+<li>CLI</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_joboperator_sample">
+<h2>JobOperator sample</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">final</span> JobOperator jobOperator = BatchRuntime.getJobOperator();&#x000A;<span style="color:#088;font-weight:bold">final</span> <span style="color:#339;font-weight:bold">long</span> id = jobOperator.start(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">my-batch</span><span style="color:#710">&quot;</span></span>, myJobParameters);&#x000A;&#x000A;jobOperator.stop(id);&#x000A;&#x000A;<span style="color:#088;font-weight:bold">final</span> JobInstance instance = jobOperator.getJobInstance(id);&#x000A;<span style="color:#0a8;font-weight:bold">List</span>&lt;JobExecution&gt; exec = jobOperator.getJobExecutions(instance)&#x000A;<span style="color:#777">// ...</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_hello_world">
+<h2>Hello world!</h2>
+<div class="paragraph"><p>A simple task printing "Hello JBatch!"</p></div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7</pre></td>
+  <td class="code"><pre><span style="color:#007">@Named</span> <span style="color:#777">// optional, can be replaced by META-INF/batch.xml</span>&#x000A;<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">MyTask</span> <span style="color:#088;font-weight:bold">extends</span> AbstractBatchlet {&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> process() <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">Exception</span> {&#x000A;        <span style="color:#0a8;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Hello JBatch!</span><span style="color:#710">&quot;</span></span>);&#x000A;        <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">exit status is ok</span><span style="color:#710">&quot;</span></span>;&#x000A;    }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="paragraph"><p>And its batch definition:</p></div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="xml language-xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6</pre></td>
+  <td class="code"><pre><span style="color:#070;font-weight:bold">&lt;job</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">hello</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">version</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.0</span><span style="color:#710">&quot;</span></span>&#x000A;     <span style="color:#b48">xmlns</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://xmlns.jcp.org/xml/ns/javaee</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;step</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">hi</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;batchlet</span> <span style="color:#b48">ref</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myTask</span><span style="color:#710">&quot;</span></span> <span style="color:#070;font-weight:bold">/&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/step&gt;</span>&#x000A;<span style="color:#070;font-weight:bold">&lt;/job&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_hello_xxx">
+<h2>Hello XXX!</h2>
+<div class="paragraph"><p>Great but how to configure it?</p></div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong></pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">MyTask</span> <span style="color:#088;font-weight:bold">extends</span> AbstractBatchlet {&#x000A;    <span style="color:#007">@Inject</span>&#x000A;    <span style="color:#007">@BatchProperty</span> <span style="color:#777">// default name = field name</span>&#x000A;    <span style="color:#088;font-weight:bold">private</span> <span style="color:#0a8;font-weight:bold">String</span> name;&#x000A;&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> process() <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">Exception</span> {&#x000A;        <span style="color:#0a8;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Hello </span><span style="color:#710">&quot;</span></span> + name + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">!</span><span style="color:#710">&quot;</span></span>);&#x000A;        <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">exit status is ok for </span><span style="color:#710">&quot;</span></span> + name;&#x000A;    }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="xml language-xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5</pre></td>
+  <td class="code"><pre><span style="color:#070;font-weight:bold">&lt;batchlet</span> <span style="color:#b48">ref</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myTask</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;properties&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;property</span> <span style="color:#b48">name</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">name</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">value</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#{jobParameters['name']}</span><span style="color:#710">&quot;</span></span> <span style="color:#070;font-weight:bold">/&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/properties&gt;</span>&#x000A;<span style="color:#070;font-weight:bold">&lt;/batchlet&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_ok_but_if_my_batchlet_lasts_1h">
+<h2>Ok but if my batchlet lasts 1h!</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">MyTask</span> <span style="color:#088;font-weight:bold">implements</span> Batchlet {&#x000A;    <span style="color:#777">// same as before</span>&#x000A;&#x000A;    <span style="color:#007">@Override</span>&#x000A;    <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> stop() {&#x000A;        <span style="color:#777">// stop the task here</span>&#x000A;    }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_chunking_yeah">
+<h2>Chunking, yeah!</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code>+-----------+  +------------+  +--------------+  +--------------+
+|   step    |  |   reader   |  |   processor  |  |    writer    |
++-----+-----+  +------+-----+  +-------+------+  +------+-------+
+    +-+               |                |                |
+    | +-----read----&gt;++                |                |
+    | |              ++                |                |
+    | +--------------------process---&gt;++                |
+    | |               |               ++                |
+    | +-------------&gt;++                |                |
+    | |              ++                |                |
+    | +------------------------------&gt;++                |
+    | |               |               ++                |
+    | +-------------------------------------write-----&gt;++
+    | |               |                |               ++
+    +-+               |                |                |</code></pre>
+</div>
+</div>
+
+<div class="paragraph"><p>End when reader returns null and grouped by "chunk" ~ "commit interval", timeout or custom policy.</p></div>
+</section>
+
+<section class="slide" id="_chunking_sample">
+<h2>Chunking sample</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="xml language-xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14</pre></td>
+  <td class="code"><pre><span style="color:#070;font-weight:bold">&lt;job</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">abatch</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">version</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.0</span><span style="color:#710">&quot;</span></span>&#x000A;     <span style="color:#b48">xmlns</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://xmlns.jcp.org/xml/ns/javaee</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;step</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">astep</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;chunk&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;reader</span> <span style="color:#b48">ref</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myReader</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;        <span style="color:#070;font-weight:bold">&lt;properties&gt;</span>&#x000A;          <span style="color:#070;font-weight:bold">&lt;property</span> <span style="color:#b48">name</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">foo</span><span style="color:#710">&quot;</span></span> <span style="color:#b48">value</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">bar</span><span style="color:#710">&quot;</span></span> <span style="color:#070;font-weight:bold">/&gt;</span>&#x000A;        <span style="color:#070;font-weight:bold">&lt;/properties&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;/reader&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;processor</span> <span style="color:#b48">ref</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myProcessor</span><span style="color:#710">&quot;</span></span> <span style="color:#070;font-weight:bold">/&gt;</span>&#x000A;      <span style="color:#070;font-weight:bold">&lt;writer</span> <span style="color:#b48">ref</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myWriter</span><span style="color:#710">&quot;</span></span> <span style="color:#070;font-weight:bold">/&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;/chunk&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/step&gt;</span>&#x000A;<span style="color:#070;font-weight:bold">&lt;/job&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_go_further_with_chunks">
+<h2>Go further with chunks!</h2>
+<div class="paragraph"><p>Chunking API is checkpoint aware:</p></div>
+
+<div class="ulist">
+<ul>
+<li>reader and writer can expose their state</li>
+<li>if the batch is restarted the last state is provided to continue the execution</li>
+</ul>
+</div>
+
+<div class="paragraph"><p>Exception management is configurable (include/exclude):</p></div>
+
+<div class="ulist">
+<ul>
+<li>retry</li>
+<li>skip</li>
+<li>no rollback</li>
+</ul>
+</div>
+
+<div class="paragraph"><p>JTA compliant!</p></div>
+</section>
+
+<section class="slide" id="_partitions">
+<h2>Partitions?</h2>
+<div class="ulist">
+<ul>
+<li>A <strong>partition</strong> is an instance of a step</li>
+<li>A partition has a thread (number of threads for partition*s* configurable)</li>
+<li>Static or dynamic (<strong>ParitionMapper</strong>)</li>
+<li>Observable through <strong>PartitionReducer</strong></li>
+<li>State aware (<strong>PartitionCollector</strong>)</li>
+<li><strong>PartitionAnalyzer</strong> is a kind of aggregator of collector states</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_further_with_flow">
+<h2>Further with flow?</h2>
+<div class="ulist">
+<ul>
+<li>Flow can be static (next attribute) or dynamic using <strong>Decider</strong></li>
+</ul>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">interface</span> <span style="color:#B06;font-weight:bold">Decider</span> {&#x000A;    <span style="color:#0a8;font-weight:bold">String</span> decide(StepExecution<span style="color:#339;font-weight:bold">[]</span> executions) <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">Exception</span>;&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_listeners">
+<h2>Listeners</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Spys everywhere and configurable<div class="ulist">
+<ul>
+<li>job</li>
+<li>steps</li>
+<li>chunk</li>
+<li>reader/processor/writer</li>
+<li>retry/skip (read/process/write)</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_communicating_between_steps">
+<h2>Communicating between steps</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">MyTask</span> <span style="color:#088;font-weight:bold">extends</span> AbstractBatchlet { <span style="color:#777">// any component</span>&#x000A;  <span style="color:#007">@Inject</span>&#x000A;  <span style="color:#088;font-weight:bold">private</span> StepContext step;&#x000A;&#x000A;  <span style="color:#007">@Inject</span>&#x000A;  <span style="color:#088;font-weight:bold">private</span> JobContext job;&#x000A;&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> process() <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">Exception</span> {&#x000A;    <span style="color:#088;font-weight:bold">final</span> <span style="color:#0a8;font-weight:bold">String</span> state = step.getStepName();&#x000A;    job.setTransientUserData(state);&#x000A;    <span style="color:#777">// step.setPersistentUserData can be used</span>&#x000A;    <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span> + job.getTransientUserData();&#x000A;  }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_testing">
+<h2>Testing</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">final</span> JobExecution execution = JobLauncher.start(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">abatch</span><span style="color:#710">&quot;</span></span>, p);&#x000A;&#x000A;<span style="color:#777">// or</span>&#x000A;JobLauncher lch = <span style="color:#080;font-weight:bold">new</span> JobLauncher(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">abatch</span><span style="color:#710">&quot;</span></span>);&#x000A;JobExecution execution = lch.start(config);&#x000A;assertEquals(COMPLETED, execution.getBatchStatus());&#x000A;&#x000A;<span style="color:#0a8;font-weight:bold">List</span>&lt;StepExecution&gt; executions = lch.getLastStepExecutions();&#x000A;assertEquals(<span style="color:#00D">1</span>, executions.size());&#x000A;&#x000A;StepExecution stepExec = executions.iterator().next();&#x000A;assertEquals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">OK</span><span style="color:#710">&quot;</span></span>, stepExec.getExitStatus());</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_open_bar_batchee_way_to_package_a_batch">
+<h2>Open BAR, BatchEE way to package a batch!</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code>└── BATCH-INF
+    ├── batch-jobs
+    │   └── demo.xml
+    ├── batch.xml
+    ├── classes
+    │   ├── org
+    │   │   └── apache
+    │   │       └── demo
+    │   │           └── Task.class
+    │   └── someconfig.properties
+    └── lib
+        └── commons-lang3-3.1.jar</code></pre>
+</div>
+</div>
+
+<div class="paragraph"><p>WAR are supported to be integrable with other containers (OpenEJB).</p></div>
+</section>
+
+<section class="slide" id="_use_it_with_batchee_cli">
+<h2>Use it with BatchEE CLI&#8230;</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="verbatim language-verbatim">$ java -jar batchee-cli.jar start -archive demo-1.0.bar -name mybatch
+
+ ____        _       _     ______ ______
+|  _ \      | |     | |   |  ____|  ____|
+| |_) | __ _| |_ ___| |__ | |__  | |__
+|  _ &lt; / _` | __/ __| '_ \|  __| |  __|
+| |_) | (_| | || (__| | | | |____| |____
+|____/ \__,_|\__\___|_| |_|______|______|0.1-incubating-SNAPSHOT
+Admin mode deactivated, use -socket to activate it
+Batch 'mybatch' started with id #0
+&gt;&gt;&gt; Batch in progress...
+
+=========================
+Batch status: COMPLETED
+Exit status:  COMPLETED
+Duration:     0s
+=========================</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="__or_maven">
+<h2>&#8230; or Maven</h2>
+<div class="ulist">
+<ul>
+<li>Can be local (Maven JVM) or Remote (JAX-RS)</li>
+</ul>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre><code>$ mvn batchee:start -Dbatchee.job=mybatch
+...
+[INFO] --- batchee-maven-plugin:0.1-incubating-SNAPSHOT:start (default-cli) @ simple-batch ---
+[INFO] Started job mybatch, id is #0
+...
+
+$ mvn batchee:diagram -Dbatchee.path=src\main\resources\META-INF\batch-jobs\mybatch.xml</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_diagram_mojo">
+<h2>Diagram Mojo</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="diagram" src="./images/diagram.png">
+</div>
+</div>
+
+<div class="ulist">
+<ul>
+<li>Can be started in interactive mode!</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_admin_gui_servlet_1_4">
+<h2>Admin GUI (Servlet) 1/4</h2>
+<div class="ulist">
+<ul>
+<li>Just a jar to embed or wrap in a war then <a href="http://ip:port/webapp/jbatch">http://ip:port/webapp/jbatch</a></li>
+</ul>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="newjob" src="./images/newjob.png">
+</div>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="startjob" src="./images/startjob.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_admin_gui_servlet_2_4">
+<h2>Admin GUI (Servlet) 2/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="home" src="./images/home.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_admin_gui_servlet_3_4">
+<h2>Admin GUI (Servlet) 3/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="statusjob" src="./images/statusjob.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_admin_gui_servlet_4_4">
+<h2>Admin GUI (Servlet) 4/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="stepstatus.png" src="./images/stepstatus.png.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_batchee_next">
+<h2>BatchEE.next?</h2>
+<div class="ulist">
+<ul>
+<li>Propose a fluent API instead of relying on XML</li>
+<li>Propose components to projects instead of BatchEE</li>
+<li>Integration in TomEE</li>
+<li><p>
+More on <a href="http://batchee.incubator.apache.org">http://batchee.incubator.apache.org</a><div class="ulist">
+<ul>
+<li><a href="http://batchee.incubator.apache.org/extensions.html">http://batchee.incubator.apache.org/extensions.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/gui.html">http://batchee.incubator.apache.org/gui.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/maven.html">http://batchee.incubator.apache.org/maven.html</a></li>
+<li><a href="http://batchee.incubator.apache.org/configuration.html">http://batchee.incubator.apache.org/configuration.html</a></li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_apache_sirona">
+<h2>Apache Sirona</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Simple and extensible monitoring solution Java oriented applications.</p></div>
+</blockquote>
+</div>
+
+<div class="paragraph"><p><a href="http://sirona.incubator.apache.org">sirona.incubator.apache.org</a></p></div>
+</section>
+
+<section class="slide" id="_where_does_it_come_from">
+<h2>Where does it come from?</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Started ~2008 as commons-monitoring<div class="ulist">
+<ul>
+<li>Revival Q3 2013</li>
+</ul>
+</div></p></li>
+<li>~26k lines of code (Ohloh)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_modules">
+<h2>Modules</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Client/measure</li>
+<li class="slide">Collector</li>
+<li class="slide">Reporting</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_basis">
+<h2>Basis</h2>
+<div class="paragraph"><p>Mainly two objects:</p></div>
+
+<div class="ulist">
+<ul>
+<li>Counter: statistic and concurrency holder on a value.</li>
+<li>Gauge: provide a value at a moment. History oriented.</li>
+</ul>
+</div>
+
+<div class="paragraph"><p>Some more vocabulary:</p></div>
+
+<div class="ulist">
+<ul>
+<li>Role: name with unit</li>
+<li>Repository: counter/gauge manager</li>
+<li>StopWatch: counter wrapper (start/stop)</li>
+<li>Validation (node status)</li>
+<li>DataStores: persistence, link between repository and persistence</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_gauge">
+<h2>Gauge</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">interface</span> <span style="color:#B06;font-weight:bold">Gauge</span> {&#x000A;    <span style="color:#0a8;font-weight:bold">Role</span> role();&#x000A;    <span style="color:#339;font-weight:bold">double</span> value();&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="paragraph"><p>Defaults:</p></div>
+
+<div class="ulist">
+<ul>
+<li>CPU</li>
+<li>Memory</li>
+<li>&#8230;</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_counter">
+<h2>Counter</h2>
+<div class="paragraph"><p>Here the target is not to implement them but to reuse them to measure execution times:</p></div>
+
+<div class="ulist">
+<ul>
+<li>method</li>
+<li>HTTP request</li>
+<li>JDBC</li>
+<li>&#8230;</li>
+</ul>
+</div>
+
+<div class="paragraph"><p>Instrumentation:</p></div>
+
+<div class="ulist">
+<ul>
+<li>CDI/Spring/&#8230;</li>
+<li>ProxyFactory</li>
+<li>AspectJ</li>
+<li>sirona-javaagent</li>
+<li>JAX-RS</li>
+<li>Filter</li>
+<li>JTA</li>
+<li>&#8230;</li>
+</ul>
+</div>
+
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Experimental: dynamic interception</p></div>
+</blockquote>
+</div>
+</section>
+
+<section class="slide" id="_storage">
+<h2>Storage</h2>
+<div class="ulist">
+<ul>
+<li>Extensible indeed!</li>
+<li>Default in memory (bench oriented)</li>
+<li>Cassandra (monitoring oriented)</li>
+<li>Graphite</li>
+<li>Cube</li>
+<li>More to come!</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_gui_1_4">
+<h2>GUI 1/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="shome" src="./images/shome.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_gui_2_4">
+<h2>GUI 2/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="report" src="./images/report.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_gui_3_2">
+<h2>GUI 3/2</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="mbean attributes" src="./images/mbean-attributes.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_gui_4_4">
+<h2>GUI 4/4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="mbean operations" src="./images/mbean-operations.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_deployments">
+<h2>Deployments</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="sirona embed" src="./images/sirona-embed.png">
+</div>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="sirona collector" src="./images/sirona-collector.png">
+</div>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="sirona collector pull" src="./images/sirona-collector-pull.png">
+</div>
+</div>
+
+<div class="imageblock">
+<div class="content">
+<img alt="sirona distributed" src="./images/sirona-distributed.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_plugins">
+<h2>Plugins</h2>
+<div class="ulist">
+<ul>
+<li>New gauge</li>
+<li>New counter</li>
+<li>New storage (client/server/embedded)</li>
+<li>New plugin for the GUI (new tab)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_javaagent">
+<h2>JavaAgent</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Goal: get more control even on JVM classes.</p></div>
+</blockquote>
+</div>
+
+<div class="paragraph"><p>It is an extensible JavaAgent. It allows counter configuration
++ add custom listeners.</p></div>
+</section>
+
+<section class="slide" id="_javaagent_custom_code">
+<h2>JavaAgent: custom code</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">interface</span> <span style="color:#B06;font-weight:bold">InvocationListener</span> {&#x000A;  <span style="color:#339;font-weight:bold">boolean</span> accept(<span style="color:#0a8;font-weight:bold">String</span> key);&#x000A;  <span style="color:#339;font-weight:bold">void</span> before(AgentContext context);&#x000A;  <span style="color:#339;font-weight:bold">void</span> after(AgentContext context, <span style="color:#0a8;font-weight:bold">Object</span> result, <span style="color:#0a8;font-weight:bold">Throwable</span> ex);&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15&#x000A;16</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">HttpUrlConnectionHeaderAdder</span>&#x000A;                        <span style="color:#088;font-weight:bold">implements</span> InvocationListener {&#x000A;  <span style="color:#088;font-weight:bold">private</span> <span style="color:#088;font-weight:bold">static</span> <span style="color:#088;font-weight:bold">final</span> <span style="color:#0a8;font-weight:bold">String</span> NAME =&#x000A;      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">sun.net.www.protocol.http.HttpURLConnection.connect</span><span style="color:#710">&quot;</span></span>;&#x000A;&#x000A;  <span style="color:#007">@Override</span>&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> before(<span style="color:#088;font-weight:bold">final</span> AgentContext context) {&#x000A;      <span style="color:#0a8;font-weight:bold">HttpURLConnection</span>.class.cast(context.getReference())&#x000A;          .setRequestProperty(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">origin-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">sirona</span><span style="color:#710">&quot;</span></span>);&#x000A;  }&#x000A;&#x000A;  <span style="color:#007">@Override</span>&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">boolean</span> accept(<span style="color:#088;font-weight:bold">final</span> <span style="color:#0a8;font-weight:bold">String</span> key) {&#x000A;    <span style="color:#080;font-weight:bold">return</span> key.equals(NAME);&#x000A;  }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_extend_the_gui">
+<h2>Extend the GUI</h2>
+<div class="ulist">
+<ul>
+<li>Based on a custom light framework (JS/Servlet/Velocity) to avoid dependency hell with JAX-RS like support</li>
+</ul>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6</pre></td>
+  <td class="code"><pre><span style="color:#007">@Local</span> <span style="color:#777">// opt, only if rely on the JVM</span>&#x000A;<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">JMXPlugin</span> <span style="color:#088;font-weight:bold">implements</span> Plugin {&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> name() { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">JUG</span><span style="color:#710">&quot;</span></span>; }&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">Class</span>&lt;?&gt; endpoints() { <span style="color:#080;font-weight:bold">return</span> JUGEndpoints.class; }&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> mapping() { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/jug</span><span style="color:#710">&quot;</span></span>; }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8&#x000A;9&#x000A;<strong>10</strong>&#x000A;11&#x000A;12&#x000A;13&#x000A;14&#x000A;15</pre></td>
+  <td class="code"><pre><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">JUGEndpoints</span> {&#x000A;  <span style="color:#007">@Regex</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>)&#x000A;  <span style="color:#088;font-weight:bold">public</span> Template home() <span style="color:#088;font-weight:bold">throws</span> <span style="color:#C00;font-weight:bold">IOException</span> {&#x000A;    <span style="color:#0a8;font-weight:bold">String</span> name = <span style="color:#0a8;font-weight:bold">System</span>.getProperty(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">jug.name</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Genova</span><span style="color:#710">&quot;</span></span>);&#x000A;    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> Template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">jug/main.vm</span><span style="color:#710">&quot;</span></span>,&#x000A;             <span style="color:#080;font-weight:bold">new</span> MapBuilder&lt;<span style="color:#0a8;font-weight:bold">String</span>, <span style="color:#0a8;font-weight:bold">Object</span>&gt;()&#x000A;               .set(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">name</span><span style="color:#710">&quot;</span></span>, name);&#x000A;               .build());&#x000A;  }&#x000A;&#x000A;  <span style="color:#007">@Regex</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/update/([^/]*)/(.*)</span><span style="color:#710">&quot;</span></span>)&#x000A;  <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> doUpdate(<span style="color:#0a8;font-weight:bold">String</span> first, <span style="color:#0a8;font-weight:bold">String</span><span style="color:#339;font-weight:bold">[]</span> parameters) {&#x000A;    <span style="color:#080;font-weight:bold">return</span> ...;&#x000A;  }&#x000A;}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="html language-html"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8</pre></td>
+  <td class="code"><pre><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">container-fluid</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">row</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;    <span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">col-lg-12</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span>&#x000A;      Hello $name&#x000A;        <span style="color:#070;font-weight:bold">&lt;/div&gt;</span>&#x000A;  <span style="color:#070;font-weight:bold">&lt;/div&gt;</span>&#x000A;<span style="color:#070;font-weight:bold">&lt;/div&gt;</span>&#x000A;#* some async js using $mapping/jug/update/... *#</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_sirona_more">
+<h2>Sirona.more</h2>
+<div class="ulist">
+<ul>
+<li>Boomerang integration (js monitoring)</li>
+<li><p>
+Gauges<div class="ulist">
+<ul>
+<li>EhCache</li>
+<li>Hazelcast</li>
+<li>TomEE</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+
+<section class="slide" id="_thanks_questions">
+<h2>Thanks/Questions!</h2>
+<div class="paragraph"><p><a href="http://twitter.com/rmannibucau">@rmannibucau</a></p></div>
+
+<div class="paragraph"><p><a href="http://rmannibucau.wordpress.com">rmannibucau.wordpress.com</a></p></div>
+
+<div class="paragraph"><p><a href="http://tomee.apache.org">tomee.apache.org</a></p></div>
+
+<div class="paragraph"><p><a href="http://batchee.incubator.apache.org">batchee.incubator.apache.org</a></p></div>
+
+<div class="paragraph"><p><a href="http://sirona.incubator.apache.org">sirona.incubator.apache.org</a></p></div>
 </section>
 
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>

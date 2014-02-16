@@ -4,13 +4,15 @@ v0.1 02-16-2014
 :backend: deckjs
 :deckjs_theme: web-2.0
 :deckjs_transition: horizontal-slide
+:imagesdir: ./images
+:iconsdir: ./icons
+:source-highlighter: coderay
+:coderay-css: style
 :navigation:
 :status:
 :toc:
 :split:
 :menu:
-:imagesdir: ./images
-:iconsdir: ./icons
 
 == Who am I?
 
@@ -18,7 +20,9 @@ image::rmannibucau.png[]
 
 * Java/JavaEE developer since 2010
 * Committer Apache since 2011
-* Working
+* http://twitter.com/rmannibucau[@rmannibucau]
+* http://rmannibucau.wordpress.com[rmannibucau.wordpress.com]
+* Working in
 
 image::swissquote.jpg[]
 
@@ -28,92 +32,19 @@ image::swissquote.jpg[]
 * Apache BatchEE
 * Apache Sirona
 
+include::tomee.asciidoc[]
+include::batchee.asciidoc[]
+include::sirona.asciidoc[]
 
-== Reminder: what is JavaEE today?
+== Thanks/Questions!
 
-* Profiles (Web = 0.5.Full)
-* EARs are dead (long live wars)
-* Testable (embedded + Arquillian)
+http://twitter.com/rmannibucau[@rmannibucau]
 
-== Apache TomEE in few words
+http://rmannibucau.wordpress.com[rmannibucau.wordpress.com]
 
-____
-Tomcat + JavaEE
-____
+http://tomee.apache.org[tomee.apache.org]
 
-[options="step"]
-* Be *Simple*
-* Be *Small* (30Mo), *Fast* and *Light*
-* JavaEE 6 WP *certified* (JavaEE 7 coming)
-* *Apache* stack
-* Integration we all did for years
+http://batchee.incubator.apache.org[batchee.incubator.apache.org]
 
-
-== 3 Main flavors
-
-[cols="a,a,a,a,a,a", options="header", border="1px"]
-|===
-| |Tomcat |TomEE WP |TomEE JAX-RS | TomEE+ | OpenEJB
-
-|Servlets		|image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[] |
-|JSP			|image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[] |
-|JSF			|		    |image::check.png[] |image::check.png[] |image::check.png[] |
-|JTA			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|JPA			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|CDI			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|JAAS			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|JACC			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|JavaMail		|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|Bean Validation	|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|EJB			|		    |image::check.png[] |image::check.png[] |image::check.png[] |image::check.png[]
-|JAX-RS			|		    |			|image::check.png[] |image::check.png[] |image::check.png[]
-|JAX-WS			|		    |			|		    |image::check.png[] |image::check.png[]
-|Connector		|		    |			|		    |image::check.png[] |image::check.png[]
-|JMS			|		    |			|		    |image::check.png[] |image::check.png[]
-|===
-
-== Apache stack
-
-* OpenWebBeans
-* OpenJPA
-* OpenEJB
-* MyFaces
-* BVal
-* CXF
-* ActiveMQ
-
-== Apache TomEE job
-
-____
-Integrate all components!
-____
-
-image::integration.png[]
-
-
-== What is your job?
-
-____
-Write application...not servers.
-____
-
-== TomEE other stength
-
-* Tomcat (reuse existing Tomcat tools)
-* Very adapted for tests
-** Arquillian adapters
-** ApplicationComposer
-* TomEE Maven Plugin
-
-== Tomitribe
-
-____
-Ok TomEE looks good but what about support?
-____
-
-Tomitribe is here now! http://www.tomitribe.com/[www.tomitribe.com]
-
-image::tomitribe.png[]
-
-== Thanks/Questons!
+http://sirona.incubator.apache.org[sirona.incubator.apache.org]
 

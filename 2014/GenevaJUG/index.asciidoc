@@ -1,0 +1,50 @@
+= 3 Apache projects to follow up in 2014!
+Romain Manni-Bucau <rmannibucau@gmail.com> @rmannibucau
+v0.1 02-16-2014
+:backend: deckjs
+:deckjs_theme: web-2.0
+:deckjs_transition: horizontal-slide
+:imagesdir: ./images
+:iconsdir: ./icons
+:source-highlighter: coderay
+:coderay-css: style
+:navigation:
+:status:
+:toc:
+:split:
+:menu:
+
+== Who am I?
+
+image::rmannibucau.png[]
+
+* Java/JavaEE developer since 2010
+* Committer Apache since 2011
+* http://twitter.com/rmannibucau[@rmannibucau]
+* http://rmannibucau.wordpress.com[rmannibucau.wordpress.com]
+* Working in
+
+image::swissquote.jpg[]
+
+== Agenda
+
+* Apache TomEE
+* Apache BatchEE
+* Apache Sirona
+
+include::tomee.asciidoc[]
+include::batchee.asciidoc[]
+include::sirona.asciidoc[]
+
+== Thanks/Questions!
+
+http://twitter.com/rmannibucau[@rmannibucau]
+
+http://rmannibucau.wordpress.com[rmannibucau.wordpress.com]
+
+http://tomee.apache.org[tomee.apache.org]
+
+http://batchee.incubator.apache.org[batchee.incubator.apache.org]
+
+http://sirona.incubator.apache.org[sirona.incubator.apache.org]
+

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Apache JCS: Caching revealed</title>
+
+    <meta name="description" content="Apache JCS">
+    <meta name="author" content="Romain Manni-Bucau">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/jcs.css" id="theme">
+    <link rel="stylesheet" href="css/highlightjs/code.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-asciidoctor>
+            <script type="text/template">
+                [big]#Apache JCS#
+            </script>
+        </section>
+        <section data-asciidoctor>
+            == Who Am I?
+
+            Romain Manni-Bucau
+
+            image::img/twitter.png[]
+            image::img/wordpress.png[]
+            image::img/github.png[]
+            image::img/tomitribe.png[]
+        </section>
+        <section data-asciidoctor data-background="img/voielactee.jpg">
+            == What is Apache JCS?
+
+            - Distributed (or not) caching system written in Java
+
+            - Built @Apache
+
+            - Designed for high read, low put applications.
+        </section>
+        <section data-asciidoctor data-background="img/molecules.png">
+            == JCS Core Concepts
+
+            - Elements: a cached object
+            - Regions: a cache subpart (with its own configuration)
+            - Auxilaries: plugins
+        </section>
+        <section data-asciidoctor data-background="img/configuration.jpg">
+            == JCS Configuration
+
+            Properties based
+
+            [source,bash,numbered]
+            ----
+            jcs.default = DC
+            jcs.default.cacheattributes = org.apache.commons.jcs.engine.CompositeCacheAttributes
+            jcs.default.cacheattributes.MaxObjects = 200001
+            jcs.default.cacheattributes.MemoryCacheName = org.apache.commons.jcs.engine.memory.lru.LRUMemoryCache
+            jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds = 3600
+            jcs.default.elementattributes = org.apache.commons.jcs.engine.ElementAttributes
+            jcs.default.elementattributes.IsEternal = false
+            jcs.default.elementattributes.MaxLife = 700
+            jcs.default.elementattributes.IdleTime = 1800
+            jcs.default.elementattributes.IsRemote = true
+
+            thread_pool.default.maximumPoolSize = 150
+            thread_pool.default.minimumPoolSize = 4
+            ----
+
+            `java.util.Properties` or from a classpath resource
+
+            Lot of samples http://svn.apache.org/repos/asf/commons/proper/jcs/trunk/commons-jcs-core/src/test/conf/[here]
+        </section>
+        <section data-asciidoctor>
+            == Cache types
+
+            - LOCAL (`IMemoryCache`): node storage (default are LRU, FIFO, MRU)
+            - CACHE_HUB: facade (just behind the API)
+            - DISK_CACHE: persistent storage (block, indexed - chunk, JDBC). Used for "memory limit" case.
+            - LATERAL_CACHE: intended to broadcast write actions to other local caches. There are often server (`SocketServer`).
+            - REMOTE_CACHE: client or server but in a remote cache architecture (RMI/HTTP)
+        </section>
+        <section data-asciidoctor>
+            == Listeners?
+
+            - `ICacheListener`, `IRemoteCacheListener`: used by plugins (lateral/remote caches). Get write actions.
+            - `ICacheEventLogger`: you get `ICacheEvent` for all actions.
+        </section>
+        <section data-asciidoctor>
+            == Serialization?
+
+            `org.apache.commons.jcs.engine.behavior.IElementSerializer`
+        </section>
+        <section data-asciidoctor>
+            == JCS And Batching (?)
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCS And Remote Facades
+
+            HTTP
+            TCP
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCS And Monitoring
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == And JCache?
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCache in two words
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCache API
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCache Advanced features
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == Main Implementations
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == JCache, JCS and Extensions
+
+            TBD
+        </section>
+        <section data-asciidoctor>
+            == Thanks/Questions
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // @see https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        parallaxBackgroundImage: 'img/background.png',
+        parallaxBackgroundSize: '100%',
+        transition: 'zoom', // none/fade/slide/convex/concave/zoom
+        dependencies: [
+            { src: 'plugin/asciidoctor/asciidoctor-all.js', condition: function () { return !!document.querySelector('[data-asciidoctor]'); }},
+            { src: 'plugin/asciidoctor/asciidoctor.reveal.js', condition: function () { return !!document.querySelector('[data-asciidoctor]'); }},
+            { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true},
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); }}
+        ]
+    });
+
+</script>
+
+<style type="text/css">
+    .reveal p, .reveal section img {
+        margin: 0 !important;
+    }
+
+    .reveal section img {
+        width: 50%;
+    }
+
+    .big {
+        font-size: 500% !important;
+    }
+</style>
+</body>
+</html>

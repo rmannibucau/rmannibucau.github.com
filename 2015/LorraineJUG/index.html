@@ -93,74 +93,99 @@
 
             Lot of samples http://svn.apache.org/repos/asf/commons/proper/jcs/trunk/commons-jcs-core/src/test/conf/[here]
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/map.jpg">
             == Cache types
 
-            - LOCAL (`IMemoryCache`): node storage (default are LRU, FIFO, MRU)
+            - `IMemoryCache`: node storage (LRU, FIFO, MRU)
             - CACHE_HUB: facade (just behind the API)
-            - DISK_CACHE: persistent storage (block, indexed - chunk, JDBC). Used for "memory limit" case.
-            - LATERAL_CACHE: intended to broadcast write actions to other local caches. There are often server (`SocketServer`).
+            - DISK_CACHE: overflow storage (block, indexed, DB).
+            - LATERAL_CACHE: intended to broadcast write actions to other local caches ( often`SocketServer`).
             - REMOTE_CACHE: client or server but in a remote cache architecture (RMI/HTTP)
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/007.jpg">
             == Listeners?
 
-            - `ICacheListener`, `IRemoteCacheListener`: used by plugins (lateral/remote caches). Get write actions.
-            - `ICacheEventLogger`: you get `ICacheEvent` for all actions.
+            [fragment]#`I*CacheListener`: for plugins, bound to an event queue (sync/async).#
+
+            [fragment]#`ICacheEventLogger`: you get `ICacheEvent`...from auxilaries.#
+
+            [fragment medium]#So no events?#
+
+            [fragment big]#Auxilary ;)#
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/queue.png">
             == Serialization?
 
-            `org.apache.commons.jcs.engine.behavior.IElementSerializer`
+            - `IElementSerializer`
+            - JVM serialization
+            - JVM + ZLIB
+            - Custom
         </section>
-        <section data-asciidoctor>
-            == JCS And Batching (?)
+        <section data-asciidoctor data-background="img/remote.jpg">
+            == JCS And Remoting
 
-            TBD
+            - HTTP
+            - UDP
+            - TCP
+            - RMI (remote client/server)
         </section>
-        <section data-asciidoctor>
-            == JCS And Remote Facades
-
-            HTTP
-            TCP
-            TBD
-        </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-asciidoctor data-background="img/monitoring.jpg">
             == JCS And Monitoring
 
-            TBD
+            Mainly based on JMX
+
+            - Regions management (JCSAdmin MBean)
+            - JCache MBeans (statistics, configuration, `clear()`)
+
+            image::img/jmx.png[JCS]
+
+            - Admin servlet (1-1 MBean)
         </section>
         <section data-asciidoctor>
             == And JCache?
 
-            TBD
+            [medium]#First implementation done!#
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/arbre.jpg">
             == JCache in two words
 
-            TBD
+            - Standardization (after years) of caching API
+            - "Map" like API
+            - Events
+            - Light computing on data
+            - External system integration (DB, ...)
+            - CDI
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/chain.jpg">
             == JCache API
 
-            TBD
+            Caching -> CacheProvider -> CacheManager -> Cache
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/advanced.jpg">
             == JCache Advanced features
 
-            TBD
+            - Bulk loading (+`CompletionListener`)
+            - Entry processing (`EntryProcessor`)
+            - Listeners (`CacheEntry*Listener`)
         </section>
         <section data-asciidoctor>
             == Main Implementations
 
-            TBD
+            - RI
+            - EhCache
+            - Hazelcast
+            - Infinispan
+            - Coherence
+            - JCS ;)
+            - ~ Spring
         </section>
         <section data-asciidoctor>
-            == JCache, JCS and Extensions
+            == JCache and JCS Extensions
 
-            TBD
+            - OpenJPA L2 Cache (JCache based)
+            - JCache extras (CDI, Web filter, writers/loaders - async, composite)
         </section>
-        <section data-asciidoctor>
+        <section data-asciidoctor data-background="img/question.jpg">
             == Thanks/Questions
         </section>
     </div>
@@ -202,6 +227,9 @@
 
     .big {
         font-size: 500% !important;
+    }
+    .medium {
+        font-size: 250% !important;
     }
 </style>
 </body>

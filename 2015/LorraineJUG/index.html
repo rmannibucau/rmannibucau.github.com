@@ -37,9 +37,7 @@
 <div class="reveal">
     <div class="slides">
         <section data-asciidoctor>
-            <script type="text/template">
-                [big]#Apache JCS#
-            </script>
+            [big]#Apache JCS#
         </section>
         <section data-asciidoctor>
             == Who Am I?
@@ -125,7 +123,7 @@
             == JCS And Remoting
 
             - HTTP
-            - UDP
+            - UDP (+ discovery)
             - TCP
             - RMI (remote client/server)
         </section>
@@ -141,6 +139,25 @@
 
             - Admin servlet (1-1 MBean)
         </section>
+        <section data-asciidoctor data-asciidoctor data-background="img/monitoring.jpg">
+            == JCS sample
+
+            [source,numbered,java]
+            ----
+            final CacheAccess[String, String] cache = JCS.getInstance("mycache");
+            cache.put("jug", "lorraine");
+            assertEquals("lorraine", cacheAccess.get("jug"));
+            ----
+        </section>
+        <section data-asciidoctor data-asciidoctor data-background="img/monitoring.jpg">
+            == JCS a word before going futher
+
+            ____
+            JCS works well as local cache but
+            once auxilaries configured it is a simple and
+            efficient distributed cache as well.
+            ____
+        </section>
         <section data-asciidoctor>
             == And JCache?
 
@@ -155,11 +172,17 @@
             - Light computing on data
             - External system integration (DB, ...)
             - CDI
+            - Expiry
+            - ...
         </section>
         <section data-asciidoctor data-background="img/chain.jpg">
             == JCache API
 
-            Caching -> CacheProvider -> CacheManager -> Cache
+            [fragment]#Caching -> CacheProvider -> CacheManager -> Cache#
+
+            [fragment big]#or#
+
+            [fragment]#Caching -> Cache#
         </section>
         <section data-asciidoctor data-background="img/advanced.jpg">
             == JCache Advanced features
@@ -180,10 +203,149 @@
             - ~ Spring
         </section>
         <section data-asciidoctor>
+            == JCache basic sample
+
+            [source,numbered,java]
+            ----
+            try (CachingProvider provider = Caching.getCachingProvider()) {
+                try (CacheManager manager = provider.getCacheManager()) {
+                    try (Cache[String, String] cache = manager.createCache(
+                            "getting-started", new MutableConfiguration[String, String]())) {
+                        cache.putIfAbsent("jug", "lorraine");
+                        assertEquals("lorraine", cache.get("jug"));
+                    }
+                }
+            }
+            ----
+        </section>
+        <section data-asciidoctor>
+            == JCache processing
+
+            [source,numbered,java]
+            ----
+            cache.putIfAbsent("jug", "lorraine");
+            
+            int l = cache.invoke("jug", new EntryProcessor[String, String, Integer]() {
+                @Override
+                public Integer process(
+                        final MutableEntry[String, String] entry,
+                        final Object... arguments) throws EntryProcessorException {
+                    if (entry.exists()) {
+                        entry.setValue(arguments[0].toString());
+                    }
+                    return entry.getValue().length();
+                }
+            }, "best jug ever");
+            
+            assertEquals("best jug ever".length(), l);
+            assertEquals("best jug ever", cache.get("jug"));
+            ----
+        </section>
+        <section data-asciidoctor>
+            == JCache events
+
+            [source,numbered,java]
+            ----
+            public interface CacheEntryListenerConfiguration[K, V] extends Serializable {
+                Factory[CacheEntryListener[? super K, ? super V]] getCacheEntryListenerFactory();
+                Factory[CacheEntryEventFilter[? super K, ? super V]] getCacheEntryEventFilterFactory();
+                boolean isOldValueRequired();
+                boolean isSynchronous();
+            }
+            ----
+
+            `javax.cache.configuration.FactoryBuilder`
+            `SingletonFactory`
+            `ClassFactory`
+
+            See demo for a real sample
+        </section>
+        <section data-asciidoctor>
+            == JCache + CDI
+
+            [source,numbered,java]
+            ----
+            @CacheDefaults(cacheName = "accounts")
+            public class AccountManager {
+                @CacheResult
+                public Account createAccount(@CacheKey String name,
+                                             String importantData) {
+                    // ...
+                }
+
+                @CacheRemove
+                public void deleteAccount(String name) {
+                    // ...
+                }
+
+
+                @CacheRemoveAll
+                public void bankruptcy() {
+                    // ...
+                }
+
+                @CachePut
+                public void addAccount(@CacheKey String id, @CacheValue Account name) {
+                    // ...
+                }
+            }
+            ----
+        </section>
+        <section data-asciidoctor>
             == JCache and JCS Extensions
 
             - OpenJPA L2 Cache (JCache based)
             - JCache extras (CDI, Web filter, writers/loaders - async, composite)
+        </section>
+        <section data-asciidoctor>
+            == JCache OpenJPA extension
+
+            - 100% using JCache API (portable)
+
+            [source,java,numbered]
+            ----
+            <persistence version="2.0"
+                         xmlns="http://java.sun.com/xml/ns/persistence"
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                         xsi:schemaLocation="
+                            http://java.sun.com/xml/ns/persistence
+                            http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+                <persistence-unit name="app">
+                    <jta-data-source>app</jta-data-source>
+                    <properties>
+                        <property name="openjpa.DataCacheManager" value="jcache"></property>
+                    </properties>
+                </persistence-unit>
+            </persistence>
+            ----
+        </section>
+        <section data-asciidoctor>
+            == JCache CDI extension
+
+            - 100% using JCache API (portable)
+
+            [source,java,numbered]
+            ----
+            @Inject
+            private CachingProvider provider;
+
+            @Inject
+            private CacheManager mgr;
+            ----
+        </section>
+        <section data-asciidoctor>
+            == JCache Elsewhere?
+
+            CXF JAXRS HTTP caching!
+            
+            [source,java,numbered]
+            ----
+            ClientBuilder.newBuilder()
+                .register(CacheControlFeature.class)
+                .build()
+                .target("...")
+                .get();
+            ----
         </section>
         <section data-asciidoctor data-background="img/question.jpg">
             == Thanks/Questions

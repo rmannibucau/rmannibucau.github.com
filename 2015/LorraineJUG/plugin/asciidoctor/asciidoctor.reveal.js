@@ -17,7 +17,21 @@
             currentOptions = Opal.hash2(optionKeys, {attributes: currentAttr ? currentAttr.split(",") : defaultOptions});
         }
         var notes = sections[i].querySelector('aside.notes');
-        sections[i].innerHTML = Opal.Asciidoctor.$convert(sections[i].textContent.trim().replace(/\r?\n */g, '\n'), currentOptions);
+
+        var content = sections[i].innerHTML;
+        var whiteSpaces = 0;
+        for (var skip = 0; skip < content.length; skip++) {
+            var c = content.charAt(skip);
+            if (c == '\n') {
+                whiteSpaces = 0;
+            } else if (c != ' ' && c != '\t') {
+                break;
+            } else {
+                whiteSpaces++;
+            }
+        }
+
+        sections[i].innerHTML = Opal.Asciidoctor.$convert(content.trim().replace(new RegExp('\r?\n {' + whiteSpaces + '}', 'g'), '\n'), currentOptions);
         if (notes) {
             sections[i].appendChild(notes);
         }

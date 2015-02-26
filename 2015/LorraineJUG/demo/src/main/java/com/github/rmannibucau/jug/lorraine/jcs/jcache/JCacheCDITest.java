@@ -1,5 +1,6 @@
 package com.github.rmannibucau.jug.lorraine.jcs.jcache;
 
+import org.apache.commons.jcs.jcache.cdi.GeneratedCacheKeyImpl;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.openejb.junit.ApplicationComposer;
 import org.apache.openejb.testing.Classes;
@@ -7,7 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.concurrent.TimeUnit;
+import javax.cache.Caching;
 import javax.cache.annotation.CacheResult;
+import javax.cache.annotation.GeneratedCacheKey;
 import javax.inject.Inject;
 
 import static java.lang.Thread.sleep;
@@ -15,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(ApplicationComposer.class)
 @Classes(cdi = true, innerClassesAsBean = true)
-public class JCacheTest {
+public class JCacheCDITest {
     @Inject
     private JUGService service;
 
@@ -36,7 +39,12 @@ public class JCacheTest {
             stopWatch.stop();
             cached = stopWatch.getNanoTime();
         }
-        System.out.println(TimeUnit.NANOSECONDS.toMillis(raw) + " " + TimeUnit.NANOSECONDS.toMillis(cached));
+        System.out.println(">>> thinking      => " + TimeUnit.NANOSECONDS.toMillis(raw) + "ms");
+        System.out.println(">>> sheep thought => " + TimeUnit.NANOSECONDS.toMillis(cached) + "ms");
+        System.out.println(">>> cached value  => " + // important to think to @CacheKey
+                Caching.getCache("JUGService", GeneratedCacheKey.class, Boolean.class)
+                    .get(new GeneratedCacheKeyImpl(new Object[0]))
+        );
     }
 
     public static class JUGService {

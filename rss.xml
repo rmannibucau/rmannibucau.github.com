@@ -856,17 +856,17 @@
     <pubDate>Wed, 28 Feb 2018 00:00:00 GMT</pubDate>
    </item>
    <item>
-    <title>Deploy a Meecrowave (or Maven based) application in Docker easily</title>
-    <description>Docker is more and more a production or development constraint to share environments. Therefore you need to bundle your application in a Docker image more and more often. Don&apos;t get afraid of it, it is actually easy!</description>
-    <link>https://rmannibucau.github.io/deploy-meecrowave-bundle-on-docker-with-nexus.html</link>
-    <guid isPermaLink="false">/deploy-meecrowave-bundle-on-docker-with-nexus.html</guid>
-    <pubDate>Wed, 7 Feb 2018 00:00:00 GMT</pubDate>
-   </item>
-   <item>
     <title>Book on Java EE 8 Performance</title>
     <description>JavaEE 8 was released a few months earlier and applications start to be deployed in production. But did you evaluate your performance? Do you respect your SLA? If you are lost with this topic, my book, JavaEE 8 High Performance, can help you.</description>
     <link>https://rmannibucau.github.io/book-javaee-8-high-performance.html</link>
     <guid isPermaLink="false">/book-javaee-8-high-performance.html</guid>
+    <pubDate>Wed, 7 Feb 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Deploy a Meecrowave (or Maven based) application in Docker easily</title>
+    <description>Docker is more and more a production or development constraint to share environments. Therefore you need to bundle your application in a Docker image more and more often. Don&apos;t get afraid of it, it is actually easy!</description>
+    <link>https://rmannibucau.github.io/deploy-meecrowave-bundle-on-docker-with-nexus.html</link>
+    <guid isPermaLink="false">/deploy-meecrowave-bundle-on-docker-with-nexus.html</guid>
     <pubDate>Wed, 7 Feb 2018 00:00:00 GMT</pubDate>
    </item>
    <item>

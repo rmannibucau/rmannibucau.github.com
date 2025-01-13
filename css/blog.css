@@ -118,8 +118,8 @@ footer > div.footer-bottom {
 }
 
 .blog-links {
-    visibility: inherit;
-    max-width: inherit;
+    visibility: inherit !important;
+    max-width: inherit !important;
 }
 
 img {

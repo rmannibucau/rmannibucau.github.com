@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Microprofile Metrics: get metrics without coding them</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="microprofile-metrics-geronimo-sigar-html-container" class="container page-content microprofile-metrics-geronimo-sigar-html is-blog">
+                        <div class="page-header">
+                <h1>Microprofile Metrics: get metrics without coding them</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-11-14</span>, <span class="metadata-readingtime">5 min and 8 sec read</span></p>
+</div>
+<p><strong>Microprofile metrics</strong> allow to interact with metrics and get out of the box the metrics exposed through REST, as JSON or Prometheus (text/plain), if you <strong>deploy on Kubernetes</strong>.</p>
+
+<p>This is great but actually, most of the time, you want the metrics to be contributed by the modules they are related to.</p>
+
+<p>In other words: you <strong>want the OS metrics to be contributed by the default implementation</strong> or a &quot;common&quot; extension, the <strong>JVM</strong> metrics by the default&nbsp;implementation or a JVM extension, the <strong>JPA</strong> metrics to be contributed by a JPA extension or even your JPA vendor etc...and your application metrics only being contributed by your application...if you have any.</p>
+
+<p>The main thing it changes, compared to what the specification provides, is the fact you can <strong>enrich an application with the &quot;metrics stack&quot;</strong> (the API + implementation + contributing extension) and get a well monitored product without any integration layer.</p>
+
+<p>We are not yet there since <strong>Microprofile Metrics</strong> is not yet a standard but we start to see some good moves, in particualr at Apache Geronimo which got recently some extensions.</p>
+
+<p>Since the first release, the &quot;base&quot; built-in registrar (class reponsible for registering metrics) was responsible for registering the JVM related metrics: memory, thread, garbage collector etc...</p>
+
+<p>However the 1.0.1 release is getting new real extension modules (understand &quot;separate&quot; modules):</p>
+
+<ol>
+	<li><strong>sigar extension</strong>: sigar is a library using native implementation to get insights about the machines (process stats, CPU, memory, RAM, network etc...). The Geronimo Metrics Sigar extension register most of sigar data as Microprofile metrics.</li>
+	<li><strong>tomcat extension</strong>: Tomcat is still the most used server and monitoring its thread pool is important for the production to detect misconfigurations and unexpected behaviors. This is what the Geronimo Metrics Tomcat extension does. It is compatible with Apache Meecrowave, TomEE, plain Tomcat (through JMX) and custom Tomcat instances through a SPI.</li>
+</ol>
+
+<p>The nice thing about these two extensions is the fact that you can reuse them to register metrics in a system that is not using Microprofile metrics at all, since the registration process has been abstracted and they both provide a &quot;registrar&quot; class that just passes definition of metrics you can convert in the system you want. A default CDI extension just converts it in Microprofile Metrics to have a working default integration.</p>
+
+<p>Once deployed - you just need to add the jars in your application, no need to code anything so it means you get metrics for free - you get these metrics (I&#39;m using the prometheus endpoint as a sample):</p>
+
+<pre>
+<code class="language-php"># TYPE base:server_executor_port_8080_tasks_count_count gauge
+base:server_executor_port_8080_tasks_count_count 3.0
+# TYPE base:sigar_network_tcp_segments_in_count gauge
+base:sigar_network_tcp_segments_in_count 3.4060533E7
+# TYPE base:sigar_cpu_3_wait_ms gauge
+base:sigar_cpu_3_wait_ms 1025260.0
+# TYPE base:sigar_cpu_2_total_ms gauge
+base:sigar_cpu_2_total_ms 9.5303832E8
+# TYPE base:sigar_cpu_2_nice_ms gauge
+base:sigar_cpu_2_nice_ms 159970.0
+# TYPE base:sigar_network_tcp_bound_count gauge
+base:sigar_network_tcp_bound_count 0.0
+# TYPE base:classloader_total_loaded_class_count counter
+base:classloader_total_loaded_class_count 10569.0
+# TYPE base:sigar_cpu_2_idle_ms gauge
+base:sigar_cpu_2_idle_ms 9.0997478E8
+# TYPE base:sigar_cpu_1_sys_ms gauge
+base:sigar_cpu_1_sys_ms 8571520.0
+# TYPE base:sigar_mem_total_bytes gauge
+base:sigar_mem_total_bytes 3.3620475904E10
+# TYPE base:sigar_cpu_3_sys_ms gauge
+base:sigar_cpu_3_sys_ms 6265220.0
+# TYPE base:cpu_available_processors gauge
+base:cpu_available_processors 8.0
+# TYPE base:sigar_cpu_wait_ms gauge
+base:sigar_cpu_wait_ms 2117190.0
+# TYPE base:sigar_cpu_7_idle_ms gauge
+base:sigar_cpu_7_idle_ms 9.1447258E8
+# TYPE base:sigar_cpu_4_wait_ms gauge
+base:sigar_cpu_4_wait_ms 778390.0
+# TYPE base:sigar_net_disk_dev_sda1_read_count_count gauge
+base:sigar_net_disk_dev_sda1_read_count_count 1121.0
+# TYPE base:sigar_cpu_3_nice_ms gauge
+base:sigar_cpu_3_nice_ms 168630.0
+# TYPE base:sigar_mem_used_bytes gauge
+base:sigar_mem_used_bytes 2.9857202176E10
+# TYPE base:sigar_network_tcp_segments_retrans_count gauge
+base:sigar_network_tcp_segments_retrans_count 10944.0
+# TYPE base:sigar_cpu_0_sys_ms gauge
+base:sigar_cpu_0_sys_ms 6335650.0
+# TYPE base:sigar_cpu_3_idle_ms gauge
+base:sigar_cpu_3_idle_ms 9.0990666E8
+# TYPE base:gc_ps_scavenge_time_seconds gauge
+base:gc_ps_scavenge_time_seconds 1.09E-4
+# TYPE base:sigar_cpu_4_sys_ms gauge
+base:sigar_cpu_4_sys_ms 7471340.0
+# TYPE base:sigar_cpu_5_total_ms gauge
+base:sigar_cpu_5_total_ms 9.5462758E8
+# TYPE base:sigar_network_tcp_closewait_count gauge
+base:sigar_network_tcp_closewait_count 0.0
+# TYPE base:sigar_network_tcp_inbound_total_bytes gauge
+base:sigar_network_tcp_inbound_total_bytes 2.0
+# TYPE base:sigar_mem_actual_free_bytes gauge
+base:sigar_mem_actual_free_bytes 1.977362432E10
+# TYPE base:sigar_cpu_6_idle_ms gauge
+base:sigar_cpu_6_idle_ms 9.1437283E8
+# TYPE base:thread_count counter
+base:thread_count 22.0
+# TYPE base:sigar_cpu_idle_ms gauge
+base:sigar_cpu_idle_ms 7.29362456E9
+# TYPE base:sigar_cpu_7_wait_ms gauge
+base:sigar_cpu_7_wait_ms 43380.0
+# TYPE base:sigar_cpu_5_wait_ms gauge
+base:sigar_cpu_5_wait_ms 93310.0
+# TYPE base:sigar_net_disk_dev_sda1_read_bytes_bytes gauge
+base:sigar_net_disk_dev_sda1_read_bytes_bytes 2.9075968E7
+# TYPE base:sigar_cpu_3_total_ms gauge
+base:sigar_cpu_3_total_ms 9.5536839E8
+# TYPE base:sigar_network_tcp_segments_out_count gauge
+base:sigar_network_tcp_segments_out_count 3.3188576E7
+# TYPE base:sigar_mem_ram_bytes gauge
+base:sigar_mem_ram_bytes 32064.0
+# TYPE base:sigar_cpu_4_idle_ms gauge
+base:sigar_cpu_4_idle_ms 9.0973935E8
+# TYPE base:sigar_cpu_2_wait_ms gauge
+base:sigar_cpu_2_wait_ms 36420.0
+# TYPE base:sigar_cpu_total_ms gauge
+base:sigar_cpu_total_ms 7.63997502E9
+# TYPE base:thread_max_count counter
+base:thread_max_count 22.0
+# TYPE base:sigar_net_disk_dev_sda1_write_count_count gauge
+base:sigar_net_disk_dev_sda1_write_count_count 230.0
+# TYPE base:sigar_net_disk_dev_sda2_write_count_count gauge
+base:sigar_net_disk_dev_sda2_write_count_count 5869314.0
+# TYPE base:sigar_cpu_1_idle_ms gauge
+base:sigar_cpu_1_idle_ms 9.1034829E8
+# TYPE base:sigar_cpu_6_total_ms gauge
+base:sigar_cpu_6_total_ms 9.5541696E8
+# TYPE base:sigar_cpu_7_nice_ms gauge
+base:sigar_cpu_7_nice_ms 188900.0
+# TYPE base:sigar_cpu_4_nice_ms gauge
+base:sigar_cpu_4_nice_ms 189900.0
+# TYPE base:memory_max_heap_bytes gauge
+base:memory_max_heap_bytes 7.471628288E9
+# TYPE base:sigar_net_disk_dev_sda2_read_bytes_bytes gauge
+base:sigar_net_disk_dev_sda2_read_bytes_bytes 2.9003113472E10
+# TYPE base:server_executor_port_8080_tasks_completed_count gauge
+base:server_executor_port_8080_tasks_completed_count 2.0
+# TYPE base:gc_ps_mark_sweep_time_seconds gauge
+base:gc_ps_mark_sweep_time_seconds 1.53E-4
+# TYPE base:sigar_network_tcp_attempts_fails_count gauge
+base:sigar_network_tcp_attempts_fails_count 142304.0
+# TYPE base:sigar_cpu_2_sys_ms gauge
+base:sigar_cpu_2_sys_ms 6200000.0
+# TYPE base:sigar_cpu_nice_ms gauge
+base:sigar_cpu_nice_ms 1346000.0
+# TYPE base:sigar_cpu_1_nice_ms gauge
+base:sigar_cpu_1_nice_ms 160370.0
+# TYPE base:sigar_cpu_6_wait_ms gauge
+base:sigar_cpu_6_wait_ms 61300.0
+# TYPE base:server_executor_port_8080_active_count gauge
+base:server_executor_port_8080_active_count 1.0
+# TYPE base:sigar_network_tcp_output_total_bytes gauge
+base:sigar_network_tcp_output_total_bytes 67.0
+# TYPE base:sigar_cpu_0_wait_ms gauge
+base:sigar_cpu_0_wait_ms 43140.0
+# TYPE base:sigar_network_tcp_idle_count gauge
+base:sigar_network_tcp_idle_count 0.0
+# TYPE base:classloader_current_loaded_class_count counter
+base:classloader_current_loaded_class_count 10569.0
+# TYPE base:sigar_cpu_7_sys_ms gauge
+base:sigar_cpu_7_sys_ms 6300540.0
+# TYPE base:sigar_cpu_5_nice_ms gauge
+base:sigar_cpu_5_nice_ms 159510.0
+# TYPE base:sigar_cpu_7_total_ms gauge
+base:sigar_cpu_7_total_ms 9.5543684E8
+# TYPE base:gc_ps_mark_sweep_count counter
+base:gc_ps_mark_sweep_count 2.0
+# TYPE base:sigar_cpu_0_nice_ms gauge
+base:sigar_cpu_0_nice_ms 151370.0
+# TYPE base:thread_daemon_count counter
+base:thread_daemon_count 20.0
+# TYPE base:sigar_cpu_1_wait_ms gauge
+base:sigar_cpu_1_wait_ms 35960.0
+# TYPE base:sigar_network_tcp_resets_out_count gauge
+base:sigar_network_tcp_resets_out_count 162335.0
+# TYPE base:sigar_cpu_0_idle_ms gauge
+base:sigar_cpu_0_idle_ms 9.1200435E8
+# TYPE base:sigar_cpu_6_nice_ms gauge
+base:sigar_cpu_6_nice_ms 167310.0
+# TYPE base:sigar_cpu_0_total_ms gauge
+base:sigar_cpu_0_total_ms 9.5600749E8
+# TYPE base:server_executor_port_8080_queue_size_count gauge
+base:server_executor_port_8080_queue_size_count 0.0
+# TYPE base:sigar_net_disk_dev_sda2_read_count_count gauge
+base:sigar_net_disk_dev_sda2_read_count_count 2605578.0
+# TYPE base:sigar_network_tcp_closing_count gauge
+base:sigar_network_tcp_closing_count 0.0
+# TYPE base:sigar_network_tcp_passive_opens_count gauge
+base:sigar_network_tcp_passive_opens_count 44475.0
+# TYPE base:sigar_network_tcp_established_current_count gauge
+base:sigar_network_tcp_established_current_count 34.0
+# TYPE base:sigar_network_tcp_listen_count gauge
+base:sigar_network_tcp_listen_count 14.0
+# TYPE base:jvm_uptime_seconds gauge
+base:jvm_uptime_seconds 0.010037
+# TYPE base:sigar_cpu_5_sys_ms gauge
+base:sigar_cpu_5_sys_ms 6394010.0
+# TYPE base:sigar_network_tcp_established_count gauge
+base:sigar_network_tcp_established_count 34.0
+# TYPE base:sigar_mem_actual_used_bytes gauge
+base:sigar_mem_actual_used_bytes 1.3846851584E10
+# TYPE base:gc_ps_scavenge_count counter
+base:gc_ps_scavenge_count 4.0
+# TYPE base:memory_committed_heap_bytes gauge
+base:memory_committed_heap_bytes 7.06215936E8
+# TYPE base:sigar_network_tcp_established_reset_count gauge
+base:sigar_network_tcp_established_reset_count 17647.0
+# TYPE base:sigar_network_tcp_close_count gauge
+base:sigar_network_tcp_close_count 0.0
+# TYPE base:sigar_cpu_sys_ms gauge
+base:sigar_cpu_sys_ms 5.377779E7
+# TYPE base:sigar_net_disk_dev_sda2_write_bytes_bytes gauge
+base:sigar_net_disk_dev_sda2_write_bytes_bytes 5.04329940992E11
+# TYPE base:classloader_total_unloaded_class_count counter
+base:classloader_total_unloaded_class_count 10569.0
+# TYPE base:sigar_cpu_6_sys_ms gauge
+base:sigar_cpu_6_sys_ms 6239490.0
+# TYPE base:sigar_cpu_4_total_ms gauge
+base:sigar_cpu_4_total_ms 9.5461735E8
+# TYPE base:sigar_cpu_1_total_ms gauge
+base:sigar_cpu_1_total_ms 9.554619E8
+# TYPE base:sigar_cpu_5_idle_ms gauge
+base:sigar_cpu_5_idle_ms 9.1280568E8
+# TYPE base:server_executor_port_8080_submitted_count gauge
+base:server_executor_port_8080_submitted_count 1.0
+# TYPE base:sigar_net_disk_dev_sda1_write_bytes_bytes gauge
+base:sigar_net_disk_dev_sda1_write_bytes_bytes 2.766848E7
+# TYPE base:memory_used_heap_bytes gauge
+base:memory_used_heap_bytes 1.23842032E8
+# TYPE base:sigar_network_tcp_active_opens_count gauge
+base:sigar_network_tcp_active_opens_count 244467.0
+# TYPE base:sigar_mem_free_bytes gauge
+base:sigar_mem_free_bytes 3.763273728E9
+# TYPE vendor:start_time counter
+vendor:start_time 1.54054573411E12
+</code></pre>
+
+<p>If you are <strong>using docker to package your application</strong> before the deployment you can add geronimo-metrics and its stack in the&nbsp;<em>Dockerfile</em>&nbsp;- not even in your <em>pom.xml/build.gradle</em> , and get these metrics automatically.&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//simple-play-router-based-on-routing-dsl.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//asciidoctorj-osgi-setup.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

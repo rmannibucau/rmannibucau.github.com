@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gradle and TomEE Embedded FatJars</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="gradle-tomee-fatjar-html-container" class="container page-content gradle-tomee-fatjar-html is-blog">
+                        <div class="page-header">
+                <h1>Gradle and TomEE Embedded FatJars</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-09-02</span>, <span class="metadata-readingtime">7 min and 49 sec read</span></p>
+</div>
+<p>Creating a fatjar, uber jar or a shade with maven leads quite often to maven-shade-plugin but gradle ecosystem is quite young on that area and even if it reused some maven-shade API/idea it is not always trivial to dig into it today. Let see how you can benefit from gradle scripting to build your fat TomEE jar!</p>
+
+<p>So what is our goal? Merge a web application (let&rsquo;s say JAX-RS + JPA) with TomEE to build an executable jar. In short do: java -jar myapp.jar.</p>
+
+<p>What are the challenges? The standards one of a shade: how to merge the fullstack without breaking any part of the libraries/application.</p>
+
+<p>Why should this break anything? Think to a part of the application using for its extensibility a service provider interface (SPI):</p>
+
+<ul>
+	<li>
+	<p>app-part1.jar contains META-INF/services/com.app.Extension with</p>
+	</li>
+</ul>
+
+<pre>
+<code>com.app.Extension11
+com.app.Extension12</code></pre>
+
+<ul>
+	<li>app-part2.jar contains META-INF/services/com.app.Extension with</li>
+</ul>
+
+<pre>
+<code>com.app.Extension21
+com.app.Extension22</code></pre>
+
+<p>When the build will happen it will encounter both files and will just keep a single one of both. In other words: even if the classes are all there your application will only be half working, which means it will just not work.</p>
+
+<p>Now you think it is your application so not a big deal? Actually most of the libraries use that, in TomEE stack to cite a few there are:</p>
+
+<ul>
+	<li>
+	<p>CXF</p>
+	</li>
+	<li>
+	<p>TomEE</p>
+	</li>
+	<li>
+	<p>MyFaces</p>
+	</li>
+	<li>
+	<p>BVal</p>
+	</li>
+	<li>
+	<p>OpenWebBeans</p>
+	</li>
+	<li>
+	<p>&hellip;</p>
+	</li>
+</ul>
+
+<p>How to solve it? Configuring the way well known resources are merged. In maven-shade-plugin it is known as Transformer and the Gradle shadow pluigin just copied this notion.</p>
+
+<p>Another challenge is to handle dependencies. Often in a shade you want to eclude some parts of the dependencies, you can do it directly on the dependencies or through the shading directly. Nice thing about gradle there is you can script it.</p>
+
+<p>Finally last thing to keep in mind is how to ensure the jar is executable, ie how to set a Main-Class in the MANIFEST.MF.</p>
+
+<h2>Setup a project</h2>
+
+<p>First you need to create a normal gradle project, here is a build.gradle to start:</p>
+
+<pre>
+<code class="language-java">group 'com.github.rmannibucau'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.tomee:tomee-embedded:7.0.2-SNAPSHOT'
+}
+
+</code></pre>
+
+<p>If you need JPA/OpenJPA you can add the build time enhancement (highly recommanded for fatjars to avoid to have to set a javaagent on the running command):</p>
+
+<pre>
+<code class="language-java">buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'at.schmutterer.oss.gradle:gradle-openjpa:0.2.0'
+        classpath 'org.apache.openjpa:openjpa:2.4.1'
+    }
+}
+
+group 'com.github.rmannibucau'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'openjpa'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.tomee:tomee-embedded:7.0.2-SNAPSHOT'
+}
+
+openjpa {
+    files = fileTree(sourceSets.main.output.classesDir).matching {
+        include '**/jpa/*.class'
+    }
+}
+</code></pre>
+
+<p>Now just develop your application in src/main/java and src/main/resources (don&#39;t forget the src/main/resources/META-INF/persistence.xml for JPA if needed).</p>
+
+<h2>Setup gradle shadow plugin</h2>
+
+<p>To build a fatjar with gradle you have several options but shadow plugin is the more advanced (actually pretty close to maven shade plugin). Here is a basic setup:</p>
+
+<pre>
+<code class="language-java">buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+group 'com.github.rmannibucau'
+version '1.0-SNAPSHOT'
+
+// keep java, openjpa etc plugins if needed, removed for brievity
+apply plugin: 'com.github.johnrengelman.shadow'
+
+// remove the dependencies/openjpa config for brievity
+
+shadowJar {
+    classifier = 'bundle'
+}
+</code></pre>
+
+<p>Note: this snippet didn&#39;t keep the previous blocks for brievity but we actually enrich previous build.gradle with that content.</p>
+
+<p>So what does mean setting up shadow jar plugin: just adding the plugin dependency, declaring it as an applied plugin and configuring it in the shadowJar section.</p>
+
+<p>But default setup will not allow you to run a TomEE fatjar, let&#39;s see what is missing!</p>
+
+<h2>Merging&nbsp;SPI files</h2>
+
+<p>First step is to ensure SPI files are still containing what is needed. For that aspect, shadow jar plugin copied the maven shade plugin concept of trasformer which are really aggregator of resources (from multiple jar resources to a merged one in the fatjar).</p>
+
+<p>For ServiceLoader ones (META-INF/services/*) shadowJar provides a nice shortcut: &quot;mergeServiceFiles()&quot;.&nbsp;For CXF we have to concatenate&nbsp;META-INF/cxf/bus-extensions.txt files, this can be done using the shortcut &quot;append&quot; which is an automatic transformer of show jar plugin. Finally we miss the aggregation of META-INF/openwebbeans/openwebbeans.properties files. That is properties so append should work? Actually not really cause these files have an ordinal so entries should be sorted. For that purpose OpenWebBeans will provide a custom transformer (one for maven, one for shadow jar) you can declare using transformer() method of shadow jar plugin:</p>
+
+<pre>
+<code class="language-java">import org.apache.openwebbeans.gradle.shadow.OpenWebBeansPropertiesTransformer
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'org.apache.openwebbeans:openwebbeans-gradle:1.7.0'
+    }
+}
+
+
+shadowJar {
+    mergeServiceFiles()
+    append 'META-INF/cxf/bus-extensions.txt'
+    transform(OpenWebBeansPropertiesTransformer.class)
+}
+</code></pre>
+
+<h2>Filtering dependencies</h2>
+
+<p>Now we merge correctly our dependencies resources, we need&nbsp;to ensure we have all the depencencies we need...which also means most of the time&nbsp;removing the ones we&nbsp;don&#39;t need.</p>
+
+<p>There are several syntaxes for that in shadow jar plugin but one common one is to code it using some exclusions/inclusions list configured in the build.gradle file. Personally i use two exclusions lists (but that&#39;s programmation so theorically you can do what you want):</p>
+
+<ul>
+	<li>excluded groups: used as categories of artifacts which are not required (activemq for instance if you don&#39;t need JMS)</li>
+	<li>excluded artifacts: when only a partial set of the artifacts of a groups are not needed (CXF JAX-WS artifacts when JAX-RS ones are needed for example)</li>
+</ul>
+
+<p>Here is a sample of such an algorithm:</p>
+
+<pre>
+<code class="language-java">//
+// customize exclusions depending your app
+//
+
+// first the not used dependencies like JSF, JAXWS, JMS ones
+def excludedDependenciesGroups = [
+        // gradle is buggy with poms, scope provided and optional I think
+        'com.google.code.findbugs',
+        'com.google.guava',
+        'javax.annotation',
+        'javax.ws.rs',
+        'net.sf.ehcache',
+        'org.apache.httpcomponents',
+        'org.ow2.asm',
+        // tomee jaxws, jms, etc...
+        'commons-codec',
+        'com.sun.xml.messaging.saaj',
+        'joda-time',
+        'junit',
+        'net.shibboleth.utilities',
+        'org.apache.activemq',
+        'org.apache.activemq.protobuf',
+        'org.apache.myfaces.core',
+        'org.apache.neethi',
+        'org.apache.santuario',
+        'org.apache.ws.xmlschema',
+        'org.apache.wss4j',
+        'org.bouncycastle',
+        'org.cryptacular',
+        'org.fusesource.hawtbuf',
+        'org.jasypt',
+        'org.jvnet.mimepull',
+        'org.opensaml',
+        'wsdl4j',
+        'xml-resolver'
+]
+
+// then cxf+tomee specific dependencies so we need to be more precise than the group
+// to not exclude everything
+def excludedDependenciesArtifacts = [
+        'cxf-rt-bindings-soap',
+        'cxf-rt-bindings-xml',
+        'cxf-rt-databinding-jaxb',
+        'cxf-rt-frontend-jaxws',
+        'cxf-rt-frontend-simple',
+        'cxf-rt-security-saml',
+        'cxf-rt-ws-addr',
+        'cxf-rt-wsdl',
+        'cxf-rt-ws-policy',
+        'cxf-rt-ws-security',
+        'openejb-cxf',
+        'openejb-webservices',
+        'tomee-webservices',
+        'geronimo-connector',
+        'geronimo-javamail_1.4_mail'
+]
+shadowJar {
+    // switch off JSF + JMS + JAXWS
+    dependencies {
+        exclude(dependency {
+            excludedDependenciesGroups.contains(it.moduleGroup) ||
+                    excludedDependenciesArtifacts.contains(it.moduleName)
+        })
+    }
+}
+</code></pre>
+
+<p>We define the two sets and just use contains on the &quot;current&quot; dependency shadow jar plugin gives us in the depednencies clojure which behaves as a filter for dependencies.</p>
+
+<p>Side note: of course shadow jar plugin also allows to include/exclude resources directly and for instance to skip JSF you can exclude META-INF/faces-config.xml file this way:</p>
+
+<pre>
+<code class="language-java">shadowJar {
+    exclude 'META-INF/faces-config.xml'
+}
+</code></pre>
+
+<h2>Customizing&nbsp;MANIFEST.MF: Main-Class</h2>
+
+<p>So now we merged jar resources altogether, we included only the dependencies we want/need so we just need to ensure our jar is executable, for that we need to set in the MANIFEST.MF the Main-Class attribute. Since TomEE embedded provides one we can just reuse it:&nbsp;org.apache.tomee.embedded.FatApp.</p>
+
+<p>Here what it looks like with shadow jar plugin:</p>
+
+<pre>
+<code class="language-java">shadowJar {
+    // ensure we define the expected Main (if you wrap tomee main use your own class)
+    manifest {
+        attributes 'Main-Class': 'org.apache.tomee.embedded.FatApp'
+    }
+}
+</code></pre>
+
+<h2>Run it</h2>
+
+<p>Now we have our plugin fully configured we can build our bundle:</p>
+
+<pre>
+<code>gradle clean shadowJar</code></pre>
+
+<p>it will create a&nbsp;build/libs/*-bundle.jar file you can execute with the following command:</p>
+
+<pre>
+<code>java -jar build/libs/*-bundle.jar</code></pre>
+
+<p>Note: the wildcard is used there just to not mention a too specific name but you should just use the actual jar name.</p>
+
+<p>The main inherit of most tomee embedded options but it just enforces the fatjar ones (--as-war to say it is a jar to deploy as a war a,d --single-classloader to use the same classloader for the boot and the application).</p>
+
+<h2>Conclusion</h2>
+
+<p>Shadow jar plugin is very nice to build fatjar cause the usage of groovy in the build file allows to enrich the merge without creating another artifact if desired (nice for transformers). It also allows to fix programmatically and &quot;easily&quot; the bad parsing of maven dependencies of gradle (some excluded depencencies shouldn&#39;t be visible from included artifacts).</p>
+
+<p>To conclude this article here is the full build.gradle file:</p>
+
+<pre>
+<code class="language-java">// run $ gradle clean shadowJar
+// you can need to add apache snapshot repository: https://repository.apache.org/content/repositories/snapshots/
+import org.apache.openwebbeans.gradle.shadow.OpenWebBeansPropertiesTransformer
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'org.apache.openwebbeans:openwebbeans-gradle:1.7.0'
+        classpath 'at.schmutterer.oss.gradle:gradle-openjpa:0.2.0'
+        classpath 'org.apache.openjpa:openjpa:2.4.1'
+    }
+}
+
+group 'com.github.rmannibucau'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'openjpa'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.16.10'
+    compile 'org.apache.tomee:tomee-embedded:7.0.2-SNAPSHOT'
+}
+
+openjpa { // in embedded module you have to set the javaagent if you don't enhance entities
+    files = fileTree(sourceSets.main.output.classesDir).matching {
+        include '**/User.class'
+    }
+}
+
+
+//
+// customize exclusions depending your app
+//
+
+// first the not used dependencies like JSF, JAXWS, JMS ones
+def excludedDependenciesGroups = [
+        // gradle is buggy with poms, scope provided and optional I think
+        'com.google.code.findbugs',
+        'com.google.guava',
+        'javax.annotation',
+        'javax.ws.rs',
+        'net.sf.ehcache',
+        'org.apache.httpcomponents',
+        'org.ow2.asm',
+        // tomee jaxws, jms, etc...
+        'commons-codec',
+        'com.sun.xml.messaging.saaj',
+        'joda-time',
+        'junit',
+        'net.shibboleth.utilities',
+        'org.apache.activemq',
+        'org.apache.activemq.protobuf',
+        'org.apache.myfaces.core',
+        'org.apache.neethi',
+        'org.apache.santuario',
+        'org.apache.ws.xmlschema',
+        'org.apache.wss4j',
+        'org.bouncycastle',
+        'org.cryptacular',
+        'org.fusesource.hawtbuf',
+        'org.jasypt',
+        'org.jvnet.mimepull',
+        'org.opensaml',
+        'wsdl4j',
+        'xml-resolver'
+]
+
+// then cxf+tomee specific dependencies so we need to be more precise than the group
+// to not exclude everything
+def excludedDependenciesArtifacts = [
+        'cxf-rt-bindings-soap',
+        'cxf-rt-bindings-xml',
+        'cxf-rt-databinding-jaxb',
+        'cxf-rt-frontend-jaxws',
+        'cxf-rt-frontend-simple',
+        'cxf-rt-security-saml',
+        'cxf-rt-ws-addr',
+        'cxf-rt-wsdl',
+        'cxf-rt-ws-policy',
+        'cxf-rt-ws-security',
+        'openejb-cxf',
+        'openejb-webservices',
+        'tomee-webservices',
+        'geronimo-connector',
+        'geronimo-javamail_1.4_mail'
+]
+shadowJar {
+    classifier = 'bundle'
+
+    // merge SPI descriptors
+    mergeServiceFiles()
+    append 'META-INF/cxf/bus-extensions.txt'
+    transform(OpenWebBeansPropertiesTransformer.class)
+
+    // switch off JSF + JMS + JAXWS
+    exclude 'META-INF/faces-config.xml'
+    dependencies {
+        exclude(dependency {
+            excludedDependenciesGroups.contains(it.moduleGroup) ||
+                    excludedDependenciesArtifacts.contains(it.moduleName)
+        })
+    }
+
+    // ensure we define the expected Main (if you wrap tomee main use your own class)
+    manifest {
+        attributes 'Main-Class': 'org.apache.tomee.embedded.FatApp'
+    }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//maven-surefire-debugging-execution.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//angular2-rc4-rc5-migration.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

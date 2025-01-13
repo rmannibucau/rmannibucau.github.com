@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JAX-RS: enrich the response with headers outside your business code</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,151 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jaxrs-response-filter-html-container" class="container page-content jaxrs-response-filter-html is-blog">
+                        <div class="page-header">
+                <h1>JAX-RS: enrich the response with headers outside your business code</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-05-09</span>, <span class="metadata-readingtime">2 min and 44 sec read</span></p>
+</div>
+<p>In a previous <a href="https://rmannibucau.metawerx.net/#/post/jaxrs-2-server-security-filter" target="_blank">post</a>&nbsp;we saw how to validate the security with JAX-RS. It was mainly based on a request filter. Do you know the response has the same kind of control with JAX-RS &gt;= 2?</p>
+
+<p>To illustrate it we&#39;ll enrich our response with two headers:</p>
+
+<ul>
+	<li>the cluster name we belong to</li>
+	<li>the node name which responded</li>
+</ul>
+
+<p>This kind of enrichment is generally avoided on exposed to the world API but is quite common for internal API to let teams interact way faster when there is an issue. This will typically allow to identify a corrupted machine or failing node really quick.</p>
+
+<h2>Create a response filter</h2>
+
+<p>To be able to enrich the response we can use a servlet filter of course, but it is interesting to replace it with a JAX-RS&nbsp;<em>ContainerResponseFilter</em>&nbsp;because we have access to the JAX-RS model then. Typically:</p>
+
+<ul>
+	<li>entity metadata (annotations etc)</li>
+	<li>entity stream (it is pretty hard to do it with a filter since JAX-RS runtime will flush this stream before exiting and therefore before your &quot;post&quot; execution in a servlet filter)</li>
+	<li>already parsed headers, locale, links, status...</li>
+</ul>
+
+<p>Our implementation will just get the node value from the JVM (<em>InetAddress</em>) and the cluster from a system property:</p>
+
+<pre>
+<code class="language-java">public class ResponseHeaderEnricherProvider {
+    private String node;
+    private String cluster;
+
+    @PostConstruct
+    private void init() {
+        cluster = System.getProperty("app.cluster", "default");
+        try {
+            node = InetAddress.getLocalHost().getHostName();
+        } catch (final UnknownHostException e) {
+            throw new IllegalStateException("Machine not well configured, ensure localhost name is set");
+        }
+    }
+
+    // ...
+}
+</code></pre>
+
+<p>Then to integrate it to JAX-RS runtime we create a&nbsp;<em>@Provider</em>&nbsp;and add these values as headers at response filtering time:</p>
+
+<pre>
+<code class="language-java">@Provider
+@Dependent
+public class ResponseHeaderEnricherProvider implements ContainerResponseFilter {
+    // previous code to get node/cluster values
+
+    public void filter(final ContainerRequestContext requestContext, final ContainerResponseContext responseContext) throws IOException {
+        responseContext.getHeaders().put("Node", singletonList(node));
+        responseContext.getHeaders().put("Cluster", singletonList(cluster));
+    }
+}</code></pre>
+
+<p>And here it is, if you curl a test endpoint you&#39;ll see we get our additional headers:</p>
+
+<pre>
+<code class="language-bash">$ curl -v http://localhost:8080/test
+*   Trying 127.0.0.1...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+&gt; GET /test HTTP/1.1
+&gt; Host: localhost:8080
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt;
+&lt; HTTP/1.1 200
+&lt; Date: Sun, 07 May 2017 15:28:35 GMT
+&lt; Node: rmannibucau
+&lt; Cluster: default
+&lt; Content-Type: text/plain
+&lt; Content-Length: 4
+&lt;
+* Connection #0 to host localhost left intact
+test
+</code></pre>
+
+<h2>Real life applications</h2>
+
+<p>As mentionned for internal exosure of some deployment information it is very useful but for external API it is useful too, you can expose:</p>
+
+<ul>
+	<li>some rate limiting</li>
+	<li>some account state information (like &quot;you are locked but try again tomorrow&quot;)</li>
+	<li>some service state (&quot;we are under an attack, please check status.company.com)</li>
+	<li>some timing information regarding the server execution</li>
+	<li>some transaction id</li>
+	<li>...</li>
+</ul>
+
+<p>Overall idea is to expose anything the client can be interested in, which is not dangerous in term of security, and is not directly linked to the business. Said otherwise,&nbsp;anything transversal is a good candidate to this kind of implementation. You will often mix it with a service injected holding some state (like a&nbsp;<em>@RequestScoped</em>&nbsp;contextual data holder) to complete the full code structure.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-tomee-apachecon-na-2017.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomcat-rewrite-url.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TomEE: how to know which CDI beans the application deploys</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="tomee-cdi-beans-scanning-debug-html-container" class="container page-content tomee-cdi-beans-scanning-debug-html is-blog">
+                        <div class="page-header">
+                <h1>TomEE: how to know which CDI beans the application deploys</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-11-09</span>, <span class="metadata-readingtime">6 min and 38 sec read</span></p>
+</div>
+<p>CDI deployment is quite automatic. Either you use a beans.xml and the scanning of the archive is forced but you still scan the whole &quot;jar&quot; or you don&#39;t have a beans.xml and you scan it with default rules.</p>
+
+<p>This is not a bad default because it is &quot;working by default&quot; but it also makes quite hard to know what is scanned out of the box.</p>
+
+<p>Why should you care? Scanning control, even if not portable, is a key of the usability of CDI based applications - in EE or not. If not tuned and the application has a real stack then you will scan a bunch of useless jars and slow down the bootstrap of your application. Why do we care? Just cause it makes development iterations slower for no reasons! In other words: controlling its scanning ensure development stays smooth and fast.</p>
+
+<p>There are multiple ways to configure the scanning but let see one procedure you can use with TomEE without requiring any &quot;guess&quot; logic.</p>
+
+<h2>Find the CDI beans to filter them</h2>
+
+<p>The first step is to find which beans are deployed. To do that you can write a custom extension or just use TomEE&nbsp;&nbsp;<em>openejb.cdi.debug</em>&nbsp;options. To activate it just add it in the container or JVM system properties:</p>
+
+<pre>
+<code class="language-bash">openejb.cdi.debug=true</code></pre>
+
+<p>This will simply log all classes keep&nbsp;as potentially CDI beans (ie before effectively starting CDI container). Output will look like:</p>
+
+<pre>
+<code>INFOS - Existing thread singleton service in SystemInstance(): org.apache.openejb.cdi.ThreadSingletonServiceImpl@78aa1f72
+INFOS - OpenWebBeans Container is starting...
+INFOS - Adding OpenWebBeansPlugin : [CdiPlugin]
+INFOS - Using annotated mode for file:/media/data/dev/github/rblog/target/test-classes/ looking all classes to find CDI beans, maybe think to add a beans.xml if not there or add the jar to exclusions.list
+INFOS - CDI beans for rblog
+INFOS -     com.github.rmannibucau.rblog.angular2.UrlRewriting
+INFOS -     com.github.rmannibucau.rblog.configuration.Configuration
+INFOS -     com.github.rmannibucau.rblog.configuration.ConfigurationProducer
+INFOS -     com.github.rmannibucau.rblog.configuration.ConfigurationProducer$Decrypter
+INFOS -     com.github.rmannibucau.rblog.configuration.DefaultDecrypter
+INFOS -     com.github.rmannibucau.rblog.event.DoBackup
+INFOS -     com.github.rmannibucau.rblog.jaxrs.AttachmentResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.BackupResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.BackupResource$1
+INFOS -     com.github.rmannibucau.rblog.jaxrs.BitlyResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.BitlyResource$State
+INFOS -     com.github.rmannibucau.rblog.jaxrs.BitlyResource$Url
+INFOS -     com.github.rmannibucau.rblog.jaxrs.CategoryResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.PostResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RBlogApplication
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RBlogConfiguration
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RBlogConfiguration$Configuration
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource$AtomLink
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource$Channel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource$Guid
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource$Item
+INFOS -     com.github.rmannibucau.rblog.jaxrs.RssResource$Rss
+INFOS -     com.github.rmannibucau.rblog.jaxrs.SiteMapResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.SiteMapResource$1
+INFOS -     com.github.rmannibucau.rblog.jaxrs.SiteMapResource$TChangeFreq
+INFOS -     com.github.rmannibucau.rblog.jaxrs.SiteMapResource$TUrl
+INFOS -     com.github.rmannibucau.rblog.jaxrs.SiteMapResource$Urlset
+INFOS -     com.github.rmannibucau.rblog.jaxrs.UserResource
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.Async
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.AsyncInterceptor
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.AsyncInterceptor$Meta
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.AsyncInterceptor$Metas
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.AsyncInterceptor$NoContentHandlerAsyncResponse
+INFOS -     com.github.rmannibucau.rblog.jaxrs.async.AsyncInterceptor$TransactionProvider
+INFOS -     com.github.rmannibucau.rblog.jaxrs.dump.VisitorSupport
+INFOS -     com.github.rmannibucau.rblog.jaxrs.format.JSDateConverter
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.AttachmentModel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.AttachmentPage
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.CategoryModel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.Message
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.NotificationModel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.PostModel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.PostPage
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.TopPosts
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.TopPosts$CategoryData
+INFOS -     com.github.rmannibucau.rblog.jaxrs.model.UserModel
+INFOS -     com.github.rmannibucau.rblog.jaxrs.package-info
+INFOS -     com.github.rmannibucau.rblog.jaxrs.provider.AccessDeniedExceptionExceptionMapper
+INFOS -     com.github.rmannibucau.rblog.jaxrs.provider.EntityConcurrentModificationException
+INFOS -     com.github.rmannibucau.rblog.jaxrs.provider.EntityConcurrentModificationExceptionExceptionMapper
+INFOS -     com.github.rmannibucau.rblog.jaxrs.provider.JSonProvider
+INFOS -     com.github.rmannibucau.rblog.jaxrs.provider.TransactionExceptionExceptionMapper
+INFOS -     com.github.rmannibucau.rblog.jaxrs.reflect.CollectionType
+INFOS -     com.github.rmannibucau.rblog.jpa.Attachment
+INFOS -     com.github.rmannibucau.rblog.jpa.BaseEntity
+INFOS -     com.github.rmannibucau.rblog.jpa.Category
+INFOS -     com.github.rmannibucau.rblog.jpa.Notification
+INFOS -     com.github.rmannibucau.rblog.jpa.Notification$State
+INFOS -     com.github.rmannibucau.rblog.jpa.Post
+INFOS -     com.github.rmannibucau.rblog.jpa.PostType
+INFOS -     com.github.rmannibucau.rblog.jpa.Token
+INFOS -     com.github.rmannibucau.rblog.jpa.User
+INFOS -     com.github.rmannibucau.rblog.lang.Exceptions
+INFOS -     com.github.rmannibucau.rblog.lang.JaxRsPromise
+INFOS -     com.github.rmannibucau.rblog.lang.JaxRsPromise$PromiseInvocationCallback
+INFOS -     com.github.rmannibucau.rblog.security.TokenPrincipal
+INFOS -     com.github.rmannibucau.rblog.security.cdi.AccessDeniedException
+INFOS -     com.github.rmannibucau.rblog.security.cdi.Logged
+INFOS -     com.github.rmannibucau.rblog.security.cdi.LoggedInterceptor
+INFOS -     com.github.rmannibucau.rblog.security.service.TokenGenerator
+INFOS -     com.github.rmannibucau.rblog.security.web.InvalidCredentialsException
+INFOS -     com.github.rmannibucau.rblog.security.web.InvalidCredentialsExceptionExceptionMapper
+INFOS -     com.github.rmannibucau.rblog.security.web.SecurityFilter
+INFOS -     com.github.rmannibucau.rblog.security.web.SecurityFilter$1
+INFOS -     com.github.rmannibucau.rblog.security.web.SecurityFilter$TokenUpdater
+INFOS -     com.github.rmannibucau.rblog.security.web.TokenResource
+INFOS -     com.github.rmannibucau.rblog.security.web.model.Credentials
+INFOS -     com.github.rmannibucau.rblog.security.web.model.TokenError
+INFOS -     com.github.rmannibucau.rblog.security.web.model.TokenValue
+INFOS -     com.github.rmannibucau.rblog.service.Backup
+INFOS -     com.github.rmannibucau.rblog.service.Backup$Internal
+INFOS -     com.github.rmannibucau.rblog.service.Backup$Internal$1
+INFOS -     com.github.rmannibucau.rblog.service.BitlyService
+INFOS -     com.github.rmannibucau.rblog.service.BitlyService$BitlyData
+INFOS -     com.github.rmannibucau.rblog.service.BitlyService$BitlyResponse
+INFOS -     com.github.rmannibucau.rblog.service.IOService
+INFOS -     com.github.rmannibucau.rblog.service.PasswordService
+INFOS -     com.github.rmannibucau.rblog.service.SlugService
+INFOS -     com.github.rmannibucau.rblog.service.TokenEviction
+INFOS -     com.github.rmannibucau.rblog.service.URLService
+INFOS -     com.github.rmannibucau.rblog.setup.AnalyticsConfiguration
+INFOS -     com.github.rmannibucau.rblog.setup.DefaultUser
+INFOS -     com.github.rmannibucau.rblog.setup.PersistenceConfiguration
+INFOS -     com.github.rmannibucau.rblog.social.SocialNotifier
+INFOS -     com.github.rmannibucau.rblog.social.SocialNotifier$NotifierStates
+INFOS -     com.github.rmannibucau.rblog.social.SocialService
+INFOS -     com.github.rmannibucau.rblog.social.TwitterService
+INFOS -     com.github.rmannibucau.rblog.social.TwitterService$NonceProvider
+INFOS -     com.github.rmannibucau.rblog.social.TwitterService$TimestampProvider
+INFOS -     com.github.rmannibucau.rblog.test.BitlyMocks
+INFOS -     com.github.rmannibucau.rblog.test.TwitterMocks
+INFOS -     com.github.rmannibucau.rblog.test.TwitterMocks$NonceTestProvider
+INFOS -     com.github.rmannibucau.rblog.test.TwitterMocks$TimestampTestProvider
+INFOS -     org.apache.openejb.cdi.transactional.MandatoryInterceptor
+INFOS -     org.apache.openejb.cdi.transactional.NeverInterceptor
+INFOS -     org.apache.openejb.cdi.transactional.NotSupportedInterceptor
+INFOS -     org.apache.openejb.cdi.transactional.RequiredInterceptor
+INFOS -     org.apache.openejb.cdi.transactional.RequiredNewInterceptor
+INFOS -     org.apache.openejb.cdi.transactional.SupportsInterceptor</code></pre>
+
+<p>The interesting lines are&nbsp;after:</p>
+
+<pre>
+<code>INFOS - CDI beans for rblog</code></pre>
+
+<p>What does it give us? The list of scanned classes. Idea is to extract all classes which are not CDI beans and configure the container to exclude them from the scanning. With TomEE it leads to use&nbsp;<em>exclusions.list</em>&nbsp;to exclude a full jar (if you see commons-* or bouncycastle scanned for instance) or&nbsp;scan.xml&nbsp;to exclude a package or classes from a module without excluding the full jar (common if you want to scan 2 classes over&nbsp;1000 for a particular jar). You can also use CDI standard exclusions in&nbsp;<em>beans.xml</em>&nbsp;but it generally happens a bit later so this is more a business exclusion than a scanning exclusion (= less impacting on the startup duration).</p>
+
+<p>Concretely once well configured you should only scan your business beans. This will ensure the container starts as fast as possible and you control the CDI context (note that a side effect is you can also remove some ambiguity in the resolution).</p>
+
+<h2>When to do it?</h2>
+
+<p>Ideally each time you add a dependency to your project. TomEE - and other servers - comes with different strategies and a set of default exclusions of well known dependencies. It is better to ensure you don&#39;t rely too much on the defaults quality and ensure it actually fits your use case to validate what the container does for you at least once per project/container-dependency upgrade. Said otherwise: checking instead of assuming should be the rule.</p>
+
+<p>In practise you can accept to scan small libraries, it will be fast but big ones will be impacting and therefore need to be excluded if not participating to CDI directly. This &quot;rule&quot; is probably the best I can recommand you in a generic manner but it omits what means &quot;big&quot;. It depends the computer(s) you use and your stack/development model. Best there is to do the test on 1 or 2 projects and get your own metric(s) for that definition.</p>
+
+<h2>What if my container doesn&#39;t provide me that information that smoothly?</h2>
+
+<p>There are a lot of alternatives:</p>
+
+<ul>
+	<li>start from excluding 3rd party libraries (full jars) which are not CDI libraries or not used like that</li>
+	<li>if not enough, configure packages (often companies have a dedicated package - com.company.application - which works well if configured as inclusion)</li>
+	<li>write a small extension capturing ProcessAnnotationType&nbsp;event and listing all types from there. It is not the&nbsp;full set of scanned classes but generally it is good enough to configure the scanning</li>
+	<li>For weld based containers, give a try to&nbsp;probe webapp which can help. It is&nbsp;more impacting in term of setup but a way to get a good information level without redeveloping something new yourself</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>Scanning is a critical part of the setup of a project which is also a living part of it. Badly setup you can end up loosing several minutes to boot a container which would only require&nbsp;few seconds once configured. This is not something you should put in a backlog but solve upfront to enable your team to be productive!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//webpack-scp-plugin.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jasmine-mocha-test-dont-fail.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

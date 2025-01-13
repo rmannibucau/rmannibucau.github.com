@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Integrate 3rd party library with CDI, part 2: avoid new annotations for interceptors</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="integrate-third-party-library-cdi-interceptors-html-container" class="container page-content integrate-third-party-library-cdi-interceptors-html is-blog">
+                        <div class="page-header">
+                <h1>Integrate 3rd party library with CDI, part 2: avoid new annotations for interceptors</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-14</span>, <span class="metadata-readingtime">6 min and 16 sec read</span></p>
+</div>
+<p>If we take the Shiro-CDI integration case, here what we want to do:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class Service {
+    @RequiresRoles("rtest")
+    public void roleTest() {
+    }
+
+    @RequiresPermissions("ptest")
+    public void permTest() {
+    }
+
+    @RequiresGuest
+    public void guest() {
+    }
+
+    @RequiresUser
+    public void user() {
+    }
+
+    @RequiresAuthentication
+    public void authenticated() {
+    }
+}</code></pre>
+
+<p>Concretely we want to just decorate our CDI beans with Shiro annotations without requiring any other annotation.</p>
+
+<h2>Implement the interceptor</h2>
+
+<p>Our backbone will - as often in such a case - will use an interceptor:</p>
+
+<pre>
+<code class="language-java">public class ShiroInterceptor implements Serializable {
+    @AroundInvoke
+    public Object around(final InvocationContext ic) throws Exception {
+        validate(ic);
+        try {
+            return ic.proceed();
+        } catch (final Throwable throwable) {
+            if (Exception.class.isInstance(throwable)) {
+                throw Exception.class.cast(throwable);
+            }
+            if (Error.class.isInstance(throwable)) {
+                throw Error.class.cast(throwable);
+            }
+            throw new IllegalStateException(throwable);
+        }
+    }
+}</code></pre>
+
+<p>All the challenge is how to implement the&nbsp;<em>validate()</em>&nbsp;method.</p>
+
+<p>In Shiro case you will see it is not hard since Shiro provides&nbsp;<em>MethodInterceptors</em>&nbsp;for all annotations. To bridge it to CDI we just need to just bridge the&nbsp;<em>InvocationContext</em>&nbsp;to a&nbsp;<em>MethodInvocation</em>&nbsp;which are almost the same:</p>
+
+<pre>
+<code class="language-java">public class MethodInvocationContext implements MethodInvocation {
+    private final InvocationContext ic;
+
+    public MethodInvocationContext(final InvocationContext ic) {
+        this.ic = ic;
+    }
+
+    @Override
+    public Object proceed() throws Throwable {
+        return ic.proceed();
+    }
+
+    @Override
+    public Method getMethod() {
+        return ic.getMethod();
+    }
+
+    @Override
+    public Object[] getArguments() {
+        return ic.getParameters();
+    }
+
+    @Override
+    public Object getThis() {
+        return ic.getTarget();
+    }
+}</code></pre>
+
+<p>Nothing complicated for now. Now we need to just delegate the invocation to shiro handler by annotation.</p>
+
+<p>Side note: we&#39;ll not do it in this post to not make it too long but using an extension you can go a bit further and support dynamic annotations (through&nbsp;<em>AnnotatedMethod</em>).</p>
+
+<p>All Shiro annotations have their own handler so I&#39;ll just present&nbsp;<em>@RequiresRoles</em>&nbsp;one.</p>
+
+<p>First step is to bridge CDI and Shiro API:</p>
+
+<pre>
+<code class="language-java">public abstract class ShiroInterceptorBridge implements Serializable {
+    private final MethodInterceptorSupport delegate;
+
+    protected ShiroInterceptorBridge(final MethodInterceptorSupport delegate) {
+        this.delegate = delegate;
+    }
+
+    @AroundInvoke
+    public Object around(final InvocationContext ic) throws Exception {
+        try {
+            return delegate.invoke(new MethodInvocationContext(ic));
+        } catch (final Throwable throwable) {
+            if (Exception.class.isInstance(throwable)) {
+                throw Exception.class.cast(throwable);
+            }
+            if (Error.class.isInstance(throwable)) {
+                throw Error.class.cast(throwable);
+            }
+            throw new IllegalStateException(throwable);
+        }
+    }
+}</code></pre>
+
+<p>The implementation is very simple: we just fully delegate to Shiro wiring the&nbsp;<em>InvocationContext</em>&nbsp;to a&nbsp;<em>MethodInvocation.</em></p>
+
+<p>Then to create an actual interceptor we define an interceptor and set the right Shiro handler inheriting from previous abstract class:</p>
+
+<pre>
+<code class="language-java">@Interceptor
+@RequiresRoles("")
+@Priority(Interceptor.Priority.LIBRARY_BEFORE)
+public class RequiresRolesInterceptor extends ShiroInterceptorBridge {
+    public RequiresRolesInterceptor() {
+        super(new RoleAnnotationMethodInterceptor());
+    }
+}</code></pre>
+
+<p>Here are the important points there:</p>
+
+<ul>
+	<li><em>@Interceptor</em>: mark the class as interceptor</li>
+	<li><em>@Priority: ensure our interceptor is automatically activated and executed very early (LIBRARY_BEFORE</em>)</li>
+	<li><em>@RequiresRole</em>: a CDI interceptor needs an&nbsp;<em>@InterceptorBinding</em>&nbsp;and since we don&#39;t want to add another annotation we&#39;ll reuse the Shiro one</li>
+</ul>
+
+<h2>Make the 3rd party library annotation binding</h2>
+
+<p>An annotation is binding if it has&nbsp;<em>@InterceptorBinding.</em></p>
+
+<p>The other issue we&#39;ll have is CDI uses parameters to distinguish between bindings: the annotation matching includes parameters&nbsp;<strong>values</strong>. For us it means our interceptor will only match the parameter&nbsp;&quot;&quot;<em>...</em>which will likely never happen. Of course you can define as much interceptors as roles, permissions etc...but this is not doable in a generic integration.</p>
+
+<p>Of course CDI provides a solution: if you don&#39;t use that feature and just use the annotation method as a configuration option you can make CDI ignore it in binding resolution with the annotation&nbsp;<em>@Nonbinding</em>.</p>
+
+<p>So overall question is: how to request to CDI to use the Shiro annotation considering it has&nbsp;<em>@InterceptorBinding</em>&nbsp;on the class and&nbsp;<em>@Nonbinding&nbsp;</em>on all methods.</p>
+
+<p>To do that we need a CDI&nbsp;<em>Extension</em>. This&nbsp;<em>Extension</em>&nbsp;will be responsible to add the annotation as&nbsp;<em>@InterceptorBinding</em>&nbsp;programmatically adding <em>@Nonbinding</em>&nbsp;on the model of the annotation.</p>
+
+<p>Here is the basic idea of the extension (I used Java 8&nbsp;<em>Stream</em>&nbsp;but an old for loop works very well too):</p>
+
+<pre>
+<code class="language-java">public class ShiroExtension implements Extension {
+  void makeShiroAnnotationsInterceptorBindings(@Observes final BeforeBeanDiscovery e, final BeanManager bm) {
+    Stream.of(
+      RequiresRoles.class,
+      RequiresPermissions.class,
+      RequiresAuthentication.class,
+      RequiresUser.class,
+      RequiresGuest.class)
+    .forEach(type -&gt; {
+      AnnotatedType&lt;?&gt; at = bm.createAnnotatedType(type);
+      e.addInterceptorBinding(new NonBindingAnnotation&lt;&gt;(at));
+    });
+  }
+}</code></pre>
+
+<p>This extension just does what was described previously for all Shiro interceptor annotations.</p>
+
+<p>The trick is still hidden in the&nbsp;<em>NonBindingAnnotation</em>&nbsp;class. This is just an implementation of&nbsp;<em>AnnotatedType</em>&nbsp;delegating all method to the CDI instance (<em>at</em>) except the annotations ones where it adds&nbsp;<em>@InterceptorBinding</em>:</p>
+
+<pre>
+<code class="language-java">import javax.enterprise.inject.spi.AnnotatedConstructor;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedMethod;
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.interceptor.InterceptorBinding;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
+
+public class NonBindingAnnotation&lt;T extends Annotation&gt; implements AnnotatedType&lt;T&gt; {
+    private static final AnnotationLiteral&lt;InterceptorBinding&gt; INTERCEPTOR_BINDING_ANNOTATION_LITERAL = new InterceptorBindingLiteral();
+
+    private final AnnotatedType&lt;T&gt; delegate;
+    private final Set&lt;AnnotatedMethod&lt;? super T&gt;&gt; methods;
+    private final Set&lt;Annotation&gt; annotations;
+
+    public NonBindingAnnotation(final AnnotatedType&lt;T&gt; annotatedType) {
+        this.delegate = annotatedType;
+        this.methods = delegate.getMethods().stream()
+                .map(m -&gt; new NonBindingMethod&lt;&gt;((AnnotatedMethod&lt;T&gt;) m))
+                .collect(toSet());
+
+        this.annotations = new HashSet&lt;&gt;(delegate.getAnnotations().size() + 1);
+        this.annotations.addAll(delegate.getAnnotations());
+        this.annotations.add(INTERCEPTOR_BINDING_ANNOTATION_LITERAL);
+    }
+
+    @Override
+    public Class&lt;T&gt; getJavaClass() {
+        return delegate.getJavaClass();
+    }
+
+    @Override
+    public Set&lt;AnnotatedConstructor&lt;T&gt;&gt; getConstructors() {
+        return delegate.getConstructors();
+    }
+
+    @Override
+    public Set&lt;AnnotatedMethod&lt;? super T&gt;&gt; getMethods() {
+        return methods;
+    }
+
+    @Override
+    public Set&lt;AnnotatedField&lt;? super T&gt;&gt; getFields() {
+        return delegate.getFields();
+    }
+
+    @Override
+    public Type getBaseType() {
+        return delegate.getBaseType();
+    }
+
+    @Override
+    public Set&lt;Type&gt; getTypeClosure() {
+        return delegate.getTypeClosure();
+    }
+
+    @Override
+    public &lt;T extends Annotation&gt; T getAnnotation(final Class&lt;T&gt; annotationType) {
+        return annotationType == InterceptorBinding.class ? annotationType.cast(INTERCEPTOR_BINDING_ANNOTATION_LITERAL) : delegate.getAnnotation(annotationType);
+    }
+
+    @Override
+    public Set&lt;Annotation&gt; getAnnotations() {
+        return annotations;
+    }
+
+    @Override
+    public boolean isAnnotationPresent(final Class&lt;? extends Annotation&gt; annotationType) {
+        return annotationType == InterceptorBinding.class || delegate.isAnnotationPresent(annotationType);
+    }
+
+    public static class InterceptorBindingLiteral
+        extends AnnotationLiteral&lt;InterceptorBinding&gt;
+        implements InterceptorBinding {
+    }
+}</code></pre>
+
+<p>So now all annotations are usable for interceptors. If the annotation has no method/parameter then we are done. But role and permissions can be configured on the annotation in Shiro so we still need to add&nbsp;<em>@Nonbinding</em>&nbsp;to the methods to ensure we bind to our interceptor which ignores the parameters.</p>
+
+<p>To do that the previous&nbsp;<em>AnnotatedType</em>&nbsp;implementation uses&nbsp;<em>NonBindingMethod</em>&nbsp;which does exactly the same but at&nbsp;<em>AnnotatedMethod</em>&nbsp;level and with the annotation&nbsp;<em>@Nonbinding</em>:</p>
+
+<pre>
+<code class="language-java">import javax.enterprise.inject.spi.AnnotatedMethod;
+import javax.enterprise.inject.spi.AnnotatedParameter;
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.Nonbinding;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class NonBindingMethod&lt;T extends Annotation&gt; implements AnnotatedMethod&lt;T&gt; {
+    private static final AnnotationLiteral&lt;Nonbinding&gt; NONBINDING_ANNOTATION_LITERAL = new NonbindingLiteral();
+
+    private final AnnotatedMethod&lt;T&gt; delegate;
+    private final Set&lt;Annotation&gt; annotations;
+
+    NonBindingMethod(final AnnotatedMethod&lt;T&gt; m) {
+        delegate = m;
+        annotations = new HashSet&lt;&gt;(m.getAnnotations().size() + 1);
+        this.annotations.addAll(delegate.getAnnotations());
+        this.annotations.add(NONBINDING_ANNOTATION_LITERAL);
+    }
+
+    @Override
+    public Method getJavaMember() {
+        return delegate.getJavaMember();
+    }
+
+    @Override
+    public List&lt;AnnotatedParameter&lt;T&gt;&gt; getParameters() {
+        return delegate.getParameters();
+    }
+
+    @Override
+    public boolean isStatic() {
+        return delegate.isStatic();
+    }
+
+    @Override
+    public AnnotatedType&lt;T&gt; getDeclaringType() {
+        return delegate.getDeclaringType();
+    }
+
+    @Override
+    public Type getBaseType() {
+        return delegate.getBaseType();
+    }
+
+    @Override
+    public Set&lt;Type&gt; getTypeClosure() {
+        return delegate.getTypeClosure();
+    }
+
+    @Override
+    public &lt;T extends Annotation&gt; T getAnnotation(final Class&lt;T&gt; annotationType) {
+        return annotationType == Nonbinding.class ? annotationType.cast(NONBINDING_ANNOTATION_LITERAL) : delegate.getAnnotation(annotationType);
+    }
+
+    @Override
+    public Set&lt;Annotation&gt; getAnnotations() {
+        return annotations;
+    }
+
+    @Override
+    public boolean isAnnotationPresent(final Class&lt;? extends Annotation&gt; annotationType) {
+        return Nonbinding.class == annotationType || delegate.isAnnotationPresent(annotationType);
+    }
+
+    public static class NonbindingLiteral
+        extends AnnotationLiteral&lt;Nonbinding&gt;
+        implements Nonbinding  {
+    }
+}
+</code></pre>
+
+<p>Here we are, we have our annotation correctly integrated with CDI, we have our interceptor consistent with Shiro API so we just need to use it!</p>
+
+<h2>Conclusion</h2>
+
+<p>Integrating a 3rd party interceptor based API with CDI without duplicating or introducing new API&nbsp;generally just means:</p>
+
+<ul>
+	<li>registering the library API as interceptor bindings</li>
+	<li>ensuring parameters of the bindings are ignored by CDI</li>
+	<li>implement an interceptor integrating with the library</li>
+</ul>
+
+<p>This can look like a lot of code but if you think the annotation wrappers and literals are in a library you (re)use then it is really just the matter of the extension and is almost just 3 lines plus the interceptor itself which is not that big (depends the library). So concretely this is not a lot of code you own but it ensures you use a consistent programming model with the stack you rely on, in CDI or not :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi-ioc.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

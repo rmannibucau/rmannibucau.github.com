@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Reading a file insanely fast in java</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="reading-a-file-insanely-fast-in-java-html-container" class="container page-content reading-a-file-insanely-fast-in-java-html is-blog">
+                        <div class="page-header">
+                <h1>Reading a file insanely fast in java</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2024-01-11</span>, <span class="metadata-readingtime">15 min and 53 sec read</span></p>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+Gunnar Morling launched end of 2023 (almost beginning of 2024) his <a href="https://www.morling.dev/blog/one-billion-row-challenge/">*o*ne *b*illion *r*ows</a> challenge.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_challenge">The challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can check out all the details on Gunnar&#8217;s blog <a href="https://www.morling.dev/blog/one-billion-row-challenge/">post</a> but high level the idea is to read a file containing a location name and a value per line, separated by a semicolon:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csv hljs" data-lang="csv">---
+Bordeaux;12.3
+Marrakesh;25.6
+...
+---</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What is interesting is that the value has a maximum of 1 decimal, and a maximum of two digits (so it is -100 &lt; x &lt; 100), and the location name is limited in size too.</p>
+</div>
+<div class="paragraph">
+<p>The challenge is not to read the values but that the file has 1 million rows and the goal is to compute the min/max/average per location.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the figures given in this post were on my computer and given for comparison purposes.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_goods">The goods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default Gunnar provided a default implementation using Java.
+Indeed, it is not the fastest - and it was not the goal, but it give a base.
+The implementation is basically what we woud do in java using a bit <code>Stream</code> and <code>String</code> manipulation.
+The processing was done in about 4mn - which is already not bad for a very simple code, trivial to maintain and enhance.</p>
+</div>
+<div class="sect2">
+<h3 id="_read_the_file_concurrently">Read the file concurrently</h3>
+<div class="sect3">
+<h4 id="_split_the_file">Split the file</h4>
+<div class="paragraph">
+<p>To process quickly a file the best way is to use all the power possible (IO and CPU), the challenge context was mentionning 8 CPU would be available and a "fast enough" disk.
+So the first step is to make the processing parallel.</p>
+</div>
+<div class="paragraph">
+<p>This phase is very common in any big data stack (from Hadoop to Apache Spark or Flink).
+High level, the idea is to split virtually the file in chunks and let each "worker" process its segment.
+What is interesting there is that the big data flavor - which often uses a remote filesystem - splits in segments with a heuristic and not exactly aligned on records (lines there) so a worker can overflow its segments to read the end of a record and it can start after the beginning of its segment to not read twice the same record.</p>
+</div>
+<div class="paragraph">
+<p>Assuming we have this content (the file was inlined to make it easier to "split"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>city1;12.3\ncity2;45.6\ncity3;78.9\ncity4;1.2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we want to create two chunks (number of CPU/worker normally but it is easier to explain with less) we would get something like the following where <code>||</code> represents the split:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>city1;12.3\ncity2;45.||6\ncity3;7.\ncity4;1.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If each worker reads only its segment, <code>city2</code> wouldn&#8217;t see <code>45.6</code> but would read <code>45.</code> and second worker would start with a failling record.
+To avoid that, the common algorithm is to "read until the end of the record" for the end of the segment so <code>city2</code> gets <code>45.6</code> as value and
+"read from after the first end of record" for the beginning (except first chunk indeed) so second worker starts at <code>city3</code>.
+Indeed, for last chunk, it is read until the end.</p>
+</div>
+<div class="paragraph">
+<p>In big data ecosystem, this adjustment is done "on the flow" because reading is often costly but here we read a local file so we can adjust the segments before starting to process them using whatever way you prefer to navigate in the file around the chunk ends (can be a <code>Channel</code> or <code>RandomAccessFile</code>).</p>
+</div>
+<div class="paragraph">
+<p>So after this phase we get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>city1;12.3\ncity2;45.6\n||city3;7.\ncity4;1.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and since we don&#8217;t care of the separator we can even get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>city1;12.3\ncity2;45.6||city3;7.\ncity4;1.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which enables each worker to read its chunk to the end blindly.</p>
+</div>
+<div class="paragraph">
+<p>This small adjustment of the widespread concurrent reading of files enable to drop all the state logic managing if we are before/after the end which simplifies a lot the code and even enables to make it a bit faster dropping some condition (but it is negligible most of the time).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_threads">Create threads</h4>
+<div class="paragraph">
+<p>So at that stage we have chunks so we just have to create threads to read each chunk in a thread.
+Here there are diverse options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create an <code>ExecutorService</code> (fixed size or fork/join types for example),</p>
+</li>
+<li>
+<p>Create N <code>Thread</code>,</p>
+</li>
+<li>
+<p>Use <code>ForJoin.commonPool()</code> - and <code>Stream</code> <code>parallel</code> call for example,</p>
+</li>
+<li>
+<p>Use virtual threads (which is just a kind of <code>ForkJoin</code> pool at the end).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since each worker will basically be 100% computation - we&#8217;ll discuss it more soon - all of these options will lead to get a thread per chunk fill CPU capacity.
+The hability to steal work, to use a queue to process pending work until some thread is available etc is useless.</p>
+</div>
+<div class="paragraph">
+<p>Conclusion: use whatever you prefer there, there will be no real performance difference.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_summary">Summary</h4>
+<div class="paragraph">
+<p>So overall, in pseudo code, we have something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void run() {
+    int cpus = getCpuCount();
+    var chunks = splitFile(cpus);
+    try (var threads = createThreads(cpus)) {
+        threads.invokeAll(chunks);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Moving to this kind of processing is quite efficient and enables to reach the &#8230;&#8203;. it depends how you implement the parsing but assuming you do it the simple way you should be between the minute and 30s.
+Let move to next part to see the difference between both options.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_read_the_file_efficiently">Read the file efficiently</h3>
+<div class="sect3">
+<h4 id="_handle_your_memory_correctly">Handle your memory correctly</h4>
+<div class="paragraph">
+<p>When optimizing a software there are always trade off, the most extreme are generally something around "make it easy to read/maintain" vs "make it insanely fast".
+But when working with data streams (<code>InputStream</code>, <code>Channel</code> and friends) the key is to not re-allocate the memory when possible.</p>
+</div>
+<div class="paragraph">
+<p>Yes you read it right, even if java manages the memory for you, if you can avoid to reallocate the memory you will be faster.
+This is a common optimization the parser/writer you use in your applications - even JSON ones - do.
+Even Apache Tomcat or Jackson use such optimization.</p>
+</div>
+<div class="paragraph">
+<p>Conretely what we want is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">var buffer = new byte[MAX_LINE_LENGTH];
+int read;
+while ((read = in.read(buffer)) &gt;= 0) {
+    // do process
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and <strong>NOT</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">int read;
+while ((read = doRead()) &gt;= 0) {
+    // do process
+}
+
+// ...
+int doRead() {
+    var buffer = new byte[MAX_LINE_LENGTH]; // oops
+    return in.read(buffer);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, since each time you read you do an I/O access, you will want to limit that to enable to work in memory - and therefore abuse of the CPU as planned - so more you read better it is.</p>
+</div>
+<div class="paragraph">
+<p>So a first implementation can be to do chunks of ~512Mb and load them all in memory to process these chunks concurrently.
+There you will reach the 45s execution - which is already very good and the code stay quite maintainable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_handle_your_memory_without_byte">Handle your memory without byte[]</h4>
+<div class="paragraph">
+<p>Now, there is a more efficient way to read bytes from a file inherited from C primitives: mapping the file in memory - challenge allocated enough memory to enable that.</p>
+</div>
+<div class="paragraph">
+<p>In java it looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (final var channel = FileChannel.open(input, EnumSet.of(StandardOpenOption.READ)); <i class="conum" data-value="1"></i><b>(1)</b>
+    final var arena = Arena.ofConfined()) { <i class="conum" data-value="2"></i><b>(2)</b>
+  final var segment = channel.map(READ_ONLY, 0, size, arena); <i class="conum" data-value="3"></i><b>(3)</b>
+  final long address = segment.address(); <i class="conum" data-value="4"></i><b>(4)</b>
+  // process your file
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create a file channel from your input,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define a memory retention for the file mapping (= out of the try block the mapping/memory can be released),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Map the file content in memory (<code>MemorySegment</code>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Get the pointer to the first byte of the file mapped in memory.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then you can browse the file, there are multiple options, the simplest is to use <code>MemorySegment</code> directly but it has the same pitfall than using an <code>ArrayList</code> or <code>ByteBuffer</code> to iterate item by item over the array/list: each call checks the indices so does an useless check which costs some CPU time for nothing.
+The alternative is to use <code>Unsafe</code> which which has a <code>getByte(pointer)</code> method which does exactly what we need.</p>
+</div>
+<div class="paragraph">
+<p>So now we have a way to navigate in the file in memory, we&#8217;ll just use the <code>MemorySegment#address</code> as our offset (our "0") and visit each chunk using <code>Unsafe#getByte</code> instead of preloading a <code>byte[]</code> as before.</p>
+</div>
+<div class="paragraph">
+<p>This change is quite impressive because it moves to 30s the global execution.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_process_lines_efficiently">Process lines efficiently</h3>
+<div class="paragraph">
+<p>Processing a line needs to extract the location and then parse the value.</p>
+</div>
+<div class="paragraph">
+<p>First implementation always uses something like:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Find the ';',</p>
+</li>
+<li>
+<p>Substring of the first part,</p>
+</li>
+<li>
+<p><code>Double.parseDouble</code> of the last part.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This has 3 steps&#8230;&#8203;.and 3 issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do not just find the separator but also process the first value in the mean time, will save one iteration later,</p>
+</li>
+<li>
+<p>Do not use String since they are backed by a byte array but also a decoder which is insanely slow and we don&#8217;t care of that for most of the processing,</p>
+</li>
+<li>
+<p>Do not parse a simple number (xx.x) as a double since it also handles a lot of syntax which makes it slower than parsing 3 integer more or less.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_process_the_value">Process the value</h4>
+<div class="paragraph">
+<p>Processing the value is constructing an int (we&#8217;ll divide it by 10 later).
+We know that a byte is a digit and to get its value we just need to remove '0' because '1' is actually <code>'0' + 1</code> etc&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>So assuming we have our byte array of 4 bytes (xx.x) we just need to do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">int value = (bytes[0]-'0')*100 + (bytes[1]-'0')*10 + (bytes[0]-'0');</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+for simplicity I don&#8217;t enter into much more details but in the challenge negative values must be handled - so x-1 after the parsing if first byte is '-' and missing decimal or multiple of 10.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Some extreme optimizers use <a href="https://www.playingwithpointers.com/blog/swar.html">SWAR</a> algorithm which is very good for a generic parser but here the complexity of the simple parser is likely the same than the SWAR one so I&#8217;m not sure it is worth its added complexity.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_process_the_key">Process the key</h4>
+<div class="paragraph">
+<p>The key processing is quite simple: just extract the bytes between the beginning and the semicolon but the challenge is to fusion the values.</p>
+</div>
+<div class="paragraph">
+<p>For that there are sevral options but high level they all converge to get a hash and a backing structure enabling to store the value aggregator (we&#8217;ll speak of that in next part) to cumulate the parsed values thank previous part.</p>
+</div>
+<div class="paragraph">
+<p>You can, indeed implement a custom structure - but I have to admit that when I benchmarked it compared to a well sized <code>HashMap</code> I didn&#8217;t see any boost.</p>
+</div>
+<div class="paragraph">
+<p>So overall our algorithm will be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// beginning of the worker
+final var aggregators = new HashMap&lt;Location, Aggregator&gt;();
+
+// loop
+// while() {
+    final var location = readLocation();
+    final int value = readValue();
+    aggregators.computeIfAbsent(location, k -&gt; new Aggregator()).add(value);
+// }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But this snippet hides multiple things:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>computeIfAbsent</code> is slower than <code>get and if not found put</code> pattern,</p>
+</li>
+<li>
+<p>location key must be very efficient if you use a <code>HashMap</code> because if too much key use the same hash the map will keep adding nodes for this hash (see it as a list behind the index represented by the hash),</p>
+</li>
+<li>
+<p>hash must be quick to compute,</p>
+</li>
+<li>
+<p>equals - which is used after the first put for each hash - must be quick to compare keys.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>At that stage we have a <code>byte[]</code> for the location so we can use <code>Arrays.hashCode</code> and <code>Arrays.equals</code> but it will keep iterating over the array and is not insanely fast.</p>
+</div>
+<div class="paragraph">
+<p>To compensate that we can reuse the same algorithm - it is fast enough - and cache the hashcode for the item already stored in the map (so hashcode computation is not redone) and only use the equals when needed.</p>
+</div>
+<div class="paragraph">
+<p>One trick there to avoid to iterate once to find the location and once to compute its hashcode is to compute the hashcode while we find the semicolon:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// start readRecord() {
+final long nameStart = memIndex;
+int hash = UNSAFE.getByte(memIndex++);
+byte c;
+while ((c = UNSAFE.getByte(memIndex++)) != ';') {
+    hash *= 31;
+    hash += c;
+}
+final long nameEnd = memIndex - 1;
+
+final var name = new byte[(int) (nameEnd - nameStart)];
+UNSAFE.copyMemory(null, nameStart, name, Unsafe.ARRAY_BYTE_BASE_OFFSET, name.length);
+// }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This snippet gives us the start and end offsets of the name and loads it in a <code>byte[]</code> - indeed we can avoid some allocation in this pseudo code.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+the map must always be sized to avoid to need to be resized for speed (challenge was providing a max of locations) so <code>HashMap#newHashMap(int)</code> (or <code>HashMap</code> constructor if you do the computation yourself) is highly recommended.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_handle_the_aggregation_correctly">Handle the aggregation correctly</h3>
+<div class="paragraph">
+<p>To compute a min/max/average 3-uple you just need to keep storing for each location the:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>min</p>
+</li>
+<li>
+<p>max</p>
+</li>
+<li>
+<p>number of value</p>
+</li>
+<li>
+<p>sum of values</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So you can get the map we just talked about as a <code>ConcurrentHashMap</code>, share it accross the threads and store everything in the aggregators.</p>
+</div>
+<div class="paragraph">
+<p>However, if you do so you need to lock the aggregator or allocate one aggregator per thread (in an array with one index per worker for example).
+To avoid that, the simplest and recommended solution is to create one map per worker and after all worker terminated, fusion them since the four values we stored in the aggregators are trivially mergeable before the final computation (don&#8217;t forget to divide by ten the values once all is merged since we parsed floats/doubles as integers).</p>
+</div>
+<div class="paragraph">
+<p>Congratulation! You just did a map/reduce and if you followed all these advices you should be around 10s on my computer scale!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_bads">The bads</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There aren&#8217;t a lot of bads in this challenges but I want to highlight a few extremes we see sometimes.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_equalshashcode_irrespect">The equals/hashcode irrespect</h3>
+<div class="paragraph">
+<p>Recall we need a very fast <code>hashCode</code> and <code>equals</code> implementation for our locations?
+We treated <code>hashCode</code> but one way to make <code>equals</code> very fast is to implement it this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Override
+public boolean equals(final Object obj) {
+    return true;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It can&#8217;t be faster right? This means that, since we precompute the hash, that our map key can be this wrapper (of <code>byte[]</code>) class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class Bytes {
+  private final byte[] value;
+  private final int hash;
+
+  private Bytes(final byte[] value, final int hash) {
+    this.value = value;
+    this.hash = hash;
+  }
+
+  @Override
+  public int hashCode() {
+    return hash;
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    return true;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I qualify it of bad because it means it assumes:
+* there is no conflict in the incoming key for hashes (each key has a different hash)
+* each hash lead to a different cell in the hashmap storage - so map is well sized for the incoming data
+* the input dataset (locations) is known enough to ensure previous point for each execution.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+indeed there are real life cases - and this challenge one where location are weather station location could be one since it almost never moves - where these assumptions are really acceptable, it is up to you to <strong>evaluate</strong> if the associated boost is worth it or not (do you want to gain 1s for 1 billion rows?).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_swar">SWAR</h3>
+<div class="paragraph">
+<p>SWAR algorithm by itself is a very good thing but in the context of this challenge there is no real boost using it due to file format/hypothesis.
+I&#8217;ll not copy the algorithm there but is it mainly using binary operations and still its complexity is comparable to the one we have without doing it and since CPU have most of the operations we use to convert the data to a number already wired the boost is not there - it can even be the opposite.</p>
+</div>
+<div class="paragraph">
+<p>Conclusion: don&#8217;t be greeky (geek + greedy ;)).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dont_reimplement_well_implemented_code">Don&#8217;t reimplement well implemented code</h3>
+<div class="paragraph">
+<p>The challenge didn&#8217;t allow to use any dependency but some participant - not the fastest when writing these lines - reimplemented containers - more than dispatching in an array which is okish - and in particular maps.</p>
+</div>
+<div class="paragraph">
+<p>I didn&#8217;t find a good proof that it was faster than built-in structures - well sized <code>HashMap</code> was fast enough for me by comparison - but it is also something quite hard to maintain and which will make you miss some performance optimizations of the JVM - we regularly see the JVM enhancing its structures.</p>
+</div>
+<div class="paragraph">
+<p>So for a challenge it is fun to do it but please not in real life/applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dont_use_streamparallel_until_you_know_why">Don&#8217;t use <code>Stream#parallel</code> until you know why</h3>
+<div class="paragraph">
+<p>For this challenge it was not critical but <code>Stream#parallel</code> behavior is basically "you&#8217;ll be ran in parallel but you don&#8217;t know in which context nor how".</p>
+</div>
+<div class="paragraph">
+<p>However, <code>Stream</code> design enables map/reduce algorithm thanks <code>SplitIterator</code> so if you wan to use it you have to do the <code>parallel</code> call from a <code>ForkJoinWorkerThread</code> you will inherit (but this is cumbersome and generally it is saner to control the threading of your application to ensure you can bulkhead part of your application, avoid deadlocks and tune it accurately).
+If you don&#8217;t do that, the default reduce tasks (most of terminal operations) will end up calling <code>java.util.concurrent.ForkJoinTask#fork</code> so <code>ForkJoin.commonPool()</code>.
+This is the easiest and works great for batch like applications.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively you can handle the split yourself from the <code>SplitIterator</code> but it can become hard with hinted streams (sorted, sized, etc), see <code>java.util.stream.AbstractShortCircuitTask#compute</code> for example - but keep in mind in web application you likely don&#8217;t want to abuse concurrency there to keep the scalability of your web application part.</p>
+</div>
+<div class="paragraph">
+<p>Tomorrow we&#8217;ll probably be able to use it withing virtual threads but today virtual threads are just a hidden <code>ForkJoinPool</code> - not, not the same than the <code>commonPool</code> one, see <code>java.lang.VirtualThread#DEFAULT_SCHEDULER</code>, it has its own system properties like <code>jdk.virtualThreadScheduler.parallelism</code> - so we would just move the issue a bit further and not even leverage the continuation capabilities for this challenge (ew just consume 100% of the thread resources we use from a worker).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+even if implicit threading is a trend, it is key to always know where your code is executed and in which thread (for example common pool - which is implicitly used by <code>HttpClient</code> in async mode - will make you look your contextual <code>ClassLoader</code> so your <code>thenApply</code> can fail with a <code>ClassNotFound</code>).
+The only case using a banalised thread pool is ok is when all the code of all the stack is fully reactive. For Java it means when the whole platform will be reactive we will be able to default to virtual threads, but we are far from there so please ensure to control your threads for now.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I&#8217;d like to thank Gunnar a lot for this challenge, it was a really interesting time and I loved to highlght simple algorithms people don&#8217;t always know (like the map/reduce which is rarely masterized by common developers from my experience).</p>
+</div>
+<div class="paragraph">
+<p>It is also very great to see that performance boost are not always at the level we think and it is a great reminder that you shouldn&#8217;t optimize any application without metrics or a very good knowledge of what you do.
+Similarly, also ensure to run performance tests on a comparable environments (don&#8217;t run one listenining music and unplugged on a laptop and the other plugged without any aplication running ;)) and (when possible) on the target hardware because it can completely change the results (imagine you use GPU vectorization and there is no GPU on the machine you run on in prod).
+No "feeling" there, just metrics and facts.</p>
+</div>
+<div class="paragraph">
+<p>Another insane conclusion of this challenge is that Java is moving and in the right direction, the <code>MemorySegment</code> is very promishing for example and make working with mapped file way easier than before.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, since we talked of goods but also bad, it is important to keep in mind that in real work we always evaluate the "next dev" who will maintain our code and wonder if the gain is worth it.</p>
+</div>
+<div class="paragraph">
+<p>I really encourage you to review some of the proposals - including the "naive" original implementation.</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//k9s-skin-per-context.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//simple-retry-with-wget.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

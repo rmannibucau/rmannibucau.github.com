@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Compile a Java Crest CLI application thanks to GraalVM! Go FAAS 'n furious!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="compile-java-crest-cli-application-with-graalvm-prepare-faas-html-container" class="container page-content compile-java-crest-cli-application-with-graalvm-prepare-faas-html is-blog">
+                        <div class="page-header">
+                <h1>Compile a Java Crest CLI application thanks to GraalVM! Go FAAS 'n furious!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-03-29</span>, <span class="metadata-readingtime">23 min and 2 sec read</span></p>
+</div>
+<p><strong><u><a href="https://www.graalvm.org/" target="_blank">Graalvm</a></u></strong>&nbsp;is a newcomer in Java ecosystem enabling to compile Java compiled code - bytecode - to native code (C on UNix and C++ on Windows).</p>
+
+<p>The overall target is, indeed, the cloud and more precisely the instances started/stopped very often. In other words, it immediately targets the Function As A Service - FAAS - kind of cloud deployment. The two main known ones are AWS lamda and Azure functions. This does not look that important from a Java developer perspective, but for some kind of people this type of deployment is very nice because it enables the deployment of your business code without caring of all the infrastructure. What&#39;s more, it will catch up Java developers as well, so it is important to take some time to understand what we are talking about and how it can impact your development.</p>
+
+<h2>What is a function?</h2>
+
+<p>To answer the question &quot;what is a function&quot;, you can read a lot of definitions but I&#39;d like to start the opposite way and have a look at the available API.</p>
+
+<p>Generally the API are quite flexible to simplify the developer experience, but the most generic one for AWS lamda is the following one:</p>
+
+<pre>
+<code class="language-java">public class MyLambda {
+    public static void onEvent(final InputStream inputStream, // &lt;1&gt;
+                               final OutputStream outputStream, // &lt;2&gt;
+                               final Context context) { // &lt;3&gt;
+        // do something
+    }
+}</code></pre>
+
+<p>We immediately identify that we have:</p>
+
+<ol>
+	<li>Some (optional) incoming data,</li>
+	<li>Some outcoming data,</li>
+	<li>Some execution context (can enable to get a logger, the function name, some resource information, etc...)</li>
+</ol>
+
+<p>Doesn&#39;t it remind you of something? Here&#39;s a sneak peek:</p>
+
+<pre>
+<code class="language-java">public class MyLambda implements Servlet {
+  public void service(final ServletRequest req, final ServletResponse res) {
+    // ....
+  }
+}</code></pre>
+
+<p>Plus, the API is a bit different but we find back the same input, output, and context (in the request in the case of servlet).</p>
+
+<p>In the case of Azure it looks the same:</p>
+
+<pre>
+<code class="language-java">public class MyFunction {
+    @FunctionName("myFunction")
+    public HttpResponseMessage&lt;String&gt; hello(
+            @HttpTrigger(name = "req", methods = "post", authLevel = AuthorizationLevel.ANONYMOUS)
+            final HttpRequestMessage&lt;Optional&lt;Data&gt;&gt; request,
+            final ExecutionContext context) {
+        // ...
+    }
+}</code></pre>
+
+<p>Here, the API is a bit more specific and coupled but you find back a context on the execution, a request, and you can create a response - from the request instance.</p>
+
+<p>I didn&#39;t mention servlets randomly before. There are abstractions for functions/lambdas using servlet API. So you develop a standard function, and a framework generates under the hood the actual lambda/function and binding - to map the java code to the environment.</p>
+
+<p>However functions are not that closely matching servlet world, even if this can look like from a very high level.</p>
+
+<p>The first difference is that the previous samples were just limited to the HTTP case. Functions can be way more like a scheduled event or an event pushed to a queue. In other words, a function is a callback bound to a particular technology supported by your cloud provider. In any case it is one of the&nbsp;last &quot;current&quot; steps of the serverless computing.</p>
+
+<h2>Function and Java</h2>
+
+<p>As we saw before, there are generally Java bindings/API/SDK for functions, but there are also ways to bind a native command if you have a custom image in the cloud provider you are using. There&nbsp;is also a function initiative called <strong><u><a href="https://fnproject.io/" target="_blank">fn project</a></u></strong>. This project aims to abstract FAAS - not with servlet, don&#39;t worry. This project provides several toolings to developping a function, testing it and most importantly in the context of this post, it relies on docker as the basis of its solution.</p>
+
+<p>At the end, there is some convergence to becoming native (as compiled in C) when doing functions because the current provider integrations tend to execute the function - program - each time an event arrives. In other words, the bootstrap time is very important and it is not acceptable to wait 1 min for your IoC to be ready.</p>
+
+<p><u><strong>Side note:</strong></u> you may think that you will not need an IoC or some library to write something as simple as a function, but the function is actually a new way to get an entry point - compared to the old style which would be a <em>main(String[])</em>. Thus, behind the entry point you can get complex code, so you want the same comfort and reliability to develop your function.</p>
+
+<h2>Quarkus.io</h2>
+
+<p>I can&#39;t write a blog post about GraalVM without mentionning a newcomer in the server world: <u><strong><a href="https://quarkus.io/" target="_blank">Quarkus.io</a></strong></u>.</p>
+
+<p>This project propulsed by Red Hat integrated most of Red Hat stack with GraalVM to enable compiling a Java JAX-RS service natively. Said like that, it sounds inaccurate to optimize a long running software where you will want to enable caching - the JVM is a good platform for that - and serve a lot of requests. Actually they also took most of the specification - particularly CDI and JPA - and cut most of what can bring some slowness during their bootstrap. At the end you get a complete service starting very fast - which is very consistent with the race to the bootstrap time we have in function world.</p>
+
+<h2>GraalVM</h2>
+
+<p><u><strong><a href="https://www.graalvm.org/" target="_blank">GraalVM</a></strong></u> is a project which will take your main - in bytecode form, inspect all the code path from it, convert the code to native code (.o as in your first C compilation:&nbsp;<em>gcc -o main.o -c main.c</em>) and finally build an executable you can run directly on the platform you ran the command.</p>
+
+<p>There is also an option to statically link your executable so you will not even need any dependency when running your executable, which means you can use docker&nbsp;<em>scratch </em>base image (literally an empty image). This magic takes the form of&nbsp;<em>native-image</em>&nbsp;binary you can find in GraalVM distribution.</p>
+
+<p>GraalVM also has another awesome feature which is to bring some polyglotism to the JVM. It supports Node (javascript), Python, R etc... which is really a game changer for Big Data projects where the polyglotism is just required - you can see how Apache Beam tried to build a GRPC solution to that need. With Graal it is built-in :)</p>
+
+<h2>Crest/CLI in that world?</h2>
+
+<p>So why my blogpost is talking about a <u><strong><a href="https://tomitribe.io/projects/crest" target="_blank">Crest</a></strong></u> CLI? First of all, if you don&#39;t know Crest, it is a Java API to write Command Line Interface (CLI) programs. It is a really nice solution because it stays light, it is command driven - a bit like JAX-RS - and it enables to:</p>
+
+<ol>
+	<li>Bind arguments on your commands,</li>
+	<li>Add interceptors on your commands,</li>
+	<li>Handle streaming of output data,</li>
+	<li>Use services (mini-IoC) across commands.</li>
+</ol>
+
+<p>Concretely here is what a service can look like:</p>
+
+<pre>
+<code class="language-java">public class MyCommands {
+    @Command("do-something")
+    public void listImages(@Out final PrintStream stdout,
+                           @Option("target") final Path target,
+                           final MyService service) {
+        // ...
+    }
+}</code></pre>
+
+<p>This command will enable you to execute some logic running the command:</p>
+
+<pre>
+<code class="language-bash">java -jar mycommand-fatjar.jar org.tomitribe.crest.Main \
+    do-something --target xxxxxx</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Do you see now why it can be interesting in the context of functions?</p>
+
+<p>Without explicitly using any proprietary API, you have all you need from a static model to generate a function. The static part is very important because it enables to generate, at build time, the bridge/descriptors, without more knowledge at all! Doing so enables you to benefit from few business advantages:</p>
+
+<ul>
+	<li>You are no more coupled to any vendor - Crest is open source and has not the disavantage to have a vendor betting a lot of the technology like some other function related abstraction,</li>
+	<li>You can easily test and harness your code - it is a plain function without specific imports,</li>
+	<li>You can change FAAS provider easily depending on their cost, infrastructure change or business objectives - simply change the descriptor generator you use at build time or the bridge you have in place if you use a code bridge,</li>
+	<li>You can reuse the command in other contexts - in some case you expose some tool over HTTP using FAAS but it is something you may need to run on a CI or locally as well. You solve that need by doing a request (thanks curl) on your FAAS but you also pay each time you do ;)</li>
+	<li>Contrat is more explicit, standardized and understandable so it enables better and saner interactions between developers.</li>
+</ul>
+
+<p>So using a CLI API to write function is not that bad idea, but it keeps one drawback of Java platform: it is &quot;slow&quot; to start. Without going deep into details, it will be hard to start in less than 200ms in Java whereas the same software in C will start in 1ms - on the same machine. Here are some figures on my computer:</p>
+
+<pre>
+<code class="language-bash">$ time java -cp ... SomeApp ...
+
+real 0m0,206s
+user 0m0,288s
+sys 0m0,038s
+
+$ time ./someapp ...
+
+real 0m0,007s
+user 0m0,004s
+sys 0m0,003s</code></pre>
+
+<p>If your function is rarely used it is not that important, but if your function is often used it will have a real impact on the overall performances of the system, and keep in mind that cloud performances often mean money.</p>
+
+<p>Finally, the side note will be that CLI commands are often suffering from the startup time. So dropping that issue can only be an advantage for such programs. An ecosystem is ready to change now ;)</p>
+
+<h2>Crest and GraalVM?</h2>
+
+<p>To show you how to use GraalVM to build a native executable from your Crest application, I will take a simple command which will read a&nbsp;<em>docker-compose.yml</em>&nbsp;file and print all the services available. This use case is quite simple but will enable us to start feeling what GraalVM development is.</p>
+
+<p>With crest, it is mainly about creating a class and a service - for the parsing - which will take the path to the yml as an option and print the service to stdout:</p>
+
+<pre>
+<code class="language-java">public class Docosh {
+    @Command("list-images")
+    public void listImages(@Out final PrintStream stdout,
+                           @Option("docker-compose") final Path compose,
+                           final DockerComposeParser parser) {
+        parser.extractImages(compose).forEach(stdout::println);
+    }
+}</code></pre>
+
+<p>This command requires two crest extensions:</p>
+
+<ol>
+	<li>Enable Path support - crest supports files out of the box but not yet Path,</li>
+	<li>Register the parser service.</li>
+</ol>
+
+<p>To enable path support we will register a custom&nbsp;<em>PropertyEditor</em>:</p>
+
+<pre>
+<code class="language-java">public class PathEditor extends PropertyEditorSupport {
+
+    @Override
+    public void setAsText(final String text) throws IllegalArgumentException {
+        setValue(Paths.get(text));
+    }
+}
+
+// registered with
+PropertyEditorManager.registerEditor(Path.class, PathEditor.class);</code></pre>
+
+<p>The editor implementation&nbsp;is quite trivial thanks to the&nbsp;<em>Paths#get</em>&nbsp;utility. Then we just have to register our editor using&nbsp;<em>PropertyEditorManager</em>&nbsp;API. This is enough to enable crest to know how to map a <em>Path</em>&nbsp;from a&nbsp;<em>String</em>.</p>
+
+<p>Now we have inject our&nbsp;<em>Path</em>, we need to inject our&nbsp;<em>DockerComposeParser</em>. To do that, the simplest way is to write a custom main:</p>
+
+<pre>
+<code class="language-java">public static void main(final String... args) throws Exception {
+    PropertyEditorManager.registerEditor(Path.class, PathEditor.class);
+
+    final Map&lt;Class&lt;?&gt;, Object&gt; services = new HashMap&lt;&gt;();
+    services.put(DockerComposeParser.class, new DockerComposeParser());
+    new org.tomitribe.crest.Main().main(new SystemEnvironment(services), args);
+}</code></pre>
+
+<p>Nothing crazy here, we fully delegate the main handling to the one of crest but we pass a custom environment initialized with our service mapping.</p>
+
+<p>Note that if you have an IoC you will likely override the <em>findService</em>&nbsp;method of the&nbsp;<em>Environment</em>&nbsp;API to rely on your IoC lookup mecanism.</p>
+
+<p>Just to ensure you follow where we are, here is the dependency we rely on to write this code:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.tomitribe&lt;/groupId&gt;
+  &lt;artifactId&gt;tomitribe-crest&lt;/artifactId&gt;
+  &lt;version&gt;0.10&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.xbean&lt;/groupId&gt;
+      &lt;artifactId&gt;xbean-asm5-shaded&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.xbean&lt;/groupId&gt;
+      &lt;artifactId&gt;xbean-finder-shaded&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.bval&lt;/groupId&gt;
+      &lt;artifactId&gt;bval-jsr&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+      &lt;artifactId&gt;geronimo-validation_1.1_spec&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>You can notice that we excluded Bean Validation dependencies and XBean (finder to find the commands) because we don&#39;t use that feature in our CLI.</p>
+
+<p>So at that point I can build a jar with that code and I&#39;m ready to convert it to a native binary.</p>
+
+<p>To do that we have to download GraalVM on <strong><u><a href="https://github.com/oracle/graal/releases" target="_blank">github</a></u></strong>. Once the VM extracted in&nbsp;<em>GRAALVM_HOME, </em>you wil notice you have a&nbsp;<em>native-image</em>&nbsp;binary in its&nbsp;<em>bin</em>&nbsp;folder. This is what will enable you to build the native executable. If you plan to use it directly - without a build plugin - I recommend you to add it to your&nbsp;<em>PATH.</em></p>
+
+<p><u><strong>Note:</strong></u> I have been using the last GraalVM version when writing this application, i.e. 1.0.0-rc14. I encountered few bugs I will workaround in this post but most of them have been fixed for the coming rc15.</p>
+
+<p>The game will be to give to Graal&nbsp;<em>native-image</em>&nbsp;command the classpath of your application and some option to enable its correct compilation.</p>
+
+<p>For our CLI&nbsp;application it will look like:</p>
+
+<pre>
+<code class="language-bash">native-image \
+  -cp tomitribe-crest-0.10.jar:tomitribe-crest-api-0.10.jar:tomitribe-util-1.0.0.jar:docosh-1.0-SNAPSHOT.jar \
+  --static \
+  --verbose \
+  -H:Class=com.github.rmannibucau.docker.compose.cli.Launcher \
+  -H:Name=docosh-1.0-SNAPSHOT</code></pre>
+
+<p>The main points of that command are:</p>
+
+<ol>
+	<li>The classpath to use to build the application, it is typically the application plus some graalvm integration - I will come back to that later,</li>
+	<li>Static option which enable to statically link the application,</li>
+	<li>We activate the verbose mode to ensure we know what happens,</li>
+	<li>The main to use as entry point for the code path analysis (<em>H:Class</em>)</li>
+	<li>The binary output name (<em>H:Name</em>).</li>
+</ol>
+
+<p>If you run that command you immediately get an error about Bean Validation:</p>
+
+<pre>
+<code class="language-bash">com.oracle.svm.core.util.UserError$UserException: com.oracle.graal.pointsto.constraints.UnresolvedElementException: Discovered unresolved type during parsing: javax.validation.ConstraintViolationException. To diagnose the issue you can use the --allow-incomplete-classpath option. The missing type is then reported at run time when it is accessed the first time.
+Detailed message:
+Error: com.oracle.graal.pointsto.constraints.UnresolvedElementException: Discovered unresolved type during parsing: javax.validation.ConstraintViolationException. To diagnose the issue you can use the --allow-incomplete-classpath option. The missing type is then reported at run time when it is accessed the first time.
+Trace:
+	at parsing org.tomitribe.crest.val.BeanValidation.messages(BeanValidation.java:76)
+Call path from entry point to org.tomitribe.crest.val.BeanValidation.messages(Exception):
+	at org.tomitribe.crest.val.BeanValidation.messages(BeanValidation.java:76)
+	at org.tomitribe.crest.cmds.CmdMethod.reportWithHelp(CmdMethod.java:479)
+	at org.tomitribe.crest.cmds.CmdMethod.exec(CmdMethod.java:363)
+	at org.tomitribe.crest.Main.exec(Main.java:192)
+	at org.tomitribe.crest.Main.main(Main.java:144)
+	at com.github.rmannibucau.docker.compose.cli.Launcher.main(Launcher.java:41)
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>This is weird because we excluded bean validation dependencies but not the bean validation bridge in crest so it should have worked....except that Crest uses that code to find if it should use bean validation or not to run its command:</p>
+
+<pre>
+<code class="language-java">static {
+    BeanValidationImpl impl = null;
+    final ClassLoader loader = BeanValidation.class.getClassLoader();
+    try {
+        Class.forName("javax.validation.executable.ExecutableValidator", false, loader);
+        impl = new BeanValidation11();
+    } catch (final ClassNotFoundException e) {
+        try {
+            Class.forName("org.apache.bval.jsr303.extensions.MethodValidator", false, loader);
+            impl = new BVal05();
+        } catch (final ClassNotFoundException cnfe) {
+            // no-op
+        }
+    }
+    IMPL = impl;
+}</code></pre>
+
+<p>This is a common Java pattern which globally means &quot;try if present&quot; but we notice that it uses&nbsp;<em>Class.forName</em>&nbsp;which is handled by GraalVM as a code path which will trigger the code behind that class name. In other words, if we would have used a <em>ServiceLoader</em>&nbsp;or an option instead of &quot;guessing&quot; the implementation we wouldn&#39;t have had that issue.</p>
+
+<p>This is exactly where <em>substrate</em>&nbsp;API will help us. Said very shortly, it enables you to monkey patch the stack you are trying to compile enabling you to replace, delete, and modify part of the code. In our case we want to replace the&nbsp;<em>BeanValidation</em>&nbsp;class of Crest by a mock which disables that feature.</p>
+
+<p>First, we will add the substrate dependency to our project:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.oracle.substratevm&lt;/groupId&gt;
+  &lt;artifactId&gt;svm&lt;/artifactId&gt;
+  &lt;version&gt;${graalvm.version}&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>Once this dependency is present we can write a class respecting the signatures of the BeanValidation one:</p>
+
+<pre>
+<code class="language-java">public class Substitute_BeanValidation {
+    public static boolean isActive() {
+        return false;
+    }
+
+    public static void validateParameters(
+        final Object instance, final Method method, final Object[] parameters) {
+        // no-op
+    }
+
+    public static void validateParameters(
+        final Constructor&lt;?&gt; constructor, final Object[] parameters) {
+        // no-op
+    }
+
+    public static Iterable&lt;? extends String&gt; messages(final Exception e) {
+        return emptyList();
+    }
+}</code></pre>
+
+<p>To enable this class and make GraalVM know we want to use that in the analyzis instead of Crest code, we will have three things to do:</p>
+
+<ol>
+	<li>Mark the class as targetting crest <em>B</em><em>eanValidation</em>,</li>
+	<li>Mark all the methods as replacing - subtituting - the original ones,</li>
+	<li>Make the class final - substrate does not support it otherwise.</li>
+</ol>
+
+<p>Here is what it can look like:</p>
+
+<pre>
+<code class="language-java">@TargetClass(BeanValidation.class)
+public final class Substitute_BeanValidation {
+    @Substitute
+    public static boolean isActive() {
+        return false;
+    }
+
+    @Substitute
+    public static void validateParameters(
+        final Object instance, final Method method, final Object[] parameters) {
+        // no-op
+    }
+
+    @Substitute
+    public static void validateParameters(
+        final Constructor&lt;?&gt; constructor, final Object[] parameters) {
+        // no-op
+    }
+
+    @Substitute
+    public static Iterable&lt;? extends String&gt; messages(final Exception e) {
+        return emptyList();
+    }
+}</code></pre>
+
+<p>Now we can recompile our jar and relaunch our <em>native-image</em>&nbsp;command.</p>
+
+<p><u><strong>Tip:</strong></u> in this post I will put substrate patches in the same jar as the application but this is not required, it is likely better to have a module for that, this way you can keep your java flavor clean and still build a native version of your application.</p>
+
+<p>The output of the build is now clean and should look like:</p>
+
+<pre>
+<code class="language-bash">[docosh-1.0-SNAPSHOT:14067]    classlist:     215.80 ms
+[docosh-1.0-SNAPSHOT:14067]        (cap):     729.11 ms
+[docosh-1.0-SNAPSHOT:14067]        setup:     950.42 ms
+[docosh-1.0-SNAPSHOT:14067]   (typeflow):   3,211.50 ms
+[docosh-1.0-SNAPSHOT:14067]    (objects):   3,524.30 ms
+[docosh-1.0-SNAPSHOT:14067]   (features):     111.67 ms
+[docosh-1.0-SNAPSHOT:14067]     analysis:   6,950.70 ms
+[docosh-1.0-SNAPSHOT:14067]     universe:     166.90 ms
+[docosh-1.0-SNAPSHOT:14067]      (parse):     410.62 ms
+[docosh-1.0-SNAPSHOT:14067]     (inline):     655.26 ms
+[docosh-1.0-SNAPSHOT:14067]    (compile):   2,550.93 ms
+[docosh-1.0-SNAPSHOT:14067]      compile:   3,891.88 ms
+[docosh-1.0-SNAPSHOT:14067]        image:     514.70 ms
+[docosh-1.0-SNAPSHOT:14067]        write:      71.64 ms
+[docosh-1.0-SNAPSHOT:14067]      [total]:  12,810.02 ms
+</code></pre>
+
+<p>Don&#39;t hesistate to have a look at the details to the output, it shows all the phases GraalVM goes through to go from your bytecode to a native version of it. It also shows the time of each phase. If the analyzis is too long for the application you are building it can mean you want to drop - <em>@Delete </em>-&nbsp; some part of the application or substitute it to get a boost.</p>
+
+<p>Now we should have a&nbsp;<em>docosh-1.0-SNAPSHOT</em>&nbsp;binary we can run:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT
+Unknown command: help
+
+Exception in thread "main" java.lang.NullPointerException
+	at org.tomitribe.crest.Main.exec(Main.java:192)
+	at org.tomitribe.crest.Main.main(Main.java:144)
+	at com.github.rmannibucau.docker.compose.cli.Launcher.main(Launcher.java:41)</code></pre>
+
+<p>Outch, this is not really the expected output! The positive thing is that it runs our code and we see it tried to default to <em>help</em> command because we didn&#39;t select on the command line any particular command.</p>
+
+<p>The <em>NullPointerException</em> we see here, means that the <em>help</em> command itself was not found by crest in its command registry - crest <em>help</em> command is registered as any other command internally.</p>
+
+<p>How can it happen?</p>
+
+<p>Help is a normal command except it is instantiated internally by the framework. The direct implication is that <em>help</em> is identified by reflection so we have to enable <em>help</em> to be registered.</p>
+
+<p>To do that we have to register the help methods reflection metadata to be kept during GraalVM preparation - before it compiles to native code. The way to do it is to create a GraalVM feature, register it through&nbsp;<em>@AutomaticFeature</em>&nbsp;and register help class methods for reflection:</p>
+
+<pre>
+<code class="language-java">@AutomaticFeature
+public class Feature_RegisterReflections implements Feature {
+    @Override
+    public void beforeAnalysis(final BeforeAnalysisAccess access) {
+        RuntimeReflection.register(Help.class.getMethods());
+    }
+}</code></pre>
+
+<p>Now that it is ready we can run again our program and we now get:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT
+Commands:
+
+   help
+
+</code></pre>
+
+<p>The good point is that we don&#39;t have any error. The bad point is that we still didn&#39;t register our command. There are few options to do that but I will take the Service Provider Interface option. it consists in implementing a&nbsp;<em>Commands.Loader</em>&nbsp;which will return the commands:</p>
+
+<pre>
+<code class="language-java">// don't forget
+// the META-INF/services/org.tomitribe.crest.cmds.processors.Commands$Loader
+public class DocoshLoader implements Commands.Loader {
+    @Override
+    public Iterator&lt;Class&lt;?&gt;&gt; iterator() {
+        return Stream.&lt;Class&lt;?&gt;&gt;of(Docosh.class).iterator();
+    }
+}</code></pre>
+
+<p>We relaunch our&nbsp;<em>native-image</em>&nbsp;command and our native program and this time we get... the same! This is because our command relies on reflection as well so we must register it as the&nbsp;<em>Help</em>&nbsp;command. Let&#39;s add it in our feature and retry. This time here is what we get:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT
+Commands:
+
+   help
+   list-images </code></pre>
+
+<p>So now our command is registered, let&#39;s call it:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT list-images --docker-compose=docker-compose.yml
+Cannot convert to 'java.nio.file.Path' for 'docker-compose'. No PropertyEditor
+
+Usage: list-images [options]
+
+Options:
+  --docker-compose=&lt;Path&gt;
+Exception in thread "main" java.lang.IllegalArgumentException: Cannot convert to 'java.nio.file.Path' for 'docker-compose'. No PropertyEditor
+	at org.tomitribe.util.editor.Converter.convert(Converter.java:101)
+	at org.tomitribe.crest.cmds.CmdMethod.fillOptionParameter(CmdMethod.java:603)
+	at org.tomitribe.crest.cmds.CmdMethod.convert(CmdMethod.java:589)
+	at org.tomitribe.crest.cmds.CmdMethod.convert(CmdMethod.java:525)
+	at org.tomitribe.crest.cmds.CmdMethod.parse(CmdMethod.java:510)
+	at org.tomitribe.crest.cmds.CmdMethod.exec(CmdMethod.java:361)
+	at org.tomitribe.crest.Main.exec(Main.java:196)
+	at org.tomitribe.crest.Main.main(Main.java:144)
+	at com.github.rmannibucau.docker.compose.cli.Launcher.main(Launcher.java:41)</code></pre>
+
+<p>This is because there is no property editor to create a&nbsp;<em>Path</em>&nbsp;instance from a&nbsp;<em>String</em>....but wait, we registered it in our main right? Sure! But we didn&#39;t register it to be instantiable in&nbsp;GraalVM.</p>
+
+<p>So let&#39;s add it in out feature:</p>
+
+<pre>
+<code class="language-java">RuntimeReflection.register(PathEditor.class);
+RuntimeReflection.registerForReflectiveInstantiation(PathEditor.class);</code></pre>
+
+<p>As you can notice the registration is different here, we do not register methods but the class itself and its no-arg constructor to enable the <em>PropertyEditorManager</em> to instantiate it. After another round trip of compilation-run here is what you will get now:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT list-images --docker-compose=docker-compose.yml
+Exception in thread "main" java.lang.NullPointerException
+	at com.oracle.svm.reflect.helpers.ExceptionHelpers.createFailedCast(ExceptionHelpers.java:30)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tomitribe.crest.cmds.targets.SimpleBean.invoke(SimpleBean.java:34)
+</code></pre>
+
+<p>Still does not look good though. Here, the command was found but the command method was not static. So crest tried to instantiate the command class to get an instance to execute the command and failed because we didn&#39;t register it as instantiable. Let&#39;s add it and try again adding the following line in our feature:</p>
+
+<pre>
+<code class="language-java">RuntimeReflection.registerForReflectiveInstantiation(Docosh.class);</code></pre>
+
+<p>After this line added, the output of our command is:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT list-images --docker-compose=docker-compose.yml
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tomitribe.crest.cmds.targets.SimpleBean.invoke(SimpleBean.java:34)
+	at org.tomitribe.crest.cmds.CmdMethod.doInvoke(CmdMethod.java:463)
+	at org.tomitribe.crest.cmds.CmdMethod.exec(CmdMethod.java:371)
+	at org.tomitribe.crest.cmds.CmdMethod.exec(CmdMethod.java:367)
+	at org.tomitribe.crest.Main.exec(Main.java:196)
+	at org.tomitribe.crest.Main.main(Main.java:144)
+	at com.github.rmannibucau.docker.compose.cli.Launcher.main(Launcher.java:46)</code></pre>
+
+<p>This one is not that trivial. Long story short, when invoking the command method, it has missed a parameter. After a quick check out to the signature, it is probably the last one, the service - some debugging will confirm that. It is one of the bugs the rc14 of GraalVM has and which is fixed on master - if you want to recompile substrate from sources. GraalVM does not manage to follow the code of our environment usage - which is done through a threadlocal&nbsp;and the service parameter lookup.</p>
+
+<p>Are we done yet? Not really, you can generally help GraalVM yb expliciting some code path either in your main or in some substitution. Here we will just modify our main to explicitly bind our environment in the ThreadLocal which is enough to let GraalVM get back on track:</p>
+
+<pre>
+<code class="language-java">public static void main(final String... args) throws Exception {
+    PropertyEditorManager.registerEditor(Path.class, PathEditor.class);
+
+    final Map&lt;Class&lt;?&gt;, Object&gt; services = new HashMap&lt;&gt;();
+    services.put(DockerComposeParser.class, new DockerComposeParser());
+
+    //
+    // this is the develish hack
+    //
+    Environment.ENVIRONMENT_THREAD_LOCAL.set(environment);
+
+    new org.tomitribe.crest.Main().main(new SystemEnvironment(services), args);
+}</code></pre>
+
+<p>Let&#39;s recompile/run our program - I took one of the first google responses for <em>docker-compose.yml</em>:</p>
+
+<pre>
+<code class="language-bash">$ ./docosh-1.0-SNAPSHOT list-images --docker-compose=docker-compose.yml
+redis (sameersbn/redis:4.0.9-1)
+postgresql (sameersbn/postgresql:10)
+gitlab (sameersbn/gitlab:11.8.3)
+</code></pre>
+
+<p>It worked :) Are we gone now? Not yet, we still have two things to do:</p>
+
+<ol>
+	<li>Make that part of our build,</li>
+	<li>Compare it to the program in plain Java.</li>
+</ol>
+
+<p>To integrate that command in our build we can of course use a bash script but GraamVM has actually a nice maven plugin so let&#39;s use it:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;com.oracle.substratevm&lt;/groupId&gt;
+  &lt;artifactId&gt;native-image-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;${graalvm.version}&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;native&lt;/id&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;native-image&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;mainClass&gt;com.github.rmannibucau.docker.compose.cli.Launcher&lt;/mainClass&gt;
+    &lt;imageName&gt;${project.artifactId}-${project.version}&lt;/imageName&gt;
+    &lt;buildArgs&gt;--static --verbose&lt;/buildArgs&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Using current&nbsp;<em>JAVA_HOME</em>&nbsp;distribution as a GraalVM distribution, this will simply execute the same command we used to build a native binary in our <em>target/</em>&nbsp;folder. However, make sure to run the maven command with GraalVM as&nbsp;<em>JAVA_HOME</em>&nbsp;otherwise it will fail.</p>
+
+<p>Here is an example if you don&#39;t want to modify your environment globally:</p>
+
+<pre>
+<code class="language-bash">JAVA_HOME="$GRAALVM_HOME" mvn clean install</code></pre>
+
+<p>Note that by default the binary is not attached to the project so it is not deployed. If you want to do it you will need to use build helper maven plugin but take care as it is not portable. So make sure to put a classifier that is related to your build architecture.</p>
+
+<p>Now let&#39;s compare the two executions. First the native execution:</p>
+
+<pre>
+<code class="language-bash">$ time ./target/docosh-1.0-SNAPSHOT list-images --docker-compose=/tmp/docker-compose.yml
+redis (sameersbn/redis:4.0.9-1)
+postgresql (sameersbn/postgresql:10)
+gitlab (sameersbn/gitlab:11.8.3)
+
+real	0m0,004s
+user	0m0,001s
+sys	0m0,003s
+</code></pre>
+
+<p>Now the same in plain java (8):</p>
+
+<pre>
+<code class="language-bash">$ time java -cp target/docosh-1.0-SNAPSHOT.jar:target/dependency/tomitribe-crest-0.10.jar:target/dependency/tomitribe-crest-api-0.10.jar:target/dependency/tomitribe-util-1.0.0.jar com.github.rmannibucau.docker.compose.cli.Launcher list-images --docker-compose=/tmp/docker-compose.yml
+redis (sameersbn/redis:4.0.9-1)
+postgresql (sameersbn/postgresql:10)
+gitlab (sameersbn/gitlab:11.8.3)
+
+real	0m0,176s
+user	0m0,239s
+sys	0m0,045s</code></pre>
+
+<p>We immediately see the difference and if you repeat the executions multiple times it stays around 200ms of difference. For such an utility it is a lot and anything closer to native tools is better.</p>
+
+<p>In terms of memory usage it is impressive as well. Java results are:</p>
+
+<pre>
+<code class="language-bash">Maximum resident set size (kbytes): 39096
+Average resident set size (kbytes): 0</code></pre>
+
+<p>And native version results are:</p>
+
+<pre>
+<code class="language-bash">Maximum resident set size (kbytes): 6684
+Average resident set size (kbytes): 0</code></pre>
+
+<p>In terms of memory state at the end of the program it is even more surprising. Java will exit with this state:</p>
+
+<pre>
+<code class="language-bash">==21630== HEAP SUMMARY:
+==21630==     in use at exit: 33,574,459 bytes in 4,494 blocks
+==21630==   total heap usage: 11,622 allocs, 7,128 frees, 47,160,079 bytes allocated
+==21630==
+==21630== LEAK SUMMARY:
+==21630==    definitely lost: 4,489 bytes in 26 blocks
+==21630==    indirectly lost: 4,392 bytes in 15 blocks
+==21630==      possibly lost: 234,218 bytes in 251 blocks
+==21630==    still reachable: 33,331,360 bytes in 4,202 blocks
+==21630==                       of which reachable via heuristic:
+==21630==                         newarray           : 22,536 bytes in 1 blocks
+==21630==         suppressed: 0 bytes in 0 blocks
+==21630== Rerun with --leak-check=full to see details of leaked memory</code></pre>
+
+<p>Whereas the native execution exists with:</p>
+
+<pre>
+<code class="language-bash">==21827==
+==21827== HEAP SUMMARY:
+==21827==     in use at exit: 0 bytes in 0 blocks
+==21827==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==21827==
+==21827== All heap blocks were freed -- no leaks are possible
+</code></pre>
+
+<p>However don&#39;t think it is because it allocates/deallocates each time an object it is no more needed. There is a <u><strong><a href="https://github.com/oracle/graal/blob/master/substratevm/src/com.oracle.svm.core.genscavenge/src/com/oracle/svm/core/genscavenge/GCImpl.java" target="_blank">GC</a></strong></u> in graal as in the JVM, even if it tends to behave a bit slower than native JVM one in &quot;normal&quot; concurrent applications....for now.</p>
+
+<p>In terms of CPU the same kind of difference can be seen:</p>
+
+<pre>
+<code class="language-bash">$ /usr/bin/time -v ./target/docosh-1.0-SNAPSHOT ...
+	Percent of CPU this job got: 100%
+$ /usr/bin/time -v java -cp ...
+	Percent of CPU this job got: 154%</code></pre>
+
+<p>Finally, in terms of disk space GraalVM binary is fat compared to our small module but don&#39;t forget you need a JVM to run the jar flavor:</p>
+
+<pre>
+<code class="language-bash">-rwxrwxr-x 1 rmannibucau rmannibucau  11M mars  24 17:45 docosh-1.0-SNAPSHOT
+-rw-rw-r-- 1 rmannibucau rmannibucau 106K mars  24 17:47 tomitribe-crest-0.10.jar
+-rw-rw-r-- 1 rmannibucau rmannibucau  12K mars  24 17:47 tomitribe-crest-api-0.10.jar
+-rw-rw-r-- 1 rmannibucau rmannibucau  89K mars  24 17:47 tomitribe-util-1.0.0.jar
+-rw-rw-r-- 1 rmannibucau rmannibucau  21K mars  24 17:45 docosh-1.0-SNAPSHOT.jar</code></pre>
+
+<p>So at the end we can compare the native flavor of 11M to the JVM one of (106+12+89+21)K+229M~=230M!</p>
+
+<h2>Is GraalVM really the Java Graal?</h2>
+
+<p>It looks so, however keep in mind some few points before you go run to start converting your applications:</p>
+
+<ul>
+	<li>Compilation times are not that fast for real applications and it can really slow down your productivity if you don&#39;t rely on Java in development,</li>
+	<li>Testing is crucial, as seen in this post, you can compile but not run correctly, so ensure to test your binary before deploying it. This is true for all the code considered by GraalVM so this means you must have 100% coverage for your code and the libraries you use - at least the parts you use,</li>
+	<li>Tooling is not yet perfect. I shared some code to enable reflection but some automotion can be done, typically a generic feature can be written and each library should integrate with GraalVM to make the starting cost very low (typically any mapper, IoC&nbsp;can find most classes it will see and therefore force their reflection metadata to be generated),</li>
+	<li>Docker scratch mode is not always possible, typically if you put the binary we built - even with static option, you will get this error:</li>
+</ul>
+
+<pre>
+<code class="language-bash">docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"/bin/sh\": stat /bin/sh: no such file or directory": unknown.
+ERRO[0000] error waiting for container: context canceled</code></pre>
+
+<p>This is because glic is not statically linked, however busybox docker image is very light and provides it so we just have to use it in our&nbsp;<em>FROM</em>&nbsp;clause - or in your Jib configuration if you followed one of my previous blogposts (<a href="https://rmannibucau.metawerx.net/post/dockerize-tomee-embedded-maven-2-2" target="_blank">dockerize-tomee-embedded</a>&nbsp;or <a href="https://rmannibucau.metawerx.net/post/jlink-your-java-image-before-putting-it-into-docker-part-3-of-3" target="_blank">put-your-jlink-application-in-docker</a>):</p>
+
+<pre>
+<code>FROM busybox
+COPY ./docosh-1.0-SNAPSHOT /opt/docosh/bin/docosh
+ENTRYPOINT /opt/docosh/bin/docosh</code></pre>
+
+<p>Then you can run your binary and in our case it takes only few more megs:</p>
+
+<pre>
+<code class="language-bash">REPOSITORY TAG    IMAGE ID     CREATED       SIZE
+docosh     latest e3bcccf0ab8c 6 seconds ago 12.4MB
+</code></pre>
+
+<p>So yes GraalVM can change the way we do Java, it is still in RC and doing this program I encountered even more bugs - like the <em>-ljvm</em> flag was wrongly passed to the linker - but it still is an active project that must be followed along. <strong>It will also be interesting to see how it will compete with jlink</strong> (see blogposts <u><strong><a href="https://rmannibucau.metawerx.net/post/jlink-java-application-image-before-putting-into-docker-part-1-of-3" target="_self">part 1</a></strong></u>, <u><strong><a href="https://rmannibucau.metawerx.net/post/jlink-your-java-image-before-putting-into-docker-part-2-of-3" target="_self">part 2</a></strong></u> and <u><strong><a href="https://rmannibucau.metawerx.net/post/jlink-your-java-image-before-putting-it-into-docker-part-3-of-3" target="_self">part 3</a></strong></u> about it) since both are owned by Oracle and GraalVM clearly makes jlink outdated... and therefore the not yet adopted Java Platform Module System!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jsonb-enum-serialization.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//completion-exception-jax-rs-handling.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

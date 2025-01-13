@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Extract a docker image filesystem without docker but only bash</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,135 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="docker-extracts-fileystem-with-bash-html-container" class="container page-content docker-extracts-fileystem-with-bash-html is-blog">
+                        <div class="page-header">
+                <h1>Extract a docker image filesystem without docker but only bash</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-09-11</span>, <span class="metadata-readingtime">3 min and 20 sec read</span></p>
+</div>
+<p>Sometimes it can be useful to get files from a docker containers. With kubernetes it can even be more common to use an init container to provision another container and therefore introspecting its filesystem can be important.</p>
+
+<p>However, there is one case which can be an issue: you are on a server or machine without docker and need to check an image (yes, at midnight on the laptop of your child ;)). The most immediate solution is to install docker but if you are on a bastion or deployment server, it can not be an option to change the server state. But in this case, you still have a luck: you depend on a docker image which is not local - since you don&#39;t have docker locally ;).</p>
+
+<p>The tip there is to check what is a docker image after all. If you never dig into the image format it can sound complicated but actually a docker image is just a sequence of archive of archives. In other words, once you downloaded the archives you are done.</p>
+
+<p>Here is a bash script using&nbsp;<em>curl</em>,&nbsp;<em>jq</em>,&nbsp;<em>gunzip</em>&nbsp;and&nbsp;<em>tar</em>&nbsp;to recreate a filesystem:</p>
+
+<pre>
+<code class="language-bash">#! /bin/bash
+
+# 1.
+image="$1"
+version="$2"
+folder_filter="$3"
+
+# 2.
+work_dir=.
+target_dir="$work_dir/output"
+
+
+# 3.
+cd "$work_dir"
+
+# 4. get an API token
+echo "Getting an API token"
+token=$(curl --silent --header 'GET' "https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:$image:pull" | jq -r '.token')
+
+# 5. download manifest to get layers
+echo "Retrieving $image:$version layers list"
+layers=$(curl --silent --request 'GET' --header "Authorization: Bearer $token" "https://registry-1.docker.io/v2/$image/manifests/$version" | jq -r '.fsLayers[].blobSum')
+
+# 6. download and extract each layer
+mkdir -p "layers/gz"
+mkdir -p "layers/tar"
+for i in $layers; do
+  name="${i/*:/}"
+  out="layers/gz/$name.gz"
+  echo "Downloading layer $name"
+  curl --silent --location --request 'GET' --header "Authorization: Bearer $token" "https://registry-1.docker.io/v2/$image/blobs/$i" &gt; "$out"
+  gunzip -c "$out" &gt; "layers/tar/$name"
+  rm "$out"
+done
+
+# 7. for each layer extract the actual files in the target directory
+mkdir -p "$target_dir"
+for i in layers/tar/*; do
+  if tar -tf "$i" "$folder_filter" &gt;/dev/null 2&gt;&amp;1; then
+    echo "Extracting $i"
+    tar -xf "$i" -C "$target_dir" "$folder_filter"
+  else
+    echo "No $folder_filter in $i, skipping"
+  fi
+done
+rm -rf "layers"
+echo "Created $target_dir"</code></pre>
+
+<p>This script can look long but it is actually quite simple:</p>
+
+<ol>
+	<li>we read from the script options the image to download and a subfolder of the filesystem to include (&quot;&quot; would include the whole container filesystem including linux itself),</li>
+	<li>we configure the work directory since we will download files and expand archives,</li>
+	<li>we go inside the work directory to avoid to pollute undesired folders,</li>
+	<li>we retrieve a token from the docker registry we use (the public one here),</li>
+	<li>we call the manifest of the docker image we configured to get all its layers,</li>
+	<li>we download all layers found in previous step and extract each of them - they are just plain gzip archives,</li>
+	<li>each file extracted from previous step is actually a tar containing the filesystem, we just check it contains the filtered folder and extract it in the output folder</li>
+</ol>
+
+<p>After all that processing we obtained in the output folder the container filesystem.</p>
+
+<p>Indeed it can be reworked and enhanced but what is important is to see that from a docker manifest and with just ungzipping and untarring logics, you can access any file of a docker container. Side note being it is trivial to implement the exact same logic in java or any language ;).</p>
+
+<p>Now if you run multiple times this script in an init container of kubernetes you can actually provision a container from a set of images used as plain filesystem. The benefit is to only deliver docker images, not specific zip or repository you need to combine to deploy your application.</p>
+
+<p>My conclusion on that small post will be simple: never accept that a tool you are using is a blackbox, anything done must be understood and you must validate it does what you expect before using it at scale or in production.</p>
+
+<p>Stay curious!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jsonb-versinoing.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//johnzon-jsonp-jsonb-status.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

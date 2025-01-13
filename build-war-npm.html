@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Build a war with NPM?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,257 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="build-war-npm-html-container" class="container page-content build-war-npm-html is-blog">
+                        <div class="page-header">
+                <h1>Build a war with NPM?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-12-13</span>, <span class="metadata-readingtime">5 min and 4 sec read</span></p>
+</div>
+<p>NPM is the standard to orchestrate a javascript build, even delegating front dependencies to bower or the build itself to gulp or webpack, the starting point is often npm.</p>
+
+<p>Where you easily find java (maven/gradle) plugin to build a frontend project, the opposite is rare. This is probably justified by the fact you often embed a single page application (SPA)&nbsp;in a java application but rarely the opposite....normally.</p>
+
+<p>A SPA is after all just a static website so nothing should prevent it to be served from a Servlet container. What would be the interest?</p>
+
+<ul>
+	<li>you already have a servlet container you control but you don&#39;t control a front (not there or just there as proxy)</li>
+	<li>colocalizing the SPA with another application to save memory or process to manage</li>
+	<li>reuse an established stack (&quot;deploy in tomcat&quot;)</li>
+	<li>reuse an existing tooling around war deployment or monitoring you don&#39;t have yet around nodejs deployments (got this case for cluster deployment for instance)</li>
+	<li>...</li>
+</ul>
+
+<h2>How to do it?</h2>
+
+<p>The easiest way is to build it through a script npm can launch. A war is after all just a zip with some specific files, right? Concretely you need to follow these high level steps:</p>
+
+<ol>
+	<li>build your application (webpack, gulp, ... are good candidates)</li>
+	<li>create a zip containing as root resources the SPA (web) resources</li>
+	<li>(optional) map some urls in web.xml and add the web.xml in WEB-INF of the archive (more about this step in next part)</li>
+</ol>
+
+<h3>Dependencies</h3>
+
+<p>From now on I&#39;ll only deal with parts 2 and 3 cause 1 is highly dependent on your application and 100% related to your javascript build.</p>
+
+<p>To create a zip we&#39;ll use&nbsp;<em>archiver</em>&nbsp;dependencies of npm:</p>
+
+<pre>
+<code class="language-javascript">{
+  "name": "warjs",
+  "version": "1.0",
+  "author": "You",
+  "license": "MIT",
+  "description": "Build a war from npm",
+  "repository": "https://github.com/you/warjs.git",
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "archiver": "1.2.0"
+  }
+}
+</code></pre>
+
+<h2>War packaging</h2>
+
+<p>To simulate a packaging&nbsp;phase (reference to maven) we&#39;ll add a script to npm called&nbsp;<em>bundle</em>&nbsp;intended to create our war:</p>
+
+<pre>
+<code class="language-javascript">{
+  "name": "warjs",
+  "version": "1.0",
+  "author": "You",
+  "license": "MIT",
+  "description": "Build a war from npm",
+  "repository": "https://github.com/you/warjs.git",
+  "scripts": {
+    "bundle": "rimraf dist &amp;&amp; webpack --config  webpack.config.js &amp;&amp; node bundle.ts",
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "archiver": "1.2.0"
+  }
+}
+</code></pre>
+
+<p>This&nbsp;<em>bundle</em>&nbsp;script will:</p>
+
+<ol>
+	<li>cleanup our dist directory (~ target for maven)</li>
+	<li>build our frontend application (using webpack in this example but any build would fit)</li>
+	<li>finally run <em>bundle.ts</em> script</li>
+</ol>
+
+<p>The&nbsp;<em>bundle.ts&nbsp;</em>is responsible to create the war from the previously built resources. Here a light version:</p>
+
+<pre>
+<code class="language-javascript">const fs = require('fs');
+const archiver = require('archiver');
+
+// 1
+const out = 'dist/application.war';
+
+// 2
+const output = fs.createWriteStream(out);
+const archive = archiver('zip', {});
+
+// 3
+output.on('finish', () =&gt; {
+    console.log('war (' + out + ') ' + archive.pointer() + ' total bytes');
+});
+
+// 4
+archive.pipe(output);
+
+// 5
+archive.bulk([{ expand: true, cwd: 'dist/application', src: ['**'], dest: '/'}]);
+
+// 6
+archive.finalize();
+</code></pre>
+
+<ol>
+	<li>
+	<p>we want to build our war in <em>dist/application.war</em></p>
+	</li>
+	<li>
+	<p>we create an output stream for our war and an archive handler (<em>archive</em>)</p>
+	</li>
+	<li>
+	<p>we log some message when the war is done (never forget to let the user know you did something in a script)</p>
+	</li>
+	<li>
+	<p>we redirect the archive content to the output stream of our war</p>
+	</li>
+	<li>
+	<p>we add to the archive (so the war) all the context of&nbsp;<em>dist/application</em>&nbsp;as root web resources of the war (<em>dest</em>)</p>
+	</li>
+	<li>
+	<p>we close the zip</p>
+	</li>
+</ol>
+
+<h2>HTML5 routing and war?</h2>
+
+<p>This solution works fine but one case is not handled: html5 routing. This solution consists to replace the hash routing by a more natural routing without hash. Typically you&#39;ll get this:</p>
+
+<pre>
+<code># standard hash routing
+/myapp/#/page1
+/myapp/#/page2
+
+# html5 routing
+/myapp/page1
+/myapp/page2</code></pre>
+
+<p>Often node servers have an option to redirect all pages not matching any resource (js, css) to&nbsp;<em>index.html</em> which will handle the routing. In a servlet container it is more complicated cause all these urls will return a 404 so links will not be shareable and users would need to start from the home page everytime.</p>
+
+<p>To solve it in a java application you can write a filter - or reuse an existing one - redirecting all client urls (page1, page2 in previous example) to the <em>index.html</em> page but without writing java code you need to use the&nbsp;<em>web.xml</em>.</p>
+
+<p>Using string literals of javascript it is made a bit easier. Once built the web.xml just needs to be added to the archive in <em>WEB-INF/web.xml</em>:</p>
+
+<pre>
+<code class="language-javascript">const resources = ['*.eot', '*.svg', '*.woff', '*.woff2', '*.ttf', '*.js', '*.js.map', '*.png', '*.jpg'];
+const html5routes = ['/', '/page1', '/page2'];
+
+archive.append(`&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+          http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0" metadata-complete="true"&gt;
+    &lt;!-- we define index.html as a servlet to be able to reference it --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;index&lt;/servlet-name&gt;
+        &lt;jsp-file&gt;/index.html&lt;/jsp-file&gt;
+    &lt;/servlet&gt;
+
+    &lt;!-- we map all existing resources to the default servlet ("file" one) --&gt;
+` +
+    resources.map(m =&gt;
+    `   &lt;servlet-mapping&gt;
+          &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+          &lt;url-pattern&gt;` + m + `&lt;/url-pattern&gt;
+        &lt;/servlet-mapping&gt;
+`).join('\n') +
+    '\n   &lt;!-- html5 routing mappings --&gt;\n' +
+    html5routes.map(m =&gt;
+`   &lt;servlet-mapping&gt;
+      &lt;servlet-name&gt;index&lt;/servlet-name&gt;
+      &lt;url-pattern&gt;` + m + `&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+`).join('\n') + `
+&lt;/web-app&gt;`, { name: 'WEB-INF/web.xml' });
+
+// finalize is still the last line
+archive.finalize();
+</code></pre>
+
+<p>With this web.xml the application will still behave correctly even in a servlet container. The only drawback is to maintain the&nbsp;<em>resources</em>&nbsp;and&nbsp;<em>htmlroutes</em>&nbsp;variables.</p>
+
+<h2>Last tip</h2>
+
+<p>Before concluding that post, keep in mind servlet container will often deploy the war in a context (sub path in the url). For a SPA developped to be deployed on root you should then either ensure it is named&nbsp;<em>ROOT.war</em>&nbsp;for Tomcat/TomEE/...or&nbsp;ensure you adapt the <em>base&nbsp;</em>in your&nbsp;<em>index.html. </em>If you don&#39;t do it then the application links and resources will not behave as expected.</p>
+
+<h2>Conclusion</h2>
+
+<p>Even if not that natural, creating a war from npm is very possible. The companion steps can be:</p>
+
+<ul>
+	<li>push the war to nexus (just a POST request to do ;))</li>
+	<li>instead of creating a war you can build an embeddable jar user can add to their war and embed your application in their own one!</li>
+	<li>alternative to this full process is to add a <em>pom.xml</em> (or <em>build.gradle</em>) and just use&nbsp;<em>frontend-maven-plugin</em>&nbsp;to orchestrate the full build.</li>
+</ul>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//restlet-ee-cdi-servlet.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jaxrs-2.0-sse.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

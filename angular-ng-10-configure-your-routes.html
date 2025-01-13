@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Angular 10: configure your routes</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,124 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="angular-ng-10-configure-your-routes-html-container" class="container page-content angular-ng-10-configure-your-routes-html is-blog">
+                        <div class="page-header">
+                <h1>Angular 10: configure your routes</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-10-27</span>, <span class="metadata-readingtime">2 min and 24 sec read</span></p>
+</div>
+<p>We saw in previous post that we can have dynamic routes thanks to generic/reusable components. The question is how to make them configurable to customize them enough to not look too generic and make the UI not understable enough by end users.</p>
+
+<p>The solution can be summarized in two points:</p>
+
+<ol>
+	<li>Configure the route activating a component adding the required component metadata,</li>
+	<li>Make the component read the route metadata to auto-configure itself.</li>
+</ol>
+
+<h2>Configure a route</h2>
+
+<p>Angular added to its route API (<em>ActivatedRoute&nbsp;</em>or its snapshot flavor)&nbsp;a&nbsp;<em>data</em>&nbsp;attribute to host the route metadata:</p>
+
+<pre>
+<code class="language-javascript">{
+  path: 'home',
+  component: HomeComponent,
+  data: { title: 'Home' }
+}</code></pre>
+
+<p>In this simple example, the home route has a title configured in its data and&nbsp;<em>HomeComponent</em>&nbsp;can read it to render it without knowing it upfront.</p>
+
+<h2>Read the route configuration from your component</h2>
+
+<p>Reading data can be done in two ways:</p>
+
+<ol>
+	<li>Subscribing to data changes - if you plan to update it with another part of your application,</li>
+	<li>Reading current version (snapshot) directly as a snapshot route&nbsp;attribute.</li>
+</ol>
+
+<p>Here are what both cases can look like for our home component:</p>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody>
+		<tr>
+			<td>
+			<pre>
+<code class="language-javascript">constructor(route: ActivatedRoute) {
+  this.title = route.snapshot.data.title;
+}</code></pre>
+
+			<p>&nbsp;</p>
+			</td>
+			<td>
+			<pre>
+<code class="language-javascript">constructor(route: ActivatedRoute) {
+  route.data.subscribe(d =&gt; {
+    this.title = d.title;
+  });
+}</code></pre>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Then you can use <em>title</em>&nbsp;class attribute in your view/template or to compute other properties depending your component logic.</p>
+
+<h2>Conclusion</h2>
+
+<p>Using this solution enables to have generic and very reusable components. If you use widely this pattern, I recommend you to start typing the&nbsp;<em>data</em>&nbsp;you request in your route. Used at wider scale, you can also pass a provider function in data enabling to request data from the component without having to assume on the shape of the data object. This is very useful when composing component and reading the data from multiple level of components (components used in the&nbsp;main or sub components dynamically). The function would act as a registry (the component request a key and gets the associated data instead of having to build a big object in the route).</p>
+
+<p>Combined with previous post, it enables to have a CRUD UI very adapted to each entity without any crazy code. The components are just renderers and all the logic is mainly in converting the backend model to the route bindings/data. It is also quite easy to debug and you can even optimize previous post by storing previous flavor of the router in local storage very easily to bootstrap faster (without waiting for the initializer actually).</p>
+
+<p>So, overall, it is very interesting to start making render oriented components - application logic agnostic. It can look like being too much technical but it actually makes the application simpler and easier to test and update in time.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//camel-healthcheck-registry-for-kubernetes.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//angular-ng-10-create-update-route-at-runtime.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

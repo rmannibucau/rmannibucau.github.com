@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JCache EntryProcessor: nice abstraction for rate limiting!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,218 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jcache-entryprocessor-rate-limiting-html-container" class="container page-content jcache-entryprocessor-rate-limiting-html is-blog">
+                        <div class="page-header">
+                <h1>JCache EntryProcessor: nice abstraction for rate limiting!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-05-30</span>, <span class="metadata-readingtime">4 min and 45 sec read</span></p>
+</div>
+<p>JCache entry processor is an API of JCache specification. Most of the API is close to a Map but it has one nice addition trick to execute some logic using the cache &quot;lock&quot;: the <em>EntryProcessor</em>.</p>
+
+<p>Why is it useful? If you need to be able to rely and mutate cache values it is the way to do it. Then question is why would I mutate cache values? Simply because you need to maintain a volatile state, kind of session.</p>
+
+<p>Then why JCache? Because as a framework or product which is not bound to a deployment stack (can be hosted differently by several customers), JCache brings you the abstraction you need to support local or distributed volatile storage.</p>
+
+<p>Side note: JCache is NOT about distributed caching (more about performances than clustering) but most providers support it, that&#39;s why previous statement is true.</p>
+
+<p>In trendy/buzzy world you can think about microservices rate limiting implementation: each time a request is done you need to increment the current window counter to ensure you can execute the request. In JCache world it means you will update the currently cached value incrementing it. The nice thing about this setup is you have automatically&nbsp;with JCache an eviction you can align on window period. Therefore you don&#39;t need to handle it yourself! You get for free the state management and eviction! Powerful isn&#39;t it?</p>
+
+<p>What does it look like?</p>
+
+<p>First we&#39;ll create a key, just to show you can get a complex key and don&#39;t need a plain string I&#39;ll use that model:</p>
+
+<pre>
+<code class="language-java">import java.io.Serializable;
+
+public class Key implements Serializable {
+    private String id;
+    private long version;
+
+    public Key(final String id, final long version) {
+        this.id = id;
+        this.version = version;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(final long version) {
+        this.version = version;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final Key key = (Key) o;
+
+        return version == key.version &amp;&amp; (id != null ? id.equals(key.id) : key.id == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (int) (version ^ (version &gt;&gt;&gt; 32));
+        return result;
+    }
+}
+</code></pre>
+
+<p>So the key is composed of an identifier and version. Then we need a value, to keep things simple for this post we&#39;ll just modelize a counter holding an int but it can hold much more like some policies or rules to apply when the max is reached:</p>
+
+<pre>
+<code class="language-java">import java.io.Serializable;
+
+public class Counter implements Serializable {
+    private int value;
+    // you can get other values
+
+
+    public Counter(final int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(final int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Counter{" +
+                "value=" + value +
+                '}';
+    }
+}</code></pre>
+
+<p>Finally we need the task incrementing the counter which will be our <em>EntryProcessor</em>:</p>
+
+<pre>
+<code class="language-java">import javax.cache.processor.EntryProcessor;
+import javax.cache.processor.EntryProcessorException;
+import javax.cache.processor.MutableEntry;
+
+public class Increment implements EntryProcessor&lt;Key, Counter, Counter&gt; {
+    public Counter process(final MutableEntry&lt;Key, Counter&gt; entry, final Object... arguments) throws EntryProcessorException {
+        if (arguments.length &gt; 1) {
+            throw new IllegalArgumentException("Only boolean parameter to create the entry if missing is allowed");
+        }
+
+        if (entry.exists()) { // 1
+            final Counter counter = entry.getValue();
+            entry.setValue(new Counter(counter.getValue() + 1)); // 2
+            return counter;
+        }
+
+        if (arguments.length == 1 &amp;&amp; Boolean.class.cast(arguments[0])) { // 3
+            return null;
+        }
+        // else create the entry
+        entry.setValue(new Counter(1));
+        return null;
+    }
+}</code></pre>
+
+<ol>
+	<li>JCache API allows to check if there is a value or not for the related key</li>
+	<li>we can also update the value, in our case we increment the counter (you can also just increase the int in <em>counter</em>&nbsp;but this was to show you can completely rebuild the value or just create it if it was missing</li>
+	<li>you can also pass parameters to your tasks to reuse them</li>
+</ol>
+
+<p>Then to invoke our processor we just call&nbsp;<em>invoke</em>&nbsp;on our cache:</p>
+
+<pre>
+<code class="language-java">cache.invoke(new Key("entry1", 1), new Increment(), true); // with parameter
+cache.invoke(new Key("entry1", 1), new Increment());
+</code></pre>
+
+<p>To be complete you can get a cache with:</p>
+
+<pre>
+<code class="language-java">Cache&lt;Key, Counter&gt; cache = Caching.getCachingProvider()
+   .getCacheManager()
+   .createCache("test", new MutableConfiguration&lt;Key, Counter&gt;()
+       .setTypes(Key.class, Counter.class));
+</code></pre>
+
+<p>or if you don&#39;t use a flat standalone classloader:</p>
+
+<pre>
+<code class="language-java">CachingProvider cachingProvider = Caching.getCachingProvider();
+Cache&lt;Key, Counter&gt; cache = cachingProvider
+        .getCacheManager(cachingProvider.getDefaultURI(), Thread.currentThread().getContextClassLoader())
+        .createCache("test", new MutableConfiguration&lt;Key, Counter&gt;()
+                .setTypes(Key.class, Counter.class));</code></pre>
+
+<p>Note:&nbsp;don&#39;t forget to close the manager and/or at least the provider once your app is over</p>
+
+<p>What do we miss for a complete rate limiting? The window management. As mentionned you just need to set an expiration on the cache entries, this is done on the configuration. For a 5mn window you can use:</p>
+
+<pre>
+<code class="language-java">new MutableConfiguration&lt;Key, Counter&gt;()
+    .setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(Duration.FIVE_MINUTES))</code></pre>
+
+<p>And here we are, we just need to put the&nbsp;<em>invoke</em>&nbsp;in a servlet or JAX-RS filter and we have some nice rate limiting. Note that you often return some metadata as headers when doing so to say how long remains in the window and how many calls you can still do for instance. Since the processor can return any value (even the Counter in our case) it is the way to handle it: just return the metadata you need as returned value of the processor.</p>
+
+<p>To rephrase the explanation of the beginning of the post, JCache can now - with Hazelcast, Ignite and Infinispan implementations - be used as an abstraction for clustered friendly states with eviction. Therefore it can be a nice alternative to Redis with a simpler infrastructure and no single point of failure :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//minified-javascript-warning.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-tomee-apachecon-na-2017.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

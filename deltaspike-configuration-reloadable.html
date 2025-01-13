@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>DeltaSpike Configuration: how to make it @Reloadable!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,242 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="deltaspike-configuration-reloadable-html-container" class="container page-content deltaspike-configuration-reloadable-html is-blog">
+                        <div class="page-header">
+                <h1>DeltaSpike Configuration: how to make it @Reloadable!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-06-24</span>, <span class="metadata-readingtime">4 min and 55 sec read</span></p>
+</div>
+<p>The idea is to have a configuration listener in the application and allows it to request the application to re-read the configuration. I will say one word about it at the end.</p>
+
+<p>In the <a href="https://rmannibucau.metawerx.net/#/post/deltaspike-cdi-configsources">previous post</a> we saw that DeltaSpike configuration looked like:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class MyConfig{
+   @Inject
+   @ConfigProperty(name = "app.weather.url")
+   private String weatherUrl;
+
+   // getter
+}
+</code></pre>
+
+<p>Of course, to ensure the value can be reloaded, you can migrate it to:</p>
+
+<pre>
+<code class="language-java">
+@ApplicationScoped
+public class MyConfig{
+   @Inject
+   @ConfigProperty(name = "app.weather.url")
+   private Provider&lt;String&gt; weatherUrl;
+
+   public String getWeatherUrl() {
+     return weatherUrl.get();
+   }
+}
+</code></pre>
+
+<p>This is great but quite inefficient in terms of performances. Thus, you will need to add, on top of that, some caching/eviction. It would work fine but you will need to maintain an event to reload the configuration (the &ldquo;listener&rdquo;) and another one for the eviction in all beans having some configuration.</p>
+
+<p>We can surely do better!</p>
+
+<h2>@Reloadable: mark instance to be destroyable</h2>
+
+<p>The first step to enhance it a bit is to create a marker annotation for our config clients (the instances getting configuration injected):</p>
+
+<pre>
+<code class="language-java">@Retention(RUNTIME)
+@Target({TYPE, METHOD, FIELD})
+public @interface Reloadable {
+}
+</code></pre>
+
+<p>Our configuration bean will then become as follow:</p>
+
+<pre>
+<code class="language-java">@Reloadable
+@ApplicationScoped
+public class MyConfig{
+   @Inject
+   @ConfigProperty(name = "app.weather.url")
+   private String weatherUrl;
+
+   // getter
+}
+</code></pre>
+
+<h2>Find the @Reloadable instance</h2>
+
+<p>To find the reloadable instances, we will use the same logic as in the <a href="https://rmannibucau.metawerx.net/#/post/deltaspike-cdi-configsources">previous post</a> in a new extension, but for this new annotation:</p>
+
+<pre>
+<code class="language-java">public class ReloadExtension implements Extension {
+   private final Collection&lt;Bean&lt;?&gt;&gt; beans = new ArrayList&lt;&gt;();
+
+
+   void findReloadableBeans(@Observes final ProcessBean&lt;?&gt; bean, final BeanManager bm) {
+       if (!bean.getAnnotated().isAnnotationPresent(Reloadable.class)) {
+           return;
+       }
+       final Bean&lt;?&gt; b = bean.getBean();
+       if (!AlterableContext.class.isInstance(bm.getContext(b.getScope()))) {
+           throw new IllegalArgumentException(
+                   "Only AlterableContext are supported, " + b.getScope() + " for " +
+                           bean.getBean() + " is not using such a scope");
+       }
+       beans.add(b);
+   }
+
+   public Collection&lt;Bean&lt;?&gt;&gt; getBeans() {
+       return beans;
+   }
+}
+</code></pre>
+
+<p>So, we basically capture all the beans decorated with @Reloadable and validate that the related scope/context is an AlterableContext (you will understand soon).</p>
+
+<h2>Lose coupling: destroy on event!</h2>
+
+<p>Then the second step is to have a way to trigger the bean destruction. To ensure it integrates with whatever listener we use, a Reload event will be created:</p>
+
+<pre>
+<code class="language-java">public class Reload {
+}</code></pre>
+
+<p>Yes, this class is quite simple and is just there to mark the event.</p>
+
+<h2>Reload the instances!</h2>
+
+<p>Finally we need an observer for this event resetting marked instances.</p>
+
+<p>Before seeing the observer implementation and to ensure the extension jar doesn&rsquo;t need to be scanned to work, we will add a small method to our extension:</p>
+
+<pre>
+<code class="language-java">void registerInternalBeans(@Observes final BeforeBeanDiscovery bbd, final BeanManager bm) {
+   bbd.addAnnotatedType(bm.createAnnotatedType(ReloadObserver.class));
+}
+</code></pre>
+
+<p>This method simply enforces CDI to know the ReloadObserver bean even if not scanned. This is important for us since we rely on that observer for @Reloadable to work.</p>
+
+<p>The observer implementation will count on CDI 1.1 new methods which allows to destroy an instance from a Bean. For that, we get, from the BeanManager, the Context (scope) related to the @Reloadable bean we want to destroy and just invoke its destroy method with this bean.</p>
+
+<p>To get the beans, we inject the extension, which is used there as a @Reloadable bean repository:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ReloadObserver {
+   @Inject
+   private BeanManager bm;
+
+   @Inject
+   private ReloadExtension extension;
+
+   public void observe(@Observes final Reload reload) {
+       extension.getBeans().forEach(this::destroy);
+   }
+
+   private void destroy(final Bean&lt;?&gt; bean) {
+       AlterableContext.class.cast(bm.getContext(bean.getScope()))
+           .destroy(bean);
+   }
+}
+</code></pre>
+
+<h2>Limitation</h2>
+
+<p>There is no advanced locking there, so if your beans use @PreDestroy, then the reloading thread can destroy the bean while it is used. Of course you can use a ReadWriteLock to solve this issue, or simply move the configuration in a bean without that issue.</p>
+
+<h2>Going further</h2>
+
+<p>Obviously, the API can be enhanced to support conditions in @Reloadable or even scan the injection points to automatically find these conditions. For instance, you can scan @ConfigProperty in an extension to filter the beans to reload depending on the config keys:</p>
+
+<pre>
+<code class="language-java">public void observe(@Observes final Reload reload) {
+   extension.getBeans().stream()
+        .filter(reload::accept)
+        .forEach(this::destroy);
+}
+
+public class Reload {
+   private final Collection&lt;Bean&lt;?&gt;&gt; beans;
+
+   // constructor
+
+   public boolean accept(Bean&lt;?&gt; bean) {
+     return beans.contains(bean);
+   }
+}
+</code></pre>
+
+<p>And when you trigger the Reload event, you just find the beans that needs to be reloaded thanks to the extension which can own the list of beans by config key.</p>
+
+<h3>Listeners</h3>
+
+<p>My original description of the initial event spoke about &ldquo;listeners&rdquo;, and you probably thought of a &ldquo;ConfigListener&rdquo; API or a &ldquo;FileWatcher&rdquo; for instance. This would be perfectly valid but it can also be a web hook, i.e. you deploy an HTTP endpoint in your application (secured or not) and an external actor can trigger this event. This is particularly useful when the configuration storage is external and the configuration writers are not your own application, but ops team for instance. In such a case they will update the configuration, call your endpoint and you will request your application to reload the needed beans with your Reload event :)</p>
+
+<h2>OpenWebBeans case</h2>
+
+<p>OpenWebBeans caches @ApplicationScoped instances once retrieved. This is a clever idea - even if not 100% spec compliant - but this prevents the destroy() to be propagated to all injections. Essentially, if you got an @ApplicationScoped instance injected and you already used it, even if you fire Reload event, you will still use the same instance.</p>
+
+<p>To solve it, you need to configure in openwebbeans.properties what follows:</p>
+
+<pre>
+<code>org.apache.webbeans.proxy.mapping.javax.enterprise.context.ApplicationScoped = org.apache.webbeans.intercept.NormalScopedBeanInterceptorHandler</code></pre>
+
+<p>For tomee, you can alternatively just set in conf/system.properties like this:</p>
+
+<pre>
+<code>openejb.cdi.applicationScope.cached = false</code></pre>
+
+<p>@ApplicationScoped invocations will be a little bit too slower : overhead should be close to two &ldquo;get()&rdquo; in two maps so I am not sure you should even care about it. But this use case will perfectly work.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-embedded-flavors.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//deltaspike-cdi-configsources.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

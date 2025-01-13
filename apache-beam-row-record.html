@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apache Beam and Row: a new Big Data record/serialization standard?</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="apache-beam-row-record-html-container" class="container page-content apache-beam-row-record-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Beam and Row: a new Big Data record/serialization standard?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-09-05</span>, <span class="metadata-readingtime">10 min and 28 sec read</span></p>
+</div>
+<p>Apache <a href="https://beam.apache.org/" target="_blank">Beam</a>&nbsp;project provides a Big Data abstraction over different &quot;runners&quot; - which are nothing more than real Big Data engines like Apache Spark,&nbsp;Flink or even Google Dataflow.</p>
+
+<p>For such an abstraction layer you quickly hit one concern which is how to represent &quot;data&quot;. Apache Beam is code driven, understand by that it expects, in its approach, you to write your &quot;pipeline&quot; (data processing flow) and your &quot;transforms&quot; (processing steps). This has the direct implication that you generally type all your steps.</p>
+
+<h2>Strongly typed pipeline: industrialization made hard</h2>
+
+<p>Here is a sample pipeline:</p>
+
+<pre>
+<code class="language-java">public static void main(final String[] args) {
+    final Pipeline pipeline = Pipeline.create(PipelineOptionsFactory.fromArgs(args).create());
+
+    pipeline.apply("ReadCSV", TextIO.read().from("./people.txt"))
+            .apply("MapToPerson", ParDo.of(new DoFn&lt;String, Person&gt;() {
+                @ProcessElement
+                public void onElement(
+                      @Element final String file,
+                      final OutputReceiver&lt;Person&gt; emitter) {
+                    final String[] parts = file.split(";");
+                    emitter.output(new Person(parts[0], parts[1], Integer.parseInt(parts[2])));
+                }
+            }))
+            .apply("MapToJson", ParDo.of(new DoFn&lt;Person, String&gt;() {
+                private transient Jsonb jsonb;
+
+                @ProcessElement
+                public void onElement(
+                      @Element final Person person,
+                      final OutputReceiver&lt;String&gt; emitter) {
+                    if (jsonb == null) {
+                        jsonb = JsonbBuilder.create();
+                    }
+                    emitter.output(jsonb.toJson(person));
+                }
+
+                @Teardown
+                public void onTearDown() {
+                    if (jsonb != null) {
+                        try {
+                            jsonb.close();
+                        } catch (final Exception e) {
+                            throw new IllegalStateException(e);
+                        }
+                    }
+                }
+            }))
+            .apply("WriteToJson", TextIO.write().to("./target/output.json"));
+
+    pipeline.run().waitUntilFinish();
+}</code></pre>
+
+<p>This simple pipeline will read from a file its lines, then a mapper will convert it to a&nbsp;<em>Person, </em>then another mapper will convert it to JSON, and finally will write the output back to another file. Note that the output will not be&nbsp;<em>target/output.json</em>&nbsp;but a set of file matching this pattern (like&nbsp;<em>output.json-[0-9]+-of-[0-9]+</em>) to support concurrent bundles which is one of the basis of the Big Data pattern.</p>
+
+<p>This pipeline by itself is not very accurate since it can be simplified but it shows quite simply the issue Beam has: to chain transformations (each&nbsp;<em>apply()</em>), you need to ensure each step match in term of type. The&nbsp;<em>TextIO</em>&nbsp;issue a <em>String</em>&nbsp;so we need a mapper to create a&nbsp;<em>Person</em>&nbsp;which is the type the&nbsp;<em>Json&nbsp;</em>step takes as input and the output&nbsp;<em>TextIO</em>&nbsp;takes a String too so we need to ensure out&nbsp;<em>Json</em>&nbsp;output is a String (whereas for a Json transform a&nbsp;<em>JsonObject</em>&nbsp;would be way more natural).</p>
+
+<p>Said otherwise: it implies a lot of verbosity to do pretty much nothing. It can not look as a big concern and it is true if you just have one Big Data pipeline in your company. However when you start using Big Data for a lot of jobs and therefore create a lot of pipelines, you will very quickly want to industrialize your code and create a library you can share for common steps. It is exactly the same kind of solution than the old one we know very well in the &quot;standalone&quot; batch area where you have libraries of steps you can just compose to create a new batch just assembling bricks.</p>
+
+<p>This philosophy requires to ensure each step is interoperable with each potential connection. In other words, you need a single type for records and drop the strong typing previous pipeline had otherwise you will keep writing these conversion&nbsp;steps which are more code to write, test and maintain but no added value in terms of business or feature at the end of the day.</p>
+
+<h2>How Apache Beam hit the generic record need</h2>
+
+<p>One of the tracks of Apache Beam is the Big Data SQL. High level it allows to use a SQL like language, adapted to Beam data model (<em>PCollections</em>&nbsp;typically), to select the data and process them without having to code the transforms.</p>
+
+<p>Concretely, assuming the input data are correctly formatted you can add into your pipeline a step like:</p>
+
+<pre>
+<code class="language-java">.apply(SqlTransform.query("select age,name,id from PCOLLECTION where age &gt; 18"))</code></pre>
+
+<p><em>PCOLLECTION</em>&nbsp;being a virtual table composed of the elements from the input. Note that there are ways to select data from mutiple inputs but this is out of scope for this post.</p>
+
+<p>The issue for such a transform is that it has two hypothesis:</p>
+
+<ol>
+	<li>It can access input data</li>
+	<li>It can output data you can process</li>
+</ol>
+
+<p>These two concern are actually the exact same than the one explained in the previous part: how to interact with data structures you don&#39;t own?</p>
+
+<h2>Beam Row record, schema and friends</h2>
+
+<p>In terms of generic structures you can introspect, there are already some mainstream solutions:</p>
+
+<ul>
+	<li>XML is used for a very long time and is probably the most advanced one with its very complete schema and tooling built around it,</li>
+	<li>JSON is a bit less tooled and its schema is not that advanced but is very interesting because it embeds in a light way its schema for most cases which avoids to manage a schema + data generally,</li>
+	<li>Apache Avro IndexedRecord which is generally known from Big Data developpers which is exactly a schema which defines the structure of the data and the data which are serialized without the schema in general (except using FileContainer but it is never done in BigData to be able to distribute the processing easily and avoid the cost associated to the schema maintenance...but it leads to the well known versioning hell),</li>
+	<li>Protobuf which is close to avro,</li>
+	<li>....</li>
+</ul>
+
+<p>So Apache Beam had the choice to use one of the mainstream format....but wait, it is all about serialization, not modelling or API. Also which one to pick? Each ecosystem has its preference so why Beam, which is an abstraction, would prefer one over the other?</p>
+
+<p>The serialization point is interesting. If you check avro, it doesn&#39;t have a date/time type so you have to use&nbsp;<em>STRING</em>&nbsp;or <em>LONG&nbsp;</em>type generally, it is ok since you can normalize how you serialize dates but this means in the&nbsp;<em>SqlTransform</em>&nbsp;the comparison of dates (which is a very common use case) would be quite hard to implement simply - would require to pass a format in the query which complexify the SQL syntax for this case.</p>
+
+<p>So at the end, Apache Beam created the Beam&nbsp;<em>Row</em>&nbsp;structure.</p>
+
+<p>The&nbsp;<em>Row&nbsp;</em>&nbsp;structure is highly inspired from Avro in terms of design:</p>
+
+<ul>
+	<li>A schema which supports primitives (byte, two/four/eight bytes signed integer, decimal integer, float, double, string, datetime, boolean), byte arrays (mainly for lobs), and containers (arrays, nested rows, and map),</li>
+	<li>A data holder (the&nbsp;<em>Row</em>&nbsp;itself) which is just a list of values organized in the same order than the schema definition.</li>
+</ul>
+
+<p>Want to visualize it with some code? Here is how our&nbsp;<em>Person</em>&nbsp;can be defined:</p>
+
+<pre>
+<code class="language-java">final Schema schema = Schema.builder()
+  .addInt16Field("age")
+  .addStringField("name")
+  .addStringField("id")
+  .build();
+final Row person = Row.withSchema(schema)
+  .addValues((short) 2, "beam", "1").build()</code></pre>
+
+<p>As you can see, a row is always associated with a schema (like Avro&nbsp;<em>IndexedRecord</em>&nbsp;has a&nbsp;<em>getSchema()</em>).</p>
+
+<p>With this structure, the generic transforms (including the SQL one), can access the schema and therefore process the data without knowing them before. This lead to new transforms creation like the&nbsp;<em>Filter</em>&nbsp;one:</p>
+
+<pre>
+<code class="language-java">.apply(Filter.whereFieldName("age", age -&gt; age &gt; 18))</code></pre>
+
+<p>Other transforms to group records from a criteria, to project data etc are doable as well from the moment you know how to process data you don&#39;t know at build time.</p>
+
+<p>Apache Beam even provides a way to convert this&nbsp;<em>Row</em>&nbsp;to&nbsp;POJO implicitly.</p>
+
+<p>But wait, we are in Big Data world so data are potentially serialized, right? What about this&nbsp;<em>Row</em>&nbsp;thing? The <em>Schema</em>&nbsp;itself is&nbsp;<em>Serializable</em>&nbsp;so no big deal and it must be done only &quot;once&quot; (as in Big Data world so likely once per worker, the important part being not for each record). The&nbsp;<em>Row </em>itself gets a new beam&nbsp;<em>Coder</em>, a.k.a. the&nbsp;<em>RowCoder </em>which is created from the schema:</p>
+
+<pre>
+<code class="language-java">RowCoder.of(schema)</code></pre>
+
+<p>This coder has the schema so is able to process the incoming&nbsp;<em>Row</em>&nbsp;and serialize it processing each element (exactly like any (de)serializer). High level, it will delegate the serialization of each element to the coder matching its type. <em>STRING</em>&nbsp;will use the <em>StringUtf8Coder</em>, <em>INT32</em>&nbsp;will use <em>BigEndianIntegerCoder</em>, etc... See&nbsp;<em>RowCoderGenerator</em>&nbsp;for more details.</p>
+
+<p>How does it compare to Avro for instance? Assuming you use the same unitary serialization, which mainly means you serialize dates as longs and not string (which takes way more space), avro will generally be more compact cause it uses direct primitive serialization whereas the nested coders of the&nbsp;<em>Row</em>&nbsp;use java serialization which is more verbose than needed.</p>
+
+<p>To illustrate that, let&#39;s use this schema:</p>
+
+<pre>
+<code class="language-java">Schema.builder()
+    // flat part
+    .addStringField("id")
+    .addStringField("name")
+    .addInt32Field("age")
+    .addDateTimeField("created")
+    .addDateTimeField("updated")
+    // nested
+    .addField("address", Schema.FieldType.row(Schema.builder()
+            .addInt16Field("number")
+            .addStringField("street")
+            .addStringField("country")
+            .build()))
+    .build();</code></pre>
+
+<p>Which can be illustrated with this sample data:</p>
+
+<pre>
+<code class="language-javascript">{
+  id: "0",
+  name: "Beam",
+  age: 2,
+  created: 1535885173202,
+  updated: 1535885173202,
+  address: {
+    number: 14,
+    street: "Big Data",
+    country: "Java"
+  }
+}</code></pre>
+
+<p>If you serialize it with beam&nbsp;<em>RowCoder</em>, you will use 45 bytes and using an Avro&nbsp;<em>IndexedRecord</em>, it will take 35 bytes....almost 30% which is a lot for Big Data world. To have a comparison, JSON (not compressed) takes 142 bytes and gzipped it takes&nbsp;128&nbsp;bytes - which is normal cause data size is comparable to structure size here. Interesting comparison is if you take the raw JSON (you drop the keys and consider the data being in arrays), then the size is 66 bytes. Now if you have a big&nbsp;<em>STRING</em>&nbsp;data (10240 &#39;a&#39;&nbsp;for instance), JSON will take&nbsp;10378 bytes, avro&nbsp;10273, row&nbsp;10282. Compressed with GZIP,&nbsp;json takes&nbsp;152 bytes and avro 90 bytes. Now if you make each character different JSON.gz becomes&nbsp;20714 bytes and gzipped avro becomes&nbsp;20570 bytes. Gzipped row is between both each time. What is interesting are not the figures but more than the serialization disk space is highly depending the data you transmit. If you have small data or said otherwise, if you data are comparable in size to the schema space, you must avoid to serialize the schema in general...if you serialize it - keep in mind Beam and Big Data engines will try to avoid that as much as possible. It also depends what you do of these data. Using JSON will make them more quickly available to the end usage whereas Avro or worse, Row serialization will require processing to serve it in your applications since they are highly dependent of the Big Data stack.</p>
+
+<p>Why all that paragraph on the serialization? Big Data execution comes with serialization concern but this one is highly dependent of multiple points:</p>
+
+<ul>
+	<li>Your data structure,</li>
+	<li>The size of your data vs the size of your structure definition,</li>
+	<li>How the data will be stored and in which backend,</li>
+	<li>Which part of your system will access and read the data,</li>
+	<li>....</li>
+</ul>
+
+<p>All that means that it is not because a format looks wrong theorically that it is wrong in practise. Look the JSON example with big data, the difference is no more significative compared Avro but the cost to use Avro in a system which is not only about Big Data will be way higher than the cost to use JSON in terms of performance.</p>
+
+<p>The conclusion about Avro Row structure is that the main issue with its serialization form is not that it is fat compared to other Big Data serializations but more that it is not interoperable at all. JSON is interoperable with any application today, Avro is quite interoperable and has libraries in most languages, protobuf as well...Beam Row structure is just relevant in Beam ecosystem. Keep in mind that if you picked Beam it is to be vendor independent and be able to switch of engine....it is likely not to be locked to Beam itself. This has the direct implication that you must ensure to never ever serialize in a backend <em>Row </em>structures directly and always convert it to a more mainstream format.</p>
+
+<p>Finally it is important to keep in mind some issues with Beam Row structure before using it a lot in your code and potentially create a library around it:</p>
+
+<ul>
+	<li>Its&nbsp;<em>DATETIME</em>&nbsp;type relies on Joda-time<em>&nbsp;AbstractInstant </em>and is not compatible with Java 8 date times formats. Today you likely don&#39;t want to let Joda surface in any API so maybe avoid this type of column.</li>
+	<li>Beam Row format is in Beam SDK core so if you just want to use it to prepare some functions you will import jackson, tukaani, joda-time, guava! etc... in your classpath which is quite indesired (IMHO the Row structure should be extracted in an API module without any dependency).</li>
+	<li>Ensure to write a bridge to another serialization format to be able to read/write the data without having to propagate Beam (and its huge core stack) in all applications. Hopefully on that point, Beam&nbsp;<em>Row</em>&nbsp;structure will just becomes a pluggable API (as any EE API, with a provider etc) which would natively use another format and not a full stacked structure with a custom serialization.</li>
+</ul>
+
+<p>However, even if <em>Row</em>&nbsp;structure is not perfect and its API can look weird since it just hides a list and not a real structure (you can&#39;t do an&nbsp;<em>addField(name value)</em>), it is a good step forward to a more generic coding of the pipelines. Some enhacements to do (better API, extract it in its own lightweight module, ...) and we could get a meta pipeline environment pretty easily.</p>
+
+<p>In next post I will show you how to convert a&nbsp;<em>Row&nbsp;</em>&nbsp;to an&nbsp;Avro&nbsp;<em>IndexedRecord</em> almost transparently :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-beam-row-structure-to-avro-indexedrecord.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//maven-dependencies-locations.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

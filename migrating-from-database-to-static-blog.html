@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Migrating from a database to static blog</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="migrating-from-database-to-static-blog-html-container" class="container page-content migrating-from-database-to-static-blog-html is-blog">
+                        <div class="page-header">
+                <h1>Migrating from a database to static blog</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-03-23</span>, <span class="metadata-readingtime">17 min and 23 sec read</span></p>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+A backend backed blog is great because it enables a lot of features.
+Typically my previous blog was a TomEE backed <a href="https://github.com/rmannibucau/rblog">implementation</a> which enabled to have great features such as scheduled tweeter post, dynamic updates and so on.
+However, it has several pitfalls like the fact it must be maintained somehow, upgrades must also follow security vulnerabilities (which can happen when totally undesired) and so on.
+Let see why I decided to move the technical stack of this blog and the few challenges I faced and how I solved it.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technology_stack_maintenance_and_context">Technology stack maintenance and context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the blog was originally developed, 5 years ago now, I was very involved in Apache TomEE, Angular "NG" was a bit new but very relevant for a full stack developer and quite simple so the choice was quite easy.</p>
+</div>
+<div class="paragraph">
+<p>If we compare these choices to today world:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>I slowly moved from Apache TomEE to Apache Meecrowave or even plain Apache OpenWebBeans/CDI SE API (with an embedded HTTP server),</p>
+</li>
+<li>
+<p>Angular &gt;= 2 became a full industry and is quite slow (to compile/transpile/build but also to run, even with ivy) compared to its concurrent as React or Vue.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So if I would choice the same technical solution as of today, I would start from a CDI SE application and probably use React.</p>
+</div>
+<div class="paragraph">
+<p>However, in the mean time, static generation became more popular, Github opened private repositories for everyone (which enables to save content without publishing it) etc&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Reviewing the way I was managing the documentation for most of the Apache projects I&#8217;m involved in, I realized most of them use a custom documentation generator - understand a java script like generator.
+At the same time, I developed for the company I work currently for (Yupiik) a similar <a href="https://github.com/yupiik/tools-maven-plugin">tool</a> in the minisite maven plugin.
+Even if originally it was documentation oriented, this goal has some blogging capabilities.</p>
+</div>
+<div class="paragraph">
+<p>So overall, it was time to evaluate the capacity to use a static generator for my blog.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_was_i_starting_from">Where was I starting from?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each time a migration occurs you need to check what you accept to loose (or not) and what you gain.</p>
+</div>
+<div class="paragraph">
+<p>For this blog, it was almost ok to loose all backend features - I can schedule a tweet in a lot of free apps today - but I was not ready to loose the post URL I had before.</p>
+</div>
+<div class="paragraph">
+<p>In terms of gain, it is obvious I was now able to write content in asciidoc - and no more through a UI in the blog itself, and have a backup as <code>.adoc</code> files and not a database dump.</p>
+</div>
+<div class="paragraph">
+<p>To start the migration I needed to move from the database content to the minisite layout.
+The starting point was to export all the content in <code>.adoc</code> files.
+Luckily I had on my prevous blog a "dump content as JSON" button.
+Output was looking like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "date": "2021-03-22T05:45:56.317",
+  "categories": [ <i class="conum" data-value="2"></i><b>(2)</b>
+    {
+      "id": 51,
+      "name": "Java/EE/Microprofile",
+      "slug": "javaee",
+      "color": "#fe005e"
+    },
+    ...
+  ],
+  "posts": [ <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+      "id": 151,
+      "title": "Bye bye wordpress.com, Hello RBlog!",
+      "author": "rmannibucau",
+      "slug": "bye-bye-wordpress",
+      "type": "POST",
+      "content": "&lt;p&gt;Blogging is probably the easiest way to share some tips and experiences. ...",
+      "summary": "I started blogging in 2012 on wordpress.com ...",
+      "published": "2016-05-26 23:49:00",
+      "created": "2016-05-26 23:49:00",
+      "updated": "2016-05-26 23:49:00",
+      "categories": { <i class="conum" data-value="2"></i><b>(2)</b>
+        "id": 53,
+        "name": "Other"
+      }
+    },
+    ...
+  ],
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The interesting parts are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Post content is exported (sadly as HTML),</p>
+</li>
+<li>
+<p>Categories are available in the export and can be joined on in the post data to find their metadata.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_migration">Migration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_migrate_the_content">Migrate the content</h3>
+<div class="paragraph">
+<p>The first step to migrate was to convert this dump in adoc files.</p>
+</div>
+<div class="paragraph">
+<p>To do that I first need to read the JSON dump. To do it I used JSON-B (Apache Johnzon more exactly) and Java 16 records:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public record Category(long id, String name, String slug, String color) {}
+
+public record Post(long id, String title, String author, String slug, String type, String content, String summary,
+                   String published, String created, String update, Category categories) {}
+
+public record Dump(String date, List&lt;Category&gt; categories, List&lt;Post&gt; posts) {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From that model, ready the dump is as simple as - indeed I downloaded it before, no need to automate it from REST API for a one shot migration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private Dump readDump() {
+    try (final var jsonb = newJsonb();
+         final var reader = Files.newBufferedReader(Paths.get("backup.json"))) {
+        return  jsonb.fromJson(reader, Dump.class);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once dump is read, posts are available through <code>dump.posts()</code>.
+Idea is to create a folder <code>src/main/minisite/content</code> and for each post put a file from post item:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private void migrate(final Post post, final AtomicInteger remaining, final long total, final Path content,
+                                    final Map&lt;Long, String&gt; categories) {
+    final var out = content.resolve(post.slug() + ".adoc"); <i class="conum" data-value="1"></i><b>(1)</b>
+    try {
+        Files.writeString(out,
+                "= " + post.title() + "\n" + <i class="conum" data-value="2"></i><b>(2)</b>
+                        <i class="conum" data-value="3"></i><b>(3)</b>
+                        ":minisite-blog-published-date: " + post.published().substring(0, post.published().indexOf(' ')) + "\n" +
+                        ":minisite-blog-categories: " + categories.get(post.categories().id()) + "\n" +
+                        ":minisite-blog-authors: Romain Manni-Bucau\n" +
+                        ":minisite-blog-summary: " + post.summary().replace("\n", " ").trim() + "\n" +
+                        "\n" +
+                        <i class="conum" data-value="4"></i><b>(4)</b>
+                        "++++\n" +
+                        post.content() + "\n" +
+                        "++++\n");
+    } catch (final IOException e) {
+        throw new IllegalStateException(e);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Each post has a slug which is the url text marker for the post so simply use that as file name,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The post title is a simple 1-1 binding for the content,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The minisite meta enables to generate the item on listing pages (per category, per author, all posts sorted per date),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>As a first step the HTML content (from the dump) is injected in the asciidoc file as this (since blog will be rendered with html5 backend it is sufficient),</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+in practise this method is wrapped in a loop and even a multi-threaded impl but this is not the core of the migration so I skip it.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_the_minisiteblog_generator">Setup the minisite/blog generator</h3>
+<div class="paragraph">
+<p>At that stage we can enable minisite mojo in the project pom:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;groupId&gt;io.yupiik.maven&lt;/groupId&gt;
+  &lt;artifactId&gt;yupiik-tools-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.0.9&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;id&gt;generate-site&lt;/id&gt;
+      &lt;phase&gt;process-classes&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;minisite&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;siteBase&gt;/&lt;/siteBase&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+
+    <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;logoText&gt;RManniBucau&lt;/logoText&gt;
+    &lt;logoSideText&gt;Blog&lt;/logoSideText&gt;
+    &lt;copyright&gt;RManniBucau &amp;amp;copy;&lt;/copyright&gt;
+    &lt;logo&gt;/images/logo.png&lt;/logo&gt;
+    &lt;linkedInCompany&gt;rmannibucau&lt;/linkedInCompany&gt;
+    &lt;indexText&gt;RManniBucau Blog&lt;/indexText&gt;
+    &lt;indexSubTitle&gt;An opiniated IT blogging.&lt;/indexSubTitle&gt;
+    &lt;skipIndexTitleDocumentationText&gt;true&lt;/skipIndexTitleDocumentationText&gt;
+
+    <i class="conum" data-value="5"></i><b>(5)</b>
+    &lt;customHead&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/blog.css?v=${project.version}&amp;quot;&amp;gt;&lt;/customHead&gt;
+
+    <i class="conum" data-value="6"></i><b>(6)</b>
+    &lt;blogPageSize&gt;5&lt;/blogPageSize&gt;
+    &lt;blogCategoriesCustomizations&gt;
+      &lt;JavaEEMicroprofile&gt;
+        &lt;order&gt;1&lt;/order&gt;
+        &lt;icon&gt;fab fa-java&lt;/icon&gt;
+        &lt;description&gt;Java related posts.&lt;/description&gt;
+      &lt;/JavaEEMicroprofile&gt;
+      &lt;Frontend&gt;
+        &lt;order&gt;2&lt;/order&gt;
+        &lt;icon&gt;fab fa-js&lt;/icon&gt;
+        &lt;description&gt;Frontend development.&lt;/description&gt;
+      &lt;/Frontend&gt;
+      &lt;BigData&gt;
+        &lt;order&gt;3&lt;/order&gt;
+        &lt;icon&gt;fa fa-database&lt;/icon&gt;
+        &lt;description&gt;Big Data technology.&lt;/description&gt;
+      &lt;/BigData&gt;
+      &lt;Other&gt;
+        &lt;order&gt;4&lt;/order&gt;
+        &lt;icon&gt;fa fa-random&lt;/icon&gt;
+        &lt;description&gt;All other posts.&lt;/description&gt;
+      &lt;/Other&gt;
+    &lt;/blogCategoriesCustomizations&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Define the plugin which will enable to generate the blog,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define the actual execution of minisite mojo to generate the blog on <code>process-classes</code> phase (optional, can be replaced with <code>mvn yupiik-tools:serve-minisite -e</code> command),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Force the base of the site (for assets) to be the root context,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Customize default theme texts (home page mainly),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Inject a custom CSS in default theme (will sit in <code>src/main/minisite/assets/css/blog.css</code>),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Customize the blog generation, here by reducing the number of post per page (pagination) and categories (sorting them, customizing them icons and description).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If I run the minisite dev server: <code>mvn yupiik-tools:serve-minisite</code>, I can check the blog at <a href="http://localhost:4200" class="bare">http://localhost:4200</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_handle_redirects">Handle redirects</h3>
+<div class="paragraph">
+<p>There are multiple options to handle the redirections.</p>
+</div>
+<div class="paragraph">
+<p>One first idea can be to generate the exact same file layout (<code>src/main/minisite/content/post/&lt;slug&gt;</code>) and inject in the "old" file the generated html by the adoc&#8594;html convertion.
+This is not a bad idea but not all servers will serve the html without the extension as a html file which can create some issues.</p>
+</div>
+<div class="paragraph">
+<p>At the end, my server will stay a Tomcat (but upgraded to a v10) instance so I can use Tomcat features.
+You maybe thought about a servlet filter, it would  work perfectly but actually there is a way to not code it at all: <code>RewriteValve</code>.
+This valve (a kind of tomcat lower level filter) is close to HTTPd mod_rewrite and enables to work on the tomcat <code>Request</code> object before it hits the servlet chain.
+In other words: it can rewrite the incoming request to fake it is another one when entering the servlet chain, the <code>DefaultServlet</code> in our case which will serve the static html files.</p>
+</div>
+<div class="paragraph">
+<p>For example, my last post was <code>/post/apache-meecrowave-access-log</code> and after the migration it will be <code>/apache-meecrowave-access-log.html</code> so I want to rewrite the request path from the first pattern to the second one.</p>
+</div>
+<div class="paragraph">
+<p>The first step to handle these mapping was to extract the mapping between the new and old post.
+Since we iterate over all the posts we can indeed store all mappings but the rule is actually simpler: if it starts with <code>/post/</code>, capture what is after this prefix, drop this prefix and append <code>.html</code>.
+In terms of rewrite rule it can be written as this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-apache hljs" data-lang="apache">RewriteRule ^/post/([^/]+)$ /$1.html [L]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we split this line in segments we define a rewrite rule (rewrite the request),
+match a request on <code>/post/&lt;slug&gt;</code> extracting the <code>&lt;slug&gt;</code> part,
+replace this path by <code>/&lt;slug&gt;.html</code> and finally quit the rewrite evaluation (<code>[L]</code> - optional since we have a single rule ;)).</p>
+</div>
+<div class="paragraph">
+<p>Now I put this file in a war in <code>WEB-INF/rewrite.config</code> and define a <code>META-INF/context.xml</code> containing the rewrite valve declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Context&gt;
+  &lt;Valve className="org.apache.catalina.valves.rewrite.RewriteValve" /&gt;
+&lt;/Context&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And now we are good.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_packaging">Packaging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In terms of packaging it is mainly a matter of putting the generated website in an exploded war called <code>ROOT</code> to serve root context (<code>/</code>).</p>
+</div>
+<div class="paragraph">
+<p>What is interesting to note in this phase is that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>using an folder instead of an archive enables a better diff process to update the server (whatever technology you use),</p>
+</li>
+<li>
+<p>once the first migration is uploaded you only upload <code>.html</code> (and optionally a few assets) so the webapp can be generated once only and even manually - even if <code>maven-war-plugin</code> works well if you prefer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updates">Updates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now the website is functional and deployed but the last question is how to update/add content the new blog?
+Before it was mainly about connecting to the admin layer, writing the content and saving it.</p>
+</div>
+<div class="paragraph">
+<p>Now the process is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go in the blog project,</p>
+</li>
+<li>
+<p>Write the content in <code>src/main/minisite/content/&lt;my-new-blog-slug&gt;.adoc</code> - without forgetting the minisite blog metadata,</p>
+</li>
+<li>
+<p>Optionally check out the result using <code>mvn yupiik-tools:serve-minisite</code>,</p>
+</li>
+<li>
+<p>Upload the new files.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The very interesting point is that all this process but last step is offline compared to before which is a big win plus the content is written in a wiki format and not HTML directly.</p>
+</div>
+<div class="paragraph">
+<p>About the upload process I tend to have a FTP access to the server (thanks Metawerx :)) so I first looked at <code>lftp</code> or alike commands to have a kind of <code>rsync</code> between my local folder and the server but the process was not that accurate for this flow so I ended up writting a main I can run when i want to update the blog.</p>
+</div>
+<div class="paragraph">
+<p>The logic is:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>List all FTP files in the ROOT webapps (almost only the posts and index pages),</p>
+</li>
+<li>
+<p>List all blog files in the minisite output folder.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When both are the same it means there is nothing to update, when both are different there is a diff.</p>
+</div>
+<div class="paragraph">
+<p>The synchronization main implements a simple "mostly work" logic:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>all missing file on the remote server must be uploaded,</p>
+</li>
+<li>
+<p>all files which changes must be uploaded (here we rely on the size which is not perfect but generally works),</p>
+</li>
+<li>
+<p>never delete any file to prevent errors (this can still be done manually when really needed but it is not that common for a blog).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In terms of code I rely on <code>commons-net</code> and <code>component-runtime-junit</code> library.
+The first one gives me a FTP client and last one a way to read my FTP server password from my maven servers (ciphered):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;commons-net&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-net&lt;/artifactId&gt;
+  &lt;version&gt;3.8.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.talend.sdk.component&lt;/groupId&gt;
+  &lt;artifactId&gt;component-runtime-junit&lt;/artifactId&gt;
+  &lt;version&gt;1.31.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt; &lt;!-- no need of transitive deps --&gt;
+      &lt;groupId&gt;*&lt;/groupId&gt;
+      &lt;artifactId&gt;*&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+I use <code>provided</code> scope to ensure it is not bundled in the war when using <code>maven-war-plugin</code>. Similarly the plugin excludes <code>target/classes</code> from being bundled since it is only generation code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The next step is to create a FTP client pool class to be able to execute this process a bit concurrently (this is optional if you don&#8217;t use concurrency because your FTP server throttles accesses):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.commons.net.ftp.FTPClient;
+import org.talend.sdk.component.maven.Server;
+
+import java.io.IOException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.function.Function;
+
+public class FTPClientPool implements AutoCloseable {
+    private final BlockingQueue&lt;FTPClient&gt; clients;
+
+    public FTPClientPool(final int count, final Server credentials, final String host, final int port) throws IOException {
+        try {
+            clients = new ArrayBlockingQueue&lt;&gt;(count);
+            for (int i = 0; i &lt; count; i++) {
+                final var client = new FTPClient();
+                client.connect(host, port);
+                if (!client.login(credentials.getUsername(), credentials.getPassword())) {
+                    throw new IllegalArgumentException("Can't log in");
+                }
+                clients.add(client);
+            }
+        } catch (final RuntimeException | IOException re) {
+            close();
+            throw re;
+        }
+    }
+
+    public &lt;T&gt; T withClient(final Function&lt;FTPClient, T&gt; fn) throws InterruptedException {
+        final var client = clients.take();
+        try {
+            return fn.apply(client);
+        } finally {
+            clients.add(client);
+        }
+    }
+
+    @Override
+    public void close() {
+        clients.forEach(it -&gt; {
+            try {
+                it.disconnect();
+            } catch (final IOException e) {
+                // no-op
+            }
+        });
+        clients.clear();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This class has no real trick, it just creates a queue of ftp clients and when calling <code>withClient</code> provides a client to the caller as soon as possible.</p>
+</div>
+<div class="paragraph">
+<p>To make a diff between local and remote file we&#8217;ll use a record (or a POJO if you can&#8217;t use records) just comparing the file path (relative) and size:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">record FileSpec(String name, long size) {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main is now as simple as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public final class SynchronizeFTP {
+    public static void main(final String... args) throws Exception {
+        final var credentials = new MavenDecrypter().find("blog-ftp"); <i class="conum" data-value="1"></i><b>(1)</b>
+        final var pool = Executors.newWorkStealingPool(); <i class="conum" data-value="2"></i><b>(2)</b>
+        try (var ftp = new FTPClientPool(Integer.get("ftp.concurrency", 1), credentials, "xxxx.net", 21)) { <i class="conum" data-value="3"></i><b>(3)</b>
+            <i class="conum" data-value="4"></i><b>(4)</b>
+            final var remoteFiles = listFiles(pool, ftp, "/webapps/ROOT")
+                    .toCompletableFuture()
+                    .get();
+
+            <i class="conum" data-value="5"></i><b>(5)</b>
+            final var sourceFolder = Paths.get("target/rmannibucau-blog");
+            final var localFiles = listFiles(sourceFolder);
+
+            <i class="conum" data-value="6"></i><b>(6)</b>
+            final var diff = new ArrayList&lt;&gt;(localFiles);
+            diff.removeAll(remoteFiles);
+
+            if (!diff.isEmpty()) {
+                ftp.withClient(client -&gt; {
+                    diff.forEach(file -&gt; { <i class="conum" data-value="7"></i><b>(7)</b>
+                        final var from = sourceFolder.resolve(file.name());
+                        try (final var stream = Files.newInputStream(from)) {
+                            client.storeFile("/webapps/ROOT/" + file.name(), stream);
+                        } catch (final IOException e) {
+                            throw new IllegalStateException(e);
+                        }
+                    });
+                    return null;
+                });
+            }
+        } finally {
+            pool.shutdownNow();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>we fetch from <code>~/.m2/settings.xml</code> the credentials to use to connect to the ftp server,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>we create a thread pool to enable to executes concurrently some tasks (optional),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>we list files from the remote FTP but only in the "webapp"/blog folder (we ignore server files) - so we use <code>/webapps/ROOT</code> here,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>we do the same locally in the minisite folder (assumes <code>mvn yupiik-tools:minisite</code> was executed before),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>we diff both file sets based on the previous logic, here it is as simple as removing from the local files the ones already on the server (thanks records or POJO <code>equals/hashCode</code> to make this code that simple;)),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>if there is any file to upload, we grab a ftp client from our pool and upload it from the minisite output folder.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+real code has a bit more logs to know what is happening.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Listing local files is easy with Java NIO File API since it is mainly using <code>Files.walkFileTree</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private static List&lt;FileSpec&gt; listFiles(final Path path) throws IOException {
+    final var files = new ArrayList&lt;FileSpec&gt;(256);
+    Files.walkFileTree(path, new SimpleFileVisitor&lt;&gt;() {
+        @Override
+        public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) throws IOException {
+            final var filename = file.getFileName().toString();
+            <i class="conum" data-value="1"></i><b>(1)</b>
+            if (("war-tracker".equals(filename) || "MANIFEST.MF".equals(filename)) &amp;&amp;
+                    file.getParent() != null &amp;&amp; "META-INF".equals(file.getParent().getFileName().toString())) {
+                return FileVisitResult.SKIP_SUBTREE;
+            }
+            files.add(new FileSpec(path.relativize(file).toString().replace(File.separatorChar, '/'), Files.size(file)));
+            return super.visitFile(file, attrs);
+        }
+
+        @Override
+        public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
+            <i class="conum" data-value="1"></i><b>(1)</b>
+            if ("maven".equals(dir.getFileName().toString()) &amp;&amp;
+                    dir.getParent() != null &amp;&amp; "META-INF".equals(dir.getParent().getFileName().toString())) {
+                return FileVisitResult.SKIP_SUBTREE;
+            }
+            return super.preVisitDirectory(dir, attrs);
+        }
+    });
+    return files;
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the only trick this code has is to ignore not blog related resource when using <code>maven-war-plugin</code> (manifest is useless here, maven folder too and <code>war-tracker</code> is a tomcat marker file).
+All these files are not generated if you don&#8217;t use any default tooling - or it can be configured to be ignored - but it is easier to not prevent to use any tooling and integrate this exclusion list.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To list the FTP file code is similar but does not have a walk utility so we use a standard recursive logic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private static CompletionStage&lt;Collection&lt;FileSpec&gt;&gt; listFiles(final ExecutorService pool, final FTPClientPool ftp,
+                                                               final String dir) throws IOException {
+    final var files = new ArrayList&lt;FileSpec&gt;(256);
+    final FTPFile[] listFiles;
+    try {
+        listFiles = ftp.withClient(client -&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+            try {
+                return client.listFiles(dir);
+            } catch (final IOException e) {
+                throw new IllegalStateException(e);
+            }
+        });
+    } catch (final InterruptedException e) {
+        Thread.currentThread().interrupt();
+        throw new IllegalStateException(e);
+    }
+    final var promise = new CompletableFuture&lt;Collection&lt;FileSpec&gt;&gt;();
+    try {
+        pool.submit(() -&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+            var facade = CompletableFuture.&lt;Void&gt;completedFuture(null); <i class="conum" data-value="3"></i><b>(3)</b>
+            try {
+                for (final FTPFile ftpFile : listFiles) {
+                    <i class="conum" data-value="4"></i><b>(4)</b>
+                    if (("maven".equals(ftpFile.getName()) || "war-tracker".equals(ftpFile.getName()) || "MANIFEST.MF".equals(ftpFile.getName())) &amp;&amp;
+                            dir.endsWith("META-INF")) { // ignore these ones
+                        continue;
+                    }
+                    <i class="conum" data-value="5"></i><b>(5)</b>
+                    if (ftpFile.isFile()) {
+                        final var remoteFile = new FileSpec(ftpFile.getName(), ftpFile.getSize());
+                        synchronized (files) {
+                            files.add(remoteFile);
+                        }
+                    } else if (ftpFile.isDirectory()) {
+                        facade = facade <i class="conum" data-value="6"></i><b>(6)</b>
+                                .thenCompose(ignored -&gt; {
+                                    try {
+                                        return listFiles(pool, ftp, dir + '/' + ftpFile.getName());
+                                    } catch (final IOException e) {
+                                        throw new IllegalStateException(e);
+                                    }
+                                })
+                                .thenApply(list -&gt; list.stream()
+                                        .map(f -&gt; new FileSpec(ftpFile.getName() + '/' + f.name(), f.size()))
+                                        .collect(toList()))
+                                .thenAccept(list -&gt; {
+                                    synchronized (files) {
+                                        files.addAll(list);
+                                    }
+                                });
+                    }
+                }
+                facade.whenComplete((r, e) -&gt; { <i class="conum" data-value="7"></i><b>(7)</b>
+                    if (e != null) {
+                        promise.completeExceptionally(e);
+                    } else {
+                        promise.complete(files);
+                    }
+                });
+            } catch (final RuntimeException re) {
+                promise.completeExceptionally(re);
+            }
+        });
+    } catch (final RuntimeException re) { <i class="conum" data-value="8"></i><b>(8)</b>
+        promise.completeExceptionally(re);
+    }
+    return promise;
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>we start by listing children of a starting folder (we start from <code>/webapps/ROOT</code>),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>we will process the output in a thread pool (once again it depends if you FTP server supports it or not) to try to make it faster,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>our method will return a <code>CompletionStage</code> (promise) but we need to return only when nested folders are also visited so we create another promise which will stack nested folder visits to resolve the returned promise when all nested folders are processed (reactively),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>we exclude the same folders than the one we had for local directory,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>if the ftp file is a regular file we just append it to our result list,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>if the ftp file is a folder we launch a recursive processing and stack it on our promise facade to be notified when it is done,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>we are waiting for our facade completion (with an error or success) to complete the resulting promise (<code>promise</code>) and return to the caller the result,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>it is important to always handle synchronous error case with promises otherwise you can get callers awaiting indefinitively, since a thread pool submission can fail in some cases we must catch exceptions there too.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now, when I want to update my blog I can just run that main and I have exactly which files are changed and uploaded (<code>diff</code> is logged in practise).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_it_in_tomcat">Test it in Tomcat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To test in tomcat - a real tomcat not an embedded flavor - the easiest I found was to use Apache TomEE Maven plugin&#8230;&#8203;yes TomEE plugin supports a vanilla Tomcat ;).</p>
+</div>
+<div class="paragraph">
+<p>I used <code>maven-war-plugin</code> which enables to easily bundle the generated site excluding project classes (generation/migration code) and dependencies (by using <code>provided</code> scope).</p>
+</div>
+<div class="paragraph">
+<p>Then it is just a matter of configuring tomcat as distribution in TomEE plugin and to force the context to be <code>ROOT</code> and you can start the blog with <code>mvn [package] tomee:run</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugins&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.8.1&lt;/version&gt;
+    &lt;configuration&gt;
+      &lt;source&gt;16&lt;/source&gt;
+      &lt;target&gt;16&lt;/target&gt;
+      &lt;release&gt;16&lt;/release&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.3.1&lt;/version&gt;
+    &lt;configuration&gt;
+      &lt;failOnMissingWebXml&gt;false&lt;/failOnMissingWebXml&gt;
+      &lt;!-- ignore classes since it is a fully static website --&gt;
+      &lt;classesDirectory&gt;${project.build.directory}/skip-classes&lt;/classesDirectory&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;
+  &lt;plugin&gt; &lt;!-- to test or prepare an instance (version upgrade) --&gt;
+    &lt;groupId&gt;org.apache.tomee.maven&lt;/groupId&gt;
+    &lt;artifactId&gt;tomee-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;8.0.5&lt;/version&gt;
+    &lt;configuration&gt;
+      &lt;context&gt;ROOT&lt;/context&gt;
+      &lt;removeDefaultWebapps&gt;true&lt;/removeDefaultWebapps&gt;
+
+      &lt;tomeeGroupId&gt;org.apache.tomcat&lt;/tomeeGroupId&gt;
+      &lt;tomeeArtifactId&gt;tomcat&lt;/tomeeArtifactId&gt;
+      &lt;tomeeVersion&gt;10.0.4&lt;/tomeeVersion&gt;
+      &lt;tomeeClassifier&gt;ignore&lt;/tomeeClassifier&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+    &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0&lt;/version&gt;
+    &lt;executions&gt;
+      &lt;execution&gt;
+        &lt;id&gt;sync&lt;/id&gt;
+        &lt;phase&gt;none&lt;/phase&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;java&lt;/goal&gt;
+        &lt;/goals&gt;
+        &lt;configuration&gt;
+          &lt;mainClass&gt;com.github.rmannibucau.blog.migration.ftp.SynchronizeFTP&lt;/mainClass&gt;
+          &lt;classpathScope&gt;compile&lt;/classpathScope&gt;
+          &lt;includeProjectDependencies&gt;true&lt;/includeProjectDependencies&gt;
+          &lt;stopUnresponsiveDaemonThreads&gt;true&lt;/stopUnresponsiveDaemonThreads&gt;
+        &lt;/configuration&gt;
+      &lt;/execution&gt;
+    &lt;/executions&gt;
+  &lt;/plugin&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;io.yupiik.maven&lt;/groupId&gt;
+    &lt;artifactId&gt;yupiik-tools-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;1.0.9-SNAPSHOT&lt;/version&gt;
+    &lt;executions&gt;
+      &lt;execution&gt;
+        &lt;id&gt;generate-site&lt;/id&gt;
+        &lt;phase&gt;process-classes&lt;/phase&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;minisite&lt;/goal&gt;
+        &lt;/goals&gt;
+      &lt;/execution&gt;
+    &lt;/executions&gt;
+    &lt;configuration&gt;
+      &lt;!-- same as before --&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;
+&lt;/plugins&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Indeed the natural temptation is to reuse as much as possible and reduce the cost but for something as personal and custom as a blog and since now Java can almost be used as a scripting language (even if not interpreted), it is also important to ensure you use a tool adapted to <strong>you</strong> and not mix a ton of tools to have something almost ok.
+Maintenance is key and being static enables an easier tuning and future.</p>
+</div>
+<div class="paragraph">
+<p>More the tooling is complex more it has chances to fail. The tooling is really bare minimum now for my blog, I don&#8217;t rely on a javascript frontend, on advanced WYSIWYG widget to have something human friendly etc&#8230;&#8203;just two Java piece of code I can easily tweak and very few dependencies (actually only asciidoctor for the generation as important dependency and commons-net for the upload) so risk is way lower than it was before where angular, typescript, CKEditor, TomEE, CXF, &#8230;&#8203;.. were on the path.
+This is also true for the runtime, no more database, only files, "by construction" backup, easier output (I could now output PDF if I want whereas before it would have been complicated) and faster site loading (even if it had some optimizations before already).</p>
+</div>
+<div class="paragraph">
+<p>I also note the mix with Tomcat to handle the URL migration is very neat and avoids to require a third party tooling (another proxy or custom filter).</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-setup-basic-security-by-configuration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-meecrowave-access-log.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JavaEE Concurrency Utilities: propagate MDC easily!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,244 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="javaee-concurrency-utilities-mdc-propagation-html-container" class="container page-content javaee-concurrency-utilities-mdc-propagation-html is-blog">
+                        <div class="page-header">
+                <h1>JavaEE Concurrency Utilities: propagate MDC easily!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-07</span>, <span class="metadata-readingtime">4 min and 31 sec read</span></p>
+</div>
+<p>Applications are more and more &quot;reactive&quot; and even if orthogonal with asynchronism it is often mixed together to have an optimized application. What does it mean? That you go through multiple thread for a single request more and more often.</p>
+
+<p>A lot of frameworks are relying on MDC (or ThreadLocal values), in such a context how can the multi-threads usage (take care it doesn&#39;t mean multithreading only there)&nbsp;be smooth?</p>
+
+<p>Since JavaEE 7 you have EE Concurrency utilities&nbsp;API and it comes with a nice solution for that.</p>
+
+<h2>Overall need</h2>
+
+<p>Before digging into EE, let&#39;s see how we want to solve that.</p>
+
+<p>Concretely a MDC (often used in logging frameworks) or ThreadLocal is bound to one thread (take care to InheritedThreadLocal implementations which are a secure way to guarantee you will leak at some point).</p>
+
+<p>A MDC is globally a value so what we need is to retrieve this value and when switching of thread, reinitialize the MDC to the captured value and reset it once our task is done.</p>
+
+<p>Let&#39;s assume we have that simplified MDC implementation:</p>
+
+<pre>
+<code class="language-java">import java.util.HashMap;
+import java.util.Map;
+
+public class MDC {
+    private static final ThreadLocal&lt;Value&gt; VALUE = new ThreadLocal&lt;&gt;();
+
+    //
+    // lifeycle
+    //
+
+    public static void init(final Value init) {
+        VALUE.set(init);
+    }
+
+    public static void reset() {
+        VALUE.remove();
+    }
+
+    //
+    // accessors
+    //
+
+    public static &lt;T&gt; T get(final String key, final Class&lt;T&gt; type) {
+        return type.cast(VALUE.get().values.get(key));
+    }
+
+    public static &lt;T&gt; T set(final String key, final T value) {
+        return (T) VALUE.get().values.put(key, value);
+    }
+
+    //
+    // represents the value, can be anything
+    //
+    public static class Value {
+        private final Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+
+        // often some helper methods, skipped for the sample
+    }
+}
+</code></pre>
+
+<p>We clearly identify multiple parts in that MDC:</p>
+
+<ul>
+	<li>lifecycle methods (initialize and reset the thread local). These methods are most of the time provided by your framework (logback for instance) and often <em>init()</em>&nbsp;is transparent.</li>
+	<li>accessor methods are the way you modify and read the values (so the main goal of such API)</li>
+</ul>
+
+<p>In term of propagation here is what we would like to do:</p>
+
+<pre>
+<code class="language-java">public void runPropagating() {
+    Value state = MDC.getSomehowCurrentState();
+    executor.submit(() -&gt; {
+        MDC.init(state);
+        try {
+            // do the actual job
+        } finally {
+            MDC.reset();
+        }
+    });
+}</code></pre>
+
+<p>This simple code will propagate the MDC in the task executed in another thread (executor is just an&nbsp;<em>ExecutorService</em>/thread pool).</p>
+
+<p>Most of modern MDC will propose such &quot;state&quot; method. Only thing to take care is to ensure you have it immutable to avoid concurrency issues, in our case it could be:</p>
+
+<pre>
+<code class="language-java">public class MDC {
+    // skipping code not changing
+
+    public static Value state() {
+        return VALUE.get().copy();
+    }
+
+    public static class Value {
+        private final Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+
+        private Value copy() {
+            return new HashMap&lt;&gt;(values);
+        }
+    }
+}
+</code></pre>
+
+<p>This code works but is not that elegant. Let&#39;s see how EE concurrency utilities makes it a bit more elegant.</p>
+
+<h2>EE Concurrency Utilities to the rescue</h2>
+
+<p>If you analyze previous code, the only pitfall is to require some code in the submitted task. EE concurrency utilities provide a kind on interceptor for the task submitted to a&nbsp;<em>ManagedExecutorService</em>:&nbsp;<em>ManagedTaskListener</em>.</p>
+
+<p>This listener will provide you the hook when the task is started and the one with the task is stopped.</p>
+
+<p>Here is a proposal for our MDC issue:</p>
+
+<pre>
+<code class="language-java">public class MDCManagedTaskListener {
+    public MDCManagedTaskListener() {
+        value = MDC.state();
+    }
+
+    @Override
+    public void taskStarting(Future&lt;?&gt; future,
+                             ManagedExecutorService executor,
+                             Object task) {
+        MDC.init(value);
+    }
+
+    @Override
+    public void taskDone(Future&lt;?&gt; future,
+                         ManagedExecutorService executor,
+                         Object task, Throwable exception) {
+        MDC.reset();
+    }
+
+    @Override
+    public void taskSubmitted(Future&lt;?&gt; future,
+                              ManagedExecutorService executor,
+                              Object task) {
+        // no-op
+    }
+
+    @Override
+    public void taskAborted(Future&lt;?&gt; future,
+                            ManagedExecutorService executor,
+                            Object task, Throwable exception) {
+        // no-op
+    }
+}</code></pre>
+
+<p>Starting and done hooks gives you exactly the wrapping try/finally blocking of the previous snippets - even if the execution fails - which is a perfect fit for out MDC problem. The only trick of this code is the constructor which captures the MDC value to propagate in the caller thread (you can think to an implementation where you pass the value you want to propagate to the constructor too).</p>
+
+<p>To summarize: the constructor is executed first and in the caller thread with the initial MDC context and the starting/done hooks are executed in the&nbsp;<em>ManagedExecutorService</em>&nbsp;thread around the task.</p>
+
+<p>Now we have our listener how to bind it to our task? The specification provides some factory methods making it trivial to bind a&nbsp;<em>Runnable</em>&nbsp;or&nbsp;<em>Callable</em>&nbsp;to a&nbsp;<em>ManagedTaskListener</em>&nbsp;through&nbsp;<em>ManagedExecutors</em>:</p>
+
+<pre>
+<code class="language-java">Callable&lt;?&gt; task = ManagedExecutors.managedTask(
+     () -&gt; {/*whatever task you need*/},
+     new MDCManagedTaskListener())</code></pre>
+
+<p>Then just submit this task. Here what the service code can look like:</p>
+
+<pre>
+<code class="language-java">import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.concurrent.ManagedExecutors;
+import javax.enterprise.context.ApplicationScoped;
+import java.util.Date;
+import java.util.concurrent.Future;
+
+@ApplicationScoped
+public class PropagatingService {
+    @Resource
+    private ManagedExecutorService executor;
+
+    public Future&lt;String&gt; sendAndPropagate() {
+        MDC.set("test", "something important");
+        return executor.submit(ManagedExecutors.managedTask(
+                () -&gt; {/*your business can use MDC.get("test", String.class)*/},
+                new MDCManagedTaskListener()));
+    }
+}
+</code></pre>
+
+<p>If you want it to be even more automatic you can proxy the ManagedExecutorService to make this wrapping automatic and just use&nbsp;<em>@Inject ExecutorService</em>&nbsp;instead of the&nbsp;<em>@Resource </em>but that&#39;s not always needed.</p>
+
+<h2>Conclusion</h2>
+
+<p>Even if perfectly doable without EE concurrency utilities, relying on the <em>ManagedTaskListener</em>&nbsp;in a EE application can make very smooth the propagation of some MDC context of your stack. It allows you to limit&nbsp;the custom code to its minimum which is a pure gain for business applications.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-oauth2.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

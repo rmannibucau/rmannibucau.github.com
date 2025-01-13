@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Part 2 : Test &amp; package your oauth2 server</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,288 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cxf-oauth2-server-part-2-html-container" class="container page-content cxf-oauth2-server-part-2-html is-blog">
+                        <div class="page-header">
+                <h1>Part 2 : Test &amp; package your oauth2 server</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-07-28</span>, <span class="metadata-readingtime">3 min and 54 sec read</span></p>
+</div>
+<p>A simple way to test your oauth2 server is to use TomEE Embedded JUnit runner. It needs an application which defines the test, and it is simple for us. It defines that we need a random port (the runner will automatically deploy the classpath):</p>
+
+<pre>
+<code class="language-java">@Application
+public class App {
+   public static final String CLIENT_ID = "client";
+   public static final String CLIENT_SECRET = "secret";
+
+   @RandomPort("http")
+   private URL base;
+}</code></pre>
+
+<p>Then we need a client to be able to do an authentication request so we will persist it in an CDI bean observing a startup event (addClient()). This bean will also setup jaas for tests providing the absolute path of our jaas configuration file (setJaas()):</p>
+
+<pre>
+<code class="language-java">@Dependent // test doesnt have a beans.xml
+public final class Init {
+   @PersistenceContext
+   private EntityManager em;
+
+   @Resource
+   private UserTransaction ut;
+
+   void init(@Observes @Initialized(ApplicationScoped.class) final Object start) throws Throwable {
+       addClient();
+       setJaas();
+   }
+
+   private void setJaas() {
+       System.setProperty("java.security.auth.login.config", new File(jarLocation(App.class), "oauth2.jaas").getAbsolutePath());
+   }
+
+   private void addClient() throws NotSupportedException, SystemException, HeuristicMixedException, HeuristicRollbackException, RollbackException {
+       final ClientEntity entity = new ClientEntity();
+       entity.setId(CLIENT_ID);
+       entity.setSecret(CLIENT_SECRET);
+       entity.setConfidential(true);
+       ut.begin();
+       em.persist(entity);
+       ut.commit();
+   }
+}
+</code></pre>
+
+<p>Finally, we will define a test, getting a token and refreshing it:</p>
+
+<pre>
+<code class="language-java">@RunWith(TomEEEmbeddedSingleRunner.class)
+public class OAuth2Test {
+   @RandomPort("http")
+   private URL base;
+
+   @Inject
+   private OAuthDataProvider provider;
+
+   @Test
+   public void token() {
+       final Invocation.Builder request = ClientBuilder.newClient()
+               .target(base.toExternalForm())
+               .path("api/token")
+               .request(MediaType.APPLICATION_JSON_TYPE);
+
+       // get a token
+       final ClientAccessToken token = request
+               .post(Entity.entity(new Form()
+  .param(OAuthConstants.RESOURCE_OWNER_NAME, "test")
+  .param(OAuthConstants.RESOURCE_OWNER_PASSWORD, "pwd")
+  .param(OAuthConstants.CLIENT_ID, App.CLIENT_ID)
+  .param(OAuthConstants.CLIENT_SECRET, App.CLIENT_SECRET)
+  .param(OAuthConstants.GRANT_TYPE, OAuthConstants.RESOURCE_OWNER_GRANT),
+                       MediaType.APPLICATION_FORM_URLENCODED_TYPE), ClientAccessToken.class);
+       validateToken(token);
+
+       // refresh the token
+       final ClientAccessToken refreshedToken = request.post(Entity.entity(new Form()
+  .param(OAuthConstants.REFRESH_TOKEN, token.getRefreshToken())
+  .param(OAuthConstants.RESOURCE_OWNER_PASSWORD, "pwd")
+  .param(OAuthConstants.CLIENT_ID, App.CLIENT_ID)
+  .param(OAuthConstants.CLIENT_SECRET, App.CLIENT_SECRET)
+  .param(OAuthConstants.GRANT_TYPE, OAuthConstants.REFRESH_TOKEN_GRANT), MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+               ClientAccessToken.class);
+       validateToken(refreshedToken);
+       validateToken(token); // still valid
+   }
+
+   private void validateToken(final ClientAccessToken token) {
+       assertNotNull(token.getTokenKey());
+       assertNotNull(token.getRefreshToken());
+
+       final ServerAccessToken found = provider.getAccessToken(token.getTokenKey());
+       assertNotNull(found);
+       assertFalse(OAuthUtils.isExpired(found.getIssuedAt(), 3600L));
+   }
+}</code></pre>
+
+<h2>Bonus: fat jar</h2>
+
+<p>Using TomEE Embedded is easy to bundle this server as a jar. You can reuse tomee embedded main but since we need few parameters we can force, I will redefine it as below:</p>
+
+<pre>
+<code class="language-java">public final class OAuth2 {
+   public static void main(final String[] args) {
+       Main.main(new String[] {
+          "--as-war", "--single-classloader"
+       });
+   }
+}</code></pre>
+
+<p>Tip: TomEE 7.0.2 will provide this main as part of TomEE distribution (org.apache.tomee.embedded.FatApp). You can also desire to handle args forwarding to tomee-embedded main, if you need more control over the deployment like server.xml location for instance.</p>
+
+<p>This will simply deploy the jar as a war and avoid a webapp classloader (i.e. it will reuse the JVM classloader in this case).</p>
+
+<p>Then your pom<a href="https://github.com/rmannibucau/simple-oauth2/blob/master/pom.xml"> </a>will look like (click<a href="https://github.com/rmannibucau/simple-oauth2/blob/master/pom.xml"> on the link</a> for the complete version, here is a simplified one for the blog):</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+ &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;!-- simplified --&gt;
+
+ &lt;dependencies&gt;
+   &lt;dependency&gt;
+     &lt;groupId&gt;org.apache.tomee&lt;/groupId&gt;
+     &lt;artifactId&gt;javaee-api&lt;/artifactId&gt;
+     &lt;version&gt;7.0&lt;/version&gt;
+     &lt;scope&gt;provided&lt;/scope&gt;
+   &lt;/dependency&gt;
+
+   &lt;dependency&gt;
+     &lt;groupId&gt;org.apache.tomee&lt;/groupId&gt;
+     &lt;artifactId&gt;tomee-embedded&lt;/artifactId&gt;
+     &lt;version&gt;7.0.1&lt;/version&gt;   &lt;/dependency&gt;
+   &lt;dependency&gt;
+     &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+     &lt;artifactId&gt;cxf-rt-rs-security-oauth2&lt;/artifactId&gt;
+     &lt;version&gt;3.1.6&lt;/version&gt;
+   &lt;/dependency&gt;
+ &lt;/dependencies&gt;
+
+ &lt;build&gt;
+   &lt;plugins&gt;
+     &lt;plugin&gt;
+       &lt;groupId&gt;org.apache.openjpa&lt;/groupId&gt;
+       &lt;artifactId&gt;openjpa-maven-plugin&lt;/artifactId&gt;
+       &lt;version&gt;2.4.1&lt;/version&gt;
+       &lt;configuration&gt;
+         &lt;includes&gt;**/entity/*.class&lt;/includes&gt;
+       &lt;/configuration&gt;
+     &lt;/plugin&gt;
+     &lt;plugin&gt;
+       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+       &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+       &lt;version&gt;2.4&lt;/version&gt;
+       &lt;executions&gt;
+         &lt;execution&gt;
+           &lt;phase&gt;package&lt;/phase&gt;
+           &lt;goals&gt;
+             &lt;goal&gt;shade&lt;/goal&gt;
+           &lt;/goals&gt;
+           &lt;configuration&gt;
+             &lt;dependencyReducedPomLocation&gt;${project.build.directory}/reduced-pom.xml&lt;/dependencyReducedPomLocation&gt;
+             &lt;transformers&gt;
+               &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
+                 &lt;mainClass&gt;com.github.rmannibucau.oauth2.runner.OAuth2&lt;/mainClass&gt;
+               &lt;/transformer&gt;
+               &lt;transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"&gt;
+                 &lt;resource&gt;META-INF/cxf/bus-extensions.txt&lt;/resource&gt;
+               &lt;/transformer&gt;
+               &lt;transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"&gt;
+                 &lt;resource&gt;META-INF/openwebbeans/openwebbeans.properties&lt;/resource&gt;
+               &lt;/transformer&gt;
+             &lt;/transformers&gt;
+             &lt;filters&gt;
+               &lt;filter&gt;
+                 &lt;artifact&gt;*:*&lt;/artifact&gt;
+                 &lt;excludes&gt;
+                   &lt;exclude&gt;META-INF/faces-config.xml&lt;/exclude&gt;
+                 &lt;/excludes&gt;
+               &lt;/filter&gt;
+             &lt;/filters&gt;
+           &lt;/configuration&gt;
+         &lt;/execution&gt;
+       &lt;/executions&gt;
+     &lt;/plugin&gt;
+   &lt;/plugins&gt;
+ &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>Points to note are:</p>
+
+<ul>
+	<li>
+	<p>Openjpa plugin to enhance entities if you rely on OpenJPA as JPA provider to avoid surprises at runtime</p>
+	</li>
+	<li>
+	<p>The shade plugin defines our OAuth2 main as mainClass</p>
+	</li>
+	<li>
+	<p>We merge cxf-extensions.txt on one side and openwebbeans.properties on the other side files during the shade to not lose any configuration of both libraries</p>
+	</li>
+	<li>
+	<p>We exclude tomee faces-config.xml because we don&rsquo;t need JSF in this project</p>
+	</li>
+</ul>
+
+<p>And that&rsquo;s it! Run mvn package and in target you will get a OAuth2 server runnable with java -jar simple-oauth2-1.0-SNAPSHOT.jar!</p>
+
+<p>Tip: as we used JPA for the persistence, you may need to define a datasource. And as it is TomEE you can do it using system properties:</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code>java -jar simple-oauth2-1.0-SNAPSHOT.jar
+    -Dds=new://Resource?type=DataSource
+    -Dds.JdbcUrl=jdbc:mysql://localhost:3306/oauth2
+    -Dds.JdbcDriver=com.mysql.jdbc.Driver
+    -Dds.UserName=oauth2
+    -Dds.Password=xsdgedugede=
+    -Dds.PasswordCipher=crypto</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>CXF provides much more oauth2 features, including implicit flow handler, JWT support etc... Most of the code you need to write is the persistence of the tokens.</p>
+
+<p>This makes it very easy to have an OAuth2 server and can be a good solution avoiding custom security mechanism handling which are often hard to maintain on the long term. The JWT integration also opens very nice doors for applications with a javascript frontend since the JWT can hold all the data you want and can avoid several round trips with the server for user&rsquo;s metadata.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomcat-tomee-log4j2-setup.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cxf-oauth2-server-part-1.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

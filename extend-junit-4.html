@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Extend JUnit Part 1: JUnit 4</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="extend-junit-4-html-container" class="container page-content extend-junit-4-html is-blog">
+                        <div class="page-header">
+                <h1>Extend JUnit Part 1: JUnit 4</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-01-03</span>, <span class="metadata-readingtime">12 min and 37 sec read</span></p>
+</div>
+<p>JUnit is the most used testing framework in Java world. You will likely encounter a lot of companions like Assertj but the backbone is generally JUnit. The only real concurrent is TestNG and except for some specific usages like Test Compatibility Kit of the specifications, it never got a lot of attraction for developers. One of the reasons is probably a better integration in the whole tooling suite for JUnit (IDE are deeply integration with it compared to TestNG integrations which are good but not that advanced in general.</p>
+
+<p>In any case the fact is you will likely have to work with JUnit tests. A JUnit test is often based on this kind of lifecycle:</p>
+
+<pre>
+<code class="language-java">start class
+    execute class before hooks (@BeforeClass)
+        execute test before hooks (@Before)
+            execute test (@Test)
+        execute test after hooks (@After)
+    execute class after hooks (@AfterClass)
+end class</code></pre>
+
+<p>This high level lifecycle works for the default JUnit runner but is generally respected by most runners (except cucumber-jvm one maybe but this is for good reasons).</p>
+
+<p>The important things to note are:</p>
+
+<ol>
+	<li>The lifecycle is symmetric (a before hook has a symmetric after hook). This is very important to be able to create/destroy resources.</li>
+	<li>You have hooks to execute code once per class and once per method.</li>
+	<li>All these hooks are inside an &quot;execution&quot; for the class (first and last lines)</li>
+</ol>
+
+<p>This is the part known by most developers and this is where it becomes interesting. You can rephrase the last two statements this way:</p>
+
+<ol>
+	<li>You can decorate the class execution (respectively, you can decorate the test execution) with custom logic.</li>
+	<li>JUnit orchestrate the test class execution.</li>
+</ol>
+
+<p>This is the two concepts we will dig into with JUnit 4 in this post.</p>
+
+<p>Before going deeper into the implementation, don&#39;t forget you need to add this dependency into your project to be able to test this post examples:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;junit&lt;/groupId&gt;
+  &lt;artifactId&gt;junit&lt;/artifactId&gt;
+  &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<h2>JUnit Runners</h2>
+
+<p>The orchestration of the test is done by what JUnit 4 calls a&nbsp;<em>Runner</em>. A&nbsp;<em>Runner</em>&nbsp;is responsible to prepare the execution of the JUnit test class. It is literally the one converting the class to something runnable. The default - and implicit - runner, called&nbsp;<em>JUnit4</em>&nbsp;or&nbsp;<em>BlockJUnit4ClassRunner</em>,&nbsp; does the lifecycle we saw previoulsy (with a small difference we will see in next part). Most of custom runners will inherit from this behavior.</p>
+
+<p>However note that you can also implement it in a custom and completely different way. For instance cucumber-jvm runner doesn&#39;t use that and just defines its own lifecycle since scenarii and features don&#39;t fit well this default lifecycle. Also note that there is an abstract runner you can extend which shares most of the previous lifecycle without going that deep, the&nbsp;<em>ParentRunner&nbsp;</em>defines a hierarchic execution: the class represents the root and has a list of child you can execute. Finally if you really want a custom lifecycle you just extend&nbsp;<em>Runner</em>&nbsp;class.</p>
+
+<p>To set a runner for a particular class you add on your test class the annotation&nbsp;<em>@RunWith</em>&nbsp;and pass the runner to use as parameter.</p>
+
+<p>Here is an example using the default runner (here it is just expliciting the default):</p>
+
+<pre>
+<code class="language-java">@RunWith(JUnit4.class)
+public class SomeServiceTest {
+    @Test
+    public void run() {
+        // ...
+    }
+}</code></pre>
+
+<h3>Implement your first runner</h3>
+
+<p>If you want to implement a custom lifecycle you will extend&nbsp;<em>Runner</em>&nbsp;and need to implement two methods:</p>
+
+<pre>
+<code class="language-java">public class MyFirstRunner extends Runner {
+    private final Class&lt;?&gt; clazz;
+
+    public MyFirstRunner(final Class&lt;?&gt; testClass) {
+        this.clazz = testClass;
+    }
+
+    @Override
+    public Description getDescription() {
+        return null; // todo
+    }
+
+    @Override
+    public void run(final RunNotifier notifier) {
+        // todo
+    }
+}</code></pre>
+
+<p>The description is the one for the test and the run the hook where you implement you own lifecycle. Also note you MUST have a public constructor taking the test class as parameter.</p>
+
+<p>There are static utilities to create the description. Since our runner represents a suite we can just call the relative utility:</p>
+
+<pre>
+<code class="language-java">return Description.createSuiteDescription(clazz);</code></pre>
+
+<p>And the run is what you need for this runner, for instance:</p>
+
+<pre>
+<code class="language-java">@Override
+public void run(final RunNotifier notifier) {
+    System.out.println("Running " + clazz);
+}</code></pre>
+
+<p>Now if you set it on a class with the&nbsp;<em>@RunWith</em>&nbsp;annotation and execute it, you will see the corresponding output.</p>
+
+<p>This is a good start but not yet very useful. You probably noticed the run method takes a notifier as parameter. This is the one which makes you able to notify JUnit which part of the lifecycle you execute. All is based on description, for each test, and you can notify if you start a test, if the test suceeded/failed, if the test is skipped etc...</p>
+
+<p>Here is how the notifier is often used:</p>
+
+<pre>
+<code class="language-java">@Override
+public void run(final RunNotifier notifier) {
+    getTestDescriptions().forEach(description -&gt; {
+        notifier.fireTestStarted(description);
+        try {
+            doExecuteTest(description);
+        } catch (final AssumptionViolatedException e) {
+            notifier.fireTestAssumptionFailed(new Failure(description, e));
+        } catch (final Throwable e) {
+            notifier.fireTestFailure(new Failure(description, e));
+        } finally {
+            notifier.fireTestFinished(description);
+        }
+    });
+}</code></pre>
+
+<p>This snippet assumes you have a&nbsp;<em>getTestDescriptions()</em>&nbsp;to find the tests to execute and a&nbsp;<em>doExecuteTest()</em>&nbsp;to actually run a test from its description. Then all the rest of the code is the lifecycle handling of the test and the communication with the notifier which can be seen as a JUnit bus here.</p>
+
+<p>Note: the actual lifecycle of the default runner is a bit more complicated because it handles&nbsp;<em>@Ignore</em>&nbsp;and&nbsp;<em>MultipleFailureException.</em>&nbsp;You can reuse&nbsp;<em>EachTestNotifier</em>&nbsp;to get an abstraction to simplify this lifecycle handling.</p>
+
+<h3>Implement your hierarchic runner</h3>
+
+<p>Going that high in the runner hierarchy is a bit rude, often you extend the default runner or just the&nbsp;<em>ParentRunner</em>. The default runner extension is straight forward and you just plug some custom logic in the child methods so we&#39;ll dig into the other solution which is more intesting: the parent runner.</p>
+
+<p>The parent runner defines a set of children to execute. Therefore the API enforces you to define how to find your children, how to describe them and how to execute them:</p>
+
+<pre>
+<code class="language-java">public class MyHierarchicRunner extends ParentRunner&lt;Class&lt;?&gt;&gt; {
+    protected MyHierarchicRunner(final Class&lt;?&gt; testClass) throws InitializationError {
+        super(testClass);
+    }
+
+    @Override
+    protected List&lt;Class&lt;?&gt;&gt; getChildren() {
+        return null;
+    }
+
+    @Override
+    protected Description describeChild(Class&lt;?&gt; child) {
+        return null;
+    }
+
+    @Override
+    protected void runChild(Class&lt;?&gt; child, RunNotifier notifier) {
+
+    }
+}</code></pre>
+
+<p>If you implement this runner it means you have a custom API. To illustrate it, we will&nbsp;assume we have a test class which is just a container and we actually want to execute all the nested classes which are&nbsp;<em>Runnable</em>. It can look like:</p>
+
+<pre>
+<code class="language-java">@RunWith(MyHierarchicRunner.class)
+public class MyHierarchicTest {
+    public static class MyTest1 implements Runnable {
+        @Override
+        public void run() {
+            Assert.assertTrue(true);
+        }
+    }
+
+    public static class MyTest2 implements Runnable {
+        @Override
+        public void run() { // fails for the demo
+            Assert.assertTrue(false);
+        }
+    }
+}</code></pre>
+
+<p>This is indeed just for the demo but give an idea of what we want to achieve: each static nested class will get instantiated and executed&nbsp;(<em>run()</em>) as a test.</p>
+
+<p>Here is how we can implement that in our runner:</p>
+
+<pre>
+<code class="language-java">public class MyHierarchicRunner extends ParentRunner&lt;Class&lt;?&gt;&gt; {
+    public MyHierarchicRunner(final Class&lt;?&gt; testClass) throws InitializationError {
+        super(testClass);
+    }
+
+    @Override
+    protected List&lt;Class&lt;?&gt;&gt; getChildren() {
+        return Stream.of(getTestClass().getJavaClass().getClasses())
+                .filter(c -&gt; {
+                    final int modifiers = c.getModifiers();
+                    return Modifier.isStatic(modifiers) &amp;&amp;
+                            Modifier.isPublic(modifiers) &amp;&amp;
+                            Runnable.class.isAssignableFrom(c);
+                })
+                .collect(toList());
+    }
+
+    @Override
+    protected Description describeChild(final Class&lt;?&gt; child) {
+        return Description.createTestDescription(child, child.getSimpleName());
+    }
+
+    @Override
+    protected void runChild(final Class&lt;?&gt; child, final RunNotifier notifier) {
+        final EachTestNotifier eachNotifier = new EachTestNotifier(notifier, describeChild(child));
+        eachNotifier.fireTestStarted();
+        try {
+            Runnable.class.cast(child.getConstructor().newInstance()).run();
+        } catch (final AssumptionViolatedException e) {
+            eachNotifier.addFailedAssumption(e);
+        } catch (final Throwable e) {
+            eachNotifier.addFailure(e);
+        } finally {
+            eachNotifier.fireTestFinished();
+        }
+    }
+}
+</code></pre>
+
+<p>Our find children method just filters nested classes to find the public static ones implementing&nbsp;<em>Runnable</em>, the description of each test is built based on the class name and the execution reuses the previous notifier integration and the execution is just the call to the&nbsp;<em>run()</em>&nbsp;method of the&nbsp;<em>Runnable</em>. Simple no?</p>
+
+<p>Implementing custom runners is quite straight forward but for simple integrations and common needs it is too deep into the JUnit stack. It also has a very strong limitation: you can have a single runner per class, no way to compose them without recoding a custom runner which can be very tricky. This is why next part will show you how to extend JUnit 4 more easily to be more efficient and get an easier maintenance.</p>
+
+<h2>JUnit rules: the natural extension point</h2>
+
+<p>Writing a custom runner opens you a lot of doors and capabilities but is also quite rigid and strict, in particular when it comes to the composition of runners.</p>
+
+<p>To make it simpler to extend JUnit, the framework added to the default runner what it calls&nbsp;<em>Rules</em>. If you are familiar with JavaEE - including Spring ;) - programming model, it is really what is commonly called&nbsp;<em>interceptors</em>&nbsp;or&nbsp;<em>aspects</em>. The main difference with these other implementations of this pattern is the lack of context which goes through the rule itself in JUnit.</p>
+
+<p>Before digging into what rules are, it is important to understand the concept of JUnit&nbsp;<em>Statement</em>. A Statement is basically an execution in the generic way. It can be a method, a method with its before/after hooks, a class execution etc...</p>
+
+<p>Seen like that you already see where the rule idea is coming from: the decoration of statements.</p>
+
+<p>JUnit statement is just a class which defines an&nbsp;<em>evaluate()</em>&nbsp;method which does its execution. It is really a&nbsp;<em>Runnable</em>&nbsp;from a design perspective.</p>
+
+<p>What we commonly call a&nbsp;<em>Rule</em>&nbsp;is actually an implementation of&nbsp;<em>TestRule</em>&nbsp;interface:</p>
+
+<pre>
+<code class="language-java">public interface TestRule {
+    Statement apply(Statement base, Description description);
+}</code></pre>
+
+<p>As you can see, it takes a&nbsp;<em>Statement</em>&nbsp;and a <em>Description</em>&nbsp;corresponding to the decorated object and it returns a new&nbsp;<em>Statement</em>&nbsp;which replaces the first one. As mentionned earlier: just the plain old decorator pattern.</p>
+
+<p>JUnit provides some built-in rules like:</p>
+
+<ul>
+	<li><em>ErrorCollector</em>: allows to continues the execution of a test even after the first failure</li>
+	<li><em>ExternalResource</em>: converts the decorator pattern in two hooks:&nbsp;<em>before()</em>&nbsp;and&nbsp;<em>after()</em></li>
+	<li><em>TemporaryFolder</em>: creates a temporary folder per execution and gives control to creates temporary files</li>
+	<li><em>Timeout</em>: allows to set a time limit for the test execution</li>
+	<li><em>ExpectedException</em>: allows to test the first execption thrown by a test</li>
+	<li><em>DisableOnDebug</em>: allows to disable a decorated rule if you pass&nbsp;debug the JUnit JVM</li>
+</ul>
+
+<p>You can already see that even built-in rules can be designed to be used as decorators.</p>
+
+<p>What is interesting is to understand that the most common pattern when implementing a rule is this one:</p>
+
+<pre>
+<code class="language-java">public class MyFirstTestRule implements TestRule {
+    @Override
+    public Statement apply(final Statement base, final Description description) {
+        return new Statement() {
+            @Override
+            public void evaluate() throws Throwable {
+                final MyRuleState state = doStart(description);
+                try {
+                    base.evaluate();
+                } finally {
+                    state.stop();
+                }
+            }
+        };
+    }
+
+    private State start(final Description description) {
+        // ...
+    }
+}</code></pre>
+
+<p>The rule creates a new&nbsp;<em>Statement</em>&nbsp;which delegates the main execution to the original one (<em>base</em>). It also adds some execution before delegating the execution to the original statement and execute some code after. Indeed the&nbsp;<em>ExternalResource</em>&nbsp;abstraction simplifies it but the fact it doesn&#39;t handle a state assumes you pass it through the rule instance which prevents to handle it per thread and run concurrently the tests. Can be an issue or not depending your setup. The previous skeleton doesn&#39;t have this issue using an internal state to avoid to store the state in the rule instance.</p>
+
+<p>Now you have a rule, to use it you have a choice to do:</p>
+
+<ul>
+	<li>decorate a single test execution</li>
+	<li>decorate all the tests execution</li>
+</ul>
+
+<p>In other words: do you bind your rule to the before/after hooks or beforeclass/afterclass ones.</p>
+
+<p>Note: even if at the same level from a design point of view, the rule are nested in terms of decoration if you compare them to the native hooks (<em>@Before/@After </em>and<em> @BeforeClass/@AfterClass</em>).</p>
+
+<p>Once you picked the decorated execution you just have to declare your rule as required by JUnit in your test class:</p>
+
+<ul>
+	<li>class rule: use a <em>public static</em>&nbsp;field decorated with&nbsp;<em>@ClassRule</em></li>
+	<li>test rule: use a <em>public</em>&nbsp;field decorated with&nbsp;<em>@Rule</em></li>
+</ul>
+
+<p>As an example is worth a thousand words, here is what it can look like:</p>
+
+<pre>
+<code class="language-java">public class RuleTest {
+    @ClassRule
+    public static final TestRule GLOBAL = new MyFirstLoggingTestRule("Around all tests");
+
+    @Rule
+    public final TestRule perTest = new MyFirstLoggingTestRule("Around each test");
+
+    @Test
+    public void test1() {
+        System.out.println("Test 1");
+    }
+
+    @Test
+    public void test2() {
+        System.out.println("Test 2");
+    }
+}
+</code></pre>
+
+<p>And if you execute it, you get as expected this output:</p>
+
+<pre>
+<code>Start &gt; Around all tests
+Start &gt; Around each test
+Test 1
+Stop &gt; Around each test
+Start &gt; Around each test
+Test 2
+Stop &gt; Around each test
+Stop &gt; Around all tests</code></pre>
+
+<p>Tip: if you need a custom API access, you can use the description to read annotations. For instance if you have a&nbsp;<em>@Debug</em>&nbsp;annotation you can put on the corresponding description (class for class rules and method for rules) which will activate or not some logging statement you can read it this way:</p>
+
+<pre>
+<code class="language-java">private State start(final Description description) {
+    final Debug debug = description.getAnnotation(Debug.class);
+    if (debug == null) {
+        return new State(); // no-op
+    }
+    System.out.println("Start &gt; " + message);
+    return new State() {
+        @Override
+        public void stop() {
+            System.out.println("Stop &gt; " + message);
+        }
+    };
+}</code></pre>
+
+<p>The&nbsp;<em>Description</em>&nbsp;is the abstraction of the decorated object. You can access the class using the&nbsp;<em>getTestClass()</em>&nbsp;method of the description but it can return null since the runner can use something else to create the description and fill the annotations with another way - including a fully configured and not programmative way.</p>
+
+<p>Rules are very useful, you can check out my <a href="https://github.com/rmannibucau/rule-them-all" target="_blank">rule-them-all</a>&nbsp;project to see some examples of them to set system properties in the scope of a test, start a ftp or sftp server, use spring as a rule instead of a runner to be able to compose it with other rules (and start spring context after the sftp server for instance) etc...</p>
+
+<p>And this is the last thing we need to check out to be complete in the context of this post: the composition. Because if you define this test class you can get some surprises:</p>
+
+<pre>
+<code class="language-java">public class RuleTest {
+    @Rule
+    public final TestRule perTest1 = new MyFirstLoggingTestRule("Around each test #1");
+
+    @Rule
+    public final TestRule perTest2 = new MyFirstLoggingTestRule("Around each test #2");
+
+    @Test
+    public void test() {
+        System.out.println("Test");
+    }
+}</code></pre>
+
+<p>Java doesn&#39;t guarantee anymore the order of the fields in a class so using the reflection as does JUnit you can&#39;t guarantee&nbsp;<em>perTest1&nbsp;</em>is launched before&nbsp;<em>perTest2</em>. This can be an issue if the first rule starts a server and set the port in a system property to let the second rule use this system property as a placeholder. Rules are often coupled this way, in particular the last rule which starts the context/container.</p>
+
+<p>To solve that, JUnit introduces the&nbsp;<em>RuleChain</em>&nbsp;rule which is a rule defining an order between other rules:</p>
+
+<pre>
+<code class="language-java">public class RuleTest {
+    @Rule
+    public final TestRule perTest2 = RuleChain.emptyRuleChain()
+            .around(new MyFirstLoggingTestRule("Around each test #1"))
+            .around(new MyFirstLoggingTestRule("Around each test #2"));
+
+    @Test
+    public void test() {
+        System.out.println("Test");
+    }
+}</code></pre>
+
+<p>This way you can guarantee the order of your rules and that you are fully deterministic and functional.</p>
+
+<p>Last tip: you can need some rule instance. Typically a rule starting/stopping a server will expose a&nbsp;<em>getPort()</em>&nbsp;method. This is fully compatible with this chaining since you can use plain references in the chain and keep the instance in the class:</p>
+
+<pre>
+<code class="language-java">public class RuleTest {
+    private final MyFirstLoggingTestRule first = new MyFirstLoggingTestRule("Around each test #1");
+    private final MyFirstLoggingTestRule second = new MyFirstLoggingTestRule("Around each test #2");
+
+    @Rule
+    public final TestRule perTest2 = RuleChain.emptyRuleChain()
+            .around(first)
+            .around(second);
+
+    @Test
+    public void test() {
+        System.out.println("Test/" + first.getMessage() + "/" + second.getMessage());
+    }
+}</code></pre>
+
+<p>With this simple refactoring which doesn&#39;t change anything to the lifecycle of the test execution, you can now use the rule instances and access their state if any.</p>
+
+<p>Happy testing!</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//extend-junit-5.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-local-maven-server.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

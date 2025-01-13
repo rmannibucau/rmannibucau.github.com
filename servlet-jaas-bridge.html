@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Use Servlet Authentication from a JAAS LoginModule</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,209 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="servlet-jaas-bridge-html-container" class="container page-content servlet-jaas-bridge-html is-blog">
+                        <div class="page-header">
+                <h1>Use Servlet Authentication from a JAAS LoginModule</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-10</span>, <span class="metadata-readingtime">3 min and 9 sec read</span></p>
+</div>
+<p>Some applications rely on JAAS to be portable in multiple environment and bypass Servlet 3.0 authentication. This can be useful is you need to run in a Servlet container but also an OSGi one like Karaf or even a plain standalone application. However when in your Servlet container it requires some advanced setup and prevent you to rely on your container security mecanism which is quite a pitfall.</p>
+
+<h2>Reminder: Servlet security API vs JAAS</h2>
+
+<p>As a quick reminder here is what Servlet 3.x proposes you:</p>
+
+<pre>
+<code class="language-java">httpRequest.login(user, password);
+Principal pcp = httpRequest.getUserPrincipal();</code></pre>
+
+<p>On another side JAAS requires a&nbsp;<em>LoginModule</em>:</p>
+
+<pre>
+<code class="language-java">public interface LoginModule {
+  void initialize(Subject subject, CallbackHandler callbackHandler,
+                  Map&lt;String, ?&gt; sharedState, Map&lt;String, ?&gt; options);
+  boolean login() throws LoginException;
+  boolean commit() throws LoginException;
+  boolean abort() throws LoginException;
+  boolean logout() throws LoginException;
+}</code></pre>
+
+<h2>The bridge</h2>
+
+<p>The bridge idea is simple: capture the subject and handlers in&nbsp;<em>initialize()</em>&nbsp;then call the request&nbsp;<em>login()</em>&nbsp;method in&nbsp;<em>login()</em>&nbsp;and in&nbsp;<em>commit()</em>&nbsp;add the principal to the subject - of course <em>abort()</em> and <em>logout()</em>&nbsp;would cleanup the state if needed.</p>
+
+<p>Issue is: how do I get the request from JAAS? You can write a filter, set the request in a&nbsp;<em>ThreadLocal&lt;HttpServletRequest&gt;</em>&nbsp;and just use that reference but if you run in a CDI container like TomEE or Meecrowave for instance, you can just lookup the request from CDI:</p>
+
+<pre>
+<code class="language-java">final BeanManager beanManager = CDI.current().getBeanManager();
+final HttpServletRequest request =
+        HttpServletRequest.class.cast(
+                beanManager.getReference(
+                        beanManager.resolve(beanManager.getBeans(HttpServletRequest.class)),
+                        HttpServletRequest.class,
+                        beanManager.createCreationalContext(null)));</code></pre>
+
+<p>So globally here is your login module:</p>
+
+<pre>
+<code class="language-java">public class ServletLoginModule implements LoginModule {
+    private Subject subject;
+    private CallbackHandler callbackHandler;
+
+    private Principal principal;
+
+    @Override
+    public void initialize(final Subject subject, final CallbackHandler callbackHandler,
+                           final Map&lt;String, ?&gt; sharedState, final Map&lt;String, ?&gt; options) {
+        this.subject = subject;
+        this.callbackHandler = callbackHandler;
+    }
+
+    @Override
+    public boolean login() throws LoginException {
+        final Callback[] callbacks = new Callback[2];
+        callbacks[0] = new NameCallback("Username: ");
+        callbacks[1] = new PasswordCallback("Password: ", false);
+        try {
+            callbackHandler.handle(callbacks);
+        } catch (IOException | UnsupportedCallbackException e) {
+            throw new LoginException(e.toString());
+        }
+
+        final BeanManager beanManager = CDI.current().getBeanManager();
+        final HttpServletRequest request =
+                HttpServletRequest.class.cast(
+                        beanManager.getReference(
+                                beanManager.resolve(beanManager.getBeans(HttpServletRequest.class)),
+                                HttpServletRequest.class,
+                                beanManager.createCreationalContext(null)));
+
+        try {
+            request.login(NameCallback.class.cast(callbacks[0]).getName(), new String(PasswordCallback.class.cast(callbacks[1]).getPassword()));
+        } catch (final ServletException e) {
+            throw new LoginException(e.getMessage());
+        }
+
+        principal = request.getUserPrincipal();
+
+        return principal != null;
+    }
+
+    @Override
+    public boolean commit() throws LoginException {
+        if (!subject.getPrincipals().contains(principal)) {
+            subject.getPrincipals().add(principal);
+            if (GenericPrincipal.class.isInstance(principal)) {
+                final String roles[] = GenericPrincipal.class.cast(principal).getRoles();
+                for (final String role : roles) {
+                    subject.getPrincipals().add(new GenericPrincipal(role, null, null));
+                }
+
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean abort() throws LoginException {
+        principal = null;
+        return true;
+    }
+
+    @Override
+    public boolean logout() throws LoginException {
+        subject.getPrincipals().remove(principal);
+        return true;
+    }
+}</code></pre>
+
+<p>Here in commit we have a little trick using Tomcat&nbsp;<em>GenericPrincipal</em>&nbsp;to get back the roles but it is not always needed - depends your application.</p>
+
+<h2>Setup this realm</h2>
+
+<p>To setup this realm you need to configure it in your JAAS config file:</p>
+
+<pre>
+<code>myrealm {
+   com.rmannibucau.blog.ServletLoginModule required;
+};</code></pre>
+
+<p>Then if you login using the realm&nbsp;<em>myrealm</em>&nbsp;you will use our servlet login module and therefore servlet security.</p>
+
+<p>However you can go further if you manage the boot of your application.</p>
+
+<p>Suppose we extend&nbsp;<em>javax.security.auth.login.Configuration</em>&nbsp;in a class called&nbsp;<em>MyConfig</em>&nbsp;this way:</p>
+
+<pre>
+<code class="language-java">public class MyConfig extends Configuration {
+    private final AppConfigurationEntry[] entries = new AppConfigurationEntry[]{
+      new AppConfigurationEntry(ServletLoginModule.class.getName(), AppConfigurationEntry.LoginModuleControlFlag.REQUIRED, new HashMap&lt;&gt;())
+    };
+
+    @Override
+    public AppConfigurationEntry[] getAppConfigurationEntry(final String name) {
+        return "myrealm".equals(name) ? entries : null;
+    }
+}</code></pre>
+
+<p>and if you set the&nbsp;<em>Security</em>&nbsp;property&nbsp;<em>login.configuration.provider</em>&nbsp;to be this class:</p>
+
+<pre>
+<code class="language-java">java.security.Security.setProperty(key, MyConfig.class.getName());</code></pre>
+
+<p>Then you don&#39;t need to set any JAAS system property or use any&nbsp;<em>login.config</em>&nbsp;file. Everything is in memory :).</p>
+
+<h2>Conclusion</h2>
+
+<p>JAAS is not the easiest API ever but it is flexible enough to match today&#39;s embedded applications (microservices?). It is also not very hard to bridge it with servlet containers to have a portable accross most environments security layer.</p>
+
+<p>Of course this code only works if authentication is done with a request otherwise you need a fallback but this is a rare usage.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cxf-request-dispatcher-provider.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//daemon-batch-tomcat.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

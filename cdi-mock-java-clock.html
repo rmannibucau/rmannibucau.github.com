@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to mock java Clock with CDI</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,250 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-mock-java-clock-html-container" class="container page-content cdi-mock-java-clock-html is-blog">
+                        <div class="page-header">
+                <h1>How to mock java Clock with CDI</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-04-23</span>, <span class="metadata-readingtime">5 min and 20 sec read</span></p>
+</div>
+<p>Timing tests are always a pain, in particular because it is very tempting to use <em>Thread.sleep()</em>&nbsp;and then your tests will easily be flacky.</p>
+
+<p>However since java 8, there is the&nbsp;<em>Clock</em>&nbsp;API which enables to be a bit more flexible. Let see how to use it to make the tests way more reliable.</p>
+
+<h2>Your own Clock</h2>
+
+<p>The first need in a test is generally to become the master of time (i.e. be able to make the time moving at the rate your want). To illustrate that, here is a sample test representing not that bad all test harnessing window based implementations (rate limiting, circuit breaker, batch, ...):</p>
+
+<pre>
+<code class="language-java">@Test
+void doTest() {
+    doSomethingInCurrentWindow();
+    moveToNextWindow();
+    doSomethingInNextWindow();
+}</code></pre>
+
+<p>Indeed,&nbsp;<em>moveToNextWindow()</em>&nbsp;could be a&nbsp;<em>Thread.sleep()</em>&nbsp;but how convenient it would be to just be a&nbsp;<em>setTime(now + windowDuration)</em>?</p>
+
+<p><em>Clock</em>&nbsp;API enables to do that by creating a custom window:</p>
+
+<pre>
+<code class="language-java">public class CustomClock extends Clock { // &lt;1&gt;
+    @Setter // lombok generates setInstant(Instant)
+    private Instant instant; // &lt;2&gt;
+
+    private ZoneId zone = ZoneId.of("UTC");
+
+    @Override
+    public ZoneId getZone() {
+        return zone;
+    }
+
+    @Override
+    public Clock withZone(final ZoneId zone) { // &lt;3&gt;
+        this.zone = zone;
+        return this;
+    }
+
+    @Override
+    public Instant instant() { // &lt;4&gt;
+        return instant.atZone(zone);
+    }
+}</code></pre>
+
+<ol>
+	<li>First we extend java&nbsp;<em>Clock</em>&nbsp;to override the part we want,</li>
+	<li>We ensure the&nbsp;<em>Instant</em>&nbsp;of the clock is settable from outside (note this implementation is not thread safe which is generally ok in tests but not for runtime/replay algorithms),</li>
+	<li>Small warning that this implementation should create a new custom clock, if you know your application don&#39;t use that you can implement it this way or just throw an&nbsp;<em>UnsupportedOperationException</em>,</li>
+	<li>Finally all that enables us to return the instance we set manually.</li>
+</ol>
+
+<p>If we go back to our previous test, it can now look like:</p>
+
+<pre>
+<code class="language-java">@Test
+void doTest() {
+    final CustomClock clock = new CustomClock();
+    clock.setInstant(Instant.now());
+    doSomethingInCurrentWindow(clock); // &lt;1&gt;
+    clock.setInstant(clock.instant().plusMillis(windowDurationMs)); // &lt;2&gt;
+    doSomethingInNextWindow(clock); // &lt;1&gt;
+}</code></pre>
+
+<ol>
+	<li>Everything is the almost same except we now pass to the&nbsp;<em>doSomething()</em>&nbsp;method the clock to ensure the logic uses our own clock implementation,</li>
+	<li>And we can move in time as we need without having to wait for the same amount of time (concretely even if the window duration is 1 year, and assuming the&nbsp;<em>doSomething()</em>&nbsp;logic is fast, this test will take a couple of ms.</li>
+</ol>
+
+<p>So the issue we have today is how to ensure the logic uses that clock. There are two main cases:</p>
+
+<ol>
+	<li>You wire everything manually so it will use that clock (this is generally the case for generic libraries),</li>
+	<li>You use an IoC (CDI, Spring, Guice, ...) and you inject the clock.</li>
+</ol>
+
+<p>This is this last case we will consider now.</p>
+
+<h2>Clock and CDI</h2>
+
+<p>There are several ways to get a clock instance in CDI but the easiest is likely to create a producer:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ClockFactory {
+    @Produces
+    public Clock clock() {
+        return Clock.systemUTC();
+    }
+}</code></pre>
+
+<ol>
+	<li>This is a plain standard producer which will enable to use&nbsp;<em>@inject Clock clock</em>&nbsp;anywhere in the application without having to say how the clock was constructed (no more usage of the <em>Clock</em>&nbsp;factory classes),</li>
+	<li>You probably noted the producer does not define any qualifier, in real applications it is likely better (<em>@MyApplication</em>) because&nbsp;<em>Clock</em>&nbsp;is a JVM type and these types can easily conflict between libraries (compared to application types which are not ambiguous at all),</li>
+	<li>There is no explicit scope on the clock producer so it will be&nbsp;<em>@Dependent</em>, which means it is created for each injection/lookup. For this one it is not important since&nbsp;<em>systemUTC</em>&nbsp;is a constant already and it enables to bypass CDI proxies.</li>
+</ol>
+
+<h2>Override the clock in tests</h2>
+
+<p>For now we have an injectable clock in our business logic but how to override it in tests to ensure it is settable? There are multiple options with CDI but the most direct is to specialize the producer to replace it by our custom clock:</p>
+
+<pre>
+<code>@Specializes // &lt;1&gt;
+@ApplicationScoped
+public class FakeClockProducer extends ClockFactory { // &lt;2&gt;
+    // if you use a custom qualifier @MyQualifier
+    @Produces
+    @Override // &lt;3&gt;
+    public CustomClock clock() { // &lt;4&gt;
+        final Clock defaultImpl = super.clock(); // &lt;5&gt;
+        return new CustomClock() {
+            @Override
+            public ZoneId getZone() {
+                return defaultImpl.getZone();
+            }
+
+            @Override
+            public Clock withZone(final ZoneId zone) {
+                return defaultImpl.withZone(zone);
+            }
+
+            @Override
+            public Instant instant() { // &lt;6&gt;
+                if (super.instant() != null) {
+                    return super.instant();
+                }
+                return defaultImpl.instant();
+            }
+        };
+    }
+}</code></pre>
+
+<ol>
+	<li>We notify CDI to replace the default application bean by this subclass,</li>
+	<li>We really subclass the bean at java level (otherwise CDI deployment will fail),</li>
+	<li>We override our producer but keep&nbsp;<em>@Produces</em>&nbsp;on the mehod (otherwise producer is lost),</li>
+	<li>We replace the <em>Clock</em>&nbsp;type by our&nbsp;<em>CustomClock</em>&nbsp;type as returned type to ensure a custom clock can be injected in tests by CDI (to have the setter),</li>
+	<li>We get the default impl,</li>
+	<li>We fully delegate to the default implementation except if a test set an explicit instance.</li>
+</ol>
+
+<p>Now we can write our CDI test this way:</p>
+
+<pre>
+<code class="language-java">@Cdi // &lt;1&gt;
+public class MyTest {
+  @Inject
+  private CustomClock clock; // &lt;2&gt;
+
+  @AfterEach // &lt;3&gt;
+  void resetClock() {
+    clock.setInstance(null); // back to default
+  }
+
+  @Test
+  void doTest() { // &lt;4&gt;
+    clock.setInstant(Instant.now());
+    doSomethingInCurrentWindow(clock);
+    clock.setInstant(clock.instant().plusMillis(windowDurationMs));
+    doSomethingInNextWindow(clock);
+  }
+}</code></pre>
+
+<ol>
+	<li>We enable CDI classpath deployment (this is using openwebbeans-junit5 here but this is actually any testing integration supporting CDI deployment and injections, even Arquillian if you put the test clock class in the Archive),</li>
+	<li>We inject our produced clock in the test,</li>
+	<li>We don&#39;t forget to reset th clock after tests to avoid to have a test failling cause of a previous test,</li>
+	<li>We use the clock in all tests needing it.</li>
+</ol>
+
+<p>If you run this test it will likely not work. The reason is that the custom clock is stateful, it stores the instance to use as state. Therefore all injections must share the same instance to ensure it works. To solve that we have two main options:</p>
+
+<ol>
+	<li>Make the test clock producer&nbsp;<em>@ApplicationScoped</em></li>
+	<li>Store the custom clock instance in the enclosing class and implement the producer just as &quot;<em>return instance&quot;</em></li>
+</ol>
+
+<p>The choice between these two options depends mainly if having a proxy on the Clock instance an issue or not for you. If not just go with 1 which is the cleanest:</p>
+
+<pre>
+<code class="language-java">?@Specializes
+@ApplicationScoped
+public class FakeClockProducer extends ClockFactory {
+    @Produces
+    @ApplicationScoped // here is the magic
+    @Override
+    public CustomClock clock() {
+        // same as before
+    }
+}</code></pre>
+
+<p>And here we are, we can now test year based algorithm in milliseconds and without any flakiness :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//log4j2-environment-configuration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//junit5-extension-run-once-per-suite.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

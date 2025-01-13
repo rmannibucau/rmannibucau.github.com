@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How Apache Johnzon makes JSONP/JSONB a real option for configuration</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,139 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="johnzon-jsonp-jsonb-configuration-file-html-container" class="container page-content johnzon-jsonp-jsonb-configuration-file-html is-blog">
+                        <div class="page-header">
+                <h1>How Apache Johnzon makes JSONP/JSONB a real option for configuration</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-06-01</span>, <span class="metadata-readingtime">3 min and 24 sec read</span></p>
+</div>
+<p>In an older <a href="https://rmannibucau.wordpress.com/2015/01/05/json-for-configuration-apache-johnzon-made-another-step-with-comments/" target="_blank">post</a>&nbsp;I explained how to use JSON-P and Johzon proprietary mapper to bind configuration files on java code. Since this post was published, JSON-B was released and Johnzon implementation as well. Therefore here is the update explaining how to keep the configuration file oriented.</p>
+
+<p>The main difference between a machine configuration file which is pretty close to a webservice in terms of &#39;aspect&#39; since the configuration file is generated but will never be read by a human, and an user oriented configuration file - read by a human, is concentrated in three points the first configuration does not have to meet whereas the last one must have it:</p>
+
+<ol>
+	<li>It must be readable so text/string based (XML, JSON, INI, properties matching this rule),</li>
+	<li>It must be formatted - not inlined - to keep the readability point,</li>
+	<li>It must enable to use comments.</li>
+</ol>
+
+<p>As explained in the post mentionned at the beginning of this post, JSON is very tempting but it rarely supports comments. Luckily for us, Apache Johnzon made it an option very early and my previous post was about it. The missing part was the JSON-B support, let see how to enable that comment feature for JSON-B.</p>
+
+<p>The first thing to do is to ensure you have the right dependencies:</p>
+
+<ol>
+	<li>The JSON-P (underlying JSON reader/parser implementation for JSON-B), JSON-B API,</li>
+	<li>Apache Johnzon JSON-B implementation.</li>
+</ol>
+
+<p>Here is what it looks like in a Maven pom:</p>
+
+<pre>
+<code class="language-xml">&lt;dependencies&gt;
+  &lt;!-- spec API - you can use javax ones as well --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-jsonb_1.0_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.1&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-json_1.1_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.1&lt;/version&gt;
+  &lt;/dependency&gt;
+
+  &lt;!-- implementation --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.johnzon&lt;/groupId&gt;
+    &lt;artifactId&gt;johnzon-jsonb&lt;/artifactId&gt;
+    &lt;version&gt;1.1.12&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<p>Now the next step is to have some java code activating the configuration friendly options:</p>
+
+<pre>
+<code class="language-java">final JsonbConfig jsonbConfig = new JsonbConfig()
+        .withFormatting(true) // 1
+        .setProperty("org.apache.johnzon.supports-comments", true); // 2</code></pre>
+
+<ol>
+	<li>The formatting is a standard property of JSON-B, it is useful only when when writing so in most cases - where you read the configuration - you will just ignore this line,</li>
+	<li>The property&nbsp;<em>org.apache.johnzon.supports-comments</em>&nbsp;is a Apache Johnzon specific property of JSON-P implementation which enables to skip comments when reading and not fail which enables to have commented configuration files. Since JSON-B relies on JSON-P this property works while passed to the underlying <em>JsonProvider</em>.</li>
+</ol>
+
+<p>Then we must ensure the JSON-P implementation used relies on previous property and in case there is also Yasson implementation&nbsp;in the classpath that Johnzon is used - otherwise the configuration wouldn&#39;t be used:</p>
+
+<pre>
+<code class="language-java">final JsonbBuilder jsonbBuilder = JsonbBuilder
+        .newBuilder()
+        .withProvider(new org.apache.johnzon.core.JsonProviderImpl()) // 1
+        .withConfig(jsonbConfig); // 2</code></pre>
+
+<ol>
+	<li>We enforce Johzon implementation,</li>
+	<li>We pass our configuration enabling comments support.</li>
+</ol>
+
+<p>Finally we just have to build our&nbsp;<em>Jsonb</em>&nbsp;instance calling the&nbsp;<em>build()</em>&nbsp;method of the builder and use it normally:</p>
+
+<pre>
+<code class="language-java">try (final Jsonb jsonb = jsonbBuilder.build();
+     final Reader reader = Files.newBufferedReader(Paths.get("configuration.json"))) {
+    final Config config = jsonb.fromJson(reader, Config.class);
+    System.out.println(config);
+}</code></pre>
+
+<p>If you care about being portable, you can wrap the&nbsp;<em>withProvider</em>&nbsp;within a try/catch block to ensure it will be ignored if Johnzon is not present - which means you will loose the comments feature but the parsing of a standard JSON file will still work.</p>
+
+<p>It can look a detail but enabling to use comments in a configuration is key to ensure it is usable. It can be as simple as <em>don&#39;t modify this count because the database will not support it</em>&nbsp;or as a&nbsp;<em>this was a probably too large value which can require more tuning</em>. The point is that configuration files are also communication files so they must support comments to ensure the documentation stay close to the entries, maintained and aligned on the actual configuration.</p>
+
+<p>The other key point of a configuration file is to be able to be validated to let the user know it is invalid and nto silently loose some configuration, Apache Johnzon also has some tools to help you doing that - and you can fine it at the bottom of this <a href="https://johnzon.apache.org/" target="_blank">page</a> - but this is another <s>story</s> post ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//okta-jaxrs-cdi-microprofile-authorization-code-flow.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//extensible-classpath-jib-docker-image.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

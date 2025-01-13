@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>How to use JMS in a Microprofile server: Meecrowave and Artemis case!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="jms-microprofile-meecrowave-artemis-html-container" class="container page-content jms-microprofile-meecrowave-artemis-html is-blog">
+                        <div class="page-header">
+                <h1>How to use JMS in a Microprofile server: Meecrowave and Artemis case!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-03-07</span>, <span class="metadata-readingtime">6 min and 10 sec read</span></p>
+</div>
+<p>Microprofile definition is intentionally limited to CDI and JAX-RS but with the Microservice trend using JMS to get a broker is quite common. Let see how smooth it is to make both working together.</p>
+
+<p><em>Note:</em> this post is not about the rationnality of that architecture.</p>
+
+<h2>The use case</h2>
+
+<p>To illustrate this post we&#39;ll simply create a server hosting the broker and listener for messages on a topic. The client will send a message on a JAX-RS call.</p>
+
+<h2>The dependencies</h2>
+
+<p>We&#39;ll use Meecrowave 0.3.0 (just released :)) and Artemis 1.5.3 to illustrate this post.</p>
+
+<p>Quick note before listing the dependencies, Apache ActiveMQ Artemis is ActiveMQ 5+1. It is not Apollo which was supposed to replace ActiveMQ 5 not the next version of ActiveMQ 5 but a merge with HornetQ. Therefore if you are used to AMQ 5 you can get some surprises but they did a great work to make it smoother than HornetQ was in my opinion.</p>
+
+<h3>Server</h3>
+
+<pre>
+<code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+    &lt;artifactId&gt;artemis-jms-server&lt;/artifactId&gt;
+    &lt;version&gt;${artemis.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.meecrowave&lt;/groupId&gt;
+    &lt;artifactId&gt;meecrowave-core&lt;/artifactId&gt;
+    &lt;version&gt;${meecrowave.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<h3>Client</h3>
+
+<pre>
+<code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+    &lt;artifactId&gt;artemis-jms-client&lt;/artifactId&gt;
+    &lt;version&gt;${artemis.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.meecrowave&lt;/groupId&gt;
+    &lt;artifactId&gt;meecrowave-core&lt;/artifactId&gt;
+    &lt;version&gt;${meecrowave.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<h3>artemis-cdi-client</h3>
+
+<p>Artemis-cdi-client is a CDI integration of artemis JMS but it has some pitfall in last release like making it hard to use only as a client or server or server with remote connection. Since code is pretty much trivial to replace it I didn&#39;t select it to ensure to fully control the deployment and avoid to fake some broker to not bind any uncontrolled port on the client.</p>
+
+<p>I think it will evolve if needed to match more real life use cases.</p>
+
+<h2>The server</h2>
+
+<p>To make things simple to test we&#39;ll host the broker instance in our server but note that in practise you will simply connect to a remote broker as a client. I&#39;ll try to make obvious the related code.</p>
+
+<h3>Manage a server</h3>
+
+<p>Starting a server is as easy as creating a <em>JMSServerManager</em>. Once you get it you have a start and stop methods allowing you to control its lifecycle. Here is a way to handle it:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ServerConfig {
+    @Produces
+    @ApplicationScoped
+    public JMSServerManager startServer() throws Exception {
+        final JMSServerManagerImpl jmsServerManager = new JMSServerManagerImpl(
+                ActiveMQServers.newActiveMQServer(new ConfigurationImpl()
+                        .setSecurityEnabled(false)
+                        .setPersistenceEnabled(false)
+                        .setJMXManagementEnabled(false)
+                        .addAcceptorConfiguration("netty-acceptor", "tcp://localhost:1234")
+                        .addConnectorConfiguration("netty-connector", "tcp://localhost:1234"), false));
+        jmsServerManager.start();
+        return jmsServerManager;
+    }
+
+    public void stopServer(@Disposes final JMSServerManager manager) throws Exception {
+        manager.stop();
+    }
+
+    public void doStart(@Observes @Initialized(ApplicationScoped.class) ServletContext context,
+                        final JMSServerManager serverManager) throws Exception {
+        System.out.println("&gt;&gt;&gt; Started JMS on " + serverManager.getActiveMQServer()
+                .getConfiguration().getConnectorConfigurations()
+                .values().stream()
+                .map(Object::toString)
+                .collect(joining(", ")));
+    }
+}
+</code></pre>
+
+<p>The important points are:</p>
+
+<ol>
+	<li>Ensure to bind remote connectors to allow to connect to that broker (tcp://localhost:1234)</li>
+	<li>Don&#39;t forget to close the server with the application (stopServer)</li>
+	<li>Force the broker to start with the application (doStart). The trick there is to inject the server as a parameter of the initialization method (<em>@Observes @Initialized(ApplicationScoped.class)</em>&nbsp;for me) and &quot;touch&quot; the instance calling any method to enforce the proxy (if scoped) to be initialized.</li>
+</ol>
+
+<h3>Listen for messages</h3>
+
+<p>Then we need a topic to listen on, this part is easy since we just instantiate the right implementation class:</p>
+
+<pre>
+<code class="language-java">@Produces
+@ApplicationScoped
+public Topic itemsTopic() {
+    return ActiveMQDestination.createTopic("items");
+}</code></pre>
+
+<p>Of course you can do a &quot;new&quot; on&nbsp;<em>ActiveMQTopic</em>&nbsp;too but the factory will ensure you create it properly if it evolves.</p>
+
+<p>Then we need a JMS 2.0&nbsp;<em>JMSContext</em>. This part is built-in in artemis-cdi-client but since we don&#39;t use it we need to integrate it. It is as easy as creating a&nbsp;<em>ConnectionFactory</em>&nbsp;on our broker and create an&nbsp;<em>@ApplicationScoped</em>&nbsp;context from it:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ServerConfig {
+
+    @Produces
+    @ApplicationScoped
+    public JMSContext createJMSContext(final ConnectionFactory connectionFactory) {
+        return connectionFactory.createContext();
+    }
+
+    @Produces
+    @ApplicationScoped
+    public ActiveMQConnectionFactory factory(final JMSServerManager serverManager) throws Exception {
+        return ActiveMQJMSClient.createConnectionFactory("tcp://localhost:1234", null);
+    }
+}
+</code></pre>
+
+<p>Nothing crazy right? Note however how we chain the producers relying on CDI: we inject the previously created instances as parameter of &quot;next&quot; producer. Of course the&nbsp;<em>JMSServerManager</em>&nbsp;is not mandatory for the factory but since we host it in the same application we ensure it is created before this way.</p>
+
+<p>Finally we need to create a listener to get some messages. Here to make thing simpler in our &quot;business&quot; code, we&#39;ll fire the unmarshalled message from JMS to a CDI event. This way our real processor will be JMS agnostic:</p>
+
+<pre>
+<code class="language-java">@Produces
+public JMSConsumer startListener(final Topic topic, final JMSContext context,
+                                 final Event&lt;Msg&gt; msg) {
+    final JMSConsumer consumer = context.createConsumer(topic);
+    consumer.setMessageListener(message -&gt; {
+        try {
+            msg.fire(new Msg(message.getBody(String.class)));
+        } catch (final JMSException e) {
+            throw new IllegalStateException(e);
+        }
+    });
+    return consumer;
+}</code></pre>
+
+<p>We still abuse of CDI producer parameter injections and simply create an auto-started consumer from the&nbsp;<em>JMSContext</em>. Our listener fires the message on CDI bus.</p>
+
+<p>Tip: if you use multiple destinations, rely on a qualifier to distinguish them.</p>
+
+<p>Finally processing the message (<em>Msg</em>) simply means observing this type:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class Listener {
+    public void onMessage(@Observes final Msg msg) {
+        System.out.println("&gt;&gt;&gt; " + msg.getMessage());
+    }
+}
+</code></pre>
+
+<h2>The client</h2>
+
+<p>The client side is pretty close, we&#39;ll find the same connection factory, topic producer and&nbsp;<em>JMSContext</em>&nbsp;producer but it will be all our JMS configuration on that side:</p>
+
+<pre>
+<code class="language-java">import org.apache.activemq.artemis.api.jms.ActiveMQJMSClient;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.activemq.artemis.jms.client.ActiveMQTopic;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.Topic;
+
+@ApplicationScoped
+public class ClientConfig {
+    @Produces
+    public Topic itemsTopic() {
+        return new ActiveMQTopic("items");
+    }
+
+    @Produces
+    @ApplicationScoped
+    public JMSContext createJMSContext(final ConnectionFactory connectionFactory) {
+        return connectionFactory.createContext();
+    }
+
+    @Produces
+    public ActiveMQConnectionFactory factory() throws Exception {
+        return ActiveMQJMSClient.createConnectionFactory("tcp://localhost:1234", null);
+    }
+}
+</code></pre>
+
+<p>Then we simply inject these elements in our endpoint and convert our JAX-RS call to a JMS message:</p>
+
+<pre>
+<code class="language-java">import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.Topic;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("jms")
+@ApplicationScoped
+public class Sender {
+    @Inject
+    private ConnectionFactory connectionFactory;
+
+    @Inject
+    private Topic topic;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Sent send(final Send send) {
+        try (final JMSContext jmsContext = connectionFactory.createContext()) {
+            jmsContext.createProducer().send(topic, send.message);
+        }
+        return new Sent(true);
+    }
+
+    public static class Send { public String message; }
+    public static class Sent { public final boolean acknowledge; } // +constructor
+}
+</code></pre>
+
+<p>If you deploy this client on port 10100 for instance you will be able to test it with this curl command:</p>
+
+<pre>
+<code class="language-bash">curl -XPOST http://localhost:10100/jms \
+  -d '{"message":"test"}' \
+  -H 'Accept: application/json' -H 'Content-Type: application/json'</code></pre>
+
+<p>And the server will a few milliseconds after log&nbsp;<em>&quot;test&quot; to show it received it.</em></p>
+
+<h2>Conclusion</h2>
+
+<p>Artemis is simple to get started with and integrating its standalone flavor in CDI is only 3 lines of (real) code.</p>
+
+<p>Of course Artemis supports far more than what is in this post but it is mainly configuration related (user, password, failover, ...) or overpass the microservice area (JTA integration for instance).</p>
+
+<p>The good aspect of that experimentation is nothing prevent you to use JMS with CDI today, whatever flavor of CDI you use (a full blown EE server with MDB&nbsp;or a standalone program without all that integration). Integrating both technology - and potential containers since we start to get portable protocols -&nbsp;is very doable in a few minutes.</p>
+
+<p>Even if it can bring some drawbacks like:</p>
+
+<ul>
+	<li>managing a new system for your ops team</li>
+	<li>it can require some specific infrastructure&nbsp;(good I/O for instance)</li>
+	<li>it is generally based on a connected protocol so you need to ensure failover works if needed</li>
+</ul>
+
+<p>It can still be desirable in some complex cases or environments where JMS can be a good fit. The outcome is the same as at any time: select what you need and not what is easy ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//sirona-tomee-maven-plugin.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-stream-error-handling.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

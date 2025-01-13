@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>TomEE Embedded And Gradle</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,174 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tomee-embedded-gradle-plugin-html-container" class="container page-content tomee-embedded-gradle-plugin-html is-blog">
+                        <div class="page-header">
+                <h1>TomEE Embedded And Gradle</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-05-31</span>, <span class="metadata-readingtime">3 min and 38 sec read</span></p>
+</div>
+<p>TomEE 7.0.0 was just released and brings in its new features a surprising and interesting one: a better Gradle integration.&nbsp;This means a better support of gradle build layout for embedded tests but also a new official TomEE embedded Gradle plugin.</p>
+
+<p>TomEE already got several non-official gradle plugins but they all got some known issues like:</p>
+
+<ul>
+	<li>Disappearing from github/repositories</li>
+	<li>Bringing back TomEE in the build classpath (which means potentially having lots of conflicts with other plugins)</li>
+	<li>Not supporting TomEE embedded classpath deployment</li>
+</ul>
+
+<p>The new TomEE embedded Gradle plugin design is centered on the flat classpath case and aims to make web development easier.</p>
+
+<h2>Gradle + TomEE: get started</h2>
+
+<p>To get started, you just need to reference the TomEE embedded plugin. The plugin is on central so you need mavenCentral() if not already used :</p>
+
+<pre>
+<code class="language-java">buildscript {
+   repositories {
+       mavenCentral()
+   }
+
+   dependencies {
+       classpath 'org.apache.tomee.gradle:tomee-embedded:7.0.0'
+   }
+}
+
+apply plugin: 'org.apache.tomee.tomee-embedded'
+</code></pre>
+
+<p>So a hello world gradle.build file would look like:</p>
+
+<pre>
+<code class="language-java">buildscript {
+   repositories {
+       mavenCentral()
+   }
+
+   dependencies {
+       classpath 'org.apache.tomee.gradle:tomee-embedded:7.0.0'
+   }
+}
+
+apply plugin: 'org.apache.tomee.tomee-embedded'
+
+group 'test'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   providedCompile 'org.apache.tomee:javaee-api:7.0'
+}
+</code></pre>
+
+<p>Once all is setup and your classes are built (you don&rsquo;t need to package them) you can run:</p>
+
+<pre>
+<code class="language-java">gradle tomee-embedded</code></pre>
+
+<p>By doing that, you will likely think the server is hanging because, by default, Gradle is not logging much.<br />
+To solve it and to see TomEE startup, just add the Gradle option -i :</p>
+
+<pre>
+<code class="language-java">gradle tomee-embedded -i</code></pre>
+
+<h2>TomEE Gradle plugin configuration</h2>
+
+<p>You can configure the plugin using the extension tomee-embedded and set the TomEE version you want there (default is the same as the plugin) :</p>
+
+<pre>
+<code class="language-java">extensions.getByName('tomee-embedded').tomeeVersion = 'other version'</code></pre>
+
+<p>You can also require to skip the default repository used to find tomee (i.e. maven central) :</p>
+
+<pre>
+<code class="language-java">extensions.getByName('tomee-embedded').skipDefaultRepository = true</code></pre>
+
+<p>Which means tomee will fetch from the repositories you declared and maven central will not be automatically added.</p>
+
+<p>Once this configuration is done, the plugin creates a configuration (&ldquo;classpath&rdquo; in gradle world) named tomee-embedded (which means you can update it as well programmatically in gradle.build) and add this org.apache.tomee:tomee-embedded dependency. If you need more &ldquo;container libraries&rdquo;, just add the dependencies you need to this configuration.</p>
+
+<p>Thanks to this configuration the plugin itself doesn&rsquo;t depend on tomee and doesn&rsquo;t bring back all tomee dependencies to the build script classpath, which should already avoid several issues and allow to customize it easily.</p>
+
+<p>Finally, as seen in previous samples, the plugin registers a task called tomee-embedded. This is a highly customizable task which is pretty close to its maven friend allowing you to:</p>
+
+<ul>
+	<li>Configure container properties</li>
+	<li>Configure container ports/connectors</li>
+	<li>Configure deployment context and docBase</li>
+	<li>Configure container classpath (you can replace their previous configuration if you desire)</li>
+	<li>Modules/libraries to deploy and dependency scopes to take into account</li>
+	<li>Etc ...</li>
+</ul>
+
+<p>Tip: with such a configuration, you can easily start multiple TomEE instances and applications by overriding their configurations (to create gradle tomee1 -i and gradle tomee2 -i to test clustering or a distributed security infrastructure with an identity provider for instance).</p>
+
+<h2>Conclusion</h2>
+
+<p>This is a first step in Gradle world for TomEE. The obvious goal is to ensure that TomEE experience is as smooth as jetty was, but with a stack you are used to.</p>
+
+<p>There are still a lot of potential improvements and directions:</p>
+
+<ul>
+	<li>Should the task configuration be copied in the extension/global configuration? This has pros and cons but could simply default configuration.</li>
+	<li>Should we rename configuration and extension tomeeEmbedded or something else to let Gradle support it without requiring getByName() usage?</li>
+	<li>Should we also create a tomee-remote plugin like the one we have for Maven? (this doesn&rsquo;t make much sense just to start TomEE since it is 1 line, but can provide a better &ldquo;API&rdquo; and some advanced features like tomee:build or tomee:exec)?</li>
+</ul>
+
+<p>As a TomEE developer I have to admit we have not enough feedback from Gradle users. Thus, I&rsquo;m not sure it is not used, but maybe they have different habits from Maven users. If you use TomEE (from tests to deployment without forgetting web development) don&rsquo;t hesitate to send us a mail on tomee mailing list (<a href="mailto:dev@tomee.apache.org">dev@tomee.apache.org</a>) to give us some feedback or even help us improve Gradle users experience!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-cxf-jmx-monitoring.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//bye-bye-wordpress.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

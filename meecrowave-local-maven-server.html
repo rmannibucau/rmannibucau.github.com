@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Expose your local Maven repository through http with Meecrowave</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,140 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="meecrowave-local-maven-server-html-container" class="container page-content meecrowave-local-maven-server-html is-blog">
+                        <div class="page-header">
+                <h1>Expose your local Maven repository through http with Meecrowave</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-12-13</span>, <span class="metadata-readingtime">2 min and 20 sec read</span></p>
+</div>
+<p>Sometimes it is convenient to expose its local maven repository through http. The most common case are to share with others some pre-downlaoded or pre-built artifacts on a poor or lack of internet connection. To be even more concrete: if you are teaching or doing some trainings you probably already understood what it is about.</p>
+
+<p>There are several ways to do it but I would like to show that reusing Meecrowave server - Tomcat actually - it is already quite trivial. Since, for a Java developper, it is common to have such a server locally already, it can be a quick and efficient way to setup a maven server from your local repository.</p>
+
+<p>To do it I&#39;m using this&nbsp;<em>web.xml</em>&nbsp;which will work with all Tomcat based servers (Tomcat, TomEE, Meecrowave, ...):</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app version="3.0"
+	 xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.apache.catalina.servlets.DefaultServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;debug&lt;/param-name&gt;
+            &lt;param-value&gt;0&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;listings&lt;/param-name&gt;
+            &lt;param-value&gt;true&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;readonly&lt;/param-name&gt;
+            &lt;param-value&gt;true&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;mime-mapping&gt;
+        &lt;extension&gt;jar&lt;/extension&gt;
+        &lt;mime-type&gt;application/java-archive&lt;/mime-type&gt;
+    &lt;/mime-mapping&gt;
+    &lt;mime-mapping&gt;
+        &lt;extension&gt;war&lt;/extension&gt;
+        &lt;mime-type&gt;application/java-archive&lt;/mime-type&gt;
+    &lt;/mime-mapping&gt;
+    &lt;mime-mapping&gt;
+        &lt;extension&gt;zip&lt;/extension&gt;
+        &lt;mime-type&gt;application/zip&lt;/mime-type&gt;
+    &lt;/mime-mapping&gt;
+    &lt;mime-mapping&gt;
+        &lt;extension&gt;pom&lt;/extension&gt;
+        &lt;mime-type&gt;text/plain&lt;/mime-type&gt;
+    &lt;/mime-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+
+<p>This just defines the default servlet, allows to list folder (it is easier to browse the repository this way) and prevent to upload files since we just want to expose our repository, not make it writable.</p>
+
+<p>Finally grab Meecrowave runner <a href="http://repo.apache.maven.org/maven2/org/apache/meecrowave/meecrowave-core/1.1.0/meecrowave-core-1.1.0-runner.jar" target="_blank">jar</a>&nbsp;and launch a server which deploys your maven repository as a webapp with this web.xml. Here what it looks generally, assuming you created a&nbsp;<em>web.xml</em>&nbsp;like the previous one in current directory:</p>
+
+<pre>
+<code class="language-bash">java -jar meecrowave-core-1.1.0-runner.jar \
+  --webapp ~/.m2/repository \
+  --context maven2 \
+  --web-xml conf/web.xml \
+  --tomcat-default-setup false</code></pre>
+
+<p>It will deploy the server on the default port (8080) but you can customize it using&nbsp;<em>--http</em>&nbsp;option. The last option (tomcat-default-setup) avoids to setup the default servlet since we customized it in our web.xml. You can skip it if you want.</p>
+
+<p>Now go on&nbsp;<em>http://localhost:8080/maven2</em>&nbsp;and you should see your local maven repository.</p>
+
+<p>Add it to a pom or settings.xml in your repositories list and you can grab artifacts from the computer which launched the server if it is on the same network.</p>
+
+<p>Last tip: if you are using Ubuntu, you can easily create an Hotspot Wifi and then anyone connected to your Wifi could grab the artifacts you have in your local repository. No more need to ensure the conference/University has a great Wifi, no more need to pre-build a Docker or VirtualBox image, skipping part of the experience the students should get familiar with. To create such a Hotspot you can use this kind of command:</p>
+
+<pre>
+<code class="language-bash">nmcli device wifi hotspot \
+  con-name MyConnection \
+  ssid MySSID band bg \
+  password MyPassword</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//extend-junit-4.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-stream-decorator.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

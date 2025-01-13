@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Asciidoctor and documentation: how to implement search feature</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="asciidoctor-search-index-creation-html-container" class="container page-content asciidoctor-search-index-creation-html is-blog">
+                        <div class="page-header">
+                <h1>Asciidoctor and documentation: how to implement search feature</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-05-08</span>, <span class="metadata-readingtime">11 min and 2 sec read</span></p>
+</div>
+<p>Asciidoctor is a great language for documentation and its API enables to do awesome things (while you accept to pay the initialization cost for java binding). However, some tasks are not built-in and require some glue code. This is the case for search support.</p>
+
+<p>To create an search in your documentation you have multiple options:</p>
+
+<ol>
+	<li>Start an elasticsearch+shield (or equivalent) and use that as an API,</li>
+	<li>Pay an online service to provide you a search API,</li>
+	<li>Do a client search in javascript.</li>
+</ol>
+
+<p>1 and 2 and quite close in terms of documentation impact (but not in terms of infra) but require to manage a runtime or pay. It will be relevant for very huge documentations but less for small/medium documentations. For that last category, you can implement a client search.</p>
+
+<p>To implement a client search, you can:</p>
+
+<ol>
+	<li>Create a build/rendering time index and directly look it up at runtime,</li>
+	<li>Create a documentation dictionnary, map it to an index at runtime then use it to implement your search.</li>
+</ol>
+
+<p>personally I tend to prefer the option 2 even if a bit slower (but it is unlikely you notice it) because the index can stay while you update the search library + you can filter the indexation&nbsp;whereas option 1 will prevent you to preprocess the index depending the page, the user logged in or whatever other criteria.</p>
+
+<p>So the first step for us will be to create a dictionnary usable by the search. Here, I recommend you to check out your search library and its format. Some will support objects (like fuse), others can only support a string (like flexsearch).</p>
+
+<p>In my case I picked flexsearch because its results are quite accurate and it is fast even for thousands of records.</p>
+
+<p>In terms of code, you will need these steps:</p>
+
+<pre>
+<code class="language-javascript">const index = FlexSearch.create(); // 1
+getMyDictionnary().forEach((entry, idx) =&gt; index.add(idx, entry.content)); // 2
+const searchResultIds = index.search(query); // 3</code></pre>
+
+<ol>
+	<li>You create an empty index,</li>
+	<li>You index your dictionnary,</li>
+	<li>You do a search.</li>
+</ol>
+
+<p>Tip: if you are in a SPA, ensure to create the index once for all pages. In angular it can be done through a service responsible of the index management.</p>
+
+<p>This previous snippet already gives you hints about the structure we will use. How search results will be used:</p>
+
+<ol>
+	<li>They will be rendered as proposals so we must have the rendering data, for us it will be a title and a content (short description),</li>
+	<li>Each result must be able to be linked (as href) so we will have a link and optionally an anchor.</li>
+</ol>
+
+<p>Side note: you can also notice, flexsearch is based on identifiers but in our case we will use the index in the dictionnary array so we can bypass that but if you have a natural id then you can use it.</p>
+
+<p>So what we want to generate is this dictionnary:</p>
+
+<pre>
+<code class="language-json">[
+  {
+    "title": "...",
+    "content": "...",
+    "link": "...",
+    "anchor": "..."
+  },
+  {
+    "title": "...",
+    "content": "...",
+    "link": "...",
+    "anchor": "..."
+  }
+]</code></pre>
+
+<p>Note: indeed, you can merge the link and anchor in a single string &quot;link&quot; but this structure avoids to reparse the link in SPA based on a router API line angular.</p>
+
+<p>Assuming we have this JSON at the uri&nbsp;<em>search/index.json</em>, here is some&nbsp;code able to handle a search (ensure to adapt it to your website).</p>
+
+<p>First we create a form to go on the search result page:</p>
+
+<pre>
+<code class="language-html">&lt;form role="search" action="search.html"&gt;
+  &lt;input type="text" placeholder="Search..." name="query" id="searchInput"&gt;
+&lt;/form&gt;</code></pre>
+
+<p>Nothing crazy there, just a plain old form sending the search input as a query parameter on&nbsp;<em>search.html&nbsp;</em>page.</p>
+
+<p>Then to have flexsearch we need to import it. You can use&nbsp;<em>npm</em>&nbsp;if you have it or just a CDN link:</p>
+
+<pre>
+<code class="language-html">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/FlexSearch/0.6.22/flexsearch.light.js"
+    integrity="sha256-yHgMhLaDJWehbr/+au9lLLUq4+5rJKrwkSCz0s68Zdw="
+    crossorigin="anonymous"&gt;&lt;/script&gt;</code></pre>
+
+<p>Then we just add a div to contain our results in the <em>search.html</em> page:</p>
+
+<pre>
+<code class="language-html">&lt;div class="search-results"&gt;&lt;/div&gt;</code></pre>
+
+<p>Finally we need to fetch the JSON index, create a flexsearch index, index the dictionnary and create a list of results based on the search results. Here is a snippet doing it (which must be added/imported in <em>search.html</em>):</p>
+
+<pre>
+<code class="language-javascript">new Promise(function (done) {
+   var index = new FlexSearch(); // 1
+   fetch('search/index.json') // 2
+    .then(function (r) {return r.json();}) // 3
+    .then(function (data) {
+        data.forEach((entry, idx) =&gt; index.add(idx, entry.content)); // 4
+        var result = {index,data}; // 5
+        done(result);
+        return result;
+    });
+}).then(function (wrapper) {
+    var query = (location.search.split('query=')[1] || '').split('&amp;')[0].replace('+', ' '); // 6
+    document.querySelector('#searchInput').value = query; // 7
+    wrapper.index.search(query, function (result) { // 8
+        var resultDiv = document.querySelector('.search-results'); // 9
+        if (!result || result.length === 0) {
+            resultDiv.innerHTML = 'No result found';
+        } else {
+            resultDiv.innerHTML = (result || []).map(i =&gt; {
+                var toRender = wrapper.data[i]; // 10
+                return '&lt;div class="search-result-container"&gt;' +
+                    '&lt;a href="' + toRender.link + '#' + toRender.anchor + '"&gt;' + toRender.title + '&lt;/a&gt;' +
+                    '&lt;p&gt;' + toRender.content + '&lt;/p&gt;' +
+                '&lt;/div&gt;';
+            }).join('');
+        }
+    });
+});</code></pre>
+
+<ol>
+	<li>We create the flexsearch index,</li>
+	<li>We fetch our dictionnary,</li>
+	<li>We map the result as a javascript object/json,</li>
+	<li>We index our dictionnary using the index of the entry in the dictionnary as identifier and content as indexed data,</li>
+	<li>Since the fetch is asynchronous we use a promise to load the dictionnary and therefore create a &quot;message&quot; with the index and dictionnary to be able to handle the search result. This &quot;wrapper&quot; is our promise result,</li>
+	<li>We extract the query from the URL,</li>
+	<li>We ensure to propagate the query string to the input (since we changed of page thanks to the form - this is useless in a SPA),</li>
+	<li>We do the search thanks flexsearch index,</li>
+	<li>When we get search result we render it in the div we created for that purpose,</li>
+	<li>This is where the flexsearch identifier (index for us) is useful, from the identifier sent as result of the search, we can lookup the original entry in the dictionnary and therefore get the title/content/link/anchor to render the search result in HTML.</li>
+</ol>
+
+<p>At that point, we have all the HTML/javascript code to have a functional search but it is missing the most important part: the dictionnary creation.</p>
+
+<p>What do we have as inputs: an asciidoc&nbsp;documentation, what do we want as output? a JSON reprensenting this documentation.</p>
+
+<p>So the creation of the dictionnary can be split in these steps:</p>
+
+<ol>
+	<li>Visit all pages of the documentation,</li>
+	<li>Parse them all to extract each part of the documentation,</li>
+	<li>Create the JSON.</li>
+</ol>
+
+<p>This second step is very important and enables to have a more accurate search and more precise links. For example, if you have a reference documentation or configuration page in your documentation it will likely be huge so any search will match it but then the user will be at the top of the&nbsp; page but not exactly where the search matched. To fix it, you must split the asciidoctor page in subparts being small but having some consistency. In practise it means paragraph, snippets and more generally unitary elements.</p>
+
+<p>I&#39;ll use Java to implement this logic but ruby or javascript are two very relevant alternatives (but if you have a java project and a living documentation you likely alreayd started to code in java this part).</p>
+
+<p>So the first step is to extract all <em>adoc</em>&nbsp;files. Here is a quick snippet doing that in Java:</p>
+
+<pre>
+<code class="language-java">final Path root = Paths.get("documentation/asciidoctor"); // 1
+Files.walkFileTree(root, new SimpleFileVisitor&lt;Path&gt;() { // 2
+    private final Collection&lt;Path&gt; adocs = new ArrayList&lt;&gt;(); // 3
+
+    @Override // 4
+    public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) throws IOException {
+        final String name = file.getFileName().toString();
+        if (name.endsWith(".adoc") &amp;&amp; !"README.adoc".equals(name)) {
+            adocs.add(file);
+        }
+        return super.visitFile(file, attrs);
+    }
+});</code></pre>
+
+<ol>
+	<li>We first create a&nbsp;<em>Path</em>&nbsp;representing the base directory of our documentation,</li>
+	<li>We visit recursively this directory,</li>
+	<li>We accumulate all files in a list (optional, could be done in steaming, just easier to debug),</li>
+	<li>The accumulation is done if the file is a&nbsp;<em>adoc</em>&nbsp;and not the readme of the project (ensure to adjust it to your project structure). Note that if some pages must not be indexed, they can be filtered there (or after if you use an asciidoc attribute to mark them as not indexable).</li>
+</ol>
+
+<p>Now we need to load each asciidoc document and extract its indexable parts. For that we will use asciidoctorj (the Java binding of asciidoctor but once again you can do almost the same in ruby/js):</p>
+
+<pre>
+<code class="language-java">final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+// optionally register extensions</code></pre>
+
+<p>Then the overall logic will be:</p>
+
+<pre>
+<code class="language-java">final Options options = OptionsBuilder.options() // 1
+    .backend("html5")
+    .inPlace(false)
+    .headerFooter(false) // 2
+    .baseDir(root)
+    .safe(SafeMode.UNSAFE)
+    .get();
+final Collection&lt;SearchableEntry&gt; entries = adocs.stream() // 3
+        .flatMap(adoc -&gt; {
+            try {
+                final Document document = adoc.load( // 4
+                    String.join("\n", Files.readAllLines(adoc, options);
+                return createDictionnaryElements(document); // 5
+            } catch (final IOException e) {
+                throw new IllegalStateException(e);
+            }
+        }).collect(toList());</code></pre>
+
+<ol>
+	<li>We create shared options for the dictionnary,</li>
+	<li>We ensure to bypass header and footer elements which don&#39;t bring anything for the search,</li>
+	<li>We iterate over all documents,</li>
+	<li>We load their AST in memory (<em>Document</em>),</li>
+	<li>We explode the document in subelements (indexable).</li>
+</ol>
+
+<p>The question now is how to implement&nbsp;<em>createDictionnaryElements</em>. The first step is to extract all sections of the pages:</p>
+
+<pre>
+<code class="language-java">final Stream&lt;Section&gt; sections = document.getBlocks().stream()
+  .filter(Section.class::isInstance)
+  .map(Section.class::cast);</code></pre>
+
+<p>Then we must extract all subelements but there is an important thing to not forget: the anchors. We want to create precise links so the page + the anchor. Since Asciidoctor generates &quot;id&quot; for almost all HTML elements, it is mainly a matter of tracking the closest id of any element.</p>
+
+<p>The method doing that will take as input a stream of node and the closest id and will return a stream of <em>ContentWithId objects:</em></p>
+
+<pre>
+<code class="language-java">@Data
+public class ContentWithId {
+    private final String id;
+    private final String content;
+}</code></pre>
+
+<p>Tip: if you are already on java 14, don&#39;t hesitate to use a record ;).</p>
+
+<p>The method doing this mapping will need to explode blocks, explode tables in cells, explode lists in listitems and once a leaf is reached, create a&nbsp;<em>ContentWithId</em>&nbsp;using parent Id and current node content. Here is a simple implementation:</p>
+
+<pre>
+<code class="language-java">private Stream&lt;ContentAndId&gt; extractIndexableTexts(final Stream&lt;StructuralNode&gt; nodes, final String lastId) {
+    return nodes.flatMap(n -&gt; { // 1
+        if (n.isBlock()) { // 2
+            final List&lt;StructuralNode&gt; blocks = n.getBlocks();
+            if (!blocks.isEmpty()) { // 3
+                return extractIndexableTexts(blocks.stream(), ofNullable(n.getId()).orElse(lastId));
+            }
+        }
+        if (Table.class.isInstance(n)) { // 4
+            final Table table = Table.class.cast(n);
+            return table.getBody().stream()
+                    .flatMap(t -&gt; t.getCells().stream()) // 5
+                    .map(Cell::getContent)
+                    .map(String::valueOf)
+                    .map(c -&gt; new ContentAndId(
+                        ofNullable(table.getId()).orElse(lastId),  // 7
+                        c));
+        }
+        return Stream.of(n).map(c -&gt; { // 6
+            final Object content = c.getContent();
+            if (String.class.isInstance(content) &amp;&amp; !String.valueOf(content).isEmpty()) {
+                return new ContentAndId(
+                    ofNullable(n.getId()).orElse(lastId), // 7
+                    String.valueOf(content));
+            }
+            if (ListItem.class.isInstance(c)) {
+                return new ContentAndId(
+                    ofNullable(n.getId()).orElse(lastId), // 7
+                    ListItem.class.cast(c).getText());
+            }
+            if ("empty".equals(c.getContentModel())) {
+                return null;
+            }
+            if (Section.class.isInstance(c) &amp;&amp; c.getTitle() != null &amp;&amp; !c.getTitle().isEmpty()) { // just a title, can happen in generated doc
+                return null;
+            }
+            throw new IllegalArgumentException("unsupported: " + c);
+        });
+    });
+}</code></pre>
+
+<ol>
+	<li>We take a node and want to convert it to a list of sub elements so we flatmap the original nodes,</li>
+	<li>If we have a block we try to relaunching the same logic on subblock,</li>
+	<li>If there is no subblock let&#39;s handle current block directly to ensure we index it,</li>
+	<li>If we have a table we want to index its content,</li>
+	<li>So we explode the table in cells,</li>
+	<li>If the node is not explodable then we process it directly,</li>
+	<li>Each time we go down in the block hierarchy we ensure to propagate the identifier so we take the id of the current element or inherit from the parent one.</li>
+</ol>
+
+<p>This implementation does not handle all potential asciidoctor ast elements but works for most documentations.</p>
+
+<p>Then we must filter potentially undesired elements so we can append a filter on this stream:</p>
+
+<pre>
+<code class="language-java">contentWithIds.filter(it -&gt; it != null &amp;&amp; isIndexable(it.getContent()))</code></pre>
+
+<p>Personally I use this kind of heuristic:</p>
+
+<pre>
+<code class="language-java">private boolean isIndexable(final String str) {
+    return str.length() &gt; 2 &amp;&amp; // too small
+           str.length() &lt; 2000 &amp;&amp; // too big, likely a "full" snippet
+           !isHtml(str); // passthrough page
+}
+
+private boolean isHtml(final String string) {
+    return string.startsWith("&lt;div") || string.startsWith("&lt;script");
+}</code></pre>
+
+<p>Now we have sections, we know how to explode it so let&#39;s just do it:</p>
+
+<pre>
+<code class="language-java">final Collection&lt;SearchEntry&gt; entries = sections
+  .flatMap(s -&gt; extractIndexableTexts(Stream.of(s), s.getId()) // 1
+                   .map(c -&gt; new SearchableEntry( // 2
+                       document.getTitle() + " :: " + s.getTitle(), // 3
+                       root.relativize(adoc).toString().replaceAll(".adoc$", ".html"), // 4
+                       c.getId(), // 5
+                       c.getContent() // 6
+                         .replaceAll("&lt;[^&gt;]+&gt;", "").trim())));</code></pre>
+
+<ol>
+	<li>For each section we convert it to the stream of subelements,</li>
+	<li>For each subelement we create a dictionnary entry,</li>
+	<li>We create the search result title (here the document title suffxed by the section title),</li>
+	<li>We create the link to the page (simply the relative path from the root and the adoc extension replaced with html, this can need to be refined depending your deployment, like prefixing with a context),</li>
+	<li>We propagate the anchor (asciidoctor &quot;parent&quot; id we extracted),</li>
+	<li>Finally we propagate the content with some minor sanitization (we drop html tags).</li>
+</ol>
+
+<p>At that stage we have our dictionnary so we just have to serialize it in a json file:</p>
+
+<pre>
+<code class="language-java">try (final Jsonb jsonb = JsonbBuilder.create(new JsonbConfig()
+                .withFormatting(true)
+                .withPropertyOrderStrategy(PropertyOrderStrategy.LEXICOGRAPHICAL)
+                .setProperty("johnzon.cdi.activated", false))) {
+    Files.write(searchJsonPath, jsonb.toJson(entries).getBytes(StandardCharsets.UTF_8));
+}</code></pre>
+
+<p>Indeed, ensure&nbsp;<em>seatchJsonPath</em>&nbsp;matched the uri you fetch in the javascript code.</p>
+
+<p>Here we are, we have our dictionnary properly built, we jave our flexsearch consumer which builds an index and is wired to our search input so our documentation just got search feature for free :).</p>
+
+<p>Indeed, it can be enhanced a lot (by highlighting the search keywords in the result rendering, by refining the asciidoc document dictionnary etc..) but this gives already pretty good results and enable to search in huge reference pages quite efficiently.</p>
+
+<p>Happy writing!</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//completion-stage-exception-promise-and-allOf-without-failfast.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//log4j2-environment-configuration.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

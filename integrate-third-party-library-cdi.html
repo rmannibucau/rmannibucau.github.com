@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Integrate 3rd party library with CDI, part 1: what are the challenges? Shiro case!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,234 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="integrate-third-party-library-cdi-html-container" class="container page-content integrate-third-party-library-cdi-html is-blog">
+                        <div class="page-header">
+                <h1>Integrate 3rd party library with CDI, part 1: what are the challenges? Shiro case!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-09</span>, <span class="metadata-readingtime">3 min and 24 sec read</span></p>
+</div>
+<p>Integrating a third party library with CDI - or developping a CDI support for a library - can be done in two ways:</p>
+
+<ul>
+	<li>cheap: just provide a lookup solution to get CDI beans but keep the framework configuration</li>
+	<li>complete: make CDI the first class citizen of the framework and bring the framework to CDI</li>
+</ul>
+
+<p>Both solutions are valid even if drastically opposed.</p>
+
+<p>In this post serie we&#39;ll investigate the last one since the first one is generally &quot;easy&quot;.</p>
+
+<h2>One example: Apache Shiro</h2>
+
+<p>Before starting with code snippets, let&#39;s use this first post to really understand the difference between both.</p>
+
+<p>Let&#39;s have a look to a common way to setup and use Apache Shiro before adding CDI into the game:</p>
+
+<ul>
+	<li>you add the needed dependencies (shiro-web for instance). This part is one which will not change with or without CDI.</li>
+	<li>you configure the web integration through web.xml add shiro filter and environment intializer</li>
+	<li>you configure shiro itself in shiro.ini</li>
+	<li>you use the programmatic API or annotation API to validate the user (<em>Subject</em>&nbsp;in Shiro semantic) context</li>
+</ul>
+
+<h3>Shiro configuration</h3>
+
+<p>Here is a sample for&nbsp;<em>shiro.ini&nbsp;</em>(taken from shiro master):</p>
+
+<pre>
+<code class="language-ini">[main]
+cacheManager = org.apache.shiro.cache.MemoryConstrainedCacheManager
+
+sessionManager = org.apache.shiro.web.session.mgt.DefaultWebSessionManager
+sessionManager.sessionIdUrlRewritingEnabled = false
+
+securityManager.sessionManager = $sessionManager
+securityManager.cacheManager = $cacheManager
+
+[urls]
+/** = authcBasic[permissive]
+
+[users]
+root = secret,admin
+guest = guest,guest
+presidentskroob = 12345,president
+darkhelmet = ludicrousspeed,darklord,schwartz
+lonestarr = vespa,goodguy,schwartz
+
+[roles]
+admin = *
+schwartz = lightsaber:*
+goodguy = winnebago:drive:eagle5</code></pre>
+
+<p>What do we observe?</p>
+
+<ul>
+	<li>The main part defines the wiring of the runtime. This is a shiro specific IoC.</li>
+	<li>The other parts just configure some special beans (in real life users/roles are not in this file but in a database or ldap for instance)</li>
+</ul>
+
+<p>So what would it mean to migrate it to CDI? After previous analyzis we identify that CDI integration will happen mainly at&nbsp;<em>[main]</em>&nbsp;part. The first challenge will be to use CDI as the main IoC for Shiro and not rely on a custom one (the one Shiro built on top of <em>shiro.ini</em>).</p>
+
+<p>If you pause a second and check the proposed model in spring you will quickly see it is close to that philosophy:</p>
+
+<pre>
+<code class="language-java">@Configuration
+@Import({ShiroBeanConfiguration.class})
+public class ShiroConfiguration extends AbstractShiroConfiguration {
+
+    @Bean
+    @Override
+    protected SessionsSecurityManager securityManager(List&lt;Realm&gt; realms) {
+        return super.securityManager(realms);
+    }
+
+    @Bean
+    @Override
+    protected SessionManager sessionManager() {
+        return super.sessionManager();
+    }
+
+    @Bean
+    @Override
+    protected SubjectDAO subjectDAO() {
+        return super.subjectDAO();
+    }
+
+    @Bean
+    @Override
+    protected SessionStorageEvaluator sessionStorageEvaluator() {
+        return super.sessionStorageEvaluator();
+    }
+
+    @Bean
+    @Override
+    protected SubjectFactory subjectFactory() {
+        return super.subjectFactory();
+    }
+
+    @Bean
+    @Override
+    protected SessionFactory sessionFactory() {
+        return super.sessionFactory();
+    }
+
+    @Bean
+    @Override
+    protected SessionDAO sessionDAO() {
+        return super.sessionDAO();
+    }
+
+    @Bean
+    @Override
+    protected Authorizer authorizer() {
+        return super.authorizer();
+    }
+
+    @Bean
+    @Override
+    protected AuthenticationStrategy authenticationStrategy() {
+        return super.authenticationStrategy();
+    }
+
+    @Bean
+    @Override
+    protected Authenticator authenticator() {
+        return super.authenticator();
+    }
+
+    @Bean
+    @Override
+    protected RememberMeManager rememberMeManager() {
+        return super.rememberMeManager();
+    }
+}</code></pre>
+
+<p>All the goal of&nbsp;<em>shiro.ini</em>&nbsp;is to build a Shiro&nbsp;<em>SecurityManager</em>&nbsp;fully intiialized. Using CDI as backbone just consists to build it based on CDI beans.</p>
+
+<h3>Shiro usage</h3>
+
+<p>Once you have a&nbsp;<em>SecurityManager</em>&nbsp;and it is initialized properly (I&#39;ll skip the&nbsp;<em>ThreadContext</em>&nbsp;setup there since it is very specific to Shiro and far from our original topic), you can use the programmatic or annotation based API:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class Service {
+    @RequiresRoles("admin")
+    public Result stopBatch(BatchId id) {
+        // ...
+    }
+}</code></pre>
+
+<p>What&#39;s the challenge there in CDI? Shiro not being CDI integrated you need an&nbsp;<em>@InterceptorBinding</em>&nbsp;which means the actual service will look like:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class BatchService {
+    @Shiro
+    @RequiresRoles("admin")
+    public Result stopBatch(BatchId id) {
+        // ...
+    }
+}</code></pre>
+
+<p>Adding this marker will slowly result in a lot of boilerplate (suppose you use multiple frameworks for the same method).</p>
+
+<p>Here is our second challenge: avoid to require the user to use other annotations.</p>
+
+<h2>Conclusion</h2>
+
+<p>Integrating with CDI a third party library has mainly two challenges:</p>
+
+<ul>
+	<li>replace the library initialization by CDI using CDI beans directly and avoiding any custom configuration not integrated to CDI or requiring some specific files</li>
+	<li>avoid to add new API/annotations</li>
+</ul>
+
+<p>Next posts will deal with these two aspects still using Shiro example.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi-interceptors.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//javaee-concurrency-utilities-mdc-propagation.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

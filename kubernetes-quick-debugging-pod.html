@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Kubernetes Quick Debugging Pod</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,277 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="kubernetes-quick-debugging-pod-html-container" class="container page-content kubernetes-quick-debugging-pod-html is-blog">
+                        <div class="page-header">
+                <h1>Kubernetes Quick Debugging Pod</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2022-04-05</span>, <span class="metadata-readingtime">5 min and 7 sec read</span></p>
+</div>
+<div class="paragraph">
+<p>When working with Kubernetes, it is not rare to need to access a Kubernetes internal resource.
+While you can bridge a lot of things, you can also need to run an image from Kubernetes environment/network/&#8230;&#8203; to reproduce an issue and connect faster (bridges can be slow if done until your computer, in particular over a VPN).</p>
+</div>
+<div class="paragraph">
+<p>To solve that the easiest is to deploy a <em>debug</em> container which will run the time you investigate your issue (checking some database content for example).</p>
+</div>
+<div class="paragraph">
+<p>Recent Kubernetes versions create the notion of <strong>ephemeral container</strong> (<a href="https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/">doc</a>).
+Long story short, it is a way to run a container without any resource guarantee (I see it as "low priority" container), no port binding nor probe.
+The main advantage of an ephemeral container is to be able to run it in a particular <code>Pod</code> to check it state.</p>
+</div>
+<div class="paragraph">
+<p>However, in practise, we often want to just pop up a container to connect to others or inspect the application state (databases, filesystem, &#8230;&#8203;).
+And this is where ephemeral containers are not the best option&#8230;&#8203;.because they require you to have permissions to run them and a very recent Kubernetes version which are two hypothesis not always true as of today (hopefully it will change  within the coming years).</p>
+</div>
+<div class="paragraph">
+<p>So today, the best option to run a debug container in a Kubernetes cluster - assuming you have deploy permissions - is to run a plain old container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl run \ <i class="conum" data-value="1"></i><b>(1)</b>
+  debug \ <i class="conum" data-value="2"></i><b>(2)</b>
+  --restart=Never \ <i class="conum" data-value="3"></i><b>(3)</b>
+  --image=alpine \ <i class="conum" data-value="4"></i><b>(4)</b>
+  -it \ <i class="conum" data-value="5"></i><b>(5)</b>
+  -- /bin/sh <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Run a container from <code>kubectl</code> (you can indeed replace it by a YAML),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name this container <code>debug</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Don&#8217;t restart it when it is closed (= when I&#8217;ll stop it)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Use <code>alpine</code> image</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Run it in interactive mode (indeed we want to connect to it)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Open a shell</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So after that we&#8217;ll get a container which started a shell for us.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+I&#8217;m using <code>alpine</code> and its package manager <code>apk</code> in this post but if you feel more comfortable with <code>ubuntu</code> and <code>apt</code> just replace the images and commands, it works the same.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>And we are done :)&#8230;&#8203;.almost.</p>
+</div>
+<div class="paragraph">
+<p>In some (dev) unsecured environments, it will work great, you will connect to the shell, <code>apk update &amp;&amp; apk add &lt;debug tool&gt;</code> and you will debug what you need.
+However, in secured environments it will not run because root user (default of the container) is forbidden to modify the container (<code>apk</code> will print you that the system is locked):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ERROR: Unable to lock database: Permission denied
+ERROR: Failed to open apk database:</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are multiple options to solve that, from tweaking the deployment to give the container the permission to run the command (not that recommended if not in pure dev environment) to the creation of a pre-packaged image.</p>
+</div>
+<div class="paragraph">
+<p>This is this last option I tend to use because it has some advantages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You do what you want in terms of tool installation because you run it on the build machine (often yours),</p>
+</li>
+<li>
+<p>You prepackage an utility image you can then reuse if needed, avoiding to resetup all the tools for next time,</p>
+</li>
+<li>
+<p>(optional) You can inject some aliases in the images to have shortcuts using kubernetes environment variables (my common one is <code>pg</code> to connect to the environment postgres service).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use that last option, the first step is to create a docker image.
+To do that you can create this <code>Dockerfile</code> in any empty folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM alpine <i class="conum" data-value="1"></i><b>(1)</b>
+RUN apk update &amp;&amp; apk add postgresql-client curl <i class="conum" data-value="2"></i><b>(2)</b>
+ENTRYPOINT "/bin/sh" <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use the base image you prefer,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Install the utilities you need (postgresql client and curl there),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Start a shell by default (avoids the container to start and stop immediately when deployed).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then you need to build this image. To do that, run this command from the folder you put the <code>Dockerfile</code> in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker build . \ <i class="conum" data-value="1"></i><b>(1)</b>
+  -t $MY_REGISTRY/debug <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create the image from the <code>Dockerfile</code> in this folder,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Tag the image (name) as <code>$MY_REGISTRY/debug</code>. Here it is important <code>$MY_REGISTRY</code> is the registry you will push the image to and Kubernetes will download the image from.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+if you are using gitlab registry for example (similarly for github), it will be something like <code>docker build . -t registry.gitlab.com/myorg/myproject/debug</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now you have your debug image with the tools you need, just push it remotely to your Kubernetes/images registry:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker push $MY_REGISTRY/debug</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+if your registry is authenticated (normally it is), ensure to run <code>docker login &lt;registry host&gt;</code> before.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>At that stage we pushed our image and Kubernetes is able to run it so we just have to modify previous command to deploy our image instead of a plain <code>alpine</code> one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl delete pod debug <i class="conum" data-value="1"></i><b>(1)</b>
+kubectl run debug --restart=Never --image=$MY_REGISTRY/debug -it -- /bin/sh <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We delete the previous pod deployment which should still be there</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We deploy our newly created debug image in a container.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There you can use all the tools your prepackaged in the image to debug your application.</p>
+</div>
+<div class="paragraph">
+<p>Finally, when you are done with your <code>debug</code> container, you can delete it with <code>kubectl delete pod debug</code>.</p>
+</div>
+<div class="paragraph">
+<p>There are a lot of ways to achieve this kind of thing but this technique is quite efficient and has, for me, the most advantages over the alternatives.</p>
+</div>
+<div class="paragraph">
+<p>The last trick I like to use is to not name <code>debug</code> the debug container but use my username (or team name if we are numerous).
+This enables to not cross-use the image and kill the container when <code>run</code> ends, plus this enables to distinguish between the tools and not overwrite the image without creating a ton of tags (using a date).
+A very close option is to name the image <code>debug</code>, tag it with your <code>name</code> and name the container <code>debug-$name</code> but this is way less easy to handle in time than having one image per person/group and name the container the same way than the image.
+Having a single name (and just using <code>latest</code> in general), makes it very easy to clean up the images and containers when team rotates.</p>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//simple-bash-cli-for-automotion.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//docker-compose-java-healthcheck.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

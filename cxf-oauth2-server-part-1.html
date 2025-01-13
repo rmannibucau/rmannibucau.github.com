@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Part 1 : Build an OAuth2 server with CXF</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,271 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cxf-oauth2-server-part-1-html-container" class="container page-content cxf-oauth2-server-part-1-html is-blog">
+                        <div class="page-header">
+                <h1>Part 1 : Build an OAuth2 server with CXF</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-07-26</span>, <span class="metadata-readingtime">5 min read</span></p>
+</div>
+<h2>Setup the project</h2>
+
+<p>Note: In this post I suppose that you are developing an application to deploy in TomEE. If not, you may need to add CXF JAX-RS libraries.</p>
+
+<p>So first, we suppose that we have a standard JAX-RS project setup (org.apache.tomee:javaee-api:7.0 is enough for that).</p>
+
+<p>Then we will add cxf OAuth2 module in our pom.xml:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+ &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+ &lt;artifactId&gt;cxf-rt-rs-security-oauth2&lt;/artifactId&gt;
+ &lt;version&gt;3.1.6&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Since we will deploy JAX-RS endpoint, we will create an Application subclass:</p>
+
+<pre>
+<code class="language-java">import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+@ApplicationPath("api")
+public class OAuth2Application extends Application {
+}</code></pre>
+
+<p>And finally we will create the OAuth2 &ldquo;token&rdquo; endpoint, which is the endpoint you hit to get an access token or a refresh token (or more ;)). CXF provides one - AccessTokenService &nbsp;- but to control the scope and format, we will just wrap it in our own endpoint:</p>
+
+<pre>
+<code class="language-java">@Path("token")
+@RequestScoped
+public class TokenResource {
+   private final AccessTokenService delegate = new AccessTokenService();
+
+
+   @POST
+   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response handleTokenRequest(final MultivaluedMap&lt;String, String&gt; params) {
+       return delegate.handleTokenRequest(params);
+   }
+
+   @Context
+   public void setMessageContext(final MessageContext context) {
+       delegate.setMessageContext(context);
+   }
+}</code></pre>
+
+<p>For now this is a pure delegation, but this allows us to:</p>
+
+<ul>
+	<li>
+	<p>Define the scope on the resource (needs to be request scoped cause of the way the AccessTokenService is implemented)</p>
+	</li>
+	<li>
+	<p>If desired, in handleTokenRequest() we can change the Response entity format if the CXF one doesn&rsquo;t fit the need (don&rsquo;t forget to do so for error and normal cases)</p>
+	</li>
+	<li>
+	<p>Our token endpoint is a CDI bean so we can use injections and see that it is handy</p>
+	</li>
+</ul>
+
+<p>Side note: setMessageContext is needed by CXF implementation, so we just give it to the delegate instance.</p>
+
+<p>If you execute this endpoint it will probably fail, because you need to setup the OAuth2 chain and the persistence of tokens.</p>
+
+<h2>Implement the storage</h2>
+
+<p>The storage is handled through org.apache.cxf.rs.security.oauth2.provider.OAuthDataProvider API in CXF OAuth2 extension so you need to implement it and set it on the delegate service.</p>
+
+<p>Let&rsquo;s take the simple case of a JPA implementation - but a JCache one can be neat as it gives you eviction for free and a faster re-read access ;).</p>
+
+<p>To do so, we need a Token and Client entities:</p>
+
+<pre>
+<code class="language-java">@Entity
+public class ClientEntity {
+   @Id
+   private String id;
+   private String secret;
+   private boolean confidential;
+   private String application;
+   private String webUri;
+
+   // getters/setters
+}</code></pre>
+
+<pre>
+<code class="language-java">@Entity
+public class TokenEntity {
+   @Id
+   private String id;
+
+   @ManyToOne
+   private ClientEntity client;
+
+   private String tokenType;
+   private String refreshToken;
+   private long expiresIn;
+   private long issuedAt;
+   private String issuer;
+   private String grantType;
+   private String clientCodeVerifier;
+   private String nonce;
+   private String responseType;
+   private String grantCode;
+
+   // getters/setters
+}</code></pre>
+
+<p>Then once this is done you have to implement the &ldquo;repository&rdquo; which is the OAuthDataProvider. To do that, you can extend AbstractOAuthDataProvider which makes it quite simpler. Finally, since we can use CDI, we will inject our EntityManager and use @Transactional in this repository:</p>
+
+<pre>
+<code class="language-java">@Transactional
+@ApplicationScoped
+public class JPAOAuthDataProvider extends AbstractOAuthDataProvider {
+   @PersistenceContext
+   private EntityManager em;
+
+   @Override
+   protected boolean isRefreshTokenSupported(final List&lt;String&gt; theScopes) {
+       return true;
+   }
+
+// all the code at https://github.com/rmannibucau/simple-oauth2/blob/master/src/main/java/com/github/rmannibucau/oauth2/backend/JPAOAuthDataProvider.java
+
+}</code></pre>
+
+<p>This is a pure CRUD implementation exception isRefreshTokenSupported() which is overriden cause if you don&rsquo;t do the token endpoint will not generate a refresh token (the alternative is to ensure you request and have the scope refreshToken but this doesn&rsquo;t work using password grant).</p>
+
+<h2>Defining oauth2 chain</h2>
+
+<p>Now we have our storage, we need to wire it to the oauth2 server:</p>
+
+<pre>
+<code class="language-java">@Path("token")
+@RequestScoped
+public class TokenResource {
+   private final AccessTokenService delegate = new AccessTokenService();
+
+   @Inject
+   private JPAOAuthDataProvider provider;
+
+   @PostConstruct
+   private void setup() {
+       delegate.setDataProvider(provider);
+       // TODO
+   }
+
+   // as before
+}</code></pre>
+
+<p>This is a good step forward and quite easy as we rely on CDI. However, we still need to help our delegate to handle the requests it can receive.</p>
+
+<p>For this post, we will handle password and refresh grants (i.e. from a user/password, you get an access_token and refresh_token : the access_token will be your &ldquo;secret&rdquo; until it expires and the refresh_token will allow you to get a new one when needed).</p>
+
+<p>CXF provides a set of AccessTokenGrantHandler already implementing main flows/grants. The handler for the password grant is called ResourceOwnerGrantHandler and the one for the refresh is called RefreshTokenGrantHandler. All you need to do is to initialize them if needed and add them to the delegate token service.</p>
+
+<p>In our case, the initialization is simple:</p>
+
+<ul>
+	<li>
+	<p>Both need the OAuthDataProvider (already injected so no issue)</p>
+	</li>
+	<li>
+	<p>The resource owner grant handler needs a login handler validating credentials. Here again, CXF does all the job providing a JAAS implementation. All we will need to do is to set the JAAS context name (if you don&rsquo;t know what it is, you will understand it next part)</p>
+	</li>
+</ul>
+
+<p>Finally, here is how we initialize our token service:</p>
+
+<pre>
+<code class="language-java">@PostConstruct
+private void setup() {
+   delegate.setDataProvider(provider);
+   Stream.of(new ResourceOwnerGrantHandler() {{
+                 setDataProvider(provider);
+                 setLoginHandler(new JAASResourceOwnerLoginHandler() {{
+                     setContextName("oauth2");
+                 }});
+             }}, new RefreshTokenGrantHandler() {{
+                 setDataProvider(provider);
+             }}
+   ).forEach(delegate::setGrantHandler);
+}
+</code></pre>
+
+<p>At that point the token endpoint is done but we still need to setup JAAS to have a working authentication.</p>
+
+<h2>JAAS setup</h2>
+
+<p>To setup JAAS we need to define a context matching the context name we set on the login handler. In the previous part, we called it &ldquo;oauth2&rdquo; so we need to define in jaas.config:</p>
+
+<pre>
+<code>oauth2 {
+  // login modules
+};</code></pre>
+
+<p>To use TomEE properties login module (user, password and groups are in properties files), the JAAS configuration file can look like:</p>
+
+<pre>
+<code>oauth2 {
+   org.apache.openejb.core.security.jaas.PropertiesLoginModule required
+      UsersFile="users.properties"
+      GroupsFile="groups.properties";
+};</code></pre>
+
+<p>Finally, to run it, you will need to set the system property java.security.auth.login.config to the path to jaas.config. For instance:</p>
+
+<pre>
+<code>-Djava.security.oauth.login.config=/opt/app/security/jaas.config</code></pre>
+
+<p>Side note: you can also use Tomcat context.xml to configure the JAAS configuration location using JAASRealm directly from the web application.</p>
+
+<p>Next post we will see how to test this oauth2 server and how to package it as a fatjar.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cxf-oauth2-server-part-2.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tea-ci-travis-like-windows.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Generate your adoc module/application configuration instead of maintaining it manually</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="generate-configuration-from-code-adoc-html-container" class="container page-content generate-configuration-from-code-adoc-html is-blog">
+                        <div class="page-header">
+                <h1>Generate your adoc module/application configuration instead of maintaining it manually</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-10-25</span>, <span class="metadata-readingtime">8 min and 57 sec read</span></p>
+</div>
+<p>Configuration if a central piece of an application and it is one of the communication channels with other people of your team or other teams (if you have an operation team). For that reason it is insanely important to ensure it is up to date and accurate.</p>
+
+<p>For that reason it is impossible to do it manually without adding an insane process of review which would be very costly for a poor gain.</p>
+
+<p>So how to do? To answer that question I&#39;ll use an application configured with DeltaSpike as example but it will be easy to generalize it to any application: the very high level view is to generate the documentation at build time.</p>
+
+<h2>Generation setup</h2>
+
+<p>Your configuraton can be lucky and use a framework with a plugin for your build tool to generate the documentation but if not, don&#39;t worry, you can &quot;make your own&quot;. For Gradle it is quite easy since you can script it but for Maven you would need to write a Mojo (another small project). Where it is possible it is often too much overhead for the goal and therefore we&#39;ll just use the groovy mojo to script our documentation generation:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.codehaus.gmaven&lt;/groupId&gt;
+  &lt;artifactId&gt;groovy-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;config-doc&lt;/id&gt;
+      &lt;phase&gt;prepare-package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;execute&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+       &lt;source&gt;${project.basedir}/src/main/documentation/Configuration.groovy&lt;/source&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.xbean&lt;/groupId&gt;
+      &lt;artifactId&gt;xbean-finder-shaded&lt;/artifactId&gt;
+      &lt;version&gt;4.5&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>This is a standard setup of the plugin, the Configuration.groovy script will be executed just before creating your artifact (jar/war). You can have noted I added xbean-finder as a dependency, we&#39;ll soon see why.</p>
+
+<h2>Code the documentation generation</h2>
+
+<p>Now we have the plugin setup we need to create the&nbsp;<em>src/main/documentation/Configuratoin.groovy</em>. What will do the script?</p>
+
+<ul>
+	<li>find the configuration</li>
+	<li>extract from each entry the configuration name (can be an xml path), the default if any and a small description</li>
+	<li>dump everything in a well formatted document</li>
+</ul>
+
+<h3>Find the configuration</h3>
+
+<p>Illustrating with DeltaSpike this post, we&#39;ll need to look for these annotations:</p>
+
+<pre>
+<code class="language-java">@Inject
+@ConfigProperty(name ="....", defaultValue = "...")
+private String value;</code></pre>
+
+<p>That&#39;s where&nbsp;<em>xbean-finder</em>&nbsp;will help us. This is a small library parsing a list of &quot;archives&quot; to find annotations.</p>
+
+<p>To create an&nbsp;<em>AnnotationFinder</em>, we need to create a classloader usable for the application and&nbsp;define what we scan (the&nbsp;<em>Archive</em>). Thanks to the groovy plugin we inherit from maven components and can use the&nbsp;<em>project</em>&nbsp;to achieve it - not that with gradle it is globally the same using&nbsp;<em>configurations</em>:</p>
+
+<pre>
+<code class="language-java">def classes = new File(project.build.outputDirectory).toURI().toURL()
+
+def urls = []
+urls.add(classes)
+project.artifacts.each { urls.add(it.file.toURI().toURL()) }
+
+def configLoader = new URLClassLoader(urls as URL[])
+def finder = new AnnotationFinder(new FileArchive(configLoader, classes), true)
+</code></pre>
+
+<p>In summary, we create a classloader composed of dependencies and the module classes, we define we want to scan only the module classes (<em>FileArchive</em>) and create build a <em>finder</em>&nbsp;from it.</p>
+
+<p>Tip: of course you can scan the whole dependency set if you want, just ensure to not scan utilities or external modules cause it can increase the execution time significantly for no gain. If you are interested in that strategy see xbean&nbsp;<em>JarArchive</em>&nbsp;and&nbsp;<em>CompositeArchive</em>.</p>
+
+<p>Then the finder API is quite simple and you generally do:</p>
+
+<pre>
+<code class="language-java">Collection&lt;Field&gt; fields = finder.findAnnotatedFields(MyAnnotation.class);</code></pre>
+
+<p>Here it is just a bit more tricky cause to respect the classloading so we need to load <em>MyAnnotation</em>&nbsp;with the same classloader than the application: our&nbsp;<em>configLoader.</em></p>
+
+<p>Concretey we&#39;ll just do:</p>
+
+<pre>
+<code class="language-java">def markerConfig = configLoader.loadClass('org.apache.deltaspike.core.api.config.ConfigProperty')
+finder.findAnnotatedFields(markerConfig)</code></pre>
+
+<p>Note: using this finder we get a nice high level API but we need to respect the classloading (last boolean parameter we set creating the finder). It is also possible to not go through these constraints disabling it or just using directly asm library but API is a bit more complex so personally I find this trade off quite acceptable.</p>
+
+<p>Side note: for this post we&#39;ll only handle field injections but with the&nbsp;<em>finder</em>&nbsp;you can find constructor and&nbsp;setters injections too. This would be the exact same kind of logic.</p>
+
+<h3>Description?</h3>
+
+<p>DeltaSpike API only answers to DeltaSpike needs and therefore doesn&#39;t provide a&nbsp;<em>description</em>&nbsp;member to its&nbsp;<em>@ConfigProperty</em>. Not a big deal, we&#39;ll create our own:</p>
+
+<pre>
+<code class="language-java">import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+@Target(FIELD)
+@Retention(RUNTIME)
+public @interface Description {
+    String value();
+}
+</code></pre>
+
+<p>Then update your configuration to use it:</p>
+
+<pre>
+<code class="language-java">@Inject
+@Description("this configures something important")
+@ConfigProperty(name ="....", defaultValue = "...")
+private String value;</code></pre>
+
+<p>Of course we need to use the same trick as for&nbsp;<em>@ConfigProperty</em>&nbsp;to find it so we&#39;ll do:</p>
+
+<pre>
+<code class="language-java">def markerDescription = configLoader.loadClass('com.company.Description')</code></pre>
+
+<h3>Output the documentation: adoc to the rescue</h3>
+
+<p>We have our configuration marker, we can find all attributes we want (<em>@ConfigProperty</em>&nbsp;has name and default, out&nbsp;<em>@Description</em>&nbsp;has some human readable description) so we just need to dump it in a table.</p>
+
+<p>Most of the time you will want to output some html to share it easily but also some PDF to be able to mail the documentation (mailing a html is not that friendly if you already tried ;)).</p>
+
+<p>Asciidoc has the advantage to support both (and more) outputs and is an easy format to generate since it is a wiki like syntax. Here what we want to generate can look like:</p>
+
+<pre>
+<code class="language-ini">= My Config
+
+|===
+| Name     | Default | Description
+| sample 1 | -       | aweomse config
+| sample 2 | true    | aweomse config too
+|===</code></pre>
+
+<p>I&#39;ll not show you how to output that exactly but something a bit more advanced in next part.</p>
+
+<h2>Custom generation</h2>
+
+<p>I previously justified the fact to code the generation by the lack of plugin for my configuration API. This is not 100% the actual reason. The actual reason is code is simple and allows you to format it exactly as you want with the content you want.</p>
+
+<p>If you want to add some static data or documentation blocks, you can include other .adoc anywhere in the generation, if you want to instantiate some objects to generate some samples (very nice for JSON/XML REST API documentation) you can do it too etc...An automatic tool wouldn&#39;t be that powerful.</p>
+
+<p>To show that I will suppose our application uses a common pattern for its configuration keys: ${application prefix}.${configuration segment}+.${configuration attribute}.</p>
+
+<p>Concretely if we need to configure a twitter client, and a database pool it can look like:</p>
+
+<pre>
+<code class="language-bash">app.twitter.baseUrl = ...
+app.twitter.http.socket_timeout = ...
+app.twitter.http.read_timeout = ...
+app.database.driver = ...
+app.database.url = ...
+app.database.username = ...
+app.database.password = ...
+app.database.pool.min = ...
+app.database.pool.max = ...</code></pre>
+
+<p>Of course this is a simplified version but we identify clearly we have a configuratoin marker then&nbsp;<strong>multiple</strong>&nbsp;levels of configuration for this marker: twitter configuration has the endpoint configuration and the http client configuration, database configuration has the connection configuration and the pool configuration etc...</p>
+
+<p>Merging all properties in a single table wouldn&#39;t make it very obvious and would make the configuration a bit harder to read. To solve that we&#39;ll spli the configuration and create a table for each part. And to keep it hierarchic as ou keys we&#39;ll increment the level of title for each added segment: twitter would be a level 2 (level 1 if the whole document title) and twitter.http would be a level 3 for instance.</p>
+
+<p>There are a lot of ways to code that but I chose a lazy one: build a configuration tree, sort the keys by tree node and dump them all. Each node of the tree will be responsible to dump its level and its children (then we browse the whole tree at the end).</p>
+
+<p>To build the tree we iterate over all config entries found thanks the&nbsp;<em>finder</em>&nbsp;and we split the key with dots. We ignore the application prefix and then just add the nodes to the tree respecting the tree path the split gives us.</p>
+
+<p>Enough words, let see what it can look it:</p>
+
+<pre>
+<code class="language-java">import org.apache.xbean.finder.AnnotationFinder
+import org.apache.xbean.finder.archive.FileArchive
+
+import static java.util.Locale.ENGLISH
+
+class Config {
+    def name
+    def defaultValue
+    def description
+}
+class Node {
+    def shortName
+    def level
+    def children = [:]
+    def childrenLeaves = []
+
+    def dumpNode(writer) {
+        (1..level).each { writer.write '=' }
+        writer.writeLine "= ${shortName.capitalize()}"
+        writer.writeLine ''
+
+        if (!childrenLeaves.isEmpty()) {
+            writer.writeLine '|==='
+            writer.writeLine '|Name|Default|Description'
+            childrenLeaves.sort { it.name }.each {
+                writer.writeLine "|${it.name}|${it.defaultValue}|${it.description}"
+            }
+            writer.writeLine '|==='
+            writer.writeLine ''
+        }
+
+        children.values()
+                .sort { it.shortName.toLowerCase(ENGLISH) }
+                .each { it.dumpNode(writer) }
+    }
+
+}
+
+// retrieves all @ConfigProperty on fields and generate doc from it
+def generateConfigurationDoc() {
+    def classes = new File(project.build.outputDirectory).toURI().toURL()
+
+    def urls = []
+    urls.add(classes)
+    project.artifacts.each { urls.add(it.file.toURI().toURL()) }
+
+    log.debug("using classloader ${urls}")
+
+    def configLoader = new URLClassLoader(urls as URL[])
+    def markerConfig = configLoader.loadClass('org.apache.deltaspike.core.api.config.ConfigProperty')
+    def markerDescription = configLoader.loadClass('com.company.Description')
+    def finder = new AnnotationFinder(new FileArchive(configLoader, classes), true)
+
+    def tree = new Node(shortName: "${project.name} :: Configuration", level: 0)
+    finder.findAnnotatedFields(markerConfig).each {
+        def config = it.getAnnotation(markerConfig)
+        def description = it.getAnnotation(markerDescription)
+        if (description == null) {
+            throw new IllegalStateException("No @Description for " + it)
+        }
+
+        def name = config.name()
+        def current = tree;
+        def values = name.replace('myapp.', '').tokenize('\\.')
+        for (int i = 0; i &lt; values.size() - 1; i++) {
+            def key = values.get(i);
+            def newNode = current.children[key]
+            if (newNode == null) {
+                newNode = new Node(shortName: key, level: current.level + 1)
+                current.children[key] = newNode
+            }
+            current = newNode
+        }
+        current.childrenLeaves &lt;&lt; new Config(
+                name: name,
+                defaultValue: config.defaultValue().replace('org.apache.deltaspike.NullValueMarker', "-"),
+                description: description.value())
+    }
+
+    if (tree.children.isEmpty()) {
+        throw new IllegalStateException("Something went bad, we didn't find any doc");
+    }
+
+    def configuration = new File(project.build.directory, "doc/src/configuration.adoc")
+    configuration.parentFile.mkdirs()
+    configuration.withWriter('utf-8') { w -&gt;
+        w.writeLine "= ${project.name} :: Configuration"
+        w.writeLine ''
+        tree.dumpNode(w)
+    }
+
+}
+
+generateConfigurationDoc()
+</code></pre>
+
+<p>The nice thing doing it from the build is you can use project to generate some parts. See how the title is reusing <em>project.name </em>for instance or <em>project.build</em>&nbsp;to find directories.</p>
+
+<p>Groovy allows us to write real classes and &quot;standard&quot; code which makes the tree handling quite easy.</p>
+
+<p>At the end the documentation is dumped in&nbsp;<em>target/doc/src/configuration.adoc </em>and you just need to render it. About that you can add asciidoctor (and its pdf extension) to do the generation in the same build script if needed.</p>
+
+<h2>Attach the documentation</h2>
+
+<p>Last important point is to ensure the documentation is released with the project. To do that you just need to&nbsp;<em>attach</em>&nbsp;the documentation with the module artifacts. Maven has a helper to do that just requiring the file, classifier and extension representing the artifact to attach. Here how you can do it in the setup of this post:</p>
+
+<pre>
+<code class="language-java">container.lookup('org.apache.maven.project.MavenProjectHelper')
+  .attachArtifact(project, 'adoc', 'configuration', configuration)</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Documentation is a part of software which is important to do cause it is one of the reference for end users - and dev when time passes ;). However doing it manually is quite costly, hard and not nice for developpers so automating it is always a big win and not that hard. You can get very high level documentation this way</p>
+
+<ul>
+	<li>configuration as we seen in this post</li>
+	<li>application graph interactions (capture clients in the generation)</li>
+	<li>resource usage (which part of your application use a JMS queue, a database, ...)</li>
+	<li>REST API (which paths, which payloads, ...)</li>
+	<li>and much more....</li>
+</ul>
+
+<p>Correctly setup this generation is generally fast and really does worth it so when bootstraping a project ensure you don&#39;t bypass this step :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//you-dont-want-to-build-your-server-microprofile-example.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jsonb-list-map.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

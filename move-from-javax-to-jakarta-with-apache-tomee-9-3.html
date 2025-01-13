@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Move from javax to jakarta with Apache TomEE 9 (Part 3): dockerize it</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,238 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="move-from-javax-to-jakarta-with-apache-tomee-9-3-html-container" class="container page-content move-from-javax-to-jakarta-with-apache-tomee-9-3-html is-blog">
+                        <div class="page-header">
+                <h1>Move from javax to jakarta with Apache TomEE 9 (Part 3): dockerize it</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-01-12</span>, <span class="metadata-readingtime">4 min and 26 sec read</span></p>
+</div>
+<p>In two previous post we built a jakarta TomEE distribution and migrated an application to TomEE. The two missing pieces are:</p>
+
+<ol>
+	<li>The testing layer</li>
+	<li>The final packaging.</li>
+</ol>
+
+<p>The testing reuses what we saw by making libraries jakarta friendly or using TomEE Remote in your test there is nothing more than using the distribution you built. So I will not detail the testing for now - until I get a lot of requests to do it ;).</p>
+
+<p>The packaging is important since it is what will deliver your application. Since the usage of jakarta likely means it is a new application or an application you invest in - otherwise you can stick to javax for years, it also likely means you will deploy it in docker.</p>
+
+<p>So at current stage, we have a ready to run TomEE with our application in&nbsp;<em>target/tomee/standalone</em>&nbsp;and we want to put it in a docker container. You can write a Dockerfile<em>&nbsp;</em>but I encourage you to use JIB. This has the advantage to be very maven friendly but also to not require the docker daemon to push an image on a registry which is great on CI.</p>
+
+<p>Our build will put our tomee instance in&nbsp;<em>/opt/application,&nbsp;</em>use a JRE 11 as base image and launch TomEE in waiting mode (to let a kill on the container kill the instance).</p>
+
+<p>The base will look like:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+	&lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.7.0&lt;/version&gt; &lt;!-- 1 --&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;id&gt;standalone&lt;/id&gt;
+			&lt;phase&gt;none&lt;/phase&gt; &lt;!-- 2 --&gt;
+			&lt;configuration&gt;
+				&lt;extraDirectories&gt;
+					&lt;paths&gt;
+						&lt;path&gt;  &lt;!-- 3 --&gt;
+							&lt;from&gt;${project.build.directory}/tomee/standalone&lt;/from&gt;
+							&lt;into&gt;/opt/application&lt;/into&gt;
+						&lt;/path&gt;
+					&lt;/paths&gt;
+				&lt;/extraDirectories&gt;
+				&lt;from&gt;  &lt;!-- 4 --&gt;
+					&lt;image&gt;adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine@sha256:58254737530df7f7e7acfe3e7538a027f898ac05accd2e15adcef34d5a33ae72&lt;/image&gt;
+				&lt;/from&gt;
+				&lt;to&gt;  &lt;!-- 5 --&gt;
+					&lt;image&gt;rmannibucau/app-jakarta-demo&lt;/image&gt;
+				&lt;/to&gt;
+				&lt;container&gt;
+                    &lt;!-- 6 --&gt;
+					&lt;appRoot&gt;/opt/application&lt;/appRoot&gt;
+					&lt;workingDirectory&gt;/opt/application&lt;/workingDirectory&gt;
+                    &lt;!-- 7 --&gt;
+					&lt;entrypoint&gt;
+						&lt;entry&gt;sh&lt;/entry&gt;
+						&lt;entry&gt;/opt/application/bin/catalina.sh&lt;/entry&gt;
+						&lt;entry&gt;run&lt;/entry&gt;
+					&lt;/entrypoint&gt;
+					&lt;ports&gt; &lt;!-- 8 --&gt;
+						&lt;port&gt;8080&lt;/port&gt;
+					&lt;/ports&gt;
+				&lt;/container&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+
+<ol>
+	<li>We configure jib plugin,</li>
+	<li>We define an execution to build our docker image - as in previous posts we make this callable explicitly but not bound to any phase,</li>
+	<li>We require jib to copy our tomee distribution to&nbsp;<em>/opt/application</em>&nbsp;in the container,</li>
+	<li>We use&nbsp;<em>OpenJDK11</em>&nbsp;(jre) as base image. The sha is optional but ensures we use the image we expect since docker images are not immutables,</li>
+	<li>We define the target name of our image (without more configuration it will be tagged&nbsp;<em>latest</em>&nbsp;but you can explicit the version),</li>
+	<li>We define the application and container working directory to the application folder we chose,</li>
+	<li>We define our entry point to be tomcat&nbsp;<em>catalina.sh</em>&nbsp;script and we execute&nbsp;<em>run</em>&nbsp;option to ensure the prcess is aligned on the container lifecycle,</li>
+	<li>Finally we define that our TomEE we use the port 8080.</li>
+</ol>
+
+<p>Note: without any server.xml tuning, AJP port will be used on port 8009. It is almost never useful with docker so we don&#39;t define it and you can even define a sever.xml without this connector in&nbsp;<em>src/main/tomee/conf</em>&nbsp;if desired.</p>
+
+<p>If you run the following command, JIB will create your image and load it in your local docker registry (replace <em>dockerBuild</em>&nbsp;by <em>build</em>&nbsp;and add a registry host as prefix of your image name and you will push it remotely):</p>
+
+<pre>
+<code class="language-bash">mvn jib:dockerBuild@standalone</code></pre>
+
+<p>In other words, it means you can now launch your application running:</p>
+
+<pre>
+<code class="language-bash">docker run -p 8080:8080 rmannibucau/app-jakarta-demo</code></pre>
+
+<p>Great no? Actually not that much. JIB is opiniated and is integrated with JAR and WAR so it added your application files in the container image whereas you already created a TomEE/Tomcat oriented layout JIB does not know about.</p>
+
+<p>To drop the &quot;leaking&quot; files, you can use JIB filter extension which enables to delete files from layers.</p>
+
+<p>TIP: it also enables to reorganize layers so you could put all TomEE in a layer and your application in another layer. Assuming your application moves more than TomEE it will make the docker image update faster most of the time.</p>
+
+<p>Here is how to remove unneeded file - we will even remove the distribution unneeded files as the README for example:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+	&lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.7.0&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;id&gt;standalone&lt;/id&gt;
+			&lt;phase&gt;none&lt;/phase&gt;
+			&lt;configuration&gt;
+				&lt;!-- same configuration as before, omitted for brievity --&gt;
+				&lt;pluginExtensions&gt;
+					&lt;pluginExtension&gt; &lt;!-- 1 --&gt;
+						&lt;implementation&gt;com.google.cloud.tools.jib.maven.extension.layerfilter.JibLayerFilterExtension&lt;/implementation&gt;
+						&lt;configuration implementation="com.google.cloud.tools.jib.maven.extension.layerfilter.Configuration"&gt;
+							&lt;filters&gt;
+								&lt;!-- 2 --&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/*.txt&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/*.md&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/LICENSE&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/NOTICE&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/RELEASE-NOTES&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/RUNNING.txt&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;!-- 3 --&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/META-INF/**&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/META-INF&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;!-- 4 --&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/WEB-INF/**&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/WEB-INF&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/classpath/**&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/classpath&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/resources/**&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt;
+									&lt;glob&gt;/opt/application/resources&lt;/glob&gt;
+								&lt;/filter&gt;
+								&lt;filter&gt; &lt;!-- 5 --&gt;
+									&lt;glob&gt;/opt/application/index*&lt;/glob&gt;
+								&lt;/filter&gt;
+							&lt;/filters&gt;
+						&lt;/configuration&gt;
+					&lt;/pluginExtension&gt;
+				&lt;/pluginExtensions&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt; &lt;!-- 6 --&gt;
+			&lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+			&lt;artifactId&gt;jib-layer-filter-extension-maven&lt;/artifactId&gt;
+			&lt;version&gt;0.1.0&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+&lt;/plugin&gt;</code></pre>
+
+<ol>
+	<li>We add to previous configuration a plugin extenson of jib;</li>
+	<li>We configure the filter extension to &quot;filter&quot; all the Tomcat undesired files (text files mainly). JIB filter extension removes the file when there is no target layer in&nbsp;<em>&lt;filter&gt;</em>&nbsp;configuration which is what we use there.</li>
+	<li>JIB adds webapp and resources files so we drop resources first. Note that due to JVM glob implementation we must add two expressions to drop a folder, one to empty it and one to drop the folder itself.</li>
+	<li>Same thing than for resources (3) but for webapp directory&nbsp;(src/main/webapp).</li>
+	<li>Note that if you have folders or custom files in webapp directory you can also need to filter them here like this index file for example.</li>
+	<li>Finally we ensure the jib filter extension is available for the plugin.</li>
+</ol>
+
+<p>Now if we run back the jib command we will get a clean docker image.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jsonb-jpa-relationship-avoid-infinite-loop.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//move-from-javax-to-jakarta-with-apache-tomee-9-2.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Jsonb: how to customize enum names</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,193 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jsonb-enum-serialization-html-container" class="container page-content jsonb-enum-serialization-html is-blog">
+                        <div class="page-header">
+                <h1>Jsonb: how to customize enum names</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-04-10</span>, <span class="metadata-readingtime">3 min and 51 sec read</span></p>
+</div>
+<p>Jsonb is the standard JSON-Java mapper API. It is very simple and efficient. However some few details stay surprising. Let&#39;s detail the enum case in this post.</p>
+
+<p>To illustrate our post let&#39;s take a very simple model. First a normal POJO:</p>
+
+<pre>
+<code class="language-java">public class Result {
+    private final State state;
+
+    public Result(final State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        return state;
+    }
+}</code></pre>
+
+<p>Then our&nbsp;<em>State</em>&nbsp;enum:</p>
+
+<pre>
+<code class="language-java">public enum State {
+    ok,
+    ko
+}</code></pre>
+
+<p>Nothing crazy, right? Now let&#39;s take the case where the code enum name does not match the serialization name. Most of the time you will just refactor the enum and that&#39;s it, however in several cases you can&#39;t:</p>
+
+<ul>
+	<li>You wrote a library and part of the contract (either serialization or java) is already out since some version and you don&#39;t want to break the compatibility with the new version,</li>
+	<li>The serialization name is not a value java name.</li>
+</ul>
+
+<p>Immediately you think JSON-B is awesome and already have the right API for that so you convert it to:</p>
+
+<pre>
+<code class="language-java">public enum State {
+    @JsonbProperty("well")
+    ok,
+
+    @JsonbProperty("bad")
+    ko
+}</code></pre>
+
+<p>Sounds good no? If you serialize a&nbsp;<em>Result</em>&nbsp;instance, you will still get&nbsp;<em>ok&nbsp;</em>and&nbsp;<em>ko&nbsp;</em>names instead of <em>well</em>&nbsp;and <em>bad</em>.</p>
+
+<p>To solve that, the simplest is to write an adapter. The adapter will build a mapping Java-JSON in its constructor and then just use these two mappings to load the values. The mapping will indeed be maps. An&nbsp;<em>HashMap</em>&nbsp;is good enough in both cases but the one having the enum as key can also be an <em>IdentityHashMap</em>&nbsp;which should be a little bit faster if you are a purist. So here is the skeleton of our adapter:</p>
+
+<pre>
+<code class="language-java">public abstract class EnumMapperBase&lt;A extends Enum&lt;?&gt;&gt; implements JsonbAdapter&lt;A, String&gt; {
+    private final Map&lt;String, A&gt; jsonToJavaMapping = new HashMap&lt;&gt;();
+    private final Map&lt;A, String&gt; javaToJsonMapping = new IdentityHashMap&lt;&gt;();
+
+    protected EnumMapperBase() {
+        // todo
+    }
+
+    private Class&lt;A&gt; getEnumType() {
+        return Class.class.cast(ParameterizedType.class.cast(
+                getClass().getGenericSuperclass())
+                .getActualTypeArguments()[0]);
+    }
+
+    @Override
+    public String adaptToJson(final A obj) {
+        return javaToJsonMapping.get(obj);
+    }
+
+    @Override
+    public A adaptFromJson(final String obj) {
+        return ofNullable(jsonToJavaMapping.get(obj))
+                .orElseThrow(() -&gt; new IllegalArgumentException("Unknown enum value: '" + obj + "'"));
+    }
+}</code></pre>
+
+<p>The implementation is super simple: two maps and each one matching a mapper method. The only trick can be to throw - or not - an exception when an unknown value enters the mapper methods. Finally, this is a generic implementation which must be contextualize with an enum type to work, it is done just extending this class and passing the right generic and be able to extract the mapping:</p>
+
+<pre>
+<code class="language-java">public class EnumMapper extends EnumMapperBase&lt;State&gt; {
+}</code></pre>
+
+<p>At that point we just miss the mapping. The simplest is to extract the enum type - this is ready in the abstract class we just created - and iterate over its constants and map each of them. Here is a potential implementation you can put in the constructor of the base class:</p>
+
+<pre>
+<code class="language-java">Stream.of(getEnumType().getEnumConstants()).forEach(constant -&gt; {
+    final String asString;
+    try {
+        asString = ofNullable(
+                    constant.getClass()
+                            .getDeclaredField(constant.name())
+                            .getAnnotation(JsonbProperty.class))
+                .map(JsonbProperty::value)
+                .orElseGet(constant::name);
+    } catch (final NoSuchFieldException e) {
+        throw new IllegalArgumentException(e);
+    }
+    jsonToJavaMapping.put(asString, constant);
+    javaToJsonMapping.put(constant, asString);
+});</code></pre>
+
+<p>The value considered the JSON value -&nbsp;<em>asString</em>&nbsp;in previous snippet - follows default implementation in JSON-B, i.e. it uses the enum constant name but if you decorated the enum constant/value with&nbsp;<em>@JsonbProperty</em>&nbsp;then it will take the property name as we desired at the beginning of this post.</p>
+
+<p>One you put it altogether your adapter is ready to use. To register it you have mainly two options:</p>
+
+<ol>
+	<li>Register it&nbsp;for your enum globally,</li>
+	<li>Register it for your enum only for one attribute of a particular model.</li>
+</ol>
+
+<p>Last case is the simplest, you just add&nbsp;<em>@JsonbTypeAdapter&nbsp;</em>on the field you want to map:</p>
+
+<pre>
+<code class="language-java">public class Result {
+    @JsonbTypeAdapter(StateMapper.class)
+    private final State state;
+
+    // ... as before
+
+    public static class StateMapper extends EnumMapperBase&lt;State&gt; {}
+}</code></pre>
+
+<p>However, if you prefer to register this mapping globally you must do it in your&nbsp;<em>Jsonb</em>&nbsp;instance:</p>
+
+<pre>
+<code class="language-java">try (final Jsonb jsonb = JsonbBuilder.create(new JsonbConfig()
+  .withAdapters(new StateMapper()))) {
+
+  // ....
+}</code></pre>
+
+<p>The&nbsp;<em>withAdapters</em>&nbsp;is the simplest way to register globally an adapter.</p>
+
+<p>This way to customize an enum serialization - or more generally any object - is very very powerful. This post was just about the name but you can also duplicate the entries in the mapping to manage older versions (parameter renaming) or even tolerate multiple input types for a single field (<em>String</em>&nbsp;and&nbsp;<em>List&lt;String&gt;</em>&nbsp;mapping the same attribute if the key is the same or using singular/plural form).</p>
+
+<p>Adapters are really powerful and generally easy to abstract to reuse accross a whole application so don&#39;t hesitate to write one!</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//oauth2-jwt-microprofile-validation-with-geronimo.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//compile-java-crest-cli-application-with-graalvm-prepare-faas.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

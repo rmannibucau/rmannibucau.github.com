@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to convert an XML document to a JSON one with Sax and JSON-P</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,195 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="sax-to-jsonp-converter-html-container" class="container page-content sax-to-jsonp-converter-html is-blog">
+                        <div class="page-header">
+                <h1>How to convert an XML document to a JSON one with Sax and JSON-P</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-04-18</span>, <span class="metadata-readingtime">5 min and 13 sec read</span></p>
+</div>
+<p>JSON-P provides several kind of API (generator, reader, writers, parser, pointer, ...). These are generally low level API but it also allows to write some bridge code which is quite efficient. To illustrate that, this post will show you how to convert a&nbsp;XML document to a JSON one using implementing a Sax handler to parse the XML document with a JSON-P object builder.</p>
+
+<p>Technical note: if you want to implement that for a real convertion ending on a stream you will likely want to switch the object builder by a JSON-P generator to enable streaming. In the context of this post we just want to build in memory a <em>JsonObject</em>&nbsp;to be able to apply on a&nbsp;XML model a JSON processing already existing (extraction thanks to a pointer for instance).</p>
+
+<h2>Sax parsing to visit the XML document</h2>
+
+<p>The base to parse a XML document with Sax is to create a sax handler and use a&nbsp;<em>SAXParser</em>&nbsp;to visit the document:</p>
+
+<pre>
+<code class="language-java">final SAXParserFactory factory = SAXParserFactory.newInstance();
+final SAXParser parser = factory.newSAXParser();
+final MyHandler handler = new MyHandler();
+parser.parse(inputStream, handler);</code></pre>
+
+<p>I would recommand you to cache the&nbsp;<em>SAXParserFactory</em>&nbsp;and not create it each time you need one but it is not a thread safe instance so either create a pool - a cheap pool is a queue ;) - or use a thread local to ensure you reuse the created instances instead of going through the instantiation chain each single time.</p>
+
+<p>One you have a factory, it is as easy as calling&nbsp;<em>newSAXParser()</em>&nbsp;to get a parser and then call&nbsp;<em>parse()</em>&nbsp;on the parser passing your handler instance.</p>
+
+<p>The handler gets called when the XML parser visits a tag or&nbsp;some content.</p>
+
+<h2>The Sax Handler to convert the XML document to JSON</h2>
+
+<p>There are a tons of way to implement the handler. For this post we&#39;ll use a single one which will have two responsabilities - but in more advanced code you should split it in two handlers to respect the separation of concerns:</p>
+
+<ul>
+	<li>Handle the XML stack browsing: each time we visit a node/tag we will create a new JSON object so we need to maintain a kind stack,</li>
+	<li>Extract the needed informations from tags - the tag name will be used as an object attribute key fo rinstance, and create the objects when the end tag is visited.</li>
+</ul>
+
+<p>Here is our handler:</p>
+
+<pre>
+<code class="language-java">public class ObjectHandler extends DefaultHandler {
+    private final JsonBuilderFactory jsonBuilderFactory;
+
+    private JsonObjectBuilder builder;
+    private String name;
+    private Attributes attributes;
+    private StringBuilder characters;
+
+    private final LinkedList&lt;ObjectHandler&gt; stack;
+    private final List&lt;ObjectHandler&gt; children = new LinkedList&lt;&gt;();
+
+    public ObjectHandler(final JsonBuilderFactory jsonBuilderFactory, final LinkedList&lt;ObjectHandler&gt; stack) {
+        this.jsonBuilderFactory = jsonBuilderFactory;
+        this.stack = stack;
+    }
+
+    @Override
+    public void startElement(final String uri, final String localName, final String qName, final Attributes attributes) throws SAXException {
+        stack.getLast().onStartElement(qName, attributes);
+    }
+
+    @Override
+    public void characters(final char[] ch, final int start, final int length) {
+        stack.getLast().onCharacter(ch, start, length);
+    }
+
+    @Override
+    public void endElement(final String uri, final String localName, final String qName) throws SAXException {
+        stack.removeLast().onEndElement();
+    }
+
+    private void onStartElement(final String qName, final Attributes attributes) {
+        if (this.name == null) {
+            this.name = qName;
+            this.attributes = attributes;
+        } else {
+            final ObjectHandler handler = new ObjectHandler();
+            handler.name = qName;
+            handler.attributes = attributes;
+            handler.stack = stack;
+            stack.add(handler);
+            children.add(handler);
+        }
+    }
+
+    private void onCharacter(final char[] ch, final int start, final int length) {
+        if (characters == null) {
+            characters = new StringBuilder();
+        }
+        characters.append(ch, start, length);
+    }
+
+    private void onEndElement() {
+        builder = jsonBuilderFactory.createObjectBuilder();
+        if (characters != null) {
+            builder.add("__content__", characters.toString());
+            characters = null;
+        }
+        if (attributes != null &amp;&amp; attributes.getLength() &gt; 0) {
+            builder.add("__attributes__", IntStream.range(0, attributes.getLength())
+                    .boxed()
+                    .collect(
+                            jsonBuilderFactory::createObjectBuilder,
+                            (builder, idx) -&gt; builder.add(attributes.getQName(idx), attributes.getValue(idx)),
+                            JsonObjectBuilder::addAll)
+                    .build());
+        }
+        children.forEach(c -&gt; builder.add(c.name, c.builder));
+        children.clear();
+    }
+}</code></pre>
+
+<p>We clearly identify two parts in this implementation which could be split in two handler layers as mentionned previously. The overriden method and the&nbsp;<em>stack</em>&nbsp;list maintain the visiting state of the XML document. Each time a tag is visited a new handler is appended to the list of &quot;current&quot; handlers and the last one is always used to process the current tag. The other attributes are used to extract the data from the XML payload (text etc) and convert it at the end of the corresponding tag to a JSON object using a&nbsp;<em>JsonObjectBuilder</em>.</p>
+
+<p>Note that in this conversion I convert the tag content to the&nbsp;<em>__content__</em>&nbsp;JSON attribute, this could be replaced by using a&nbsp;<em>JsonString</em>&nbsp;instead of a&nbsp;<em>JsonObject</em>&nbsp;if needed. The advantage to do it is to be able to add the XML attributes under the&nbsp;<em>__attributes__</em>&nbsp;object in a &quot;key/value&quot; JSON object.</p>
+
+<h2>Use the ObjectHandler</h2>
+
+<p>To use this implementation we need to modify a little bit the parser to add the root object handler to the initial stack. To be fancy we also add a flag&nbsp;<em>wrapRoot&nbsp;</em>to add a nested JSON object to keep the first level of JSON instead of swallowing the root tag. For instance&nbsp;<em>&lt;foo&gt;bar&lt;/foo&gt;</em>&nbsp;would be&nbsp;<em>{&quot;__content__&quot;:&quot;bar&quot;}</em>&nbsp;without that tag and&nbsp;<em>{&quot;foo&quot;:{&quot;__content__&quot;:&quot;bar&quot;}}</em>&nbsp;with that tag:</p>
+
+<pre>
+<code class="language-java">final SAXParserFactory factory = SAXParserFactory.newInstance();
+final SAXParser parser = factory.newSAXParser();
+final ObjectHandler handler = new ObjectHandler(Json.createBuilderFactory(emptyMap()), new LinkedList&lt;&gt;());
+handler.getStack().add(handler); // the change
+parser.parse(stream, handler);
+</code></pre>
+
+<h2>Going further</h2>
+
+<p>This first implementation is functional but has several limitations:</p>
+
+<ul>
+	<li>It doesn&#39;t handle arrays: not a hard task it requires two configurations
+	<ul>
+		<li>Being able to detect consecutive tags with the same name at the same level to wrap them in a&nbsp;<em>JsonArray,</em></li>
+		<li>Being able to detect a wrapper contains only the same nested tags and replace it with a&nbsp;<em>JsonArray</em>&nbsp;(this can require additional configuration).</li>
+	</ul>
+	</li>
+	<li>It doesn&#39;t handle namespaces: the previous implementation assumes all tags are using the default namespace, if you use namespaces you need another way to convert it to JSON. An option can be to add the attribute&nbsp;<em>__namespace__</em>&nbsp;in such cases or change the attribute name to include the full namespace. The alternative which consists to add a first level object child with the namespace registry works but is very XML and not really JSON so consumers would be probably less happy.</li>
+	<li>As mentionned a bit earlier, it loads the model in memory, if your goal is to return the JSON model as a HTTP response, you will probably want to enable streaming and therefore replace the builders by a&nbsp;<em>JsonGenerator</em>&nbsp;which has almost the exact same API but adapted to a streaming mode.</li>
+</ul>
+
+<p>All these limitations are not blockers at all, JSON-P provides all you need to solve them so no reason to not use it ;).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-gzip-tomcat-connector.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//javaee-close-component-lifecycle.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

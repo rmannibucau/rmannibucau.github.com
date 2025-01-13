@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Simple HTML Form</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="simple-html-form-javascript-jaxrs-html-container" class="container page-content simple-html-form-javascript-jaxrs-html is-blog">
+                        <div class="page-header">
+                <h1>Simple HTML Form</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-03-21</span>, <span class="metadata-readingtime">8 min and 34 sec read</span></p>
+</div>
+<p>There are a lot of ways to secure your application but if you propose a UI it will likely start with a HTML form.</p>
+
+<p>Let&#39;s see how to create a super trivial implementation using the root code in the browser and a simple JAX-RS endpoint. Goal of that example is to show what is involved for such cases and let you bind your own stack more easily.</p>
+
+<h2>Create the backend</h2>
+
+<p>To keep it simple we&#39;ll use JAX-RS to implement the backend but you basically just need a way to get the username and password and validate it.</p>
+
+<p>Note: a login can require additional information like a token to ensure you are not an attacker for instance. This post doesn&#39;t cover it but the technology is exactly the same except you would pass the token in a hidden way (either an input or other storage).</p>
+
+<p>The easiest way to send data through a HTML form is to use&nbsp;<em>application/x-www-form-urlencoded</em>&nbsp;media type, it will basically send the form as a request query but in the payload. The interest is to not let the password be in the URL which could be a security leakage.</p>
+
+<p>Concretely your payload will look like:</p>
+
+<pre>
+<code>username=whoami&amp;password=thisisnotvisible</code></pre>
+
+<p>Of course Servlet (and therefore JAX-RS) abstract that and to parse it you just need to read the parameters. In JAX-RS land it is mapped to a payload of type&nbsp;<em>MultivaluedMap</em>.</p>
+
+<p>To be concrete the endpoint signature looks like:</p>
+
+<pre>
+<code class="language-java">@Path("login")
+@ApplicationScoped
+public class LoginResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User doLogin(final MultivaluedMap&lt;String, String&gt; form) {
+        final String username = form.getFirst("username");
+        final String password = form.getFirst("password");
+        // will be done soon
+    }
+}</code></pre>
+
+<p>Now the question is: how to validate the user? You have several options there but the two big are:</p>
+
+<ul>
+	<li>custom mecanism</li>
+	<li>use your container solution/realm</li>
+</ul>
+
+<p>The first one would lead to:</p>
+
+<pre>
+<code class="language-java">?
+@Path("login")
+@ApplicationScoped
+public class LoginResource {
+    @Inject
+    private UserRepository users;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User doLogin(@Context final HttpServletRequest request,
+                        final MultivaluedMap&lt;String, String&gt; form) {
+        final String username = form.getFirst("username");
+        final String password = form.getFirst("password");
+        if (users.findByUserAndPassword(username, password).isPresent()) {
+           // success
+        } else {
+           // failed
+        }
+    }
+}
+?</code></pre>
+
+<p>The issue in such a case is you get the full responsability of the security in the application. It is fine if you handle yourself the deployment but less if you provide a solution installed by someone else who can desire to get control on that part. Also hidden in that snippet: you need to NOT store the password in clear and a common strategy is to hash N times the password combined with a salt. All this code belongs to you (and your application) if you use a custom user repository.</p>
+
+<p>Alternatively you can push it back to the container (and let it be plugged by the &quot;deployers&quot;) and just use Servlet 3.0 login API:</p>
+
+<pre>
+<code class="language-java">@Path("login")
+@ApplicationScoped
+public class LoginResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User doLogin(@Context final HttpServletRequest request,
+                        final MultivaluedMap&lt;String, String&gt; form) {
+        final String username = form.getFirst("username");
+        final String password = form.getFirst("password");
+        try {
+            request.login(username, password);
+            // success
+        } catch (final ServletException e) {
+            // failure
+        }
+    }
+}</code></pre>
+
+<p>This is great but will just require a small addition in case you use a stateless login mecanisms (= not using the session). It is for instance the case for JWT which shouldn&#39;t require any HTTP session (and therefore scale very well). It is also the case - theorically - for any &quot;database&quot; - SQL or NoSQL - token based solutions but then it depends your implementation. These use cases will require to clean the container security context as soon as you don&#39;t need it anymore. What does it mean? Just ensure to logout once you don&#39;t need the principal anymore to release the security context from the container:</p>
+
+<pre>
+<code class="language-java">?
+@Path("login")
+@ApplicationScoped
+public class LoginResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User doLogin(@Context final HttpServletRequest request,
+                        final MultivaluedMap&lt;String, String&gt; form) {
+        final String username = form.getFirst("username");
+        final String password = form.getFirst("password");
+        try {
+            request.login(username, password);
+            // success
+        } catch (final ServletException e) {
+            // failure
+        } finally {
+            if (request.getUserPrincipal() != null) { // if stateless
+                try {
+                    request.logout();
+                } catch (final ServletException e) {
+                    // no-op
+                }
+            }
+        }
+    }
+}</code></pre>
+
+<p>Now we just miss the success/failure code. The success is quite easy: just return a client context the application can use to show contextual data. Typically the displayname or at least username (&quot;Hello XXX&quot; in the UI). For error case just needs to throw a HTTP status translating this case, a status of 401 (unauthorize) is good enough for us:</p>
+
+<pre>
+<code class="language-java">@Path("login")
+@ApplicationScoped
+public class LoginResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User doLogin(@Context final HttpServletRequest request,
+                        final MultivaluedMap&lt;String, String&gt; form) {
+        final String username = form.getFirst("username");
+        final String password = form.getFirst("password");
+        try {
+            request.login(username, password);
+            return new User(username);
+        } catch (final ServletException e) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        } finally {
+            if (request.getUserPrincipal() != null) {
+                try {
+                    request.logout();
+                } catch (final ServletException e) {
+                    // no-op
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+<h2>The HTML form</h2>
+
+<p>The HTML form will be easy for this case:</p>
+
+<ul>
+	<li>a username</li>
+	<li>a password</li>
+	<li>a submit/login button</li>
+	<li>a zone where we can show errors</li>
+</ul>
+
+<p>Here is what it can look like:</p>
+
+<pre>
+<code class="language-html">&lt;form action="#" method="post"&gt;
+    &lt;div class="error"&gt;&lt;/div&gt;
+
+    Username:&lt;input type="text" name="username"&gt;&lt;br&gt;
+    Password:&lt;input type="password" name="password"&gt;&lt;br&gt;
+
+    &lt;button type="submit"&gt;Login&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+<p>Here what it look like:</p>
+
+<p><img src="data:image/png;base64,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" /></p>
+
+<p>This is simple but looks like what we want right? It actually does nothing interesting except reloading the page on click (cause action path is <em># </em>and not an actual url/path).</p>
+
+<p>What we want on the submit is to:</p>
+
+<ul>
+	<li>validate the user through our endpoint</li>
+	<li>redirect on a valid login to a /home.html page</li>
+</ul>
+
+<p>To do that we&#39;ll bind a javascript action to the login button:</p>
+
+<pre>
+<code class="language-html">&lt;button type="submit" onclick="doSubmit();return false;"&gt;Login&lt;/button&gt;</code></pre>
+
+<p>Now&nbsp;<em>doSubmit()</em>&nbsp;will be called when we&#39;ll click on that button. The&nbsp;<em>return false</em>&nbsp;is just there to stop the javascript event loop once we executed our hook&nbsp;<em>doSubmit()</em>.</p>
+
+<p>We&#39;ll add to our HTML page a javascript block (in real projects we would do it in a login.js file but for that demo it is fine to put it all together). This block will be responsible to define the&nbsp;<em>doSubmit()</em>&nbsp;function which will send our POST request to our server and redirect to /home.html if the login&nbsp;was successful and return a HTTP 200 (OK) status or just add in the <em>div</em>&nbsp;block intended to show errors in our form some message if it failed to let the user know he has to resubmit the form:</p>
+
+<pre>
+<code class="language-javascript">&lt;script type="text/javascript"&gt;
+    function doSubmit() {
+        // 1
+        var form = document.getElementsByTagName('form')[0];
+        var username = form.children[1].value;
+        var password = form.children[3].value;
+
+        // 2
+        var request = new XMLHttpRequest();
+        request.open('POST', 'api/login', true);
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        request.onreadystatechange = function () {
+            // 4
+            if (this.readyState !== 4) {
+                return;
+            }
+
+            // 5
+            if (this.status === 200) { // HTTP_OK
+                // 6
+                console.log(JSON.parse(this.responseText).username);
+                document.location.pathname = '/home.html';
+            } else {
+                // 7
+                form.children[0].innerHTML = 'Error: ' + this.responseText;
+            }
+        };
+        // 3
+        request.send('username=' + encodeURIComponent(username) + '&amp;password=' + encodeURIComponent(password));
+    };
+&lt;/script&gt;</code></pre>
+
+<ol>
+	<li>we get the form DOM element (HTML element) and extract from its children the two input values representing our username and password</li>
+	<li>we create a HTTP request of type POST on the endpoint <em>api/login </em>and listen for the status changes (request initialized, request received etc... )</li>
+	<li>We send our payload in urlencoded format based on the data we extracted from the form to actually login our user</li>
+	<li>readyState represents the state of the request, only <em>4</em>&nbsp;is interesting for us and means the request is done</li>
+	<li>request is done so we can postprocess the response</li>
+	<li>if the status is OK then we can extract the username (here we just log it but that&#39;s to show how to extract it, in a real project we would put it in the browser session or any client storage) and finally we redirect the application on&nbsp;<em>/home.html</em></li>
+	<li>if the login failed we add in the error block a message. Note this code will show the actual failure instead of a nice error message but the principle would be the same to do something more user friendly, you would just read the message in another manner.</li>
+</ol>
+
+<h2>Going further</h2>
+
+<p>This solution works but misses several points to be usable in a real project like:</p>
+
+<ul>
+	<li>a correct error handling on the client side</li>
+	<li>likely some theming</li>
+	<li>a servlet Filter to validate the security on all secured backend calls
+	<ul>
+		<li>this likely requires to send back a token in the login endpoint and propagate it from the client for all secured calls</li>
+	</ul>
+	</li>
+	<li>some actual container realm setup to login against a database, ldap or any other source</li>
+	<li>some higher level javascript code</li>
+	<li>you can also investigate servlet FORM solution (which is not that compatible with SPA and stateless state but depending the application it can worth it if it is not a constraint)</li>
+	<li>...</li>
+</ul>
+
+<p>This post was intended to present the basis of a login solution and will not detail all these points but just to give you an idea, the last point (javascript code level) will make it really simpler since you generally have a http service in any modern javascript framework abstracting the <em>XMLHttpRequest</em>. Typically with Angular you will do:</p>
+
+<pre>
+<code class="language-javascript">login(username, password) {
+  return this.http.post('security/login', {username: username, password: password})
+    .map(response =&gt; {
+      this.initToken(credentials.username, response.token, response.rememberMe)
+      return res;
+    });
+}
+</code></pre>
+
+<p>This (typescript) function will do the post request in JSON format - but urlencoded one is available as well - and then once the response is there it will initialize the client security context. If you compare it with the raw javascript code you don&#39;t need to handle the&nbsp;<em>XMLHttpRequest</em>&nbsp;state, you don&#39;t need to handle the JSON parsing or creation yourself etc...however you will need to setup angular since it is not part of the browser language. However, even if the getting started steps can look very costly (you need to setup node/npm, maybe integrate it with Maven through frontend-maven-plugin etc...), you will see that once done the development flow is quite smooth and the code way more maintainable.</p>
+
+<h2>Conclusion</h2>
+
+<p>A login form is always the starting point of setting up security for your application. However it is only the first step and just the entry point to enable security.</p>
+
+<p>For the webapp case (this post topic) it also requires to understand it integrates two technologies and enable the communication between those two parts of the application.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-tomee-artemis.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//sirona-tomee-maven-plugin.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

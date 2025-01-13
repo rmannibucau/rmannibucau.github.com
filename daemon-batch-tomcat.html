@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Should you run your daemon/batch in Tomcat?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,222 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="daemon-batch-tomcat-html-container" class="container page-content daemon-batch-tomcat-html is-blog">
+                        <div class="page-header">
+                <h1>Should you run your daemon/batch in Tomcat?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-05</span>, <span class="metadata-readingtime">5 min and 18 sec read</span></p>
+</div>
+<p>From time to time you write some daemon or batch scheduled with whatever scheduler (a very expensive one or just a cron entry). These programs are often intended to just manipulate some data to let other applications be functional. Most common usage is to synchronize two datasets but you can find some more advanced use cases.</p>
+
+<p>Often these programs are plain <em>main(String[])</em>&nbsp;cause it is easier to handle than deploying a webapp and doesn&#39;t worth as much effort for something running &lt; 30 minutes a day. This also often means you face some surprinsing challenges:</p>
+
+<ul>
+	<li>how do I get some&nbsp;IoC? We are used to run in TomEE, JBoss, Meecrowave, ... and inherit from the default CDI context, how do I handle that in my <em>main</em>?</li>
+	<li>how do I handle logs? In Tomcat (or any container) we are used to configure the logs a certain way but what about this plain <em>main</em>?</li>
+	<li>how do I communicate the exit status? If this is a batch I need a particular exit code to communicate to the scheduler the state of the execution, who is responsible to set it? Said otherwise: do I brutally call&nbsp;<em>System.exit(xxx)</em>&nbsp;or do I wait my application to be done before calling it?</li>
+	<li>how do I define the lifecycle of my application?</li>
+	<li>etc...</li>
+</ul>
+
+<p>Excepted the exit code point all these questions are there just cause you removed the container from a&nbsp;<em>standard</em>&nbsp;development. What if we add it back?</p>
+
+<h2>Tomcat to the rescue</h2>
+
+<p>Since some time now, Tomcat can be embedded so it is easy enough to write a <em>main</em>&nbsp;with Tomcat. If still a bit raw for you, you can use one of its flavor where most of the work is already done and it is really a one liner to start an embedded application in Tomcat:</p>
+
+<ul>
+	<li>Apache TomEE Embedded</li>
+	<li>Apache Meecrowave (microprofile container)</li>
+	<li>JBoss Swarm</li>
+	<li>Spring Boot</li>
+	<li>...</li>
+</ul>
+
+<p>Once you have Tomcat (and for previous solutions either CDI or Spring) you answered the container and programming model points.</p>
+
+<p>Concretely now you can write a batch with JBatch, relying on CDI for the JBatch components (or if you chose Spring boot you will likely use spring-batch with spring beans).</p>
+
+<p>For the logs you will rely on the container configuration as well.</p>
+
+<p>But wait...this is tomcat so now I need a port? Since a few versions Tomcat embed supports to run without any Connector! It literally means you don&#39;t need to bind any port with Tomcat :).</p>
+
+<h2>What about the exit code?</h2>
+
+<p>That&#39;s the beauty of these solutions (which are not modern BTW, OpenEJB/TomEE does it since 17 years): you can - if you desire - own the <em>main</em> and bootstrap logic. They all provide a <em>main</em> but it is trivial to wrap it with a custom one. In such a solution you simply need a way to communicate to the main the exit status.</p>
+
+<p>A&nbsp;way is to use an&nbsp;<em>ExitStatus</em><em>&nbsp;</em>bean representing this state and add it in CDI. This bean will be responsible:</p>
+
+<ul>
+	<li>to store the status and share it with the main</li>
+	<li>let the application finish once the exit status is set and the container is destroyed</li>
+</ul>
+
+<p>Tip: if you don&#39;t want your code to depend on&nbsp;<em>ExitStatus</em>&nbsp;you can keep the same idea but using an <em>Event</em><em>&lt;Execution&gt;</em>&nbsp;which would do the same in an observer decorrelating the main code from the exit status logic.</p>
+
+<h2>CDI ExitStatus</h2>
+
+<p>I&#39;ll use Apache Meecrowave for the container but TomEE Embedded, Wildfly Swarm , ... would use something pretty close.</p>
+
+<p>First we need a server:</p>
+
+<pre>
+<code class="language-java">import org.apache.meecrowave.Meecrowave;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class Launcher {
+    public static void main(final String[] args) {
+        final Meecrowave.Builder config = new Meecrowave.Builder();
+        config.setSkipHttp(true);
+        try (final Meecrowave meecrowave = new Meecrowave(config).bake()) {
+            // we need some magic
+        }
+    }
+}</code></pre>
+
+<p>This <em>main</em>&nbsp;will just start a container without any Connector and deploy the classpath.</p>
+
+<p>Now we need an&nbsp;<em>ExitStatus</em>&nbsp;bean:</p>
+
+<pre>
+<code class="language-java">import javax.enterprise.inject.Vetoed;
+import java.util.concurrent.CountDownLatch;
+
+@Vetoed
+public class ExitStatus {
+    private volatile int status = 0;
+    private final CountDownLatch latch = new CountDownLatch(1);
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+        latch.countDown();
+    }
+
+    public void await() {
+        try {
+            latch.await();
+        } catch (final InterruptedException e) {
+            Thread.interrupted();
+        }
+    }
+}</code></pre>
+
+<p>Nothing fancy, a status the application will set and a latch to be able to notify the main we are done.</p>
+
+<p>Wait, we need a bean but this one is&nbsp;<em>@Vetoed</em>? How would it work?</p>
+
+<p>We need the main to have the instance of the <em>ExitStatus</em>&nbsp;class. There are two options there:</p>
+
+<ul>
+	<li>let the bean be&nbsp;<em>@ApplicationScoped</em>&nbsp;and lookup the instance with&nbsp;<em>CDI.current().getBeanManager()</em></li>
+	<li>add our own instance to CDI through a producer</li>
+</ul>
+
+<p>We&#39;ll use this last option here but other one works well too. To do so we&#39;ll just add a producer to our main (that is why it was decorated with @ApplicationScoped even if the class will not be used as a CDI bean):</p>
+
+<pre>
+<code class="language-java">import org.apache.meecrowave.Meecrowave;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+
+@ApplicationScoped
+public class Launcher {
+    @Produces
+    public static ExitStatus status = new ExitStatus();
+
+    public static void main(final String[] args) {
+        final Meecrowave.Builder config = new Meecrowave.Builder();
+        config.setSkipHttp(true);
+        try (final Meecrowave meecrowave = new Meecrowave(config).bake()) {
+            status.await();
+        } finally {
+            System.exit(status.getStatus());
+        }
+    }
+}</code></pre>
+
+<ul>
+	<li><em>status</em>&nbsp;instance is our exit status holder</li>
+	<li>the main has been updated to&nbsp;
+	<ul>
+		<li>await the status is set before exiting</li>
+		<li>call&nbsp;<em>System.exit(...) </em>with the right value</li>
+	</ul>
+	</li>
+</ul>
+
+<h2>Timeout or not?</h2>
+
+<p>This solution works well and is actually quite easy to setup. However it has one pitfall: if nothing calls&nbsp;<em>setStatus()</em>&nbsp;then you will hang. To avoid it you can either add a timeout in the main (<em>if after 30 minute we didn&#39;t exit then exit with status code xxx</em>) or ensure you run some logic wrapped in a way ensuring&nbsp;<em>setStatus()</em>&nbsp;is called (a <em>JobListener</em>&nbsp;of JBatch can help for instance).</p>
+
+<p>This is not a lot of work but don&#39;t forget it, in particular if you run a batch multiple times a day, otherwise you can start having concurrent processes on the machine for the same application which never leads to good results.</p>
+
+<h2>Conclusion</h2>
+
+<p>So today there is no reason to have to manage N containers and N ways to write applications. You can use the same for all your application types:</p>
+
+<ul>
+	<li>batchs</li>
+	<li>daemons</li>
+	<li>webapps</li>
+	<li>...</li>
+</ul>
+
+<p>Relying on the same stack and infrastructure allows to share a highly valuable knowledge in your team(s) which is no more a limitation since you now fully control your (flat or not) classpath and bootstrap logic.</p>
+
+<p>Enjoy being embedded :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//servlet-jaas-bridge.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//gravatar-service-jcache.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apache TomEE and Apache Artemis</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="apache-tomee-artemis-html-container" class="container page-content apache-tomee-artemis-html is-blog">
+                        <div class="page-header">
+                <h1>Apache TomEE and Apache Artemis</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-03-28</span>, <span class="metadata-readingtime">6 min and 4 sec read</span></p>
+</div>
+<p>In a previous <a href="/#/post/jms-microprofile-meecrowave-artemis" target="_blank">post</a>&nbsp;I showed how to use Apache Artemis -&nbsp;the JMS 2 implementation or ActiveMQ &quot;5+1&quot; -&nbsp;with Apache Meecrowave - the very lightweight CDI/JAX-RS container. However if you are used to EE and not yet to build/wire your applications yourself (&quot;&agrave; la Spring&quot;) then it can look really heavy or complex in term of code. A more natural EE way is to use message driven beans (MDB) which can automatically listen for the messages and then the client side is pretty close since it will reuse&nbsp;<em>JMSContext</em>&nbsp;but will use an externally configured&nbsp;<em>ConfigurationFactory</em>&nbsp;instead of building it from the application.</p>
+
+<p>Let&#39;s see how to use TomEE this time as a backbone for Artemis!</p>
+
+<h2>What we want to achieve</h2>
+
+<p>In term of code this post just wants to be able to deploy automatically a MDB:</p>
+
+<pre>
+<code class="language-java">@MessageDriven(activationConfig = {
+    // will be defined later but we want to listen a queue
+})
+public class Listener implements MessageListener {
+    @Inject
+    private Event&lt;Message&gt; msg;
+
+    @Override
+    public void onMessage(final Message message) {
+        msg.fire(message);
+    }
+}</code></pre>
+
+<p>As you can see to abstract the processing of the message we just fire a CDI event - this is far enough for this post but not a bad practise in real life applications since it will decouple the transport from the processing.</p>
+
+<p>In term of client it will be even simpler:</p>
+
+<pre>
+<code class="language-java">@Resource(name = "somequeue")
+private Queue queue;
+
+@Inject
+@JMSConnectionFactory("artemisConnectionFactory")
+private JMSContext jmsContext;
+
+// and somewhere
+jmsContext.createProducer().send(queue, stringMessage);</code></pre>
+
+<p>Simple right? If you use JMS 1.1 API see how it is smooth compared to that, now old, time. No need of 3 nested try/catch without&nbsp;<em>AutoCloseable</em>.</p>
+
+<h2>Deployment setup</h2>
+
+<p>Because of the server side we&#39;ll need to integrate with Artemis resource adapter.</p>
+
+<p>A resource adapter is just the &quot;user&quot; code (read is as pluggable way) which integrates with the EJB/MDB container.</p>
+
+<p>Concretely the MDB container will give EJB instances (proxies handling the EJB pool if configured) to the resource adapter which will &quot;listen&quot; on the configured interface(s) (JMS Queue or Topic for JMS) and forward the &quot;messages&quot; to the EJB.</p>
+
+<p>Note: if not obvious MDB doesn&#39;t mean JMS but any listening API, you can listen for tasks, (S)FTP files etc... See for instance my <a href="https://github.com/rmannibucau/hazelcast-mdb" target="_blank">hazelcast-mdb</a> demo for a hazelcast message oriented implementation.</p>
+
+<p>With TomEE you can deploy resource adapters directly (as .rar) but you can also just deploy them as plain resource. We&#39;ll use that solution which avoids to add yet another application in the container and just replaces it by container resources.</p>
+
+<p>What do we need?</p>
+
+<ul>
+	<li>define the resource adapter (MDB-JMS link)</li>
+	<li>define a connection factory for our client/JMSContext</li>
+	<li>define our queue (named&nbsp;<em>somequeue&nbsp;</em>&nbsp;for the sample)</li>
+	<li>define our MDB container linked to our resource adapter</li>
+</ul>
+
+<h2>The artemis resource adapter</h2>
+
+<p>Our resource adapter will connect to a broker on port 1234 of host localhost. To do that simply define this resource:</p>
+
+<pre>
+<code class="language-xml">&lt;Resource id="artemis" class-name="org.apache.activemq.artemis.ra.ActiveMQResourceAdapter"&gt;
+ConnectorClassName=org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnectorFactory
+ConnectionParameters=host=localhost;port=1234
+JndiParams=java.naming.factory.initial=org.apache.openejb.core.OpenEJBInitialContextFactory
+&lt;/Resource&gt;</code></pre>
+
+<ul>
+	<li>We define the resource based on the implementation of artemis (class-name)</li>
+	<li>Connector* properties define how to connect to the broker (we use the tcp/netty implementation and connect on port 1234 of localhost</li>
+	<li>JndiParams allows to configure how to lookup destinations (queue for us). Since we define a resource in an unmanaged environment (understand not in tomcat JNDI context) we need to specify to use OpenEJB context.</li>
+</ul>
+
+<h2>The artemis connection factory</h2>
+
+<p>Defining the connection factory is as easy except the connection url is simpler using an URI syntax there. The trick used there is to build it from its constructor and bind a name to constructor parameter to enable to configure it using resource syntax:</p>
+
+<pre>
+<code class="language-xml">&lt;Resource id="connectionFactory"
+          class-name="org.apache.activemq.artemis.jms.client.ActiveMQXAConnectionFactory"
+          constructor="uri,username,password"
+          type="javax.jms.ConnectionFactory"&gt;
+uri=tcp://localhost:12345
+# username = ...
+# password = ...
+&lt;/Resource&gt;</code></pre>
+
+<p>Note it is important there to define the type to let TomEE be able to wire it back when a connection factory is needed.</p>
+
+<h2>The Queue</h2>
+
+<p>Defining a queue is close to the connection factory except we&#39;ll use a static factory method:</p>
+
+<pre>
+<code class="language-xml">&lt;Resource id="somequeue"
+          class-name="org.apache.activemq.artemis.api.jms.ActiveMQJMSClient"
+          constructor="name"
+          factory-name="createQueue"
+          type="javax.jms.Queue"&gt;
+name = test
+&lt;Resource&gt;</code></pre>
+
+<p>Here we define a queue named&nbsp;<em>somequeue</em>&nbsp;as the resource (<em>@Resource</em>) but&nbsp;<em>test</em>&nbsp;in the artemis system (bindings).</p>
+
+<h2>The MDB container</h2>
+
+<p>Finally we need to configure our MDB container and make OpenEJB/TomEE use our&nbsp;<em>artemis</em>&nbsp;resource adapter:</p>
+
+<pre>
+<code class="language-xml">&lt;Container id="mdb" type="MESSAGE"&gt;
+InstanceLimit = -1
+ResourceAdapter = artemis
+ActivationSpecClass = org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec
+&lt;/Container&gt;</code></pre>
+
+<p>Here the trick is to not limit the number of instances cause artemis doesn&#39;t behave like ActiveMQ (5) which creates the instance then keep it whatever happens on the network but artemis recreates an instance if the network fails at the connection without releasing it. This is a limitation of&nbsp;<em>javax.resource.spi.endpoint.MessageEndpointFactory</em>&nbsp;which makes the&nbsp;<em>InstanceLimit</em>&nbsp;count not that useful. However since then the MDB allows to configure the number of sessions this is not a big deal in practise.</p>
+
+<h2>Final configuration: the queue to listen</h2>
+
+<p>Finally we need to listen for our queue on our MDB. There are two options there:</p>
+
+<ul>
+	<li>let&#39;s artemis auto create the queue from its name (in the binding system, not the container system)</li>
+	<li>request artemis to lookup the queue from openejb jndi system</li>
+</ul>
+
+<p>The first one will look like:</p>
+
+<pre>
+<code class="language-java">@MessageDriven(activationConfig = {
+    @ActivationConfigProperty(propertyName = "destination", propertyValue = "test")
+})
+public class Listener implements MessageListener {
+    @Override
+    public void onMessage(final Message message) {
+        // ...
+    }
+}</code></pre>
+
+<p>Where the second one would be:</p>
+
+<pre>
+<code class="language-java">?@MessageDriven(activationConfig = {
+    @ActivationConfigProperty(propertyName = "destination", propertyValue = "somequeue")
+    @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "true")
+})
+public class Listener implements MessageListener {
+    @Override
+    public void onMessage(final Message message) {
+        // ...
+    }
+}</code></pre>
+
+<h2>What about JTA</h2>
+
+<p>All that runs but without JTA. Artemis uses a &quot;locator&quot; to find the transaction manager and surprisingly it doesn&#39;t provide a default implementation. I opened&nbsp;<a href="https://issues.apache.org/jira/browse/ARTEMIS-1070" target="_blank">https://issues.apache.org/jira/browse/ARTEMIS-1070</a>&nbsp;to try to enhance it in next version. What is funny is if the resource adapter would have a&nbsp;<em>setTransactionManager(TransactionManager)</em>&nbsp;then TomEE would automatically integrates with it.</p>
+
+<p>If you want to integrates TomEE and Artemis at JTA level you will need to implement&nbsp;<em>org.apache.activemq.artemis.service.extensions.transactions.TransactionManagerLocator</em>:</p>
+
+<pre>
+<code class="language-java">import org.apache.activemq.artemis.service.extensions.transactions.TransactionManagerLocator;
+import org.apache.openejb.OpenEJB;
+
+import javax.transaction.TransactionManager;
+
+public class OpenEJBTransactionManagerLocator implements TransactionManagerLocator {
+    @Override
+    public TransactionManager getTransactionManager() {
+        return OpenEJB.getTransactionManager();
+    }
+}</code></pre>
+
+<p>Since it is a SPI don&#39;t forget to create&nbsp;<em>META-INF/services/org.apache.activemq.artemis.service.extensions.transactions.TransactionManagerLocator </em>with the fully qualified name of&nbsp;<em>OpenEJBTransactionManagerLocator</em>.</p>
+
+<p>Note that an alternative implementation just using a JNDI lookup would also work.</p>
+
+<h2>The dependencies to add</h2>
+
+<p>To add Artemis you need to add it to TomEE. The most common deployment will be to add them in tomee/lib (I recommand you to use common.loader and not merge them physically in this folder).</p>
+
+<p>The dependencies to add are:</p>
+
+<pre>
+<code class="language-xml">&lt;properties&gt;
+  &lt;artemis.version&gt;2.0.0&lt;/artemis.version&gt;
+&lt;/properties&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+  &lt;artifactId&gt;artemis-jms-client&lt;/artifactId&gt;
+  &lt;version&gt;${artemis.version}&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+      &lt;artifactId&gt;artemis-core-client&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+      &lt;artifactId&gt;artemis-jms-client&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+      &lt;artifactId&gt;geronimo-jms_2.0_spec&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+      &lt;artifactId&gt;geronimo-ejb_3.0_spec&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+  &lt;artifactId&gt;artemis-ra&lt;/artifactId&gt;
+  &lt;version&gt;${artemis.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+  &lt;artifactId&gt;artemis-jms-server&lt;/artifactId&gt;
+  &lt;version&gt;${artemis.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+  &lt;artifactId&gt;artemis-core-client&lt;/artifactId&gt;
+  &lt;version&gt;${artemis.version}&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+      &lt;artifactId&gt;artemis-core-client&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;io.netty&lt;/groupId&gt;
+  &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+  &lt;version&gt;4.1.6.Final&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>You can add these dependencies in a pom.xml and run</p>
+
+<pre>
+<code class="language-bash">mvn dependency:copy-dependencies</code></pre>
+
+<p>to get the jar to add copies in target/dependencies.</p>
+
+<h2>Conclusion</h2>
+
+<p>JCA specification (the one defining resource adapters) allows to integrate very heterogeneous systems quite well even if the API to do that is not that trivial.</p>
+
+<p>In this post we saw how to use the brand new Apache Artemis and therefore the power of JMS 2.0 with Apache TomEE+. It is mainly a matter of adding some libraries and defining some resources (until you need JTA).</p>
+
+<p>Happy JMS!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//brudge-jaxrs-and-camel-cdi.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//simple-html-form-javascript-jaxrs.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

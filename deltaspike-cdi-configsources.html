@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>DeltaSpike Configuration: auto registration of CDI ConfigSources</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,180 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="deltaspike-cdi-configsources-html-container" class="container page-content deltaspike-cdi-configsources-html is-blog">
+                        <div class="page-header">
+                <h1>DeltaSpike Configuration: auto registration of CDI ConfigSources</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-06-22</span>, <span class="metadata-readingtime">3 min and 17 sec read</span></p>
+</div>
+<p>DeltaSpike configuration provides this API:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class MyConfig{
+   @Inject
+   @ConfigProperty(name = "app.weather.url")
+   private String entry;
+
+   public String getEntry() {
+       return entry;
+   }
+}
+</code></pre>
+
+<p>Of course, it supports standard basic types needed for a configuration solution and the values are read from a ConfigSource chain. A configSource is basically a value provider looked-up from a key.</p>
+
+<p>This allows you to register your enterprise source (this awesome Oracle database) and use a system properties source for testing which is far easier to setup on your machine :)</p>
+
+<p>DeltaSpike provides some abstract classes to make writing a ConfigSource easy. In this post I will use MapConfigSource which basically allows you to use the source as a map, and that is something great for a key/value logic.</p>
+
+<p>Here is one implementation:</p>
+
+<pre>
+<code class="language-java">public static class ConfigRepo extends MapConfigSource {
+   public ConfigRepo() {
+       super(new ConcurrentHashMap&lt;&gt;());
+   }
+
+   @Override
+   public String getConfigName() {
+       return "blog-config";
+   }
+}
+</code></pre>
+
+<p>To register it, you can use standard JavaSE SPI mecanism (META-INF/services/org.apache.deltaspike.core.spi.config.ConfigSource) or call org.apache.deltaspike.core.api.config.ConfigResolver.addConfigSources(sources).</p>
+
+<p>DeltaSpike config is usable and is used in Extension, that is why it has this ConfigResolver &ldquo;JavaSE&rdquo; API. However, if you don&rsquo;t care about that part - which is quite common for application configuration where you mainly only care about getting injected values in business services - you can enhance this API.</p>
+
+<h2>@Source or mark our ConfigSource</h2>
+
+<p>First of all, we will create a @Source API to mark our ConfigSources:</p>
+
+<pre>
+<code class="language-java">@Retention(RUNTIME)
+@Target({TYPE, METHOD, FIELD})
+public @interface Source {
+}
+</code></pre>
+
+<h2>Register @Source ConfigSources</h2>
+
+<p>Then we will write a small CDI extension (don&rsquo;t forget to register it putting its fully qualified name in META-INF/services/javax.enterprise.inject.spi.Extension) capturing beans with this annotation and adding them to DeltaSpike once extensions are started:</p>
+
+<pre>
+<code class="language-java">
+public class SourceExtension implements Extension {
+   private final Collection&lt;Bean&lt;?&gt;&gt; sources = new ArrayList&lt;&gt;();
+
+   void findConfigSources(@Observes final ProcessBean&lt;?&gt; bean, final BeanManager bm) {
+       if (!bean.getAnnotated().isAnnotationPresent(Source.class)) {
+           return;
+       }
+       if (!bm.isNormalScope(bean.getBean().getScope())) {
+           throw new IllegalArgumentException("Only normal scoped ConfigSource can be decorated with @Source: " + bean.getBean());
+       }
+       sources.add(bean.getBean());
+   }
+
+   void registerSources(@Observes final AfterDeploymentValidation adv, final BeanManager bm) {
+       ConfigResolver.addConfigSources(
+               sources.stream()
+                       .map(b -&gt; ConfigSource.class.cast(bm.getReference(b, ConfigSource.class, bm.createCreationalContext(null))))
+                       .collect(toList()));
+   }
+
+   public Collection&lt;Bean&lt;?&gt;&gt; getBeans() {
+       return beans;
+   }
+}
+</code></pre>
+
+<p>Note: if you dig into the implementation you will see that I didn&rsquo;t handle @Dependent. There is no blocker to do so, but simply don&rsquo;t forget to release the creational context during BeforeShutdown event. For this post - or even in real life ;) - it wouldn&rsquo;t have brought much.</p>
+
+<p>So, this extension :</p>
+
+<ul>
+	<li>captures all @Source beans (findConfigSources())</li>
+	<li>then, once the extensions validated (AfterDeploymentValidation), make a lookup of these instances in CDI context</li>
+	<li>and finally adds them to the ConfigResolver to allow CDI to use them.</li>
+</ul>
+
+<h2>Managing the configuration</h2>
+
+<p>What does that mean? It means that from this point we can use a CDI ConfigSource. In other words, you can consider your ConfigSource as a ConfigRepository and inject it everywhere in your CDI application:</p>
+
+<pre>
+<code class="language-java">public class ConfigCrud {
+   @Inject
+   private ConfigRepo config;
+
+   @Test
+   public void update(final String newUrl) {
+       config.getProperties()
+          .put("app.weather.url", newUrl);
+   }
+}
+</code></pre>
+
+<p>Of course the new value will not be used if you already instantiated an @ApplicationScoped bean. But for @RequestScoped beans, it will work and you will get dynamic configuration. So in about 50 lines of code you can handle your configuration like any EE code (@PersistenceContext usage is just one step forward).</p>
+
+<h2>What&rsquo;s next ?</h2>
+
+<p>Next step will be to allow @ApplicationScoped instances to reload the configuration. This way, you will get a complete and dynamic configuration solution:</p>
+
+<ul>
+	<li>Configuration API through @ConfigProperty</li>
+	<li>Advanced and easy configuration management through your ConfigSource</li>
+	<li>Dynamic configuration through this reload mechanism.</li>
+</ul>
+
+<p>I will deal with this reloading in the next article and show you that reloading the configuration doesn&rsquo;t mean listening for it in all configuration consumers :)</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//deltaspike-configuration-reloadable.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//barcelone-conference-javaee-angular2.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

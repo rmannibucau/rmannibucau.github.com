@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Java 14 record type and JSON-B, what is the current status?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,156 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="java-14-record-class-type-and-json-b-html-container" class="container page-content java-14-record-class-type-and-json-b-html is-blog">
+                        <div class="page-header">
+                <h1>Java 14 record type and JSON-B, what is the current status?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-12-21</span>, <span class="metadata-readingtime">3 min and 14 sec read</span></p>
+</div>
+<p>Java 14 brings a new experimental feature: records. Records are a new &quot;class&quot; type which could be presented as &quot;value&quot; classes. For scala developpers, it is close to case classes or for java developpers it is the @Data of lombok but without the POJO convention. Let see how it integrates with JSON-B.</p>
+
+<p>A record is as simple as a class with an implicit constructor:</p>
+
+<pre>
+<code class="language-java">record Foo(int property1, String property2) {}</code></pre>
+
+<p>You can also decorate the properties:</p>
+
+<pre>
+<code class="language-java">record Foo(int property1, @JsonbProperty("bar") String property2) {}</code></pre>
+
+<p>The first step to compile this sample is to add the flag&nbsp;<em>--enable-preview</em>&nbsp;to&nbsp;<em>javac</em>&nbsp;(and we will need to do the same to the&nbsp;<em>java</em>&nbsp;command). For maven it can look like:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+  &lt;version&gt;3.8.1&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;release&gt;14&lt;/release&gt;
+    &lt;forceJavacCompilerUse&gt;true&lt;/forceJavacCompilerUse&gt;
+    &lt;compilerArgs&gt;
+      &lt;compilerArg&gt;--enable-preview&lt;/compilerArg&gt;
+    &lt;/compilerArgs&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>If you compile and decompile the record type, you will likely get this:</p>
+
+<pre>
+<code class="language-java">final class com.github.rmannibucau.record.Foo extends java.lang.Record { // 1
+  public com.github.rmannibucau.record.Foo(int, java.lang.String); // 2
+
+  // 3
+  public int property1();
+  public java.lang.String property2();
+
+  // 4
+  public java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+</code></pre>
+
+<ol>
+	<li><em>Record</em>&nbsp;base class just enforces a contract but is not super useful by itself in the context of this post (but it is for libraries, see 4.)</li>
+	<li>A cnstructor is generated for the properties of the class</li>
+	<li>An accessor is generated per property but it does not respect POJO convention, it uses the same name than the property - note that properties&nbsp;</li>
+	<li><em>Record</em> contract is implemented enforcing&nbsp;<em>toString()</em>,&nbsp;<em>hashCode</em>() and&nbsp;<em>equals()</em>&nbsp;to be implemented automatically (this is what can be useful for libraries, ensuring these methods are there open several doors).</li>
+	<li>Something not that visible in the snippet is that parameters of the constructor are named - first parameter is named&nbsp;<em>property1</em>&nbsp;and not&nbsp;<em>arg0</em>&nbsp;as usual - which will be key for us.</li>
+</ol>
+
+<p>The issue is obvious: default JSON-B mapping does not work since there is no getter and there is no default constructor so serialization AND deserialization will not work.</p>
+
+<p>For the deserialization you can add&nbsp;<em>@JsonbCreator</em>&nbsp;on the constructor like that:</p>
+
+<pre>
+<code class="language-java">record Foo(int property1, String property2) {
+  @JsonbCreator
+  public Foo { // the implicit constructor is called anyway to enforce this "value" behavior
+  }
+}</code></pre>
+
+<p>At this stage, it enables to deserialize the record - even if it broke the simplicity of record classes.</p>
+
+<p>For the serialization, you can have the same kind of trick: add getters....but then you get a POJO implementing record constract (which is a bit better but will not help with the verbosity).</p>
+
+<p>The last trick you will hit is the renaming of properties. We saw we can add&nbsp;<em>@JsonbProperty</em>&nbsp;on the properties, this will work for the fields but not the constructor so deserialization will not respect that.</p>
+
+<p>So are we condamned to use POJO? Yes and no :). Today, if you want to be portable, you will need to. However, next release of Apache Johnzon supports out of the box record types so you can just write:</p>
+
+<pre>
+<code>record Foo(int property1, @JsonbProperty("bar") String property2) {}</code></pre>
+
+<p>With that, if you run this code:</p>
+
+<pre>
+<code class="language-java">final var foo = new Foo(1, "foo");
+try (final var jsonb = JsonbBuilder.create()) {
+  System.out.println("json=" + jsonb.toJson(foo)); // 1
+  System.out.println("object=" + jsonb.fromJson("{\"bar\":\"bar\",\"property1\":3}", Foo.class)); // 2
+}</code></pre>
+
+<p>It will output:</p>
+
+<pre>
+<code class="language-bash">json={"bar":"foo","property1":1} // 1
+object=Foo[property1=3, property2=bar] // 2
+</code></pre>
+
+<ol>
+	<li>The serialization mapped both properties of the record and used the inline renaming of <em>property2</em> as <em>bar,</em></li>
+	<li>The deserialization filled both properties, respecting the renaming of&nbsp;<em>properties2</em>&nbsp;which was named&nbsp;<em>bar</em>&nbsp;in the JSON</li>
+</ol>
+
+<p>So this shows that record classes will likely need some JSON-B specification itnegration but that there is no technical blocker to make it work.</p>
+
+<p>This is a big promise for future java versions since it will enable to write more fluently anemic structures (API DTO for instance) but also to use pattern/expression matching more easily in our code.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//osgi-cdi-whiteboard-pattern.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//github-pages-authentication.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

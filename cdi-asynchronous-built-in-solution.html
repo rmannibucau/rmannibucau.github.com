@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI built-in @Asynchronous?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,147 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-asynchronous-built-in-solution-html-container" class="container page-content cdi-asynchronous-built-in-solution-html is-blog">
+                        <div class="page-header">
+                <h1>CDI built-in @Asynchronous?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-03-14</span>, <span class="metadata-readingtime">3 min and 42 sec read</span></p>
+</div>
+<p>Compared to EJB, CDI still misses an <em>@Asynchronous</em>&nbsp;API, however since CDI 2.0 there is a way to implement it without any external dependency or custom threading strategy (custom&nbsp;<em>ExecutorService</em>) which breaks the CDI integrations with the container (you miss security context inheritance etc).</p>
+
+<p>CDI 2.0 didn&#39;t bring&nbsp;<em>@Asynchronous</em>&nbsp;but asynchronous events. This way you can implement any asynchronous processing through an event which is returned as a handle (<em>CompletionStage</em>):</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class AsciidoctorService {
+    @Inject // &lt;1&gt;
+    private Event&lt;PreComputeEvent&gt; event;
+
+    // &lt;2&gt;
+    private static class PreComputeEvent {
+        private LongStateToCompute value;
+    }
+
+    // &lt;3&gt;
+    public CompletionFuture&lt;LongStateToCompute&gt; doAsync() {
+        preComputedState = event
+            .fireAsync(new PreComputeEvent())
+            .thenApply(i -&gt; i.value)
+            .toCompletableFuture();
+    }
+
+    // &lt;4&gt;
+    void init(@ObservesAsync final Init doInit) {
+        doInit.instance = someLongComputingToImplementSynchronouslyOrNot();
+    }
+}</code></pre>
+
+<ul>
+	<li>We need an event so we inject it to start</li>
+	<li>To make it work we need a typed event holding our computation, it is just a wrapper of our returned type</li>
+	<li>Instead of returning a&nbsp;<em>Future&lt;T&gt;</em>&nbsp;as in EJB specification we return a&nbsp;<em>CompletionFuture</em>&nbsp;which is a more powerful and reactive addition of java 8. In the implementation we fire our event with&nbsp;<em>fireAsync</em>&nbsp;to make it asynchronous and unwrap the event to have our actual result. Finally we convert it to a&nbsp;<em>CompletionFuture</em>&nbsp;which is generally a no-op for CDI to expose a more powerful API than&nbsp;<em>CompletionStage</em>&nbsp;which can&#39;t be used as a&nbsp;<em>Future</em>&nbsp;whereas&nbsp;<em>CompletionFuture</em>&nbsp;can.</li>
+	<li>Finally to make it working we write an asynchronous which does the synchronous computation in asynchronously (in another &quot;thread&quot;)</li>
+</ul>
+
+<p>When it comes to asynchronous computing in applications, there is a particular case which is interesting to speak about: the startup slow initializations. If you have a resource which is slow to compute but that you can cache then, you trigger its initialization at startup and then cache its value (or values if you want a small pool).</p>
+
+<p>To do that with CDI you can observe when&nbsp;<em>ApplicationScope</em>&nbsp;is initialized and trigger 1 (or N) event(s) to fill this cache. In this case the event can even be injected as a parameter of the initialization event observer - which is a synchronous observer triggering an asynchrnous one ;):</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class AsciidoctorService {
+    private CompletionFuture&lt;LongStateToCompute&gt; preComputedState;
+
+    void init(@Observes @Initialized(ApplicationScoped.class) final ServletContext onStart,
+                     final Event&lt;PreComputeEvent&gt; initEvent) {
+        preComputedState = initEvent
+            .fireAsync(new PreComputeEvent())
+            .thenApply(i -&gt; i.value)
+            .toCompletableFuture();
+    }
+}</code></pre>
+
+<p>We observe&nbsp;when the application context is initialized - generally with the application deployment - and then trigger the asynchronous processing and keep a reference on the result.</p>
+
+<p>Tip: if you want N instances, mix it with <em>IntStream</em> ;).</p>
+
+<p>Then you have two options depending how your application is developped. The first one is to encapsulate the asynchronous computing and just make it blocking when used:</p>
+
+<pre>
+<code class="language-java">public String syncUsage() {
+    try {
+        return preComputedState.get();
+    } catch (final InterruptedException e) {
+        Thread.currentThread().interrupt();
+        throw new IllegalStateException(e);
+    } catch (final ExecutionException e) {
+        throw new IllegalStateException(e.getCause());
+    } catch (final TimeoutException e) {
+        throw new IllegalStateException(e);
+    }
+}
+?</code></pre>
+
+<p>This is very useful when you initialize a pool or in memory cache of some instances which can be slow to create. For instance is you use asciidoctorj to render some asciidoc document you will create an&nbsp;instance&nbsp;at startup and cache it to avoid to create it at runtime which is very slow and costly. This means that the&nbsp;<em>get()</em>&nbsp;call will not wait in general, except maybe for the first ones if they occur super quickly after the application startup.</p>
+
+<p>However, if you developped your application in a reactive way you can expose the <em>CompletionStage</em>&nbsp;directly and just let it be chained. In this case you just return the&nbsp;<em>preComputedState</em>&nbsp;directly and let the caller(s) manages the exception handling. With some frameworks you can let it go until the front (JAX-RS for instance) layer!</p>
+
+<p>This solution is simple and quite efficient, however it has one drawback: it uses the default asynchronous threading. In most of containers it is the common forkjoin pool which means you can need to configure it globally on the JVM to tune its size and that you can&#39;t seggregate the different asynchronous services of your application.</p>
+
+<p>To solve that and own that threading model you can pass to the&nbsp;<em>fireAsync</em>&nbsp;some&nbsp;<em>NotificationOptions</em>&nbsp;with an executor you get from somewhere else - like ee concurrency utilities in JavaEE or a custom thread pool you configured yourself if you are in standalone:</p>
+
+<pre>
+<code class="language-java">event.fireAsync(myEvent, NotificationOptions.ofExecutor(getExecutor());</code></pre>
+
+<p>With all these tricks, no more excuse to pay any initialization cost at runtime in a CDI application ;).</p>
+
+<ul>
+</ul>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//javaee-close-component-lifecycle.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-fallback-microprofile-alternative.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CXF and Swagger integration</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,228 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cxf-and-swagger-integration-html-container" class="container page-content cxf-and-swagger-integration-html is-blog">
+                        <div class="page-header">
+                <h1>CXF and Swagger integration</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-21</span>, <span class="metadata-readingtime">3 min and 27 sec read</span></p>
+</div>
+<p>CXF worked a lot of Swagger integration and it is now way cleaner (if you read my old post on how to get it running in TomEE you probably remember it was not that easy before).</p>
+
+<p>Let see how to make it running with Apache Meecrowave as a concrete example but any CXF based server (or custom application) would behave almost the same.</p>
+
+<h2>Setup the swagger dependencies</h2>
+
+<p>Part of this nice CXF work is to have extracted swagger model, so to activate it now you need to add this dependency:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+  &lt;artifactId&gt;cxf-rt-rs-service-description-swagger&lt;/artifactId&gt;
+  &lt;version&gt;${cxf.version}&lt;/version&gt; &lt;!-- 3.1.9, 3.1.10, ... --&gt;
+&lt;/dependency&gt;</code></pre>
+
+<h2>Make your Application swagger friendly</h2>
+
+<p>This part is optional but not doing it can lead to activate auto scanning of swagger which can either mean preventing your container to start for some or to slow down a lot the startup for a poor gain in general so I would recommand you to not bypass it.</p>
+
+<p>Idea there is to simply implement the&nbsp;<em>getClasses()</em>&nbsp;method of your JAX-RS&nbsp;<em>Application</em>&nbsp;and not let the container scan for you. Why that? Simply because then Swagger integration will just reuse that method to find your documented API.</p>
+
+<p>Here an example:</p>
+
+<pre>
+<code class="language-java">@Dependent
+@ApplicationPath("api")
+public class SwaggerApp extends Application {
+    private final Set&lt;Class&lt;?&gt;&gt; classes = Stream.of(
+         MyFeature.class,
+         MyFilter.class,
+         MyEndpoint1.class, MyEndpoint2.class)
+       .collect(toSet());
+
+    @Override
+    public Set&lt;Class&lt;?&gt;&gt; getClasses() {
+        return classes;
+    }
+}
+</code></pre>
+
+<p>Nothing very surprising there but I guarantee you paying this small configuration cost will help a lot to use Swagger on an everyday basis.</p>
+
+<h2>Activate swagger integration</h2>
+
+<p>This part depends your container, with TomEE you will use <em>openejb-jar.xml</em>&nbsp;or the same configuration than Meecrowave we&#39;ll see in a second, with Spring you will use spring-configuration or XML configuration, etc...</p>
+
+<p>The requirement is to add the swagger feature of CXF as a CXF feature of the application.</p>
+
+<p>As previous snippet can let you guess you just need to put the feature in the&nbsp;<em>getClasses()</em>&nbsp;or&nbsp;<em>getSingleton()</em>. Last one enabling you to customize the configuration:</p>
+
+<pre>
+<code class="language-java">@Dependent
+@ApplicationPath("api")
+public class SwaggerApp extends Application {
+    private final Set&lt;Class&lt;?&gt;&gt; classes = singleton(MyEndpoint.class);
+    private final Set&lt;Object&gt; singletons = singleton(new Swagger2Feature() {{
+        setScan(false);
+        setRunAsFilter(true);
+
+        setPrettyPrint(true);
+        setSupportSwaggerUi(true);
+    }});
+
+    @Override
+    public Set&lt;Class&lt;?&gt;&gt; getClasses() {
+        return classes;
+    }
+
+    @Override
+    public Set&lt;Object&gt; getSingletons() {
+        return singletons;
+    }
+}</code></pre>
+
+<p>Nothing very complicated right?</p>
+
+<h2>Run it!</h2>
+
+<p>If you run that application with Meecrowave you will get this kind of output:</p>
+
+<pre>
+<code>REST Application: /api -&gt; com.github.rmannibucau.meecrowave.SwaggerApp
+      Service URI: /api/hi                        -&gt; com.github.rmannibucau.meecrowave.HelloWorld
+               GET /api/hi/                       -&gt;      String hi()
+      Service URI: /api/swagger.{type:json|yaml}  -&gt; io.swagger.jaxrs.listing.ApiListingResource
+               GET /api/swagger.{type:json|yaml}/ -&gt;      Response getListing(Application, ServletConfig, HttpHeaders, UriInfo, String)
+</code></pre>
+
+<p>If you check the previous code,&nbsp;<em>ApiListingResource</em>&nbsp;is automatically added by the swagger feature and that&#39;s the one doing all the work.</p>
+
+<p>Tip: since swagger will bring slf4j requirement I recommand you to add that dependency:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+  &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+  &lt;version&gt;${log4j2.version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Once this is setup you can it&nbsp;<em>/swagger.json</em>&nbsp;and you will get:</p>
+
+<pre>
+<code class="language-json">{
+   swagger:"2.0",
+   info:{
+      description:"The Application",
+      version:"1.0.0",
+      title:"Sample REST Application",
+      contact:{
+         name:"users@cxf.apache.org"
+      },
+      license:{
+         name:"Apache 2.0 License",
+         url:"http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+   },
+   basePath:"/api",
+   paths:{
+      /hi:{
+         get:{
+            operationId:"test",
+            parameters:[
+
+            ],
+            responses:{
+               200:{
+                  description:"successful operation",
+                  schema:{
+                     type:"string"
+                  },
+                  headers:{
+
+                  }
+               }
+            }
+         }
+      }
+   }
+}</code></pre>
+
+<p>(yes I didn&#39;t use much swagger API, goal was just to show how to activate it)</p>
+
+<h2>Wait I did all that but my endpoint is not documented!</h2>
+
+<p>Swagger will integrate only endpoints part of the api. This is a manual step requiring to add&nbsp;<em>@Api</em>&nbsp;annotation on your class. Here is my hello world endpoint for instance:</p>
+
+<pre>
+<code class="language-java">import io.swagger.annotations.Api;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+@Path("hi")
+@ApplicationScoped
+@Api
+public class HelloWorld {
+    @GET
+    public String test() {
+        return "hi";
+    }
+}
+</code></pre>
+
+<p>Of course Swagger API is way richer and you can document all part of the API through annotations but this is the one making your API part of&nbsp;<em>swagger.json</em>&nbsp;or not.</p>
+
+<h2>Conclusion</h2>
+
+<p>Documenting your API is still some work but activating the documentation is now way easier and pretty straight forward thanks to all the work CXF did to enable it so don&#39;t let your consumers guess your API anymore ;).</p>
+
+<p>What can be the next steps? Activating swagger ui to let your consumers visualize this documentation in a human friendly manner or even test it!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//java-stream-error-handling.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi-ioc.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

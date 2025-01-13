@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Microprofile Config and Proxy based configuration?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,128 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="microprofile-config-proxy-based-configuration-html-container" class="container page-content microprofile-config-proxy-based-configuration-html is-blog">
+                        <div class="page-header">
+                <h1>Microprofile Config and Proxy based configuration?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-05-23</span>, <span class="metadata-readingtime">2 min and 57 sec read</span></p>
+</div>
+<p>Microprofile Configuration provides a way to handle configuration in CDI applications.</p>
+
+<p>Concretely it allows to use a configuration abstraction - called&nbsp;<em>Config</em>&nbsp;- which is filled from&nbsp;<em>ConfigSource,</em>&nbsp;and therefore is extensible, to configure any part of your application but also CDI extensions. This sounds trivial but since an extension is executed before CDI is really active it is already a problem solved!</p>
+
+<p>The API is inspired from mainstream configuration API like Spring Configuration or Apache DeltaSpike config. It looks like:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class AppConfig {
+    @Inject
+    @ConfigProperty(name="app.port")
+    private Integer port;
+
+    @Inject
+    @ConfigProperty(name="app.host")
+    private String host;
+}</code></pre>
+
+<p>This is not bad but has a few downsides:</p>
+
+<ol>
+	<li>When you inject primitives you don&#39;t get them updated at any time</li>
+	<li>It kind of encourage to put config anywhere and doesn&#39;t structure the configuration</li>
+	<li>It doesn&#39;t allow to add features under the hood for free, for instance if you want to add some caching on the values and some hot reloading, then you need to scope your bean with an adapted scope (@Refreshed for instance)</li>
+</ol>
+
+<p>An alternative programming model exists in the configuration ecosystem and is based on proxies. Long story short, the idea is to make an interface and each method a configuration entry:</p>
+
+<pre>
+<code class="language-java">public interface AppConfig {
+    @ConfigProperty(name="app.port")
+    Integer port();
+
+    @ConfigProperty(name="app.host")
+    String host();
+}</code></pre>
+
+<p>It looks pretty close to previous solution but requires to inject the config to be used:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class MyApp {
+  @Inject
+  private AppConfig config;
+}</code></pre>
+
+<p>Not a big deal right? Now the implementation can do a lot for you:</p>
+
+<ul>
+	<li>Reload the keys when needed and ensure the refreshing is consistent for all the keys (would be sad to have the old port but new host for instance)</li>
+	<li>Make your configuration bean managed through JMX</li>
+	<li>Have statistics on the configuration usage</li>
+	<li>Route the configuration depending the current tenant</li>
+	<li>...</li>
+</ul>
+
+<p>All that is possible because the implementation is decoupled&nbsp;from the usage and stay dynamic.</p>
+
+<p>Apache Geronimo Config which is one of the Microprofile Config implementation is able to handle this kind of configuration. Microprofile is getting updates hooks to be able to refresh key/values when needed and consistently (the host/port example I talked about earlier) so it will be key for application to benefit from it for free.</p>
+
+<p>As you can see the proxy API is only dependent on the standard API of Microprofile Config so with very few effort already usable. Of course, once it gets added to Microprofile Config itself, it will probably get a&nbsp;<em>@Configuration</em>&nbsp;annotation you can put on the interface to specify a global prefix but it is not a big deal to handle in practise.</p>
+
+<p>Side note:&nbsp;<em>@ConfigProperty </em>can be put on the interface but it is weird to have a default value here, this is why another API can make more sense.</p>
+
+<p>If you are interested in the implementation you can grab it on <a href="https://github.com/apache/geronimo-config/blob/trunk/impl/src/main/java/org/apache/geronimo/config/cdi/ConfigurationHandler.java" target="_blank">github</a>&nbsp;and the required wiring is mainly just observing annotated types with&nbsp;<em>@ConfigProperty</em>&nbsp;annotation and if it is an interface bind a proxy created with previous handler in the CDI&nbsp;beans.</p>
+
+<p>Last tip: with such interfaces it is very trivial to generate the documentation for your configuration: you grab you class, iterate over its method, extract&nbsp;<em>@ConfigProperty</em>&nbsp;and generate some nice asciidoctor file with the property name and its default. If you want to be fancy you can add a&nbsp;<em>@Documentation(String)</em>&nbsp;annotation to add a smart description but at least all keys will be easy to extract :).</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//microproflie-opentracing-getting-started.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-gzip-tomcat-connector.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

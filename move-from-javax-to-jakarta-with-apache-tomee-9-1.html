@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Move from javax to jakarta with Apache TomEE 9 (Part 1): better jakarta libraries</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="move-from-javax-to-jakarta-with-apache-tomee-9-1-html-container" class="container page-content move-from-javax-to-jakarta-with-apache-tomee-9-1-html is-blog">
+                        <div class="page-header">
+                <h1>Move from javax to jakarta with Apache TomEE 9 (Part 1): better jakarta libraries</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-01-05</span>, <span class="metadata-readingtime">5 min and 13 sec read</span></p>
+</div>
+<p>TomEE 9 targets javax-&gt;jakarta package switch. However, you can get some surprises when getting started with it.</p>
+
+<p>The first one will likely be you don&#39;t find it. Since this distribution is not yet &quot;native&quot; - I&#39;ll explain after what it means, it is not in&nbsp;<em>org.apache.tomee</em>&nbsp;groupId but&nbsp;<em>org.apache.tomee.jakarta</em>. It is also important to note that it is the only jakarta artifact, no openejb jakarta, no tomee maven plugin jakarta etc...</p>
+
+<p>Then, here is what you will find in&nbsp;<em>tomee/lib</em>&nbsp;folder:</p>
+
+<pre>
+<code>...
+lib/bval-jsr-2.0.5.jar
+...
+lib/geronimo-config-impl-1.2.1.jar
+lib/geronimo-health-1.0.1.jar
+lib/geronimo-health-common-1.0.1.jar
+lib/geronimo-javamail_1.6_mail-1.0.0.jar
+lib/geronimo-metrics-1.0.2.jar
+lib/geronimo-metrics-common-1.0.2.jar
+lib/geronimo-openapi-impl-1.0.12.jar
+lib/geronimo-opentracing-1.0.0.jar
+lib/geronimo-transaction-3.1.4.jar
+...
+lib/jakarta.activation-1.2.1.jar
+lib/jakarta.xml.bind-api-2.3.2.jar
+...
+lib/johnzon-core-1.2.5.jar
+lib/johnzon-jaxrs-1.2.5.jar
+lib/johnzon-jsonb-1.2.5.jar
+lib/johnzon-mapper-1.2.5.jar
+...
+lib/mbean-annotation-api-8.0.5.jar
+lib/microprofile-config-api-1.3.jar
+lib/microprofile-fault-tolerance-api-1.1.4.jar
+lib/microprofile-health-api-1.0.jar
+lib/microprofile-jwt-auth-api-1.1.1.jar
+lib/microprofile-metrics-api-1.1.1.jar
+lib/microprofile-openapi-api-1.1.2.jar
+lib/microprofile-opentracing-api-1.1.2.jar
+lib/microprofile-rest-client-api-1.3.3.jar
+...
+lib/mp-common-8.0.5.jar
+lib/mp-jwt-8.0.5.jar
+...
+lib/myfaces-api-2.3.6.jar
+lib/myfaces-impl-2.3.6.jar
+...
+lib/neethi-3.0.3.jar
+lib/openejb-api-8.0.5.jar
+lib/openejb-client-8.0.5.jar
+lib/openejb-core-8.0.5.jar
+lib/openejb-cxf-8.0.5.jar
+lib/openejb-cxf-rs-8.0.5.jar
+lib/openejb-cxf-transport-8.0.5.jar
+lib/openejb-ejbd-8.0.5.jar
+lib/openejb-hsql-8.0.5.jar
+lib/openejb-http-8.0.5.jar
+lib/openejb-javaagent.jar
+lib/openejb-jee-8.0.5.jar
+lib/openejb-jee-accessors-8.0.5.jar
+lib/openejb-jpa-integration-8.0.5.jar
+lib/openejb-loader-8.0.5.jar
+lib/openejb-rest-8.0.5.jar
+lib/openejb-server-8.0.5.jar
+lib/openejb-webservices-8.0.5.jar
+...
+lib/openjpa-3.1.2.jar
+...
+lib/opentracing-api-0.31.0.jar
+lib/openwebbeans-ee-2.0.12.jar
+lib/openwebbeans-ee-common-2.0.12.jar
+lib/openwebbeans-ejb-2.0.12.jar
+lib/openwebbeans-el22-2.0.12.jar
+lib/openwebbeans-impl-2.0.12.jar
+lib/openwebbeans-jsf-2.0.12.jar
+lib/openwebbeans-spi-2.0.12.jar
+lib/openwebbeans-web-2.0.12.jar
+...
+lib/tomee-catalina-8.0.5.jar
+lib/tomee-common-8.0.5.jar
+lib/tomee-config-8.0.5.jar
+lib/tomee-jaxrs-8.0.5.jar
+lib/tomee-jdbc-8.0.5.jar
+lib/tomee-loader-8.0.5.jar
+lib/tomee-mojarra-8.0.5.jar
+lib/tomee-myfaces-8.0.5.jar
+lib/tomee-security-8.0.5.jar
+lib/tomee-webapp-8.0.5.jar
+lib/tomee-webservices-8.0.5.jar
+</code></pre>
+
+<ul>
+	<li>I didn&#39;t make a typo, I listed a TomEE 9 lib folder and you see TomEE 8 jars.</li>
+	<li>OpenWebBeans, BVal, Johnzon have jakarta jars - using relocations -&nbsp;but they are not in TomEE 9 (jakarta) distribution.</li>
+	<li>MyFaces which has an official&nbsp;jakarta branch is in version 2 and not 3 which is the jakarta release.</li>
+	<li>TomEE 9 microprofile contains microprofile stack and other EE libraries which are not jakarta yet.</li>
+</ul>
+
+<p>Another weird thing happens if you check Tomcat jars:</p>
+
+<pre>
+<code>apache-tomee-microprofile-9.0.0-M3 $ unzip -p lib/tomcat-coyote.jar META-INF/MANIFEST.MF | grep Implementation-Version
+Implementation-Version: 9.0.39
+</code></pre>
+
+<p>Yes, the built-in Tomcat version is the 9 and not tomcat 10 which targets Jakarta.</p>
+
+<p>How can it work? Why these inconsistencies? Simply because TomEE 9 is for now a rebuild of TomEE 8 with jakarta relocations. You can see it as a big &quot;replace&quot; build hack - but don&#39;t get me wrong, it works fine.</p>
+
+<p>The main issue with such a packaging is that you don&#39;t get the best of the libraries which are jakarta native and can have some specificities compared to javax flavor - for now it is almost nothing but it will come quickly for the native implementations.</p>
+
+<p>So the solution is to replace the implementations until TomEE switches itself and while the integration code still works - it is the case as of today.</p>
+
+<p>So our goal is to remove myfaces 2 and add myfaces 3, and to remove catalina/tomcat jars to add their version 10.</p>
+
+<p>Indeed you can do it with a shell script or manually but I propose you to do it with TomEE Maven plugin.</p>
+
+<p>Wait, TomEE 9 does not have a TomEE Maven Plugin so how to do? Well, let&#39;s use TomEE Maven Plugin 8. The plugin is actually a TomEE packager plugin so you can use it to package a TomEE, another TomEE version or even a Tomcat.</p>
+
+<p>Here is how you can switch MyFaces and Tomcat version:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.tomee.maven&lt;/groupId&gt;
+	&lt;artifactId&gt;tomee-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;8.0.5&lt;/version&gt; &lt;!-- 1 --&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;id&gt;prepare-distribution&lt;/id&gt;
+			&lt;phase&gt;none&lt;/phase&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;build&lt;/goal&gt;
+			&lt;/goals&gt;
+			&lt;configuration&gt; &lt;!-- 2 --&gt;
+				&lt;attach&gt;false&lt;/attach&gt;
+				&lt;zip&gt;false&lt;/zip&gt;
+				&lt;catalinaBase&gt;${project.build.directory}/tomee/standalone&lt;/catalinaBase&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;configuration&gt;
+        &lt;!-- 3 --&gt;
+		&lt;context&gt;ROOT&lt;/context&gt;
+		&lt;warFile&gt;${project.build.directory}/${project.build.finalName}&lt;/warFile&gt;
+
+        &lt;!-- 4 --&gt;
+		&lt;tomeeGroupId&gt;org.apache.tomee.jakarta&lt;/tomeeGroupId&gt;
+		&lt;tomeeVersion&gt;9.0.0-M3&lt;/tomeeVersion&gt;
+		&lt;tomeeClassifier&gt;microprofile&lt;/tomeeClassifier&gt;
+
+		&lt;!-- 5 --&gt;
+		&lt;libs&gt;
+			&lt;lib&gt;remove:myfaces&lt;/lib&gt;
+			&lt;lib&gt;org.apache.myfaces.core:myfaces-api:3.0.0-RC1&lt;/lib&gt;
+			&lt;lib&gt;org.apache.myfaces.core:myfaces-impl:3.0.0-RC1&lt;/lib&gt;
+			&lt;lib&gt;remove:catalina&lt;/lib&gt;
+			&lt;lib&gt;remove:tomcat&lt;/lib&gt;
+			&lt;lib&gt;remove:servlet-api&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-catalina-ant:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-catalina-ha:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-catalina:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-ssi:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-storeconfig:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-tribes:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-api:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-coyote:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-dbcp:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-cs:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-es:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-fr:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-ja:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-ko:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-pt-BR:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-ru:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-i18n-zh-CN:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-jdbc:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-jni:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-util:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-util-scan:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-websocket:10.0.0&lt;/lib&gt;
+			&lt;lib&gt;org.apache.tomcat:tomcat-servlet-api:10.0.0&lt;/lib&gt;
+		&lt;/libs&gt;
+	&lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<ol>
+	<li>Don&#39;t forget to use TomEE 8 plugin since TomEE 9 plugin does not exist yet.</li>
+	<li>We configure the build to not attach the distribution - since these days we often put the distribution in a docker or so it is useless to attach it to the build - but you can if desired.</li>
+	<li>Assuming the pom you add this plugin in is a war module, we configure the war to be deployed as root application (http://localhost:8080/ to hit it) and we use the exploded war instead of .war archive to avoid to force tomcat to extract the archive at first startup (useless work).</li>
+	<li>We configure the coordinates of the distribution we want to build from (TomEE 9 Microprofile here).</li>
+	<li>We configure the library tuning we did. It uses a nice hack&nbsp;<em>&lt;lib&gt;</em>&nbsp;tag supports.&nbsp;<em>remove:prefix</em>&nbsp;enables to remove all the files from lib directory of the source distribution which matches the prefix. For example,&nbsp;<em>remove:myfaces</em>, will remove myfaces-impl-2.3.6.jar and myfaces-api-2.3.6.jar. Then, once the library is removed we just add them back using the coordinates of the jakarta native implementation. We do it for myfaces and tomcat.</li>
+</ol>
+
+<p>Once done, you can run:</p>
+
+<pre>
+<code class="language-bash">$ mvn clean package tomee:build@prepare-distribution
+...
+[INFO] --- tomee-maven-plugin:8.0.5:build (prepare-distribution) @ project ---
+[INFO] TomEE was unzipped in '/project/target/tomee/standalone'
+[INFO] Removed not mandatory default webapps
+[INFO] Deleted /project/target/tomee/standalone/lib/myfaces-api-2.3.6.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/myfaces-impl-2.3.6.jar
+[INFO] Copied 'org.apache.myfaces.core:myfaces-api:3.0.0-RC1' in '/project/target/tomee/standalone/lib/myfaces-api-3.0.0-RC1.jar
+[INFO] Copied 'org.apache.myfaces.core:myfaces-impl:3.0.0-RC1' in '/project/target/tomee/standalone/lib/myfaces-impl-3.0.0-RC1.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina-ha.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina-ssi.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina-ant.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina-tribes.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/catalina-storeconfig.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-fr.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-api.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-jni.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-de.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-websocket.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-ko.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-ja.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-util-scan.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-cs.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-dbcp.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-util.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-coyote.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-jdbc.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-es.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-ru.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-pt-BR.jar
+[INFO] Deleted /project/target/tomee/standalone/lib/tomcat-i18n-zh-CN.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-catalina-ant:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-catalina-ant-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-catalina-ha:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-catalina-ha-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-catalina:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-catalina-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-ssi:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-ssi-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-storeconfig:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-storeconfig-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-tribes:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-tribes-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-api:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-api-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-coyote:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-coyote-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-dbcp:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-dbcp-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-cs:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-cs-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-es:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-es-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-fr:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-fr-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-ja:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-ja-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-ko:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-ko-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-pt-BR:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-pt-BR-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-ru:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-ru-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-i18n-zh-CN:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-i18n-zh-CN-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-jdbc:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-jdbc-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-jni:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-jni-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-util:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-util-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-util-scan:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-util-scan-10.0.0.jar
+[INFO] Copied 'org.apache.tomcat:tomcat-websocket:10.0.0' in '/project/target/tomee/standalone/lib/tomcat-websocket-10.0.0.jar</code></pre>
+
+<p>The plugin shows the actual manipulation it does on the libraries.</p>
+
+<p>Side note: the fact we replaced servlet-api jar by the official tomcat one also solves a lot of warning you can get when deploying an application and enables to use Tomcat XML validation whereas TomEE 9.0.0-M3 lost that feature (a bug in the relocation process).</p>
+
+<p>Now, if you go in&nbsp;<em>/project/target/tomee/standalone</em>, you have a TomEE instance with your application ready to run your jakarta code :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//move-from-javax-to-jakarta-with-apache-tomee-9-2.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//maven-ftp-upload.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

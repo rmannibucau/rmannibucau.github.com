@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Bitly JAX-RS client, migrating from Bitly API v3 to v4</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,142 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="bitly-jaxrs-client-v3-to-v4-api-migration-html-container" class="container page-content bitly-jaxrs-client-v3-to-v4-api-migration-html is-blog">
+                        <div class="page-header">
+                <h1>Bitly JAX-RS client, migrating from Bitly API v3 to v4</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-03-21</span>, <span class="metadata-readingtime">2 min read</span></p>
+</div>
+<p>Bitly is a great Cloud service to shorten links and be more efficient on social networks. Until recently its v3 API was the main one but it is going to&nbsp;shut down to be replaced by v4.</p>
+
+<p>As a reminder the shorten link in v3 looked like:</p>
+
+<pre>
+<code class="language-java">BitlyResponse response = target.queryParam("access_token", token)
+  .queryParam("longUrl", encode(toShorten))
+  .request(APPLICATION_JSON_TYPE)
+  .get(BitlyResponse.class)</code></pre>
+
+<p>with the&nbsp;<em>BitlyResponse</em>&nbsp;this class:</p>
+
+<pre>
+<code class="language-java">@Data
+public class BitlyResponse {
+  private BitlyData data;
+  private int status_code;
+
+  @Data
+  public static class BitlyData {
+    private String url;
+  }
+}</code></pre>
+
+<p>So to read the shorten url in&nbsp;<strong>v3</strong>&nbsp;you just had to access url after having checked the status:</p>
+
+<pre>
+<code class="language-java">if (response.getStatus_code() != HttpURLConnection.HTTP_OK) {
+  throw new IllegalStateException("Bad response from bitly: " + response);
+}
+return response.getData().getUrl();</code></pre>
+
+<p>What you can note is that the endpoint was:</p>
+
+<ol>
+	<li>Authorized using a query parameter,</li>
+	<li>Using GET HTTP method</li>
+</ol>
+
+<p>The v4 changes this by:</p>
+
+<ol>
+	<li>Using <em>Authorization</em> header with a standard bearer token value,</li>
+	<li>Using a POST,</li>
+	<li>Requiring a group identifier,</li>
+	<li>The request payload changed of course since we changed the HTTP method but the response one too, the shorten link i snow directly under&nbsp;<em>link</em>&nbsp;attribute of the response and the status code is th eplain HTTP one and no more a field.</li>
+</ol>
+
+<p>In terms of code the new one looks like:</p>
+
+<pre>
+<code class="language-java">public String bitlyize(final String longLink, final String token, final String group) {
+  return target
+          .request(APPLICATION_JSON_TYPE)
+          .header("Authorization", "Bearer " + token)
+          .post(entity(
+             new BitlyData(group, "bit.ly", longLink), APPLICATION_JSON_TYPE),
+             BitlyResponse.class)
+          .getLink();
+}</code></pre>
+
+<p>With the request class which looks like:</p>
+
+<pre>
+<code class="language-java">@Data
+public class BitlyData {
+    private final String group_guid;
+    private final String domain;
+    private final String long_url;
+}</code></pre>
+
+<p>And the reponse class which looks like:</p>
+
+<pre>
+<code class="language-java">@Data
+public class BitlyResponse {
+    private String link;
+    // other attributes ignored
+}</code></pre>
+
+<p>With this migration you should get back a functional bitly.</p>
+
+<p>The last tip about this migration is that, even if the access token is simple to find in Bitly admin panel, the group uid to use can be hidden. Personally, since I had a client (this post is all about it), i just called&nbsp;<a href="https://api-ssl.bitly.com/v4/groups">https://api-ssl.bitly.com/v4/groups</a>&nbsp;endpoint (ensure to pass your token in Authorization header) with a GET HTTP method and it contains the group uid you can directly use.</p>
+
+<p>Happy coding!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//reuse-webpack-plugins-without-a-webpack-build.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//docker-image-and-jib-creation-time.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

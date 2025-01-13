@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Webpack and SCP: write your own plugin!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,259 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="webpack-scp-plugin-html-container" class="container page-content webpack-scp-plugin-html is-blog">
+                        <div class="page-header">
+                <h1>Webpack and SCP: write your own plugin!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-11-15</span>, <span class="metadata-readingtime">4 min and 8 sec read</span></p>
+</div>
+<p>If you use webpack and a dev server you can desire to update the server on the fly with the development iteration: a.k.a watch process.</p>
+
+<p>I didn&#39;t find a built-in plugin doing it for webpack but there is an awesome npm package doing almost it:&nbsp;<em>scp2</em>.</p>
+
+<p>Only missing piece is the webpack integration. Let&#39;s see how to make both working together.</p>
+
+<h2>SCP from NodeJS</h2>
+
+<p>One you added&nbsp;<em>scp2</em>&nbsp;to your&nbsp;<em>package.json </em>with:</p>
+
+<pre>
+<code class="language-javascript">{
+  //...
+  "devDependencies": {
+    "scp2": "0.5.0"
+  }
+}
+</code></pre>
+
+<p>You can run this code to scp the folder&nbsp;<em>dist</em>&nbsp;to the folder&nbsp;<em>/server/input</em>&nbsp;on the machine&nbsp;<em>dev.server.company.com</em>:</p>
+
+<pre>
+<code class="language-javascript">var scp2 = require('scp2');
+var fs = require('fs');
+
+var sshConfig = {
+  host: 'dev.server.company.com',
+  username: process.env.DEV_INSTANCE_USER || process.env.USER,
+  privateKey: fs.readFileSync(process.env.DEV_INSTANCE_KEY || (process.env.USER_HOME + '/.ssh/dev-instance.pem')),
+  path: '/server/input/'
+};
+
+scp2.scp('dist', sshConfig, function(err) {
+  console.log('[ERROR] ' + JSON.stringify(err));
+});</code></pre>
+
+<p>This code is pretty straight forward:</p>
+
+<ol>
+	<li>we import&nbsp;<em>scp2</em>&nbsp;and&nbsp;<em>fs</em>&nbsp;libraries</li>
+	<li>we build our ssh configuration: which server, which SSH user, for the privateKey the trick is to configure the content of the key and not its path (with 0.5.0, next version should support the path) and finally the path where to upload the data. Note that you can replace&nbsp;<em>privateKey</em>&nbsp;by&nbsp;<em>password</em>&nbsp;if your server relies on that kind of authentication.</li>
+	<li>We SCP&nbsp;<em>dist</em>&nbsp;folder using previous configuration and log an error if it happens.</li>
+</ol>
+
+<p>Tip: for variables you can use&nbsp;<em>process.env</em>&nbsp;to read it from your environment instead of hardcoding the values.</p>
+
+<h2>Wrap SCP2 in a Webpack plugin</h2>
+
+<p>A webpack plugin is a class with an apply method:</p>
+
+<pre>
+<code class="language-javascript">var MyPlugin = (function () {
+    var plugin = function (options) {
+    };
+
+    plugin.prototype.apply = function(compiler) {
+    };
+
+    return plugin;
+})();</code></pre>
+
+<p>The <em>options</em>&nbsp;parameter for the constructor is optional and depends if your plugin needs some configuration when instantiated or not. For this post we&#39;ll keep it since it is generally a good idea to let it be configurable.</p>
+
+<p>The&nbsp;<em>apply</em>&nbsp;method is called with &nbsp;the compiler and let you register hooks to each phase of the build. For our case we want the build to be done so we&#39;ll register on&nbsp;<em>emit</em>&nbsp;phase:</p>
+
+<pre>
+<code class="language-javascript">plugin.prototype.apply = function(compiler) {
+  compiler.plugin('emit', function(compilation, callback) {
+    callback();
+  });
+};</code></pre>
+
+<p>The&nbsp;<em>compiler.plugin</em>&nbsp;method allows you to listen for a phase and register a hook. For our case we just need to ensure to call the&nbsp;<em>callback</em>&nbsp;hook once we are done to finish webpack cycle/iteration.</p>
+
+<p>Once we are there the plugin is almost written, we just need to put it all together:</p>
+
+<pre>
+<code class="language-javascript">var ScpPlugin = (function () {
+    var scp2 = require('scp2');
+    var fs = require('fs');
+
+    var sshConfig = {
+      host: 'dev.server.company.com',
+      username: process.env.DEV_INSTANCE_USER || process.env.USER,
+      privateKey: fs.readFileSync(process.env.DEV_INSTANCE_KEY || (process.env.USER_HOME + '/.ssh/dev-instance.pem')),
+      path: '/server/input/'
+    };
+
+    var plugin = function (options) {
+        // optionally override sshConfig with passed options
+    };
+
+    plugin.prototype.apply = function(compiler) {
+      compiler.plugin('emit', function(compilation, callback) {
+        scp2.scp('dist', sshConfig, function(err) {
+            console.log('[ERROR] ' + JSON.stringify(err));
+        });
+        callback();
+      });
+    };
+
+    return plugin;
+})();</code></pre>
+
+<h2>Register the plugin in webpack configuration</h2>
+
+<p>Finally you just need to register the plugin in main webpack configuration:</p>
+
+<pre>
+<code class="language-javascript">var ScpPlugin = ....;
+
+module.exports = {
+    // ...
+
+    plugins: [
+        // ...,
+        new ScpPlugin({});
+    ]
+};
+</code></pre>
+
+<h2>Going further</h2>
+
+<p>This code works well for small projects but for big ones you will get synchronization issues. A better way is to integrate mode deeply with webpack and its chunks. Here is the code based on the same dependencies:</p>
+
+<pre>
+<code class="language-javascript">var webpack = require('webpack');
+var scp2 = require('scp2');
+var fs = require('fs');
+
+// config
+var fromFolder = 'dist/';
+var targetPath = '/opt/app/';
+var sshConfig = {
+    host: process.env.THE_HOST,
+    username: process.env.USER,
+    privateKey: fs.readFileSync(process.env.THE_KEY_LOCATION),
+};
+
+// plugin vars
+var scpCount = 0;
+var chunkVersions = {};
+
+var client = new scp2.Client(sshConfig); // no close since we "watch"
+client.on('error', function (e) {
+    console.log(e);
+});
+
+var scp = function (file, content, hook) {
+    console.log('Updating ' + file + ' on dev instance');
+    client.write({
+        destination: targetPath + file,
+        content: new Buffer(content, 'utf-8')
+    }, function (err) {
+        scpCount--;
+        hook();
+        console.log('Updated ' + file + (err ? '. Error: ' + err + '.' : '') + '. Remaining uploads: ' + scpCount + '.');
+    });
+};
+
+
+
+var scpSynchroPlugin = {
+  apply: function(compiler) {
+      compiler.plugin('emit', function (compilation, callback) {
+          var filtered = compilation.chunks.filter(function(chunk) {
+              var oldVersion = chunkVersions[chunk.name];
+              chunkVersions[chunk.name] = chunk.hash;
+              return chunk.hash !== oldVersion;
+          });
+          if (filtered.length == 0) {
+              callback();
+          } else {
+              scpCount += filtered.map(function (chunk) {
+                  return chunk.files.length;
+              }).reduce(function (a, b) {
+                  return a + b;
+              }, 0);
+              filtered.forEach(function (chunk, idx) {
+                chunk.files.forEach(function(filename) {
+                    scp(filename, compilation.assets[filename].source(), function () {
+                      if (idx == filtered.length - 1) {
+                          callback();
+                      }
+                    });
+                });
+              });
+          }
+      });
+  }
+};
+
+
+// and add it in webpack plugins:[..., scpSynchroPlugin]</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Now if your webpack setup relies on&nbsp;<em>--watch</em>, each time you will update the <em>dist</em>&nbsp;folder, you will also update your dev server.</p>
+
+<p>Note that it is also easy to extend this code to just run a simple npm (or gulp)&nbsp;task doing a deployment of an application on any server.</p>
+
+<p>Happy frontend hacking!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//deltaspike-new-configuration-api.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-cdi-beans-scanning-debug.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

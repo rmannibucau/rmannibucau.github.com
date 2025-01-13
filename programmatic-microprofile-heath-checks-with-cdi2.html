@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Add Microprofile healthchecks programmatically from an extension with CDI 2!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,150 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="programmatic-microprofile-heath-checks-with-cdi2-html-container" class="container page-content programmatic-microprofile-heath-checks-with-cdi2-html is-blog">
+                        <div class="page-header">
+                <h1>Add Microprofile healthchecks programmatically from an extension with CDI 2!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-11-29</span>, <span class="metadata-readingtime">3 min and 24 sec read</span></p>
+</div>
+<p>CDI 2 brings bean configurator features which enables to register very easily custom beans without implementing all the annotated/bean API. However, there are some cases it is not as trivial as it looks. Let investigate the health check case using microprofile health specification as base.</p>
+
+<p>The use case is simple: we add though an extension several clients or bean - could be datasources - we want to add health check on programmatically.</p>
+
+<p>Technically it is as easy as writing this kind of extension:</p>
+
+<pre>
+<code class="language-java">public class MyExtension implements Extension {
+
+    void registerBeans(@Observes final AfterBeanDiscovery afterBeanDiscovery) {
+        if (getCustomBeans().isEmpty()) {
+            return;
+        }
+
+        final AnnotationLiteral&lt;Readiness&gt; literal = new AnnotationLiteral&lt;Readiness&gt;() {};
+        getCustomBeans()
+                .forEach(beanMetadata -&gt; {
+                    // 1
+                    afterBeanDiscovery
+                            .addBean()
+                            .id(getClass().getName() + "#mybean#" + beanMetadata)
+                            .scope(ApplicationScoped.class)
+                            .beanClass(MyBeanType.class)
+                            .qualifiers(new MyQualifier(beanMetadata.id()))
+                            .types(WebTarget.class, Object.class)
+                            .createWith(context -&gt; createBeanInstance(beanMetadata));
+
+                    // 2
+                    final String checkName = "mybean_" + beanMetadata.id();
+                    afterBeanDiscovery
+                            .addBean()
+                            .id(getClass().getName() + "#check#" + beanMetadata)
+                            .scope(ApplicationScoped.class)
+                            .beanClass(HealthCheck.class)
+                            .qualifiers(literal) // 3
+                            .types(HealthCheck.class, Object.class) // 4
+                            .createWith(context -&gt; (HealthCheck) () -&gt; HealthCheckResponse.named(checkName).up().build()); // 5
+                });
+    }
+}
+</code></pre>
+
+<ol>
+	<li>we assume we have a getCustomBeans() method which returns the required bean metadata to build the bean, this is generally done processing annotated types or injection points. Then we just register for each entry a bean instance (here the bean detail is not important).</li>
+	<li>For each bean registered, we register a healthcheck as well.</li>
+	<li>Since microprofile-health has two check buckets (liveness and readyness) we dispatch it in the right bucket using the related qualifier (<em>@Readiness</em> here).</li>
+	<li>To ensure the microprofile-health implementation can capture and call our bean we type it as expected: <em>HealthCheck</em>.</li>
+	<li>Finally we implement the check - using lambdas here - just returning up. A real implementation would test the bean. For a http client it would ensure a GET works or for a remote service that the remote health check is accessible&nbsp;for example.</li>
+</ol>
+
+<p>This looks simple and good right? However this does not work as soon as you have &gt; 1 bean/check since both will be ambiguous in CDI context.</p>
+
+<p>In general the health check is typed, it is class implementing <em>HealthCheck</em>&nbsp;so the implementation type is enough to make it no more ambiguous but not here since bean class is always the same.</p>
+
+<p>Indeed we can solve that by generating a fake class at runtime but it is not very elegant nor efficient.</p>
+
+<p>To solve it more elegantly, we will disambiguate the health check beans just adding a qualifier on them.</p>
+
+<p>To ensure the qualifier changes we will use a binding&nbsp;identifier which changes for each check. Here is a potential implementation:</p>
+
+<pre>
+<code class="language-java">@Qualifier
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface InternalCheck {
+    int value();
+
+    class Literal extends AnnotationLiteral&lt;InternalCheck&gt; implements InternalCheck {
+        protected static int ID_GENERATOR = 0;
+
+        protected final int id = ++ID_GENERATOR;
+
+        @Override
+        public int value() {
+            return id;
+        }
+    }
+}</code></pre>
+
+<p>This is a very trivial qualifier with one binding method and its literal companion class which auto-values the binding parameter (<em>value()</em>) using an increment. Note that the increment as an <em>int&nbsp;</em>works since we will only use it in the extension which is a thread safe context.</p>
+
+<p>Then we go back in our check bean we have in our extension and add this qualifier:</p>
+
+<pre>
+<code class="language-java">.qualifiers(literal, new InternalCheck.Literal())</code></pre>
+
+<p>Now each bean is different - has two qualifier and the internal check qualifier is different for each of them.</p>
+
+<p>In other words our automatic check registration through an extension is now functional.</p>
+
+<p>This way to implement a SPI with CDI is very powerful and avoids to materialize all the implementation which makes most of the feature transversal and just a win for the end user so don&#39;t hesitate to use it in libraries.</p>
+
+<p>Side note: a better implementation would make the internal check qualifier generation deterministic, using the bean metadata if there is a natural identifier there, to ensure the checks can be looked up individually if needed. Here it was not important but it can be neat for some more advanced use cases.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//github-pages-authentication.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//mavens-shade-plugin-source-relocation.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

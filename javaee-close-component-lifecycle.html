@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JavaEE: don&#8217;t forget to close your components!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,142 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="javaee-close-component-lifecycle-html-container" class="container page-content javaee-close-component-lifecycle-html is-blog">
+                        <div class="page-header">
+                <h1>JavaEE: don&#8217;t forget to close your components!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-03-28</span>, <span class="metadata-readingtime">3 min and 55 sec read</span></p>
+</div>
+<p>Since JavaEE 7 and even more in JavaEE 8 the JavaEE instances start to get some&nbsp;close()&nbsp;methods. It is true for Bean Validation where the&nbsp;ValidationFactory&nbsp;got a&nbsp;close(), for JSON-B where&nbsp;Jsonb&nbsp;has a&nbsp;close()&nbsp;method, JAX-RS client which has a&nbsp;close()&nbsp;method as well etc...</p>
+
+<p>But why these methods are important and why should you care about them?</p>
+
+<h2>Managed vs Unmanaged</h2>
+
+<p>First of all there are two cases which are a bit different for you: are the instances managed or not. What does it mean? Do you instantiate the EE component yourself or not. If you get the component injected without defining how then the container is the one responsible of the lifecycle of the instance and you must not care at all.</p>
+
+<p>A common example is with Bean Validation which is integrated with JavaEE and allows you to get injected a&nbsp;Validator&nbsp;or&nbsp;ValidatorFactory&nbsp;through&nbsp;@Resource:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class MyValidatorService {
+    @Resource
+    private ValidatorFactory factory;
+
+    public void validate(final User user) {
+        // use the factory
+    }
+}</code></pre>
+
+<p>In this case you will not call&nbsp;factory.close()&nbsp;otherwise you will either get an exception from the container saying it is invalid or just prevent further usages of the factory to work.</p>
+
+<p>However, if you instantiate yourself the factory you will have to handle its lifecycle:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class MyValidatorService {
+    private ValidatorFactory factory;
+
+    @PostConstruct
+    private void init() {
+        factory = Validation.buildDefaultValidatorFactory();
+    }
+
+    public void validate(final User user) {
+        // use the factory
+    }
+
+
+    @PreDestroy
+    private void destroy() {
+        factory.close();
+    }
+}</code></pre>
+
+<p>Whereas you instantiate yourself or not the instance depends if you write the final application, a reusable library or must be able to run under multiple environments.</p>
+
+<p>Last note is that if you build a library and allow to inject an instance factory you should probably think to provide a destroy/close callback when the library cleans up its state to let the implementation call the corresponding method.</p>
+
+<h2>Why close methods are added everywhere?</h2>
+
+<p>There are multiple reasons to these close methods addition. The general answer is, indeed, &quot;to clean up some internal state&quot;, but if you want some more insight it can be:</p>
+
+<ul>
+	<li>To clean up CDI&nbsp;CreationalContext&nbsp;of the component instances used by the specification for not normal scoped beans (CreationalContext.release()&nbsp;will avoid memory leaks in a lot of cases and more important will ensure pre-destroy callbacks are called for related beans), This is the case for Bean Validation, JSON-B, can be for JAX-RS client, etc...</li>
+	<li>To clean up some NIO: in JAX-RS case you can now plug a NIO implementation for the client so if you don&#39;t close the client then the client will not release its NIO implementation and pools and will probably leak or fail later,</li>
+	<li>To stop some tasks: JBatch has no clear hooks but implementation generally have one which can stop the pending tasks (like batchlets or chunks),</li>
+</ul>
+
+<p>Overall JavaEE design for most specs and lifecycle importance</p>
+
+<p>Due to this release need the specifications need to define the lifecycle of the instances quite precisely. There are two main cases:</p>
+
+<ul>
+	<li>A factory allows to create instances of a component. For instance the&nbsp;ValidatorFactory&nbsp;allows to create a&nbsp;Validator, a&nbsp;EntityManagerFactory&nbsp;allows to create an&nbsp;EntityManager, a JsonBuilderFactory&nbsp;allows to create JsonObjectBuilders&nbsp;and JsonArrayBuilders, etc...</li>
+	<li>You directly get a component instance.&nbsp;JsonbBuilder&nbsp;is not useful once you got a&nbsp;Jsonb&nbsp;instance for example.</li>
+</ul>
+
+<p>However, in both cases you can identify a &quot;root&quot; entity, which is generally the one with the&nbsp;close()&nbsp;callback&nbsp;and the one allowing to clean up the state.</p>
+
+<p>The side note here is that it is also the one owning the &quot;caching&quot; if there is any. For instance in bean validation, the factory stores the metadata on the beans to allow the&nbsp;Validator&nbsp;instances to not recompute it each time when possible. Similarly, the&nbsp;Json-P&nbsp;instance can use the pre-allocated buffer caching (memory optimization) for performance reasons.</p>
+
+<p>In all cases, having a root and reusable instance allows some performance optimizations but also, generally, requires to handle properly the lifecycle of this instance to be able to:</p>
+
+<ul>
+	<li>not leak,</li>
+	<li>behave as expected - not method missed in CDI model for instance (@PreDestroy),</li>
+	<li>be fast and efficient (if you create one instance of this root component per request your application will be slow).</li>
+</ul>
+
+<p>This is why it is important to understand what your components do and are responsible for: use them as they were designed for and not forget to call some important callbacks or not use them in an appropriated scope. Your application will thank you a lot to do that properly.</p>
+
+<p><br />
+&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//sax-to-jsonp-converter.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-asynchronous-built-in-solution.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

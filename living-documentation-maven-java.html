@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Simple setup to have Living Documentation with Maven and Java</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,243 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="living-documentation-maven-java-html-container" class="container page-content living-documentation-maven-java-html is-blog">
+                        <div class="page-header">
+                <h1>Simple setup to have Living Documentation with Maven and Java</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-10-09</span>, <span class="metadata-readingtime">6 min and 45 sec read</span></p>
+</div>
+<p>Living documentation is one of the most important thing to setup in projects. There are a couple of area it is very efficient like to ensure the documentation of the configuration of your application,&nbsp;the artifacts (jar, war, docker image, ...) are correctly referenced with the last version, etc...</p>
+
+<p>However, the first step is to enable to update the documentation during the build to ensure it is always up to date and potentially push documentation changes with your commit if you don&#39;t fully generate it at documentation build time - one word on that later.</p>
+
+<h2>Living Documentation and Maven</h2>
+
+<p>A living documentation task is generally a very custom task. You can find for some particular tools some existing plugin you can smoothly integrate in your build but it generally has two dependencies:</p>
+
+<ul>
+	<li>How you document your project (can be a simple README.adoc, a JBake, docusaurus, antora site, or any other technology),</li>
+	<li>How you extract from your code/project the information you want to inject into the documentation (Microprofile-Config annotations, custom logic, etc...)</li>
+</ul>
+
+<p>It is rare a plugin handles both solution properly so you often end up using a script.</p>
+
+<p>This is where this post is interesting. To be simple the script generally have these requirements:</p>
+
+<ul>
+	<li>It can reuse the application code - but we don&#39;t want to play with classloaders to rebuild project context,</li>
+	<li>It can be configured with maven variables (project.version for example),</li>
+	<li>It can access the documentation to update,</li>
+	<li>It can be integrated into the maven build as a plugin.</li>
+</ul>
+
+<h2>Write your first living documentation task</h2>
+
+<p>If you forget one second maven and assume you can mess up the project what would you do? Probably a plain Java <em>main(String[])</em> which would enable you to run the application code and generate a String or write a file.</p>
+
+<p>Question is then: how to do the link with Maven? The answer is quite simple: with&nbsp;<em>exec-maven-plugin</em>, this plugin will enable you to configure any <em>main(String[])&nbsp;</em>and pass it arguments which can be maven variables.</p>
+
+<p>Let&#39;s put it in practise to update a README.adoc. Goal will be to instantiate an application registry to list all the available entries in the readme - but you can also scan the application code to extract all <em>@ConfigProperty</em>&nbsp;using the same pattern.</p>
+
+<p>The plugin configuration will be as simple as that:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+  &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.6.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;update-README.adoc&lt;/id&gt;
+      &lt;phase&gt;prepare-package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;java&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+        &lt;mainClass&gt;com.github.rmannibucau.sample.build.ReadmeUpdater&lt;/mainClass&gt;
+        &lt;includeProjectDependencies&gt;true&lt;/includeProjectDependencies&gt;
+        &lt;classpathScope&gt;compile&lt;/classpathScope&gt;
+        &lt;arguments&gt;
+          &lt;argument&gt;${project.basedir}/README.adoc&lt;/argument&gt;
+        &lt;/arguments&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Here the important part - except the binding of the goal to a phase executed during local build, are the following entries:</p>
+
+<ul>
+	<li>mainClass: it is the fully qualified name of the living documentation&nbsp;<em>main(String[])</em>,</li>
+	<li>includeProjectDependencies: we want to be able to use application classes,</li>
+	<li>classpathScope: default is&nbsp;<em>runtime</em>&nbsp;but it skips&nbsp;<em>provided</em>&nbsp;dependencies so can prevent your application code to run, therefore we set it to&nbsp;<em>compile</em>&nbsp;to include them,</li>
+	<li>arguments: here we pass the path to the README.adoc file but we can pass any maven variable which makes our main completely configurable.</li>
+</ul>
+
+<p>Then our main will face another challenge: how to update the README.adoc? There are multiple options. The most obvious is to replace it completely but it has the drawback to prevent to edit it. Personally I prefer to inject into the README.adoc some markers to identify blocks which will be fully managed by the build. In the context of this post it can be as simple as a start and end comments:</p>
+
+<pre>
+<code>= My Project
+
+Some nice description
+
+== Some subpart
+
+Some nice text.
+
+== List of available tasks
+
+//begin:list_of_available_tasks
+
+=== Task 1
+
+The task 1 is cool
+
+=== Task 2
+
+This is another cool task
+
+//end:list_of_available_tasks
+
+== Some other subpart</code></pre>
+
+<p>We can see that&nbsp;<em>//begin:list_of_available_tasks&nbsp;</em>and&nbsp;<em>//end:list_of_available_tasks</em>&nbsp;will not be rendered but will be usable in our generation logic to replace what is in between.</p>
+
+<p>At that stage we just need to write our generator to replace this block delimited by two comments by the new content:</p>
+
+<pre>
+<code class="language-java">@Slf4j
+@NoArgsConstructor(access = PRIVATE)
+public final class ReadmeUpdater {
+    public static void main(final String[] args) throws IOException {
+        final Path path = Paths.get(args[0]); // 1
+        final String content = Files.lines(path).collect(joining("\n")); // 2
+        final String output = replace(content, "list_of_available_tasks", findTasks()); // 3
+        if (!output.equals(content)) { // 4
+            Files.write(path, output.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            log.info("Updated '{}'", path);
+        } else {
+            log.info("'{}' didn't change", path);
+        }
+    }
+
+    // 5
+    private static String replace(final String document, final String marker, final String newContent) {
+        final String startText = "//begin:" + marker + '\n';
+        final int start = document.indexOf(startText);
+        final int end = document.indexOf("//end:" + marker + '\n');
+        if (start &lt; 0 || end &lt;= start) {
+            throw new IllegalStateException("No block found for '" + marker + "'");
+        }
+        return document.substring(0, start) + startText + '\n' + newContent + '\n' + document.substring(end);
+    }
+
+    // 6
+    private static String findTasks() {
+        return new TaskRegistry()
+                .findAll()
+                .map(m -&gt; "=== " + m.getIdentifier() + "\n\n" + m.getDescription() + '\n')
+                .sorted()
+                .collect(joining("\n"));
+    }
+}</code></pre>
+
+<ol>
+	<li>We simply read program arguments normally and thanks to the plugin setup we did we get maven variables already resolves,</li>
+	<li>We load in memory the file we want to update,</li>
+	<li>We replace the block we want in the file (this is why we used the syntax //[begin|end]:&lt;name&gt;, to be able to identify multiple blocks and replace the same <em>replace()</em>&nbsp;method),</li>
+	<li>We update the original file only - and only if - the content changed,</li>
+	<li>The replace method is as simple as extracting the block, copying the outside parts and replacing the inside part by the new&nbsp;value,</li>
+	<li>the&nbsp;<em>findTask()</em>&nbsp;method is the one doing the link with the application code (here,&nbsp;<em>TaskRegistry</em>&nbsp;would be an application class).</li>
+</ol>
+
+<p>TIP: if you don&#39;t know how to handle the blocks or don&#39;t want to recode that part you can rely on the&nbsp;<a href="https://github.com/tomitribe/swizzle" target="_blank"><em>swizzle</em></a>&nbsp;library.</p>
+
+<p>Now when you build your project, the documentation is auto-updated :).</p>
+
+<p>There are a few last tips which can be important to note:</p>
+
+<ul>
+	<li>If you need a library only for documentation purposes, you can add it to the project in scope&nbsp;<em>provided</em>. Note however that more you will add of libraries, more conflicts you can get with the application code. It will still be harnessed with your tests but ensure to not impact too much your application with very hude conflicting dependency stacks.</li>
+	<li>You can put as much tasks of that kind as you want, you don&#39;t need to use a single&nbsp;<em>main(String[])</em>.</li>
+	<li>Living documentation works better with declarative codestyle (annotations vs programmatic style to caricature it). For instance for Microprofile Config, prefer&nbsp;<em>@ConfigProperty</em>&nbsp;over&nbsp;<em>config.getValue()</em>.</li>
+	<li>You can ensure the documentation classes are not delivered in the final binary by putting all documentation classes under the same pattern (personally i use a dedicated package called <em>build </em>&nbsp;but nested classes ending with <em>Documentation</em>&nbsp;would work too)&nbsp;adding an exclusion in&nbsp;<em>maven-jar-plugin</em>&nbsp;and/or<em>&nbsp;maven-war-plugin:</em></li>
+</ul>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+  &lt;version&gt;3.1.2&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;excludes&gt;
+      &lt;exclude&gt;**/build/*&lt;/exclude&gt;
+    &lt;/excludes&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<h2>Commit or not generated files</h2>
+
+<p>This is a good question and mainly depends the requirements of your website and how it is generated.</p>
+
+<p>Typically, if you use a static generator which handles a single source or version, then you can generate in a temporary folder and forget to commit the files.</p>
+
+<p>However if you handle multiple versions, you want to update your &quot;current&quot; version and update only this version so it will be saner to commit the file in the right folder version. It is the same if you use a multi-source generator like <a href="https://antora.org/" target="_blank">antora</a> which will clone multiple git repositories (or branches/tags) to generate a single website.</p>
+
+<p>Finally, the last case is if you want to expose your documentation on github - like our README.adoc. You will also need to commit the file otherwise the people will need to go directly on the deployed version (generated with volatile/temporary files) but it will not user friendly.</p>
+
+<h2>Conclusion</h2>
+
+<p>This post showed that with very few tips you can reuse your application code to generate quickly an up-to-date documentation for anything which can be modified in your code.</p>
+
+<p>The next steps are generally to launch the generation of the website on a CI and push it to github pages or any other hosting (including jenkins <em>publishHTML</em> feature ;)) to expose it and let you and your users get immediately the information without any risk for it to not be up to date.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-geronimo-arthur.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jsonb-versinoing.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

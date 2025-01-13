@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to correctly use RequestContextController</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,222 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-request-context-controller-correct-usage-html-container" class="container page-content cdi-request-context-controller-correct-usage-html is-blog">
+                        <div class="page-header">
+                <h1>How to correctly use RequestContextController</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-05-18</span>, <span class="metadata-readingtime">3 min and 2 sec read</span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_starting_request_scope_programmatically">Why starting request scope programmatically</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Request context in CDI is misnamed, it is thread context.
+Concretely it is a context enabling to define that some beans have a lifecycle bound to current thread.
+It matches servlet request lifecycle in synchronous case but not exactly in asynchronous case where the specification has some exception.</p>
+</div>
+<div class="paragraph">
+<p>In the context of this post, we will focus to the unmanaged case.
+Most of the time, and more and more these days, we use CDI standalone API (<code>SeContainer</code>) to start an application and embed a web server, a broker, messaging client etc&#8230;&#8203;
+However, there are still cases you need to bind bean instances to the thread (MDC like, JPA for example where the entity manager lifecycle will be bound to the thread and not passed from thread to thread requiring a reactive JDBC like driver which is not yet mainstream nor maintained by database vendors).</p>
+</div>
+<div class="paragraph">
+<p>For these cases, the <code>RequestContextController</code> enables to start/stop the context programmatically.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requestcontextcontroller">RequestContextController</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>RequestContextController</code> API is quite simple, it provides an <code>boolean activate()</code> and <code>void deactivate()</code> methods which do exactly what their name suggest.</p>
+</div>
+<div class="paragraph">
+<p>Concretely the spec example is this one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+private RequestContextController requestContextController;
+
+public void doRequest(String body) {
+    // activate request context
+    requestContextController.activate();
+
+    // do work in a request context.
+
+    // deactivate the request context
+    requestContextController.deactivate();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quite explicit right? The issue is it hides the most important part, the enclosing bean.
+The <code>RequestContextController</code> is not a service as we can write in our application, it is a stateful instance storing the state (result from <code>activate</code> method to simplify).
+This means:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It is NOT thread safe,</p>
+</li>
+<li>
+<p>You must take care of its reuse.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In other words, injecting it in a bean is generally a bad idea.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_correct_requestcontextcontroller_usage">Correct RequestContextController usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To solve it consistently and without any surprises you must ensure any usage of the controller is limited to one "wrapping".
+But how to get a new instance each time?</p>
+</div>
+<div class="paragraph">
+<p>There are several options in CDI:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Inject a <code>Provider&lt;RequestContextController&gt;</code>,</p>
+</li>
+<li>
+<p>Use <code>BeanManager</code> to lookup the bean and instantiate it programmatically.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>First option will just modify previous snippet as follow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+private Provider&lt;RequestContextController&gt; requestContextControllerFactory;
+
+public void doRequest(String body) {
+    final var requestContextController = requestContextControllerFactory.get();
+    requestContextController.activate();
+    try {
+        // do work in a request context.
+    } finally {
+        requestContextController.deactivate();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This new snippet is fully correct and enables to not have surprises.
+Nested <code>activate</code> calls will be ignored (a bit like JTA default propagation) ensuring there is always a request context active in the <code>try</code> block.</p>
+</div>
+<div class="paragraph">
+<p>Last option will look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+private BeanManager beanManager;
+
+private Bean&lt;RequestContextController&gt; bean;
+
+@PostConstruct
+private void init() { <i class="conum" data-value="1"></i><b>(1)</b>
+    final Set&lt;Bean&lt;?&gt;&gt; beans = beanManager.getBeans(RequestContextController.class);
+    bean = (Bean&lt;RequestContextController&gt;) beanManager.resolve(beans);
+}
+
+public void doRequest(String body) { <i class="conum" data-value="2"></i><b>(2)</b>
+    final CreationalContext&lt;RequestContextController&gt; creationalContext = beanManager.createCreationalContext(null);
+    final var requestContextController = bean.create(creationalContext);
+    requestContextController.activate();
+    try {
+        // do work in a request context.
+    } finally {
+        requestContextController.deactivate();
+        bean.destroy(requestContextController, creationalContext);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We resolve the controller bean (which is the CDI instance factory),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We instantiate the controller to get a new instance and use it as before.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Indeed this last option looks more complicated but it will be a bit faster, avoiding the bean resolution <code>Provider</code> can imply.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_automatic_start_with_activaterequestcontext">Automatic start with ActivateRequestContext</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Last point is that <code>@ActivateRequestContext</code> defines an interceptor you can use to automatically enable/disable the request context around a method.
+It will inherit from the controller semantic (nested calls will not re-enable the context) and works generally more smoothly and is faster than the programmatic factory usage if it matches your usage (which is generally the case).</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//simple-reactjs-extension-mechanism.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//wire-websocket-events-to-cdi-event-bus.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

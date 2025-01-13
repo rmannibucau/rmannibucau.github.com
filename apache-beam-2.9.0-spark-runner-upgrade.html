@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Why my Apache Beam Spark fatjar job broke upgrading to 2.9.0 version</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,121 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="apache-beam-2-9-0-spark-runner-upgrade-html-container" class="container page-content apache-beam-2-9-0-spark-runner-upgrade-html is-blog">
+                        <div class="page-header">
+                <h1>Why my Apache Beam Spark fatjar job broke upgrading to 2.9.0 version</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-12-18</span>, <span class="metadata-readingtime">5 min and 2 sec read</span></p>
+</div>
+<p><strong>Apache Beam 2.9.0</strong> was released last week, so if you were using a previous version you are likely tempted to upgrade. This is what I did what was expected to be a single line change in a pom had surprisingly be a bit more work.</p>
+
+<p>Before explaining what happened, let me describe the setup I had:</p>
+
+<ul>
+	<li>I was running in a small spark cluster (1 master and 1 slave, mainly because I spotted it out in integration tests during my project build using a JUnit rule forking a Spark &quot;cluster&quot;),</li>
+	<li>I was &quot;submitting&quot; a fatjar built with maven-shade-plugin,</li>
+	<li>The submitted &quot;main&quot; was building a simple Apache Beam pipeline and &quot;running&quot; it</li>
+</ul>
+
+<p>All was working very well with Beam 2.8.0 but when I upgraded to Apache Beam 2.9.0 I got the error:</p>
+
+<pre>
+<code>No TransformEvaluator registered for BOUNDED transform xxxx</code></pre>
+
+<p>This is very surprising because in 2.8.0 it was known, so would it be a regression? After checking how the exception was thrown I realized <strong>the Spark runner changed</strong>, particularly in its translator part. In 2.8.0 it was looking like:</p>
+
+<pre>
+<code class="language-java">EVALUATORS.put(Read.Bounded.class, readBounded());</code></pre>
+
+<p>and in 2.9.0 it is like this:</p>
+
+<pre>
+<code class="language-java">EVALUATORS.put(PTransformTranslation.READ_TRANSFORM_URN, readBounded());</code></pre>
+
+<p>Not a crazy change right? The translator has been migrated from a&nbsp;<em>Class&nbsp;</em>keyed registry to an URN keyed registry. The goal is quite obvious : <strong>prepare Spark runner to support the polyglot feature Apache Beam promises</strong> (Beam calls it &quot;portability&quot; but since Beam is by definition a portable API between engines, it is too misleading to reuse this naming in a post).</p>
+
+<p>Ok, so Beam enhanced its runner, changed the key to lookup the Spark implementation of each operation primitives, so does it mean the key is wrong? Still not, otherwise Beam build would have failed, its coverage is not that low - it is actually quite good.</p>
+
+<p>The impacting change is not in the registry itself but the way it is&nbsp;queried. In 2.8.0 the key was passed and the registry was directly read, in 2.9.0 the&nbsp;<em>PTransform&nbsp;</em>is passed, converted in&nbsp;<em>urn</em>&nbsp;and the the registry is keyed.</p>
+
+<p>The way Spark runner translates the <em>PTransform</em> in&nbsp;<em>urn</em>&nbsp;is to use another registry which is populated from a SPI (service provider interface)....yes a registry in front of a registry. The rational is to share most of the <em>urn</em>&nbsp;related logic in a module and let all runners reuse it. Indeed Beam could have done a generic runner and just let the specific (like Spark) parts be pluggable but they did the opposite : a library is provided and each runner reuses what it needs/wants from the generic part, this is their choice.</p>
+
+<p>Ok but <strong>does it work in Spark standalone</strong>? Yes, because the classpath is correct and this is all the core of this issue. Keep in mind the deployment is the recommanded one on Apache Beam Spark documentation, i.e. do a shade and submit it through Spark submit. The issue is that the SPI is loading its implementations (= it is populating its registry) from the resources in&nbsp;<em>META-INF/services/org.apache.beam.runners.core.construction.TransformPayloadTranslatorRegistrar</em>. The issue is contained in the plural of this previous sentence : multiple modules define this resource so the shade plugin will just take one and the registry will not fully be populated which means some transforms will not be available. Here we are, we know what was the issue and how to fix it : merging the SPI files in a single one (since each not commented/empty line define a fully qualified name you can just append all the files to get the aggregated flavor). Here is how to do it:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;shade&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+        &lt;transformers&gt;
+          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/&gt;
+        &lt;/transformers&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Since the use of this <strong>standard Java plugability system</strong> is very old and common, Maven shade plugin provides a built-in transformer to do that so it is just a matter of configuration of your build to fix the upgrade.</p>
+
+<p>So at that point you can wonder why <strong>Maven shade plugin</strong> didn&#39;t do it by itself? The plugin was designed to stay simple and just do what you ask. <strong>Automatically merging two files</strong> can seem a good idea but can also be dangerous in several cases, and some of these SPI will not support having multiple implementations, the shade saving from an exception by swallowing on of the registration. This means <strong>the plugin is designed to stay safe by default</strong>. This is so true that it logs all the potential conflicts between modules and the overlapping classes. However since Beam packaging is not yet very clean there are too much and the plugin just says that and that you need to enable debug logs to see them all. Due to the number of conflicts you would likely miss this single blocking conflict (this is just a 2 files conflicts). At least this is what the default logging of the plugin implies. In practise this is not fully the case. The plugin only manages the conflicts for classes and not resources so it means you would have missed this issue anyway.</p>
+
+<p>For your information, here is, in debug mode, the log you get once the transformer is in action:</p>
+
+<pre>
+<code class="language-ini">[DEBUG] Transforming META-INF/services/org.apache.beam.runners.core.construction.TransformPayloadTranslatorRegistrar using org.apache.maven.plugins.shade.resource.ServicesResourceTransformer</code></pre>
+
+<p>The last note will be that it can not be trivial to identify it because as a good <strong>Google driven project</strong>, <strong>Beam uses Google&nbsp;<em>@AutoService</em></strong>&nbsp;which is an annotation you can put on any class which will generate thanks to an annotation processor - so at build time - the SPI file to register the implementation in current compiled module. This is great for developpers, but means you <strong>can&#39;t find the implementation as easily as expected on github</strong> : concretely, if you are looking for the <em>META-INF/services</em>&nbsp;files you will not find them so better to just copy the dependencies of your project in a folder - <em>mvn dependency:copy-dependencies</em>&nbsp;does it very well - and unzip each jar in a specific folder to check the present files.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//camel-jsonb-un-marshalling.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jruby-thread-leak-jitcompiler.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

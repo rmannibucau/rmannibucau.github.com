@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>How to handle subprocesses</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="cdi-external-process-management-html-container" class="container page-content cdi-external-process-management-html is-blog">
+                        <div class="page-header">
+                <h1>How to handle subprocesses</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-12-27</span>, <span class="metadata-readingtime">8 min and 16 sec read</span></p>
+</div>
+<p>From time to time you need to handle external processes from your application. An example is to manage an internal store where you can spawn an &quot;owned&quot; voldemort store, an hazelcast node with specific tuning (avoids to share JVM settings&nbsp;with the application), a custom NodeJS process associated with your application or even a built-in SSH or FTP process based on the OS programs, avoiding you to rewrite it in java.</p>
+
+<p>What&#39;s the point? Being able to make this other process down if your application is down avoiding an half working instance or simply making the deployment simpler (avoiding to write new scripts or to manage multiple processes). If you even go further, if you add quartz/@Schedule in the game you can replace cron with a nice frontend but this requires a bit more work.</p>
+
+<h2>ProcessBuilder to the rescue</h2>
+
+<p>Since Java 8 you have most of what you need to handle an external process in the JVM:&nbsp;<em>ProcessBuilder</em>! This class is actually there since more time but was lacking some critical methods.</p>
+
+<p>This class allows you to setup the command (<em>String[]</em>), handle basic IO (stdin, stderr, stdout) and to create a P<em>rocess</em>. Then once you have the process you can wait it exits during a timeout (this is one java 8 addition) and try to kill it if it doesn&#39;t (also a java 8 addition).</p>
+
+<h2>How to integrate it with the application (CDI or Servlet)</h2>
+
+<p>So sounds like we have all we need, why should I need CDI?</p>
+
+<p>Actually few things are still needed from the application point of view:</p>
+
+<ul>
+	<li>lifecycle handling: when to start/stop?
+	<ul>
+		<li>CDI can use&nbsp;<em>@Observes @initialized(ApplicationScoped.class)</em>&nbsp;and&nbsp;<em>@Observes @Destroyed(ApplicationScoped.class)</em></li>
+		<li>Servlets can use a&nbsp;<em>ServletContextListener</em></li>
+	</ul>
+	</li>
+	<li>command parsing: how do you pass the command? Do you hardcode it as an array or do you parse a plain String?</li>
+	<li>IO handling: do you hardcode how stderr/stdout are redirected or not?</li>
+	<li>Provide some interpolation: suppose you want to launch a java process, do you inherit from the application java instance? If your application runs on java 7 and the forked program needs java 8 how do you handle it? Is that hardcoded? No it is nice to be able to use <em>${java8.home}</em> and reuse a system property from the main application.</li>
+	<li>Do you provide hooks to be able to execute pre/post tasks around start/stop phases of the process</li>
+</ul>
+
+<h2>Coding a ProcessLifecycle</h2>
+
+<p>In this part we&#39;ll code what was described in the previous part. The&nbsp;<em>ProcessLifecycle</em>&nbsp;class will handle a single fork but code can easily be adapted to handle multiple:</p>
+
+<pre>
+<code class="language-java">import org.apache.commons.lang3.text.StrSubstitutor;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.event.Observes;
+import javax.script.Bindings;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Logger;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.logging.Level.WARNING;
+
+@ApplicationScoped
+public class ProcessLifecycle {
+    // config start, can require some config injection like Deltaspike @ConfigProperty
+
+    // resource id, tomee magic
+    private String serviceId;
+    private String command;
+
+    // if set the process will poll for the port to be opened
+    private int watchPort;
+    private String watchHost = "localhost";
+    private long watchTimeout = 60000;
+
+    // io propagation
+    private boolean inheritIo = true;
+    private boolean redirectErrorStream = false;
+    // if not inherited the redirection paths
+    private String stderr;
+    private String stdout;
+    private String stdin;
+
+    // stop handling
+    private long shutdownTimeout = 300000;
+
+    // customization
+    private String preStartScript;
+    private String postStartScript;
+    private String preStopScript;
+    private String postStopScript;
+
+    // config end
+
+    // runtime variables
+    private volatile Process process;
+    private volatile Thread hook;
+
+    // start cdi specific
+    public void start(@Observes @Initialized(ApplicationScoped.class) final Object start) {
+        // just touched (postconstruct), predestroy will finish the job automatically then
+    }
+    // end cdi specific
+
+    @PostConstruct
+    public void start() {
+        if (command == null) {
+            throw new IllegalArgumentException("No command set on '" + serviceId + "' resource.");
+        }
+
+        final ProcessBuilder builder = new ProcessBuilder(splitCommand(filteredCommand()));
+        if (inheritIo) {
+            if (stderr != null || stdout != null || stdin != null) {
+                throw new IllegalArgumentException("when setting inheritUi to true (default) you can't set stdin, stderr or stdout");
+            }
+            builder.inheritIO();
+        } else {
+            if (redirectErrorStream) {
+                if (stderr != null) {
+                    throw new IllegalArgumentException("redirectErrorStream can't be set if stderr is set");
+                }
+                builder.redirectErrorStream(true);
+            }
+            if (stderr != null) {
+                builder.redirectError(new File(stderr));
+            }
+            if (stdout != null) {
+                builder.redirectOutput(new File(stdout));
+            }
+            if (stdin != null) {
+                builder.redirectInput(new File(stdin));
+            }
+        }
+
+        executeScript(preStartScript, "builder", builder);
+
+        boolean started = false;
+        try {
+            process = builder.start();
+
+            hook = new Thread() {
+                {
+                    setName(serviceId + "-shutdown-hook");
+                }
+
+                @Override
+                public void run() {
+                    ProcessLifecycle.this.stop();
+                }
+            };
+            Runtime.getRuntime().addShutdownHook(hook);
+
+            doWatch();
+
+            started = true;
+        } catch (final IOException e) {
+            try { // wait a bit then test if process needs to be killed
+                Thread.sleep(500);
+            } catch (final InterruptedException e1) {
+                Thread.interrupted();
+            }
+            try {
+                process.exitValue();
+            } catch (final IllegalThreadStateException ise) {
+                stop();
+            }
+            throw new IllegalStateException(e);
+        } finally {
+            executeScript(postStartScript, "started", started, "process", process);
+        }
+    }
+
+    @PreDestroy
+    public void stop() { // coded to pass in java 7 but using java 8 nice API if running on java 8
+        try {
+            executeScript(preStopScript, "process", process);
+        } finally {
+            int exit = Integer.MIN_VALUE;
+            try {
+                exit = doStop();
+            } finally {
+                executeScript(postStopScript, "exitValue", exit);
+            }
+        }
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    private void executeScript(final String script, final Object... bindings) {
+        if (script == null) {
+            return;
+        }
+
+        final ScriptEngineManager mgr = new ScriptEngineManager();
+        final File file = new File(script);
+        final ScriptEngine engine;
+        Reader content = null;
+        try {
+            if (file.exists()) {
+                final int lastDot = script.lastIndexOf('.');
+                if (lastDot &gt; 0) {
+                    engine = mgr.getEngineByExtension(script.substring(lastDot + 1));
+                } else {
+                    engine = mgr.getEngineByExtension("js");
+                }
+                content = new BufferedReader(new FileReader(file));
+            } else {
+                engine = mgr.getEngineByExtension("js");
+                content = new StringReader(script);
+            }
+
+            final Bindings variables = engine.createBindings();
+            if (bindings != null) {
+                variables.put("out", System.out);
+                for (int i = 0; i &lt; bindings.length; i += 2) {
+                    variables.put(bindings[i].toString(), bindings[i + 1]);
+                }
+            }
+
+            try {
+                engine.eval(content, variables);
+            } catch (final ScriptException e) {
+                throw new IllegalStateException(e);
+            }
+        } catch (final FileNotFoundException e) {
+            throw new IllegalArgumentException(e);
+        } finally {
+            try {
+                if (content != null) {
+                    content.close();
+                }
+            } catch (final IOException e) {
+                // no-op
+            }
+        }
+    }
+
+    private int doStop() {
+        if (hook != null) {
+            try {
+                Runtime.getRuntime().removeShutdownHook(hook);
+            } catch (final IllegalStateException ise) {
+                // ok we are already shutting down
+            } finally {
+                hook = null;
+            }
+        }
+
+        if (process == null) {
+            return Integer.MIN_VALUE;
+        }
+
+        process.destroy();
+        try {
+            process.waitFor(shutdownTimeout, MILLISECONDS);
+        } catch (final InterruptedException e) {
+            Thread.interrupted();
+        }
+
+        int exitValue;
+        try {
+            exitValue = process.exitValue();
+        } catch (final IllegalThreadStateException itse) {
+            Logger.getLogger(ProcessLifecycle.class.getName()).log(WARNING,
+                    command + " didn't exist properly, will force destruction", itse);
+            try {
+                process.destroyForcibly();
+                process.waitFor(shutdownTimeout, MILLISECONDS);
+            } catch (final InterruptedException e) {
+                Thread.interrupted();
+            }
+
+            exitValue = process.exitValue();
+        }
+        Logger.getLogger(ProcessLifecycle.class.getName())
+                .info("Stopped elasticsearch code: " + exitValue);
+        return exitValue;
+    }
+
+    private String filteredCommand() {
+        return StrSubstitutor.replaceSystemProperties(command);
+    }
+
+    private void doWatch() {
+        if (watchPort &lt;= 0) {
+            return;
+        }
+
+        final long end = System.currentTimeMillis() + watchTimeout;
+        while (end - System.currentTimeMillis() &gt;= 0) {
+            try (final Socket s = new Socket(watchHost, watchPort)) {
+                s.getInputStream();
+                return; // opened :)
+            } catch (final IOException e) {
+                try { // try again
+                    Thread.sleep(500);
+                } catch (final InterruptedException e1) {
+                    Thread.interrupted();
+                    break;
+                }
+            }
+        }
+        throw new IllegalStateException("Process " + command + " didnt start in " + watchTimeout);
+    }
+
+    private static List&lt;String&gt; splitCommand(final String raw) {
+        final List&lt;String&gt; result = new LinkedList&lt;&gt;();
+
+        Character end = null;
+        boolean escaped = false;
+        final StringBuilder current = new StringBuilder();
+        for (int i = 0; i &lt; raw.length(); i++) {
+            final char c = raw.charAt(i);
+            if (escaped) {
+                escaped = false;
+                current.append(c);
+            } else if ((end != null &amp;&amp; end == c) || (c == ' ' &amp;&amp; end == null)) {
+                if (current.length() &gt; 0) {
+                    result.add(current.toString());
+                    current.setLength(0);
+                }
+                end = null;
+            } else if (c == '\\') {
+                escaped = true;
+            } else if (c == '"' || c == '\'') {
+                end = c;
+            } else {
+                current.append(c);
+            }
+        }
+        if (current.length() &gt; 0) {
+            result.add(current.toString());
+        }
+
+        return result;
+    }
+}
+
+</code></pre>
+
+<p>This class has been written as a TomEE resource, if you remove the &quot;cdi specific&quot; block at the beginning you can define it as a tomee resource this way:</p>
+
+<pre>
+<code class="language-xml">&lt;Resource id="myprocess" class-name="com.foo.ProcessLifecycle"&gt;
+   command = ${java.home}/bin/java -cp ${catalina.base}/myapp com.myapp.Main
+   postStartScript = out.println('Started myprocess')
+&lt;/Resource&gt;</code></pre>
+
+<p>In TomEE&nbsp;<em>id</em>&nbsp;is propagated as&nbsp;<em>serviceId</em>&nbsp;in the resource instance. In CDI you will need to replace all setters by some configuration injection I recommand you DeltaSpike Config) for it.</p>
+
+<p>The part to note are:</p>
+
+<ul>
+	<li>
+	<pre>
+<em>filteredCommand</em>&nbsp;which reuses commons-lang3 to filter the command and support placeholders</pre>
+	</li>
+	<li>
+	<pre>
+<em>splitCommand</em>&nbsp;which converts a <em>String</em>&nbsp;in a preprocessed command (<em>String[]</em>) handling quoting</pre>
+	</li>
+	<li>
+	<pre>
+<em>doWatch</em>&nbsp;which allows to wait for a port to be opened. If you start a server you likely want to wait it is running before continuing to start (otherwise if you application request it at startup it will fail)</pre>
+	</li>
+	<li>
+	<pre>
+<em>doStop</em>&nbsp;which tries to shutdown cleanly the process and if it doesn&#39;t manage to do it after some <strong>timeout</strong>&nbsp;it tries to just kill it</pre>
+	</li>
+	<li>
+	<pre>
+<em>executeScript</em>&nbsp;which is used to execute some custom code before/after the start/stop phases. It relies on the script JSR and out of the box provides javascript support. The nice thing there is to pass some potentially useful instances like the process builder, process, exist value, etc... depending in which phase you are. If you allow it, don&#39;t forget to give the user a way to log something (nashorn is pretty bad at it). In previous sample it just exposes <em>System.out</em>&nbsp;as <em>out</em>&nbsp;in the script.</pre>
+	</li>
+</ul>
+
+<h3>What about Servlet?</h3>
+
+<p>In a servlet container the exact same code works but you replace the lifecycle handling (<em>@Observes, @PostConstruct, @PreDestroy) </em>by a ServletContextLitener or a Servlet with load on startup = 1 and no mapping (tolerated by most containers). So even without CDI or Spring you can reuse most of the previous code.</p>
+
+<h2>Conclusion</h2>
+
+<p>Embedding the lifecycle management of an external program in an application is no more a challenge and can be done quite easily in java. Suprisingly it comes with the microservice trend since each part of the application needs to be isolated which can means that an application embeds some other technology to create a consistent delivery.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//gravatar-service-jcache.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//restlet-ee-cdi-servlet.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

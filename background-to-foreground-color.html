@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>HTML colors: from background to text colors</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,146 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="background-to-foreground-color-html-container" class="container page-content background-to-foreground-color-html is-blog">
+                        <div class="page-header">
+                <h1>HTML colors: from background to text colors</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-06-14</span>, <span class="metadata-readingtime">4 min and 15 sec read</span></p>
+</div>
+<p>The technique presented in this post works for background and text/foreground colors. But let&rsquo;s only focus on a computation of a foreground/text color from a background color (the opposite being easy to deduce inverting foreground and background in this post).</p>
+
+<p>The issue is: if you have a dynamic background color you can&rsquo;t just use black or white as foreground color. Otherwise, if the background color is dark, and so is your static foreground color, it will not be readable.</p>
+
+<p>An easy solution is to compute the opposed color and then associate the foreground color dynamically from the background color.</p>
+
+<p>Easy, easy...how do I get the opposed color? There are several ways but all don&rsquo;t work for human eyes. Typically, the plain mathematical opposed color is not the best we can do.</p>
+
+<h2>Reminder: Hexa to RGB colors</h2>
+
+<p>Before going further, we need to use RGB colors (red, green, blue and each of these components are between 0 and 255, 0 being black and 255 the lighter version of the color) for the technique I&rsquo;ll explain, but in the web context, we often manipulate hexa colors (#012345).</p>
+
+<p>To convert an hexa color into RGB, you simply need to extract each segment of the hexa color in base 16. Here is a sample code doing it in typescript:</p>
+
+<pre>
+<code class="language-javascript">const HEX_TO_RGB = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+toRGB(hex) {
+  const extract = HEX_TO_RGB.exec(hex);
+  return {r: parseInt(extract[1], 16), g: parseInt(extract[2], 16), b: parseInt(extract[3], 16)};
+}</code></pre>
+
+<p>From an hexa color passed to this function you will get an object with r, g, b attributes.</p>
+
+<p>If you need the opposite version - converting an RGB color into the hexa version - you simply reverse the algorithm:</p>
+
+<pre>
+<code class="language-javascript">toHex(rgb): string {
+  return '#' + [rgb.r, rgb.g, rgb.b].map(c =&gt; {
+    const hex =  c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }).join('');
+}</code></pre>
+
+<h2>Reversing the color</h2>
+
+<p>Now, given the RGB value, we will compute the opposed color (max - current component):</p>
+
+<pre>
+<code class="language-javascript">const MAX_RGB = 255;
+reverse(hex) {
+  const c = this.toRGB(color);
+  return this.toHex({r: MAX_RGB - c.r, g: MAX_RGB - c.g, b: MAX_RGB - c.b});
+}</code></pre>
+
+<p>Of course you can use this to compute the text color but the pitfall of such an algorithm is that you will get a lot of colors for the text, making the readability bad. That&rsquo;s why an alternative is to limit colors to a dark and light for the foreground.</p>
+
+<h2>The luminance to the rescue</h2>
+
+<p>If we want to limit our colors we need to split an axis in N colors. Commonly, we will split a linear axis in 2, so that we have a dark and light color. But you will see that it is easy to extend to 3, 4 or more colors if you want a finer split.</p>
+
+<p>The idea is to project RGB colors on a single axis. The luminance one gives you good results. This value is basically computed, giving a weight to each color component (R, G, B).</p>
+
+<p>Strictly speaking we should use:</p>
+
+<pre>
+<code class="language-javascript">const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b</code></pre>
+
+<p>But often we use this version which is closer to human eyes perception:</p>
+
+<pre>
+<code class="language-javascript">const luminance = 0.299 * c.r + 0.587 * c.g + 0.114 * c.b;</code></pre>
+
+<p>As you probably noticed the weights sum equals 1, so you just need to compare it to the maximum value of each component i.e. 255.</p>
+
+<p>In other words, to know if a color is light or dark, you compare it to 255/2 :</p>
+
+<pre>
+<code class="language-javascript">const MAX_RGB = 255;
+isLight(color) {
+  try {
+    const c = this.toRGB(color);
+    const lum = 0.299 * c.r + 0.587 * c.g + 0.114 * c.b;
+    return lum &gt; (MAX_RGB / 2.);
+  } catch (e) { // color not parseable
+    return false;
+  }
+}</code></pre>
+
+<p>Tip: &ldquo;2.&rdquo; is the number of colors you want to support. For isLight() we just have a light and dark colors so we split in two. But if you want to use black, grey and white you would replace it by 3 and associate black to [0;255/3], grey to ]255/3;2*255/3] and white to ]2*255/3;255].</p>
+
+<h2>Conclusion</h2>
+
+<p>There are more advanced versions of these algorithms and particularly a non linear version of the luminance. But this would require more CPU, and will slow down the computation for a poor need. So the mentioned approximations are generally good enough for GUI needs.</p>
+
+<p>Feel free to play with the formulas depending on your needs and layout.</p>
+
+<p>There are several use cases for this solution. The obvious one I mentioned is to make contrast between foreground and background color. However, there are lots of flavors like computing the color of a border, making contrast between a title and text, and so on.</p>
+
+<p>These algorithms can become more complicated taking into account more than 1 colors like in this post. But the overall idea to keep the computation simple and fast is to ensure that you can compare colors on a linear axis.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//openshift-tomee-datasource.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//bean-validation-with-cdi-and-jcache.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

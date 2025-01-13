@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Enable JRE HttpClient hostname validation per instance</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="java-httpclient-hostname-validation-html-container" class="container page-content java-httpclient-hostname-validation-html is-blog">
+                        <div class="page-header">
+                <h1>Enable JRE HttpClient hostname validation per instance</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2024-04-07</span>, <span class="metadata-readingtime">6 min and 39 sec read</span></p>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+The Java <code>java.net.http.HttpClient</code> is one of the most impacting addition in "recent" Java releases (Java 11 originally but it becomes usable a bit after).
+However its API is not 1-1 with the alternatives we are used too (Apache HttpClient).
+Let see the common "disable the SSL hostname validation" need and how to solve it with this new client.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_need">The need</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is quite common - in particular in Kubernetes - to request a service with a name different from its certificate - due to domain name aliasing or client IP lookup.</p>
+</div>
+<div class="paragraph">
+<p>This means that, by default where validation is enabled for security reason, a call to a HTTPS endpoint will often end up with something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Long story short, this error means the client and server certificates didn&#8217;t match so the call is rejected.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s now see how to move forward to get a valid call at the end.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_it_right_enable_the_validation">Configure it right, enable the validation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before showing how to ignore the validation, let see how to enable it - which should be your default.</p>
+</div>
+<div class="paragraph">
+<p>To enable properly a HTTPS call two main steps are needed:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configure the certificate to use (if you use mTLS you need to add the key too but this is another post story),</p>
+</li>
+<li>
+<p>Enable the certificate name validation.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Last step is the default so we&#8217;ll not detail it much more in this part.</p>
+</div>
+<div class="paragraph">
+<p>At that stage you probably think "Hey, let just set this property, I don&#8217;t care about security in dev" - indeed nobody does it in production environment ;).</p>
+</div>
+<div class="paragraph">
+<p>But the story is a bit more complex, if you only have standard HTTPS clients this will work for sure, however, if you have mTLS clients you MUST keep the validation enabled so using this system property will just break your clients and you&#8217;ll not be able to do the calls anymore even if you set the certificate and key property in the <code>SSLContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>So long story short, avoid the usage of the system property alone and prefer explicit configuration to have a proper validation in all cases, in particular in libraries.</p>
+</div>
+<div class="paragraph">
+<p>To enable the validation, you have to create <code>SSLParameters</code> and set <code>endpointIdentificationAlgorithm</code> to <code>HTTPS</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_show_me_the_code">Show me the code</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final var sslParameters = new SSLParameters();
+sslParameters.setEndpointIdentificationAlgorithm("HTTPS"); <i class="conum" data-value="1"></i><b>(1)</b>
+
+// tip: don't forget to close the client on java &gt;= 21
+final var client = HttpClient.newBuilder()
+        .sslParameters(sslParameters) <i class="conum" data-value="2"></i><b>(2)</b>
+        .sslContext(createSSLContext()) <i class="conum" data-value="3"></i><b>(3)</b>
+        .build();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We create <code>SSLParameters</code> with the identification algorithm to <code>HTTPS</code> to force the validations,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We wire the parameters we just created to the client using the <code>HttpClient</code> builder API,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We wire the certificate using a <code>SSLContext</code> with the valid <code>TrustManager</code> instances.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To create the SSLContext there are multiple ways but here is one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final var pems = "...your X509 certificates in PEM format...";
+try {
+    <i class="conum" data-value="1"></i><b>(1)</b>
+    final var x509Factory = CertificateFactory.getInstance("X.509");
+    final Collection&lt;Certificate&gt; certs;
+    try (final var in = new ByteArrayInputStream(pems.getBytes(UTF_8))) {
+        certs = new ArrayList&lt;&gt;(x509Factory.generateCertificates(in));
+    }
+
+    <i class="conum" data-value="2"></i><b>(2)</b>
+    final var pwd = "ignored!".toCharArray();
+    final var keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+    keyStore.load(null, pwd);
+
+    <i class="conum" data-value="3"></i><b>(3)</b>
+    final var counter = new AtomicInteger();
+    certs.forEach(c -&gt; {
+        try {
+            keyStore.setCertificateEntry(
+                    c instanceof X509Certificate x
+                            ? getNameOf(x).orElseGet(() -&gt; "ca-" + counter.incrementAndGet())
+                            : ("ca-" + counter.incrementAndGet()),
+                    c);
+        } catch (final KeyStoreException e) {
+            throw new IllegalArgumentException(e);
+        }
+    });
+
+    <i class="conum" data-value="4"></i><b>(4)</b>
+    final var trustManagerFactory = TrustManagerFactory.getInstance("SunX509");
+    trustManagerFactory.init(keyStore);
+
+    <i class="conum" data-value="5"></i><b>(5)</b>
+    final var sslContext = SSLContext.getInstance("TLS");
+    sslContext.init(km, trustManagerFactory.getTrustManagers(), new SecureRandom());
+
+    return sslContext;
+} catch (final GeneralSecurityException | IOException e) {
+    throw new IllegalStateException(e);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Load PEM certificates - can be a full chain if PEM are sorted - from some configuration (or hardcoded but I don&#8217;t recommend it since certificates must be rotated regularly),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create a <code>KeyStore</code> which will be used to store the certificates and initialize the trust manager factory,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Initialize the empty in memory <code>KeyStore</code> with the loaded certificates,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Create a <code>TrustManagerFactory</code> from the <code>KeyStore</code>,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Create a <code>SSLContext</code> from the <code>TrustManager</code> instances coming from the factory we just created.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+if you need the <code>getNameOf</code> method, it can be as simple as <code>ofNullable(x.getSubjectX500Principal()).map(p &#8594; p.getName(CANONICAL))</code> with  <code>x</code> the <code>X509Certificate</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_disable_the_https_validation">Disable the HTTPS validation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now we know how to enable the validation property, let&#8217;s disable it.</p>
+</div>
+<div class="paragraph">
+<p>The first option is to set <code>-Djdk.internal.httpclient.disableHostnameVerification=true</code> system property on your JVM and be it.</p>
+</div>
+<div class="paragraph">
+<p>Note that this system property basically disables to hostname verification activation, not the hostname verification itself.
+What it means is that if you want to configure per client the hostname verification you <strong>must</strong> set it even if you enable it for some client.
+In other words, it enables you to configure per client the validation activation or not whereas not setting it will force the hostname validation in all cases.</p>
+</div>
+<div class="paragraph">
+<p>If using the global property alone does not match your application because you are in one of these cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You don&#8217;t want to disable it for all calls - only for internal calls but keep it enabled for external ones for example,</p>
+</li>
+<li>
+<p>You have mTLS calls too in your application,</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>then you can configure every client to validate or not the SSL constraints.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+this is not the core topic of this post but you can also specify the cipher suites and protocols you want to support per client using <code>SSLParameters</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The key there is to ensure to have one <code>HttpClient</code> instance per "target" - DNS often - but you can share resources like the threads you associate to the NIO processing <code>executor()</code> on the <code>HttpClient.Builder</code>.</p>
+</div>
+<div class="paragraph">
+<p>To do that, we&#8217;ll follow the same steps than to properly setup our client but we&#8217;ll:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use an unsafe <code>SSLContext</code> without any certificate - indeed if you set the same <code>SSLContext</code> than in previous part it will work too but it is pointless since it is then ignored for the validation,</p>
+</li>
+<li>
+<p>Set an empty <code>endpointIdentificationAlgorithm</code> which will disable the validation.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>But we&#8217;ll also ensure our JVM has the system property <code>-Djdk.internal.httpclient.disableHostnameVerification=true</code> set.</p>
+</div>
+<div class="paragraph">
+<p>You can find a ton of example over the net - or in IA prompts - but here is an "unsafe" (empty actually) <code>SSLContext</code> bootstrap code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final var sslContext = SSLContext.getInstance("TLS");
+sslContext.init(
+    null,
+    new TrustManager[] {
+      new X509TrustManager() { <i class="conum" data-value="1"></i><b>(1)</b>
+        @Override
+        public void checkClientTrusted(final X509Certificate[] chain, final String authType) {
+            // no-op
+        }
+
+        @Override
+        public void checkServerTrusted(final X509Certificate[] chain, final String authType) {
+            // no-op
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return null;
+        }
+      }
+    },
+    new SecureRandom());
+return sslContext;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We set a single <code>TrustManager</code> which basically does nothing.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then instead of doing <code>sslParameters.setEndpointIdentificationAlgorithm("HTTPS");</code> we just do <code>sslParameters.setEndpointIdentificationAlgorithm("");</code>.</p>
+</div>
+<div class="paragraph">
+<p>And here we are! We have an unsafe "per instance" <code>HttpClient</code> instance which means another instance can keep SSL validations (using <code>"SSL"</code> algorithm and a valid <code>TrustManager</code>).</p>
+</div>
+<div class="paragraph">
+<p>If you just use an "unsafe" <code>SSLContext</code> and not disable the hostname validation (<code>endpointIdentificationAlgorithm</code>) then you&#8217;ll get this kind of error:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">javax.net.ssl.SSLHandshakeException: No name matching localhost found</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fusion_httpclient_case">Fusion HttpClient case</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At <a href="https://www.yupiik.com/" target="_blank" rel="noopener">Yupiik</a>, we use <a href="https://www.yupiik.io/fusion/" target="_blank" rel="noopener">Fusion</a> <code>HttpClient</code> wrapper, a.k.a. <code>ExtendedHttpClient</code> which enables to wrap a standard <code>HttpClient</code>, reuse the exact same API for library compatibility but add listeners to the requests/responses - to log them for example.</p>
+</div>
+<div class="paragraph">
+<p>With this API, passing <code>SSLParameters</code> is as easy as tuning the <code>HttpClient</code> and passing it to the <code>ExtendedHttpClientConfiguration</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// note: don't forget to close it
+final var client = new ExtendedHttpClient(new ExtendedHttpClientConfiguration()
+    .setDelegate(newHttpClientWithSslParameters());</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Even if the API is not as straight forward than a plain <code>.disableHostnameValidation()</code> on <code>HttpClient.Builder</code>, the new Java <code>HttpClient</code> should really be seen as a replacement of most HTTP client in Java ecosystem (it replaces very well Apache HttpClient, OkHttp, async-http-client, &#8230;&#8203;).</p>
+</div>
+<div class="paragraph">
+<p>While disabling host name validation is not the best option, it stays very convenient in dev environments to limit the work around SSL but keeping it enabled.</p>
+</div>
+<div class="paragraph">
+<p>So while this post shows you how to disable it, please ensure to have a toggle to disable it and keep it on by default to avoid to get such setup in production by error.</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//k9s-skin-per-context.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

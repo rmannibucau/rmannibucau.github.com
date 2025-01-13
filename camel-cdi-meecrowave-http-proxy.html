@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Camel+CDI to make an HTTP proxy with Meecrowave</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,193 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="camel-cdi-meecrowave-http-proxy-html-container" class="container page-content camel-cdi-meecrowave-http-proxy-html is-blog">
+                        <div class="page-header">
+                <h1>Camel+CDI to make an HTTP proxy with Meecrowave</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-12-25</span>, <span class="metadata-readingtime">4 min and 14 sec read</span></p>
+</div>
+<p><strong>Apache Camel</strong> has got a decent <strong>CDI extension</strong> some years ago now, let&#39;s see how simple it is to get started to use it to make an <strong>HTTP proxy with the microserver&nbsp;Apache Meecrowave</strong>.</p>
+
+<p>The first step to create a proxy with Camel and Meecrowave is to import some dependencies. To implement it, we will rely on Tomcat for the HTTP layer (provided by Meecrowave stack) and therefore we will use <strong>camel-servlet module</strong> and for the proxying (client) we will use HttpClient4 so camel-http4:</p>
+
+<pre>
+<code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.meecrowave&lt;/groupId&gt;
+    &lt;artifactId&gt;meecrowave-core&lt;/artifactId&gt;
+    &lt;version&gt;1.2.4&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-cdi&lt;/artifactId&gt;
+    &lt;version&gt;2.23.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-servlet&lt;/artifactId&gt;
+    &lt;version&gt;2.23.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-http4&lt;/artifactId&gt;
+    &lt;version&gt;2.23.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<p>You will note we added camel-cdi since we want to leverage the CDI stack Meecrowave brings instead of importing Spring or doing it in plan standalone.</p>
+
+<p>Once it is done the next step to use camel-servlet is to <strong>bind the camel http transport </strong>(which is just a servlet). We can do it in several manners but to keep it simple we will just write a&nbsp;<strong><em>ServletContainerInitializer</em></strong>:</p>
+
+<pre>
+<code class="language-java">package com.github.rmannibucau.camel;
+
+import java.util.Set;
+
+import javax.servlet.ServletContainerInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
+import org.apache.camel.component.servlet.CamelHttpTransportServlet;
+
+public class ServletSetup implements ServletContainerInitializer {
+    @Override
+    public void onStartup(final Set&lt;Class&lt;?&gt;&gt; classes, final ServletContext ctx) {
+        final ServletRegistration.Dynamic servlet = ctx.addServlet(
+               "CamelServlet",CamelHttpTransportServlet.class);
+        servlet.setAsyncSupported(true);
+        servlet.setLoadOnStartup(1);
+        // servlet.setInitParameter("async", "true"); // optional
+        servlet.addMapping("/*");
+    }
+}</code></pre>
+
+<p>Then to make it effective you can just register the fully qualified name of this class in&nbsp;<em>META-INF/services/javax.servlet.ServletContainerInitializer</em>:</p>
+
+<pre>
+<code>com.github.rmannibucau.camel.ServletSetup</code></pre>
+
+<p>Now we can start by implementing a route builder proxying some endpoint:</p>
+
+<pre>
+<code class="language-java">import javax.enterprise.context.Dependent;
+import org.apache.camel.builder.RouteBuilder;
+
+@Dependent // &lt;1&gt;
+public class ProxyDefinition extends RouteBuilder {
+    @Override
+    public void configure() {
+        from("servlet://*") // &lt;2&gt;
+          .to("http4://google.fr?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"); // &lt;3&gt;
+    }
+}</code></pre>
+
+<ol>
+	<li>Since we are using camel-cdi and we didn&#39;t define a META-INF/beans.xml we will mark our routebuilder as a <strong>CDI bean</strong> thanks to&nbsp;<em>@Dependent</em>,</li>
+	<li>we want to proxy all incoming requests so we will use the wildcard as a marker,</li>
+	<li>we redirect any <strong>request to Google</strong> (in the context of this post I consider that Google is used widely enough to be simple to demonstrate the proxying)</li>
+</ol>
+
+<p>Now if you run that route (can be as simple as&nbsp;<em>mvn package meecrowave:run</em>&nbsp;if you use Meecrowave Maven plugin) then you will see it will just fail because of the wildcard. The <strong>camel servlet</strong> matching is not the servlet matching and there is no real wildcard but only path element wildcard you can name (as in JAX-RS {name} placeholders). So does it mean we can&#39;t use servlet component to implement a proxy? of course not!</p>
+
+<p>The trick is to set a custom&nbsp;<em>ServletResolveConsumerStrategy&nbsp;</em>in the transport servlet. In our case, all requests must resolve our &quot;from&quot; consumer, i.e.&nbsp;<em>servlet:/*</em>&nbsp;consumer. To set this implementation we must override the default camel servlet and set the strategy in <em>init()</em>&nbsp;<strong>after</strong> having called the <em>super</em>&nbsp;method otherwise it would reset our initialization (the parent <em>init</em>&nbsp;set the strategy). We just make our servlet container initializer evolving to look like:</p>
+
+<pre>
+<code class="language-java">public class ServletSetup implements ServletContainerInitializer {
+    @Override
+    public void onStartup(Set&lt;Class&lt;?&gt;&gt; c, ServletContext ctx) {
+        final CamelHttpTransportServlet transportServlet = new CamelHttpTransportServlet() {
+            @Override
+            public void init(final ServletConfig config) throws ServletException {
+                super.init(config);
+
+                // &lt;1&gt;
+                setServletResolveConsumerStrategy(new ServletResolveConsumerStrategy() {
+                    @Override
+                    public HttpConsumer resolve(final HttpServletRequest request,
+                                                final Map&lt;String, HttpConsumer&gt; consumers) {
+                        return consumers.get("servlet:/*"); // &lt;2&gt;
+                    }
+
+                    @Override
+                    public boolean isHttpMethodAllowed(final HttpServletRequest request, final String method,
+                                                       final Map&lt;String, HttpConsumer&gt; consumers) {
+                        return true;
+                    }
+                });
+            }
+        };
+
+        final ServletRegistration.Dynamic servlet = ctx.addServlet("CamelServlet", transportServlet);
+        servlet.setAsyncSupported(true);
+        servlet.setLoadOnStartup(1);
+        // servlet.setInitParameter("async", "true"); // if you want to go with Servlet 3 async mode
+        servlet.addMapping("/*");
+    }
+}
+</code></pre>
+
+<ol>
+	<li>This is where the magic happens and how we set a custom strategy we could call a SingleProxyStrategy,</li>
+	<li>Since we want to be in proxy mode, we ensure any request is sent to the same consumer (our wildcard one).</li>
+</ol>
+
+<p>Now if you recompile and restart your instance, you can go on&nbsp;<em>http://localhost:8080</em>&nbsp;and you should see <strong>Google homepage</strong>. But does it really work? If you doubt, you can add&nbsp;<em>/search?q=camel</em>&nbsp;to the URL and you should see the search result.</p>
+
+<p>All that to proxy google? Not really, this shows that it is very simple <strong>to build a proxy</strong> using the current <strong>servlet container as consumer/receiver</strong> and <strong>http4</strong> (or any other camel client) as <strong>data retriever</strong>. Our route was trivial and without any value but it is a Camel route so it means you can very easily add any component/processor inside, even more easily that you can use CDI for your processor since we used camel-cdi! This opens the door to a lot of very advanced features like <strong>load balancing</strong>, rate limiting, throttling, enrichment (in headers or even the payload), transversal decryption of the <strong>payloads</strong>, <strong>caching of remote calls</strong>&nbsp;etc... All these features done in a very line of code and thanks to Camel flexibility. This is the dream for a microservice based architecture as you can mix transversal concerns with semi-business ones (for instance: an integration with Vault is not always trivial to make generic because it can be used in a lot of ways, but once you have your company choice, it is few lines to write).</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-beam-initialization-destruction-task.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//camel-jsonb-un-marshalling.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

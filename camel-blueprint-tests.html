@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Testing your blueprint camel routes</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,207 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="camel-blueprint-tests-html-container" class="container page-content camel-blueprint-tests-html is-blog">
+                        <div class="page-header">
+                <h1>Testing your blueprint camel routes</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-07-31</span>, <span class="metadata-readingtime">4 min and 41 sec read</span></p>
+</div>
+<p>Camel is a great library but it also comes with a great tooling. Except the well known Standalone, CDI and Spring support, it comes with a blueprint test support module which greatly helps to test your routes without launching a full container with pax-exam or an equivalent solution.</p>
+
+<p>The first thing to do is to add the right dependency, it is as simple as adding:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-test-blueprint&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>Then all the magic is done through&nbsp;<em>CamelBlueprintTestSupport</em>&nbsp;base class - it uses the same pattern than any camel test support module.</p>
+
+<p>To enable to launch your blueprint route, you must override&nbsp;<em>getBlueprintDescriptor</em>&nbsp;method and return the descriptor(s) to deploy:</p>
+
+<pre>
+<code class="language-java">public class MyBlueprintCamelTest extends CamelBlueprintTestSupport {
+    @Override
+    protected String getBlueprintDescriptor() {
+        return "OSGI-INF/blueprint/my-context.xml";
+    }
+
+    @Test
+    public void myTest() {
+       // do test
+    }
+}</code></pre>
+
+<p>If you need to deploy multiple blueprint contexts, just put them all in the <em>String</em>&nbsp;separated by a comma:</p>
+
+<pre>
+<code class="language-java">public class MyBlueprintCamelTest extends CamelBlueprintTestSupport {
+    @Override
+    protected String getBlueprintDescriptor() {
+        return "OSGI-INF/blueprint/my-context1.xml,OSGI-INF/blueprint/my-context2.xml";
+    }
+
+    // ...
+}</code></pre>
+
+<p>Then to trigger a route you can reuse the standard camel patterns. Assuming you can directly send a message to your&nbsp;<em>from</em>&nbsp;endpoint - it is the case for&nbsp;<em>seda</em>,&nbsp;<em>direct</em>, .... endpoints - then you can directly use the protected fields of the parent class to do so, creating an exchange and sending it through the camel template:</p>
+
+<pre>
+<code class="language-java">final Exchange exchange = new DefaultExchange(context);
+exchange.setIn(......); // set your incoming data
+template.send("seda:route_entry_point", exchange);</code></pre>
+
+<p>I will not detail more how to mock endpoints in tests etc, because the context of this post is really more blueprint than camel test support but keep in mind that you can replace endpoints if you need to simplify the testing, you don&#39;t need to rewrite the new context or create a test context which would require to maintain it to guarantee your tests are still accurate.</p>
+
+<p>At that point it can look like we are done, but actually there are other methods you can override which greatly helps.</p>
+
+<p>The first one is a method enabling to set some configuration in the context of the test - <em>ConfigAdmin</em>&nbsp;API which is often used through aries placeholders. To initialize a bundle with some properties, override&nbsp;<em>setConfigAdminInitialConfiguration. </em>The method takes the properties as parameter, you can provision them as you need, and the returned value is the configuration pid (name of the file in <em>etc/</em>&nbsp;without the&nbsp;<em>cfg</em>&nbsp;extension:</p>
+
+<pre>
+<code class="language-java">@Override
+protected String setConfigAdminInitialConfiguration(final Properties props) {
+  props.setProperty("my.config.property", "and its value");
+  return "org.company.my.config";
+}</code></pre>
+
+<p>Where this becomes very very powerful if when you use a JUnit rule which has some dynamic values like a port. For instance to test a blueprint module connecting to Elasticsearch which is launched in the test with a random port you can ensure your blueprint container uses the right port this way:</p>
+
+<pre>
+<code class="language-java">public class ElasticsearchSenderProcessorTest extends CamelBlueprintTestSupport {
+    @ClassRule(order = 1) // rule creating random ports
+    public static final RandomPort ES_PORTS = new RandomPort("http", "tcp");
+
+    @ClassRule(order = 2) // rule launching ES and respecting the random ports of the first rule
+    public static final Elasticsearch ES = new Elasticsearch(ES_PORTS::getPorts);
+
+    @Override
+    protected String getBlueprintDescriptor() {
+        return "OSGI-INF/blueprint/my-context.xml";
+    }
+
+    @Override
+    protected String setConfigAdminInitialConfiguration(final Properties props) {
+        props.setProperty("elasticsearch.protocol", "http");
+        props.setProperty("elasticsearch.host", "localhost");
+        props.setProperty("elasticsearch.port", Integer.toString(getHttpPort()));
+        // etc...
+
+        return "org.company.elasticsearch";
+    }
+
+    @Test
+    public void myTest() {
+       // ...
+    }
+}</code></pre>
+
+<p>It is already not bad but the blueprint integration will deploy the classpath, the test classpath, which can be an issue since it can lead to deploy way more than needed. To ensure you control the blueprint deployment, even being outside an OSGi container, camel exposes a&nbsp;<em>getBundleFilter</em>&nbsp;method which enables you to filter the deployed bundles. This way you can blacklist undesired bundles - or whitelist them if it is easier:</p>
+
+<pre>
+<code class="language-java">@Override
+protected String getBundleFilter() {
+    return "(!(Bundle-Name=org.company.tool))";
+}</code></pre>
+
+<p>One concrete example is to blacklist snappy for tests where the native setup will not be done and the blueprint/OSGi activator initialization would make the test failling:</p>
+
+<pre>
+<code>(!(Bundle-SymbolicName=org.xerial.snappy.snappy-java))</code></pre>
+
+<p>Finally the last method you can override and which is very useful is the <em>createCamelContext</em>&nbsp;one. It is quite common to have multiple contexts and in this case the default implementation takes the first one...which can not be the one you want to test. Here is a blueprint descriptor with multiple camel context:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="
+            http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"&gt;
+  &lt;camel:camelContext id="my-main-context"&gt;
+    &lt;camel:route&gt;
+      &lt;!-- ... the routes .... --&gt;
+    &lt;/camel:route&gt;
+  &lt;/camel:camelContext&gt;
+
+  &lt;camel:camelContext id="otherCamelContext"&gt;
+      &lt;camel:template id="otherTemplate" /&gt;
+  &lt;/camel:camelContext&gt;
+&lt;/blueprint&gt;</code></pre>
+
+<p>With such a setup you must provide yourself the camel context to camel test to ensure it uses the right one and not a random one.</p>
+
+<p>Of course, with this kind of descriptor,&nbsp;<em>CamelContext</em>&nbsp;are OSGi services and camel blueprint test support provides a lookup utility in blueprint test support so you just have to lookup the right bean adding a filter on the context name/id:</p>
+
+<pre>
+<code class="language-java">@Override
+protected CamelContext createCamelContext() {
+  return getOsgiService(CamelContext.class, "(camel.context.name=my-main-context)");
+}</code></pre>
+
+<p><em>getOsgiService</em>&nbsp;is an utility of the base camel class we inherited to write the test so the code to explicitly select the right camel context is really as simple as previous snippet.</p>
+
+<p>So now we know how to :</p>
+
+<ul>
+	<li>Launch a camel blueprint test,</li>
+	<li>Select the blueprint descriptor we want to deploy for our test,</li>
+	<li>Filter the deployed OSGi bundles in the context of the test,</li>
+	<li>Setup our configuration dynamically,</li>
+	<li>Make the context selection deterministic.</li>
+</ul>
+
+<p>Most of these point are simply overriding a method from the base class of camel blueprint test support, so you don&#39;t have any excuse anymore to not test your production code ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//johnzon-jsonp-jsonb-status.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jaxrs-json-query-parameter-converter.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JAX-RS 2 Client: maintain the session between requests</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,135 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jaxrs-client-maintain-session-html-container" class="container page-content jaxrs-client-maintain-session-html is-blog">
+                        <div class="page-header">
+                <h1>JAX-RS 2 Client: maintain the session between requests</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-19</span>, <span class="metadata-readingtime">3 min and 36 sec read</span></p>
+</div>
+<p>JAX-RS 2 has a good client API but it doesn&#39;t provide a solution to maintain the session out of the box. How to do it?</p>
+
+<p>Until CXF 3.1.9 the old CXF WebClient solution was not working without some work (it has been fixed for 3.1.10 and you can just set&nbsp;<em>http.maintain.session=true</em>&nbsp;in client properties).</p>
+
+<p>With Jersey, you need to switch the actual client implementation to httpclient or another transport supporting session handling then configure it.</p>
+
+<p>Nothing really portable or nice to use. So how to solve that issue?</p>
+
+<h2>How is a session maintained in a browser?</h2>
+
+<p>When you browse a website using the session (whatever it is, java, PHP, other) the browser does a lot of tricks behind the scene to hide the required work between requests to ensure you reuse the same session. It is a bit like when you authenticate with this ugly popup for Basic authentication and the browser propagate the&nbsp;<em>Authorization</em>&nbsp;header automatically.</p>
+
+<p>So what&#39;s involved to maintain the session? In Servlet containers - and most servers actually - you have 3 modes:</p>
+
+<ul>
+	<li>Cookie: a cookie named JSESSIONID (by default) holds the session id and ensures the server can find it back, here the browser sends automatically this cookie for each requests once created</li>
+	<li>URL: same idea as for cookies but using a path parameters, by default it is the&nbsp;<em>jsessionid</em>&nbsp;parameter in the URL.
+	<ul>
+		<li>Note this one is good cause doesn&#39;t require the browser to support Cookies (but today which browser doesn&#39;t?) but has the drawback to put the id in the URl which can be a security issue and also a SEO issue.</li>
+	</ul>
+	</li>
+	<li>SSL: the request has an attribute with the session id, it is named&nbsp;<em>javax.servlet.request.ssl_session_id</em></li>
+</ul>
+
+<h2>Link with JAX-RS Client</h2>
+
+<p>What does it mean for our client? That we just have to find how the session is maintained and propagate the right information to the next request.</p>
+
+<p>Between the 3 modes we talked about before, we don&#39;t care much about&nbsp;<em>SSL</em>&nbsp;one since this is a server trick but client handling is generally&nbsp;<em>Cookie</em>&nbsp;or&nbsp;<em>URL</em>.</p>
+
+<h3>Cookie case</h3>
+
+<p>For the cookie case - most of website will rely on this one - you just need to use a request returning a&nbsp;<em>Response</em>&nbsp;to be able to read the&nbsp;<em>Cookie</em>&nbsp;and set it on next request:</p>
+
+<pre>
+<code class="language-java">final Client client = ClientBuilder.newClient();
+try {
+    final WebTarget target = client.target("https://superhost.com");
+
+    // 1
+    final Response first = target
+            .path("create-session")
+            .get();
+    // 2
+    final Payload1 data = first.readEntity(Payload1.class);
+    // 3
+    final Cookie sessionId = first.getCookies().get("JSESSIONID");
+    final Payload2 second = target
+            .path("need/to/be/logged")
+            // 4
+            .cookie(sessionId)
+            .get(Payload2.class);
+} finally {
+    client.close();
+}</code></pre>
+
+<ol>
+	<li>We do our first request creating the session (often you will login there too) and get the&nbsp;<em>Response</em>&nbsp;and not directly our response payload (<em>Payload1</em>)</li>
+	<li>We extract our payload since it is often what is important when doing a request and can process it if needed</li>
+	<li>We extract the session id from the cookies</li>
+	<li>We propagate the session cooke to the next request</li>
+</ol>
+
+<p>Note: of course you can propagate all cookies (like a browser) between requests but it is not mandatory. Also note it is easy to wrap the JAX-RS client API to handle this propagation automatically.</p>
+
+<h3>URL case</h3>
+
+<p>This case is not as easy as previous one cause if you don&#39;t have any redirection once the session created you will not see the&nbsp;<em>jsessionId</em>&nbsp;parameter and will not be able to propagate it. However if you are redirected you can get the&nbsp;<em>Location</em>&nbsp;from the&nbsp;<em>Response</em>&nbsp;and extract&nbsp;<em>jsessionId</em>&nbsp;parameter.</p>
+
+<p>Note however that this is rare to have this case activated without the Cookie one so it is not a very big deal.</p>
+
+<h2>Conclusion</h2>
+
+<p>Maintaining the session with a JAX-RS client is finally as difficult as with any client but the good news is that it is not more difficult :).</p>
+
+<p>Since most servers will rely on cookies it is finally very doable to implement it even if the manual propagation is quite painful for API relying on the session heavily. In such a case I would recommand you to wrap the client API to avoid some headache if you forget it on one request or if you try to reuse a single id. The server can, in some cases, change the session id for security reasons (this means you need to read it from each response to be safe and link the propagation between requests).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//bash-synchronize-folders.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cxf-request-dispatcher-provider.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

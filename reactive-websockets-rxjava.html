@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Reactive WebSockets: when javax means RxJava!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="reactive-websockets-rxjava-html-container" class="container page-content reactive-websockets-rxjava-html is-blog">
+                        <div class="page-header">
+                <h1>Reactive WebSockets: when javax means RxJava!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-10-11</span>, <span class="metadata-readingtime">11 min and 1 sec read</span></p>
+</div>
+<p>JavaEE 7 introduces javax.websocket API which enables to use this technology for modern applications but how to make it really reactive and giving the best of themself? Let&#39;s see few options!</p>
+
+<h1>Aren&#39;t javax.websockets already reactive?</h1>
+
+<p>If you check the server side API you have two choices: programmatic or declarative (annotations) API. In both case you have hooks to react to websockets events:</p>
+
+<pre>
+<code class="language-java">// not a real interface but shares the main hooks
+public class MyEndpoint extends Endpoint implements MessageHandler.Whole&lt;String&gt; {
+    onOpen(session, config);
+    onMessage(message);
+    onClose(session, reason);
+    onError(session, exception);
+}</code></pre>
+
+<p>The client side is pretty close excepted it doesn&#39;t provide the <em>onClose()</em>&nbsp;hook (sadly).</p>
+
+<p>But wait, this post is about making them reactive but it is really close to the <a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/master/api/src/main/java/org/reactivestreams/Subscriber.java" target="_blank"><em>Subscriber</em></a>&nbsp;definition of reactive stream API.&nbsp;So what&#39;s wrong there?</p>
+
+<p>Being reactive is great and, in this example, producing values through events is a good start but if you can&#39;t consume the events in an efficient manner it is quite pointless.</p>
+
+<h2>What is missing?</h2>
+
+<p>The whole point of RxJava - and actually where it differs from this reactive-streams phylosophy - is to make reactive programming smooth and useful. Technically the implementation is not always elegant but the direct consequence is to enable the end user to define a full processing chain from the consuming part to the post flow processing without forgetting the transformation and composition parts. Concretely you can write:</p>
+
+<pre>
+<code class="language-java">observable
+    .doOnSubscribe(() -&gt; {/*init*/})
+    .doOnNext(message -&gt; {/*processing*/})
+    .doOnCompleted(() -&gt; {/*destroy*/})
+    .doOnError(exception -&gt; {/*error handling*/});</code></pre>
+
+<p>By itself it doesn&#39;t change much what we had in websocket API but if you add all the helpers RxJava provides like composition of Observables, retry, back pressure etc...it just makes the stream built-in in an API and avoids you to reinvent the wheel or reimplement it - with the bug risks or performance responsability - yourself. It also enables you to do it in a single place making it easy to understand your data flow and error handling (which doesn&#39;t mean you will define all your logic there but you ill orchestrate it there, a bit like camel DSL if you know it).</p>
+
+<p>Want to see what I&#39;m speaking about? Here a more complex example enabled by RxJava:</p>
+
+<pre>
+<code class="language-java">Observable&lt;String&gt; source1 = ...;
+Observable&lt;Integer&gt; source2 = ...;
+
+source1.retry(3) // accepts 3 errors
+        .onBackpressureBuffer(2048) // producing is temp. faster than consuming
+        .doOnNext(item -&gt; {/**/})
+        .doOnError(oops -&gt; {/*buffering and retries failed*/})
+        .map(item -&gt; {/*convert to another type*/ return item;})
+        .filter(item -&gt; {/*remove undesired items*/ return !item.isEmpty();})
+        // merge both sources
+        .zipWith(source2, (s, integer) -&gt; s + integer)
+        .doOnNext(item -&gt; {/*process the merge*/})</code></pre>
+
+<p>This example has two distincts data sources with their own producers (hidden in &quot;<em>...</em>&quot;), first source has some pre processing and supports retries and back pressure cause it is a remote source and is merged with the second source - which can have the same kind of pipeline - to create a third source (<em>zipWith</em>).</p>
+
+<p>If your server is fully reactive and you wrapped everything in <em>Observable</em>s then you can compose them like <em>source1</em> and <em>source2 </em>in previous example, synchronize them, etc...to ensure you process the data when available and that you don&#39;t wait for them (at least on the processing thread pool).</p>
+
+<p>It&nbsp;changes the default paradigm but can really improve the scalability of your application and the error handling which is often badly done by default. With RxJava everything is avilable as a DSL and let you activate it easily.</p>
+
+<p>Side note: this also means if you don&#39;t understand the small call you do you can completely break your flow like loading in memory a whole stream at some point so ensure to respect the rule &quot;with great power comes great responsabilities&quot;&nbsp;;).</p>
+
+<h1>Wrapping javax.websocket in RxJava</h1>
+
+<h2>String vs RxMessage</h2>
+
+<p>We&#39;ll wire the websocket messages to RxJava API. Of course we can do it blindly and pass a&nbsp;<em>String</em>&nbsp;or whatever we use but we can also pass a custom message. That&#39;s what we&#39;ll do because it allows to pass the message but also the&nbsp;<em>Session</em>&nbsp;which can be useful to send a message back and it also allows you to define shortcuts for commonly needed API like sending a&nbsp;<em>String</em>&nbsp;message which is verbose and requires to handle exceptions by default. Here a sample&nbsp;<em>RxMessage</em>&nbsp;respecting this idea:</p>
+
+<pre>
+<code class="language-java">import javax.websocket.Session;
+
+public class RxMessage {
+    private final String message;
+    private final Session session;
+
+    RxMessage(final Session session, final String message) {
+        this.session = sesson;
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    //
+    // some API shortcuts
+    //
+
+    public void send(final String s) {
+        try {
+            session.getBasicRemote().sendText(s);
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}
+</code></pre>
+
+<h2>Server side</h2>
+
+<p>There are multiple ways to do it on server side since there are multiple API available. I&#39;ll show you two ways to do it depending which kind of API you use but there are really tons of solutions.</p>
+
+<h3>Basis</h3>
+
+<p>Before digging on how to register our websocket let&#39;s see what we need:</p>
+
+<ul>
+	<li>we want to create an Observable so we&#39;ll implement&nbsp;<em>rx.Observable.OnSubscribe</em></li>
+	<li>we&#39;ll wire all the <em>java.websocket</em>&nbsp;hooks to the RxJava ones</li>
+	<li>we&#39;ll need a hook to define the flow since the API can be declarative and we&#39;ll not be able to handle the &quot;from&quot; part</li>
+</ul>
+
+<p>Concretely it means we&#39;ll create a generic Endpoint (to get javax hooks) implementing&nbsp;<em>OnSubscribe</em>:</p>
+
+<pre>
+<code class="language-java">import rx.Observable;
+import rx.Subscriber;
+
+import javax.websocket.CloseReason;
+import javax.websocket.Endpoint;
+import javax.websocket.EndpointConfig;
+import javax.websocket.MessageHandler;
+import javax.websocket.Session;
+
+public abstract class RxWebSocketEndpoint extends Endpoint implements Observable.OnSubscribe&lt;RxMessage&gt; {
+    private Subscriber&lt;? super RxMessage&gt; subscriber;
+
+    protected abstract void defineFlow(Session session, Observable&lt;RxMessage&gt; root);
+
+    @Override
+    public void onOpen(final Session session, final EndpointConfig config) {
+        defineFlow(session, Observable.create(this));
+        session.addMessageHandler(new Handler(this, session));
+    }
+
+    @Override
+    public void onClose(final Session session, final CloseReason closeReason) {
+        subscriber.onCompleted();
+    }
+
+    @Override
+    public void onError(final Session session, final Throwable throwable) {
+        subscriber.onError(throwable);
+    }
+
+    @Override
+    public void call(final Subscriber&lt;? super RxMessage&gt; subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    private static class Handler implements MessageHandler.Whole&lt;String&gt; {
+        private final RxWebSocketEndpoint parent;
+        private final Session session;
+
+        private Handler(final RxWebSocketEndpoint subscriber, final Session session) {
+            this.parent = subscriber;
+            this.session = session;
+        }
+
+        @Override
+        public void onMessage(final String message) {
+            this.parent.subscriber.onNext(new RxMessage(session, message));
+        }
+    }
+}
+</code></pre>
+
+<p>This abstract endpoint gets on the subscription a RxJava subscriber then wires all websocket hooks to it. The only trick there is to wire the&nbsp;<em>onMessage</em>&nbsp;hook which can use several types (<em>Whole</em>&nbsp;or&nbsp;<em>Partial</em>, and depending the decoder/encoder different message type/class). Here the implementation simply provides a&nbsp;<em>Whole&lt;String&gt;</em>&nbsp;but being a bit more generic is impossible. That said it should be good enough for web applications.</p>
+
+<h2>Declarative server endpoint</h2>
+
+<p>Once we have this generic endpoint writing a declarative endpoint is as easy as extending it:</p>
+
+<pre>
+<code class="language-java">import com.github.rmannibucau.websocket.rx.RxWebSocketEndpoint;
+import rx.Observable;
+
+import javax.enterprise.context.Dependent;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
+
+@Dependent
+@ServerEndpoint(value = "/test")
+public class RxServerEndpoint extends RxWebSocketEndpoint {
+    @Override
+    public void defineFlow(final Session session, final Observable&lt;RxMessage&gt; root) {
+        root.doOnNext(next -&gt; {/*...*/})
+                .subscribe();
+    }
+}
+</code></pre>
+
+<p>Yes as simple as that:</p>
+
+<ul>
+	<li>you declare your child with&nbsp;<em>@ServerEndpoint</em>&nbsp;binding at the same time its path (<em>/test</em>&nbsp;there)</li>
+	<li>you define your flow in the&nbsp;<em>defineFlow</em>&nbsp;method designed for that purpose</li>
+	<li>you don&#39;t forget to call&nbsp;<em>subscribe()</em>&nbsp;otherwise the endpoint will not get any subscriber (this part could be enhanced depending your need)</li>
+</ul>
+
+<h3>Programmatic registration</h3>
+
+<p>The programmatic registration needs the same information:</p>
+
+<ul>
+	<li>websocket path</li>
+	<li>flow definition</li>
+</ul>
+
+<p>To gather that there are several options but let&#39;s take the easy one: fire a&nbsp;<em>Registration</em>&nbsp;event through CDI. For that we just need an event giving to the user a light API to define an endpoint by a path and flow. The event will store all definition enabling us to define the actual endpoints later. Here a proposal:</p>
+
+<pre>
+<code class="language-java">public class Registration {
+    private final String path;
+    private final Consumer&lt;Observable&lt;RxMessage&gt;&gt; configurer;
+
+    Registration(final String path, final Consumer&lt;Observable&lt;RxMessage&gt;&gt; configurer) {
+        this.path = path;
+        this.configurer = configurer;
+    }
+
+    // getters
+}
+
+public class Registrations {
+    private final Collection&lt;Registration&gt; registrations = new ArrayList&lt;&gt;();
+
+    public Registrations define(final String path, final Consumer&lt;Observable&lt;RxMessage&gt;&gt; consumer) {
+        registrations.add(new Registration(path, consumer));
+        return this;
+    }
+}</code></pre>
+
+<p>So we can now collect all our &quot;registrations&quot;, but how to ask the container to define this servlet? The easiest is to write a&nbsp;<em>ServletContextListener </em>and access the websocket container through the&nbsp;<em>ServerContainer</em>&nbsp;attribute of the <em>ServletContext. </em>We&#39;ll also fire our&nbsp;<em>Registrations</em>&nbsp;event at that moment allowing us to leverage CDI to collect definitions.</p>
+
+<pre>
+<code class="language-java">import rx.Observable;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+import javax.websocket.DeploymentException;
+import javax.websocket.Session;
+import javax.websocket.server.ServerContainer;
+import javax.websocket.server.ServerEndpointConfig;
+
+@WebListener
+public class DslRegistration implements ServletContextListener {
+  private ServerContainer container;
+
+  @Inject
+  private Event&lt;Registrations&gt; collectEvent;
+
+  @Override
+  public void contextInitialized(final ServletContextEvent sce) {
+    final Registrations inMemoryRegistrations = new Registrations();
+    collectEvent.fire(registrations);
+
+    container = ServerContainer.class.cast(sce.getServletContext()
+                   .getAttribute("javax.websocket.server.ServerContainer"));
+    inMemoryRegistrations.getRegistrations().forEach(registration -&gt; {
+      try {
+        container.addEndpoint(ServerEndpointConfig.Builder
+          .create(RxWebSocketEndpoint.class, registration.getPath())
+          .configurator(new ServerEndpointConfig.Configurator() {
+            @Override
+            public &lt;T&gt; T getEndpointInstance(final Class&lt;T&gt; clazz)
+            throws InstantiationException {
+              return RxWebSocketEndpoint.class == clazz ?
+                (T) new RxWebSocketEndpoint() {
+                  @Override
+                  protected void defineFlow(final Session session,
+                                            final Observable&lt;RxMessage&gt; root) {
+                    registration.getFlowConfigurer().accept(root);
+                  }
+                } : super.getEndpointInstance(clazz);
+              }
+          })
+          .build());
+        } catch (final DeploymentException e) {
+          throw new IllegalStateException(e);
+        }
+      });
+    }
+
+    @Override
+    public void contextDestroyed(final ServletContextEvent sce) {
+        // no-op
+    }
+}
+</code></pre>
+
+<p>The trick there is to use a custom&nbsp;<em>Configurator</em>&nbsp;to implement our endpoint on the fly with our custom flow and not let the container do a&nbsp;<em>newInstance()</em>&nbsp;which would fail since&nbsp;<em>RxWebSocketEndpoint</em>&nbsp;is abstract.</p>
+
+<p>From the user perspective you just do:</p>
+
+<pre>
+<code class="language-java">@Dependent
+public class WsRegistrer {
+    public void register(@Observes final Registrations registrations) {
+        registrations.define(
+                "/test",
+                root -&gt; root.doOnNext(next -&gt; {/*...*/}).subscribe());
+    }
+}</code></pre>
+
+<h2>What about client side?</h2>
+
+<p>The client side is pretty close but has a drawback compared to server one: there is no close hook. To workaround that we&#39;ll poll the status of the session to know if it is still open or not. To ensure we don&#39;t create a lot of threads we&#39;ll use a client factory which will be responsible of that: triggering close event.</p>
+
+<p>The factory will just use a schedule thread to check registered sessions.</p>
+
+<pre>
+<code class="language-java">// RxWebSocketClient is our websocket client wrapper, we'll define it later
+
+public class Factory implements AutoCloseable {
+    private final ConcurrentMap&lt;String, RxWebSocketClient&gt; sessions = new ConcurrentHashMap&lt;&gt;();
+    private final Subscription eviction;
+
+    public Factory() {
+        eviction = Observable.timer(500, MILLISECONDS)
+                .doOnNext(l -&gt; sessions.values().stream()
+                        .filter(client -&gt; !client.getSession().isOpen())
+                        .forEach(client -&gt;
+                              ofNullable(sessions.get(client.getSession().getId()))
+                                  .ifPresent(RxWebSocketClient::close)))
+                .subscribe();
+    }
+
+    public RxWebSocketClient connect(final String uri) {
+        final RxWebSocketClient client = new RxWebSocketClient(uri, sessions::remove);
+        final Session session = client.getSession();
+        sessions.put(session.getId(), client);
+        return client;
+    }
+
+    @Override
+    public void close() {
+        eviction.unsubscribe();
+    }
+}</code></pre>
+
+<p>To keep the code simple we reused&nbsp;<em>Observable.timer</em>&nbsp;but using a custom thread is as good as that solution there.</p>
+
+<p>The thread just check all sessions of the created client and for the not opened anymore ones it calls <em>close()</em>&nbsp;on the client which fires the <em>completed</em>&nbsp;event.</p>
+
+<p>For that to work we just need to create client by the factory and keep track of tham and this is the purpose of&nbsp;<em>connect()</em>&nbsp;method.</p>
+
+<p>Then for other events the client websocket API allows you to bind an&nbsp;<em>Endpoint</em>&nbsp;to a&nbsp;<em>Session</em>&nbsp;so it is pretty much the same as server side API (of course since events are the same). It means we can reuse our abstract endpoint:</p>
+
+<pre>
+<code class="language-java">import rx.Observable;
+import rx.Subscription;
+
+import javax.websocket.ClientEndpointConfig;
+import javax.websocket.CloseReason;
+import javax.websocket.ContainerProvider;
+import javax.websocket.DeploymentException;
+import javax.websocket.Session;
+import java.io.IOException;
+import java.net.URI;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
+
+import static java.util.Optional.ofNullable;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+public class RxWebSocketClient extends RxApiAdapter implements AutoCloseable {
+    private final Session session; // +getter
+    private final Consumer&lt;String&gt; onClose;
+    private Observable&lt;RxMessage&gt; observable; // +getter
+    private RxWebSocketEndpoint endpoint;
+
+    private RxWebSocketClient(final String uri, final Consumer&lt;String&gt; onClose) {
+        this.onClose = onClose;
+        try {
+          session = ContainerProvider.getWebSocketContainer()
+                .connectToServer(new RxWebSocketEndpoint() {
+          {
+            endpoint = this;
+          }
+
+          @Override
+          protected void defineFlow(final Session session,
+                                    final Observable&lt;RxMessage&gt; root) {
+            observable = root;
+          }
+        },
+        ClientEndpointConfig.Builder.create()/*can get config*/.build(),
+        URI.create(uri));
+    } catch (final DeploymentException | IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  @Override
+  public synchronized void close() {
+    if (endpoint != null) {
+      try {
+        endpoint.onClose(
+          session,
+          new CloseReason(CloseReason.CloseCodes.GOING_AWAY, ""));
+      } finally {
+        onClose.accept(session.getId());
+        endpoint = null;
+      }
+    }
+
+    if (!session.isOpen()) {
+      return;
+    }
+    try {
+      session.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, ""));
+    } catch (final IOException e) {
+        throw new IllegalStateException(e);
+    }
+  }
+}
+</code></pre>
+
+<p>No big trick there excepted:</p>
+
+<ul>
+	<li>close can be manual (when the client quit the server and not the opposite - depends you protocol) or automatic through the factory</li>
+	<li>we use the&nbsp;<em>WebSocketContainer</em>&nbsp;to connect our endpoint implementation and here we don&#39;t register the flow directly - we could - but just capture the&nbsp;<em>Observable</em>&nbsp;to expose it and let the user handle it in a more natural manner</li>
+</ul>
+
+<p>In term of end user API it looks like:</p>
+
+<pre>
+<code class="language-java">try (final RxWebSocketClient.Factory factory = new RxWebSocketClient.Factory()) {
+  final RxWebSocketClient client = factory.connect("ws://localhost:8080/test");
+  client.getObservable()
+    // "normal" pipeline
+    .doOnSubscribe(() -&gt; { // when connected send a message
+      try {
+        client.getSession().getBasicRemote().sendText("client is there");
+      } catch (final IOException e) {
+        throw new IllegalStateException(e);
+      }
+    })
+    .doOnNext(next -&gt; {/*..*/})
+    .subscribe();
+
+  // do the work you need with the websocket
+  // in practise the factory will be created and closed
+  // in @PostConstruct/@PreDestroy
+  // of an @ApplicationScoped bean
+}</code></pre>
+
+<p>Client side is nicer there cause you can extract the Observable from any registration process and use it &quot;as usual&quot;. Composition is also easier.</p>
+
+<h1>Conclusion</h1>
+
+<p>Before concluding this post a small warning to say that the code of this post is not complete and miss several configuration to make it readable and that a websocket registration in a generic manner has several more options like encoder/decoders, subprotocols, ...</p>
+
+<p>However we made it, with this code you can define a Rx flow from your websockets. The programmatic approach being the most interesting since you will define your flow outside the websocket itself with all the error handling, retry etc...</p>
+
+<p>Also note that even if the client side is not as good as the server one, half of the cases will use browser websockets and not java websockets so you can rely on the excellent RxJs which already wraps browser websockets for you!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-embedded-args-cli.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//elasticsearch-jaxrs-jsonp.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

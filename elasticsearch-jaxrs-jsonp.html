@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Elasticsearch loves JAX-RS 2 and JSON-P</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,186 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="elasticsearch-jaxrs-jsonp-html-container" class="container page-content elasticsearch-jaxrs-jsonp-html is-blog">
+                        <div class="page-header">
+                <h1>Elasticsearch loves JAX-RS 2 and JSON-P</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-10-06</span>, <span class="metadata-readingtime">4 min and 24 sec read</span></p>
+</div>
+<p>Elasticsearch proposes API for java developers. The two main ones are:</p>
+
+<ul>
+	<li>Native</li>
+	<li>HTTP</li>
+</ul>
+
+<p>The first one forces you to make your application part of the cluster which is rarely a good idea or even what you want so we have the HTTP solution.</p>
+
+<p>Before Elasticsearch 5.0 you were quite naked but since 5.0 elasticsearch provides a <a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html" target="_blank">java REST client</a>. It is built on top of http client and provides asynchronism through the async version of httpclient.</p>
+
+<p>So now you should probably wonder why I spoke of JAX-RS? Simply cause this client - still in beta when I write this post - has the same pitfall than the historical HTTP client &quot;Jest&quot; which is to rely on String for the requests.</p>
+
+<p>Why is it an issue? Simply cause it enforces you to build string and you can do a lot of errors - yes typos. You will probably answer me &quot;fine but why not just using JSON-P&quot;. This is true but if you step back and check what the rest client really do (<a href="https://github.com/elastic/elasticsearch/tree/master/client/rest/src/main/java/org/elasticsearch/client">https://github.com/elastic/elasticsearch/tree/master/client/rest/src/main/java/org/elasticsearch/client</a>) you will realize it can be overkill and if you are in a EE server you can just desire to rely on what is there: JAX-RS.</p>
+
+<p>The nice things with JAX-RS for the HTTP part of the client are:</p>
+
+<ul>
+	<li>it is there so no need to mess up dependencies</li>
+	<li>if you need advanced async features you can still do it (typically CXF can also use http async client as transport)</li>
+	<li>the API is stable, known and not a custom one</li>
+	<li>it will be as expressive as the rest client since the API is still bound on HTTP at the moment</li>
+</ul>
+
+<p>What do you loose with that solution compared to the rest client? Mainly the blacklisting of hosts...well this is not really true since CXF provides some failover and circuit breaker features you can integrate with CXF JAX-RS client (see&nbsp;<a href="http://cxf.apache.org/docs/jax-rs-failover.html">http://cxf.apache.org/docs/jax-rs-failover.html</a>).</p>
+
+<p>So we justified we can go with JAX-RS so now why JSON-P? Here the answer is more trivial: cause it is a built-in and native solution to build JSON limiting error factors on the structure and this is what we&#39;ll use to communicate with Elasticsearch.</p>
+
+<h2>Simple Elasticsearch request with JAX-RS and JSON-P</h2>
+
+<p>So what will look our search API (we&#39;ll not handle other endpoints in this post&nbsp;since it is more or less the same thing but this one is the most common):</p>
+
+<pre>
+<code class="language-java">public JsonObject search(String index, String type,
+                         JsonObject request,
+                         long from, long size);</code></pre>
+
+<p>So we need to know what we query (index/type), what is the query (request) and the pagination we use (from/size).</p>
+
+<p>How to implement it? Simply getting a client and send the payload on the right endpoint!</p>
+
+<pre>
+<code class="language-java">public class ElasticsearchHttpClient implements AutoCloseable {
+    private final Client client;
+
+    public ElasticsearchHttpClient() {
+        client = ClientBuilder.newClient();
+    }
+
+    public JsonObject search(final String base, // http://localhost:9200 for instance
+                             final String index, final String type,
+                             final String query,
+                             final long from, final long size) {
+        // if you need security: builder.header("Authorization", token)
+
+        final WebTarget target = client.target(base)
+                                .path("{index}/{type}/_search")
+                                .resolveTemplate("index", index)
+                                .resolveTemplate("type", type);
+        try {
+            return target.queryParam("from", from)
+                    .queryParam("size", size)
+                    .queryParam("q", query)
+                    .request(APPLICATION_JSON_TYPE)
+                    .post(entity(request, APPLICATION_JSON_TYPE), JsonObject.class);
+        } catch (final WebApplicationException wae) {
+            Object entity;
+            try {
+                entity = wae.getResponse().readEntity(JsonObject.class);
+                Logger.getLogger(getClass().getName())
+                    .log(WARNING, "Elasticsearch error: " + entity, wae);
+            } catch (final RuntimeException e) { // unlikely
+                entity = wae.getResponse().getEntity();
+            }
+            throw new WebApplicationException(Response
+                .status(wae.getResponse().getStatus())
+                .entity(entity)
+                .header(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_TYPE)
+                .build());
+        }
+    }
+
+    @Override
+    public void close() {
+        client.close();
+    }
+}</code></pre>
+
+<p>So what is important here is:</p>
+
+<ul>
+	<li>we build a <em>WebTarget</em>&nbsp;on the search endpoint</li>
+	<li>we bind our request in the <em>post</em>&nbsp;method and request to deserialize the response as a <em>JsonObject</em></li>
+	<li>don&#39;t forget to close the client, depending the transport it can be super important to not leak threads etc...</li>
+</ul>
+
+<p>TIP: if you implement the bulk endpoint don&#39;t forget to parse the response even in HTTP 200 case since it can contain an error. This can look like:</p>
+
+<pre>
+<code class="language-java">final JsonObject result = ....;
+if (result.containsKey("errors") &amp;&amp; result.getBoolean("errors")) {
+    throw new MyElasticsearchBulkException(result);
+}</code></pre>
+
+<p>Finally what is interesting is the usage: this API allows to use whatever Elasticsearch query format you want in a smooth way:</p>
+
+<pre>
+<code class="language-java">// can be a field in the client, avoid to load a new one for each request
+final JsonBuilderFactory factory = Json.createBuilderFactory(config);
+
+final JsonObject searched = client.search(index, type,
+                // and here the builder API allows to match whatever request format you need
+               factory.createObjectBuilder()
+                    .add("query", factory.createObjectBuilder()
+                            .add("term", factory.createObjectBuilder()
+                                    .add("name", "blog")))
+                    .build(), 0, 10);
+
+// and parsing the response is as easy as building it
+final int total = searched.getJsonObject("hits").getInt("total");
+
+// here you can use streams too ;)
+final JsonObject firstResult = searched.getJsonObject("hits").getJsonArray("hits")
+                                .getJsonObject(0).getJsonObject("_source");
+
+// business field access
+final String displayName = firstResult.getString("displayName");</code></pre>
+
+<p>Of course we can miss some binding (like JPA for instance) at the end for&nbsp;<em>_source</em>&nbsp;value but it would be easy to add if needed with any json mapper (johnzon having the advantage to be built on top of jsonp but jsonb module is also an option).&nbsp;Anyway, the central point of that proposal if that the query if really flexible and if you already use elasticsearch you know that trying to strongly type the query is very limiting and not usable very long so this solution is a quite good compromise in my opinion.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//reactive-websockets-rxjava.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-embedded-improvement-7.0.2.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

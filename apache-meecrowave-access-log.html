@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Apache Meecrowave: enable access log</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,80 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="apache-meecrowave-access-log-html-container" class="container page-content apache-meecrowave-access-log-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Meecrowave: enable access log</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-02-23</span>, <span class="metadata-readingtime">1 min and 45 sec read</span></p>
+</div>
+<p>If you are using or tested Apache <a href="https://openwebbeans.apache.org/meecrowave/" target="_blank">Meecrowave</a>&nbsp;you can wonder why you don&#39;t see access log by default, this is because, to let you use the logging you want it is not on out of the box.</p>
+
+<p>Thanks to the pluggable and unified configuration system of Apache Meecrowave you can set the configuration in multiple location but one common option is&nbsp;<em>meecrowave.properties</em>&nbsp;but another one, if you are using Meecrowave CLI (based on&nbsp;<em>commons-cli</em>) is to just enable it in the CLI arguments.</p>
+
+<p>There is in Meecrowave C<em>onfiguration</em>&nbsp;an option to enable the access log using the Meecrowave logging system - Log4j2 by default but it can move to JUL if desired excluding log4j2 from dependencies. This option is named&nbsp;<em>tomcat-access-log-pattern</em>&nbsp;and takes Tomcat <a href="https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Log_Valve" target="_blank">AccessLog</a> pattern as value. It can be&nbsp;<em>common</em>&nbsp;or&nbsp;<em>combined</em>&nbsp;if you want to reused the standard ones or a custom one as <em>&#39;</em>%h %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot;&#39;<em>&nbsp;</em>for example.</p>
+
+<p>If you are using Kubernetes and Meecrowave CLI in your image, you can enable it in the&nbsp;<em>args</em>&nbsp;of your container:</p>
+
+<pre>
+<code class="language-bash">spec:
+  containers:
+    - name: myapp
+      image: myapp:latest
+      args: ["--tomcat-access-log-pattern", "common"]</code></pre>
+
+<p>If you prefer to hardcode the default you can put it in&nbsp;<em>meecrowave.properties</em>&nbsp;in your classpath:</p>
+
+<pre>
+<code class="language-bash">tomcat-access-log-pattern = %h %l %u %t "%r" %s %b "%{Referer}i" "%{User-Agent}i"</code></pre>
+
+<p>Or you can just set it on the&nbsp;<em>Configuration</em>&nbsp;class, either directly if you launch yourself Meecrowave or through a <em>Meecrowave.ConfigurationCustomizer</em>&nbsp;if you want to configure the instance programmatically.</p>
+
+<p>With this setting, the access log lines will go to the&nbsp;<em>org.apache.meecrowave.tomcat.LoggingAccessLogPattern</em>&nbsp;logger so you can tune the output using your logging framework (<em>log4j2.xml&nbsp;</em>or&nbsp;<em>logging.properties</em>&nbsp;depending if you are using Log4j2 or JUL). The common tuning is to only keep the message and EOL instead of logging the logger name and date since it is redundant but with the cloud and Kubernetes/Loki/... erea it is not really required anymore so just ensure it works with your stack :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//migrating-from-database-to-static-blog.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//graalvm-jul-slf4j-logging.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

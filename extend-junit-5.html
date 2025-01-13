@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Extend JUnit Part 2: JUnit 5</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="extend-junit-5-html-container" class="container page-content extend-junit-5-html is-blog">
+                        <div class="page-header">
+                <h1>Extend JUnit Part 2: JUnit 5</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-01-10</span>, <span class="metadata-readingtime">9 min and 24 sec read</span></p>
+</div>
+<p>JUnit 5 is out since a few months and starts to be integrated in an usable fashion in main IDE and build tools. In other words it means you can start using it. When you start to look at JUnit 5, you quickly realise it is not a JUnit 4 + 1&nbsp; but a new solution. So why migrating since it is not yet supported by most framework? Yes, Arquillian for instance, doesn&#39;t natively support it even if mainstream :(. However Spring or Meecrowave have native integrations with JUnit 5.</p>
+
+<p>The API is different, even the&nbsp;<em>@Test</em>&nbsp;uses another package but the new programming model brings a new way to extend the execution. We saw in previous part how to use rules to add custom logic in the test execution and start a server or setup the test, now you can write <strong>extensions</strong>! The composability will be way more straight forward and natural than it was before, proposing a nicer experience to developers.</p>
+
+<p>Without entering into the details because it is not the purpose of the post, the tag support, the native display name support, the test instance configuration, the repeated tests etc... are other features you can be interested in to organise your tests, make better reports or simplify your test logic and which can justify to move to this new version.</p>
+
+<p>Before starting to deal with the extensions, you need to use the new dependency:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+  &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
+  &lt;version&gt;5.0.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>The surefire configuration also to customize and take care you can&#39;t use surefire 2.20.x. To support JUnit 5 you need to add the JUnit 5 surefire provider and you can also support the JUnit 4 adding its integartion with the JUnit5 provider. It can sound complicated but concretely you just need to define your surefire plugin like that - there is the equivalent configuration for gradle:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.19.1&lt;/version&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.junit.platform&lt;/groupId&gt;
+      &lt;artifactId&gt;junit-platform-surefire-provider&lt;/artifactId&gt;
+      &lt;version&gt;1.0.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+      &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
+      &lt;version&gt;5.0.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+      &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+      &lt;version&gt;4.12.2&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Once done, you can write your first test:</p>
+
+<pre>
+<code class="language-java">import org.junit.jupiter.api.Test;
+
+public class JUnit5Test {
+    @Test
+    public void run() {
+        System.out.println("Hello JUnit 5");
+    }
+}
+</code></pre>
+
+<p>It looks exactly like before....except the import which uses the jupiter (JUnit 5) package.</p>
+
+<h2>JUnit 5 Extensions</h2>
+
+<p>The extensions are based on a few callbacks you can implement in a class:</p>
+
+<ul>
+	<li>BeforeAllCallback/AfterAllCallback: equivalent to a&nbsp;<em>ClassRule</em> for JUnit 4, it will be executed before/after all tests</li>
+	<li>BeforeEachCallback/AfterEachCallback: it will be executed before/after each test, including the potential&nbsp;<em>@BeforeEach</em>/<em>@AfterEach</em>&nbsp;callbacks of the test (equivalent to <em>@Before/@After </em>in JUnit 4)</li>
+	<li>BeforeTestExecutionCallback/AfterTestExecutionCallback: equivalent to a <em>Rule</em>&nbsp;for JUnit 4, it will be executed before/after each test</li>
+</ul>
+
+<p>All the extensions defines an extension point - and a single one since it is functional interfaces. A single class can implement them all or not, it is up to you:</p>
+
+<pre>
+<code class="language-java">public class MyFirstJUnit5Extension implements
+        BeforeAllCallback, AfterAllCallback,
+        BeforeEachCallback, AfterEachCallback,
+        BeforeTestExecutionCallback, AfterTestExecutionCallback {
+    @Override
+    public void beforeAll(final ExtensionContext context) throws Exception {
+        log("beforeAll", context);
+    }
+
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        log("beforeEach", context);
+    }
+
+    @Override
+    public void beforeTestExecution(final ExtensionContext context) throws Exception {
+        log("beforeTestExecution", context);
+    }
+
+    @Override
+    public void afterTestExecution(final ExtensionContext context) throws Exception {
+        log("afterTestExecution", context);
+    }
+
+    @Override
+    public void afterEach(final ExtensionContext context) throws Exception {
+        log("afterEach", context);
+    }
+
+    @Override
+    public void afterAll(final ExtensionContext context) throws Exception {
+        log("afterAll", context);
+    }
+
+    private void log(final String what, final ExtensionContext context) {
+        System.out.println(what + ": " + context.getDisplayName() + ", test=" + context.getTestInstance());
+    }
+}</code></pre>
+
+<p>If you run a test with two test methods logging &quot;<em>Test #n</em>&quot;, you will have this output:</p>
+
+<pre>
+<code class="language-java">beforeAll: JUnit5Test, test=Optional.empty
+beforeEach: test1(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@7cd62f43]
+beforeTestExecution: test1(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@7cd62f43]
+Test #1
+afterTestExecution: test1(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@7cd62f43]
+afterEach: test1(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@7cd62f43]
+beforeEach: test2(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@464bee09]
+beforeTestExecution: test2(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@464bee09]
+Test #2
+afterTestExecution: test2(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@464bee09]
+afterEach: test2(), test=Optional[com.github.rmannibucau.blog.junit.JUnit5Test@464bee09]
+afterAll: JUnit5Test, test=Optional.empty</code></pre>
+
+<p>It allows us to validate the lifecycle and to see that the &quot;all&quot; hooks don&#39;t have access to the test instance. This is something important as we&#39;ll see very soon.</p>
+
+<p>Before seeing how to impelment the extension properly, we need to see how to activate it. In JUnit 4 we had&nbsp;<em>@ClassRule</em>&nbsp;and&nbsp;<em>@Rule</em>&nbsp;but what do we use in JUnit 5? What you want! Concretely you define the annotation you want - most of the time you will define one holding the extension configuration if needed, then you decorate your annotation with&nbsp;<em>@ExtendWith</em>&nbsp;and pass your extension as parameter - it needs to have a no-arg constructor. Here is a sample:</p>
+
+<pre>
+<code class="language-java">import org.junit.jupiter.api.extension.ExtendWith;
+
+@Target(TYPE)
+@Retention(RUNTIME)
+@ExtendWith(MyFirstJUnit5Extension.class)
+public @interface MyJunit5 {
+
+    // if you need some extension config put it here
+
+}</code></pre>
+
+<p>Then you can decorate your test or test class with that extension:</p>
+
+<pre>
+<code class="language-java">@MyJunit5
+public class JUnit5Test {
+    @Test
+    public void test1() {
+        System.out.println("Test #1");
+    }
+
+    @Test
+    public void test2() {
+        System.out.println("Test #2");
+    }
+}
+</code></pre>
+
+<p>No Junit API except to mark the test class :). Friendly no?</p>
+
+<p>Important: if you make the annotation targetting&nbsp;<em>METHOD</em>&nbsp;as well (or only), then you can define any &quot;all&quot; hook, it wouldn&#39;t fail but they would be ignored since the scope would be the method already.</p>
+
+<p>In real life it can look like:</p>
+
+<pre>
+<code class="language-java">@MeecrowaveConfig
+public class JUnit5Test {
+    @Test
+    @CleanDatabase(AFTER)
+    public void test1() {
+        System.out.println("Test #1");
+    }
+
+    @Test
+    @SeedDatabase("myscript.sql")
+    @CleanDatabase(BEFORE_AND_AFTER)
+    public void test2() {
+        System.out.println("Test #2");
+    }
+}
+</code></pre>
+
+<p>This test would start the CDI/JAX-RS server Apache Meecrowave and provision/clean a database for each method. Nice no?</p>
+
+<p>But wait, what about the ordering? There are two ways to order extensions with this API:</p>
+
+<ol>
+	<li>Define your own annotation (<em>@MyTestSetup</em>) and list in order the extensions since&nbsp;<em>@ExtendWith&nbsp;</em>takes multiple classes</li>
+	<li>Put the annotations in the order you want the execution respects since the annotations are sorted in Java bytecode so&nbsp;<em>@Server @Database</em>&nbsp;would first execute the server extension(s) and then the database one(s)</li>
+</ol>
+
+<p>Now we know all the hooks and how to use it let&#39;s see how to implement an extension. The first thing to know is that the context passed to each hook is hierarchic. This means when you decorate a method (all but &quot;all&quot; hooks), you can access the data of the class contexts if current one doesn&#39;t contain it.</p>
+
+<p>Each context has a global storage which is keyed by a namespace. I would recommand you extension to define a custom namespace based on the extension qualified name to avoid conflicts. This can be done this way:</p>
+
+<pre>
+<code class="language-java">private static final ExtensionContext.Namespace NAMESPACE =
+    ExtensionContext.Namespace.create(MyFirstJUnit5Extension.class.getName());</code></pre>
+
+<p>Then, you can access a store from this namespace in the context:</p>
+
+<pre>
+<code class="language-java">final ExtensionContext.Store store = context.getStore(NAMESPACE);</code></pre>
+
+<p>This store is a kind of map where you can put and retrieve informations. If you read the previous post on JUnit 4, it is the way we will replace our rule state. We will put some data into the store in before hooks and clean the state in the corresponding after hook:</p>
+
+<pre>
+<code class="language-java">public class MyFirstJUnit5Extension implements
+        BeforeAllCallback, AfterAllCallback {
+
+    private static final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(MyFirstJUnit5Extension.class.getName());
+
+    @Override
+    public void beforeAll(final ExtensionContext context) throws Exception {
+        final ExtensionContext.Store store = context.getStore(NAMESPACE);
+        store.put(State.class.getName(), doStart());
+    }
+
+    @Override
+    public void afterAll(final ExtensionContext context) throws Exception {
+        State.class.cast(
+            context.getStore(NAMESPACE).get(State.class.getName())
+        ).stop();
+    }
+
+    private State doStart() {
+        // ...
+    }
+}</code></pre>
+
+<p>Of course you can define a state per type of callback (all, each, test execution). The <em>doStart() </em>can for instance start a server and the <em>stop()</em> will stop it.</p>
+
+<p>Now we have our hooks and know to organize our code, we need to know how to interact with the test. With JUnit 4 we were able to get feedback from the rule directly. The common example being to access the port of the started server by the rule. Here we don&#39;t have the extension instance so how to do? A nice way to solve that is to use the extension itself to inject into the test the expected value.</p>
+
+<p>There are a lot of ways to do it but here is a proposal:</p>
+
+<ul>
+	<li>Define an <em>@Injected</em>&nbsp;annotation - not&nbsp;<em>@Inject</em>&nbsp;which exist everywhere. If you prefer you can do something like @<em>MyExtensionInject</em>:</li>
+</ul>
+
+<pre>
+<code class="language-java">@Target(FIELD)
+@Retention(RUNTIME)
+public @interface MyExtensionInject {
+}</code></pre>
+
+<ul>
+	<li>Then add in the&nbsp;<em>BeforeEachCallback</em>&nbsp;an implementation which will inject into the test instance the right value. There are multiple ways to do the value matching, the simplest is per type if not ambiguous. If you have multiple values of the same type, just ensure you have a kind of qualifier to distinguish them. A <em>String value()</em>&nbsp;into the inject annotation can make it easy to solve:</li>
+</ul>
+
+<pre>
+<code class="language-java">@Override
+public void beforeEach(final ExtensionContext context) throws Exception {
+    Class&lt;?&gt; current = context.getRequiredTestClass();
+    while (current != Object.class) {
+        Stream.of(current.getDeclaredFields())
+                .filter(f -&gt; f.isAnnotationPresent(MyExtensionInject.class))
+                .forEach(f -&gt; {
+                    if (!f.isAccessible()) {
+                        f.setAccessible(true);
+                    }
+                    try {
+                        f.set(context.getRequiredTestInstance(), findInstance(context, f));
+                    } catch (final IllegalAccessException e) {
+                        throw new IllegalArgumentException(e);
+                    }
+                });
+        current = current.getSuperclass();
+    }
+}</code></pre>
+
+<p>This just loops over the fields of the test class and if there is an inject annotation set the field to the right value.</p>
+
+<p>Tip: a simpler implementation could implement <em>TestInstancePostProcessor</em>, its usage depends your extension lifecycle. If you want to go further you can even support parameter injection through <em>ParameterResolver</em> API.</p>
+
+<p>In terms of usages, our test can look like:</p>
+
+<pre>
+<code class="language-java">@MyJunit5
+public class JUnit5Test {
+    @MyExtensionInject
+    private MyInjection inject;
+
+    @Test
+    public void test1() {
+        assertNotNull(inject);
+    }
+}</code></pre>
+
+<p>The last missing piece for that code to work is the <em>findInstance()</em>&nbsp;logic. It is highly dependent on your implementation but here is a skeleton implementation to help you to get started:</p>
+
+<pre>
+<code class="language-java">private Object findInstance(final ExtensionContext context, final Field field) {
+    final Class&lt;?&gt; type = field.getType();
+    {
+        final Object instance = context.getStore(NAMESPACE).get(type);
+        if (instance != null) {
+            return instance;
+        }
+    }
+    throw new IllegalArgumentException("No value for " + field);
+}</code></pre>
+
+<p>This implementation will just check there is a matching instance in the store associated to this extension. This means if you put your extension instance in a context before this method is called - like in the&nbsp;<em>beforeAll</em>&nbsp;hook - you will be able to inject your extension into the test class. Here is a skeleton of an extension doing that:</p>
+
+<pre>
+<code class="language-java">public class MyFirstJUnit5Extension implements
+        BeforeAllCallback, AfterAllCallback, BeforeEachCallback {
+
+    private static final ExtensionContext.Namespace NAMESPACE =
+            ExtensionContext.Namespace.create(MyFirstJUnit5Extension.class.getName());
+
+    @Override
+    public void beforeAll(final ExtensionContext context) throws Exception {
+        final ExtensionContext.Store store = context.getStore(NAMESPACE);
+        store.put(State.class.getName(), doStart());
+        store.put(getClass(), this);
+    }
+
+    @Override
+    public void afterAll(final ExtensionContext context) throws Exception {
+        State.class.cast(context.getStore(NAMESPACE).get(State.class.getName())).stop();
+    }
+
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        Class&lt;?&gt; current = context.getRequiredTestClass();
+        while (current != Object.class) {
+            Stream.of(current.getDeclaredFields())
+                    .filter(f -&gt; f.isAnnotationPresent(MyExtensionInject.class))
+                    .forEach(f -&gt; {
+                        if (!f.isAccessible()) {
+                            f.setAccessible(true);
+                        }
+                        try {
+                            f.set(context.getRequiredTestInstance(), findInstance(context, f));
+                        } catch (final IllegalAccessException e) {
+                            throw new IllegalArgumentException(e);
+                        }
+                    });
+            current = current.getSuperclass();
+        }
+    }
+
+    private State doStart() {
+        // start a server etc
+        return new State() {
+            @Override
+            protected void stop() {
+                // stop the server
+            }
+        };
+    }
+
+    private Object findInstance(final ExtensionContext context, final Field field) {
+        final Class&lt;?&gt; type = field.getType();
+        {
+            final Object instance = context.getStore(NAMESPACE).get(type);
+            if (instance != null) {
+                return instance;
+            }
+        }
+        throw new IllegalArgumentException("No value for " + field);
+    }
+
+    private static class State {
+        protected void stop() {
+            throw new UnsupportedOperationException("must be implemented inline");
+        }
+    }
+}
+</code></pre>
+
+<p>Of course you will need to implement <em>doStart()/stop()</em>&nbsp;but the skeleton is functional and associated with an annotation it allows to use it in a test exactly like that:</p>
+
+<pre>
+<code class="language-java">@MyJunit5
+public class JUnit5Test {
+    @MyExtensionInject
+    private MyFirstJUnit5Extension inject;
+
+    @Test
+    public void test() {
+        assertNotNull(inject);
+    }
+}</code></pre>
+
+<p>The&nbsp;<em>test()</em>&nbsp;method will be executed with the extension context (server started if you respect the comments for the start/stop logic) and with the injection available :).</p>
+
+<p>Elegant no?</p>
+
+<p>Happy testing!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-microservice-on-heroku.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//extend-junit-4.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

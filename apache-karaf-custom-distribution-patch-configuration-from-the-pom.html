@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Apache Karaf custom distribution : patch your configuration from your pom</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,126 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="apache-karaf-custom-distribution-patch-configuration-from-the-pom-html-container" class="container page-content apache-karaf-custom-distribution-patch-configuration-from-the-pom-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Karaf custom distribution : patch your configuration from your pom</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-10-13</span>, <span class="metadata-readingtime">1 min and 25 sec read</span></p>
+</div>
+<p>Apache Karaf Maven plugin enables to build a custom distribution configuring it in your pom.xml. However, part of the configuration was still externalized in configuration file. It was typically the case of the &quot;patches&quot; to apply to the configuration (a.k.a. prop-edits).</p>
+
+<p>File was required in&nbsp;<em>src/main/karaf/</em>assembly-<em>property</em>-<em>edits</em>.xml&nbsp;and was looking like:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;property-edits xmlns="http://karaf.apache.org/tools/property-edits/1.0.0"&gt;
+    &lt;edits&gt;
+        &lt;edit&gt;
+            &lt;file&gt;config.properties&lt;/file&gt;
+            &lt;operation&gt;put&lt;/operation&gt;
+            &lt;key&gt;karaf.framework&lt;/key&gt;
+            &lt;value&gt;felix&lt;/value&gt;
+        &lt;/edit&gt;
+        &lt;edit&gt;
+            &lt;file&gt;system.properties&lt;/file&gt;
+            &lt;operation&gt;put&lt;/operation&gt;
+            &lt;key&gt;app.key&lt;/key&gt;
+            &lt;value&gt;1234&lt;/value&gt;
+        &lt;/edit&gt;
+    &lt;/edits&gt;
+&lt;/property-edits&gt;</code></pre>
+
+<p>Nothing crazy but it breaks a bit the maintenance of the plugin (if you drop the plugin you likely forget this file, if you change another setting - like a bundle - you don&#39;t adjust the config coming from this file, you can configure&nbsp;<em>config</em>&nbsp;(ie config.properties) in the plugin configuration but you can also patch it with this file&nbsp;etc...).</p>
+
+<p>To make it more consistent and selfcontained, this file can now be in the plugin configuration directly. The only small warning is that the&nbsp;<em>operation</em>&nbsp;value is contained in an&nbsp;<em>operation&nbsp;</em>tag since it also take the <em>prepend=[true|false]&nbsp;</em>configuration as sibling tag.</p>
+
+<p>So now (Karaf &gt; 4.3.0.RC1), you assembly configuration can look like:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.karaf.tooling&lt;/groupId&gt;
+  &lt;artifactId&gt;karaf-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;${karaf-maven-plugin.version}&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;assembly&lt;/id&gt;
+      &lt;phase&gt;prepare-package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;assembly&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;propertyEdits&gt;
+      &lt;edits&gt;
+        &lt;edit&gt;
+          &lt;file&gt;config.properties&lt;/file&gt;
+          &lt;operation&gt;
+            &lt;operation&gt;put&lt;/operation&gt;
+          &lt;/operation&gt;
+          &lt;key&gt;karaf.framework&lt;/key&gt;
+          &lt;value&gt;felix&lt;/value&gt;
+        &lt;/edit&gt;
+        &lt;edit&gt;
+          &lt;file&gt;system.properties&lt;/file&gt;
+          &lt;operation&gt;
+            &lt;operation&gt;put&lt;/operation&gt;
+          &lt;/operation&gt;
+          &lt;key&gt;app.key&lt;/key&gt;
+          &lt;value&gt;1234&lt;/value&gt;
+        &lt;/edit&gt;
+      &lt;/edits&gt;
+    &lt;/propertyEdits&gt;
+    &lt;!-- ... --&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Indeed, it makes the pom more verbose, but you can browse more easily the whole configuration so at the end it is a real better choice to use that inline configuration.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//angular-ng-10-create-update-route-at-runtime.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jib-docker-layer-file-filtering.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

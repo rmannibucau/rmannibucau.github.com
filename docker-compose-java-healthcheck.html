@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Docker Compose Java Healthcheck</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,261 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="docker-compose-java-healthcheck-html-container" class="container page-content docker-compose-java-healthcheck-html is-blog">
+                        <div class="page-header">
+                <h1>Docker Compose Java Healthcheck</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2022-02-23</span>, <span class="metadata-readingtime">3 min and 48 sec read</span></p>
+</div>
+<div class="paragraph">
+<p>Docker compose is often used to run locally a development stack.
+Even if I would recommend to use minikube/microk8s/&#8230;&#8203; + Yupiik <a href="https://www.yupiik.io/bundlebee/">Bundlebee</a>, it is a valid option to get started quickly.</p>
+</div>
+<div class="paragraph">
+<p>One trick is to handle dependencies between services.</p>
+</div>
+<div class="paragraph">
+<p>A compose descriptor often looks like:</p>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.9" <i class="conum" data-value="1"></i><b>(1)</b>
+
+services: <i class="conum" data-value="2"></i><b>(2)</b>
+  postgres: <i class="conum" data-value="3"></i><b>(3)</b>
+    image: postgres:14.2-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+
+  my-app-1: <i class="conum" data-value="4"></i><b>(4)</b>
+    image: my-app
+    restart: always
+    ports:
+      - "18080:8080"
+
+  my-app-2: <i class="conum" data-value="4"></i><b>(4)</b>
+    image: my-app
+    restart: always
+    depends_on: <i class="conum" data-value="5"></i><b>(5)</b>
+      - my-app-1</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the descriptor version</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the list of services (often containers if there is no replicas)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>some external images (often databases or transversal services like gateways)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>custom application images</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>dependencies between images</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+for <strong>web</strong> services it is not recommended having dependencies between services but it is insanely useful if you have a batch provisioning your database and you want it to run only when a web service is ready.
+It is often the case if you have a Kubernetes <code>CronJob</code> calling one of your <code>Deployment</code>/<code>Service</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Previous descriptor works but it can happen the web service is not fully started before the second app (simulating a batch/job) is launched.</p>
+</div>
+<div class="paragraph">
+<p>To solve that we need to add a healthcheck on the first app and depend on the state of the application in the batch.
+Most of the examples will use <code>curl</code> or <code>wget</code> but it has the drawback to be forced to add these dependencies - and their dependencies - to the base image - don&#8217;t forget we want the image to be light - a bit for the size but generally more for security reasons - so that it shouldn&#8217;t be there.</p>
+</div>
+<div class="paragraph">
+<p>So the overall trick will be to write a custom <code>main</code> based on plain Java - since we already have a Java application.</p>
+</div>
+<div class="paragraph">
+<p>Here is what can look like the modified <code>docker-compose.yaml</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    my-app-1:
+        ...
+        healthcheck: <i class="conum" data-value="1"></i><b>(1)</b>
+          test: [
+            "CMD-SHELL", <i class="conum" data-value="2"></i><b>(2)</b>
+            "_JAVA_OPTIONS=", <i class="conum" data-value="3"></i><b>(3)</b>
+            "java", "-cp", "/opt/app/libs/my-jar-*.jar", <i class="conum" data-value="4"></i><b>(4)</b>
+            "com.app.health.HealthCheck", <i class="conum" data-value="5"></i><b>(5)</b>
+            "http://localhost:8080/api/health" <i class="conum" data-value="6"></i><b>(6)</b>
+          ]
+          interval: 30s
+          timeout: 10s
+          retries: 5
+          start_period: 5s
+
+    my-app-2:
+        ...
+        depends_on:
+          my-app-1:
+            condition: service_healthy <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>we register a healthcheck for the web service</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>we use <code>CMD-SHELL</code> and not <code>CMD</code> to be able to set environment variables in the command</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>we force the base image <code>_JAVA_OPTION</code> to be resetted to avoid to inherit the <code>environment</code> of the service (in particular if there is some debug option there)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>we set the java command to use the jar containing our healthcheck <code>main</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>we set the custom <code>main</code> we will write</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>we reference the local container health endpoint</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>on the batch service, we add the condition that the application must be <code>service_healthy</code> which means we control the state with the <code>/health</code> endpoint we have in the first application (and generally it is sufficient since initializations happen before it is deployed)</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now, the only remaining step is to write this main <code>com.app.health.HealthCheck</code>.
+Here is a trivial main class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.app.health;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+
+import static java.net.http.HttpResponse.BodyHandlers.discarding;
+
+public final class HealthCheck {
+    private HealthCheck() {
+        // no-op
+    }
+
+    public static void main(final String... args)
+        throws IOException, InterruptedException {
+        final var builder = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create(args[0]));
+        for (int i = 1; i &lt; 1 + (args.length - 1) / 2; i++) {
+            final var base = 2 * (i - 1) + 1;
+            builder.header(args[base], args[base + 1]);
+        }
+        final var response = HttpClient.newHttpClient()
+            .send(builder.build(), discarding());
+        if (response.statusCode() &lt; 200 || response.statusCode() &gt; 299) {
+            throw new IllegalStateException("Invalid status: HTTP " + response.statusCode());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nothing crazy there, we just do a <code>GET</code> request on the based on the <code>args</code> of the main.
+What is important to note there is you control that logic since you code the healthcheck so you can also check a file is present for example.</p>
+</div>
+<div class="paragraph">
+<p>Last but not least you have to ensure the jar containing this class is in your docker image (generally the class can be included in a <code>app-common.jar</code>) which will enable to reference it <strong>as classpath</strong> in the healthcheck command.</p>
+</div>
+<div class="paragraph">
+<p>Indeed you can use any dependency you want if you also add them in the classpath of the healthcheck, but generally just using the JDK is more than sufficient and enables a simpler healthcheck command.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+you can also build a dedicated <code>healthcheck-main.jar</code> archive and add it in your docker to use it directly. This option enables to set in the jar the <code>Main-Class</code> which provides your the facility to use <code>java -jar healthcheck-main.jar &lt;url&gt;</code>.
+</td>
+</tr>
+</table>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//kubernetes-quick-debugging-pod.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-logging-framework.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

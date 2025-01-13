@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Extensible classpath for a Jib based Docker images</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,120 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="extensible-classpath-jib-docker-image-html-container" class="container page-content extensible-classpath-jib-docker-image-html is-blog">
+                        <div class="page-header">
+                <h1>Extensible classpath for a Jib based Docker images</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-05-29</span>, <span class="metadata-readingtime">2 min and 53 sec read</span></p>
+</div>
+<p><a href="https://github.com/GoogleContainerTools/jib/" target="_blank">Jib</a> is a great tool which enables to build container images and push them either to a remote registry - without any daemon, even docker one!, a local filesystem - as a tar.gz, or a plain local docker image. It comes with a great Maven binding which enables to set up it as a simple maven plugin for any java application. In its defaults it comes with a convention for layers intended to be reproducible and optimized - trying to limit the number of layers downloaded once you already got the image once.</p>
+
+<p>If you are building a final service it is an awesome solution, but if, like me, you are building a generic server which can be extended by the user, containers can become a nightmare.</p>
+
+<p>The typically usages are:</p>
+
+<ul>
+	<li>Enable the user to customize the server with custom configuration files,</li>
+	<li>Enable the user to add custom logic - through .jar. It is likely relying on your IoC - CDI/Spring - or the plain old ServiceLoader of JavaSE.</li>
+</ul>
+
+<p>For custom configuration files, it is generally simple to mount a file in the container if planned and just read the configuration from there. However for the binaries extensibility it can be harder because in several cases, the JVM will fail if the folder/jar does not exist.</p>
+
+<p>Indeed an option is to use a custom classloader but it changes the behavior of your application - in particular since Java (Platform) Module System - is there, so better to just try to enrich the classpath.</p>
+
+<p>Since recent versions, Jib got a new option called&nbsp;<em>extraClasspath</em>&nbsp;which enables to add entries into the classpath which are not in the project or project dependencies. This can be neat to add an exploded zip or so.</p>
+
+<p>Thanks to the JVM implementation, it also opens the door to extensibility. The classpath option supports wildcard patterns so you can set a folder and append&nbsp;<em>*</em>&nbsp;at the end of the path to ask the JVM to take all the jars in this folder.</p>
+
+<p>Concretely here what it looks like for Jib - but it can be reused with a plain docker image:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+  &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;${jib.version}&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;build&lt;/id&gt;
+      &lt;phase&gt;none&lt;/phase&gt;
+      &lt;configuration&gt;
+        &lt;from&gt;
+          &lt;image&gt;openjdk:8-slim&lt;/image&gt;
+        &lt;/from&gt;
+        &lt;to&gt;
+          &lt;image&gt;rmannibucau/demoapp:${project.version}&lt;/image&gt;
+        &lt;/to&gt;
+        &lt;container&gt;
+          &lt;extraClasspath&gt;/opt/rmannibucau/custom/*&lt;/extraClasspath&gt;
+          &lt;mainClass&gt;com.github.rmannibucau.app.MyMain&lt;/mainClass&gt;
+        &lt;/container&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>With this setup you can run the following command to create the docker image defined by this project:</p>
+
+<pre>
+<code class="language-bash">mvn clean install jib:dockerBuild@build</code></pre>
+
+<p>Tip: the exact same tip works for the Gradle flavor of Jib.</p>
+
+<p>Then you can simply mount a volume with jars in&nbsp;<em>/opt/rmannibucau/custom</em>&nbsp;to enrich the application classpath:</p>
+
+<pre>
+<code class="language-bash">docker run \
+  -v /local/app/enrichment/:/opt/rmannibucau/custom/ \
+  rmannibucau/demoapp:1.0.0</code></pre>
+
+<p>This will mount the local folder in the custom container folder and let the JVM expand the&nbsp;<em>extraClasspath</em>&nbsp;option to replace it by the list of jar in the local&nbsp;<em>enrichment/</em>&nbsp;folder activating your extensions :).</p>
+
+<p>In my opinion, most of public images should use that solution because you never fully control the user usages and requirements in terms of deployment - and Docker does not fully help there. One simple example can be that you application provides&nbsp;<em>log4j2</em>&nbsp;without&nbsp;<em>JSON&nbsp;</em>and&nbsp;<em>YAML</em>&nbsp;support, then with this solution, the user can mount&nbsp;<em>jackson</em>&nbsp;libraries and its configuration through the&nbsp;<em>custom</em>&nbsp;folder and use that feature. Containers are bringing up constraints but also solutions to make them run away - otherwise it would be impossible to use. Let&#39;s use them ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//johnzon-jsonp-jsonb-configuration-file.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//your-first-javaagent.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

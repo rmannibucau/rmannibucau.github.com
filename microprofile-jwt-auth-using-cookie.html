@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Microprofile JWT Auth and Cookie?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,221 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="microprofile-jwt-auth-using-cookie-html-container" class="container page-content microprofile-jwt-auth-using-cookie-html is-blog">
+                        <div class="page-header">
+                <h1>Microprofile JWT Auth and Cookie?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-05-08</span>, <span class="metadata-readingtime">6 min and 43 sec read</span></p>
+</div>
+<p>Microprofile <a href="https://github.com/eclipse/microprofile-jwt-auth" target="_blank">JWT Auth</a> is a nice specification allowing to enforce authentication and potentially authorizations based on JWT tokens. It works well for machine to machine communication or for Single Page Applications (SPA) where the application is&nbsp;managed by code but for server side web applications it is less integrated.</p>
+
+<p>To give you an example, if you write a website with a login button on the top right, you will desire to see the username and a &quot;logout&quot; button instead of &quot;login&quot; once you logged in. Sounds natural right? With Microprofile JWT Auth, it requires to use the <em>Authorization</em>&nbsp;HTTP header and to have&nbsp;<em>&quot;Bearer &lt;token&gt;&quot;</em>&nbsp;in it. However, the best way to manage the login in a web application managed by the server is to use a&nbsp;<em>Cookie</em>. This enables to enforce the cookie to be sent by the client for any communication of the web application and potentially even forbids the javascript to access this cookie. This is not something you can do for headers today if you don&#39;t code your full application in javascript.</p>
+
+<p>So at the end we have a security mecanism based on a Cookie and a security layer based on an header....it will not work well.</p>
+
+<p>Now it is not that bad because JWT Auth implementation is based on JAX-RS and therefore you can add a server filter redirecting the cookie - if exists - to the header. It will let JWT Auth implementation to read the cookie as a header and behave properly.</p>
+
+<p>There are two kind of implementations for JWT Auth:</p>
+
+<ul>
+	<li>Fully JAX-RS based, this is nice because you just need to add a&nbsp;<a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/container/ContainerRequestFilter.html" target="_blank"><em>ContainerRequestFilter</em></a>&nbsp;doing the forwarding,</li>
+	<li>Servlet based implementations. Here you need to add a servlet&nbsp;<em>Filter</em>&nbsp;doing the forwarding and ensure it is before the JWT Auth one.</li>
+</ul>
+
+<p>Side note: the implementation can use both but using servlet based one enables to integrate with servlets as well as JAX-RS endpoints which is more generic and works really smoothly with libraries whereas a fully JAX-RS based implementation will requires some custom code to integrate with most libraries.</p>
+
+<h2>JAX-RS filter redirecting a cookie to a header</h2>
+
+<p>Based on JAX-RS the implementation is quite trivial:</p>
+
+<ol>
+	<li>Check the header is already there, if so do nothing,</li>
+	<li>If the header is not set, check there is the cookie, if so get its value and set it as header.</li>
+</ol>
+
+<p>Here is a potential implementation:</p>
+
+<pre>
+<code class="language-java">@Provider
+@Dependent
+@PreMatching // 1
+@Priority(Priorities.AUTHENTICATION - 10) // 2
+public class ForwardingContainerRequestFilter implements ContainerRequestFilter {
+    @Inject // 2
+    @ConfigProperty(name = "app.security.cookieName", defaultValue = "Bearer")
+    private String cookieName;
+
+    @Override
+    public void filter(final ContainerRequestContext requestContext) {
+        if (requestContext.getHeaderString(HttpHeaders.AUTHORIZATION) != null) { // 3
+            return;
+        }
+        final Cookie bearer = requestContext.getCookies().get(cookieName");
+        if (bearer != null) { // 4
+            requestContext.getHeaders().putSingle(HttpHeaders.AUTHORIZATION, "Bearer " + bearer.getValue());
+        }
+    }
+}</code></pre>
+
+<ol>
+	<li>We ensure we are prematching, which means we are executed before any resource matching in JAX-RS router,</li>
+	<li>We ensure we are executed before authentication filters - if they are pre-matching as well otherwise it is useless,</li>
+	<li>If the header is set we don&#39;t change it,</li>
+	<li>If the cookie is set and there is no header then we forward its value in headers before the authentication filter reads it.</li>
+</ol>
+
+<p>This implementation is simple but can not work if the JWT Auth implementation is based on Servlet layer instead of JAX-RS which is more generic than JAX-RS which is quite late in servlet filter (it is a servlet so you passed all fitlers without security activated if the implementation uses that). Let see how to do the same based on servlet layer - which should also work for JAX-RS based implementation if they didn&#39;t bypass Servlet layer.</p>
+
+<h2>Servlet filter redirecting a cookie to a header</h2>
+
+<p>For servlet case the filter will look like this:</p>
+
+<pre>
+<code class="language-java">// @WebFilter(urlPatterns = "/*", asyncSupported = true) // 1
+public class CookieToHeaderFilter implements Filter {
+    @Inject // 2
+    @ConfigProperty(name = "app.security.cookieName", defaultValue = "Bearer")
+    private String cookieName;
+
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        // 3
+        chain.doFilter(getRequest(HttpServletRequest.class.cast(request)), response);
+    }
+
+    // forward cookie to header to match geronimo-jwt-auth impl
+    private HttpServletRequest getRequest(final HttpServletRequest httpServletRequest) {
+        return ofNullable(httpServletRequest.getCookies()).map(Stream::of).orElseGet(Stream::empty) // 4
+                .filter(it -&gt; cookieName.equals(it.getName())) // 5
+                .findFirst()
+                .map(cookie -&gt; HttpServletRequest.class.cast(new HttpServletRequestWrapper(httpServletRequest) {
+                    @Override
+                    public String getHeader(final String name) {
+                        if (HttpHeaders.AUTHORIZATION.equalsIgnoreCase(name)) { // 6
+                            return "Bearer " + cookie.getValue();
+                        }
+                        return super.getHeader(name);
+                    }
+                }))
+                .orElse(httpServletRequest);
+    }
+}</code></pre>
+
+<ol>
+	<li>We bind the filter on the whole application (/*) - you can also limit that to a subcontext if needed, and we ensure we don&#39;t break asynchronous filter/servlets after this one. Generally this filter should be very early in the filter chain so asynchronism does not affect it since it does not use any thread local storage. Note that this line is commented because of the ordering point, see later,</li>
+	<li>We inject the cookie name used for the security since applications can customize it to avoid conflicts - it is common to put several applications with potentially different authentication mecanism behind the same host,</li>
+	<li>The filter just delegates the call except it can replace the request by a wrapped instance forwarding the cookie to the right header,</li>
+	<li><em>getCookies()</em>&nbsp;can return null so ensure we don&#39;t fail if it is the case getting a&nbsp;<em>Stream&lt;Cookie</em>&gt;,</li>
+	<li>We must extract the security cookie based on its name,</li>
+	<li>Finally, when we have a security cookie and the&nbsp;<em>Authorization</em>&nbsp;header is requested, then we return the cookie prefixed by&nbsp;<em>&quot;Bearer &quot;</em>&nbsp;to ensure it passes default setup of Microprofile JWT Auth layer.</li>
+</ol>
+
+<p>This simple filter will make the JWT Auth implementation working well for a server rendered application.</p>
+
+<h3>Note on the ordering of the filters</h3>
+
+<p>For the previous filter to work, it must be executed before the JWT Auth filter. There are multiple options for that:</p>
+
+<ol>
+	<li>Configure the filters in web.xml which provides a global way to order filters,</li>
+	<li>Manage the order programmatically. In other words, in this option to disable the automatic setup of the JWT Auth filter - or you don&#39;t add&nbsp;<em>LoginConfig</em>&nbsp;on your&nbsp;<em>Application</em>&nbsp;- and you call the filter yourself in the previous filter. Here what it can look like for Geronimo implementation:</li>
+</ol>
+
+<pre>
+<code class="language-java">@WebFilter(urlPatterns = "/*", asyncSupported = true) // 1
+public class CookieToHeaderFilter implements Filter {
+    @Inject
+    @ConfigProperty(name = "app.security.cookieName", defaultValue = "myCookie")
+    private String cookieName;
+
+    private FilterConfig config;
+    private volatile Filter jwtFilter;
+
+    @Override // 2
+    public void init(final FilterConfig config) {
+        this.config = config;
+    }
+
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        // 3
+        if (jwtFilter == null) {
+            synchronized (this) {
+                if (jwtFilter == null) {
+                    GeronimoJwtAuthFilter filter = new GeronimoJwtAuthFilter();
+                    filter.init(config);
+                    jwtFilter = filter;
+                }
+            }
+        }
+        // 4
+        jwtFilter.doFilter(getRequest(HttpServletRequest.class.cast(request)), response, chain);
+    }
+
+    // same getRequest() as before
+}</code></pre>
+
+<ol>
+	<li>In this case we can use&nbsp;<em>@WebFilter</em>&nbsp;to register the filter since the ordering of the two filter is no more ambiguous (we have actually a single filter),</li>
+	<li>We store the&nbsp;<em>FilterConfig</em>&nbsp;to be able to lazily initialize the JWT filter - to read lazily the configuration, this is optional but recommended,</li>
+	<li>We lazily initialize the JWT filter with the stored filter config,</li>
+	<li>Finally we fully delegate to the JWT filter with our wrapped request.</li>
+</ol>
+
+<p>This is exactly the same logic than before but we handle the ordering of the filter explicitly. The drawback is indeed that we are bound to one JWT Auth implementation but the advantage is that the setup is generally simpler. At the end it depends what you want to optimize: simplicity or genericity.</p>
+
+<h2>Conclusion</h2>
+
+<p>There is not yet a unique portable way to solve the cookie setup with JWT Auth, however you can implement both the Servlet and JAX-RS approach - doing one does not prevent doing the other - which should ensure your code is portable in all implementation of Microprofile (Servlet or JAX-RS based) + JWT Auth stacks.</p>
+
+<p>The specification mentions it will probably support Cookie at some point with a default name of &quot;Bearer&quot;. This can also simplify the integration a lot and even enable MVC - the specification - support.</p>
+
+<p>Finally note that Apache Geronimo JWT Auth implementation got enhanced to support cookies out of the box, it will come with the 1.0.3 release (issue is tracked at&nbsp;<a href="https://issues.apache.org/jira/browse/GERONIMO-6724">https://issues.apache.org/jira/browse/GERONIMO-6724</a>).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//long-live-javax-package.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//oauth2-jwt-microprofile-validation-with-geronimo.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

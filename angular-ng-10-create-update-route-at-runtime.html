@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Angular 10: how to create/update routes programmatically</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,232 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="angular-ng-10-create-update-route-at-runtime-html-container" class="container page-content angular-ng-10-create-update-route-at-runtime-html is-blog">
+                        <div class="page-header">
+                <h1>Angular 10: how to create/update routes programmatically</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-10-20</span>, <span class="metadata-readingtime">5 min and 56 sec read</span></p>
+</div>
+<p>Angular 10 tends to keep a high popularity, even if since Angular 1, ReactJS stacks grabbed half of the popularity by its lighter stack. However, a feature is still not obvious: how to create routes dynamically at runtime.</p>
+
+<p>You can think you just do a&nbsp;<em>fetch()</em>&nbsp;then bootstrap the application, something around:</p>
+
+<pre>
+<code class="language-javascript">import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+
+fetch('/my-routes') // 1
+  .then(route =&gt; {
+    window.globalRoutes = routes; // 2
+    platformBrowserDynamic() // 3
+      .bootstrapModule(AppModule)
+      .catch(err =&gt; console.error(err));
+  };</code></pre>
+
+<ol>
+	<li>We do a HTTP request to gather the routes to create from a backend endpoint</li>
+	<li>We store the route in a place our routing component/module can read from (here in the window for example)</li>
+	<li>We launch angular application</li>
+</ol>
+
+<p>This works but it has some pitfalls:</p>
+
+<ol>
+	<li>This delays the application bootstrap so it means you can&#39;t use angular until your routes are available, including angular services - which can help if you use <em>HttpClient</em>&nbsp;and a &quot;mapper&quot; service (backend model to angular route model),</li>
+	<li>If you secure your backend, you can&#39;t use that mecanism and once logged you need to duplicate the fetch logic to reload the route the user has permissions to use/see (or to keep a split logic, one fully angular friendly and one in pure javascript),</li>
+	<li>The application bootstrap is fully delayed (I&#39;ll come back on that later).</li>
+</ol>
+
+<p>In terms of route loading, I abstracted the actual logic by&nbsp;<em>fetch()</em>&nbsp;function, but what we actually want is to write something like that:</p>
+
+<pre>
+<code class="language-javascript">import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class RouteLoader {
+    constructor(private client: HttpClient) { }
+
+    public load() {
+        return this.client.get('/my-routes')
+            .pipe(map(json =&gt; this.createRoutes(json)));
+    }
+
+    private createRoutes(json) {
+        return ...;
+    }
+}</code></pre>
+
+<p>This flavor is angular native and enables to use angular IoC. When you start to have some conversion and use multiple services it is helping a lot and avoids to just create a spaghetti piece of code or reinvent a custom (light) IoC.</p>
+
+<p>But at that stage we have one main question: how to update the route with the new routes we created? Luckily for us, Angular&nbsp;<em>Router</em>&nbsp;provides a&nbsp;<em>resetConfig()</em>&nbsp;method enabling us to do that:</p>
+
+<pre>
+<code class="language-javascript">import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router, Routes } from '@angular/router';
+import { from } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class RouteLoader {
+    constructor(
+        private client: HttpClient,
+        private router: Router) /* 1 */ { }
+
+    public load() {
+        return this.client.get('/my-routes')
+            .pipe(switchMap(json =&gt; this.createRoutes(json)));
+    }
+
+    private createRoutes(json) {
+        return from(json.routeSpecs).pipe( // 2
+            map(spec =&gt; this.toRoutes(spec)), // 3
+            map(routes =&gt; ([ // 4
+                ...this.router.config,
+                ...routes,
+            ])),
+            map(newRoutes =&gt; this.router.resetConfig(newRoutes)) // 5
+        );
+    }
+
+}</code></pre>
+
+<ol>
+	<li>We inject the route in the service constructor,</li>
+	<li>Once we retrieved our backend model we create an observable from it (makes the DSL easier and integrates better with <em>load() </em>function&nbsp;as we&#39;ll see soon&nbsp;but can be done with a plain loop if you prefer),</li>
+	<li>We convert the backend route specification to actual routes (we&#39;ll explain that just after that),</li>
+	<li>We flatten the existing/bootstrap routes with the new routes,</li>
+	<li>Finally we update the router with the new routes. Note that this is also a place you can store the route you loaded and store them in the&nbsp;<em>RouteLoader</em>&nbsp;service. This is very very useful if you build dynamically a menu from what you fetched and it enables to inject the service in any component and dynamically create the menu (with a&nbsp;<em>*ngFor</em>&nbsp;for example) without having to use a global variable (as the original fetch option would have required).</li>
+</ol>
+
+<p>The solution is almost working but we need to create the routes. This part is very dependent on your application and backend model your get but the key there is to have reusable components you can just reference from the backend and lookup in the&nbsp;<em>createRoutes()</em>&nbsp;method.</p>
+
+<p>For instance, if you send a list of entities/tables from the backend and want to generate CRUD routes, we need to write CRUD components (one per potential routes) and we can implement the <em>createRoutes()</em>&nbsp;like that:</p>
+
+<pre>
+<code class="language-javascript">private toCrudRoutes(entities) {
+    return Object.keys(entities)
+        .map(it =&gt; ([
+            {
+              path: `${entities[it].name}s`,
+              component: ListComponent,
+            },
+            {
+              path: `${entities[it].name}`,
+              component: CreateComponent,
+            },
+            {
+              path: `${entities[it].name}/:id`,
+              component: EditComponent,
+            },
+        ]).reduce((agg, item) =&gt; ([...agg, ...item]), []))
+}
+</code></pre>
+
+<p>Here we see we just map the list of entities to 3 routes (list all, create, edit/view - and we assume list and edit views have a delete button), then each entity routes are flattened with others thanks the&nbsp;<em>reduce()</em>&nbsp;call. The key here is to have generic components (<em>ListComponent, CreateComponent, EditComponent</em>). In next blog post, I&#39;ll explain how to achieve it.</p>
+
+<p>So now our application is functional, right? Actually not completely. If you plain a bit with the application, you will see it works...but not the refresh. Assuming with have an&nbsp;<em>user</em>&nbsp;entity, if you go on&nbsp;<em>/user/1</em>&nbsp;and hit&nbsp;<em>F5</em>&nbsp;(refresh the page), you will go back on the home page (if you set a default one in the bootstrap/initial&nbsp;routes). This is because the router will be active before the backend routes are fetched and update the router when doing a page refresh.</p>
+
+<p>To solve that last issue, we need to ask Angular to wait for our router update. This is where having an&nbsp;<em>Observable</em>&nbsp;will help us a lot in the code we write previously. To request angular to wait for our processing, we will create a function returning a&nbsp;<em>Promise</em>&nbsp;representing our&nbsp;<em>Observable</em>&nbsp;returned by&nbsp;<em>load()</em>. Note, that it is important to convert the&nbsp;<em>Observable</em>&nbsp;to a&nbsp;<em>Promise</em>. When a&nbsp;<em>Promise</em>, angular will wait, but not when an&nbsp;<em>Observable</em>. All the trick is to return this&nbsp;<em>Promise</em>&nbsp;as an&nbsp;application initializer. To do that we register it in our application module:</p>
+
+<pre>
+<code class="language-javascript">import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { RouteLoader } from './service/route-loader.service';
+import { ensureRoutesExist } from './ensureRoutesExist.initializer';
+
+@NgModule({
+  // ...
+  providers: [ // 1
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ensureRoutesExist, // 2
+      multi: true,
+      deps: [HttpClient, RouteLoader], // 3
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }</code></pre>
+
+<ol>
+	<li>We register a custom provider with the token&nbsp;<em>APP_INITIALIZER</em>&nbsp;(ensure to set&nbsp;<em>multi</em>&nbsp;to true since you can get multiple initializers per application),</li>
+	<li>We bind its factory to a custom method,</li>
+	<li>We bind the factory parameters - which is a plain function in this case and requires this explicit injection binding.</li>
+</ol>
+
+<p>The&nbsp;<em>ensureRoutesExist</em>&nbsp;initializer looks like:</p>
+
+<pre>
+<code class="language-javascript">import { HttpClient } from '@angular/common/http';
+import { RouteLoader } from './service/route-loader.service';
+
+export function ensureRoutesExist( // 1
+    http: HttpClient,
+    routeLoader: RouteLoader) {
+  return () =&gt; routeLoader.load() // 2
+    .toPromise(); // 3
+}
+</code></pre>
+
+<ol>
+	<li>The factory is a plain function which returns a function returning a promise, it takes as parameters the services/providers we bound in the application module during the provider registration,</li>
+	<li>We want to wait for the route loading so we call the load function to execute it during application initialization,</li>
+	<li>We convert our observable to a promise to ensure angular waits for this logic before finishing to start.</li>
+</ol>
+
+<p>This small trick will ensure the router is not active before routes were updated and therefore make the page refresh working as expected, even on our dynamic routes - at the cost of a small delay in the initialization so ensure to have a correct page loader/spinner/skeleton/whatever you like ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//angular-ng-10-configure-your-routes.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-karaf-custom-distribution-patch-configuration-from-the-pom.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Integrate Okta Oauth2 authorization_code flow with your JAX-RS server</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="okta-jaxrs-cdi-microprofile-authorization-code-flow-html-container" class="container page-content okta-jaxrs-cdi-microprofile-authorization-code-flow-html is-blog">
+                        <div class="page-header">
+                <h1>Integrate Okta Oauth2 authorization_code flow with your JAX-RS server</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-06-19</span>, <span class="metadata-readingtime">12 min read</span></p>
+</div>
+<p>Okta is one of the leading authentication/authorization server of the market. It comes with an OAuth2 server and therefore our beloved authorization_code flow.</p>
+
+<p>If you are not familiar with this flow, it enables to get authenticated on another webapp and come back on your own application. It is really close to the implicit flow which was originally designed for single page applications (SPA) but is today considered as not secured - since it does not imply the usage of a real (client) secret compared to the authorization_code one which is done server side&nbsp;- and therefore is not recommended.</p>
+
+<h2>Okta authentication/callback JAX-RS endpoints</h2>
+
+<p>In terms of code it requires two main endpoints:</p>
+
+<ol>
+	<li>One to trigger the authentication which will generally end up as a redirection on the login page of Okta,</li>
+	<li>One to get back the code from the Okta based on a redirection from okta to your application - whitelisted - and call&nbsp;<em>/token</em>&nbsp;endpoint to get an OAuth2 token (generally a RS256 JWT).</li>
+</ol>
+
+<p>Here is what it can mean in terms of JAX-RS endpoints:</p>
+
+<pre>
+<code class="language-java">@Path("security")
+@ApplicationScoped
+public class AuthenticationEndpoint {
+    @Inject
+    private OktaConfiguration configuration;
+
+    @Inject
+    @HttpClient(OKTA) // CDI qualifier
+    private WebTarget okta;
+
+    @Inject
+    private StateManager stateManager;
+
+    @GET
+    @Path("authentication") // 1
+    public CompletionStage&lt;Response&gt; redirectOnOkta() {
+        final String state = stateManager.next();
+        return okta.path("authorize")
+                .queryParam("client_id", configuration.clientId())
+                .queryParam("response_type", "code")
+                .queryParam("scope", "openid")
+                .queryParam("redirect_uri", configuration.callback())
+                .queryParam("state", state)
+                .request(WILDCARD_TYPE)
+                .rx()
+                .get()
+                .handle((response, error) -&gt; {
+                    if (error != null) {
+                        throw new WebApplicationException(Response.status(UNAUTHORIZED).entity(new ErrorMessage(error.getMessage())).build());
+                    }
+                    if (response.getStatus() != Response.Status.FOUND.getStatusCode()) {
+                        throw new WebApplicationException(Response.status(UNAUTHORIZED).entity(new ErrorMessage("Status: " + response.getStatus())).build());
+                    }
+                    return response;
+                });
+    }
+
+    @GET
+    @Path("callback") // 2
+    public CompletionStage&lt;Response&gt; onAuthorizationCodeCallback(@QueryParam("code") final String code,
+                                                                 @QueryParam("state") final String state) {
+        if (!stateManager.isValid(state)) {
+             throw new WebApplicationException(Response.status(BAD_REQUEST).entity(new ErrorMessage("Invalid request")).build());
+        }
+        return okta.path("token")
+                .request(APPLICATION_JSON_TYPE)
+                .header(HttpHeaders.AUTHORIZATION,
+                       "Basic " + Base64.getEncoder().encodeToString((configuration.clientId() + ':' + configuration.clientSecret()).getBytes(StandardCharsets.UTF_8)))
+                .rx()
+                .post(entity(new Form()
+                        .param("grant_type", "authorization_code")
+                        .param("redirect_uri", configuration.callback())
+                        .param("code", code), APPLICATION_FORM_URLENCODED_TYPE));
+    }
+}</code></pre>
+
+<p>Here the code is split in two endpoints:</p>
+
+<ol>
+	<li>The&nbsp;<em>/authentication </em>endpoint is the one called on &quot;login&quot; action and will request a code to okta to be able to get a token. It can end up on a redirection on Okta login page. Don&#39;t forget to register&nbsp;<em>configuration.callback()</em>&nbsp;url in okta oauth2 server configuration and ensure it matches the endpoint 2.</li>
+	<li>The&nbsp;<em>/callback</em>&nbsp;endpoint will be called by a redirection from Okta server and will return the result of the&nbsp;<em>/token</em>&nbsp;endpoint of Okta - so the&nbsp;<em>access_token&nbsp;</em>and its metadata.</li>
+</ol>
+
+<p>This is the basic code needed to be able to get a token from Okta. However this code has a few important missing points:</p>
+
+<ul>
+	<li>The client will likely not understand out of the box that after a few redirections it gets a JWT so the&nbsp;<em>/callback</em>&nbsp;endpoint will generally need a few more work to grab the access token, redirect on a webapp page adding the JWT as a response header the client can gather and handle for future requests.</li>
+	<li>The okta&nbsp;<em>WebTarget</em>&nbsp;must be&nbsp;<em>@Produces</em>&nbsp;- code in a few lines,</li>
+	<li>The&nbsp;<em>StateManager</em>&nbsp;but generate states which can be used to guarantee the returning request is valid and avoid to abuse of the <em>/callback</em>&nbsp;endpoint to get tokens.</li>
+</ul>
+
+<h2>CDI producer for a JAX-RS client</h2>
+
+<p>Generating the client with JAX-RS can be as simple as this:</p>
+
+<pre>
+<code class="language-java">@Slf4j // lombok
+@ApplicationScoped
+public class ClientFactory {
+    @Produces // 1
+    @ApplicationScoped
+    public Client createClient(@Threads(Threads.Type.HTTP) final ExecutorService executorService,
+                        final OktaConfiguration configuration) {
+        // 2
+        final ClientBuilder builder = ClientBuilder.newBuilder()
+                .executorService(executorService)
+                .connectTimeout(configuration.clientConnectTimeout(), TimeUnit.MILLISECONDS)
+                .connectTimeout(configuration.clientReadTimeout(), TimeUnit.MILLISECONDS);
+
+        // 3
+        if (configuration.clientAcceptAnyCertificate()) {
+            builder.hostnameVerifier((host, session) -&gt; true);
+            builder.sslContext(createUnsafeSSLContext());
+        } else if (configuration.keystoreLocation().isPresent()) {
+            builder.hostnameVerifier((host, session) -&gt; configuration.hostnames().map(it -&gt; it.contains(host)).orElse(false));
+            builder.sslContext(createSSLContext(
+                    configuration.keystoreLocation().orElseThrow(IllegalArgumentException::new),
+                    configuration.keystoreType().orElseGet(KeyStore::getDefaultType),
+                    configuration.keystorePassword().orElse("changeit"),
+                    configuration.truststoreType().orElseGet(TrustManagerFactory::getDefaultAlgorithm)));
+        }
+
+        // 4
+        configuration.clientProviders().ifPresent(s -&gt; s.stream()
+            .map(String::trim)
+            .filter(v -&gt; !v.isEmpty() &amp;&amp; !"-".equals(v))
+            .map(fqn -&gt; {
+                try {
+                    return Thread.currentThread().getContextClassLoader().loadClass(fqn).getConstructor().newInstance();
+                } catch (final Exception e) {
+                    log.warn("Can't add provider " + fqn + ": " + e.getMessage(), e);
+                    return null;
+                }
+            })
+            .filter(Objects::nonNull)
+            .forEach(builder::register));
+
+        // 5
+        return builder.build();
+    }
+
+
+    @Produces // 6
+    @ApplicationScoped
+    @HttpClient(HttpClient.Type.OKTA)
+    public WebTarget oktaWebTarget(final Client client, final OktaConfiguration configuration) {
+        return client.target(configuration.baseUrl());
+    }
+
+    // 7
+
+    private SSLContext createUnsafeSSLContext() {
+        final TrustManager[] trustManagers = { new X509TrustManager() {
+
+            @Override
+            public void checkClientTrusted(final X509Certificate[] x509Certificates, final String s) {
+                // no-op
+            }
+
+            @Override
+            public void checkServerTrusted(final X509Certificate[] x509Certificates, final String s) {
+                // no-op
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+        } };
+        try {
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustManagers, new java.security.SecureRandom());
+            return sslContext;
+        } catch (final NoSuchAlgorithmException | KeyManagementException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private SSLContext createSSLContext(final String keystoreLocation,
+                                        final String keystoreType,
+                                        final String keystorePassword,
+                                        final String truststoreType) {
+        final Path source = Paths.get(keystoreLocation);
+        if (!Files.exists(source)) {
+            throw new IllegalArgumentException(source + " does not exist");
+        }
+        final KeyStore keyStore;
+        try (final InputStream stream = Files.newInputStream(source)) {
+            keyStore = KeyStore.getInstance(keystoreType);
+            keyStore.load(stream, keystorePassword.toCharArray());
+        } catch (final KeyStoreException | NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        } catch (final CertificateException | IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+        try {
+            final TrustManagerFactory trustManagerFactory =
+                    TrustManagerFactory.getInstance(truststoreType);
+            trustManagerFactory.init(keyStore);
+            final SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustManagerFactory.getTrustManagers(), new java.security.SecureRandom());
+            return sslContext;
+        } catch (final KeyStoreException | NoSuchAlgorithmException | KeyManagementException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}</code></pre>
+
+<p>This code is pretty standard but here are the highlights:</p>
+
+<ol>
+	<li>We produce a&nbsp;<em>Client</em>&nbsp;which will be used by the whole application, indeed we could do it per usages (Okta, Jira, Amazon, ....) but it is generally enough to do it once then the implementation handles the change of hosts. Doing that you have to use a single truststore for all clients which is generally an advantage in terms of maintenance. If you prefer to split it, ensure to split it thanks to a qualifier - by usages.</li>
+	<li>The first important configuration for a&nbsp;<em>Client</em>&nbsp;concerns the timeouts and the thread pool for&nbsp;<em>async()</em>&nbsp;or&nbsp;<em>rx()</em>&nbsp;usages. In our cases we want to be <em>rx()</em>&nbsp;since we target a remote system and don&#39;t want to block HTTP threads - bulkhead pattern - so we configure a dedicated pool we produced elsewhere.</li>
+	<li>Then, since we will rely on HTTPS - we are speaking of security here - we need to ensure the SSL context is correctly configured. We have mainly two modes: an unsafe mode for tests and a secured mode with a truststore.</li>
+	<li>We also optionally add providers to our client to ensure we can read the responses of our requests, this is optional and for a Microprofile or JakartaEE instance this is generally useless but if you build your own JAX-RS/CDI instance you can need to register JSON-B/JSON-P providers.</li>
+	<li>Now our client is fully configured we just build it.</li>
+	<li>From a client, the Okta&nbsp;<em>WebTarget</em>&nbsp;is just setting the base path to the client.</li>
+	<li>The rest of the code is about the SSLContext creation from a configuration, I put it there to ensure the completeness of the code but it is quite standard.</li>
+</ol>
+
+<h2>CDI producer for a thread pool</h2>
+
+<p>To produce the thread pool - and inject it in the previous client producer method - you can use this class:</p>
+
+<pre>
+<code class="language-java">@Slf4j
+@ApplicationScoped
+public class ThreadPoolFactory {
+    @Produces
+    @ApplicationScoped
+    @Threads(Threads.Type.HTTP)
+   public ExecutorService httpExecutorService(final ThreadConfiguration configuration) {
+        return newPool(configuration.minThreads(), configuration.maxThreads(), "client-http-");
+    }
+
+    void releaseHttpPool(@Disposes @Threads(Threads.Type.HTTP) final ExecutorService executorService) {
+        executorService.shutdownNow(); // we don't really need to await here for http calls
+    }
+
+    private ExecutorService newPool(final int min, final int max, final String prefix) {
+        final ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
+                min, max, 1L, MINUTES, new LinkedBlockingQueue&lt;&gt;(), new ThreadFactory() {
+            private final AtomicInteger counter = new AtomicInteger();
+
+            @Override
+            public Thread newThread(final Runnable r) {
+                return new Thread(r, prefix + String.format("%03d", counter.incrementAndGet()));
+            }
+        }) {
+            @Override
+            public void execute(final Runnable command) {
+                super.execute(new LoggingErrorRunnable(command));
+            }
+        };
+        poolExecutor.setRejectedExecutionHandler((r, executor) -&gt; log.error("Can't accept {}", r));
+        return poolExecutor;
+    }
+
+    @AllArgsConstructor // lombok
+    private static class LoggingErrorRunnable implements Runnable {
+        private final Runnable delegate;
+
+        @Override
+        public void run() {
+            try {
+                delegate.run();
+            } catch (final RuntimeException re) {
+                log.error(re.getMessage());
+                throw re;
+            }
+        }
+    }
+}</code></pre>
+
+<p>At that point the code misses three main elements:</p>
+
+<ol>
+	<li>Qualifiers - <em>@HttpClient&nbsp;</em>and <em>@Threads</em>, they are important since clients, thread pool etc are common types and they enable to avoid the ambiguity of the beans in a strongly typed fashion.</li>
+	<li>The configuration,</li>
+	<li>The state handling.</li>
+</ol>
+
+<h2>Custom qualfiiers</h2>
+
+<p>To clarify the &quot;type&quot; of a bean, CDI enables to associate to the java type some qualifiers - actually a bean without a qualifier has the <em>@Default</em>&nbsp;qualifier.</p>
+
+<p>A qualifier is just a custom annotation marked with&nbsp;<em>@Qualifier</em>. If it has some methods they are used as parameters and enter into the key of the bean for that particular qualifier. Here is one of our two qualifiers:</p>
+
+<pre>
+<code class="language-java">@Qualifier
+@Retention(RUNTIME)
+@Target({FIELD, METHOD, PARAMETER})
+public @interface HttpClient {
+    Type value();
+
+    enum Type {
+        GENERIC, OKTA
+    }
+}</code></pre>
+
+<p>It enables us to produce our&nbsp;<em>WebTarget</em>&nbsp;for okta and inject it adding to&nbsp;<em>@Inject</em>&nbsp;the annotation&nbsp;<em>@HttpClient(OKTA)</em>.</p>
+
+<p>We use the same kind of metadata for the thread pool.</p>
+
+<h2>Configuration</h2>
+
+<p>The configuration can use a tons of solutions from hardcoded values, through the plain system properties to libraries like owner or Microprofile config.</p>
+
+<p>Here, I will use a Microprofile config extension of Apache Geronimo Config implementation: the proxy based mapping. It is nicer than the plain injections of the specification and enables to reload the bound values consistently to their usage compared to the spec itself since the caching of the value can be evicted at once (and avoid to use the old host with the new port for instance ;)):</p>
+
+<pre>
+<code class="language-java">@ConfigProperty(name = "company.application.")
+public interface OktaConfiguration {
+    @ConfigProperty(name = "base")
+    String baseUrl();
+
+    @ConfigProperty(name = "callback")
+    String oktaCallback();
+
+    @ConfigProperty(name = "client.id")
+    String clientId();
+
+    @ConfigProperty(name = "client.secret")
+    String clientSecret();
+}</code></pre>
+
+<p>This configuration defines the keys;</p>
+
+<ul>
+	<li><em>company.application.base</em>: Okta base URL (until the API version),</li>
+	<li><em>company.application.callback</em>: the redirect_uri (callback endpoint) Okta should use - and has registered for authorization_code flow,</li>
+	<li><em>company.application.client.[id|secret]</em>: the OAuth2 client id/secret.</li>
+</ul>
+
+<p>If you use CDI scanning mode&nbsp;<em>all</em>&nbsp;then this will be a bean out of the box, if you rely on&nbsp;<em>annotated</em>&nbsp;mode - and don&#39;t want to change - you need to register this as a bean since interfaces are skipped by default in annotated mode. This can be done through a CDI extension:</p>
+
+<pre>
+<code class="language-java">// don't forget META-INF/services registration as well
+public class EnsureConfigurationIsDeployed implements Extension {
+    public void register(@Observes final BeforeBeanDiscovery beforeBeanDiscovery,
+                         final BeanManager beanManager) {
+        beforeBeanDiscovery.addAnnotatedType(beanManager.createAnnotatedType(OktaConfiguration.class));
+    }
+}</code></pre>
+
+<h2>State generation/validation</h2>
+
+<p>Finally the last missing piece of our solution is what is our&nbsp;<em>StateManager</em>. Its role is to generate state strings and be able to validate them.</p>
+
+<p>The most trivial implementation can be to generate&nbsp;<em>UUID</em>&nbsp;and not validate them - <em>isValid</em>&nbsp;would always return true. This works and relies on the fact the code is secured by itself.</p>
+
+<p>However, you can do a bit better with a few investment. A more trivial implementation can store the generated state into a database and delete it when it comes back (+ a timeout to ensure error case does not lead to fill the database).</p>
+
+<p>I would call this last solution a step 2. It would be nice to use the HTTP session but this is quite hard since the clients can differ and therefore the session is not guaranteed to be inherited. And this is likely the key to implement it properly: use a local secret.</p>
+
+<p>Long story short the idea is to implement a signed string generator, exactly as an OAuth2/JWT server would do to enable to send a string we can validate with a simple SHA256withRSA based algorithm. If we stick to JWT logic, here is what we can do:</p>
+
+<ol>
+	<li>Generate a random string (an UUID is ok),</li>
+	<li>Put it in a JSON object,</li>
+	<li>Append an expiration date (for instance now + 5 minutes assuming a login must take less than 5 minutes),</li>
+	<li>Encode that JSON as a base64 string (or another URL friendly format),</li>
+	<li>Sign that base64 and encode it as a base64 string too,</li>
+	<li>Concatenate both base64 strings with a separator outside base64 alphabet (like &#39;#&#39; or &#39;.&#39;).</li>
+</ol>
+
+<p>Validation is the symmetric process:</p>
+
+<ol>
+	<li>Split the string based on the separator,</li>
+	<li>If there are not exactly 2 strings then it fails,</li>
+	<li>Decode last strong (base64 decoder),</li>
+	<li>Ensure last decoded string if the signature of the first string (if not it is considered as invalid).</li>
+</ol>
+
+<p>Here is a potential implementation:</p>
+
+<pre>
+<code class="language-java">@Slf4j
+@ApplicationScoped
+public class StateManager {
+    @Inject
+    private StateConfiguration configuration;
+
+    private final JsonBuilderFactory jsonBuilderFactory = Json.createBuilderFactory(emptyMap());
+    private final JsonReaderFactory jsonReaderFactory = Json.createReaderFactory(emptyMap());
+    private final Clock clock = Clock.systemUTC();
+    private final Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+    private final Base64.Decoder decoder = Base64.getUrlDecoder();
+    private RSAPrivateKey privateKey;
+    private PublicKey publicKey;
+
+    public void onStart(@Observes @Initialized(ApplicationScoped.class) final Object init) {
+        privateKey = RSAPrivateKey.class.cast(loadKey(configuration.jwtPrivateKey()));
+        try { // get the public key from the private one, == simpler config
+            publicKey = KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(
+                    privateKey.getModulus(), RSAPrivateCrtKey.class.cast(privateKey).getPublicExponent()));
+        } catch (final InvalidKeySpecException | NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public String next() {
+        final String state = encoder.encodeToString(
+            nextState().toString().getBytes(StandardCharsets.UTF_8));
+        final String signature = sign(privateKey, state);
+        return state + '#' + signature;
+    }
+
+    public boolean verify(final String input) {
+        final String[] parts = input.split("#");
+        if (parts.length != 2) {
+            log.warn("Invalid state token: '{}'", input);
+            return false;
+        }
+        try {
+            final Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initVerify(publicKey);
+            signature.update(parts[0].getBytes(StandardCharsets.UTF_8));
+            final boolean verified = signature.verify(decoder.decode(parts[1]));
+            if (!verified) {
+                log.warn("Invalid state token: '{}'", input);
+                return false;
+            }
+
+            try (final JsonReader reader = jsonReaderFactory.createReader(new ByteArrayInputStream(decoder.decode(parts[0])))) {
+                final JsonObject object = reader.readObject();
+                final long expiresAt = object.getJsonNumber("expiresAt").longValue();
+                if (clock.instant().isAfter(Instant.ofEpochMilli(expiresAt))) {
+                    log.warn("Expired state token: '{}'", input);
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (final Exception e) {
+            log.warn("Invalid state token: '{}'", input, e);
+            return false;
+        }
+    }
+
+    private JsonObject nextState() {
+        return jsonBuilderFactory.createObjectBuilder()
+                .add("marker", marker())
+                .add("expiresAt", getExpirationMs())
+                .build();
+    }
+
+    private long getExpirationMs() {
+        return clock.instant().plusMillis(configuration.oktaStateGenerationExpiration()).toEpochMilli();
+    }
+
+    private String marker() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+
+    private PrivateKey loadKey(final String key) {
+        if ("auto".equals(key)) { // generate a key - for tests!
+            try {
+                final KeyPairGenerator rsa = KeyPairGenerator.getInstance("RSA");
+                rsa.initialize(1024);
+                final KeyPair keyPair = rsa.generateKeyPair();
+                return keyPair.getPrivate();
+            } catch (final NoSuchAlgorithmException e) {
+                throw new IllegalStateException(e);
+            }
+        }
+
+        final byte[] decoded = Base64.getDecoder().decode(key)
+                .replace("-----BEGIN RSA KEY-----", "")
+                .replace("-----END RSA KEY-----", "")
+                .replace("-----BEGIN PRIVATE KEY-----", "")
+                .replace("-----END PRIVATE KEY-----", "")
+                .replace("-----BEGIN RSA PRIVATE KEY-----", "")
+                .replace("-----END RSA PRIVATE KEY-----", "")
+                .replace("\n", "")
+                .trim());
+        final PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoded);
+        try {
+            return KeyFactory.getInstance("RSA").generatePrivate(keySpec);
+        } catch (final NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private String sign(final PrivateKey privateKey, final String signingString) {
+        try {
+            final Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(privateKey);
+            signature.update(signingString.getBytes(StandardCharsets.US_ASCII));
+            return encoder.encodeToString(signature.sign());
+        } catch (final NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}</code></pre>
+
+<ol>
+	<li><em>next()</em>&nbsp;implements the generation logic,</li>
+	<li><em>verify()</em>&nbsp;implements the validation logic.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>If you remove the boilerplate code which is mainly ensuring we are stateless and configurable, the integration of Okta OAuth2 server is pretty trivial from an application perspective.</p>
+
+<p>It is also the opportunity to see that Microprofile 1.0 (and it is important to note that this is the core version and that more recent ones are way more oppinatied) perfectly matches modern world and its technologies (HTTP, JSON, Config) and enable productive development (IoC/CDI).</p>
+
+<p>Finally, the important lesson learnt is that you don&#39;t need to run on a library for the security but must start by understanding what mecanism you use and what you need. Generally you have everything handy already.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//docker-container-metadata-from-java-application.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//johnzon-jsonp-jsonb-configuration-file.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

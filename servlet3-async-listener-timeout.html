@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Servlet 3 and AsyncListener: don&#8217;t miss timeouts!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,156 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="servlet3-async-listener-timeout-html-container" class="container page-content servlet3-async-listener-timeout-html is-blog">
+                        <div class="page-header">
+                <h1>Servlet 3 and AsyncListener: don&#8217;t miss timeouts!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-06-30</span>, <span class="metadata-readingtime">3 min and 11 sec read</span></p>
+</div>
+<p>To be asynchronous, Servlet 3 provides AsyncContext#start(Runnable) but it reuses the http pool. So, to have more control over it, you may desire to use a ManagedExecutorService from ee-concurrency-utilities specification.</p>
+
+<p>With that hypothesis, an asynchronous servlet - or a servlet using NIO to be more concrete - will look like:</p>
+
+<pre>
+<code class="language-java">import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.servlet.AsyncContext;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(urlPatterns = "/async", asyncSupported = true)
+public class AsyncServlet extends HttpServlet {
+   @Resource
+   private ManagedExecutorService es;
+
+   @Override
+   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+       final AsyncContext ctx = req.startAsync();
+       es.submit(() -&gt; {
+           // something long
+           try {
+              ctx.getResponse()
+                  .getWriter().write("{\"done\":true}");
+           } catch (final IOException e) {
+               throw new IllegalStateException(e);
+           }
+       });
+   }
+}
+</code></pre>
+
+<p>Some comments on that code:</p>
+
+<ul>
+	<li>asyncSupported needs to be set to true (there is the same flag in web.xml if needed). &nbsp;Otherwise the container will consider the servlet is not asynchronous friendly and will prevent the AsyncContext usage. Note that this applies to any element of the filter chain including filters! So, if you use a filter to wrap the request to initialize your own principal (and this filter is not asyncSupported), then this servlet will fail because of that filter. So take care of the whole chain and not only the leaf (the servlet).</li>
+	<li>The handler for asynchronous servlet is the AsyncContext which provides the request/response to use during the asynchronous processing. Note that you can wrap the original one using startAsync(req, resp).</li>
+	<li>The thread where the actual request processing is executed is any thread for the Servlet container. So ensure to propagate (by message passing or any other way) the contextual informations you need before starting the asynchronous task.</li>
+</ul>
+
+<p>This is great but you often need more control over the request for simple needs like auditing or more advanced ones like timeout handling. For that purpose, Servlet API offers &nbsp;AsyncListener API. The API is straightforward and looks like that:</p>
+
+<pre>
+<code class="language-java">@Override
+protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+   final AsyncContext ctx = req.startAsync();
+   ctx.addListener(new AsyncListener() {
+       @Override
+       public void onStartAsync(final AsyncEvent event) throws IOException {
+           // something
+       }
+
+       @Override
+       public void onComplete(final AsyncEvent event) throws IOException {
+           onDone(event);
+       }
+
+       @Override
+       public void onTimeout(final AsyncEvent event) throws IOException {
+           onDone(event);
+       }
+
+       @Override
+       public void onError(final AsyncEvent event) throws IOException {
+           onDone(event);
+       }
+
+       private void onDone(final AsyncEvent event) {
+           // something
+       }
+   });
+   es.submit(() -&gt; {
+       // like before
+   });
+}
+</code></pre>
+
+<p>Note: of course, onDone() is a shortcut I used in this sample to handle the termination of the request the same way whatever the cause is. But it needs to be adapted in your case.</p>
+
+<p>Servlet API offers a listener able to notify you when the request starts, when it fails, when it succeeds or when it timeouts.</p>
+
+<p>This looks simple, right? Actually, it doesn&rsquo;t work. The specification says that listeners are resetted once the request is started. In other words, onDone() will never be called in previous snippet, only onStartAsync() will.</p>
+
+<p>What does that mean? To have the behavior you probably expect (i.e. listen all events), you will need to add back your listener when the request starts. This can be done by modifying our onStartAsync this way:</p>
+
+<pre>
+<code class="language-java">@Override
+public void onStartAsync(final AsyncEvent event) throws IOException {
+   event.getAsyncContext().addListener(this);
+}
+</code></pre>
+
+<p>This is a small workaround, but not forgetting it will ensure you don&rsquo;t miss any event and in particular the timeout processing. This can be very important if you want to report an error to an altering system for instance or have statistics about your endpoint.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tea-ci-travis-like-windows.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-embedded-flavors.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

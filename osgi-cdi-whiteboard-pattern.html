@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI + OSGi and whiteboard pattern</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,140 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="osgi-cdi-whiteboard-pattern-html-container" class="container page-content osgi-cdi-whiteboard-pattern-html is-blog">
+                        <div class="page-header">
+                <h1>CDI + OSGi and whiteboard pattern</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-01-23</span>, <span class="metadata-readingtime">3 min and 14 sec read</span></p>
+</div>
+<p>One fundamental pattern in OSGi land is what is called &quot;whiteboard pattern&quot;. Long story short, it is based on the fact the OSGi registry is a singleton for all bundles and the only single instance any (dynamic) bundle can rely on to have a state independent of deployments. Associated with a&nbsp;<em>ServiceListener</em>, it enables to use the registry to lookup all services matching a condition (type, filter, ...). Then the whiteboard runtime can use these instance to do what it needs. Common examples of whiteboards are servers: HTTP&nbsp;(you don&#39;t want to bind a port per bundle and potentially rebind the same port), JAX-RS server, ...</p>
+
+<p>There are several abstraction to simplify the write of whiteboard - felix has one, karaf has some utilities about it too, but it is interesting to see that some newly API introduced by OSGi-CDI specification also help in such a task.</p>
+
+<p>Let&#39;s take the simple example you want to write a registry holding all the service instances matching the filter <em>mywhiteboard=true</em>.</p>
+
+<p>The CDI implementation will be based on the&nbsp;<em>BindService</em>&nbsp;API. It is more or less an OSGi-CDI facade to a&nbsp;<em>ServiceTracker</em>&nbsp;and can be injected with a filter passed to&nbsp;<em>@Reference</em>&nbsp;to filter the listened services.</p>
+
+<p>Here is what it an look like:</p>
+
+<pre>
+<code class="language-java">public void onStart(
+      @Observes @Initialized(ApplicationScoped.class) Object init, // 1
+
+      @Reference(target = "(mywhiteboard=true)") // 2
+      final BindService&lt;Object&gt; myWhiteboardServicesListener) { // 3
+
+  myWhiteboardServicesListener // 4
+    .adding(this::registerService)
+    .removed(this::unregisterService)
+    .bind(); // 5
+}</code></pre>
+
+<ol>
+	<li>We initialize the binder when the application starts, the <em>BindService</em>&nbsp;injection could be done in a constructor or field used in a&nbsp;<em>@PostConstruct</em>&nbsp;method, but this enables to activate the registry with the application, so if the registry is injected, it is already initialized and you don&#39;t add latency at the first calls,</li>
+	<li>Using&nbsp;<em>@Reference</em>&nbsp;we filter the services we want to listen using a custom filter, type stays&nbsp;<em>Object</em>&nbsp;here but it can be specified in the annotation as well,</li>
+	<li>We inject the&nbsp;<em>BindService</em>&nbsp;instance which is provided by the OSGi-CDI implementation,</li>
+	<li>We set up our add/remove methods, it will typically enable to &quot;parse&quot; the service instance (introspect it if needed),</li>
+	<li>Finally we <em>bind()</em>&nbsp;the&nbsp;<em>BindService</em>&nbsp;which means we start to listen for services (we open the&nbsp;<em>ServiceTracker</em>).</li>
+</ol>
+
+<p>The last piece to make this work is to add the&nbsp;<em>mywhiteboard=true</em>&nbsp;marker, this can be done in a lot of ways but the simplest is likely to create a custom annotation and mark it with&nbsp;<em>@BeanPropertyType</em>&nbsp;from OSGi-CDI to enforce the (OSGi-CDI) service registration to have this property:</p>
+
+<pre>
+<code class="language-java">import org.osgi.service.cdi.annotations.BeanPropertyType;
+
+@BeanPropertyType
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface Mywhiteboard {
+    boolean value() default true;
+}</code></pre>
+
+<p>By convention, this annotation will be converted to&nbsp;<em>mywhiteboard=true</em>&nbsp;property when used with&nbsp;OSGi-CDI<em> @Service&nbsp;</em>to register a service.</p>
+
+<p>Now, as an user of this whiteboard, you can just mark your bean with this annotation and it will be registered in the whiteboard:</p>
+
+<pre>
+<code class="language-java">@Mywhiteboard // 1
+@Service(Object.class) // 2
+public class MyService {
+}</code></pre>
+
+<ol>
+	<li>Mark the service as being using the whiteboard</li>
+	<li>Request OSGi-CDI to register the bean as a service</li>
+</ol>
+
+<p>In practise, if you think about doing a CLI like whiteboard using Tomitribe <a href="https://github.com/tomitribe/crest" target="_blank">Crest</a>&nbsp;library, you could end up with something looking like:</p>
+
+<pre>
+<code class="language-java">@CrestWhiteboard
+@Service(Object.class)
+public class MyService {
+    @Inject
+    private Dao dao;
+
+    @Command
+    public void listEntities(@Out PrintStream out) {
+        out.println(
+           dao.list().stream()
+               .map(Dto::toString)
+                .collect(joining("\n")));
+    }
+}</code></pre>
+
+<p>Nothing else to do,&nbsp;<em>@Service</em>&nbsp;will take care to register the bean in OSGi registry,&nbsp;<em>@CrestWhiteboard</em>&nbsp;will take care to mark the command bean as being to be parsed and registered in the crest whiteboard so then calling crest you can execute this command without having to do anything else, and this is the strength of the whiteboard pattern, you just declare your business logic and then it is available thanks the runtime automatically.</p>
+
+<p>Last note: don&#39;t forget to have a beans.xml (or to use <em>@Bean(s))&nbsp;</em>and bnd/maven-bundle-plugin set up to ensure your module is registered as a OSGi-CDI module in your jar MANIFEST.MF.</p>
+
+<p>Happy OSGi/CDI hacking!</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//log4j2-error-log-event-on-stderr.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-14-record-class-type-and-json-b.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

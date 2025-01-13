@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apache Beam and Websocket: send your big data outputs over websockets!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="apache-beam-websocket-output-html-container" class="container page-content apache-beam-websocket-output-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Beam and Websocket: send your big data outputs over websockets!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-06-06</span>, <span class="metadata-readingtime">12 min and 48 sec read</span></p>
+</div>
+<p>Apache <a href="https://beam.apache.org/" target="_blank">Beam</a>&nbsp;provides an abstraction for BIg Data environments. In nowdays IT world, it is a very high value to be able to change of platform without having to redevelop most of the business (Batches or Streams). This is the most costly part since the environment by itsef is mainly reusing some open source product or buying a solution, but your own business is what costs and what is risky to modify after some time when the knowledge is no more fresh. In that context using Beam is a good solutio, however you can need to extend some of its connectivity because the project is still just providing the bare minimum.</p>
+
+<p>In this context we will see how to implement very quickly a WebSocket&nbsp;output which will send all the records arriving at the end of the pipeline (execution &quot;flow&quot;) to a websocket server.</p>
+
+<p>This can sound a showcase example but actually websocket is a very efficient solution in a lot of cases because:</p>
+
+<ul>
+	<li>It provides a connected solution (i.e. you don&#39;t reconnect to the server per message) so it is generally faster than using plain HTTP,</li>
+	<li>It is (now) supported in most servers so it provides a simple and generic way to connect some Big Data flow with some external system (like a real time web application).</li>
+</ul>
+
+<p>If you never implemented or looked a Beam connector code here are the high level steps you need to go through to implement an output:</p>
+
+<ul>
+	<li>A&nbsp;<em>PTransform</em>&nbsp;will be responsible to integrate the connector into the pipeline. In other words it will create a subpipeline and merge it with current pipeline,</li>
+	<li>An output can be either a&nbsp;<em>WriteOperation</em>&nbsp;or a simple<em>&nbsp;</em><em>Fn</em>. The first option is becoming deprecated and requires a lot of boilerplate so we will just use a&nbsp;<em>DoFn</em>&nbsp;which is basically an instance with a defined lifecycle in the runner (execution implementation more exactly).</li>
+</ul>
+
+<h2>The WebSocket PTransform</h2>
+
+<p>Our <em>PTransform</em>&nbsp;will be quite simple: take the pipeline which will represent the whole processing the user wants and append it the sending of all records (called elements in Beam semantic) over a websocket.</p>
+
+<p>Before being able to code it we need to know which configuration we need. To stay simple we will limit it to the following entries:</p>
+
+<ul>
+	<li>An uri representing the server to connect to (it can be a load balancer),</li>
+	<li>A flag to say if we want to ignore or not the errors (if we don&#39;t ignore them we can make the bundle fail, which is a group of records for the runner, and will generally be reprocessed),</li>
+	<li>The idle timeout for the connection (when to disconnect the websocket connection if nothing happens),</li>
+	<li>An optional&nbsp;<em>ClientEndpointConfig</em>&nbsp;which is a way to configure websocket subprotocols, extensions and configurator (which can be used to handle the websocket security or tracing),</li>
+	<li>And finally an optional&nbsp;<em>Sender</em>, which will be a custom API to handle the send of the data, you can see it as the way to send the incoming record (as TEXT, BYTES or OBJECTS).</li>
+</ul>
+
+<p>Here is the overall structure for our transform:</p>
+
+<pre>
+<code class="language-java">public class WebSocketOutput&lt;T&gt; extends PTransform&lt;PCollection&lt;T&gt;, PDone&gt; {
+    private final URI uri;
+    private int errorTolerance;
+    private long timeout;
+    private ValueProvider&lt;ClientEndpointConfig&gt; clientEndpointConfiguration;
+    private Sender sender;
+
+    public WebSocketOutput(final URI uri) {
+        this.uri = uri;
+    }
+
+    @Override
+    public PDone expand(final PCollection&lt;T&gt; input) {
+        input.apply(ParDo.of(new Fn&lt;&gt;(uri, errorTolerance, timeout, clientEndpointConfiguration, sender)));
+        return PDone.in(input.getPipeline());
+    }
+
+    // Fn definition, see next part
+
+    //
+    // fluent setters
+    //
+
+    public WebSocketOutput&lt;T&gt; setErrorTolerance(final int errorTolerance) {
+        this.errorTolerance = errorTolerance;
+        return this;
+    }
+
+    public WebSocketOutput&lt;T&gt; setTimeout(final long timeout) {
+        this.timeout = timeout;
+        return this;
+    }
+
+    public WebSocketOutput&lt;T&gt; setSender(final Sender sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    public WebSocketOutput&lt;T&gt; setClientEndpointConfiguration(final ValueProvider&lt;ClientEndpointConfig&gt; clientEndpointConfiguration) {
+        this.clientEndpointConfiguration = clientEndpointConfiguration;
+        return this;
+    }
+}</code></pre>
+
+<ol>
+	<li>Our&nbsp;<em>PTransform</em>&nbsp;will read a&nbsp;<em>PCollection</em>&nbsp;of&nbsp;<em>T</em>, which means a collection of records will inflow into the steps we will append to the pipeline, and our output will be a&nbsp;<em>PDone</em>, which means we mark the end of the current branch of the pipeline.</li>
+	<li>The&nbsp;<em>expand()</em>&nbsp;method is the one responsible of appending the output (websocket) to the incoming pipeline. Since we will use a&nbsp;<em>DoFn</em>, we just integrate it with the&nbsp;<em>ParDo.of()</em>&nbsp;utility. Finally, since we consider the pipeline done after this step we return a&nbsp;<em>PDone</em>&nbsp;built from its <em>in()</em>&nbsp;utility.</li>
+	<li>The last part of the class is just composed of all the fluent setters for optional parameters. It allows to keep a nice API for the programmatic usage but still be compatible with configuration so not a bad compromise.</li>
+</ol>
+
+<p>Now we have a transform we can add to a pipeline, let&#39;s implement the actual logic of the transform: our&nbsp;<em>DoFn</em>.</p>
+
+<h2>The WebSocket DoFn</h2>
+
+<p>A DoFn is an element of the pipeline which takes some input(s), a record in our case, and optionally output some values, nothing for our case.</p>
+
+<p>The&nbsp;<em>DoFn</em>&nbsp;defines the following lifecycle:</p>
+
+<ul>
+	<li><em>Setup</em>: called once at the beginning of the usage of the fn in the pipeline,</li>
+	<li><em>Teardown</em>: symmetric step of the&nbsp;<em>Setup</em>, it is called once before the fn instance is no more used at all,</li>
+	<li><em>StartBundle</em>: when a bundle starts this step is called. A bundle is a group of records. Its size depends the environment and runner,</li>
+	<li><em>FinishBundle</em>: this step is called when the bundle is considered completed by the runner, very high level it is a kind of commit step but without the classical semantic associated (retries etc, all that depends of the runner),</li>
+	<li><em>ProcessElement</em>: this step is called for each record of the incoming collection.</li>
+</ul>
+
+<p>For a WebSocket output, we need to:</p>
+
+<ul>
+	<li>Initialize the connection: we will do it lazily when a record arrives to support reconnection. Assume you have an idle timeout of 1mn and you get one record per 5mn then you need to reconnect. The simplest implementation of that will be to just check the connection when a record arrives. So we will do it in the process element hook. In terms of complexity, it is just a few null checks and a reference check&nbsp;once obtains so not an issue.</li>
+	<li>Send correctly the record to the server over the connection. This means detecting if we use a&nbsp;<em>sendText()</em>,&nbsp;<em>sendBinary()</em>, or&nbsp;<em>sendObject()</em>. This is the responsability of the&nbsp;<em>Sender</em>&nbsp;enum we saw in the transform. The user can specify it but we will also be able to detect it automatically from the first record. It means we do it in the process element hook too (it is a null check at the end so not a big deal).</li>
+	<li>Count the errors to be able to make the bundle fail if we have some. To implement that, we need to reset a counter when a bundle starts and check it when the bundle finishes and throw an exception if we don&#39;t respect the condition.</li>
+	<li>Send the records and be able to wait for them before a bundle ends. For that we will call the sender in the process element step and store a way to know if it happens or not we will check in the finish bundle phase.</li>
+	<li>Ensure the connection is disconnected when no more needed. We could do it per bundle but since there is no real reason to disconnect to reconnect immediately we will just close the connection in the tear down phase if needed.</li>
+</ul>
+
+<h3>Pick a WebSocket client implementation</h3>
+
+<p>To limit the dependency stack and ensure we run in most environment without any conflict the best choice is to use the JSR256 which is just one small jar and then the user can bind the implementation of its choice (tomcat, jetty, undertow, ....).</p>
+
+<h3>Count errors and ensure record was sent</h3>
+
+<p>The JSR356 provides two way to handle the send of the records:</p>
+
+<ul>
+	<li>send and return a&nbsp;<em>Future</em></li>
+	<li>send with a completion callback</li>
+</ul>
+
+<p>The first option is quite classical but will require to bufferize all futures per bundle. Not a big deal...until a bundle is the whole dataset which can be huge and lead to an out of memory. Since the bundle size depends the runner we can&#39;t use that for a generic and portable implementation. Luckily the callback flavor allows us to have all we need.</p>
+
+<p>The callback is named&nbsp;<em>SendHandler</em>&nbsp;and requires to implement the method <em>onResult(SendResult)</em>. The&nbsp;<em>SendResult</em>&nbsp;parameter will give us if the record was sent successfully or not.&nbsp;This method also gives us a callback to remove the record &quot;wait&quot; logic, it is like removing the future from the pending list of acknowledgements.</p>
+
+<p>To handle that we will manage in our fn a list of&nbsp;<em>Cleaner</em>&nbsp;which will be the name of our implementation of handler and a counter of errors. The cleaner&nbsp;will add itself in the list when created and when the callback is triggered, we will remove it and increment the error counter if needed. Finally we will also add a&nbsp;<em>CountDownLatch</em>&nbsp;to be able to wait for the trigger to be called in our finish bundle phase:</p>
+
+<pre>
+<code class="language-java">// private cause implemented as an inner class of the transform next to the fn
+private static class Cleaner implements SendHandler {
+    private final Collection&lt;Cleaner&gt; cleaners;
+    private final AtomicInteger errors;
+    private final CountDownLatch latch = new CountDownLatch(1);
+
+    private Cleaner(final Collection&lt;Cleaner&gt; cleaners, final AtomicInteger errors) {
+        this.cleaners = cleaners;
+        this.errors = errors;
+        synchronized (this.cleaners) {
+            cleaners.add(this);
+        }
+    }
+
+    @Override
+    public void onResult(final SendResult result) {
+        latch.countDown();
+        synchronized (cleaners) {
+            cleaners.remove(this);
+        }
+        if (!result.isOK()) {
+            errors.incrementAndGet();
+        }
+    }
+
+    private void await() {
+        try {
+            latch.await();
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}</code></pre>
+
+<h3>The Sender implementation: TEXT, BYTE_BUFFER, BYTE_ARRAY and OBJECT</h3>
+
+<p>The sender just provides the casting of the record to the right type to use the right send method of the&nbsp;<em>Async</em>&nbsp;API of the JSR356:</p>
+
+<pre>
+<code class="language-java">// still an inner class
+private enum Sender {
+    TEXT {
+        @Override
+        void send(final RemoteEndpoint.Async async, final Object element, final Cleaner cleaner) {
+            async.sendText(element.toString(), cleaner);
+        }
+    }, BYTE_ARRAY {
+        @Override
+        void send(final RemoteEndpoint.Async async, final Object element, final Cleaner cleaner) {
+            BYTE_BUFFER.send(async, ByteBuffer.wrap(byte[].class.cast(element)), cleaner);
+        }
+    }, BYTE_BUFFER {
+        @Override
+        void send(final RemoteEndpoint.Async async, final Object element, final Cleaner cleaner) {
+            async.sendBinary(ByteBuffer.class.cast(element), cleaner);
+        }
+    }, OBJECT {
+        @Override
+        void send(final RemoteEndpoint.Async async, final Object element, final Cleaner cleaner) {
+            async.sendObject(element, cleaner);
+        }
+    };
+
+    abstract void send(RemoteEndpoint.Async async, final Object element, Cleaner cleaner);
+}</code></pre>
+
+<h3>The WebSocket DoFn itself</h3>
+
+<p>The DoFn will do exactly what we talked about earlier. The only two points to take care are:</p>
+
+<ul>
+	<li>Use the <em>Async</em> API to send the record (the sync one wouldn&#39;t be fast enough since it would add latency for each single record instead of considering a bundle as a batch). Note that you can add a configuration to force a flush if the list of cleaner becomes too big too.</li>
+	<li>Get lazily the&nbsp;<em>Session</em>&nbsp;(which represents the connection in the JSR356) with an &quot;empty&quot;&nbsp;<em>Endpoint</em>&nbsp;since we don&#39;t need anything else that being able to send records which is already provided by the&nbsp;<em>Session</em>.</li>
+</ul>
+
+<pre>
+<code class="language-java">private static class Fn&lt;T&gt; extends DoFn&lt;T, Void&gt; {
+    private final int errorTolerance;
+    private final URI uri;
+    private final long timeout;
+    private final ValueProvider&lt;ClientEndpointConfig&gt; clientEndpointConfiguration;
+    private Sender sender;
+
+    private Session session;
+    private RemoteEndpoint.Async async;
+    private final Collection&lt;Cleaner&gt; cleaners = new ArrayList&lt;&gt;();
+    private final AtomicInteger errors = new AtomicInteger();
+
+    private Fn(final URI uri, final int errorTolerance, final long timeout,
+               final ValueProvider&lt;ClientEndpointConfig&gt; clientEndpointConfiguration, final Sender sender) {
+        this.uri = uri;
+        this.errorTolerance = errorTolerance;
+        this.timeout = timeout;
+        this.clientEndpointConfiguration = clientEndpointConfiguration;
+        this.sender = sender;
+    }
+
+    @StartBundle
+    public void onSetup() {
+        errors.set(0);
+        cleaners.clear();
+    }
+
+    @ProcessElement
+    public void onElement(final ProcessContext context) {
+        final T element = context.element();
+        getSender(element).send(getAsync(), element, new Cleaner(cleaners, errors));
+    }
+
+    @FinishBundle
+    public void onFinishBundle() {
+        // flush all pending send
+        synchronized (cleaners) {
+            cleaners.forEach(Cleaner::await);
+        }
+        if (errorTolerance &gt; 0 &amp;&amp; errors.get() &gt; 0) {
+            throw new IllegalStateException("Error(s) sending messages: #" + errors.get());
+        }
+    }
+
+    @Teardown
+    public void onTearDown() {
+        ofNullable(session).filter(Session::isOpen).ifPresent(s -&gt; {
+            try {
+                s.close(new CloseReason(CloseReason.CloseCodes.GOING_AWAY, "DoFn teardown"));
+            } catch (final IOException e) {
+                throw new IllegalStateException(e);
+            }
+        });
+    }
+
+    private Sender getSender(final T element) {
+        if (sender == null) { // assume all elements will match the same case, will likely be the case
+            if (CharSequence.class.isInstance(element)) {
+                sender = Sender.TEXT;
+            } else if (ByteBuffer.class.isInstance(element)) {
+                sender = Sender.BYTE_BUFFER;
+            } else if (byte[].class.isInstance(element)) {
+                sender = Sender.BYTE_ARRAY;
+            } else { // default
+                sender = Sender.OBJECT;
+            }
+        }
+        return sender;
+    }
+
+    private RemoteEndpoint.Async getAsync() {
+        if (session == null || async == null || !session.isOpen()) {
+            try {
+                final ClientEndpointConfig config = ofNullable(clientEndpointConfiguration)
+                        .map(ValueProvider::get)
+                        .orElseGet(() -&gt; ClientEndpointConfig.Builder.create().build());
+                session = ContainerProvider.getWebSocketContainer()
+                        .connectToServer(new Endpoint() {
+                            @Override
+                            public void onOpen(final Session session, final EndpointConfig config) {
+                                // no-op, we just want a session
+                            }
+                        }, config, uri);
+                session.setMaxIdleTimeout(timeout);
+                async = session.getAsyncRemote();
+            } catch (final DeploymentException | IOException e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return async;
+    }
+}</code></pre>
+
+<h2>Use the Beam WebSocket output</h2>
+
+<p>Now we have our output we just need to add it in any pipeline:</p>
+
+<pre>
+<code class="language-java">pipeline
+  .apply(....) // read from a database for instance
+  .apply(....) // convert records to anything
+  .apply(new WebSocketOutput&lt;&gt;(URI.create("ws://remote.server.com/endpoint")));
+
+// finally run it
+pipeline.run();</code></pre>
+
+<p>Tip: if you don&#39;t care about providing a primitive transform you can directly use the&nbsp;<em>ParDo</em>&nbsp;one and just write a <em>DoFn</em>, it will save you from one class:</p>
+
+<pre>
+<code class="language-java">pipeline
+  .apply(....) // read from a database for instance
+  .apply(....) // convert records to anything
+  .apply(ParDo.of(new WebSocketOutputFn&lt;&gt;(URI.create("ws://remote.server.com/endpoint"))));
+
+// finally run it
+pipeline.run();</code></pre>
+
+<h2>Bonus: test your Beam WebSocket output with Apache Meecrowave</h2>
+
+<p>To test our websocket we need an endpoint. We can reuse the JSR356 to implement a server endpoint. The server will need to:</p>
+
+<ul>
+	<li>Store the messages to ensure they are received (that&#39;s all we want at the end)</li>
+	<li>Store the close reason to ensure the&nbsp;<em>DoFn</em>&nbsp;closes the connection properly</li>
+</ul>
+
+<p>Here is a simple endpoint:</p>
+
+<pre>
+<code class="language-java">@ServerEndpoint("/WebSocketOutputTest")
+public static class Server {
+    static final Collection&lt;Server&gt; INSTANCES = new ArrayList&lt;&gt;();
+
+    final Collection&lt;String&gt; messages = new ArrayList&lt;&gt;();
+    CloseReason reason;
+
+    @OnOpen
+    public void onOpen() {
+        synchronized (INSTANCES) {
+            INSTANCES.add(this);
+        }
+    }
+
+    @OnMessage
+    public void onMessage(final String message) {
+        synchronized (messages) {
+            messages.add(message);
+        }
+    }
+
+    @OnClose
+    public void onClose(final CloseReason reason) {
+        this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        return "Server{messages=" + messages + '}';
+    }
+}</code></pre>
+
+<p>Now we have an endpoint, we need to deploy it. The easiest is to import&nbsp;<em>meecrowave-junit</em>&nbsp;artifact and just use its integration with JUnit 4 (not the JUnit 5 one since Beam doesn&#39;t support it for now):</p>
+
+<pre>
+<code class="language-java">public class WebSocketOutputTest implements Serializable {
+    @ClassRule
+    public static final MeecrowaveRule SERVER = new MeecrowaveRule(new Meecrowave.Builder() {{
+        randomHttpPort();
+        setScanningExcludes("beam,avro,jsr,para,findbugs,xz");
+    }}, "");
+
+}</code></pre>
+
+<p>Normally you can pass no parameters to the rule but since beam imports some dependencies we don&#39;t want to scan we just change the scanning rules - other configurations are the defaults, i.e. a random port and the root context as deployment base.</p>
+
+<p>Finally we write a pipeline creating some strings and sending it to our websocket output then assert all were received:</p>
+
+<pre>
+<code class="language-java">@Test(timeout = 60_000)
+public void sendText() throws InterruptedException {
+    final Set&lt;String&gt; texts = new HashSet&lt;&gt;(asList("Apache", "Beam", "&amp;", "WebSocket", "Output"));
+    pipeline.apply(Create.of(texts))
+            .apply(new WebSocketOutput&lt;&gt;(URI.create("ws://localhost:" + SERVER.getConfiguration().getHttpPort() + "/WebSocketOutputTest")));
+    pipeline.run().waitUntilFinish();
+
+    Thread.sleep(1000); // waituntilfinish bug, fixed on master
+    assertEquals(texts, Server.INSTANCES.stream().flatMap(s -&gt; s.messages.stream()).collect(toSet()));
+    assertEquals(singleton("DoFn teardown"), Server.INSTANCES.stream().map(s -&gt; s.reason.getReasonPhrase()).collect(toSet()));
+}</code></pre>
+
+<p>Note that the sleep is a workaround until Beam 2.5.0 is out, a better implementation - but more verbose for a blog post ;), would be to retry the asserts.</p>
+
+<h2>Conclusion</h2>
+
+<p>On one side, writing a Beam output is not that much of work, there is a central class (the&nbsp;<em>DoFn</em>) and then it is code to integrate with the backend you use (websocket for us).</p>
+
+<p>On another side, the WebSocket technology is very simple to integrate in java land, in particular thanks to the JSR356.</p>
+
+<p>Finally, using websockets is a very nice and simple way to make Big Data more interactive in your applications and notify your users of new informations available without having to have another batch to do it. What about adding some push notification after some computation in a big data cluster? We are not far from it!</p>
+
+<p>Happy big data!</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>&nbsp;</h2>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//microprofile-design-and-platform-matters.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//microprofile-jwt-auth-getting-started.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

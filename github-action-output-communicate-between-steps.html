@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Communicate between your Github Action Steps with custom outputs</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,244 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="github-action-output-communicate-between-steps-html-container" class="container page-content github-action-output-communicate-between-steps-html is-blog">
+                        <div class="page-header">
+                <h1>Communicate between your Github Action Steps with custom outputs</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-11-10</span>, <span class="metadata-readingtime">3 min and 30 sec read</span></p>
+</div>
+<div class="paragraph">
+<p>Most of the time, <a href="https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions">Github Workflow</a> are about chaining actions executed on some event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">on: <i class="conum" data-value="1"></i><b>(1)</b>
+  push:
+  branches:
+    - main
+
+jobs:
+  build: <i class="conum" data-value="2"></i><b>(2)</b>
+  runs-on: ubuntu-latest
+
+  steps: <i class="conum" data-value="3"></i><b>(3)</b>
+    - name: Step1
+      ...
+    - name: Step2
+      ...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>trigger/event which will launch the job(s)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>one "job" = chain of steps</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the steps definition</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An action often looks like the followin one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- name: Do Something <i class="conum" data-value="1"></i><b>(1)</b>
+  id: my_id <i class="conum" data-value="2"></i><b>(2)</b>
+  uses: actions/some-action@v1 <i class="conum" data-value="3"></i><b>(3)</b>
+  with: <i class="conum" data-value="4"></i><b>(4)</b>
+    some_key: ${{ some_value }} <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A name used in the Github Actions UI</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>An identifier used if the action has some output (you can then use it in another action with <code>steps.&lt;id&gt;.outputs.&lt;output name&gt;</code>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The action reference with its version (github repository with tag)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The action configuration</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Configuration can use interpolated values, including the previous steps outputs.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So everything is well chained and works well&#8230;&#8203;until you need some particular value.</p>
+</div>
+<div class="paragraph">
+<p>An example is to parse a tag name in a repository having multiple products.
+Concretely, you create tags with this pattern: <code>&lt;product&gt;/&lt;version&gt;</code>.
+If you have a workflow which builds automatically the product when it is tagged you likely want something like - just a pseudo-workflow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">on: <i class="conum" data-value="1"></i><b>(1)</b>
+  push:
+    tags:
+      - '*/*.*.*'
+build:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout <i class="conum" data-value="2"></i><b>(2)</b>
+      uses: actions/checkout@v2
+
+    - name: Login to DockerHub <i class="conum" data-value="3"></i><b>(3)</b>
+      uses: docker/login-action@v1
+      if: startsWith( github.ref, 'refs/tags/')
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push <i class="conum" data-value="4"></i><b>(4)</b>
+      id: docker_build
+      uses: docker/build-push-action@v2
+      if: startsWith( github.ref, 'refs/tags/')
+      with: <i class="conum" data-value="5"></i><b>(5)</b>
+          push: true
+          context: ./${{ steps.parsed_tag.outputs.image }}
+          file: ./${{ steps.parsed_tag.outputs.image }}/Dockerfile
+          tags: myregistry.com/myorg/${{ steps.parsed_tag.outputs.image }}:${{ steps.parsed_tag.outputs.version }}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>When a tag is pushed - so a released is created</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Clone the repository</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Ensure your docker daemon is authenticated to be able to push images to a docker registry</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Build the image and push it to your organisation</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>You can see that the configuration requires to get the <code>image</code> and <code>version</code> from the tag.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Last step will, indeed, not run in current version because <code>steps.parsed_tag.outputs</code> does not exist since we don&#8217;t have a step <code>parsed_tag</code>.
+The trick is to parse the tag (<code>refs/tags/&lt;product&gt;/&lt;version&gt;</code>) to extract the exact version.</p>
+</div>
+<div class="paragraph">
+<p>You have the choice to have a look to an action doing almost what you want - and potentially chain some actions to do exactly the needed parsing, or to do the parsing yourself - since you can always pass a bash command and/or a command in a custom docker image in a step.</p>
+</div>
+<div class="paragraph">
+<p>Indeed we will use last option here.</p>
+</div>
+<div class="paragraph">
+<p>The build will get <code>github.ref</code> placeholder which looks like <code>refs/tags/&lt;product&gt;/&lt;version&gt;</code>.
+Parsing that in bash looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ref=${{ github.ref }}
+image=$(echo "$ref" |  cut -d '/' -f 3)
+version=$(echo "$ref" |  cut -d '/' -f 4)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then all the trick is to export <code>image</code> and <code>version</code> in a step output.
+The nice thing with Github Action is that there is a protocol to write log lines, errors, &#8230;&#8203; and outputs through the output of the program (stdout).
+The syntax is <code>::set-output name=&lt;output name&gt;::&lt;output value&gt;</code>.
+Concretely, for our bash script we just need to do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "::set-output name=image::$image"
+echo "::set-output name=version::$version"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we need to insert out bash script execution before the last step of our previous job (<code>build</code>) and force its <code>id</code> to <code>parsed_tag</code> to match the placeholders used in the last step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- name: Parsed tag
+  id: parsed_tag
+  run: |
+    ref=${{ github.ref }}
+    version=$(echo "$ref" |  cut -d '/' -f 4)
+    image=$(echo "$ref" |  cut -d '/' -f 3)
+    echo "::set-output name=image::$image"
+    echo "::set-output name=version::$version"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indeed, the goal of this post is not to dicuss about bash or the best way to parse a string but to show that you can always, in a Github Workflow, define a custom step which can communicate with other steps through its outputs.
+Used with the interpolation mecanism of the steps and your preferred language for the custom steps it is really powerful and can make the workflows more readable since they can likely need less steps quite quickly.</p>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//java-logging-framework.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//docker-scratch-image-mkdir-issue.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

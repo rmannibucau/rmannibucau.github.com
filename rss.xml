@@ -1,0 +1,1531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+   <atom:link href="https://rmannibucau.github.io/rss.xml" rel="self" type="application/rss+xml" />
+   <title>Yupiik RManniBucau</title>
+   <description>An opiniated IT blogging.</description>
+   <link>https://rmannibucau.github.io/rss.xml</link>
+   <lastBuildDate>Sun, 7 Apr 2024 00:00:00 GMT</lastBuildDate>
+   <pubDate>Sun, 7 Apr 2024 00:00:00 GMT</pubDate>
+   <ttl>1800</ttl>
+   <item>
+    <title>Enable JRE HttpClient hostname validation per instance</title>
+    <description>Java HttpClient is great but all its API is not yet known. Let see how to validate or not the hostname when calling a HTTPS endpoint per client and not globally for all clients.</description>
+    <link>https://rmannibucau.github.io/java-httpclient-hostname-validation.html</link>
+    <guid isPermaLink="false">/java-httpclient-hostname-validation.html</guid>
+    <pubDate>Sun, 7 Apr 2024 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>One skin per context/environment in k9s</title>
+    <description>When doing operations it is important to have some visual management to know which environment you are connected to (to not drop the prod). Let see how to setup one skin per environment with k9s, the Kubernetes CLI.</description>
+    <link>https://rmannibucau.github.io/k9s-skin-per-context.html</link>
+    <guid isPermaLink="false">/k9s-skin-per-context.html</guid>
+    <pubDate>Thu, 28 Mar 2024 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Reading a file insanely fast in java</title>
+    <description>January started with 1br challenge, let use this as an excuse to see the goods and bads.</description>
+    <link>https://rmannibucau.github.io/reading-a-file-insanely-fast-in-java.html</link>
+    <guid isPermaLink="false">/reading-a-file-insanely-fast-in-java.html</guid>
+    <pubDate>Thu, 11 Jan 2024 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Simple retry until with WGet</title>
+    <description>Awaiting a HTTP resource is a common need in Kubernetes or docker environments, let see how wget helps with that need.</description>
+    <link>https://rmannibucau.github.io/simple-retry-with-wget.html</link>
+    <guid isPermaLink="false">/simple-retry-with-wget.html</guid>
+    <pubDate>Wed, 21 Dec 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Enable Asciidoctor Rendering with Gitea</title>
+    <description>Asciidoc is likely the best format, as of today, to write any documentation. However Gitea does not support its rendering by default. Let see how to enable it.</description>
+    <link>https://rmannibucau.github.io/gitea-asciidoctor.html</link>
+    <guid isPermaLink="false">/gitea-asciidoctor.html</guid>
+    <pubDate>Fri, 2 Dec 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI Messaging Example</title>
+    <description>Messaging is more and more used in our applications. You probably saw Kafka or Pulsar popping up. But it has some challenges at dev and maintenance time so let see how we can integrate it in a CDI application.</description>
+    <link>https://rmannibucau.github.io/cdi-messaging-example.html</link>
+    <guid isPermaLink="false">/cdi-messaging-example.html</guid>
+    <pubDate>Thu, 18 Aug 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>A simple bash CLI structure for your automotion</title>
+    <description>We tend to write several scripts to automate repetitive tasks. Let see how to use a simple structure to ease that task.</description>
+    <link>https://rmannibucau.github.io/simple-bash-cli-for-automotion.html</link>
+    <guid isPermaLink="false">/simple-bash-cli-for-automotion.html</guid>
+    <pubDate>Sat, 9 Apr 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Kubernetes Quick Debugging Pod</title>
+    <description>Being able to get a temporary pod with debugging tools is quite important but not always trivial. Let&apos;s see the main option ot get it quickly.</description>
+    <link>https://rmannibucau.github.io/kubernetes-quick-debugging-pod.html</link>
+    <guid isPermaLink="false">/kubernetes-quick-debugging-pod.html</guid>
+    <pubDate>Tue, 5 Apr 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Docker Compose Java Healthcheck</title>
+    <description>Docker-compose is still a valid local option to run docker images. However it does not support HTTP probe as Kubernetes. Let see how to solve it for Java applications.</description>
+    <link>https://rmannibucau.github.io/docker-compose-java-healthcheck.html</link>
+    <guid isPermaLink="false">/docker-compose-java-healthcheck.html</guid>
+    <pubDate>Wed, 23 Feb 2022 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Java Logging Framework</title>
+    <description>I got an interesting exchange on twitter about Java logging framework and I think this topic is worth a post since it is not as abvious as it can look like.</description>
+    <link>https://rmannibucau.github.io/java-logging-framework.html</link>
+    <guid isPermaLink="false">/java-logging-framework.html</guid>
+    <pubDate>Mon, 13 Dec 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Communicate between your Github Action Steps with custom outputs</title>
+    <description>When Github actions need some input computed from the input Github event or even the file system it is always possible to pass the input through the output of a custom step. Let see how to do it!</description>
+    <link>https://rmannibucau.github.io/github-action-output-communicate-between-steps.html</link>
+    <guid isPermaLink="false">/github-action-output-communicate-between-steps.html</guid>
+    <pubDate>Wed, 10 Nov 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Docker SCRATCH base image mkdir issue</title>
+    <description>Docker SCRATCH image enables to start from an empty image but it has some limitation. Let&apos;s dig into the mkdir one!</description>
+    <link>https://rmannibucau.github.io/docker-scratch-image-mkdir-issue.html</link>
+    <guid isPermaLink="false">/docker-scratch-image-mkdir-issue.html</guid>
+    <pubDate>Fri, 17 Sep 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>OpenJPA Jakarta tips</title>
+    <description>OpenJPA is a well known JPA implementation. Did you know it supports Jakarta namespace? Let see how to use it.</description>
+    <link>https://rmannibucau.github.io/openjpa-jakarta-tips.html</link>
+    <guid isPermaLink="false">/openjpa-jakarta-tips.html</guid>
+    <pubDate>Tue, 29 Jun 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>A Simple React.JS extension mechanism</title>
+    <description>React.JS is a great SPA library but extending SPA is always a challenge. Let see one proposal to do it easily.</description>
+    <link>https://rmannibucau.github.io/simple-reactjs-extension-mechanism.html</link>
+    <guid isPermaLink="false">/simple-reactjs-extension-mechanism.html</guid>
+    <pubDate>Wed, 2 Jun 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to correctly use RequestContextController</title>
+    <description>CDI 2.0 enables you to start/stop request scope using RequestContextController but take care its usage is not natural. Let&apos;s see how to use it right.</description>
+    <link>https://rmannibucau.github.io/cdi-request-context-controller-correct-usage.html</link>
+    <guid isPermaLink="false">/cdi-request-context-controller-correct-usage.html</guid>
+    <pubDate>Tue, 18 May 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Wire websocket events to CDI event bus</title>
+    <description>Websocket gives the opportunity to get an even based stream, it is possible to wire it to your IoC/CDI event bus for the best, let see how to do it.</description>
+    <link>https://rmannibucau.github.io/wire-websocket-events-to-cdi-event-bus.html</link>
+    <guid isPermaLink="false">/wire-websocket-events-to-cdi-event-bus.html</guid>
+    <pubDate>Tue, 11 May 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Tomcat Meecrowave Websocket getting started</title>
+    <description>Apache Meecrowave is an Apache Tomcat and therefore can use websockets. Let see how to get started and some tips about it.</description>
+    <link>https://rmannibucau.github.io/tomcat-meecrowave-websocket-gettingstarted.html</link>
+    <guid isPermaLink="false">/tomcat-meecrowave-websocket-gettingstarted.html</guid>
+    <pubDate>Thu, 6 May 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Setup an OAuth2 PKCE flow for a React.JS application</title>
+    <description>OAuth2 PKCE flow is intended for web application. It makes the authentication flow more secure and does not require client secret (which must stay secret so not hit the client). Let see how to set it up in a React.JS application.</description>
+    <link>https://rmannibucau.github.io/react-oauth2-pkce-flow-setup.html</link>
+    <guid isPermaLink="false">/react-oauth2-pkce-flow-setup.html</guid>
+    <pubDate>Tue, 20 Apr 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Setup Meecrowave BASIC security by configuration</title>
+    <description>Meecrowave is a very flexible and configurable light server. Let see how to setup BASIC security by configuration in a few lines.</description>
+    <link>https://rmannibucau.github.io/meecrowave-setup-basic-security-by-configuration.html</link>
+    <guid isPermaLink="false">/meecrowave-setup-basic-security-by-configuration.html</guid>
+    <pubDate>Thu, 1 Apr 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Migrating from a database to static blog</title>
+    <description>Previous version of my blog was backed by a database, this new version uses a static generator. Let see how the migration went.</description>
+    <link>https://rmannibucau.github.io/migrating-from-database-to-static-blog.html</link>
+    <guid isPermaLink="false">/migrating-from-database-to-static-blog.html</guid>
+    <pubDate>Tue, 23 Mar 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Meecrowave: enable access log</title>
+    <description>If you are using or tested Apache Meecrowave you can wonder why you don&apos;t see access log by default, this is because, to let you use the logging you want it is not on out of the box. Let see how to enable it.</description>
+    <link>https://rmannibucau.github.io/apache-meecrowave-access-log.html</link>
+    <guid isPermaLink="false">/apache-meecrowave-access-log.html</guid>
+    <pubDate>Tue, 23 Feb 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>GraalVM and logs with Yupiik LogManager: JUL and bindings (SLF4J, &amp;#8230;&amp;#8203;)</title>
+    <description>GraalVM native-image enables to convert a Java application to a native binary making it generally faster to start and using less memory. However, it still hits a common issue: logging framework handling. Let see how to solve it.</description>
+    <link>https://rmannibucau.github.io/graalvm-jul-slf4j-logging.html</link>
+    <guid isPermaLink="false">/graalvm-jul-slf4j-logging.html</guid>
+    <pubDate>Tue, 9 Feb 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Maven Shade Plugin and CDI beans.xml</title>
+    <description>Maven Shade Plugin is a great plugin to have an &quot;all in one&quot; executable jar easily shareable, however when moving from a &quot;multiple jars&quot; to &quot;single jar&quot; model, some libraries need some tuning. Let&apos;s dig into CDI beans.xml case.</description>
+    <link>https://rmannibucau.github.io/maven-shade-plugin-cdi-beans-xml.html</link>
+    <guid isPermaLink="false">/maven-shade-plugin-cdi-beans-xml.html</guid>
+    <pubDate>Thu, 4 Feb 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>[TIP] Mvnd module rolling window size</title>
+    <description>Mvnd brings a big boost to maven ecosystem but default logging can be hard to follow for real life project. Let see how to get more logs to get back the feedback you need from your build.</description>
+    <link>https://rmannibucau.github.io/mvnd-rolling-window-size.html</link>
+    <guid isPermaLink="false">/mvnd-rolling-window-size.html</guid>
+    <pubDate>Thu, 28 Jan 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JSON-B and JPA, how to solve serialization loop issue</title>
+    <description>JPA and JSON-B are great technologies but how to avoid the well known Stackoverflow issue when using it? Read this post to see a solution!</description>
+    <link>https://rmannibucau.github.io/jsonb-jpa-relationship-avoid-infinite-loop.html</link>
+    <guid isPermaLink="false">/jsonb-jpa-relationship-avoid-infinite-loop.html</guid>
+    <pubDate>Tue, 26 Jan 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Move from javax to jakarta with Apache TomEE 9 (Part 3): dockerize it</title>
+    <description>In two previous posts, we migrated an application from javax to jakarta namespace. Now let see how to package it.</description>
+    <link>https://rmannibucau.github.io/move-from-javax-to-jakarta-with-apache-tomee-9-3.html</link>
+    <guid isPermaLink="false">/move-from-javax-to-jakarta-with-apache-tomee-9-3.html</guid>
+    <pubDate>Tue, 12 Jan 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Move from javax to jakarta (Part 2): customize your dependencies</title>
+    <description>Moving from jakarta to javax is not always trivial. The most common blocker is a javax 3rd party library. Let see how to solve it.</description>
+    <link>https://rmannibucau.github.io/move-from-javax-to-jakarta-with-apache-tomee-9-2.html</link>
+    <guid isPermaLink="false">/move-from-javax-to-jakarta-with-apache-tomee-9-2.html</guid>
+    <pubDate>Thu, 7 Jan 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Move from javax to jakarta with Apache TomEE 9 (Part 1): better jakarta libraries</title>
+    <description>Apache TomEE 9 got released some times ago and enables to code against the new jakarta package. However it comes with some unexpected state regarding its libraries, let&apos;s see how to make it jakarta++.</description>
+    <link>https://rmannibucau.github.io/move-from-javax-to-jakarta-with-apache-tomee-9-1.html</link>
+    <guid isPermaLink="false">/move-from-javax-to-jakarta-with-apache-tomee-9-1.html</guid>
+    <pubDate>Tue, 5 Jan 2021 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Upload a website over FTP using Maven</title>
+    <description>Documentation website are generally static and generated at build time - living doc friendly ;). Let see how to upload such a website on a FTP server using maven.</description>
+    <link>https://rmannibucau.github.io/maven-ftp-upload.html</link>
+    <guid isPermaLink="false">/maven-ftp-upload.html</guid>
+    <pubDate>Thu, 24 Dec 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Why does my Kubernetes HTTP probe fails with a &quot;Broken pipe&quot; exception</title>
+    <description>Kubernetes enables to do rolling updates. For HTTP servers it often relies on HTTP probes but sometimes they fail with a Broken pipe error which is quite unexpected. Let&apos;s see what can be the cause.</description>
+    <link>https://rmannibucau.github.io/kubernetes-http-probe-broken-pipe.html</link>
+    <guid isPermaLink="false">/kubernetes-http-probe-broken-pipe.html</guid>
+    <pubDate>Tue, 8 Dec 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Meecrowave and PKCE (OAuth2)</title>
+    <description>Let see how to set up OAuth2 PKCE flow with Apache Meecrowave OAuth2 1.2.10 module!</description>
+    <link>https://rmannibucau.github.io/meecrowave-oauth2-pkce.html</link>
+    <guid isPermaLink="false">/meecrowave-oauth2-pkce.html</guid>
+    <pubDate>Tue, 17 Nov 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Faster startup of hazelcast in tests</title>
+    <description>Hazelcast is great but in tests it adds some startup latency which is not that great. Let see how to reduce it.</description>
+    <link>https://rmannibucau.github.io/faster-hazelcast-startup-in-tests.html</link>
+    <guid isPermaLink="false">/faster-hazelcast-startup-in-tests.html</guid>
+    <pubDate>Tue, 10 Nov 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Camel: set up kubernetes healthcheck endpoints</title>
+    <description>Camel 3 was a big step forward to a more modern development model. Except Spring Boot integration, it also provides Kubernetes integration bricks like health checks which enables to create liveness and readyness probe endpoints. Let see how to set it up.</description>
+    <link>https://rmannibucau.github.io/camel-healthcheck-registry-for-kubernetes.html</link>
+    <guid isPermaLink="false">/camel-healthcheck-registry-for-kubernetes.html</guid>
+    <pubDate>Tue, 3 Nov 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Angular 10: configure your routes</title>
+    <description>Angular 10 enables to configure routes and therefore to have generic components reading their configurable from the enabled route, keeping them generic and reusable.</description>
+    <link>https://rmannibucau.github.io/angular-ng-10-configure-your-routes.html</link>
+    <guid isPermaLink="false">/angular-ng-10-configure-your-routes.html</guid>
+    <pubDate>Tue, 27 Oct 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Angular 10: how to create/update routes programmatically</title>
+    <description>Creating Angular Router routes from a backend description is tempting but has some challenges, let see how to solve them!</description>
+    <link>https://rmannibucau.github.io/angular-ng-10-create-update-route-at-runtime.html</link>
+    <guid isPermaLink="false">/angular-ng-10-create-update-route-at-runtime.html</guid>
+    <pubDate>Tue, 20 Oct 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Karaf custom distribution : patch your configuration from your pom</title>
+    <description>Apache Karaf Maven plugin enables to build custom distribution but the configuration management is not always easy to make maintenable. Let see how to put your configuration in your pom.xml!</description>
+    <link>https://rmannibucau.github.io/apache-karaf-custom-distribution-patch-configuration-from-the-pom.html</link>
+    <guid isPermaLink="false">/apache-karaf-custom-distribution-patch-configuration-from-the-pom.html</guid>
+    <pubDate>Tue, 13 Oct 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JIB: how to filter files added to docker layers</title>
+    <description>It is common to need to filter files from the implicit maven/gradle to docker mapping JIB does. Let see how it is enabled today.</description>
+    <link>https://rmannibucau.github.io/jib-docker-layer-file-filtering.html</link>
+    <guid isPermaLink="false">/jib-docker-layer-file-filtering.html</guid>
+    <pubDate>Tue, 6 Oct 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Configure Java Util Logging (JUL) to use a more production/docker ready pattern using SimpleFormatter</title>
+    <description>At docker erea, it is important to ensure its logging is grokable easily. Let see how to tune JUL without any code to reach that point.</description>
+    <link>https://rmannibucau.github.io/jul-production-ready-pattern-with-simpleformatter.html</link>
+    <guid isPermaLink="false">/jul-production-ready-pattern-with-simpleformatter.html</guid>
+    <pubDate>Tue, 29 Sep 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Skip some CDI extensions with Apache OpenWebBeans</title>
+    <description>CDI extensions are implicit but sometimes can slow down your startup for nothing. Let see how Apache OpenWebBeans enables you to get back the control on what you deploy.</description>
+    <link>https://rmannibucau.github.io/skip-cdi-extension-with-apache-openwebbeans.html</link>
+    <guid isPermaLink="false">/skip-cdi-extension-with-apache-openwebbeans.html</guid>
+    <pubDate>Fri, 10 Jul 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Replace Maven Surefire plugin by JUnit Platform Maven Plugin</title>
+    <description>How to rely on the native Junit5 test launcher with Apache Maven? You can now replace Maven Surefire with a Junit 5 native test plugin!</description>
+    <link>https://rmannibucau.github.io/replace-maven-surefire-plugin-by-junit-platform-maven-plugin.html</link>
+    <guid isPermaLink="false">/replace-maven-surefire-plugin-by-junit-platform-maven-plugin.html</guid>
+    <pubDate>Thu, 9 Jul 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Asciidoctor and excel sheets</title>
+    <description>Asciidoctor is a great documentation tool but how to maintain dynamic and advanced table/sheet? Let&apos;s dig into one solution for asciidoctorj.</description>
+    <link>https://rmannibucau.github.io/asciidoctor-excel-sheets.html</link>
+    <guid isPermaLink="false">/asciidoctor-excel-sheets.html</guid>
+    <pubDate>Sat, 20 Jun 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Asciidoctor BlockMacro to generate subblocks</title>
+    <description>Asciidoctor - and most of its bindings - is a great tool but its API is not always smooth (convert/convertFile,render,...). It is even worse when it comes to extensions. Let&apos;s see some hidden features of block macro API.</description>
+    <link>https://rmannibucau.github.io/asciidoctor-block-macro-extension-and-subblocks.html</link>
+    <guid isPermaLink="false">/asciidoctor-block-macro-extension-and-subblocks.html</guid>
+    <pubDate>Fri, 29 May 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Java Class Data Sharing or how to speed up your docker container startup</title>
+    <description>Class Data Sharing is a great addition to java which enables to bypass some time spent in classloading. Let see how to use it.</description>
+    <link>https://rmannibucau.github.io/java-class-data-sharing-docker-startup.html</link>
+    <guid isPermaLink="false">/java-class-data-sharing-docker-startup.html</guid>
+    <pubDate>Tue, 19 May 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CompletionStage pitfalls, going further</title>
+    <description>CompletionStage is a great API to orchestrate multiple systems but it misses some primitive, let see how to fix it.</description>
+    <link>https://rmannibucau.github.io/completion-stage-exception-promise-and-allOf-without-failfast.html</link>
+    <guid isPermaLink="false">/completion-stage-exception-promise-and-allOf-without-failfast.html</guid>
+    <pubDate>Fri, 15 May 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Asciidoctor and documentation: how to implement search feature</title>
+    <description>Asciidoctor is a great language for documentation and its API enables to do awesome things. Let see how to add documentation search support easily.</description>
+    <link>https://rmannibucau.github.io/asciidoctor-search-index-creation.html</link>
+    <guid isPermaLink="false">/asciidoctor-search-index-creation.html</guid>
+    <pubDate>Fri, 8 May 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Log4j2: how to configure your logging with environment variables</title>
+    <description>Fully configuring log4j2 from the environment is not that built-in but with little effort it can be made real, let&apos;s see how to do it!</description>
+    <link>https://rmannibucau.github.io/log4j2-environment-configuration.html</link>
+    <guid isPermaLink="false">/log4j2-environment-configuration.html</guid>
+    <pubDate>Wed, 29 Apr 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to mock java Clock with CDI</title>
+    <description>Time related tests always had been a pain. But since java 8 and with some CDI love it can be made trivial and reliable quite easily.</description>
+    <link>https://rmannibucau.github.io/cdi-mock-java-clock.html</link>
+    <guid isPermaLink="false">/cdi-mock-java-clock.html</guid>
+    <pubDate>Thu, 23 Apr 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Simple JUnit5 extension to run some code only once per suite</title>
+    <description>JUnit 5 is a great testing framework but it sitll hides some goodness which can makes your test suite event more efficient. Let&apos;s see how to run once some initialization logic.</description>
+    <link>https://rmannibucau.github.io/junit5-extension-run-once-per-suite.html</link>
+    <guid isPermaLink="false">/junit5-extension-run-once-per-suite.html</guid>
+    <pubDate>Wed, 15 Apr 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Quick Groovy script to grab tag and size of docker images</title>
+    <description>Docker hub is a great public repository but its search is not always the best we can find if we have specific criteria. Let&apos;s find our how Groovy can help to make it more friendly.</description>
+    <link>https://rmannibucau.github.io/groovy-script-docker-tags-and-size.html</link>
+    <guid isPermaLink="false">/groovy-script-docker-tags-and-size.html</guid>
+    <pubDate>Wed, 15 Apr 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Reuse Webpack plugins without a webpack build</title>
+    <description>Webpack plugins have a lot of goodness but when your ecosystem is not webpack based, it can be complicated to reuse it. Let see how to do it with an example.</description>
+    <link>https://rmannibucau.github.io/reuse-webpack-plugins-without-a-webpack-build.html</link>
+    <guid isPermaLink="false">/reuse-webpack-plugins-without-a-webpack-build.html</guid>
+    <pubDate>Sat, 4 Apr 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Bitly JAX-RS client, migrating from Bitly API v3 to v4</title>
+    <description>Bitly is an awesome service to shorten links, however it will shutdown its API v3 soon so it is time to migrate to the API v4!</description>
+    <link>https://rmannibucau.github.io/bitly-jaxrs-client-v3-to-v4-api-migration.html</link>
+    <guid isPermaLink="false">/bitly-jaxrs-client-v3-to-v4-api-migration.html</guid>
+    <pubDate>Sat, 21 Mar 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Set a good creation time when building a docker image with jib</title>
+    <description>Jib is a great tool to create docker image, however its defaults set the creation date of the image and the last modified date of the files to the 1-1-1970 which prevents to use file last modified value which is an issue for webjars for example.</description>
+    <link>https://rmannibucau.github.io/docker-image-and-jib-creation-time.html</link>
+    <guid isPermaLink="false">/docker-image-and-jib-creation-time.html</guid>
+    <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Log4j2 how to redirect ERROR log events on stderr</title>
+    <description>Putting an application using log4j2 in docker is quite common these days, but did you know you can ensure error log events go on stderr and other messages on stdout?</description>
+    <link>https://rmannibucau.github.io/log4j2-error-log-event-on-stderr.html</link>
+    <guid isPermaLink="false">/log4j2-error-log-event-on-stderr.html</guid>
+    <pubDate>Fri, 6 Mar 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI + OSGi and whiteboard pattern</title>
+    <description>OSGi whiteboard pattern can be tricky to implement, however, with OSGi-CDI specification it is made way simpler and you can become more productive! Let&apos;s dig into that.</description>
+    <link>https://rmannibucau.github.io/osgi-cdi-whiteboard-pattern.html</link>
+    <guid isPermaLink="false">/osgi-cdi-whiteboard-pattern.html</guid>
+    <pubDate>Thu, 23 Jan 2020 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Java 14 record type and JSON-B, what is the current status?</title>
+    <description>Java 14 brings a new experimental feature: records. Records are a new &quot;class&quot; type which could be presented as &quot;value&quot; classes. Let see how it integrates with JSON-B.</description>
+    <link>https://rmannibucau.github.io/java-14-record-class-type-and-json-b.html</link>
+    <guid isPermaLink="false">/java-14-record-class-type-and-json-b.html</guid>
+    <pubDate>Sat, 21 Dec 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Github Pages and authentication, we are not that far</title>
+    <description>Github does not enable to publish a website to share with your team (Github Pages) using autentication to ensure only people able to see the pages can actually do it. Let see how to workaround that issue.</description>
+    <link>https://rmannibucau.github.io/github-pages-authentication.html</link>
+    <guid isPermaLink="false">/github-pages-authentication.html</guid>
+    <pubDate>Thu, 12 Dec 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Add Microprofile healthchecks programmatically from an extension with CDI 2!</title>
+    <description>Microprofile health integrates smoothly with kubernetes but how to ensure any extension can register as many as check as needed programmatically without requiring to materialize them all one by one? Let see how to do it very easily.</description>
+    <link>https://rmannibucau.github.io/programmatic-microprofile-heath-checks-with-cdi2.html</link>
+    <guid isPermaLink="false">/programmatic-microprofile-heath-checks-with-cdi2.html</guid>
+    <pubDate>Fri, 29 Nov 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Maven Shade plugin: ensure your sources are relocated too!</title>
+    <description>Maven Shade plugin is a great tool to customize binaries but sources don&apos;t always match the configured relocations. Let see how to fix it in a few seconds.</description>
+    <link>https://rmannibucau.github.io/mavens-shade-plugin-source-relocation.html</link>
+    <guid isPermaLink="false">/mavens-shade-plugin-source-relocation.html</guid>
+    <pubDate>Fri, 22 Nov 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Create your own GraalVM native-image custom @Option in your Features</title>
+    <description>GraalVM native-image comes with svm which is its SDK to extend the framework. Let see how to create a custom feature and add to GraalVM custom CLI options.</description>
+    <link>https://rmannibucau.github.io/graalvm-native-image-custom-options-in-custom-features.html</link>
+    <guid isPermaLink="false">/graalvm-native-image-custom-options-in-custom-features.html</guid>
+    <pubDate>Wed, 13 Nov 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to customize a docker image with Testcontainers</title>
+    <description>Testcontainers is a great testing library to ochestrate docker containers with JUnit5. But it also hides some nice utilities wrapping docker client which can help to prepare volatile containers and stick to official images instead of building custom ones.</description>
+    <link>https://rmannibucau.github.io/testcontainers-customized-image.html</link>
+    <guid isPermaLink="false">/testcontainers-customized-image.html</guid>
+    <pubDate>Fri, 8 Nov 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Geronimo Arthur: and the GraalVM quest begins at Apache</title>
+    <description>Apache Geronimo Arthur is a new utility project which aims to simplify GraalVM native-image builds. Let&apos;s get a quick overview of it.</description>
+    <link>https://rmannibucau.github.io/apache-geronimo-arthur.html</link>
+    <guid isPermaLink="false">/apache-geronimo-arthur.html</guid>
+    <pubDate>Wed, 6 Nov 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Simple setup to have Living Documentation with Maven and Java</title>
+    <description>Living documentation is one of the most important thing to setup in projects. Let see how Apache Maven and a plain Java class can make it reality.</description>
+    <link>https://rmannibucau.github.io/living-documentation-maven-java.html</link>
+    <guid isPermaLink="false">/living-documentation-maven-java.html</guid>
+    <pubDate>Wed, 9 Oct 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to handle new versions of your JSON-B model</title>
+    <description>JSON-B does not have a versioning API but it has actually some versioning capabilities.  Let&apos;s review a few.</description>
+    <link>https://rmannibucau.github.io/jsonb-versinoing.html</link>
+    <guid isPermaLink="false">/jsonb-versinoing.html</guid>
+    <pubDate>Wed, 2 Oct 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Extract a docker image filesystem without docker but only bash</title>
+    <description>Docker image format is actually simpler than you can think, let see how to retrieve layers from docker hub and extract them to read docker container files without starting the image!</description>
+    <link>https://rmannibucau.github.io/docker-extracts-fileystem-with-bash.html</link>
+    <guid isPermaLink="false">/docker-extracts-fileystem-with-bash.html</guid>
+    <pubDate>Wed, 11 Sep 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Johnzon and JSON-P/JSON-B status</title>
+    <description>Apache Johnzon provides a JSON-P and JSON-B implementations. Their compliance status just made a big bump for the coming 1.2.0 release. Let&apos;s dig into that.</description>
+    <link>https://rmannibucau.github.io/johnzon-jsonp-jsonb-status.html</link>
+    <guid isPermaLink="false">/johnzon-jsonp-jsonb-status.html</guid>
+    <pubDate>Wed, 4 Sep 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Testing your blueprint camel routes</title>
+    <description>Camel is a great library but it also comes with a great tooling. Except the well known Standalone, CDI and Spring support, it comes with a blueprint test support module which greatly helps to test your routes without launching a full container.</description>
+    <link>https://rmannibucau.github.io/camel-blueprint-tests.html</link>
+    <guid isPermaLink="false">/camel-blueprint-tests.html</guid>
+    <pubDate>Wed, 31 Jul 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Read a query parameter as Json with JAX-RS</title>
+    <description>Having JSON query parameters is more and more common in nowdays endpoints since it enable to link the frontend and the backend more natively. Of course for us, JAX-RS enables to do it transversally.</description>
+    <link>https://rmannibucau.github.io/jaxrs-json-query-parameter-converter.html</link>
+    <guid isPermaLink="false">/jaxrs-json-query-parameter-converter.html</guid>
+    <pubDate>Wed, 24 Jul 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Get docker container metadata from an embed Java application</title>
+    <description>With the numerous docker containers we deploy and their needs in monitoring we regularly need to introspect the currently running instance to find its Id, Name, Image etc... Let see how to do it in Java in a few steps.</description>
+    <link>https://rmannibucau.github.io/docker-container-metadata-from-java-application.html</link>
+    <guid isPermaLink="false">/docker-container-metadata-from-java-application.html</guid>
+    <pubDate>Thu, 4 Jul 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Integrate Okta Oauth2 authorization_code flow with your JAX-RS server</title>
+    <description>How to integrate Okta OAuth2 server with a JAX-RS/CDI stack? Let&apos;s follow the guide!</description>
+    <link>https://rmannibucau.github.io/okta-jaxrs-cdi-microprofile-authorization-code-flow.html</link>
+    <guid isPermaLink="false">/okta-jaxrs-cdi-microprofile-authorization-code-flow.html</guid>
+    <pubDate>Wed, 19 Jun 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How Apache Johnzon makes JSONP/JSONB a real option for configuration</title>
+    <description>I already explained how JSON-P and Johnzon mapper were options for configuration files. In the meantime JSON-B was released, let see how to use it the same way.</description>
+    <link>https://rmannibucau.github.io/johnzon-jsonp-jsonb-configuration-file.html</link>
+    <guid isPermaLink="false">/johnzon-jsonp-jsonb-configuration-file.html</guid>
+    <pubDate>Sat, 1 Jun 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Extensible classpath for a Jib based Docker images</title>
+    <description>Jib is an awesome solution to build container images from a Maven or Gradle build, but how to ensure its container is extensible with custom libraries? Let see how the solution can be simple!</description>
+    <link>https://rmannibucau.github.io/extensible-classpath-jib-docker-image.html</link>
+    <guid isPermaLink="false">/extensible-classpath-jib-docker-image.html</guid>
+    <pubDate>Wed, 29 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Your first javaagent</title>
+    <description>The most generic way to instrument any JVM code is to write a javaagent. Let see how to do it and what it means.</description>
+    <link>https://rmannibucau.github.io/your-first-javaagent.html</link>
+    <guid isPermaLink="false">/your-first-javaagent.html</guid>
+    <pubDate>Wed, 22 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI SE and JUnit 5 made easy</title>
+    <description>CDI SE API is an awesome companion for CDI to write custom &quot;main&quot; or tests, let see how OpenWebBeans made it more closely integrated to JUnit 5!</description>
+    <link>https://rmannibucau.github.io/cdi-se-api-junit5-extension.html</link>
+    <guid isPermaLink="false">/cdi-se-api-junit5-extension.html</guid>
+    <pubDate>Wed, 15 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JavaEE is dead, long live to the javax package!</title>
+    <description>Oracle does not enable Eclipse to continue to use javax package for new API. Therefore, JakartaEE encounters its first challenge. Here are my thoughts on that.</description>
+    <link>https://rmannibucau.github.io/long-live-javax-package.html</link>
+    <guid isPermaLink="false">/long-live-javax-package.html</guid>
+    <pubDate>Tue, 14 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile JWT Auth and Cookie?</title>
+    <description>Microprofile JWT Auth relies on Authorization header, does it mean it can&apos;t be used with applications relying on a Cookie for their security? Let see where we are on that question.</description>
+    <link>https://rmannibucau.github.io/microprofile-jwt-auth-using-cookie.html</link>
+    <guid isPermaLink="false">/microprofile-jwt-auth-using-cookie.html</guid>
+    <pubDate>Wed, 8 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Validate your OAuth2/JWT server is Microprofile compatible with Apache Geronimo</title>
+    <description>Using microservices you often need an adapted security implementation. One of the most adapted and scaling solution is based on JWT tokens. Let see in this post how to check the tokens you generate will work with a Microprofile consumer.</description>
+    <link>https://rmannibucau.github.io/oauth2-jwt-microprofile-validation-with-geronimo.html</link>
+    <guid isPermaLink="false">/oauth2-jwt-microprofile-validation-with-geronimo.html</guid>
+    <pubDate>Fri, 3 May 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Jsonb: how to customize enum names</title>
+    <description>Jsonb is the standard JSON-Java mapper API. It is very simple and efficient. However some few details stay surprising. Let&apos;s detail the enum case in this post.</description>
+    <link>https://rmannibucau.github.io/jsonb-enum-serialization.html</link>
+    <guid isPermaLink="false">/jsonb-enum-serialization.html</guid>
+    <pubDate>Wed, 10 Apr 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Compile a Java Crest CLI application thanks to GraalVM! Go FAAS &apos;n furious!</title>
+    <description>CLI applications are more relevant than anytime before, with the development of FAAS platforms, the simplification of scripting with Java etc... In this context, let&apos;s see how to make your CLI insanely fast with GraalVM!</description>
+    <link>https://rmannibucau.github.io/compile-java-crest-cli-application-with-graalvm-prepare-faas.html</link>
+    <guid isPermaLink="false">/compile-java-crest-cli-application-with-graalvm-prepare-faas.html</guid>
+    <pubDate>Fri, 29 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CompletionException and JAX-RS handling</title>
+    <description>JAX-RS client and server API integrate very well together. However, when using the new rx() API you can get some surprises in terms of exception handling. Let&apos;s dig into it.</description>
+    <link>https://rmannibucau.github.io/completion-exception-jax-rs-handling.html</link>
+    <guid isPermaLink="false">/completion-exception-jax-rs-handling.html</guid>
+    <pubDate>Wed, 27 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Asciidoctor PDF: watermark on all pages but the title page</title>
+    <description>Let see how to have a clean title page without any watermark and add a watermark on all other pages of an asciidoctor PDF document!</description>
+    <link>https://rmannibucau.github.io/asciidoctor-pdf-watermark-except-on-title-page.html</link>
+    <guid isPermaLink="false">/asciidoctor-pdf-watermark-except-on-title-page.html</guid>
+    <pubDate>Fri, 22 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Put TomEE Embedded in a Docker container with Maven 2/2</title>
+    <description>In previous post, we saw how to create a TomEE Embedded Microprofile application easily. In this post we will just use Jib Maven Plugin to bundle it in a Docker image.</description>
+    <link>https://rmannibucau.github.io/dockerize-tomee-embedded-maven-2-2.html</link>
+    <guid isPermaLink="false">/dockerize-tomee-embedded-maven-2-2.html</guid>
+    <pubDate>Wed, 20 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Make TomEE Embedded microprofile ready in 1s! 1/2</title>
+    <description>Apache TomEE 8 introduced a new Microprofile distribution that is great if you are still deploying in a server. But if you moved Docker or an equivalent technology, then it is not the best you can do. Let see how to also make TomEE Embedded Microprofle!</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-microprofile-1-2.html</link>
+    <guid isPermaLink="false">/tomee-embedded-microprofile-1-2.html</guid>
+    <pubDate>Fri, 15 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Use JSON-P with google-httpclient and drop jackson!</title>
+    <description>Google HTTP Client, a.k.a. com.google.http-client:google-http-client, uses jackson by default. If your stack already provide a JSON-P implementation which is not jackson or not the right version you can desire to align both. Here is how to do it.</description>
+    <link>https://rmannibucau.github.io/jsonp-google-httpclient.html</link>
+    <guid isPermaLink="false">/jsonp-google-httpclient.html</guid>
+    <pubDate>Wed, 13 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Junit5, @CsvSource and escaping</title>
+    <description>JUnit 5 new parameterized test feature is very powerful but before paying the cost to write the dataset as a dedicated method you can wonder if you can&apos;t inject any data using @CsvSource. In general it is possible, let see how to handle corner cases.</description>
+    <link>https://rmannibucau.github.io/junit5-csvsource-escaping.html</link>
+    <guid isPermaLink="false">/junit5-csvsource-escaping.html</guid>
+    <pubDate>Wed, 6 Mar 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>(J)Link your Java application before putting it into Docker! Part 3/3</title>
+    <description>In the previous post we saw how to build a custom Java distribution, let&apos;s see now how to bundle it in a Docker image...with or without docker daemon!</description>
+    <link>https://rmannibucau.github.io/jlink-your-java-image-before-putting-it-into-docker-part-3-of-3.html</link>
+    <guid isPermaLink="false">/jlink-your-java-image-before-putting-it-into-docker-part-3-of-3.html</guid>
+    <pubDate>Fri, 22 Feb 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>(J)Link your Java application before putting it into Docker! Part 2/3</title>
+    <description>In the previous post (see part 1/3), we saw how to get started with JPMS, let&apos;s rely on that now to build a native custom JVM!</description>
+    <link>https://rmannibucau.github.io/jlink-your-java-image-before-putting-into-docker-part-2-of-3.html</link>
+    <guid isPermaLink="false">/jlink-your-java-image-before-putting-into-docker-part-2-of-3.html</guid>
+    <pubDate>Thu, 21 Feb 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>(J)Link your Java application before putting it into Docker! 1/3</title>
+    <description>Java Platform Module System (JPMS) now enables us to build custom Java distribution directly for our application without having to dig into Java internals. Let&apos;s see how to get started in this post to be able to package it in a Docker image soon!</description>
+    <link>https://rmannibucau.github.io/jlink-java-application-image-before-putting-into-docker-part-1-of-3.html</link>
+    <guid isPermaLink="false">/jlink-java-application-image-before-putting-into-docker-part-1-of-3.html</guid>
+    <pubDate>Wed, 20 Feb 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Log4j2: how to get a conditional appender without any code</title>
+    <description>Log4j2 does not have a conditional feature so if you need to use an appender depending some environment variable or system property it does not look that trivial. However, log4j2 hides a feature making it not that hard to implement. Let see how to do it!</description>
+    <link>https://rmannibucau.github.io/tip-log4j2-conditional-appender.html</link>
+    <guid isPermaLink="false">/tip-log4j2-conditional-appender.html</guid>
+    <pubDate>Wed, 16 Jan 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI: how to implement a proxy (interface based API) supporting interceptors</title>
+    <description>Until CDI 2.0, it was not trivial to implement an extension based on proxies keeping interceptors support. Since CDI 2.0 this is fixed, even if it requires some tip to make it simple.</description>
+    <link>https://rmannibucau.github.io/cdi-proxy-interceptor-support-with-interceptionfactory.html</link>
+    <guid isPermaLink="false">/cdi-proxy-interceptor-support-with-interceptionfactory.html</guid>
+    <pubDate>Wed, 9 Jan 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Beam: how to execute a task before/after the record flow starts/stops</title>
+    <description>Big Data pipelines are designed to process a tons of data, however it is still common to need to execute some task once, either before or after (for batches) the flow was processed. Let see how to do it with Apache Beam.</description>
+    <link>https://rmannibucau.github.io/apache-beam-initialization-destruction-task.html</link>
+    <guid isPermaLink="false">/apache-beam-initialization-destruction-task.html</guid>
+    <pubDate>Thu, 3 Jan 2019 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Camel+CDI to make an HTTP proxy with Meecrowave</title>
+    <description>Apache Camel got a decent CDI extension some years ago now, let see how simple it is to get started to use it to make a HTTP proxy with the microserver Apache Meecrowave.</description>
+    <link>https://rmannibucau.github.io/camel-cdi-meecrowave-http-proxy.html</link>
+    <guid isPermaLink="false">/camel-cdi-meecrowave-http-proxy.html</guid>
+    <pubDate>Tue, 25 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Camel and JSON-B (un)marshalling</title>
+    <description>Apache Camel is likely the most powerful open source integration solution but in current version it does not integrate natively with JSON-B, let&apos;s make it!</description>
+    <link>https://rmannibucau.github.io/camel-jsonb-un-marshalling.html</link>
+    <guid isPermaLink="false">/camel-jsonb-un-marshalling.html</guid>
+    <pubDate>Wed, 19 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Why my Apache Beam Spark fatjar job broke upgrading to 2.9.0 version</title>
+    <description>Apache Beam 2.9.0 has released last week. So if you were using a previous version you are likely tempted to upgrade. This is what I did, an what was expected to be a single line change in a pom has surprisingly been more work. Let&apos;s see what changed!</description>
+    <link>https://rmannibucau.github.io/apache-beam-2.9.0-spark-runner-upgrade.html</link>
+    <guid isPermaLink="false">/apache-beam-2.9.0-spark-runner-upgrade.html</guid>
+    <pubDate>Tue, 18 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Avoid some thread leak running Asciidoctor on JRuby</title>
+    <description>AsciidoctorJ relies on JRuby but this last one can leak some thread, let see how to avoid that.</description>
+    <link>https://rmannibucau.github.io/jruby-thread-leak-jitcompiler.html</link>
+    <guid isPermaLink="false">/jruby-thread-leak-jitcompiler.html</guid>
+    <pubDate>Fri, 14 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>[fun] Set system properties from a java Stream&amp;lt;String&amp;gt;</title>
+    <description>You can now write pretty much all code using streams, let see how to do it to set system properties.</description>
+    <link>https://rmannibucau.github.io/set-system-properties-from-java-stream.html</link>
+    <guid isPermaLink="false">/set-system-properties-from-java-stream.html</guid>
+    <pubDate>Wed, 12 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>A hurtless Play! router based on RoutingDSL</title>
+    <description>Implementing programmatically a Play! Framework router can not be as trivial as the IoC usage promises, here are some tricks to make it hurtless.</description>
+    <link>https://rmannibucau.github.io/simple-play-router-based-on-routing-dsl.html</link>
+    <guid isPermaLink="false">/simple-play-router-based-on-routing-dsl.html</guid>
+    <pubDate>Wed, 5 Dec 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile Metrics: get metrics without coding them</title>
+    <description>Want to get machine + JVM + Tomcat metrics without coding anything? Apache Geronimo Metrics does it for you!</description>
+    <link>https://rmannibucau.github.io/microprofile-metrics-geronimo-sigar.html</link>
+    <guid isPermaLink="false">/microprofile-metrics-geronimo-sigar.html</guid>
+    <pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Use asciidoctorj in OSGi? Yes we can!</title>
+    <description>Asciidoctorj is the only Asciidoctor binding for Java today but it sadly requires JRuby which leads to some surprises when deployed in OSGi. Let see a recipe to deploy AsciidoctorJ in OSGi simply!</description>
+    <link>https://rmannibucau.github.io/asciidoctorj-osgi-setup.html</link>
+    <guid isPermaLink="false">/asciidoctorj-osgi-setup.html</guid>
+    <pubDate>Wed, 7 Nov 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Customize your Microprofile Metrics Prometheus export with Geronimo</title>
+    <description>Exporting a /metrics endpoint for Prometheus on Kubernetes is natural but how to make sure you control what you expose with Microprofile Metrics? Here is the Apache Geronimo solution.</description>
+    <link>https://rmannibucau.github.io/geronimo-metrics-prometheus-export-customization.html</link>
+    <guid isPermaLink="false">/geronimo-metrics-prometheus-export-customization.html</guid>
+    <pubDate>Wed, 31 Oct 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Convert PDF slides to a &quot;sketchy&quot; version</title>
+    <description>Having a presentation that looks like manually made is always fun, but it requires real capabilities and much time. With Imagemagick you can make it in few seconds. Let&apos;s see how to do it!</description>
+    <link>https://rmannibucau.github.io/pdf-to-sketchy-rendering.html</link>
+    <guid isPermaLink="false">/pdf-to-sketchy-rendering.html</guid>
+    <pubDate>Wed, 3 Oct 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Did you think about closing your Java stream?</title>
+    <description>Java streams are awesome to orchestrate processing flows, merge data coming from multiple sources and so on...however, as any new API it can hide some surprises. Let see why java.util.stream.Stream has a close() method.</description>
+    <link>https://rmannibucau.github.io/did-you-think-about-closing-your-java-stream.html</link>
+    <guid isPermaLink="false">/did-you-think-about-closing-your-java-stream.html</guid>
+    <pubDate>Wed, 26 Sep 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to select the best coder for your data with Apache Beam</title>
+    <description>Apache Beam coder abstraction enables you to switch between implementations without rewriting your pipeline. But how to select your coder? Performance and disk spaces are likely the most important criterias, let&apos;s see how to measure them.</description>
+    <link>https://rmannibucau.github.io/apache-beam-coder-selection.html</link>
+    <guid isPermaLink="false">/apache-beam-coder-selection.html</guid>
+    <pubDate>Wed, 19 Sep 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Beam: convert Row structure to an Avro IndexedRecord</title>
+    <description>We previously saw that Beam Row structure allows to write generic transforms but that using its serialization can be a bad bet. To illustrate how to switch between one format to another, we will show in this post how to convert a Row to an IndexedRecord</description>
+    <link>https://rmannibucau.github.io/apache-beam-row-structure-to-avro-indexedrecord.html</link>
+    <guid isPermaLink="false">/apache-beam-row-structure-to-avro-indexedrecord.html</guid>
+    <pubDate>Wed, 12 Sep 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Beam and Row: a new Big Data record/serialization standard?</title>
+    <description>Handing data you don&apos;t know at compile time is a common concern of processing libraries. Apache Beam can&apos;t ignore that since it allows to build portable pipelines for Big Data engines. Let&apos;s see how they started to solve that concern!</description>
+    <link>https://rmannibucau.github.io/apache-beam-row-record.html</link>
+    <guid isPermaLink="false">/apache-beam-row-record.html</guid>
+    <pubDate>Wed, 5 Sep 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Get Maven dependencies locations without any effort</title>
+    <description>Finding a Maven project dependency location from its coordinates is not always very easy or neat....until you know how to do it without any effort ;).</description>
+    <link>https://rmannibucau.github.io/maven-dependencies-locations.html</link>
+    <guid isPermaLink="false">/maven-dependencies-locations.html</guid>
+    <pubDate>Wed, 29 Aug 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Ensure your Servlet container supports dropping the hash from your SPA</title>
+    <description>Single Page Applications used for a long time the &apos;#&apos; as a marker for their routing. Since HTML5 democratisation, path based routing became mainstream. Let&apos;s ensure your  Java Servlet container is friendly to that routing!</description>
+    <link>https://rmannibucau.github.io/servlet-container-spa-remove-hash-from-your-urls.html</link>
+    <guid isPermaLink="false">/servlet-container-spa-remove-hash-from-your-urls.html</guid>
+    <pubDate>Wed, 22 Aug 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Preparing a TomEE instance for Microprofile 2.0</title>
+    <description>Microprofile is fully implemented at Apache but TomEE doesn&apos;t provide yet an implementation. This is not a blocker to use it and this post will show you how!</description>
+    <link>https://rmannibucau.github.io/tomee-microprofile-2.0.html</link>
+    <guid isPermaLink="false">/tomee-microprofile-2.0.html</guid>
+    <pubDate>Wed, 15 Aug 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Compare two JsonObject ignoring the ordering</title>
+    <description>JSON-P provides a nice JSON API for Java applications. However, as JSON is, the objects are ordered (as well as arrays). However, sometimes, you want to compare two objects but ignoring all potential ordering. Here is how to do it.</description>
+    <link>https://rmannibucau.github.io/jsonp-JsonObject-comparison-without-ordering.html</link>
+    <guid isPermaLink="false">/jsonp-JsonObject-comparison-without-ordering.html</guid>
+    <pubDate>Thu, 9 Aug 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile OpenAPI and Swagger UI</title>
+    <description>Microprofile OpenAPI is an easy way to generate an OpenAPI description of its JAX-RS application, but combined with Swagger UI, it makes a super efficient way to document and test its API!</description>
+    <link>https://rmannibucau.github.io/microprofile-openapi-swagger-ui.html</link>
+    <guid isPermaLink="false">/microprofile-openapi-swagger-ui.html</guid>
+    <pubDate>Wed, 1 Aug 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Build a custom Meecrowave distribution in 1 line! The Microprofile example.</title>
+    <description>The gap between Meecrowave and a full Microprofile distribution is not big but Meecrowave stays a robust and reliable server whereas Microprofile is an sandbox area for JakartaEE. However Meecrowave makes it easy to build a Microprofile distribution!</description>
+    <link>https://rmannibucau.github.io/meecrowave-custom-distribution-microprofile.html</link>
+    <guid isPermaLink="false">/meecrowave-custom-distribution-microprofile.html</guid>
+    <pubDate>Wed, 25 Jul 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile OpenAPI: generate your openapi.json at build time with Geronimo and Maven!</title>
+    <description>Microprofile OpenAPI provides a way to document its HTTP API quite easily but what about using it outside a Microprofile Server? Geronimo Microprofile OpenAPI maven plugin allows you to get at that point!</description>
+    <link>https://rmannibucau.github.io/microprofile-openapi-geronimo-maven-plugin.html</link>
+    <guid isPermaLink="false">/microprofile-openapi-geronimo-maven-plugin.html</guid>
+    <pubDate>Thu, 12 Jul 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile: why API design and platform understanding matters</title>
+    <description>Microprofile intiative was promishing the JavaEE.next preview before adding its specifications to JakartaEE. However some of the specifications were thought too isolated from the others and outside the platform core philosophy. Let see what we have today.</description>
+    <link>https://rmannibucau.github.io/microprofile-design-and-platform-matters.html</link>
+    <guid isPermaLink="false">/microprofile-design-and-platform-matters.html</guid>
+    <pubDate>Wed, 4 Jul 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Beam and Websocket: send your big data outputs over websockets!</title>
+    <description>Big Data and real time applications, this is the challenge we start to face nowdays. WebSocket is a very interesting technology allowing to solve part of that equation in a few minutes! Let&apos;s dig how to connect both worlds!</description>
+    <link>https://rmannibucau.github.io/apache-beam-websocket-output.html</link>
+    <guid isPermaLink="false">/apache-beam-websocket-output.html</guid>
+    <pubDate>Wed, 6 Jun 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile JWT Auth: Getting Started</title>
+    <description>JWT technology becomes one of the most interesting solution to handle security in applications since it provides free propagation by design and avoids a central bottleneck in the architecture. Let see how Microprofile tackled that on an API level.</description>
+    <link>https://rmannibucau.github.io/microprofile-jwt-auth-getting-started.html</link>
+    <guid isPermaLink="false">/microprofile-jwt-auth-getting-started.html</guid>
+    <pubDate>Wed, 30 May 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile OpenTracing: microservice monitoring</title>
+    <description>Tracing is one of the most important feature of a production application but also one of the most forgotten. With Microprofile OpenTracing it becomes trvial to setup so no more reason to not have it activated!</description>
+    <link>https://rmannibucau.github.io/microproflie-opentracing-getting-started.html</link>
+    <guid isPermaLink="false">/microproflie-opentracing-getting-started.html</guid>
+    <pubDate>Fri, 25 May 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Microprofile Config and Proxy based configuration?</title>
+    <description>Microprofile configuration is an efficient way to configure a CDI application but can we go further? Sure, with very little efforts you can make it using interfaces and be ready to get features for free!</description>
+    <link>https://rmannibucau.github.io/microprofile-config-proxy-based-configuration.html</link>
+    <guid isPermaLink="false">/microprofile-config-proxy-based-configuration.html</guid>
+    <pubDate>Wed, 23 May 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Activate gzip support on Apache Meecrowave in 5s</title>
+    <description>Serving static resources often comes with supporting GZIP since browsers abuse of it to be more reactive to end users. Let see how to activate it with Meecrowave in a few seconds!</description>
+    <link>https://rmannibucau.github.io/meecrowave-gzip-tomcat-connector.html</link>
+    <guid isPermaLink="false">/meecrowave-gzip-tomcat-connector.html</guid>
+    <pubDate>Thu, 3 May 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to convert an XML document to a JSON one with Sax and JSON-P</title>
+    <description>JSON-P enables to write technical bridges pretty easily. Let see how to do that to convert an incoming XML input stream.</description>
+    <link>https://rmannibucau.github.io/sax-to-jsonp-converter.html</link>
+    <guid isPermaLink="false">/sax-to-jsonp-converter.html</guid>
+    <pubDate>Wed, 18 Apr 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JavaEE: don&amp;#8217;t forget to close your components!</title>
+    <description>JavaEE provides a lot of components (ValidatorFactory, Jsonb, Jsonb, JAX-RS client) but they come with some constraints on their lifecycle? Do you know why it is important to respect them?</description>
+    <link>https://rmannibucau.github.io/javaee-close-component-lifecycle.html</link>
+    <guid isPermaLink="false">/javaee-close-component-lifecycle.html</guid>
+    <pubDate>Wed, 28 Mar 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI built-in @Asynchronous?</title>
+    <description>Compared to EJB, CDI still misses an @Asynchronous API, however since CDI 2.0 there is a way to implement it without any external dependency or custom threading strategy (custom ExecutorService) which breaks the CDI integrations with the container.</description>
+    <link>https://rmannibucau.github.io/cdi-asynchronous-built-in-solution.html</link>
+    <guid isPermaLink="false">/cdi-asynchronous-built-in-solution.html</guid>
+    <pubDate>Wed, 14 Mar 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI and fallback handling: Microprofile&amp;#8230;&amp;#8203;or not</title>
+    <description>CDI is a wonderful system for transversal concern libraries. The fallback handling is a critical feature nowdays and can easily be solved, either using Microprofile implementation or a custom one to go further.</description>
+    <link>https://rmannibucau.github.io/cdi-fallback-microprofile-alternative.html</link>
+    <guid isPermaLink="false">/cdi-fallback-microprofile-alternative.html</guid>
+    <pubDate>Wed, 28 Feb 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Deploy a Meecrowave (or Maven based) application in Docker easily</title>
+    <description>Docker is more and more a production or development constraint to share environments. Therefore you need to bundle your application in a Docker image more and more often. Don&apos;t get afraid of it, it is actually easy!</description>
+    <link>https://rmannibucau.github.io/deploy-meecrowave-bundle-on-docker-with-nexus.html</link>
+    <guid isPermaLink="false">/deploy-meecrowave-bundle-on-docker-with-nexus.html</guid>
+    <pubDate>Wed, 7 Feb 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Book on Java EE 8 Performance</title>
+    <description>JavaEE 8 was released a few months earlier and applications start to be deployed in production. But did you evaluate your performance? Do you respect your SLA? If you are lost with this topic, my book, JavaEE 8 High Performance, can help you.</description>
+    <link>https://rmannibucau.github.io/book-javaee-8-high-performance.html</link>
+    <guid isPermaLink="false">/book-javaee-8-high-performance.html</guid>
+    <pubDate>Wed, 7 Feb 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Add timestamps to Maven output</title>
+    <description>By default the maven logging is nice but doesn&apos;t show any time information. On a CI it can be missing since it prevents you to understand why a build is slow. Of course, Maven provides a simple solution to fix it!</description>
+    <link>https://rmannibucau.github.io/maven-timestamps-log.html</link>
+    <guid isPermaLink="false">/maven-timestamps-log.html</guid>
+    <pubDate>Wed, 31 Jan 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Deploy a Github Meecrowave based microservice on Heroku</title>
+    <description>Deploying a microservice can look complicated, in particular if you are trying to do it for free. However Heroku provides a simple and efficient way to do it. Deployment can even be under the condition Travis build passed.</description>
+    <link>https://rmannibucau.github.io/meecrowave-microservice-on-heroku.html</link>
+    <guid isPermaLink="false">/meecrowave-microservice-on-heroku.html</guid>
+    <pubDate>Wed, 24 Jan 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Extend JUnit Part 2: JUnit 5</title>
+    <description>JUnit 5 is out since some months and start to really be usable. It is as poswerful as JUnit 4 but its extension API completely changed. Let&apos;s see how you can do the same now!</description>
+    <link>https://rmannibucau.github.io/extend-junit-5.html</link>
+    <guid isPermaLink="false">/extend-junit-5.html</guid>
+    <pubDate>Wed, 10 Jan 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Extend JUnit Part 1: JUnit 4</title>
+    <description>JUnit is the most popular java testing framework. Let see how its API allows you to extend it very easily and build your own testing stack!</description>
+    <link>https://rmannibucau.github.io/extend-junit-4.html</link>
+    <guid isPermaLink="false">/extend-junit-4.html</guid>
+    <pubDate>Wed, 3 Jan 2018 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Expose your local Maven repository through http with Meecrowave</title>
+    <description>Sometimes it is convenient to expose its local maven repository through http. Since Java developpers often already have a server locally, let&apos;s see how to reuse it.</description>
+    <link>https://rmannibucau.github.io/meecrowave-local-maven-server.html</link>
+    <guid isPermaLink="false">/meecrowave-local-maven-server.html</guid>
+    <pubDate>Wed, 13 Dec 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to decorate a Java stream?</title>
+    <description>Java Streams are very powerful but when you use it a lot you can miss to be able to propagate a context from intermediate steps.  This is actually not a strong lack since you can fill it quite simply. Let see how to do it!</description>
+    <link>https://rmannibucau.github.io/java-stream-decorator.html</link>
+    <guid isPermaLink="false">/java-stream-decorator.html</guid>
+    <pubDate>Wed, 6 Dec 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Access JMX MBeans through Sirona webapp</title>
+    <description>Accessing JMX MBeans through a web port is a regular need. However it is not always trivial easy to find a solution. A simple way to do it is to use Sirona webapp which will activate JMX for the local machine by default and add some servlet security.</description>
+    <link>https://rmannibucau.github.io/sirona-jmx-mbeans-web.html</link>
+    <guid isPermaLink="false">/sirona-jmx-mbeans-web.html</guid>
+    <pubDate>Wed, 22 Nov 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Redirect CXF JAX-RS endpoints through javax WebSockets</title>
+    <description>Let see how to bridge your CXF JAX-RS endpoint over your javax Websocket server!</description>
+    <link>https://rmannibucau.github.io/cxf-jaxrs-websocket.html</link>
+    <guid isPermaLink="false">/cxf-jaxrs-websocket.html</guid>
+    <pubDate>Wed, 15 Nov 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache Beam and JSR233 support or how to inject java transforms!</title>
+    <description>Apache Beam is an abstraction to execute big data processes but it misses a way to make change some logic without recompile the pipeline. Using the JSR 223 you can make it easily....even relying on java script :).</description>
+    <link>https://rmannibucau.github.io/beam-jsr223.html</link>
+    <guid isPermaLink="false">/beam-jsr223.html</guid>
+    <pubDate>Fri, 3 Nov 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Control @RequestScoped  with CDI 2.0</title>
+    <description>CDI @RequestScoped context is often used as a thread related context. However there are several environments where it is not defined and therefore not active/usable. Let see how CDI 2.0 allows you to still use the request context in any environment.</description>
+    <link>https://rmannibucau.github.io/cdi-2.0-request-scope-controller.html</link>
+    <guid isPermaLink="false">/cdi-2.0-request-scope-controller.html</guid>
+    <pubDate>Wed, 11 Oct 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Bye bye Openshift and hello Metawerx!</title>
+    <description>After about 1 year of Openshift hosting and after recent Openshift structural changes, this blog is now on Metawerx. Here are the details about that story.</description>
+    <link>https://rmannibucau.github.io/openshift-metawerx-migration.html</link>
+    <guid isPermaLink="false">/openshift-metawerx-migration.html</guid>
+    <pubDate>Thu, 21 Sep 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI interceptors and asynchronous operations</title>
+    <description>CDI interceptors are a great way to enrich some beans with more or less complicated logic without polluting the business code. However with modern reactive programming you need different strategies to code them properly. Let&apos;s dig into it a bit!</description>
+    <link>https://rmannibucau.github.io/cdi-interceptor-asynchronous-operation-support.html</link>
+    <guid isPermaLink="false">/cdi-interceptor-asynchronous-operation-support.html</guid>
+    <pubDate>Tue, 5 Sep 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Meecrowave: which packaging for production?</title>
+    <description>Apache Meecrowave is really a flexible solution for JAX-RS/CDI applications. However when it comes to production the question of the packaging will pop up. Here how to tackle it.</description>
+    <link>https://rmannibucau.github.io/meecrowave-packaging-production.html</link>
+    <guid isPermaLink="false">/meecrowave-packaging-production.html</guid>
+    <pubDate>Tue, 1 Aug 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI 2.0 events: asynchronous and synchronous, what did change?</title>
+    <description>Just after the CDI SE API, one of the most requested feature of CDI 2 was the asynchronous event support. However, in that work, the specification also affected a bit the synchronous case. Let&apos;s go through some of these changes in this post.</description>
+    <link>https://rmannibucau.github.io/cdi-2-events-sync-async.html</link>
+    <guid isPermaLink="false">/cdi-2-events-sync-async.html</guid>
+    <pubDate>Tue, 25 Jul 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Get started with CDI standalone API</title>
+    <description>One of the most requested feature of CDI 2 was a standalone API. Let&apos;s digg in the outcome of this track and see when it can be a killer feature.</description>
+    <link>https://rmannibucau.github.io/cdi-se-api.html</link>
+    <guid isPermaLink="false">/cdi-se-api.html</guid>
+    <pubDate>Tue, 18 Jul 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Take care of java Streams with floats!</title>
+    <description>Java streams are very powerful but if you use them to do arithmetical computations take care if it implies any floats!</description>
+    <link>https://rmannibucau.github.io/java-stream-float-widening.html</link>
+    <guid isPermaLink="false">/java-stream-float-widening.html</guid>
+    <pubDate>Tue, 11 Jul 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI 2: programmatic observers</title>
+    <description>CDI 2 brings a nice programmatic API to have observers, it will allow to bridge bus implementations but also part of applications more easily and smoothly.</description>
+    <link>https://rmannibucau.github.io/cdi-2-programmatic-observers.html</link>
+    <guid isPermaLink="false">/cdi-2-programmatic-observers.html</guid>
+    <pubDate>Tue, 4 Jul 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Automotion, git hooks and Slack example.</title>
+    <description>Git and Slack are more extensible than them seems thanks to hooks enabling you to inject your logic in the system. Mixing both hooks you can build a complex automated system making you save time everyday!</description>
+    <link>https://rmannibucau.github.io/slack-git-hook.html</link>
+    <guid isPermaLink="false">/slack-git-hook.html</guid>
+    <pubDate>Tue, 27 Jun 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to use CXF Search extension and JPA</title>
+    <description>CXF search extension allows to convert a HTTP query to a backend query very smoothly. Let see how to use it.</description>
+    <link>https://rmannibucau.github.io/cxf-search-extension.html</link>
+    <guid isPermaLink="false">/cxf-search-extension.html</guid>
+    <pubDate>Thu, 15 Jun 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Extend Meecrowave CLI to get a EE cli</title>
+    <description>Meecrowave is a light CDI/JAX-RS server which makes it very efficient to implement any application. In coming release it will get a smoother extension point for your command line interface (CLI). Let see how to use it!</description>
+    <link>https://rmannibucau.github.io/meecrowave-custom-cli.html</link>
+    <guid isPermaLink="false">/meecrowave-custom-cli.html</guid>
+    <pubDate>Tue, 13 Jun 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Small warning on developping with minified javascript: highlightjs language sample</title>
+    <description>Today javascript is a full language with its build and development tools. This means you don&apos;t need anymore to abuse of minified versions of the libraries and just need to let your build handle it for you. Let see one risk to not do it.</description>
+    <link>https://rmannibucau.github.io/minified-javascript-warning.html</link>
+    <guid isPermaLink="false">/minified-javascript-warning.html</guid>
+    <pubDate>Fri, 9 Jun 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JCache EntryProcessor: nice abstraction for rate limiting!</title>
+    <description>JCache EntryProcessor is a nice API allowing any library to benefit from JCache as abstraction for local or distributed caching. Let see how it helps to handle rate limiting very smoothly.</description>
+    <link>https://rmannibucau.github.io/jcache-entryprocessor-rate-limiting.html</link>
+    <guid isPermaLink="false">/jcache-entryprocessor-rate-limiting.html</guid>
+    <pubDate>Tue, 30 May 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Meecrowave and TomEE @ApacheCon NA 2017!</title>
+    <description>Today I was presenting at ApacheCon NA 2017 a talk about Tomcat and JavaEE servers at Apache Software Foundation. If you are interested in it, here how to grab the slides.</description>
+    <link>https://rmannibucau.github.io/meecrowave-tomee-apachecon-na-2017.html</link>
+    <guid isPermaLink="false">/meecrowave-tomee-apachecon-na-2017.html</guid>
+    <pubDate>Thu, 18 May 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JAX-RS: enrich the response with headers outside your business code</title>
+    <description>In a previous post we saw how to validate the security with JAX-RS. It was mainly based on a request filter. Do you know the response has the same kind of control with JAX-RS &amp;gt;= 2?</description>
+    <link>https://rmannibucau.github.io/jaxrs-response-filter.html</link>
+    <guid isPermaLink="false">/jaxrs-response-filter.html</guid>
+    <pubDate>Tue, 9 May 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Tomcat: rewrite your urls without any library!</title>
+    <description>It is common to have to remap some urls at deploy time to match environment constraints or new requirements. Let see how Tomcat allows to do it very quickly without much effort.</description>
+    <link>https://rmannibucau.github.io/tomcat-rewrite-url.html</link>
+    <guid isPermaLink="false">/tomcat-rewrite-url.html</guid>
+    <pubDate>Tue, 2 May 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Hibernate: why my relationship doesn&amp;#8217;t update?</title>
+    <description>Hibernate is probably the most used JPA implementation but has sometimes some surprising behavior. One I hit recently was the relationship update. If you don&apos;t reuse the collection hibernate gives you it will not update the collection consistently.</description>
+    <link>https://rmannibucau.github.io/hibernate-collection-update.html</link>
+    <guid isPermaLink="false">/hibernate-collection-update.html</guid>
+    <pubDate>Tue, 25 Apr 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Tomcat built-in concurrent limit solution!</title>
+    <description>You maybe don&apos;t know if but since years Tomcat provides a concurrent limit implementation. Let see how to set it up!</description>
+    <link>https://rmannibucau.github.io/tomcat-built-in-concurrent-limit-solution.html</link>
+    <guid isPermaLink="false">/tomcat-built-in-concurrent-limit-solution.html</guid>
+    <pubDate>Tue, 18 Apr 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JAX-RS 2: server security filter</title>
+    <description>JAX-RS 2 added to the specification new components like request/response filters for the server and client. These ones are really helpful for all transversal concerns like the most famous one: the security. Let&apos;s see how to see how to add Basic security.</description>
+    <link>https://rmannibucau.github.io/jaxrs-2-server-security-filter.html</link>
+    <guid isPermaLink="false">/jaxrs-2-server-security-filter.html</guid>
+    <pubDate>Tue, 18 Apr 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JAX-RS and CXF: disable stacktraces on errors</title>
+    <description>CXF is a great JAX-RS provider but you can find it too verbose by default when a wrong request happens. Let&apos;s see how to make it more silent!</description>
+    <link>https://rmannibucau.github.io/jaxrs-cxf-disable-stacktrace.html</link>
+    <guid isPermaLink="false">/jaxrs-cxf-disable-stacktrace.html</guid>
+    <pubDate>Tue, 11 Apr 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Bridge JAX-RS and Camel CDI</title>
+    <description>Camel is a wonderful toolkit to build proxies or advanced integration chains. On another side JAX-RS is a great way to express an HTTP API (or REST API with some more work). Both can be integrated in various ways. Let explore one!</description>
+    <link>https://rmannibucau.github.io/brudge-jaxrs-and-camel-cdi.html</link>
+    <guid isPermaLink="false">/brudge-jaxrs-and-camel-cdi.html</guid>
+    <pubDate>Tue, 4 Apr 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Apache TomEE and Apache Artemis</title>
+    <description>In a previous post I showed how to use Apache Artemis with Apache Meecrowave. Let see this time how to go further and integrate it with Apache TomEE and MDB/EJB.</description>
+    <link>https://rmannibucau.github.io/apache-tomee-artemis.html</link>
+    <guid isPermaLink="false">/apache-tomee-artemis.html</guid>
+    <pubDate>Tue, 28 Mar 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Simple HTML Form</title>
+    <description>There are a lot of ways to secure your application but if you propose a UI it will likely start with a HTML form.  Let&apos;s see how to create a super trivial implementation using the plain javascript in the browser and JAX-RS for the backend.</description>
+    <link>https://rmannibucau.github.io/simple-html-form-javascript-jaxrs.html</link>
+    <guid isPermaLink="false">/simple-html-form-javascript-jaxrs.html</guid>
+    <pubDate>Tue, 21 Mar 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Get some quick performance idea with Sirona and TomEE Maven Plugin</title>
+    <description>Sometimes you need some rough estimates on your code performances, there are a lot of tools to do that but a quick solution to get an idea is to use Apache Sirona. Let see how to set it up on TomEE Maven Plugin pretty quickly.</description>
+    <link>https://rmannibucau.github.io/sirona-tomee-maven-plugin.html</link>
+    <guid isPermaLink="false">/sirona-tomee-maven-plugin.html</guid>
+    <pubDate>Tue, 14 Mar 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to use JMS in a Microprofile server: Meecrowave and Artemis case!</title>
+    <description>Microprofile definition is intentionally limited to CDI and JAX-RS but with the Microservice trend using JMS to get a broker is quite common. Let see how smooth it is to make both working together.</description>
+    <link>https://rmannibucau.github.io/jms-microprofile-meecrowave-artemis.html</link>
+    <guid isPermaLink="false">/jms-microprofile-meecrowave-artemis.html</guid>
+    <pubDate>Tue, 7 Mar 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Java 8 Streams and error handling?</title>
+    <description>How to return errors too in a Stream? This is not really designed for that but with some tricks it is possible!</description>
+    <link>https://rmannibucau.github.io/java-stream-error-handling.html</link>
+    <guid isPermaLink="false">/java-stream-error-handling.html</guid>
+    <pubDate>Thu, 23 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CXF and Swagger integration</title>
+    <description>Swagger is the standard to document a HTTP API. Let&apos;s see how CXF makes this work easy for JAX-RS application now!</description>
+    <link>https://rmannibucau.github.io/cxf-and-swagger-integration.html</link>
+    <guid isPermaLink="false">/cxf-and-swagger-integration.html</guid>
+    <pubDate>Tue, 21 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Integrate 3rd party library with CDI, part 3: use CDI IoC instead of the library one</title>
+    <description>When integrating a 3rd party library, replacing the 3rd party IoC by CDI is not always a trivial task. Let&apos;s see how to do it in Apache Shiro case.</description>
+    <link>https://rmannibucau.github.io/integrate-third-party-library-cdi-ioc.html</link>
+    <guid isPermaLink="false">/integrate-third-party-library-cdi-ioc.html</guid>
+    <pubDate>Thu, 16 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Integrate 3rd party library with CDI, part 2: avoid new annotations for interceptors</title>
+    <description>Integrating a 3rd party library with CDI it is always better to reuse the 3rd party library annotations if possible and avoid to introduce new API. Let&apos;s see how to do it.</description>
+    <link>https://rmannibucau.github.io/integrate-third-party-library-cdi-interceptors.html</link>
+    <guid isPermaLink="false">/integrate-third-party-library-cdi-interceptors.html</guid>
+    <pubDate>Tue, 14 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Integrate 3rd party library with CDI, part 1: what are the challenges? Shiro case!</title>
+    <description>Integrating a 3rd party library with CDI is perfectly doable but we often see partial integrations. Let see what are the actual challenges.</description>
+    <link>https://rmannibucau.github.io/integrate-third-party-library-cdi.html</link>
+    <guid isPermaLink="false">/integrate-third-party-library-cdi.html</guid>
+    <pubDate>Thu, 9 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JavaEE Concurrency Utilities: propagate MDC easily!</title>
+    <description>Frameworks are often relying on MDC (ThreadLocal), in such a context how can the modern multi-threads usage be smooth  (take care it doesn&apos;t mean multithreading only there)? Since JavaEE 7 you have EE Concurrency utilities API which solves it smoothly.</description>
+    <link>https://rmannibucau.github.io/javaee-concurrency-utilities-mdc-propagation.html</link>
+    <guid isPermaLink="false">/javaee-concurrency-utilities-mdc-propagation.html</guid>
+    <pubDate>Tue, 7 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Meecrowave OAuth2: a built-in ready to use OAuth2 server</title>
+    <description>Building an OAuth2 server is complicated but has a lot of advantages. Apache Meecrowave provides one ready to use or ready to embed OAuth2 server, let&apos;s check what&apos;s there and what&apos;s its goal.</description>
+    <link>https://rmannibucau.github.io/meecrowave-oauth2.html</link>
+    <guid isPermaLink="false">/meecrowave-oauth2.html</guid>
+    <pubDate>Thu, 2 Feb 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Meecrowave: a new lightweight Java server</title>
+    <description>Apache got a new lightweigh Java server: Apache Meecrowave. It is basically a Tomcat+OpenWebBeans server pre-integrated. How does it differ from Apache TomEE, is it just a Microprofile implementation?</description>
+    <link>https://rmannibucau.github.io/meecrowave-new-java-server.html</link>
+    <guid isPermaLink="false">/meecrowave-new-java-server.html</guid>
+    <pubDate>Tue, 31 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CDI Extensions can share data!</title>
+    <description>CDI Extensions are still a bit scary but they are really powerful. Did you know they can share data?</description>
+    <link>https://rmannibucau.github.io/share-data-in-cdi-extensions.html</link>
+    <guid isPermaLink="false">/share-data-in-cdi-extensions.html</guid>
+    <pubDate>Thu, 26 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>[TIP] Synchronize two folders with bash</title>
+    <description>It is quite common to need to synchronize/watch two folders in development. There are a lot of solutions but a cheap one can be done with bash and doesn&apos;t need anything else.</description>
+    <link>https://rmannibucau.github.io/bash-synchronize-folders.html</link>
+    <guid isPermaLink="false">/bash-synchronize-folders.html</guid>
+    <pubDate>Tue, 24 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JAX-RS 2 Client: maintain the session between requests</title>
+    <description>JAX-RS 2 has a good client API but it doesn&apos;t provide a solution to maintain the session out of the box. So how to do it?</description>
+    <link>https://rmannibucau.github.io/jaxrs-client-maintain-session.html</link>
+    <guid isPermaLink="false">/jaxrs-client-maintain-session.html</guid>
+    <pubDate>Thu, 19 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>CXF RequestDispatcherProvider: a taste of MVC specification today</title>
+    <description>MVC specification will bring a JAX-RS based MVC server framework to JavaEE 8. But if you already use CXF you can do more or less the same today based on RequestDispatcherProvider. Let&apos;s see how fast it is!</description>
+    <link>https://rmannibucau.github.io/cxf-request-dispatcher-provider.html</link>
+    <guid isPermaLink="false">/cxf-request-dispatcher-provider.html</guid>
+    <pubDate>Tue, 17 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Use Servlet Authentication from a JAAS LoginModule</title>
+    <description>JAAS and Servlet security API seems very decoupled...but can&apos;t we actually use Servlet API behind JAAS?</description>
+    <link>https://rmannibucau.github.io/servlet-jaas-bridge.html</link>
+    <guid isPermaLink="false">/servlet-jaas-bridge.html</guid>
+    <pubDate>Tue, 10 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Should you run your daemon/batch in Tomcat?</title>
+    <description>Do you really need two runtimes very different for batchs/daemons and web applications? Let see that this is no more true in 2017!</description>
+    <link>https://rmannibucau.github.io/daemon-batch-tomcat.html</link>
+    <guid isPermaLink="false">/daemon-batch-tomcat.html</guid>
+    <pubDate>Thu, 5 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Simple service to get gravatar avatars</title>
+    <description>Gravatar is a great way to allow your application to visualize your users and give it a human face. Let see how to use it in 5mn!</description>
+    <link>https://rmannibucau.github.io/gravatar-service-jcache.html</link>
+    <guid isPermaLink="false">/gravatar-service-jcache.html</guid>
+    <pubDate>Tue, 3 Jan 2017 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to handle subprocesses</title>
+    <description>Managing a process from Java is no more hard since Java 8, let see how to use it in a CDI application.</description>
+    <link>https://rmannibucau.github.io/cdi-external-process-management.html</link>
+    <guid isPermaLink="false">/cdi-external-process-management.html</guid>
+    <pubDate>Tue, 27 Dec 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Restlet and EE?</title>
+    <description>Restlet is a very mature java solution to build REST applications, but does it integrate well with JavaEE? Let&apos;s deal with it in this post.</description>
+    <link>https://rmannibucau.github.io/restlet-ee-cdi-servlet.html</link>
+    <guid isPermaLink="false">/restlet-ee-cdi-servlet.html</guid>
+    <pubDate>Tue, 20 Dec 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Build a war with NPM?</title>
+    <description>Java embraces javascript but javascript doesn&apos;t embrace java much. However with some tricks you can still build a war from a frontend npm project and deploy it in Tomcat or your preferred Servlet container!</description>
+    <link>https://rmannibucau.github.io/build-war-npm.html</link>
+    <guid isPermaLink="false">/build-war-npm.html</guid>
+    <pubDate>Tue, 13 Dec 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JAX-RS 2.0 and SSE?</title>
+    <description>JAX-RS 2.1 will introduce Server Sent Events support but do you know you can already do it with JAX-RS 2.0?</description>
+    <link>https://rmannibucau.github.io/jaxrs-2.0-sse.html</link>
+    <guid isPermaLink="false">/jaxrs-2.0-sse.html</guid>
+    <pubDate>Tue, 6 Dec 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Tomcat and Servlet 3.x: where does this timeout comes from?</title>
+    <description>If you use the Servlet 3.0 AsyncContext on Tomcat (or derived like TomEE) you can notice you get sometimes a timeout you don&apos;t expect. Where is it coming from?</description>
+    <link>https://rmannibucau.github.io/tomcat-servlet-3.0-async-timeout.html</link>
+    <guid isPermaLink="false">/tomcat-servlet-3.0-async-timeout.html</guid>
+    <pubDate>Thu, 1 Dec 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE + Arquillian: upgrade EE API</title>
+    <description>EE cycles acceptance can require you to upgrade a specification API before your server gets a new release. Let see how to tackle it with TomEE for Arquillian case.</description>
+    <link>https://rmannibucau.github.io/tomee-arquillian-upgrade-ee-api.html</link>
+    <guid isPermaLink="false">/tomee-arquillian-upgrade-ee-api.html</guid>
+    <pubDate>Thu, 24 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Make Hazelcast JCache implementation CDI friendly in 5mn</title>
+    <description>Hazelcast is an interesting distributed JCache implementation but it doesn&apos;t come with a CDI integration. Let&apos;s see why this is not a blocker at all!</description>
+    <link>https://rmannibucau.github.io/hazelcast-cdi.html</link>
+    <guid isPermaLink="false">/hazelcast-cdi.html</guid>
+    <pubDate>Tue, 22 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>DeltaSpike: new Configuration API!</title>
+    <description>DeltaSpike configuration got lately some great enhancement like interface based configuration, CDI ConfigSource and ConfigFilter or CDI converters for injected configuration entries. Let&apos;s dig into it.</description>
+    <link>https://rmannibucau.github.io/deltaspike-new-configuration-api.html</link>
+    <guid isPermaLink="false">/deltaspike-new-configuration-api.html</guid>
+    <pubDate>Thu, 17 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Webpack and SCP: write your own plugin!</title>
+    <description>Webpack is a very nice and elegant build tool for javascript applications but when it comes to integrate with the &quot;world&quot; it can require to write a custom plugin. Let see how to do your own plugin to scp some files to a server.</description>
+    <link>https://rmannibucau.github.io/webpack-scp-plugin.html</link>
+    <guid isPermaLink="false">/webpack-scp-plugin.html</guid>
+    <pubDate>Tue, 15 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE: how to know which CDI beans the application deploys</title>
+    <description>CDI is great but if the scanning is not under control it can lead to a headache for the developers. Let see how to solve it using TomEE as an example.</description>
+    <link>https://rmannibucau.github.io/tomee-cdi-beans-scanning-debug.html</link>
+    <guid isPermaLink="false">/tomee-cdi-beans-scanning-debug.html</guid>
+    <pubDate>Wed, 9 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Jasmine + mocha hell: test don&amp;#8217;t fail anymore!</title>
+    <description>Jasmine and Mocha are two nice frameworks but putting them together is not as trivial as reading the doc if you don&apos;t take care and ensure your setup works!</description>
+    <link>https://rmannibucau.github.io/jasmine-mocha-test-dont-fail.html</link>
+    <guid isPermaLink="false">/jasmine-mocha-test-dont-fail.html</guid>
+    <pubDate>Fri, 4 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>What if CDI and JPA would be friend?</title>
+    <description>CDI and JPA got some integration with EE 7 but it was the bare minimum. Let see how a small extension can make it even more flexible!</description>
+    <link>https://rmannibucau.github.io/cdi-jpa-could-be-friend.html</link>
+    <guid isPermaLink="false">/cdi-jpa-could-be-friend.html</guid>
+    <pubDate>Wed, 2 Nov 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>You don&amp;#8217;t want to build your own server: microprofile example</title>
+    <description>You probably heard of &quot;MicroProfile&quot; launch some months ago. It is &quot;just&quot; JAX-RS + CDI + JSON-P so it looks easy to build and maintain. Let see if it is the case or not.</description>
+    <link>https://rmannibucau.github.io/you-dont-want-to-build-your-server-microprofile-example.html</link>
+    <guid isPermaLink="false">/you-dont-want-to-build-your-server-microprofile-example.html</guid>
+    <pubDate>Thu, 27 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Generate your adoc module/application configuration instead of maintaining it manually</title>
+    <description>Configuration is generally one pitfall of the projects cause not considered as elegant as programming by most people. Changing people is hard but it doesn&apos;t mean we can&apos;t get a good configuration! Let&apos;s dig into that!</description>
+    <link>https://rmannibucau.github.io/generate-configuration-from-code-adoc.html</link>
+    <guid isPermaLink="false">/generate-configuration-from-code-adoc.html</guid>
+    <pubDate>Tue, 25 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>JSON-B: how to handle Lists and Maps</title>
+    <description>JSON-B doesn&apos;t provide an explicit way to handle List and Map but if you look closer it is there, let&apos;s see how to use that!</description>
+    <link>https://rmannibucau.github.io/jsonb-list-map.html</link>
+    <guid isPermaLink="false">/jsonb-list-map.html</guid>
+    <pubDate>Thu, 20 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Don&amp;#8217;t be shy, visualize your JPA model!</title>
+    <description>JPA 2 introduced a nice feature called Metamodel allowing you to browse and code against JPA model. One consequence is that visualizing the JPA model is now much much easier!</description>
+    <link>https://rmannibucau.github.io/visualize-jpa-model-graph.html</link>
+    <guid isPermaLink="false">/visualize-jpa-model-graph.html</guid>
+    <pubDate>Tue, 18 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE Embedded: extend TomEE CLI!</title>
+    <description>TomEE Embedded provides a great main allowing to configure the server but did you know you can also handle your own CLI arguments through it?</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-args-cli.html</link>
+    <guid isPermaLink="false">/tomee-embedded-args-cli.html</guid>
+    <pubDate>Thu, 13 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Reactive WebSockets: when javax means RxJava!</title>
+    <description>WebSockets are a key feature of JavaEE 7 but modern programming requires to integrate it with reactive APIs. Let&apos;s make it then!</description>
+    <link>https://rmannibucau.github.io/reactive-websockets-rxjava.html</link>
+    <guid isPermaLink="false">/reactive-websockets-rxjava.html</guid>
+    <pubDate>Tue, 11 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Elasticsearch loves JAX-RS 2 and JSON-P</title>
+    <description>Elasticsearch is a very poswerful solution but its HTTP api can be quite hard to bind in java, let&apos;s see how JAX-RS 2 and JSON-P make it hurtless!</description>
+    <link>https://rmannibucau.github.io/elasticsearch-jaxrs-jsonp.html</link>
+    <guid isPermaLink="false">/elasticsearch-jaxrs-jsonp.html</guid>
+    <pubDate>Thu, 6 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE Embedded improvements for the v7.0.2</title>
+    <description>TomEE Embedded got a lot of attention for TomEE 7.0.2. Let see which features you will find in the coming release!</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-improvement-7.0.2.html</link>
+    <guid isPermaLink="false">/tomee-embedded-improvement-7.0.2.html</guid>
+    <pubDate>Tue, 4 Oct 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Camel CDI in a TomEE Fat Jar</title>
+    <description>Camel-cdi module enables to write integration pipelines based on CDI and Camel easily. Let see how to benefit to all this toolkit and run it as an executable jar!</description>
+    <link>https://rmannibucau.github.io/camel-cdi-fatjar.html</link>
+    <guid isPermaLink="false">/camel-cdi-fatjar.html</guid>
+    <pubDate>Tue, 27 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Java vs Typescript: tweeter message length comparison</title>
+    <description>Angular2 having chosen Typescript as primary language boosted its promotion. The fact it looks not that far from Java made it easy to get accepted. Let’s see on a simple algorithm how true it is.</description>
+    <link>https://rmannibucau.github.io/java-vs-typescript-tweeter-message-length-computation.html</link>
+    <guid isPermaLink="false">/java-vs-typescript-tweeter-message-length-computation.html</guid>
+    <pubDate>Thu, 22 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE Embedded LiveReload support</title>
+    <description>When developing a frontend application it is quite common to use Livereload to instantaneously see the change you just did in the browser. To avoid you to have to find an integration TomEE embedded 7 Maven plugin provides this integration out of the box.</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-livereload.html</link>
+    <guid isPermaLink="false">/tomee-embedded-livereload.html</guid>
+    <pubDate>Tue, 20 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to handle SSL self signed certificates with JAX-RS 2</title>
+    <description>Sometimes in development it can be handy to be able to ignore a self signed certificate without adding it to a “dev” keystore or equivalent. Even if not obvious it is very doable with JAX-RS 2 Client API.</description>
+    <link>https://rmannibucau.github.io/self-signed-certificate-jaxrs-2.html</link>
+    <guid isPermaLink="false">/self-signed-certificate-jaxrs-2.html</guid>
+    <pubDate>Tue, 13 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>RBlog got a RSS feed</title>
+    <description>You can now set up RBlog in your preferred RSS feed!</description>
+    <link>https://rmannibucau.github.io/rblog-rss-feed.html</link>
+    <guid isPermaLink="false">/rblog-rss-feed.html</guid>
+    <pubDate>Mon, 12 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Tomcat/TomEE:  Failed to scan /not/existing/lib.jar</title>
+    <description>Tomcat/TomEE shows a “FileNotFound” on a not existing path when you start? Let see why it can happen and how to solve it!</description>
+    <link>https://rmannibucau.github.io/tomcat-failed-scan-lib.html</link>
+    <guid isPermaLink="false">/tomcat-failed-scan-lib.html</guid>
+    <pubDate>Thu, 8 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Maven Surefire: multiple executions and debugging</title>
+    <description>It is quite common for a “big” project to configure multiple executions for surefire but if they don’t share the same configuration how to debug selecting the right one?</description>
+    <link>https://rmannibucau.github.io/maven-surefire-debugging-execution.html</link>
+    <guid isPermaLink="false">/maven-surefire-debugging-execution.html</guid>
+    <pubDate>Tue, 6 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Gradle and TomEE Embedded FatJars</title>
+    <description>TomEE Embedded is one of the easiest way to deploy an EE application as an executable jar.</description>
+    <link>https://rmannibucau.github.io/gradle-tomee-fatjar.html</link>
+    <guid isPermaLink="false">/gradle-tomee-fatjar.html</guid>
+    <pubDate>Fri, 2 Sep 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Angular 2 rc.4 to rc.5 migration: quite smooth but still breaking!</title>
+    <description>Ten days ago I migrated this blog from Angular 2 rc.4 to Angular rc.5. Since all migration since beta.1 were not &quot;free&quot; I didn&apos;t expect to not spend some time on it but this time it didn&apos;t hurt as much as usually. Let&apos;s see the few pitfalls I hit.</description>
+    <link>https://rmannibucau.github.io/angular2-rc4-rc5-migration.html</link>
+    <guid isPermaLink="false">/angular2-rc4-rc5-migration.html</guid>
+    <pubDate>Tue, 23 Aug 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Rotating logs on TomEE without any library</title>
+    <description>Rotating logs is a basic feature for any production oriented deployment, let see how to do it with the built-in TomEE handler.</description>
+    <link>https://rmannibucau.github.io/tomee-rotating-logs.html</link>
+    <guid isPermaLink="false">/tomee-rotating-logs.html</guid>
+    <pubDate>Tue, 16 Aug 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>How to make Tomcat/TomEE loving Log4j2 in 5mn!</title>
+    <description>Tomcat/TomEE and Log4j2 are awesome Apache projects but as anytime logging is involved integrating them can be a headache. Let see how Log4j2 proposes a smooth solution for existing container/frameworks.</description>
+    <link>https://rmannibucau.github.io/tomcat-tomee-log4j2-setup.html</link>
+    <guid isPermaLink="false">/tomcat-tomee-log4j2-setup.html</guid>
+    <pubDate>Thu, 4 Aug 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Part 2 : Test &amp;amp; package your oauth2 server</title>
+    <description>In the previous post we wrote an OAuth2 server. To ensure it works and we don&apos;t break it enhancing it, it is important to test the application. It is also very important to package it to let deployments be smooth and fast. Let’s see how to make it!</description>
+    <link>https://rmannibucau.github.io/cxf-oauth2-server-part-2.html</link>
+    <guid isPermaLink="false">/cxf-oauth2-server-part-2.html</guid>
+    <pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Part 1 : Build an OAuth2 server with CXF</title>
+    <description>CXF is very well known as an awesome JAX-RS and JAX-WS implementation. However, it also provides several extensions like Fediz which is a product. It also provides a less known OAuth2 module. Let’s see how to integrate it to build your own OAuth2 server.</description>
+    <link>https://rmannibucau.github.io/cxf-oauth2-server-part-1.html</link>
+    <guid isPermaLink="false">/cxf-oauth2-server-part-1.html</guid>
+    <pubDate>Tue, 26 Jul 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Travis CI-like on windows?</title>
+    <description>Github and TravisCI provide a great solution to have a free source management and build pipeline. However if you need to validate the compatibility with windows it is not that easy. That’s why it can be interesting to also build on TeaCI which now provide</description>
+    <link>https://rmannibucau.github.io/tea-ci-travis-like-windows.html</link>
+    <guid isPermaLink="false">/tea-ci-travis-like-windows.html</guid>
+    <pubDate>Tue, 12 Jul 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Servlet 3 and AsyncListener: don&amp;#8217;t miss timeouts!</title>
+    <description>Servlet 3 specification introduces asynchronism. It is the API used by JAX-RS 2.0 to support asynchronous invocations. This is a very powerful API but its listener API can be quite surprising and can be easy to misuse. Let’s see why!</description>
+    <link>https://rmannibucau.github.io/servlet3-async-listener-timeout.html</link>
+    <guid isPermaLink="false">/servlet3-async-listener-timeout.html</guid>
+    <pubDate>Thu, 30 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE Embedded flavors</title>
+    <description>Since years, TomEE Embedded has been proposing a shade to make it easy to deploy your application in several ways. Since 7.0.0 version, TomEE got two more flavors of TomEE embedded. Let’s see what they are and why!</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-flavors.html</link>
+    <guid isPermaLink="false">/tomee-embedded-flavors.html</guid>
+    <pubDate>Tue, 28 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>DeltaSpike Configuration: how to make it @Reloadable!</title>
+    <description>DeltaSpike configuration is quite static: once it is injected in an ApplicationScoped instance, you can’t help if a new value arrives without using a getter or any solution forcing you to duplicate the DeltaSpike logic. Let’s see how to solve it!</description>
+    <link>https://rmannibucau.github.io/deltaspike-configuration-reloadable.html</link>
+    <guid isPermaLink="false">/deltaspike-configuration-reloadable.html</guid>
+    <pubDate>Fri, 24 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>DeltaSpike Configuration: auto registration of CDI ConfigSources</title>
+    <description>DeltaSpike provides a nice way to get configuration using CDI. But in practise, with few lines of code, you can even make it nicer. Let’s start by fully integrating it with CDI</description>
+    <link>https://rmannibucau.github.io/deltaspike-cdi-configsources.html</link>
+    <guid isPermaLink="false">/deltaspike-cdi-configsources.html</guid>
+    <pubDate>Wed, 22 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Barcelona conference : JavaEE and Angular2 @JBCNConf</title>
+    <description>Last week, I had a talk at JBCNConf conference about JavaEE and Angular2. The content was about the story behind this blog. Let&apos;s discover it.</description>
+    <link>https://rmannibucau.github.io/barcelone-conference-javaee-angular2.html</link>
+    <guid isPermaLink="false">/barcelone-conference-javaee-angular2.html</guid>
+    <pubDate>Mon, 20 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Openshift DataSource and TomEE</title>
+    <description>Openshift is a great free cloud platform for java. To make it even smoother, TomEE will let you forget about the datasource details and will just let you concentrate on the important configuration!</description>
+    <link>https://rmannibucau.github.io/openshift-tomee-datasource.html</link>
+    <guid isPermaLink="false">/openshift-tomee-datasource.html</guid>
+    <pubDate>Thu, 16 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>HTML colors: from background to text colors</title>
+    <description>While developing a frontend for an application relying on dynamic colors (it is quite common for admin GUI, where colors are used, to identify team or events visually in a dashboard) you may need to compute the color of the text or background from another</description>
+    <link>https://rmannibucau.github.io/background-to-foreground-color.html</link>
+    <guid isPermaLink="false">/background-to-foreground-color.html</guid>
+    <pubDate>Tue, 14 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Dynamic Bean Validation with CDI and JCache</title>
+    <description>Bean Validation provides an elegant way to validate its data through an annotated (or XML) configured model. This is however static by design but relying on v1.1 and CDI, you can make it dynamic!</description>
+    <link>https://rmannibucau.github.io/bean-validation-with-cdi-and-jcache.html</link>
+    <guid isPermaLink="false">/bean-validation-with-cdi-and-jcache.html</guid>
+    <pubDate>Wed, 8 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Get CXF Performance Monitoring in JMX</title>
+    <description>In its “cxf-rt-management” module, CXF provides a performance extension which registers through JMX to expose metric services. Usable in TomEE, its setup is only 1 line of code. Let&apos;s see how to benefit from this feature very useful during dev phases</description>
+    <link>https://rmannibucau.github.io/tomee-cxf-jmx-monitoring.html</link>
+    <guid isPermaLink="false">/tomee-cxf-jmx-monitoring.html</guid>
+    <pubDate>Thu, 2 Jun 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>TomEE Embedded And Gradle</title>
+    <description>With its 7.0.0 release, TomEE brings with him a new official Gradle plugin. Let’s see how to get started with it.</description>
+    <link>https://rmannibucau.github.io/tomee-embedded-gradle-plugin.html</link>
+    <guid isPermaLink="false">/tomee-embedded-gradle-plugin.html</guid>
+    <pubDate>Tue, 31 May 2016 00:00:00 GMT</pubDate>
+   </item>
+   <item>
+    <title>Bye bye wordpress.com, Hello RBlog!</title>
+    <description>I started blogging in 2012 on wordpress.com  ! Everything is already set up : hosting and installation are managed for you.  However, since few months, I felt quite limited relying on the free wordpress platform and decided to create mine.</description>
+    <link>https://rmannibucau.github.io/bye-bye-wordpress.html</link>
+    <guid isPermaLink="false">/bye-bye-wordpress.html</guid>
+    <pubDate>Thu, 26 May 2016 00:00:00 GMT</pubDate>
+   </item>
+  </channel>
+</rss>

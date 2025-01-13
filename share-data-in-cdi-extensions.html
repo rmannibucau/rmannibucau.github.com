@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI Extensions can share data!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,178 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="share-data-in-cdi-extensions-html-container" class="container page-content share-data-in-cdi-extensions-html is-blog">
+                        <div class="page-header">
+                <h1>CDI Extensions can share data!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-26</span>, <span class="metadata-readingtime">3 min and 56 sec read</span></p>
+</div>
+<p>CDI Extensions are still a bit scary for several people but they are actually very powerful. One not that known feature is their ability to share data.</p>
+
+<p>CDI extensions are observers by nature, we often see:</p>
+
+<pre>
+<code class="language-java">public MyExtension implements Extension {
+  void start(@Observes BeforeBeanDiscovery bbd, final BeanManager bm) {
+    bbd.addAnnotatedType(bm.createAnnotatedType(MyType.class));
+  }
+}</code></pre>
+
+<p>This extension just adds a not scanned type as a CDI bean but why I shared this snippet was to remind you the programming model of extensions:&nbsp;<em>@Observes</em>.</p>
+
+<p>A very unknown feature - Mark Struberg reminded it to me last week ;) -&nbsp;of CDI Extension is that they can fire events between them. During bootstrap it is very precious since you can share the event this way.</p>
+
+<p>Here is a trivial example:</p>
+
+<pre>
+<code class="language-java">public Extension1 implements Extension {
+    void start(@Observes BeforeBeanDiscovery bbd, BeanManager bm) {
+      bm.fireEvent(new MyEvent1());
+    }
+}
+
+public Extension2 implements Extension {
+    void startAfterExtension1(@Observes MyEvent1 event1) {
+      // ...
+    }
+}</code></pre>
+
+<p>This trivial example shows that both extensions shared some data through&nbsp;<em>MyEvent1</em>&nbsp;and also ordered some of their execution this way.</p>
+
+<p>Of course events being able to hold any kind of data you can use that on very advanced cases.</p>
+
+<p>A nice one is when you need to share the same data between the container bootstrap and the runtime. Since you write an extension you can fire the data for the bootstrap case but then at runtime you prefer to use&nbsp;<em>@Inject&nbsp;</em>directly. To make it possible just add the event (or the data) as a bean:</p>
+
+<pre>
+<code class="language-java">public Extension1 implements Extension {
+    private MyService service;
+
+    void createAndShareBean(@Observes BeforeBeanDiscovery bbd, BeanManager bm) {
+      service = new MyService();
+      bm.fireEvent(service);
+    }
+
+    void vetoScannedImpl(@Observes ProcessAnnotatedType&lt;MyService&gt; pat) {
+      pat.veto(); // depending the app/scanning it is or not needed
+    }
+
+    void addBean(@Observes BeforeBeanDiscovery bbd, BeanManager bm) {
+      // I assume you have a Bean&lt;T&gt; implementation for provided instances,
+      // if not deltaspike-core does it very well with its BeanBuilder
+      bm.fireEvent(new ExistingInstance&lt;MyService&gt;(service));
+    }
+}
+</code></pre>
+
+<p>This small extension will guarantee startup and runtime will use the same instance of <em>MyService</em>.</p>
+
+<p>The limitation is that&nbsp;<em>MyService</em>&nbsp;needs to be instantiated in this extension and not through CDI (so no&nbsp;<em>@Inject</em>,&nbsp;<em>@Observes</em>, etc... for this instance). This is however the case for all instances created before the bootstrap of the container is done.</p>
+
+<p>At runtime the usage of our service will simply be:</p>
+
+<pre>
+<code class="language-java">@Inject
+private MyService service;</code></pre>
+
+<h2>Small limitation: BeforeBeanDiscovery event</h2>
+
+<p>The issue is CDI extensions are not ordered so you don&#39;t know which one will be first until you use some vendor API. Issue of previous solution is around&nbsp;<em>BeforeBeanDiscovery</em>&nbsp;event which is the one we use to instantiate and share our service: how other extensions can use our service in this particular event?</p>
+
+<p>The solution is to fire an event containing the service and the&nbsp;<em>BeforeBeanDiscovery</em>&nbsp;instance and the&nbsp;<em>BeanManager</em>:</p>
+
+<pre>
+<code class="language-java">public Extension1 implements Extension {
+    private MyService service;
+
+    void createAndShareBean(@Observes BeforeBeanDiscovery bbd, BeanManager bm) {
+      service = new MyService();
+      bm.fireEvent(new ServiceCreated(service, bbd, bm));
+    }
+
+    // like before
+}
+</code></pre>
+
+<p>With this new event consumers can do their work without issues:</p>
+
+<pre>
+<code class="language-java">public Extension2 implements Extension {
+    void startAfterExtension1(@Observes ServiceCreated start) {
+        start.getService().doSomething();
+        start.getBdd().addAnnotatedType(
+            start.getBm().createAnnotatedType(MyType.class));
+    }
+}</code></pre>
+
+<p>The only side effect is if you create an annotated type through this new API then it will reference the bad extension but this is rarely (never?) used so not a big pitfall.</p>
+
+<h2>Why is it useful?</h2>
+
+<p>Sharing data has a lot of use cases if you build an enterprise friendly solution (which includes microservices trend if it means anything). In such applications you will need to build some specific services for:</p>
+
+<ul>
+	<li>the configuration</li>
+	<li>the passwords/secrets handling (ciphering/crypto)</li>
+	<li>the logging</li>
+	<li>...</li>
+</ul>
+
+<p>It is tempting to use these services in extensions to read a flag in the configuration to activate or not a feature for instance, to read a resource password if your resources are managed by an extension etc...</p>
+
+<h2>Another tip before concluding</h2>
+
+<p>This post was mainly about sending data with loose coupling between producers and consumers but if you don&#39;t care to depend on class <em>XExtension</em>&nbsp;and know it is an extension then you can abuse of CDI 1.1 API:&nbsp;<em>BeanManager.getExtension(Class&lt;?&gt;)</em>&nbsp;which will allow you to retrieve another extension from an extension since extension can get the&nbsp;<em>BeanManager</em>&nbsp;in event methods and get the extension at runtime either by a direct&nbsp;injection (<em>@Inject)</em>&nbsp;or through&nbsp;<em>CDI.current().getBeanManager().getExtension(MyExtension.class), </em>even from a not managed bean.</p>
+
+<p>This solution has an advantage over previous one: it doesn&#39;t corrupt&nbsp;<em>BeforeBeanDiscovery.</em></p>
+
+<h2>Conclusion</h2>
+
+<p>Sharing data between extensions is not the first solution to think about because it&nbsp;adds some indirection (like any event based solution) to the code. However it can provide, for specific and well selected instances, a high added value to your stack and avoid you to rely on plain old singletons pattern which has its own pitfalls (classloader leakage, uncontrolled lifecycle, custom context/look-up&nbsp;handling, etc...).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-new-java-server.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//bash-synchronize-folders.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

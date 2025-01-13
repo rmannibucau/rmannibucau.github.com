@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>What if CDI and JPA would be friend?</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="cdi-jpa-could-be-friend-html-container" class="container page-content cdi-jpa-could-be-friend-html is-blog">
+                        <div class="page-header">
+                <h1>What if CDI and JPA would be friend?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-11-02</span>, <span class="metadata-readingtime">8 min and 18 sec read</span></p>
+</div>
+<p>JavaEE 7 brought JPA and CDI integration allowing to get injections in listeners. This is a nice feature but it doesn&#39;t change the programming model as much as CDI could. Let see if we can give more power to the user relying on CDI more structurally!</p>
+
+<h2>How JPA looks like today</h2>
+
+<p>Today JPA has two available modes:</p>
+
+<ul>
+	<li>RESOURCE_LOCAL</li>
+	<li>JTA</li>
+</ul>
+
+<p>Where strictly speaking both could be used by anyone, in practise it is often strictly equivalent to:</p>
+
+<ul>
+	<li>Application</li>
+	<li>Container</li>
+</ul>
+
+<p>Both will provide access to an <em>EntityManager</em> but before that point it is a bit different. Let&#39;s dig quickly into it.</p>
+
+<h3>Resource local</h3>
+
+<p>In term of code you get an <em>EntityManagerFactory</em>&nbsp;(so an&nbsp;<em>EntityManager</em>) using:</p>
+
+<pre>
+<code class="language-java">String unitName = "...";
+Map programmaticConfig = ...;
+EntityManagerFactory factory = Persistence.createEntityManagerFactory(unitName, map);</code></pre>
+
+<p>Then the pitfall of resource local mode is you need to handle transactions yourself instead of relying on JTA which has <em>@Transactional</em>&nbsp;(but you can write your own interceptor):</p>
+
+<pre>
+<code class="language-java">entityManager.getTransaction().begin();
+try {
+  doSomeWork(entityManager);
+} catch (RuntimeException re) {
+  entityManager.getTransaction().rollback();
+  throw re;
+}
+entityManager.getTransaction().commit();</code></pre>
+
+<p>Side note: most of the time you use a library like DeltaSpike or Spring to hide this boilerplate.</p>
+
+<p>This code works if you define a <em>persistence.xml</em>&nbsp;with something like:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                       http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"&gt;
+  &lt;persistence-unit name="demo" transaction-type="RESOURCE_LOCAL"&gt;
+    &lt;class&gt;org.demo.User&lt;/class&gt;
+    &lt;properties&gt;
+      &lt;!--
+      some properties to create the database,
+      define the datasource connection (driver, url, user, ...),
+      ....
+      --&gt;
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</code></pre>
+
+<p>JTA: easier but....</p>
+
+<p>With JTA the persistence.xml is close but get rid of the datasource connection information in favor of a datasource name retrieved using JNDI or a container specific lookup:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                       http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"&gt;
+  &lt;persistence-unit name="demo"&gt;
+    &lt;class&gt;org.demo.User&lt;/class&gt;
+    &lt;properties&gt;
+      &lt;!--
+      some properties to create the database,
+      ....
+      --&gt;
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</code></pre>
+
+<p>The usage is then far easier since <em>@PersistenceContext</em>&nbsp;makes it automatically available:</p>
+
+<pre>
+<code class="language-java">@PersistenceContext
+private EntityManager em;</code></pre>
+
+<p>Transactions are then completely delegated to JTA so either an EJB or <em>@Transactional&nbsp;</em>on the enclosing method works well.</p>
+
+<h2>What&#39;s the pitfall?</h2>
+
+<p>So what&#39;s the issue between JPA and CDI, and why a post about it?</p>
+
+<ol>
+	<li>The integration between CDI and JPA defined that the JPA provider gets the&nbsp;<em>BeanManager</em>&nbsp;(CDI) from the properties passed to the provider to be able to do the work it needs (injections). This is great but CDI should be able to rely on JPA in its startup phase and the JPA provider can do the injections/lookup when the&nbsp;<em>EntityManagerFactory</em>is created. Both use cases are perfectly valid for the spec and...incompatible (chicken-egg you said?). Of course some lazy loading on JPA side makes it smoother but all providers (Hibernate ;)) don&#39;t do that without extending its SPI.</li>
+	<li>The DataSource: it is either using properties in&nbsp;<em>persistence.xml</em>&nbsp;or a container defined name. This require some <em>DataSource</em>&nbsp;facade to be able to switch the datasource or to check in the container to see which one is defined in the container configuration format - which implies split the configuration of the application.</li>
+	<li>Not very visible on previous examples but the scanning is another pitfall: CDI scans for beans but JPA will likely rescan (didn&#39;t find a way to not scan with hibernate without writing a custom hibernate scanner for instance). The integration could rely on CDI to get this scanning for free and avoid the double pain in term of scanning time.</li>
+	<li>We can - by extension - say the same of most of the configuration (validation mode, cache mode properties etc...) localized in the&nbsp;<em>persistence.xml</em>: split the configuration, not programmatic or provider dependent etc...</li>
+</ol>
+
+<h2>Is there a solution?</h2>
+
+<p>Before giving some ideas, it is important to write block on white this section&nbsp;is NOT part of the specification.</p>
+
+<p>Now things are clear, what would be the idea? Consider the&nbsp;<em>persistence.xml</em>&nbsp;could be handled programmatically...wait, it is already the case, no? Yes exactly! That&#39;s why this integration is not &quot;finished&quot;.</p>
+
+<p>JPA specification expose for the containers the&nbsp;<em>PersistenceUnitInfo</em>&nbsp;API. It is mainly a representation of the&nbsp;<em>persistence.xml</em>&nbsp;file allowing to programmatically configure the provider.</p>
+
+<p>Note: all providers don&#39;t support to not have a&nbsp;<em>persistence.xml</em>&nbsp;but some of them do which means using that API you don&#39;t use any XML anymore :).</p>
+
+<h3>PersistenceUnitInfo or programmatic JPA configuration</h3>
+
+<p>The&nbsp;<em>PersistenceUnitInfo</em>&nbsp;can be seen as a JPA configuration provider. It holds the JPA configuration:</p>
+
+<ul>
+	<li>unit name</li>
+	<li>transaction type (RESOURCE_LOCAL or JTA)</li>
+	<li>the datasource(s)</li>
+	<li>managed classes (entities, mapped super classes, embeddable etc...)</li>
+	<li>validation mode</li>
+	<li>cache mode</li>
+	<li>unit properties (where to put the DDL for instance)</li>
+	<li>....</li>
+</ul>
+
+<p>Once you configured your&nbsp;<em>PersistenceUnitInfo</em>&nbsp;(or when you implemented this interface to be clearer), you can call&nbsp;<em>PersistenceProvider</em>&nbsp;class to get an&nbsp;<em>EntityManager</em>:</p>
+
+<pre>
+<code class="language-java">EntityManagerFactory factory =
+  provider.createContainerEntityManagerFactory(info, new HashMap());</code></pre>
+
+<p>Your question there is probably how to get a <em>provider</em>&nbsp;instance? You have two options: do a&nbsp;<em>new</em>&nbsp;of the implementation you use:</p>
+
+<pre>
+<code class="language-java">new PersistenceProviderImpl()
+  .createContainerEntityManagerFactory(info, new HashMap());</code></pre>
+
+<p>or use reflection to get it from the info configuraton:</p>
+
+<pre>
+<code class="language-java">final PersistenceProvider provider;
+try {
+  provider = PersistenceProvider.class.cast(
+    Thread.currentThread().getContextClassLoader()
+      .loadClass(info.getPersistenceProviderClassName()).newInstance());
+} catch (final Exception e) {
+  throw new IllegalArgumentException(
+    "Bad provider: " + info.getPersistenceProviderClassName());
+}
+final EntityManagerFactory factory = provider
+  .createContainerEntityManagerFactory(info, new HashMap());</code></pre>
+
+<p>What about this&nbsp;<em>HashMap</em>? The second parameter of&nbsp;<em>createContainerEntityManagerfactory</em>&nbsp;is a&nbsp;<em>Map</em>. It is intended to communicate between the EE container and the JPA provider all the integration points which can be useful. Concretely that&#39;s here you can - or not - pass the Bean Validation factory and CDI&nbsp;<em>BeanManager</em>&nbsp;to use:</p>
+
+<pre>
+<code class="language-java">final EntityManagerFactory factory = provider.createContainerEntityManagerFactory(info, new HashMap() {{
+  put("javax.persistence.bean.manager", beanManager);
+  put("javax.persistence.validation.factory", validatorFactory);
+}});</code></pre>
+
+<p>Side note: this only shows the&nbsp;<em>EntityManagerFactory</em>&nbsp;instantiation cause it is the hard part but don&#39;t forget to call<em>&nbsp;close()</em>&nbsp;on the factory once the application is shutting down - will avoid to leak and release all the provider needs like CDI instances for example.</p>
+
+<h3>Wire it to CDI: the scanning</h3>
+
+<p>To get the JPA components a CDI extension could scan them with this observer (to put in a CDI&nbsp;<em>Extension</em>&nbsp;implementation):</p>
+
+<pre>
+<code class="language-java">void collectEntities(
+    @Observes
+    @WithAnnotations({Entity.class, MappedSuperclass.class, Embeddable.class})
+    final ProcessAnnotatedType&lt;?&gt; jpa) {
+  jpaClasses.add(jpa.getAnnotatedType().getJavaClass().getName());
+}</code></pre>
+
+<p>This will build a&nbsp;<em>jpaClasses</em>&nbsp;list of all scanned entities (jpa components actually). Then when creating the&nbsp;<em>EntityManagerFactory</em>&nbsp;it is simply to set the managed classes property to this value and the <em>excludeUnlistedClasses</em>&nbsp;to true (to prevent another jpa scanning).</p>
+
+<h3>What about the DataSource?</h3>
+
+<p>The DataSource is probably the biggest issue in JPA today: it relies on the&nbsp;<em>persistence.xml&nbsp;</em>or the container which makes the application either enforcing the configuration and making operation teams without real configuration to tune the datasource/pool or it makes the application completely relying on the container for the connection pooling and&nbsp;the operation teams for the pooling tuning. Depending the kind of company you work in and the way to deliver the application both options can add complexity for a poor gain and it also adds the risk to get bad performances at runtime if you don&#39;t control the server and the configuration the application will be deployed to.</p>
+
+<p>So what would we need? A way to define the&nbsp;<em>DataSource</em>&nbsp;from the application with the pooling library the application selected. It would then enable to:</p>
+
+<ul>
+	<li>ensure the performances are good enough with the selected stack</li>
+	<li>ensure the configuration is consistent with the application (same &quot;source&quot; of configuraton and patterns for entries)</li>
+	<li>ensure the configuration matches the application needs (can be dynamic, environment aware, updated at runtime etc...)</li>
+</ul>
+
+<p>If you check the&nbsp;<em>PersistenceUnitInfo</em>&nbsp;API, you will realize the&nbsp;<em>DataSource</em>&nbsp;is provided, the instance not a name or properties. This means that using the previous proposed setup you would just need to pass a&nbsp;<em>DataSource</em>&nbsp;instance to your JPA provider.</p>
+
+<p>Where to take this instance from? CDI of course. CDI is a&nbsp;<em>Bean</em>&nbsp;registry. If you know how to lookup an instance then you are done! Let&#39;s take the simplest case: a&nbsp;<em>DataSource</em>&nbsp;instance. It can be as simple as these lines:</p>
+
+<pre>
+<code class="language-java">Set&lt;Bean&lt;?&gt;&gt; beans = bm.getBeans(DataSource.class);
+Bean&lt;?&gt; bean = bm.resolve(beans);
+if (bean == null || !bm.isNormalScope(bean.getScope())) {
+  // fail: no DataSource found or the scope is not compliant with JPA
+}
+DataSource ds = DataSource.class.cast(
+  bm.getReference(
+    bean, DataSource.class,
+    bm.createCreationalContext(null)));</code></pre>
+
+<p>This code just do a standard lookup from the&nbsp;<em>BeanManager</em>&nbsp;of CDI (<em>bm</em>) of a&nbsp;<em>DataSource</em>&nbsp;instance. The only trick is to ensure you get a normal scoped instance. Strictly speaking this is not mandatory and you could use a pseudo-scope or even&nbsp;<em>@Dependent</em>&nbsp;instance but if you use the&nbsp;<em>DataSource</em>&nbsp;directly elsewhere or want to rely on CDI features like destroying and recreating an instance at runtime you could get troubles.</p>
+
+<p>Side note: if you choose to go with a&nbsp;<em>@Dependent</em>&nbsp;instance, you will also need to release when the application will shut down the&nbsp;<em>CreationalContext</em>&nbsp;to not leak and execute the &quot;destroy&quot; methods (<em>@PreDestroy</em>, <em>@Disposes</em>, ...).</p>
+
+<p>Now we have a&nbsp;<em>DataSource</em>&nbsp;we just return it in our&nbsp;<em>PersistenceUnitInfo</em>&nbsp;and JPA will use the CDI instance.</p>
+
+<p>Tip: this logic can also apply to the&nbsp;<em>ValidatorFactory</em>&nbsp;;).</p>
+
+<h2>Putting it all together</h2>
+
+<p>What does it look like? It looks super complicated to use no? Actually the technical stack is maybe not obvious or intuitive but the user code is:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class JpaConfig {
+    @Produces
+    @ApplicationScoped
+    public DataSource dataSource() {
+    BasicDataSource source = new BasicDataSource();
+    source.setDriver(new Driver());
+    source.setUrl("jdbc:h2:mem:jpaextensiontest");
+    // ...
+    return source;
+  }
+}</code></pre>
+
+<p>We just need a producer for the datasource (it can get its config from injections like&nbsp;<em>@ConfigProperty</em>&nbsp;of DeltaSpike).</p>
+
+<p>Then we need a small extension with this responsability:</p>
+
+<ul>
+	<li>capture units to create (which will make them injectable)</li>
+	<li>add the transactional interceptor for RESOURCE_LOCAL units on beans getting an&nbsp;<em>EntityManager</em>&nbsp;injection to ensure it can use it - the same interceptor would support to activate/deactivate the transaction for performance reasons.</li>
+	<li>(optional) if handling multiple units it can retrieve the&nbsp;<em>PersistenceUnitInfo</em>&nbsp;to build from the CDI beans</li>
+</ul>
+
+<p>In term of end user code it can look like:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class UserService {
+    @Inject
+    @Unit(name = "test") // the extension adds units with this qualifier
+    private EntityManager em;
+
+    // tx by default
+    public User save(final User user) {
+        em.persist(user);
+        return user;
+    }
+
+    @Jpa(transactional = false) // no tx
+    public User find(final long id) {
+        return em.find(User.class, id);
+    }
+}</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>All right, ready to start? Almost, this post doesn&#39;t detail how to implement the extension but if you are interested there is an experimental module in&nbsp;<em>microwave</em>&nbsp;(a microservice server propulsed at OpenWebBeans community) implementing this idea. Check out the&nbsp;<a href="http://svn.apache.org/repos/asf/openwebbeans/microwave/trunk/microwave-doc/src/main/jbake/content/microwave-jpa/index.adoc" target="_blank">code source</a>.</p>
+
+<p>In any case, JPA could leverage far more CDI to make it smoother and more modern so don&#39;t hesitate to experiment and go further than what the specifications do to make your life and operation teams one easier!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jasmine-mocha-test-dont-fail.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//you-dont-want-to-build-your-server-microprofile-example.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

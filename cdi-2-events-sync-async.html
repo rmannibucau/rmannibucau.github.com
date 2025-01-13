@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI 2.0 events: asynchronous and synchronous, what did change?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,253 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-2-events-sync-async-html-container" class="container page-content cdi-2-events-sync-async-html is-blog">
+                        <div class="page-header">
+                <h1>CDI 2.0 events: asynchronous and synchronous, what did change?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-07-25</span>, <span class="metadata-readingtime">5 min and 45 sec read</span></p>
+</div>
+<p>Just after the CDI SE API, one of the most requested feature of CDI 2 was the asynchronous event support. However, in that work, the specification also affected a bit the synchronous case. Let&#39;s go through some of these changes in this post.</p>
+
+<h2>Reminder: sending an event in CDI 1</h2>
+
+<p>In CDI 1 you had two options to send events:</p>
+
+<ul>
+	<li>from an&nbsp;<em>Event&lt;X&gt;</em>&nbsp;injection</li>
+</ul>
+
+<pre>
+<code class="language-java">public class EventSender {
+    @Inject
+    private Event&lt;MyEvent&gt; myEvent;
+
+    public void fire(MyEvent event) {
+        myEvent.fire(event);
+    }
+}</code></pre>
+
+<ul>
+	<li>from the&nbsp;<em>BeanManager</em></li>
+</ul>
+
+<pre>
+<code class="language-java">public class EventSender {
+    @Inject
+    private BeanManager beanManager;
+
+    public void fire(MyEvent event) {
+        beanManager.fireEvent(event);
+    }
+}
+</code></pre>
+
+<h2>BeanManager API change</h2>
+
+<p>The last option (from the&nbsp;<em>BeanManager</em>), was working well but since we now have synchronous/asynchronous the API needs to evolve to support this new metadata (is the event synchronous or not).</p>
+
+<p>One clever idea to not add a&nbsp;<em>fireAsync</em>&nbsp;was to make both API converge to a single one. To make it working&nbsp;<em>BeanManager</em>&nbsp;now gets a&nbsp;<em>getEvent()</em>&nbsp;method which returns an&nbsp;<em>Event&lt;Object&gt;</em>&nbsp;which can now (in CDI 2) resolve another instance of&nbsp;<em>Event</em>&nbsp;to select the event type (exactly like&nbsp;<em>Instance&lt;?&gt;</em>&nbsp;can do it).</p>
+
+<p>In practise a synchronous sending using the <em>BeanManager&nbsp;</em>looks like:</p>
+
+<pre>
+<code class="language-java">public class EventSender {
+    @Inject
+    private BeanManager beanManager;
+
+    public void fire(MyEvent event) {
+        beanManager.getEvent().select(MyEvent.class).fire(event);
+    }
+}
+</code></pre>
+
+<p>From that point of the post I&#39;ll only speak of&nbsp;<em>Event</em>&nbsp;API since both converged but keep in mind you can access it from a direct injection or the&nbsp;<em>BeanManager</em>&nbsp;if you write an extension.</p>
+
+<h2>Sending asynchronous events</h2>
+
+<p>Sending an asynchronous event passes by the&nbsp;<em>fireAsync()</em>&nbsp;method of the&nbsp;<em>Event</em>:</p>
+
+<pre>
+<code class="language-java">CompletableStage&lt;MyEvent&gt; sent = event.fireAsync(new MyEvent());</code></pre>
+
+<p>It also has a flavor where you can pass&nbsp;<em>NotificationOptions</em>&nbsp;which will mainly allow you to pass the&nbsp;<em>Executor</em>&nbsp;to use to execute the asynchronous observers:</p>
+
+<pre>
+<code class="language-java">CompletableStage&lt;MyEvent&gt; sent = event.fireAsync(
+    new MyEvent(),
+    NotificationOptions.ofExecutor(executor));</code></pre>
+
+<p>It is important to specify the executor to use if you care about the runtime of this bus because the default is unspecified and often fallback on the standalone common ForkJoin pool which has the pitfalls to not define if the eventing is actually asynchronous (can be synchronous!) and the control the pool (size, eviction etc...) is global to the JVM which is never good if you intend to scale.</p>
+
+<p>On the same spirit, if you use asynchronous events for a reactive implementation you will likely need to configure multiple pools per usages to avoid to lock (it is easy to look a single pool if you submit different kind of tasks linked between them by a dependency relationship and you lock in an end task waiting for all tasks like in a batch or rest service).</p>
+
+<p>Concretely my recommandation is to prevent the usage of <em>fireAsync(Event)</em>&nbsp;by any build tool and ensure to always pass a&nbsp;<em>NotificationOptions</em>.</p>
+
+<p>Side note: the&nbsp;<em>NotificationOptions</em>&nbsp;can also just take properties but this is undefined so you are not sure which&nbsp;<em>Executor</em>&nbsp;you will get so not yet ready to use (maybe later some default properties like the core size etc will be standard).</p>
+
+<p>If you took care CDI broke its loose coupling here since the sender needs to know how the receiver is written. If you don&#39;t want to loose this feature don&#39;t forget to send twice your event:</p>
+
+<pre>
+<code class="language-java">public void send(MyEvent myEvent) {
+    event.fire(myEvent);
+    event.fireAsync(myEvent, NotificationOptions.ofExecutor(executor));
+}</code></pre>
+
+<h2>Listening for events</h2>
+
+<p>On the synchronous side, listening for an event still looks like:</p>
+
+<pre>
+<code class="language-java">public void onEvent(@Observes final MyEvent e) {
+    System.out.println("Event: " + e);
+}</code></pre>
+
+<p>But on the asynchronous side you use the new&nbsp;<em>@ObservesAsync</em>&nbsp;annotation:</p>
+
+<pre>
+<code class="language-java">public void onAsyncEvent(@ObservesAsync final MyEvent e) {
+    System.out.println(e);
+}</code></pre>
+
+<h2>Asynchronous event: no CompletionFuture?</h2>
+
+<p>When starting to use asynchronous events you will get confused to get a&nbsp;<em>CompletionStage</em>&nbsp;instead of a&nbsp;<em>CompletionFuture</em>.</p>
+
+<p>Debugging you will always get a&nbsp;<em>CompletionFuture</em>&nbsp;implementation so it will be tempting to cast it but resist to the temptation.&nbsp;<em>toCompletionFuture()</em>&nbsp;is here to do the conversion itself:</p>
+
+<pre>
+<code class="language-java">MyEvent event = fireAsync()
+    .toCompletableFuture()
+    .get();</code></pre>
+
+<p>Note however the need of such a conversion is often limited to tests and more rarely to the main runtime where the synchronization will not be done this way.</p>
+
+<p>The&nbsp;<em>CompletionStage</em>&nbsp;being mainly the chain handling of the&nbsp;<em>CompletionFuture</em><em>&nbsp;</em>without the<em> Future</em>&nbsp;(synchronous) part you still get the power of that API and ability to chain processing.</p>
+
+<p>The important thing to keep in mind here is the processing of the event will be done after all the observers got invoked and observers invocation is not sequential so if you mutate your event you need to be thread safe.</p>
+
+<p>Here is an example using the event to accumulate data to send to a 3rd party system:</p>
+
+<ul>
+	<li>we assume we have N observers (let say an audit one, a logging one and a processing one) with this pattern:</li>
+</ul>
+
+<pre>
+<code class="language-java">public void addAudit(@ObservesAsync final Result e) {
+    try {
+        doProcessing();
+        e.addMessage("added audit trace");
+    } catch (final RuntimeExceptino re) {
+        e.addError("failed to add audit trace: " + re.getMessage());
+    }
+}</code></pre>
+
+<ul>
+	<li>we then get back the event which is our JAX-RS payload:</li>
+</ul>
+
+<pre>
+<code class="language-java">public class Result { // + getters
+    private final Collection&lt;String&gt; messages = new ArrayList&lt;&gt;();
+    private final Collection&lt;String&gt; errors = new ArrayList&lt;&gt;();
+
+    public synchronized void addMessage(final String message) {
+        messages.add(message);
+    }
+
+    public synchronized void addError(final String message) {
+        errors.add(message);
+    }
+}</code></pre>
+
+<ul>
+	<li>then our JAX-RS endpoint can look like:</li>
+</ul>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class Endpoint {
+    @Inject
+    private Event&lt;Result&gt; resultEvent;
+
+    @Inject
+    @Named("restExecutor")
+    private Executor executor;
+
+    @GET
+    public void get(@Suspended final AsyncResponse response) {
+        resultEvent.fireAsync(new Result(), NotificationOptions.ofExecutor(executor))
+                .thenAccept(response::resume);
+    }
+}</code></pre>
+
+<h2>Event ordering: a feature reserved to synchronous events</h2>
+
+<p>If you add&nbsp;<em>@Priority</em>&nbsp;on a <strong>synchronous</strong>&nbsp;observer you can sort the processing:</p>
+
+<pre>
+<code class="language-java">public void onEvent(@Observes @Priority(2500) MyEvent e) {
+    System.out.println(e);
+}</code></pre>
+
+<p>They will be sorted by priority, the default being 2500. If you want to pass the result of a processing in the event and audit it in another observer then you will need a priority higher than 2500 but if you want ro sanitize an event mutating its state you will need to use a lower priority.</p>
+
+<p>This feature will not work with&nbsp;<em>@ObservesAsync</em>&nbsp;because asynchronous observers are not sequentially executed. This can sound like a blocker but if you think about it, if you want to sort observers in an async flow you can still fire another&nbsp;<strong>synchronous</strong>&nbsp;event and just sort this one.</p>
+
+<h2>Conclusion</h2>
+
+<p>Concretely it means that the asynchronous feature of CDI gives you a great power but requires some carefulness and thoughts:</p>
+
+<ul>
+	<li>never forget the pool/executor you want to use. Direct implication is you will also decide how you handle the awaiting of the event dispatching. A default simple strategy is to way a (configured) timeout when shutting down the executor. A more advanced one is to handle graceful shutdown waiting for all receptions of the events but is harder to implement and doesn&#39;t always give better results.</li>
+	<li>don&#39;t use it for ordering but prefer a standard chain or synchronous event or sub-event for such a need</li>
+	<li>the sender decides which kind of observer is triggered so if you want both ensure to send twice your event</li>
+</ul>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-packaging-production.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-se-api.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apache Beam: convert Row structure to an Avro IndexedRecord</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="apache-beam-row-structure-to-avro-indexedrecord-html-container" class="container page-content apache-beam-row-structure-to-avro-indexedrecord-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Beam: convert Row structure to an Avro IndexedRecord</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-09-12</span>, <span class="metadata-readingtime">8 min and 6 sec read</span></p>
+</div>
+<p>In the previous <u><a href="https://rmannibucau.metawerx.net/post/apache-beam-row-record" target="_self">big data post</a></u> we saw that Apache Beam&nbsp;<em>Row</em>&nbsp;structure allows to write generic transforms but that <strong>using its serialization can be a bad bet</strong>. To illustrate how to switch between one format to another, we will show in this post <strong>how to convert a&nbsp;<em>Row</em>&nbsp;to an Avro <em>IndexedRecord</em>&nbsp;structure</strong>.</p>
+
+<h2>From Apache Beam Row to Avro IndexedRecord</h2>
+
+<p>As a quick reminder, Beam&nbsp;<em>Row&nbsp;</em>and Avro&nbsp;<em>IndexedRecord</em>&nbsp;share the <strong>same philosophy</strong>: the data structure is described through a schema that hosts the fields order and type, and the data are just directly&nbsp;serialized without their schema which is managed in user code.</p>
+
+<p>However, contrarly to Beam&nbsp;<em>Row Schema</em>, <strong>the Avro&nbsp;<em>Schema</em>&nbsp;is not serializable</strong>. To solve that first issue, since the converters we will provide will likely be serialized through Beam runtime deployment, we must make it serializable.</p>
+
+<p>Luckily for us, the schema can be serialized as a string through its&nbsp;<strong><em>toString()</em>&nbsp;method</strong> and loaded back as a&nbsp;<em>Schema</em>&nbsp;through the&nbsp;<strong><em>Schema.Parser#parse</em>&nbsp;method</strong>.</p>
+
+<p>However, we can <strong>create a serializable schema</strong> like that:</p>
+
+<pre>
+<code class="language-java">class SerializableAvroSchema implements Serializable  {
+    private volatile transient org.apache.avro.Schema schema;
+    private String schemaString;
+
+    SerializableAvroSchema(final org.apache.avro.Schema schema) {
+        this.schema = schema;
+        this.schemaString = schema.toString();
+    }
+
+    org.apache.avro.Schema getSchema() {
+        if (schema == null) {
+            synchronized (this) {
+                if (schema == null) {
+                    schema = new org.apache.avro.Schema.Parser().parse(schemaString);
+                }
+            }
+        }
+        return schema;
+    }
+}</code></pre>
+
+<p>Then we need three conversions:</p>
+
+<ol>
+	<li>Convert the&nbsp;<em>Row Schema</em> to an Avro&nbsp;<em>Schema</em></li>
+	<li>Convert a&nbsp;<em>Row&nbsp;</em>to an&nbsp;<em>IndexedRecord</em></li>
+	<li>Convert an&nbsp;<em>IndexedRecord&nbsp;</em>to a&nbsp;<em>Row</em></li>
+</ol>
+
+<h3>Convert Beam Schema to Avro one</h3>
+
+<p>Converting Beam schema to <strong>Avro schema</strong> means iterating over each field and mapping its type to avro native ones.</p>
+
+<p>Here is <strong>how the mapping can be implemented </strong>:</p>
+
+<pre>
+<code class="language-java">public class RowAvroSchemaConverter {
+
+  public org.apache.avro.Schema toAvroSchema(final String name, final Schema beamSchema) {
+    return org.apache.avro.Schema.createRecord(
+            name,
+            null, null, false,
+            beamSchema.getFields().stream()
+                    .map(beamField -&gt; new org.apache.avro.Schema.Field(
+                            beamField.getName(), getSchema(name, beamField),
+                            beamField.getDescription(), (Object) null))
+                    .collect(toList()));
+  }
+
+  private org.apache.avro.Schema getDirectSchema(final String name, final Schema.Field field) {
+    switch (field.getType().getTypeName()) {
+        case BYTES:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.BYTES);
+        case BOOLEAN:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.BOOLEAN);
+        case BYTE:
+        case DECIMAL:
+        case INT16:
+        case INT32:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.INT);
+        case DATETIME:
+        case INT64:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.LONG);
+        case FLOAT:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.FLOAT);
+        case DOUBLE:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.DOUBLE);
+        case STRING:
+            return org.apache.avro.Schema.create(org.apache.avro.Schema.Type.STRING);
+        case ROW:
+            return toAvroSchema(name + "." + field.getName(), field.getType().getRowSchema());
+        case MAP:
+            if (field.getType().getMapKeyType().getTypeName() != Schema.TypeName.STRING) {
+                throw new IllegalArgumentException("Only maps with String keys are supported");
+            }
+            return org.apache.avro.Schema.createMap(toAvroSchema(name + "." + field.getName(), field.getType().getMapValueType().getRowSchema()));
+        case ARRAY:
+            return org.apache.avro.Schema.createArray(toAvroSchema(name + "." + field.getName(), field.getType().getCollectionElementType().getRowSchema()));
+        default:
+            throw new IllegalArgumentException(field.toString());
+    }
+  }
+
+  protected org.apache.avro.Schema getSchema(final String nameBase, final Schema.Field field) {
+    final org.apache.avro.Schema directSchema = getDirectSchema(nameBase, field);
+    if (field.getNullable() != null &amp;&amp; field.getNullable()) {
+        return org.apache.avro.Schema.createUnion(
+            directSchema,
+            org.apache.avro.Schema.create(org.apache.avro.Schema.Type.NULL));
+    }
+    return directSchema;
+
+  }
+
+}</code></pre>
+
+<p><strong>This code</strong> has the limitation to <strong>only support <em>String</em>&nbsp;keys for map container</strong> but this can be worked around using a list of key/values. To avoid complexifying this blogpost code samples, this hasn&#39;t been done but it is not very hard.</p>
+
+<p>The interesting pieces of code are:</p>
+
+<ol>
+	<li>
+	<p><em>getDirectSchema</em>&nbsp;which maps the types between Beam and Avro worlds,</p>
+	</li>
+	<li>
+	<p><em>getSchema</em>&nbsp;which handles the nullability of each field,</p>
+	</li>
+	<li>
+	<p><em>toAvroSchema</em>&nbsp;which converts Beam&#39;s&nbsp;<em>Schema </em>to Avro&#39;s one.</p>
+	</li>
+</ol>
+
+<p>With this code you can now <strong>get the Avro&#39;s schema from any Beam&#39;s schema</strong>:</p>
+
+<pre>
+<code class="language-java">public static void main(String[] args) {
+    final Schema schema = createBeamPersonSchema();
+    final RowAvroSchemaConverter provider = new RowAvroSchemaConverter();
+    final org.apache.avro.Schema avroSchema = provider.toAvroSchema(
+        "com.github.rmannibucau.generated.Person", schema);
+    System.out.println(avroSchema);
+}</code></pre>
+
+<p>Once the Avro schema reformatted to be more readable, this outputs something like:</p>
+
+<pre>
+<code class="language-javascript">{
+   "type":"record",
+   "name":"Person",
+   "namespace":"com.github.rmannibucau.generated",
+   "fields":[
+      {
+         "name":"id",
+         "type":"string",
+         "doc":""
+      },
+      {
+         "name":"name",
+         "type":"string",
+         "doc":""
+      },
+      {
+         "name":"age",
+         "type":"int",
+         "doc":""
+      },
+      {
+         "name":"created",
+         "type":"long",
+         "doc":""
+      },
+      {
+         "name":"updated",
+         "type":"long",
+         "doc":""
+      },
+      {
+         "name":"address",
+         "type":{
+            "type":"record",
+            "name":"address",
+            "namespace":"com.github.rmannibucau.generated.Person",
+            "fields":[
+               {
+                  "name":"number",
+                  "type":"int",
+                  "doc":""
+               },
+               {
+                  "name":"street",
+                  "type":"string",
+                  "doc":""
+               },
+               {
+                  "name":"country",
+                  "type":"string",
+                  "doc":""
+               }
+            ]
+         },
+         "doc":""
+      }
+   ]
+}</code></pre>
+
+<h3>Apache Beam&#39;s <em>Row</em>&nbsp;to Avro&#39;s&nbsp;<em>IndexedRecord</em></h3>
+
+<p><strong>Converting a row to an indexed record</strong> is as simple as iterating over each field and put each value into the record.</p>
+
+<p>To not even have to create a custom implementation of&nbsp;<em>IndexedRecord</em>&nbsp;you can reuse&nbsp;<em>org.apache.avro.generic.GenericData.Record</em>&nbsp;structure.</p>
+
+<p>The only careness to take is to make sure to properly process the not primitive types which are:</p>
+
+<ul>
+	<li><em>DATETIME</em> Beam&#39;s data which must be converted to <em>long</em>&nbsp;in Avro record,</li>
+	<li><em>ROW</em>&nbsp;which must trigger a nested conversion,</li>
+	<li><em>ARRAY</em>&nbsp;and&nbsp;<em>MAP</em>&nbsp;which trigger a nested conversion for the values.</li>
+</ul>
+
+<p>Hereafter is what the implementation can look like:</p>
+
+<pre>
+<code class="language-java">protected IndexedRecord toAvro(final Schema beamSchema, final org.apache.avro.Schema avroSchema, final Row row) {
+    final GenericData.Record record = new GenericData.Record(avroSchema);
+    IntStream.range(0, beamSchema.getFieldCount())
+        .forEach(i -&gt; {
+            final Object value = row.getValue(i);
+            if (value == null) {
+                record.put(i, null);
+                return;
+            }
+            final Schema.FieldType fieldType = beamSchema.getField(i).getType();
+            final Schema.TypeName typeName = fieldType.getTypeName();
+            if (typeName == Schema.TypeName.ROW) {
+                record.put(i, toAvro(fieldType.getRowSchema(), avroSchema.getFields().get(i).schema(), Row.class.cast(value)));
+            } else if (typeName == Schema.TypeName.DATETIME) {
+                record.put(i, AbstractInstant.class.cast(value).toInstant().getMillis());
+            } else if (typeName == Schema.TypeName.ARRAY) {
+                final Schema.FieldType elementType = fieldType.getCollectionElementType();
+                if (elementType.getTypeName() == Schema.TypeName.ROW) {
+                    final org.apache.avro.Schema avroEltSchema = avroSchema.getFields().get(i).schema().getElementType();
+                    record.put(i, ((Collection&lt;Row&gt;) value).stream()
+                        .map(it -&gt; toAvro(elementType.getRowSchema(), avroEltSchema, it))
+                        .collect(toList()));
+                } else {
+                    record.put(i, value);
+                }
+            } else if (typeName == Schema.TypeName.MAP) {
+                if (fieldType.getMapKeyType().getTypeName() != Schema.TypeName.STRING) {
+                    throw new IllegalArgumentException("Only Map with String keys are supported for now");
+                }
+                final Schema.FieldType mapValueType = fieldType.getMapValueType();
+                if (mapValueType.getTypeName() == Schema.TypeName.ROW) {
+                    final org.apache.avro.Schema avroValueSchema = avroSchema.getFields().get(i).schema().getValueType();
+                    record.put(i, ((Map&lt;String, Row&gt;) value).entrySet().stream()
+                        .collect(toMap(Map.Entry::getKey, it -&gt; toAvro(mapValueType.getRowSchema(), avroValueSchema, it.getValue()))));
+                } else {
+                    record.put(i, value);
+                }
+            } else {
+                record.put(i, value);
+            }
+        });
+    return record;
+}</code></pre>
+
+<p>To prepare it for Beam we will make the conversion serialization friendly through a&nbsp;<em>SerializableFunction</em>:</p>
+
+<pre>
+<code class="language-java">public SerializableFunction&lt;Row, IndexedRecord&gt; createFromRow(
+        final Schema schema, final org.apache.avro.Schema avroSchema) {
+    final SerializableAvroSchema avroSchemaRef = new SerializableAvroSchema(avroSchema);
+    return row -&gt; toAvro(schema, avroSchemaRef.getSchema(), row);
+}</code></pre>
+
+<h3>Avro&#39;s&nbsp;<em>IndexedRecord</em>&nbsp;to Apache Beam&#39;s <em>Row</em></h3>
+
+<p><strong>The reverse conversion</strong> is quite the same but the data conversion is the opposite one as expected:</p>
+
+<pre>
+<code class="language-java">protected static Row toRow(final Schema beamSchema,
+                           final org.apache.avro.Schema avroSchema,
+                           final IndexedRecord root) {
+    return Row.withSchema(beamSchema)
+        .addValues(avroSchema.getFields().stream()
+            .map(field -&gt; {
+                final Object value = root.get(field.pos());
+                if (value == null) {
+                    return null;
+                }
+
+                final Schema.Field beamField = beamSchema.getField(field.pos());
+                if (beamField.getType().getTypeName() == Schema.TypeName.DATETIME) {
+                    return AbstractInstant.class.cast(value).toInstant().getMillis();
+                }
+                if (beamField.getType().getTypeName() == Schema.TypeName.ROW) {
+                    return toRow(beamField.getType().getRowSchema(), field.schema(), IndexedRecord.class.cast(value));
+                }
+                if (beamField.getType().getTypeName() == Schema.TypeName.ARRAY &amp;&amp; !beamField.getType().getCollectionElementType().getTypeName().isPrimitiveType()) {
+                    final Schema nestedBeamSchema = beamField.getType().getCollectionElementType().getRowSchema();
+                    final org.apache.avro.Schema nestedAvroSchema = field.schema().getElementType();
+                    return Collection.class.cast(value).stream()
+                            .map(it -&gt; toRow(nestedBeamSchema, nestedAvroSchema, IndexedRecord.class.cast(it)))
+                            .collect(toList());
+                }
+                if (beamField.getType().getTypeName() == Schema.TypeName.MAP &amp;&amp; !beamField.getType().getMapValueType().getTypeName().isPrimitiveType()) {
+                    if (beamField.getType().getMapKeyType().getTypeName() != Schema.TypeName.STRING) {
+                        throw new IllegalArgumentException("Only Map with String keys are supported for now");
+                    }
+                    final Schema nestedBeamSchema = beamField.getType().getCollectionElementType().getRowSchema();
+                    final org.apache.avro.Schema nestedAvroSchema = field.schema().getElementType();
+                    return ((Map&lt;String, IndexedRecord&gt;) value).entrySet().stream()
+                            .collect(Collectors.toMap(Map.Entry::getKey, it -&gt; toRow(nestedBeamSchema, nestedAvroSchema, it.getValue())));
+                }
+                return value;
+            })
+            .collect(toList())
+        ).build();
+}</code></pre>
+
+<p>And the companion <strong>serializable function</strong> is:</p>
+
+<pre>
+<code class="language-java">public SerializableFunction&lt;IndexedRecord, Row&gt; createToRow(final Schema beamSchema,
+                                                            final org.apache.avro.Schema avroSchema) {
+    final SerializableAvroSchema avroSchemaRef = new SerializableAvroSchema(avroSchema);
+    return avro -&gt; toRow(beamSchema, avroSchemaRef.getSchema(), avro);
+}</code></pre>
+
+<h3>Usage</h3>
+
+<p>Considering all these methods were put in the same class, you can now convert a&nbsp;<em>Row</em>&nbsp;with this code:</p>
+
+<pre>
+<code class="language-java">final RowAvroSchemaConverter provider = new RowAvroSchemaConverter();
+final org.apache.avro.Schema avroSchema = provider.toAvroSchema("com.github.rmannibucau.generated.Person", schema);
+final IndexedRecord record = provider.createFromRow(schema, avroSchema).apply(row);
+System.out.println(record);</code></pre>
+
+<h2>Pitfalls of that kind of conversion</h2>
+
+<p>These conversions still <strong>have one major pitfall</strong>: they need the schema at pipeline definition time which means that it <strong>will not support data evolution</strong> which is quite an important limitation for big data ingestion. For such cases, <strong>other type of generic records can be more relevant</strong>.</p>
+
+<p>To illustrate that, let&#39;s remind us the way beam handles&nbsp;<em>Row</em>&nbsp;conversions:</p>
+
+<ul>
+	<li>You define an implicit (from functions) or explicit&nbsp;<em>org.apache.beam.sdk.schemas.SchemaProvider</em>&nbsp;which is registered in the&nbsp;<em>SchemaRegistry</em>&nbsp;of the pipeline,</li>
+	<li>The Beam&#39;s runtime is able to convert an <em>Row</em> from/to your structure using this&nbsp;<em>SchemaRegistry.</em></li>
+</ul>
+
+<p>Concretely, a&nbsp;<em>Row</em>&nbsp;can be converted to a<em>&nbsp;</em><em>Person</em>&nbsp;and a&nbsp;<em>Person</em>&nbsp;to a&nbsp;<em>Row</em>&nbsp;thanks to this registry. However the key of this registry is a&nbsp;<em>TypeLiteral</em>. To make it simpler it is a&nbsp;<em>Class&lt;?&gt;. </em>This means that if you use another generic record than the&nbsp;<em>Row</em>&nbsp;one of Beam, you can then only convert it once.</p>
+
+<p>Doesn&#39;t sound very bothering right? Actually it is a lot. If you check how we converted our&nbsp;<em>Row</em>&nbsp;to an Avro&#39;s&nbsp;<em>IndexedRecord</em>, the key of the conversion is more the Avro&#39;s schema than the&nbsp;<em>IndexedRecord</em>&nbsp;type by itself. More, you can have an&nbsp;<em>IndexedRecord</em> representing a&nbsp;<em>Person</em>&nbsp;but also a&nbsp;<em>Contract</em>&nbsp;or a&nbsp;<em>LogLine</em>. Each time the type of&nbsp;<em>IndexedRecord</em>&nbsp;but the&nbsp;<em>Schema </em>has nothing to do between each of them. <strong>This means that the implicit Beam conversion rarely works for such pipelines and you will need to make it explicit</strong>.</p>
+
+<p>Also, as you may have noticed, this&nbsp;<em>SchemaRegistry&nbsp;</em>is on the&nbsp;<em>Pipeline</em>&nbsp;API and the<em>&nbsp;org.apache.beam.sdk.transforms.reflect.DoFnInvoker.ArgumentProvider</em>&nbsp;which has an&nbsp;<em>asRow()</em>&nbsp;method. This means that, even if Beam tries to communicate that the&nbsp;<em>Schema</em>&nbsp;and data definition were extensible, it is not that true and the&nbsp;<em>Row</em>&nbsp;structure is the central pivot format in the core of the product.</p>
+
+<h2>Potential solution</h2>
+
+<p>In the <u><a href="http://rmannibucau.metawerx.net/post/apache-beam-row-record">previous data blogpost</a></u> we saw that using Beam&nbsp;<em>Row</em>&nbsp;for something else than the in memory representation is not very relevant (reusability issues, size issue, ...). However&nbsp;<strong><em>Row </em>and <em>Schema</em></strong>, <strong>as&nbsp;<em>JsonObject</em>&nbsp;can be for JSON-P</strong>, are just API and user facing models. This means, as this post showed, that it is trivial <strong>to back&nbsp;<em>Row</em>&nbsp;and&nbsp;<em>Schema</em>&nbsp;implementations</strong> by another concrete format, like Avro - or JSON if you think about it.</p>
+
+<p>This means that if&nbsp;<em>Row</em>&nbsp;and&nbsp;<em>Schema</em>&nbsp;are redesigned to load a&nbsp;<em>Row</em><em>Provider </em>and a<em>&nbsp;SchemaProvider,&nbsp;</em>then the serialization will be handled through another mechanism which is selectable on the pipeline and it would transparently <strong>solve the mainstream issue when it hits persistence</strong>. It will also avoid introducing a new specific way <strong>to serialize data between workers</strong> and increase the interoperability with some ecosystem as it will provide a default conversion to one (or multiple if there are multiple providers) native types.</p>
+
+<p>The&nbsp;<em>SchemaRegistry</em>&nbsp;concept can still be used but it must go with a redesign of its key and likely add the&nbsp;<em>Schema</em>&nbsp;(Beam&#39;s one) to the key.</p>
+
+<p>At the end, the current solution doesn&#39;t go far enough but there is no blocker to <strong>make it a portable solution</strong> which can encounter its promises: <strong>run on any engine</strong>. As shown in this post, <strong>Avro/Beam conversion</strong> is not that difficult and the challenge here will be to <strong>guarantee some stability in the model design</strong> - otherwise converters would be broken each time there is a small type addition.&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-beam-coder-selection.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-beam-row-record.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

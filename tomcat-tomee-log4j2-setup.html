@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to make Tomcat/TomEE loving Log4j2 in 5mn!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,164 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tomcat-tomee-log4j2-setup-html-container" class="container page-content tomcat-tomee-log4j2-setup-html is-blog">
+                        <div class="page-header">
+                <h1>How to make Tomcat/TomEE loving Log4j2 in 5mn!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-08-04</span>, <span class="metadata-readingtime">3 min and 35 sec read</span></p>
+</div>
+<p>Apache TomEE is a great EE container and provides a thin logging layer allowing you to switch between Java Util Logging or JUL (the default solution), SLF4J, Log4j2 or even Log4J1 if desired. This bridge has however few drawbacks even if working most of the time:</p>
+
+<ul>
+	<li>it is active a little bit after Tomcat started - when OpenEJB starts actually - which means first logs don&#39;t benefit from it</li>
+	<li>it is only usable for libraries supporting to not be in the classpath (common.loader of Tomcat)</li>
+</ul>
+
+<p>So this solution which consist of customizing the system property <em>openejb.log.factory</em>&nbsp;is easy but doesn&#39;t give you the full control of the container logging.</p>
+
+<p>How to go further?</p>
+
+<p>Since TomEE default setup is done for JUL why not trying to bridge JUL to the framework you want? In the context of this post the shining Log4j2.</p>
+
+<p>This is actually a good idea but often it ends up configuring some specific handlers doing the bridge and after some efforts....it loops. Well in short such configurations are quickly a mess to maintain and share.</p>
+
+<p>Log4j2 propose an alternative which is really more interesting and powerful in my opinion: a custom <em>LogManager</em>.</p>
+
+<p>If you are not familiar with JUL, the JVM gets a <em>LogManager </em>which will be the &quot;factory&quot; of loggers. This looks like an awesome extension point but the drawback - and why it is often done through handlers - is it is global on the JVM and needs to be in the classpath.</p>
+
+<p>But this is not a big deal if you own TomEE instance.</p>
+
+<p>What are the needed steps?</p>
+
+<ul>
+	<li>add log4j-api, log4j-jul and log4j-core jar in your classpath</li>
+	<li>add a log4j2.xml in conf/</li>
+	<li>set the java.util.logging.manager to org.apache.logging.log4j.jul.LogManager and log4j.configurationFile to conf/log4j2.xml</li>
+</ul>
+
+<h2>Adding jars to the classpath</h2>
+
+<p>To add jar to Tomcat&nbsp;JVM classpath you can use bin/setenv.sh (setenv.bat for windows) and just set the classpath there - next snippet assume you copied log4j jars in a <em>boot</em> folder under tomee/tomcat root and that you stripped te version:</p>
+
+<pre>
+<code class="language-bash">export CLASSPATH="$CATALINA_BASE/boot/log4j-api.jar:$CATALINA_BASE/boot/log4j-jul.jar:$CATALINA_BASE/boot/log4j-core.jar"</code></pre>
+
+<h2>Adding system properties</h2>
+
+<p>For system properties we can use the same file but we need to initialize the CATALINA_OPTS variable:</p>
+
+<pre>
+<code class="language-bash">export CATALINA_OPTS="-Dlog4j.configurationFile=$CATALINA_BASE/conf/log4j2.xml -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"</code></pre>
+
+<h2>Alternative setup: tomee-maven-plugin</h2>
+
+<p>Two previous parts were explaining how to do the setup manually but you can also use tomee maven plugin to do that.</p>
+
+<p>Note that it needs at least the version 7.0.2 of the plugin (so today it is a snapshot):</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.tomee.maven&lt;/groupId&gt;
+  &lt;artifactId&gt;tomee-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;7.0.2-SNAPSHOT&lt;/version&gt; &lt;!-- maven coordinate as classpath support --&gt;
+  &lt;configuration&gt;
+    &lt;classpaths&gt;
+      &lt;classpath&gt;org.apache.logging.log4j:log4j-api:${log4j2.version}&lt;/classpath&gt;
+      &lt;classpath&gt;org.apache.logging.log4j:log4j-jul:${log4j2.version}&lt;/classpath&gt;
+      &lt;classpath&gt;org.apache.logging.log4j:log4j-core:${log4j2.version}&lt;/classpath&gt;
+    &lt;/classpaths&gt;
+    &lt;systemVariables&gt;
+      &lt;log4j.configurationFile&gt;${openejb.base}/conf/log4j2.xml&lt;/log4j.configurationFile&gt;
+      &lt;java.util.logging.manager&gt;org.apache.logging.log4j.jul.LogManager&lt;/java.util.logging.manager&gt;
+    &lt;/systemVariables&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>This will automatically copy log4j jars in <em>boot</em>&nbsp;folder as we did previously and set the needed system properties when launching TomEE.</p>
+
+<p>The log4j2.xml file needs to be in src/main/tomee/conf.</p>
+
+<p>Now you can launch tomee and check your logs are using log4j2.xml:</p>
+
+<pre>
+<code class="language-bash">mvn package tomee:run</code></pre>
+
+<h2>Sample log4j2.xml</h2>
+
+<p>Since you are impatient here is a log4j2.xml you can copy if you don&#39;t have one already to test this setup:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Configuration status="INFO"&gt;
+  &lt;Appenders&gt;
+    &lt;Console name="stdout" target="SYSTEM_OUT"&gt;
+      &lt;PatternLayout pattern="[%d{HH:mm:ss.SSS}][%t][%-5level][%logger{36}] %msg%n"/&gt;
+    &lt;/Console&gt;
+  &lt;/Appenders&gt;
+  &lt;Loggers&gt;
+    &lt;Root level="INFO"&gt;
+      &lt;AppenderRef ref="stdout" level="INFO"/&gt;
+    &lt;/Root&gt;
+  &lt;/Loggers&gt;
+&lt;/Configuration&gt;
+</code></pre>
+
+<h2>Almost perfect</h2>
+
+<p>This setup works very well and if you start TomEE but switching to log4j2 you now use log4j2 registry. Remaining question is: does it handle logger per application or globally?</p>
+
+<p>If you check the implementation you will identify it relies on&nbsp;<em>org.apache.logging.log4j.spi.AbstractLoggerAdapter#registry</em>&nbsp;to cache the logger context. The context will by default use <em>Log4jContextFactory</em>&nbsp;which will delegate the finding/caching of the loggers to a <em>ContextSelector</em>. This is the one we need to ensure is by classloader/application.</p>
+
+<p>If not configured you will use&nbsp;<em>ClassLoaderContextSelector</em>&nbsp;flavor which is exactly what we desire: (almost) by application.</p>
+
+<p>In conclusion, even if using log4j2 in TomEE needs a small setup it really does worth it if you are not alone managing the application cause you then get a modern implementation handling easily a bunch of logs without any issue, you can use a single log framework in the whole container/application area and it is very pluggable and has several interesting extensions JUL doesn&#39;t have yet. The only cost is to add 3 jars to the classpath and one configuration file so why not doing it?</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-rotating-logs.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cxf-oauth2-server-part-2.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Use JSON-P with google-httpclient and drop jackson!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="jsonp-google-httpclient-html-container" class="container page-content jsonp-google-httpclient-html is-blog">
+                        <div class="page-header">
+                <h1>Use JSON-P with google-httpclient and drop jackson!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-03-13</span>, <span class="metadata-readingtime">8 min and 56 sec read</span></p>
+</div>
+<p>Google HTTP Client, a.k.a.&nbsp;<em>com.google.http-client:google-http-client</em>, uses jackson by default. If your stack already provides a JSON API/implementation which is not jackson or not the right version you can desire to align both. A typical example if a Microprofile or JakartaEE application which will rely on JSON-P but not jackson directly.</p>
+
+<p>So is the only solution to import jackson &quot;transitively&quot;? Actually not. When google implemented its own object mapper on top of Jackson it also abstracted the link between Google and Jackson so you can bridge JSON-P with Google Json API providing your own&nbsp;<em>JsonFactory</em>.</p>
+
+<p>The&nbsp;<em>JsonFactory</em>&nbsp;class provides to the Google SDK the way to parse and generate data. In other words it is very close to a&nbsp;<em>JsonParser</em>&nbsp;and&nbsp;<em>JsonGenerator</em>&nbsp;of JSON-P with a few differences.</p>
+
+<h2>The <em>JsonFactory</em> implementation</h2>
+
+<p>The first step to plug JSON-P is to extend&nbsp;<em>JsonFactory&nbsp;</em>from Google SDK:</p>
+
+<pre>
+<code class="language-json">import com.google.api.client.json.JsonFactory;
+
+public class JsonpJsonFactory extends JsonFactory {
+</code></pre>
+
+<p>Then we will need to implement parser and generator methods so we need a JSON-P&nbsp;<em>JsonParserFactory&nbsp;</em>and a&nbsp;<em>JsonGeneratorFactory</em>. We use factories but we could also rely on&nbsp;<em>Json</em>&nbsp;global factories methods. It is just saner to use factories because then you can customize and reuse the internal cache on a per usage basis instead of inheriting of the global context which can become a nightmare in an uncontrolled environment - JakataEE, OSGi, ...</p>
+
+<p>The generator part is quite particular because Google SDK has a special hook to &quot;enable pretty formatting&quot; of the JSON. There is no such hook in JSON-P, you have a generator factory which has pretty mode activate or not. To solve that we will just use two factories which will enable us to switch of mode respecting the Google SDK API. This is not a big deal since it is just a matter of having another object.</p>
+
+<p>Therefore at that stage here is our constructor and instantiation methods (more Google style friendly):</p>
+
+<pre>
+<code class="language-java">public class JsonpJsonFactory extends JsonFactory {
+    private final JsonParserFactory parserFactory;
+    private final JsonGeneratorFactory generatorFactory;
+    private final JsonGeneratorFactory prettyGeneratorFactory;
+
+    private JsonpJsonFactory(final JsonParserFactory parserFactory,
+                             final JsonGeneratorFactory generatorFactory,
+                             final JsonGeneratorFactory prettyGeneratorFactory) {
+        this.parserFactory = parserFactory;
+        this.generatorFactory = generatorFactory;
+        this.prettyGeneratorFactory = prettyGeneratorFactory;
+    }
+
+    public static JsonFactory of() {
+        return of(
+                Json.createParserFactory(emptyMap()),
+                Json.createGeneratorFactory(emptyMap()),
+                Json.createGeneratorFactory(singletonMap(javax.json.stream.JsonGenerator.PRETTY_PRINTING, "true")));
+    }
+
+    public static JsonFactory of(final JsonParserFactory parserFactory, final JsonGeneratorFactory generatorFactory) {
+        return new JsonpJsonFactory(parserFactory, generatorFactory, generatorFactory);
+    }
+
+    public static JsonFactory of(final JsonParserFactory parserFactory,
+                                 final JsonGeneratorFactory generatorFactory,
+                                 final JsonGeneratorFactory prettyGeneratorFactory) {
+        return new JsonpJsonFactory(parserFactory, generatorFactory, prettyGeneratorFactory);
+    }
+}</code></pre>
+
+<p>You can notice the way we get a pretty generator factory in the first&nbsp;<em>of()</em>&nbsp;method.</p>
+
+<p>Now our class has all we need to fill the Google&nbsp;<em>JsonFactory</em>&nbsp;API method let&#39;s start it. We will start by the easiest side: the parser. On that side we will create a Google SDK&nbsp;<em>JsonParser</em>&nbsp;implementation (take care Google and Json-P used the same simple name) and pass it a JSON-P instance which will be used under the cover:</p>
+
+<pre>
+<code class="language-java">public class JsonpJsonFactory extends JsonFactory { // &lt;1&gt;
+    // ...
+
+    @Override
+    public JsonParser createJsonParser(final InputStream inputStream) {
+        return new JsonParserImpl(this, parserFactory.createParser(requireNonNull(inputStream)));
+    }
+
+    @Override
+    public JsonParser createJsonParser(final InputStream inputStream, final Charset charset) {
+        return new JsonParserImpl(this, parserFactory.createParser(requireNonNull(inputStream), charset));
+    }
+
+    @Override
+    public JsonParser createJsonParser(final String s) {
+        return new JsonParserImpl(this, parserFactory.createParser(new StringReader(requireNonNull(s))));
+    }
+
+    @Override
+    public JsonParser createJsonParser(final Reader reader) {
+        return new JsonParserImpl(this, parserFactory.createParser(requireNonNull(reader)));
+    }
+}</code></pre>
+
+<p>Assuming we have the <em>JsonParserImpl</em>&nbsp;- and we will cover that step in next part - the implementation here is just a plain delegation since all the methods exist in the&nbsp;<em>JsonParserFactory</em>&nbsp;of JSON-P.</p>
+
+<p>The generator side is really close except the activation of the pretty mode must be done lazily - it is called on the generator itself - so we&#39;ll create a Google SDK&nbsp;<em>JsonGenerator</em>&nbsp;implementation bridging to the JSON-P&nbsp;<em>JsonGenerator</em>&nbsp;and this implementation will take a&nbsp;<em>Function&lt;Boolean, JsonGenerator</em>&gt; which will enable us to pass to this factory function if the pretty mode is activate or not and use the right&nbsp;<em>JsonGeneratorFactory</em>&nbsp;accordingly:</p>
+
+<pre>
+<code class="language-java">public class JsonpJsonFactory extends JsonFactory {
+    // ...
+
+    @Override
+    public JsonGenerator createJsonGenerator(final OutputStream outputStream, final Charset charset) {
+        return new JsonGeneratorImpl(this,
+                pretty -&gt; getGeneratorFactory(pretty).createGenerator(outputStream, charset));
+    }
+
+    @Override
+    public JsonGenerator createJsonGenerator(final Writer writer) {
+        return new JsonGeneratorImpl(this,
+                pretty -&gt; getGeneratorFactory(pretty).createGenerator(writer));
+    }
+
+    private JsonGeneratorFactory getGeneratorFactory(final boolean pretty) {
+        return pretty ? prettyGeneratorFactory : generatorFactory;
+    }
+}</code></pre>
+
+<p>Now all we miss are the bridging implementations we will cover in the two next parts.</p>
+
+<h2>The <em>JsonParser</em> bridge</h2>
+
+<p>The parser bridge has very few specificities under the delegation pattern:</p>
+
+<ul>
+	<li>The JSON-P&nbsp;<em>Event</em>&nbsp;representing a token of the grammar must be converted to a Google SDK&nbsp;<em>JsonToken</em>,</li>
+	<li><em>nextToken()</em>&nbsp;must implicitly handle&nbsp;<em>hasNext() </em>to return the right token,</li>
+	<li><em>skipChilden()</em>&nbsp;must handle&nbsp;<em>ARRAY</em>&nbsp;and&nbsp;<em>OBJECT</em>&nbsp;cases in a single method.</li>
+</ul>
+
+<p>All other methods are pure delegation and sometimes exception mapping since&nbsp;<em>JsonException</em>&nbsp;is not part of Google SDK - in general it will be <em>IllegalArgumentException</em>:</p>
+
+<pre>
+<code class="language-java">class JsonParserImpl extends JsonParser {
+    private final JsonFactory factory;
+    private final javax.json.stream.JsonParser delegate;
+
+    private JsonToken current = null;
+
+    JsonParserImpl(final JsonFactory factory,
+                          final javax.json.stream.JsonParser delegate) {
+        this.factory = factory;
+        this.delegate = delegate;
+    }
+
+    @Override
+    public JsonFactory getFactory() {
+        return factory;
+    }
+
+    @Override
+    public void close() {
+        delegate.close();
+    }
+
+    @Override
+    public JsonToken nextToken() {
+        if (!delegate.hasNext()) {
+            return current = null;
+        }
+        try {
+            return current = mapToken(delegate.next());
+        } catch (final ArrayIndexOutOfBoundsException | JsonParsingException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    @Override
+    public JsonToken getCurrentToken() {
+        return current;
+    }
+
+    @Override
+    public String getCurrentName() {
+        try {
+            return delegate.getString();
+        } catch (final IllegalStateException ise) {
+            throw new IllegalArgumentException(ise);
+        }
+    }
+
+    @Override
+    public JsonParser skipChildren() {
+        if (current == JsonToken.START_ARRAY) {
+            delegate.skipArray();
+            current = JsonToken.END_ARRAY;
+        } else if (current == JsonToken.START_OBJECT) {
+            delegate.skipObject();
+            current = JsonToken.END_OBJECT;
+        }
+        return this;
+    }
+
+    @Override
+    public String getText() {
+        return delegate.getString();
+    }
+
+    @Override
+    public byte getByteValue() {
+        return (byte) delegate.getInt();
+    }
+
+    @Override
+    public short getShortValue() {
+        return (short) delegate.getInt();
+    }
+
+    @Override
+    public int getIntValue() {
+        return delegate.getInt();
+    }
+
+    @Override
+    public float getFloatValue() {
+        return (float) JsonNumber.class.cast(delegate.getValue()).doubleValue();
+    }
+
+    @Override
+    public long getLongValue() {
+        return delegate.getLong();
+    }
+
+    @Override
+    public double getDoubleValue() {
+        return JsonNumber.class.cast(delegate.getValue()).doubleValue();
+    }
+
+    @Override
+    public BigInteger getBigIntegerValue() {
+        return JsonNumber.class.cast(delegate.getValue()).bigIntegerValue();
+    }
+
+    @Override
+    public BigDecimal getDecimalValue() {
+        return delegate.getBigDecimal();
+    }
+
+    private JsonToken mapToken(final javax.json.stream.JsonParser.Event current) {
+        switch (current) {
+            case START_ARRAY:
+                return JsonToken.START_ARRAY;
+            case START_OBJECT:
+                return JsonToken.START_OBJECT;
+            case KEY_NAME:
+                return JsonToken.FIELD_NAME;
+            case VALUE_STRING:
+                return JsonToken.VALUE_STRING;
+            case VALUE_NUMBER:
+                if (delegate.isIntegralNumber()) {
+                    return JsonToken.VALUE_NUMBER_INT;
+                }
+                return JsonToken.VALUE_NUMBER_FLOAT;
+            case VALUE_TRUE:
+                return JsonToken.VALUE_TRUE;
+            case VALUE_FALSE:
+                return JsonToken.VALUE_FALSE;
+            case VALUE_NULL:
+                return JsonToken.VALUE_NULL;
+            case END_OBJECT:
+                return JsonToken.END_OBJECT;
+            case END_ARRAY:
+                return JsonToken.END_ARRAY;
+            default:
+                throw new IllegalArgumentException("unknown event: " + current);
+        }
+    }
+}</code></pre>
+
+<h2>The <em>JsonGenerator</em> bridge</h2>
+
+<p>The generator implementation is a bit more complicated because of three elements:</p>
+
+<ol>
+	<li>The prettyfication relies on a lazy initialization to ensure&nbsp;<em>enablePrettyPrint()</em> was called (or not) before writing anything,</li>
+	<li>The write method in an object - taking a key - are split in <em>writeFieldName(key)</em>&nbsp;and&nbsp;<em>write(value)</em>&nbsp;whereas in JSON-P API you directly call&nbsp;<em>write(key, value)</em>,</li>
+	<li>Because of last point you don&#39;t know if you are writing in an array or object from within a method.</li>
+</ol>
+
+<p>In other words it implies:</p>
+
+<ol>
+	<li>Each method potentially called first must check the generator already exists or not, and if not create it,</li>
+	<li>The <em>writeFieldName</em>&nbsp;method must store the key name in a <strong>stack<em>&nbsp;</em></strong><em>- </em>since you can write arrays in objects&nbsp;<em>- </em>to be able to reuse it in the write value method and pass it properly to JSON-P,</li>
+	<li>Each <em>writeStart&nbsp;</em>method - for object or array - must track that state in a stack too to know if we must rely on a key or not for current value write call.</li>
+</ol>
+
+<p>Concretely, here is a potential implementation:</p>
+
+<pre>
+<code class="language-java">class JsonGeneratorImpl extends JsonGenerator {
+    private final JsonFactory factory;
+    private final javax.json.stream.JsonGenerator providedGenerator;
+    private final Function&lt;Boolean, javax.json.stream.JsonGenerator&gt; generatorFactory;
+
+    private javax.json.stream.JsonGenerator delegate;
+    private boolean pretty;
+
+    // to manage the diff between write(key, value) and writeKey()writeValue() APIs
+    private final LinkedList&lt;String&gt; keys = new LinkedList&lt;&gt;();
+    private final LinkedList&lt;Boolean&gt; containerIsArray = new LinkedList&lt;&gt;();
+
+    JsonGeneratorImpl(final JsonFactory factory,
+                      final Function&lt;Boolean, javax.json.stream.JsonGenerator&gt; generatorFactory) {
+        this.factory = factory;
+        this.generatorFactory = generatorFactory;
+        this.providedGenerator = delegate;
+    }
+
+    @Override
+    public void enablePrettyPrint() throws IOException {
+        pretty = true;
+    }
+
+    @Override
+    public JsonFactory getFactory() {
+        return factory;
+    }
+
+    @Override
+    public void flush() {
+        delegate.flush();
+    }
+
+    @Override
+    public void close() {
+        delegate.close();
+    }
+
+    @Override
+    public void writeStartArray() {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.writeStartArray();
+        } else if (containerIsArray.getLast()) {
+            delegate.writeStartArray();
+        } else {
+            delegate.writeStartArray(keys.removeLast());
+        }
+        containerIsArray.add(true);
+    }
+
+    @Override
+    public void writeEndArray() {
+        delegate.writeEnd();
+        containerIsArray.removeLast();
+    }
+
+    @Override
+    public void writeStartObject() {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.writeStartObject();
+        } else if (containerIsArray.getLast()) {
+            delegate.writeStartObject();
+        } else {
+            delegate.writeStartObject(keys.removeLast());
+        }
+        containerIsArray.add(false);
+    }
+
+    @Override
+    public void writeEndObject() {
+        delegate.writeEnd();
+        containerIsArray.removeLast();
+    }
+
+    @Override
+    public void writeFieldName(final String name) {
+        keys.add(name);
+    }
+
+    @Override
+    public void writeNull() {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.writeNull();
+        } else if (containerIsArray.getLast()) {
+            delegate.writeNull();
+        } else {
+            delegate.writeNull(keys.removeLast());
+        }
+    }
+
+    @Override
+    public void writeString(final String value) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(value);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(value);
+        } else {
+            delegate.write(keys.removeLast(), value);
+        }
+    }
+
+    @Override
+    public void writeBoolean(final boolean state) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(state);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(state);
+        } else {
+            delegate.write(keys.removeLast(), state);
+        }
+    }
+
+    @Override
+    public void writeNumber(final int v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final long v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final BigInteger v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final float v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final double v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final BigDecimal v) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(v);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(v);
+        } else {
+            delegate.write(keys.removeLast(), v);
+        }
+    }
+
+    @Override
+    public void writeNumber(final String encodedValue) {
+        if (containerIsArray.isEmpty()) {
+            ensureGenerator();
+            delegate.write(encodedValue);
+        } else if (containerIsArray.getLast()) {
+            delegate.write(encodedValue);
+        } else {
+            delegate.write(keys.removeLast(), encodedValue);
+        }
+    }
+
+    private void ensureGenerator() {
+        delegate = generatorFactory.apply(pretty);
+    }
+}</code></pre>
+
+<p>&nbsp;</p>
+
+<h2>Use our <em>JsonpJsonFactory</em></h2>
+
+<p>Now we have a complete implementation we just need to pass it as parameter in our Google SDK usage. For instance for google analytics client it will look like that - but most of the SDK has the same kind of methods so it is easy to generalize:</p>
+
+<pre>
+<code class="language-java">final JsonFactory jsonFactory = JsonpJsonFactory.of(); // &lt;1&gt;
+
+final GoogleCredential credential = GoogleCredential.fromStream(
+  stream, httpTransport,
+  jsonFactory); // &lt;2&gt;
+
+final AnalyticsReporting reporting = new AnalyticsReporting.Builder(
+    httpTransport,
+    jsonFactory, // &lt;3&gt;
+    credential)
+  .setApplicationName("my-app")
+  .build();</code></pre>
+
+<ol>
+	<li>
+	<p>We create an instance of our factory,</p>
+	</li>
+	<li>
+	<p>When reading our credentials we pass our factory instead of letting Google SDK default to default global&nbsp;<em>JacksonFactory</em>,</p>
+	</li>
+	<li>
+	<p>When creating a service we pass to its builder our&nbsp;<em>JsonFactory</em>&nbsp;instance.</p>
+	</li>
+</ol>
+
+<p>With that code Jackson is not even loaded!</p>
+
+<h2>If you are in a hurry use<em> google-jsonp</em></h2>
+
+<p>If you don&#39;t want to create this glue code yourself I already released it on central and you can just add to your dependencies the following one:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.github.rmannibucau&lt;/groupId&gt;
+  &lt;artifactId&gt;google-jsonp&lt;/artifactId&gt;
+  &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-embedded-microprofile-1-2.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//junit5-csvsource-escaping.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

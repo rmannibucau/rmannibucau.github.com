@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Restlet and EE?</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="restlet-ee-cdi-servlet-html-container" class="container page-content restlet-ee-cdi-servlet-html is-blog">
+                        <div class="page-header">
+                <h1>Restlet and EE?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-12-20</span>, <span class="metadata-readingtime">8 min and 40 sec read</span></p>
+</div>
+<p>Restlet is now a quite &quot;old&quot; (in the good way) but a proven REST oriented framework. A bit like Resin server at its time, it kind of leads the web development in java providing before specifications and most of servers NIO and an advanced&nbsp;REST oriented API etc...</p>
+
+<p>Let&#39;s see if EE filled the gap Restlet was surfing on at the beginning, and how to integrate both today.</p>
+
+<p>If you dig in Restlet API you will quickly identify it is very trendy because you modelize&nbsp;an application then you add components (like a router) and resources (REST semantic). To deploy, you can use&nbsp;a servlet container where you will just define a servlet referencing your application. Then,&nbsp;in standalone you will create a <em>Component</em> with a server (more or less how to bind/open the port) and you will deploy (attach) your application on this <em>Component</em> that makes the link between your application,&nbsp;its exposure (server) and potentially its security (realm). Last note on this: there is of course a shortcut class to do it in one line called <em>Server</em> ;).</p>
+
+<p>This looks very hype as it is really the way &quot;microservices&quot; servers&nbsp;tend to design their API - TomEE embedded, Meecrowave, Swarm .... The development of the resources themselves is pretty close to JAX-RS (but with a restlet design) so API is very accessible to java developpers.</p>
+
+<p>Until there, you probably think that Spring or JavaEE does the same job and are more &quot;mainstream&quot;. This is almost true so why should we use Restlet? In fact,&nbsp;it goes further on some areas:</p>
+
+<ul>
+	<li>client API (almost) shares the server API (everyone&nbsp;wants an interface based on API in JAX-RS client API, as known as &quot;proxy client API&quot;)</li>
+	<li>routing is more advanced than JAX-RS or Servlet ones (did you already hit the list/detail mapping issue with JAX-RS? <em>/users </em>vs <em>/user/{id}</em> in the same resource for instance)</li>
+	<li>some automatic services are available (range one is interesting coming from standard web applications for instance)</li>
+	<li>reverse proxying is managed out of the box (a bit like tomcat rewrites implementation)</li>
+	<li>it has a javascript API aligned on java (fullstack developpers will enjoy working in this environment)</li>
+	<li>swagger integration</li>
+	<li>security advanced features</li>
+	<li>a consistent web oriented API (no need to mix Servlet, JAX-RS, OAuth2-libX (etc)&nbsp;API to build part of your application), all is design in Restlet model and integrates smoothly since it is a full stack</li>
+	<li>etc ...</li>
+</ul>
+
+<p>To be a bit fair with EE (same points would apply to spring by the way) here are few drawbacks:</p>
+
+<ul>
+	<li>API itself looks old (probably because it needs to run on a bunch of environments): inheritance which is not really needed today, lots of shortcuts making the API not always intuitive (media type handling for instance). To be fair, this last point will not make&nbsp;java developpers (scripting guys) enjoy it too, so it may be a strategical choice.</li>
+	<li>No full container integration out of the box (there is a spring integration but not sure it is that friendly and aligned with spring boot now)
+	<ul>
+		<li>IoC is missing out of the box</li>
+		<li>No scanning. Thus,&nbsp;a manual declaration is needed.</li>
+	</ul>
+	</li>
+</ul>
+
+<p>Restlet (the company) provides a full ecosystem around the framework (like a studio to design your resources, a test framework, and even a deployment solution) so if you don&#39;t only look for a web framework, it&#39;s probably worth it. In case&nbsp;&nbsp;you just need a web framework and you are not a java developper, it can be a good choice too. If you are a java developper you can be a bit disappointed but advanced features can still make you happy if you need them!</p>
+
+<p>From now on, let&#39;s assume you are in a servlet container.</p>
+
+<h2>Auto registration</h2>
+
+<p>The first issue you will probably hit as a java developper is the lack of scanning. To solve it, an easy solution is to write a&nbsp;<em>ServletContainerInitializer</em>&nbsp;- if you run in standalone, the tip would be to use CDI directly or even xbean-finder. This initializer will be responsible for&nbsp;finding the classes we want to deploy and create an application. Concretely it will try to find an&nbsp;<em>Application</em>&nbsp;child, and if so, deploy it on the restlet&nbsp;<em>ServerServlet.</em>&nbsp;If not, it will create one from the set of&nbsp;<em>ServerResource</em>&nbsp;found, and create an application with a router delegating to these resources. The only issue in this last case is how to know the url to map when registering the resource? To make it simple, we&#39;ll define a&nbsp;<em>@Mapping</em>&nbsp;annotation holding the mapping:</p>
+
+<pre>
+<code class="language-java">// don't forget the resources/META-INF/services/javax.servlet.ServletContainerInitializer
+// with the fully qualified name of this class in it
+
+@HandlesTypes({Application.class, ServerResource.class})
+public class RestletInitializer implements ServletContainerInitializer {
+    @Override
+    public void onStartup(final Set&lt;Class&lt;?&gt;&gt; classes, final ServletContext ctx) throws ServletException {
+        if (classes == null || classes.isEmpty()) {
+            return;
+        }
+
+        final Optional&lt;Class&lt;?&gt;&gt; app = classes.stream()
+                .filter(c -&gt; Application.class.isAssignableFrom(c) &amp;&amp; Modifier.isPublic(c.getModifiers()))
+                .findAny();
+        if (app.isPresent()) {
+            final ServletRegistration.Dynamic restlet = ctx.addServlet("restlet", ServerServlet.class);
+            ctx.setInitParameter("org.restlet.application", app.get().getName());
+            restlet.setLoadOnStartup(1);
+            restlet.addMapping("/*");
+        } else {
+            final ServletRegistration.Dynamic restlet = ctx.addServlet("restlet", new ServerServlet() {
+                @Override
+                protected Application createApplication(final Context parentContext) {
+                    return new Application(parentContext.createChildContext()) {
+                        @Override
+                        public Restlet createInboundRoot() {
+                            final Router router = new Router(getContext());
+                            classes.stream().filter(c -&gt; ServerResource.class.isAssignableFrom(c) &amp;&amp; c.isAnnotationPresent(Mapping.class))
+                                    .forEach(c -&gt; router.attach(c.getAnnotation(Mapping.class).value(), Class.class.cast(c)));
+                            return router;
+                        }
+                    };
+                }
+            });
+            restlet.setLoadOnStartup(1);
+            restlet.addMapping("/*");
+        }
+    }
+
+    @Retention(RUNTIME)
+    @Target(TYPE)
+    public @interface Mapping {
+        String value();
+    }
+}</code></pre>
+
+<p>With this initializer you can just write in your application this resource and it will automatically be deployed in restlet:</p>
+
+<pre>
+<code class="language-java">import org.restlet.resource.Get;
+import org.restlet.resource.ServerResource;
+
+@Mapping("/hello")
+public class AResource extends ServerResource {
+    @Get
+    public String hello() {
+        return "hello";
+    }
+}</code></pre>
+
+<h2>CDI integration</h2>
+
+<p>Then you will start implementing the service and you will almost immediately miss a way to do injections.</p>
+
+<p>Restlet uses&nbsp;<em>Finder</em>&nbsp;API to instantiate resources. By default it is done for each request (kind of prototype/<em>@Dependent</em>&nbsp;scope). But with CDI or spring this is not the way you control the scope so you shouldn&#39;t care and just declare the scope in your bean:</p>
+
+<pre>
+<code class="language-java">@Mapping("/hello")
+@SessionScoped
+public class AResource extends ServerResource {
+    @Get
+    public String hello() {
+        return "hello";
+    }
+}</code></pre>
+
+<p>To do so,&nbsp;we will implement a&nbsp;<em>CdiFinder</em>&nbsp;which is just a CDI factory for restlet. The implementation is straight forward: when the finder is created - which corresponds to the moment the resource is attached to the router - it gets the resource class. We will lookup the associated bean at that moment from the&nbsp;<em>BeanManager. </em>Then, when restlet will request an instance we will lookup a new instance in CDI context instead of just doing a&nbsp;<em>new</em>.</p>
+
+<p>Small optimization: for normal scoped beans we&#39;ll cache the instance when the finder is created. This is possible because normal scoped instances are proxies and instantiation is managed by CDI behind the proxies.</p>
+
+<p>The last trick is to release the&nbsp;<em>CreationalContext</em>&nbsp;used for unnormal scoped proxies. This is needed to not leak any memory and correctly call<em>@PreDestroy</em>&nbsp;methods of &nbsp;unnormal scoped instances of the resource object graph. A simple solution is to proxy the resource delegating all method and calling the release one when&nbsp;<em>doRelease()</em>&nbsp;of the resource is called - restlet handles it for us.</p>
+
+<p>Here is a potentially implementations using javassist for the proxying to keep it simple (a real implementation would probably directly use asm library):</p>
+
+<pre>
+<code class="language-java">import javassist.util.proxy.Proxy;
+import javassist.util.proxy.ProxyFactory;
+import org.restlet.Context;
+import org.restlet.Request;
+import org.restlet.Response;
+import org.restlet.resource.Finder;
+import org.restlet.resource.ServerResource;
+
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Vetoed;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.CDI;
+import java.util.function.Supplier;
+
+@Vetoed
+public class CdiFinder extends Finder {
+    private final BeanManager beanManager;
+    private final Supplier&lt;ServerResource&gt; provider;
+
+    public CdiFinder(final Context context, final Class&lt;? extends ServerResource&gt; targetClass) {
+        super(context, targetClass);
+        beanManager = CDI.current().getBeanManager();
+
+        final Bean&lt;?&gt; bean = beanManager.resolve(beanManager.getBeans(targetClass));
+        if (bean == null) {
+            provider = null;
+            return;
+        }
+
+        if (beanManager.isNormalScope(bean.getScope())) {
+            final ServerResource proxy = ServerResource.class.cast(beanManager.getReference(bean, ServerResource.class, beanManager.createCreationalContext(null)));
+            provider = () -&gt; proxy;
+        } else {
+            final ProxyFactory factory = new ProxyFactory();
+            factory.setSuperclass(targetClass);
+            final Class&lt;?&gt; proxyClass = factory.createClass();
+
+            provider = () -&gt; {
+                final CreationalContext&lt;? extends ServerResource&gt; cc = beanManager.createCreationalContext(null);
+                final ServerResource instance = ServerResource.class.cast(beanManager.getReference(bean, ServerResource.class, cc));
+                try {
+                    final ServerResource resource = ServerResource.class.cast(proxyClass.newInstance());
+                    Proxy.class.cast(resource).setHandler((o, method, method1, objects) -&gt; {
+                        if (!method.isAccessible()) {
+                            method.setAccessible(true);
+                        }
+                        try {
+                            return method.invoke(instance, objects);
+                        } finally {
+                            if ("doRelease".equals(method.getName())) {
+                                cc.release();
+                            }
+                        }
+                    });
+                    return resource;
+                } catch (final InstantiationException | IllegalAccessException e) {
+                    throw new IllegalStateException(e);
+                }
+            };
+        }
+    }
+
+    @Override
+    public ServerResource create(final Class&lt;? extends ServerResource&gt; targetClass, final Request request, final Response response) {
+        return provider != null ? provider.get() : super.create(targetClass, request, response);
+    }
+}
+</code></pre>
+
+<p>Then to activate it, we set this finder class on the router we create&nbsp;in our initializer:</p>
+
+<pre>
+<code class="language-java">@Override
+public Restlet createInboundRoot() {
+    final Router router = new Router(getContext());
+    router.setFinderClass(CdiFinder.class); // the magic will happen
+    classes.stream()
+            // ...;
+    return router;
+}</code></pre>
+
+<p>With such a setup our resource can now be:</p>
+
+<pre>
+<code class="language-java">@Mapping("/hello")
+@SessionScoped
+public class AResource extends ServerResource {
+    @Inject
+    private UserService users;
+
+    @Get
+    public User findByName() {
+        return users.findById(getAttribute("id"));
+    }
+}</code></pre>
+
+<h3>Going further</h3>
+
+<p>This implementation has a big pitfall: it only works for thread safe resources (<em>@Dependent</em>,&nbsp;<em>@RequestScoped</em>,&nbsp;<em>@SessionScoped</em>, ...). It already provides the IoC integration which is the most important thing we wanted to achieve but not generic enough to be suggested as a stack.</p>
+
+<p>To go further, we need to enable users to use&nbsp;<em>@ApplicationScoped</em>&nbsp;or other scopes.</p>
+
+<p>The issue is that the&nbsp;<em>ServerResource</em>&nbsp;holds the request/response so it needs to be bound to a single serving thread.</p>
+
+<p>An easy way to achieve it is:</p>
+
+<ul>
+	<li>to proxy all resources,</li>
+	<li>to capture, by thread, the call to<em> init()/release()</em>&nbsp;on the resource</li>
+	<li>and to propagate it accordingly ensuring that one&nbsp;single instance serves one&nbsp;single request at a time.</li>
+</ul>
+
+<p>Technically it is quite hard. In fact, for&nbsp;<em>@ApplicationScoped</em>&nbsp;and&nbsp;<em>@Singleton,</em>&nbsp;we know that we need to serialize all requests (which would kill performances but ensure it behaves as expected).&nbsp;But for custom scopes we don&#39;t know if the normal scope is longer or shorter than a request or thread safe (thinking about&nbsp;the session which is generally thread safe but way longer than a request).</p>
+
+<p>I&#39;m not going&nbsp;further more on the&nbsp;<em>CdiFinder</em>&nbsp;implementation because it would be risky with a poor gain. So the constraint is to ensure the scope of the resources are controlled. However,&nbsp;if you need some application scoped instance you can still delegate to another bean which is not a resource, so no real blocker.</p>
+
+<p>An alternative implementation is to simply inject in the resource instances and not consider the resource itself as a bean. This is easily feasible with&nbsp;<em>Unmanaged&nbsp;</em>&nbsp;helper of CDI but then you lose the optimization of the previous implementation which will make the runtime faster for <em>@RequestScoped</em>&nbsp;usages.</p>
+
+<h2>Conclusion</h2>
+
+<p>Even if JavaEE reduced a lot of gaps&nbsp;between its own API and Restlet, some features and usages can still just justify to &nbsp;bet on Restlet. The built-in API doesn&#39;t embrace EE but with few glue code (less than 150 lines for the snippets of this post) you can enable it and benefit from the whole power of both worlds.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-external-process-management.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//build-war-npm.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

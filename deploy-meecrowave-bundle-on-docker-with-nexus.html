@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Deploy a Meecrowave (or Maven based) application in Docker easily</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,219 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="deploy-meecrowave-bundle-on-docker-with-nexus-html-container" class="container page-content deploy-meecrowave-bundle-on-docker-with-nexus-html is-blog">
+                        <div class="page-header">
+                <h1>Deploy a Meecrowave (or Maven based) application in Docker easily</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-02-07</span>, <span class="metadata-readingtime">5 min and 58 sec read</span></p>
+</div>
+<p>Docker is more and more used in the industry for good (or not) reasons. It means you need to be able to write a&nbsp;<em>Dockerfile</em>&nbsp;more and more often to be able to deploy your application. Most common cases are either to prepare the production deployment and get scalability thanks to the production environment or to share products/softwares between teams.</p>
+
+<p>This is not a huge task by itself because its role is to &quot;grab&quot; the application,&nbsp;&quot;deploy&quot; it and finally &quot;start&quot; it.</p>
+
+<p>Depending your environment, all these steps are different. However some tips can be interesting and used for most of (Java) applications.</p>
+
+<p>To illustrate it and show that writing a&nbsp;<em>Dockerfile</em>&nbsp;is not that hard under some circumstances, we will assume you want to deploy a <a href="http://openwebbeans.apache.org/meecrowave/" target="_blank">Meecrowave</a> application.</p>
+
+<p>The entry point of our application will be a Meecrowave bundle (<em>mvn meecrowave:bundle</em>), it is zip created at build time and easily deployable&nbsp;on nexus (in any release if you don&#39;t change the defaults).</p>
+
+<p>Note: most of applications can be aligned on such hypothesis. All JavaEE applications can be deployed in a TomEE bundled as a zip with TomEE maven plugin, Spring Boot applications can be zipped as well etc...</p>
+
+<p>Concretely, we will assume we deploy our application - release or snapshot - on a Nexus, which is a quite common case. If you use another artifact repository, it will be easy to adapt the commands.</p>
+
+<p>The trick here is to know that you can download an artifact from it coordinates (group, artifact, version, type, optionally classifier), even in snapshot and if the nexus uses timestamp for snapshots. Instead of using a direct URL you use a webservice url:<em>&nbsp;/service/local/artifact/maven/content</em>.</p>
+
+<p>Then our docker file is pretty easy:</p>
+
+<ol>
+	<li>define in the FROM the base image. It can be anything with java</li>
+	<li>(optionally, depends previous choice) ensure you have gpg if the artifacts are signed and you can use wget on HTTPS (some images don&#39;t have ssl installed by default)</li>
+	<li>setup your working directory</li>
+	<li>download the artifact and its signature (if signed)</li>
+	<li>verify the signature and that the downloaded artifact was not corrupted (if signed only)</li>
+	<li>unzip the bundle</li>
+	<li>copy the bundle files in the right folder</li>
+	<li>remove the temporary files (the zip)</li>
+	<li>(optionally) write some data about the deployment like the date and coordinates</li>
+	<li>(optionally) copy some specific configuration files like the logging configuration</li>
+	<li>ensure scripts are executable</li>
+	<li>define which port is used by default</li>
+	<li>define the command to launch the application</li>
+</ol>
+
+<p>For Meecrowave it can look like this:</p>
+
+<pre>
+<code class="language-bash">FROM openjdk:8-jre-alpine
+
+MAINTAINER xxx@yyy.com
+
+ENV LC_ALL en_US.UTF-8
+
+RUN set -xe &amp;&amp; \
+    apk add --no-cache gnupg ca-certificates openssl &amp;&amp; \
+    update-ca-certificates &amp;&amp; \
+    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys XXXXXXX
+
+ENV MEECROWAVE_BASE /opt/application
+RUN mkdir -p $MEECROWAVE_BASE
+WORKDIR $MEECROWAVE_BASE
+
+ARG SERVER_VERSION
+RUN set -ex &amp;&amp; \
+    [ -n "$SERVER_VERSION" ] || { echo "[ERROR] No version defined, set environment variable SERVER_VERSION when launching the image"; exit 1; } &amp;&amp; \
+    export NEXUS_BASE=${NEXUS_BASE:-https://oss.sonatype.org} &amp;&amp; \
+    export GROUP_ID=${GROUP_ID:-org.company} &amp;&amp; \
+    export ARTIFACT_ID=${ARTIFACT_ID:-myapplication} &amp;&amp; \
+    export REPOSITORY=$([[ "${SERVER_VERSION%-SNAPSHOT}" != "$SERVER_VERSION" ]] &amp;&amp; echo 'snapshots' || echo 'releases') &amp;&amp; \
+    export DOWNLOAD_URL="$NEXUS_BASE/service/local/artifact/maven/content?r=$REPOSITORY&amp;g=$GROUP_ID&amp;a=$ARTIFACT_ID&amp;v=$SERVER_VERSION&amp;e=zip" &amp;&amp; \
+    echo "Using artifact $GROUP_ID:$ARTIFACT_ID:zip:$SERVER_VERSION" &amp;&amp; \
+    wget $DOWNLOAD_URL.asc -O myapplication.zip.asc &amp;&amp; \
+    wget $DOWNLOAD_URL -O myapplication.zip &amp;&amp; \
+    gpg --batch --verify myapplication.zip.asc myapplication.zip &amp;&amp; \
+    unzip myapplication.zip &amp;&amp; \
+    mv myapplication/* $MEECROWAVE_BASE &amp;&amp; \
+    rm -Rf myapplication &amp;&amp; \
+    rm myapplication.zip* &amp;&amp; \
+    echo "$GROUP_ID:$ARTIFACT_ID:zip:$SERVER_VERSION" &gt; conf/build.gav &amp;&amp; \
+    date &gt; conf/build.date
+COPY conf/* $MEECROWAVE_BASE/conf/
+COPY bin/* $MEECROWAVE_BASE/bin/
+RUN chmod +x bin/*.sh
+
+EXPOSE 8080
+CMD [ "./bin/meecrowave.sh", "run" ]</code></pre>
+
+<p>Here we start from OpenJDK image bringing back a JRE 8 (not a JDK for security reasons). Then we set the maintainer of the image and default the locale to the english one to avoid surprises. The next RUN installed GPG and SSL support and retrieve the GPG key we will use to verify the binary signing. Then we setup a working directory which will be our installation directory for the application.</p>
+
+<p>The next block is where most of the logic is. We define a ARG variable to let inject the version at build time (we will see how soon). Then the script verifies this variable is set, setup some variables which can optionally be overriden like the nexus base URL (default to the OSS sonatype one), the groupId, artifactId of the artifact to deploy. It deduces from the version which repository to use (<em>releases&nbsp;</em>or<em>&nbsp;snapshots</em>) and finally computes the URL to get the artifact from.</p>
+
+<p>Note that at this point you can also add some security token setup if your nexus is not public.</p>
+
+<p>The end of the script gets the artifact and its signature, verifies it, and does the setup of the application in the working directory.</p>
+
+<p>The COPY directives allow to synchronize local folders with the image folders to copy configuration and optionally some scripts (like <em>setenv.sh</em>).</p>
+
+<p>The last two lines defines the port which will be exposed and the command to launch (which starts the server).</p>
+
+<p>With this kind of script you can already deploy your application once it is available on Nexus. However, before seeing how to use it, I&#39;d like to share a small trick about the logging. Most of the time the logs will be headless (logging in a file or to an aggregator) but no console output. This is a bit an issue during the development if you rely on docker images since you want to see the logs in the output without having to connect to the image most of the time. To solve it you can add a console appender and switch it off by default. Here is an example:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Configuration status="INFO"&gt;
+  &lt;Appenders&gt;
+    &lt;Console name="Console" target="SYSTEM_OUT"&gt;
+      &lt;PatternLayout pattern="[%d{HH:mm:ss.SSS}][%highlight{%-5level}][%15.15t][%30.30logger] %msg%n"/&gt;
+    &lt;/Console&gt;
+    &lt;RollingFile name="File"
+                 fileName="${base}/application.log"
+                 filePattern="${base}/application-%d{yyyy-MM-dd}.log"&gt;
+      &lt;PatternLayout pattern="[%d{HH:mm:ss.SSS}][%highlight{%-5level}][%15.15t][%30.30logger] %msg%n"/&gt;
+      &lt;Policies&gt;
+        &lt;TimeBasedTriggeringPolicy interval="1" modulate="true"/&gt;
+      &lt;/Policies&gt;
+    &lt;/RollingFile&gt;
+  &lt;/Appenders&gt;
+  &lt;Loggers&gt;
+    &lt;Root level="INFO"&gt;
+      &lt;AppenderRef ref="File" /&gt;
+      &lt;AppenderRef ref="Console" level="${env:CONSOLE_LOG_LEVEL:-OFF}" /&gt;
+    &lt;/Root&gt;
+  &lt;/Loggers&gt;
+&lt;/Configuration&gt;</code></pre>
+
+<p>Here all the trick is in the level of the console appender. By default it will be&nbsp;<em>OFF</em>&nbsp;but if you set&nbsp;<em>CONSOLE_LOG_LEVEL </em>to <em>INFO</em> launching the image, then you will get the logs into the console as well.</p>
+
+<p>In docker, it can be beneficial to define some JVM options. To hardcode a few we can define&nbsp;a&nbsp;<em>bin/setenv.sh</em>&nbsp;with this content:</p>
+
+<pre>
+<code class="language-bash">#! /bin/sh
+
+export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -XX:+UnlockExperimentalVMOptions"
+export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -XX:+UseCGroupMemoryLimitForHeap"
+</code></pre>
+
+<p>These options are mainly to correctly setup the memory on the JVM in a docker environment - JVM defaults are not that great otherwise.</p>
+
+<p>Now we are ready to build our image. With previous script we must pass our artifact version at that time to not fail:</p>
+
+<pre>
+<code class="language-bash">docker build \
+  --build-arg SERVER_VERSION=1.0.0 \
+  --tag myapplication:1.0.0 \
+  .</code></pre>
+
+<p>And to run the application once built:</p>
+
+<pre>
+<code class="language-bash">docker run \
+  -p 8080:8080 \
+  myapplication:1.0.0</code></pre>
+
+<p>If you want the logs in the console you can launch it this way - adding the dedicated variable:</p>
+
+<pre>
+<code class="language-bash">docker run \
+  -p 8080:8080 \
+  -e CONSOLE_LOG_LEVEL=INFO \
+  myapplication:1.0.0</code></pre>
+
+<p>And if you want to pass additional options to the Meecrowave JVM, just customize the&nbsp;<em>MEECROWAVE_OPTS</em>&nbsp;variable:</p>
+
+<pre>
+<code class="language-bash">docker run \
+  -p 8080:8080 \
+  -e MEECROWAVE_OPTS="-Dmy.conf=foo" \
+  myapplication:1.0.0</code></pre>
+
+<p>Here we are, we have a docker image ready to be used either in development or in production with our application :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-fallback-microprofile-alternative.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//book-javaee-8-high-performance.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

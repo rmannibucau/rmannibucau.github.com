@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Tomcat and Servlet 3.x: where does this timeout comes from?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,108 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tomcat-servlet-3-0-async-timeout-html-container" class="container page-content tomcat-servlet-3-0-async-timeout-html is-blog">
+                        <div class="page-header">
+                <h1>Tomcat and Servlet 3.x: where does this timeout comes from?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-12-01</span>, <span class="metadata-readingtime">2 min and 1 sec read</span></p>
+</div>
+<p>If you use the Servlet 3.0 <em>AsyncContext</em>&nbsp;on Tomcat (or derived like TomEE) you can notice you get sometimes a timeout you don&#39;t expect. Where is it coming from?</p>
+
+<h2>Reminder: Servlet 3.x and asynchronism</h2>
+
+<p>In plain Servlet 3.x the asynchronous API often looks like:</p>
+
+<pre>
+<code class="language-java">AsyncContext context = request.startAsync();
+doWorkInACustomThread(() -&gt; {
+   // do some work
+   context.complete();
+});</code></pre>
+
+<p><em>AsyncContext</em>&nbsp;is the handler used to control the request processing in a custom thread (you almost always have this notion of &quot;handler&quot; when doing asynchronism).</p>
+
+<p>If you use JAX-RS 2.0 code is simpler but relies on the exact same feature:</p>
+
+<pre>
+<code class="language-java">@GET
+public void async(@Suspended AsyncResponse response) {
+    doInCustomThread(() -&gt; response.resume(new MyResponse()));
+}</code></pre>
+
+<h2>Tomcat throws a&nbsp;timeout...but I didn&#39;t set it?</h2>
+
+<p>Out of the box you can expect Tomcat to consider the lack of timeout set (you can set it on the context) as an infinite timeout. However this has a small pitfall: after some time you can lock the container and prevent any new request to come in.</p>
+
+<p>For that reason Tomcat has a configuration on the&nbsp;<em>Connector</em>&nbsp;to handle this timeout. It just process each seconds all the current request (&quot;processor&quot; in tomcat semantic) and check if they exceed their timeout. The default is however 20s which can be low for some application - in particular when using asynchonism for long processing).</p>
+
+<h2>Configure this asynchronous timeout</h2>
+
+<p>To control it just set&nbsp;<em>asyncTimeout</em>&nbsp;on the Tomcat connector:</p>
+
+<pre>
+<code class="language-xml">&lt;Connector port="8080" protocol="HTTP/1.1" asyncTimeout="60000" /&gt;</code></pre>
+
+<p>With this configuration the timeout will be of 1mn by default instead of 20s. It doesn&#39;t prevent you to customize it manually on the AsyncContext for particular request but the default behavior is under control&nbsp;this way.</p>
+
+<p>If your application uses <em>AsyncContext</em>&nbsp;in a lot of different manners you should consider to setup a dedicated configuration and just set it on the context before starting your task:</p>
+
+<pre>
+<code class="language-java">AsyncContext ctx = request.startAsync();
+ctx.setTimeout(45000); // 45s
+myThreadPool.submit(() -&gt; {
+    doProcess(request, response);
+    ctx.complete();
+});</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>When starting to use asynchronism, getting control over the timeouts of the system is far more important than for blocking systems. Servlet 3.0 provides this control but used behind JAX-RS 2.0 it is a bit harder and often needs to rely on container specific features or integration so ensure to know how your system behaves ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jaxrs-2.0-sse.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-arquillian-upgrade-ee-api.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

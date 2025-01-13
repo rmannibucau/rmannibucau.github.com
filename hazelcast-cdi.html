@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Make Hazelcast JCache implementation CDI friendly in 5mn</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,160 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="hazelcast-cdi-html-container" class="container page-content hazelcast-cdi-html is-blog">
+                        <div class="page-header">
+                <h1>Make Hazelcast JCache implementation CDI friendly in 5mn</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-11-22</span>, <span class="metadata-readingtime">2 min and 51 sec read</span></p>
+</div>
+<p>Hazelcast is one of the most interesting <strong>distributed</strong>&nbsp;JCache provider (with Apache Ignite and Infinispan probably) but it doesn&#39;t integrate with CDI.</p>
+
+<p>What does it mean? You can, out of the box, do something like:</p>
+
+<pre>
+<code class="language-java">import javax.cache.annotation.CacheResult;
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class CachedService {
+    @CacheResult
+    public Response someExpensiveLogic(final Request request) {
+        // this is long cause we contact 3 remote HTTP servers and use 5 slow databases ;)
+        return ...;
+    }
+}
+</code></pre>
+
+<p>All the value of previous snippet is in&nbsp;<em>@CacheResult</em>. With that annotation and a CDI friendly JCache provider the &gt; 1 invocations on that method will just read the cache making it very fast. Think one second to a REST service exposing reference data: it just makes the service far more reliable.</p>
+
+<p>However With hazelcast you need to do it programmatically cause it doesn&#39;t provide the CDI integration of JCache specification.</p>
+
+<p>Most of other providers are integrated with CDI out of the box so do you need to get rid of hazelcast? Depending your application it can work but if you have an application relying on JCache and some advanced features of hazelcast (so vendor specific API) it would be hard. Other case you don&#39;t want to switch is if you already setup a Hazelcast data cluster.</p>
+
+<p>So how to embrace CDI without changing of JCache provider? Just get the CDI integration!</p>
+
+<h2>JCS to the rescue</h2>
+
+<p>Apache JCS - 2.0-beta-2 released last week - is a JCache implementation but it also has the good idea to deliver the JCache binary in 3 flavors:</p>
+
+<ol>
+	<li>default one (JCache + CDI integration)</li>
+	<li>cdi: just the CDI glue code, not provider specific</li>
+	<li>nocdi: all but CDI integration (like hazelcast)</li>
+</ol>
+
+<p>Concretely it means you will have in your pom these dependencies:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-jcs-jcache&lt;/artifactId&gt;
+  &lt;version&gt;2.0-beta-2&lt;/version&gt;
+  &lt;classifier&gt;cdi&lt;/classifier&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.hazelcast&lt;/groupId&gt;
+  &lt;artifactId&gt;hazelcast&lt;/artifactId&gt;
+  &lt;version&gt;3.7.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>And now you run...and it doesn&#39;t work. The 2.0-beta-2 had a small (fixed on trunk) bug where the CDI extension was not registered. To solve that just create a file META-INF/services/javax.enterprise.inject.spi.Extension containing:</p>
+
+<pre>
+<code>org.apache.commons.jcs.jcache.cdi.MakeJCacheCDIInterceptorFriendly</code></pre>
+
+<p>Then run again, and it works :).</p>
+
+<p>With hazelcast on a cold JVM (ie not a single request has been done yet) if you test this service:</p>
+
+<pre>
+<code class="language-java">@CacheResult
+public String pauseAndReturn(final String from) {
+    try {
+        Thread.sleep(1000);
+    } catch (final InterruptedException e) {
+        Thread.interrupted();
+    }
+    return from;
+}</code></pre>
+
+<p>With this code:</p>
+
+<pre>
+<code class="language-java">@Test
+public void checkCache() {
+    final StopWatch watch1 = new StopWatch();
+    watch1.start();
+    assertEquals("ok", service.pauseAndReturn("ok"));
+    watch1.stop();
+
+    final StopWatch watch2 = new StopWatch();
+    watch2.start();
+    assertEquals("ok", service.pauseAndReturn("ok"));
+    watch2.stop();
+
+    System.out.println(watch1.getTime(TimeUnit.MILLISECONDS));
+    System.out.println(watch2.getTime(TimeUnit.MILLISECONDS));
+}</code></pre>
+
+<p>you will get something like this output:</p>
+
+<pre>
+<code>3781
+3</code></pre>
+
+<p>Which shows the cache was used for the second invocation.</p>
+
+<p>Note that the first invocation is &quot;very&quot; slow cause hazelcast needs to start which takes few seconds (2.5s on my machine).</p>
+
+<h2>Conclusion</h2>
+
+<p>Even if JCS 2.0-beta-2 got a small glitch forgetting the SPI file it is a very low cost for a big gain in term of programming model and using JCache + CDI will give an incredible benefit to your application, in particular for reference data in a microservices architecture. Don&#39;t underestimate that, even if the code itself is not hard to develop by yourself, not having to maintain it and being able to configure the cache from outside the application - JCache offers it - is an incredible flexibility for your deployments.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-arquillian-upgrade-ee-api.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//deltaspike-new-configuration-api.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

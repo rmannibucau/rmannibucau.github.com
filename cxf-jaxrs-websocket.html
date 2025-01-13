@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Redirect CXF JAX-RS endpoints through javax WebSockets</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="cxf-jaxrs-websocket-html-container" class="container page-content cxf-jaxrs-websocket-html is-blog">
+                        <div class="page-header">
+                <h1>Redirect CXF JAX-RS endpoints through javax WebSockets</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-11-15</span>, <span class="metadata-readingtime">12 min and 20 sec read</span></p>
+</div>
+<p>Last CXF releases got a websocket transport. It is great but it doesn&#39;t enable you to control the transport or can import some dependencies you don&#39;t want like Atmosphere.</p>
+
+<p>However there is a workaround based on a&nbsp;<em>ServletContextListener</em>&nbsp;if you want to implement it yourself.</p>
+
+<p>Our hypothesis for this blog post will be:</p>
+
+<ul>
+	<li>The CXF bus is in CDI context (so injectable), if not replace the injection by another lookup implementation</li>
+	<li>There is a single CXF server - if not replace the&nbsp;<em>iterator().next() </em>by a loop and potentially filter the JAX-RS ones only</li>
+	<li>There is a single JAX-RS&nbsp;<em>Application</em>&nbsp;subclass into the CDI context - if not change the application prefix logic lookup, it can be done using CXF providers</li>
+	<li>The&nbsp;<em>Application</em>&nbsp;path starts with <em>/api/vX</em>&nbsp;- where X is the version - and we want to extract the version to keep it in our websocket redirection</li>
+</ul>
+
+<p>All these hypothesis are not strong constraints from a final applications and could be implemented in a more generic way but since CXF will probably enhance its implementation let&#39;s keep this blog post tip simple.</p>
+
+<p>Here what it can look like in term of Java code:</p>
+
+<pre>
+<code class="language-java">@Slf4j
+@Dependent
+@WebListener
+public class WebSocketBroadcastSetup implements ServletContextListener {
+    @Inject
+    private Bus bus;
+
+    @Inject
+    private Instance&lt;Application&gt; applications;
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        final JAXRSServiceFactoryBean factory = JAXRSServiceFactoryBean.class.cast(bus.getExtension(ServerRegistry.class)
+                .getServers().iterator().next() // you could use a loop
+                .getEndpoint()
+                .get(JAXRSServiceFactoryBean.class.getName()));
+
+        final String appBase = StreamSupport
+                .stream(Spliterators.spliteratorUnknownSize(applications.iterator(), Spliterator.IMMUTABLE), false)
+                .filter(a -&gt; a.getClass().isAnnotationPresent(ApplicationPath.class))
+                .map(a -&gt; a.getClass().getAnnotation(ApplicationPath.class))
+                .map(ApplicationPath::value).findFirst()
+                .map(s -&gt; !s.startsWith("/") ? "/" + s : s).orElse("/api/v1");
+        final String version = appBase.replaceFirst("/api", "");
+
+        // coming in next snippets
+    }
+}</code></pre>
+
+<p>Now we need to iterate over all endpoints. It can be done through this code:</p>
+
+<pre>
+<code class="language-java">Stream&lt;OperationResourceInfo&gt; oris = factory.getClassResourceInfo().stream()
+    .flatMap(cri -&gt; cri.getMethodDispatcher().getOperationResourceInfos().stream());</code></pre>
+
+<p>From now on we need to think about how to deploy it over websocket protocol. There are multiple options:</p>
+
+<ul>
+	<li>Deploy one websocket endpoint per JAX-RS endpoint (/api/vX/foo becoming /websocket/vX/foo)</li>
+	<li>Deploy a single endpoint and redirect from another criteria to the JAX-RS runtime</li>
+	<li>Do both previous options at the same time</li>
+</ul>
+
+<p>The most interesting option is the second one since a single websocket connection will give you all endpoints but having the last one doesn&#39;t cost a lot and simplify the API discovery so we&#39;ll go this way.</p>
+
+<p>To implement that we need to get the websocket &quot;container&quot; API, this can be done from the servlet context:</p>
+
+<pre>
+<code class="language-java">ServerContainer container = ServerContainer.class.cast(
+    sce.getServletContext().getAttribute(ServerContainer.class.getName()));</code></pre>
+
+<p>Then, in terms of actual implementation we will fake a HTTP request for each websocket message and redirect the output to the websocket output stream.</p>
+
+<p>In terms of protocol we will use a formatting close to STOMP (but not exactly STOMP):</p>
+
+<ul>
+	<li>request will start by&nbsp;<em>SEND</em>, then contain one line per header, the virtual header&nbsp;<em>destination</em>&nbsp;which is the actual endpoint, and finally the payload finished by&nbsp;^@</li>
+	<li>response will use the same formatting than requests but instead of&nbsp;<em>SEND, </em>they will start with&nbsp;<em>MESSAGE</em></li>
+</ul>
+
+<p>The implementation is based on CXF servlet integration, a.k.a&nbsp;<em>ServletController</em>&nbsp;which takes a request and&nbsp;response parameters. Therefore we &quot;just&quot; need to convert each JAX-RS endpoint to a websocket endpoint invoking this controller.</p>
+
+<p>Here is what the websocket endpoint can look like:</p>
+
+<pre>
+<code class="language-java">@Data
+public class JAXRSEndpoint extends Endpoint {
+    private final String appBase;
+    private final ServletController controller;
+    private final ServletContext context;
+    private final String method;
+    private final String defaultUri;
+    private final Map&lt;String, List&lt;String&gt;&gt; baseHeaders;
+
+    @Override
+    public void onOpen(final Session session, final EndpointConfig endpointConfig) {
+        log.debug("Opened session {}", session.getId());
+        session.addMessageHandler(InputStream.class, message -&gt; {
+            final Map&lt;String, List&lt;String&gt;&gt; headers = new TreeMap&lt;&gt;(String.CASE_INSENSITIVE_ORDER);
+            headers.putAll(baseHeaders);
+
+            final StringBuilder buffer = new StringBuilder(128);
+            try { // read headers from the message
+                if (!"SEND".equalsIgnoreCase(readLine(buffer, message))) {
+                    throw new IllegalArgumentException("not a message");
+                }
+
+                String line;
+                int del;
+                while ((line = readLine(buffer, message)) != null) {
+                    final boolean done = line.endsWith(EOM);
+                    if (done) {
+                        line = line.substring(0, line.length() - EOM.length());
+                    }
+                    if (!line.isEmpty()) {
+                        del = line.indexOf(':');
+                        if (del &lt; 0) {
+                            headers.put(line.trim(), emptyList());
+                        } else {
+                            headers.put(line.substring(0, del).trim(), singletonList(line.substring(del + 1).trim()));
+                        }
+                    }
+                    if (done) {
+                        break;
+                    }
+                }
+            } catch (final IOException ioe) {
+                throw new IllegalStateException(ioe);
+            }
+
+            final List&lt;String&gt; uris = headers.get("destination");
+            final String uri;
+            if (uris == null || uris.isEmpty()) {
+                uri = defaultUri;
+            } else {
+                uri = uris.iterator().next();
+            }
+
+            final String queryString;
+            final String path;
+            final int query = uri.indexOf('?');
+            if (query &gt; 0) {
+                queryString = uri.substring(query + 1);
+                path = uri.substring(0, query);
+            } else {
+                queryString = null;
+                path = uri;
+            }
+
+            try {
+                final WebSocketRequest request = new WebSocketRequest(method, headers, path, appBase + path, appBase,
+                        queryString, 8080, context, new WebSocketInputStream(message), session);
+                controller.invoke(request, new WebSocketResponse(session));
+            } catch (final ServletException e) {
+                throw new IllegalArgumentException(e);
+            }
+        });
+    }
+
+    @Override
+    public void onClose(final Session session, final CloseReason closeReason) {
+        log.debug("Closed session {}", session.getId());
+    }
+
+    @Override
+    public void onError(final Session session, final Throwable throwable) {
+        log.warn("Error for session {}", session.getId(), throwable);
+    }
+
+    private static String readLine(final StringBuilder buffer, final InputStream in) throws IOException {
+        int c;
+        while ((c = in.read()) != -1) {
+            if (c == '\n') {
+                break;
+            } else if (c != '\r') {
+                buffer.append((char) c);
+            }
+        }
+
+        if (buffer.length() == 0) {
+            return null;
+        }
+        final String string = buffer.toString();
+        buffer.setLength(0);
+        return string;
+    }
+}</code></pre>
+
+<p>As you can see it is mainly reading the message respecting its formatting and just redirecting it to the servlet controller into the message handler. The&nbsp;<em>WebSocketRequest </em>is a request mock without much logic so I will not detail it here but you will notice the input stream is passed to the request. This one is important because it will read the websocket stream until the end of the message (<em>^@</em>):</p>
+
+<pre>
+<code class="language-java">public class WebSocketInputStream extends ServletInputStream {
+    private final InputStream delegate;
+    private boolean finished;
+    private int previous = Integer.MAX_VALUE;
+
+    public WebSocketInputStream(final InputStream delegate) {
+        this.delegate = delegate;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return finished;
+    }
+
+    @Override
+    public boolean isReady() {
+        return true;
+    }
+
+    @Override
+    public void setReadListener(final ReadListener readListener) {
+        // no-op
+    }
+
+    @Override
+    public int read() throws IOException {
+        if (finished) {
+            return -1;
+        }
+        if (previous != Integer.MAX_VALUE) {
+            previous = Integer.MAX_VALUE;
+            return previous;
+        }
+        final int read = delegate.read();
+        if (read == '^') {
+            previous = delegate.read();
+            if (previous == '@') {
+                finished = true;
+                return -1;
+            }
+        }
+        if (read &lt; 0) {
+            finished = true;
+        }
+        return read;
+    }
+}</code></pre>
+
+<p>The response is alsmot as trivial as the request (headers are a case insensitive map keyed by a string and valued by a list of string etc...) except the output stream handling. Here is a simplified response implementation (the easy methods were removed for brievity):</p>
+
+<pre>
+<code class="language-java">public class WebSocketResponse implements HttpServletResponse {
+
+    private final Session session;
+    private String responseString = "OK";
+    private int code = HttpServletResponse.SC_OK;
+    private final Map&lt;String, List&lt;String&gt;&gt; headers = new TreeMap&lt;&gt;(String.CASE_INSENSITIVE_ORDER);
+    private transient PrintWriter writer;
+    private transient ServletByteArrayOutputStream sosi;
+    private boolean commited = false;
+    private String encoding = "UTF-8";
+    private Locale locale = Locale.getDefault();
+
+    public WebSocketResponse(final Session session) {
+        this.session = session;
+    }
+
+    @Override
+    public void sendRedirect(final String path) throws IOException {
+        if (commited) {
+            throw new IllegalStateException("response already committed");
+        }
+        resetBuffer();
+
+        try {
+            setStatus(SC_FOUND);
+
+            setHeader("Location", toEncoded(path));
+        } catch (final IllegalArgumentException e) {
+            setStatus(SC_NOT_FOUND);
+        }
+    }
+
+    @Override
+    public ServletOutputStream getOutputStream() {
+        return sosi == null ? (sosi = createOutputStream()) : sosi;
+    }
+
+    @Override
+    public void reset() {
+        createOutputStream();
+    }
+
+    private ServletByteArrayOutputStream createOutputStream() {
+        return sosi = new ServletByteArrayOutputStream(session, () -&gt; {
+            final StringBuilder top = new StringBuilder("MESSAGE\r\n");
+            top.append("status: ").append(getStatus()).append("\r\n");
+            headers.forEach(
+                    (k, v) -&gt; top.append(k).append(": ").append(v.stream().collect(Collectors.joining(","))).append("\r\n"));
+            top.append("\r\n");// empty line, means the next bytes are the payload
+            return top.toString();
+        });
+    }
+
+    public void setCode(final int code) {
+        this.code = code;
+        commited = true;
+    }
+
+    @Override
+    public void resetBuffer() {
+        sosi.outputStream.reset();
+    }
+}</code></pre>
+
+<p>What is interesting is to see that the output stream is used as a delimiter to flush the headers accumulated in memory - with the little trick to add the status as header to simplify the client handling. Note that in the real STOMP protocol it would use an&nbsp;<em>ERROR</em>&nbsp;message instead of a&nbsp;<em>MESSAGE</em>&nbsp;one.</p>
+
+<p>The&nbsp;<em>ServletByteArrayOutputStream</em>&nbsp;is the one doing the link with the websocket output stream. We use an in memory buffer and only send the data to the client when a flush is called - and we use the hook we implemented just before to flush headers the first time. Here is one implementation:</p>
+
+<pre>
+<code class="language-java">public class ServletByteArrayOutputStream extends ServletOutputStream {
+    private static final byte[] EOM_BYTES = EOM.getBytes(StandardCharsets.UTF_8);
+    private static final int BUFFER_SIZE = 1024 * 8;
+
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private final Session session;
+    private final Supplier&lt;String&gt; preWrite;
+    private boolean closed;
+    private boolean headerWritten;
+
+    public ServletByteArrayOutputStream(final Session session, final Supplier&lt;String&gt; preWrite) {
+        this.session = session;
+        this.preWrite = preWrite;
+    }
+
+    @Override
+    public boolean isReady() {
+        return true;
+    }
+
+    @Override
+    public void setWriteListener(final WriteListener listener) {
+        // no-op
+    }
+
+    @Override
+    public void write(final int b) throws IOException {
+        outputStream.write(b);
+    }
+
+    @Override
+    public void write(final byte[] b, final int off, final int len) {
+        outputStream.write(b, off, len);
+    }
+
+    public void writeTo(final OutputStream out) throws IOException {
+        outputStream.writeTo(out);
+    }
+
+    public void reset() {
+        outputStream.reset();
+    }
+
+    @Override
+    public void flush() throws IOException {
+        if (!session.isOpen()) {
+            return;
+        }
+        if (outputStream.size() &gt;= BUFFER_SIZE) {
+            doFlush();
+        }
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (closed) {
+            return;
+        }
+
+        outputStream.write(EOM_BYTES);
+        doFlush();
+        closed = true;
+    }
+
+    private void doFlush() throws IOException {
+        final RemoteEndpoint.Basic basicRemote = session.getBasicRemote();
+
+        final byte[] array = outputStream.toByteArray();
+        final boolean written = array.length &gt; 0 || !headerWritten;
+
+        if (!headerWritten) {
+            final String headers = preWrite.get();
+            basicRemote.sendBinary(ByteBuffer.wrap(headers.getBytes(StandardCharsets.UTF_8)));
+            headerWritten = true;
+        }
+
+        if (array.length &gt; 0) {
+            outputStream.reset();
+            basicRemote.sendBinary(ByteBuffer.wrap(array));
+        }
+
+        if (written &amp;&amp; basicRemote.getBatchingAllowed()) {
+            basicRemote.flushBatch();
+        }
+    }
+}</code></pre>
+
+<p>This should be enough for all synchronous endpoints but if you use some asynchrnous endpoints (<em>@Suspended</em>), you need to add a websocket continuation since your servlet &quot;mock&quot; will likely not go as far as implementing the&nbsp;<em>AsyncContext</em>&nbsp;logic and its state machine.</p>
+
+<p>To do that we need to implement our own destination. We will just wrap the servlet one. First we implement a custom registry wrapping the servlet destinations:</p>
+
+<pre>
+<code class="language-java">public class WebSocketRegistry implements DestinationRegistry {
+    private final DestinationRegistry delegate;
+    private ServletController controller;
+
+    public WebSocketRegistry(final DestinationRegistry registry) {
+        this.delegate = registry;
+    }
+
+    @Override
+    public void addDestination(final AbstractHTTPDestination destination) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void removeDestination(final String path) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public AbstractHTTPDestination getDestinationForPath(final String path) {
+        return wrap(delegate.getDestinationForPath(path));
+    }
+
+    @Override
+    public AbstractHTTPDestination getDestinationForPath(final String path, final boolean tryDecoding) {
+        return wrap(delegate.getDestinationForPath(path, tryDecoding));
+    }
+
+    @Override
+    public AbstractHTTPDestination checkRestfulRequest(final String address) {
+        return wrap(delegate.checkRestfulRequest(address));
+    }
+
+    @Override
+    public Collection&lt;AbstractHTTPDestination&gt; getDestinations() {
+        return delegate.getDestinations();
+    }
+
+    @Override
+    public AbstractDestination[] getSortedDestinations() {
+        return delegate.getSortedDestinations();
+    }
+
+    @Override
+    public Set&lt;String&gt; getDestinationsPaths() {
+        return delegate.getDestinationsPaths();
+    }
+
+    private AbstractHTTPDestination wrap(final AbstractHTTPDestination destination) {
+        try {
+            return destination == null ? null : new WebSocketDestination(destination, this);
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}</code></pre>
+
+<p>And of course our destination implementation:</p>
+
+<pre>
+<code class="language-java">public class WebSocketDestination extends AbstractHTTPDestination {
+
+    private static final Logger LOG = LogUtils.getL7dLogger(ServletDestination.class);
+
+    private final AbstractHTTPDestination delegate;
+
+    public WebSocketDestination(final AbstractHTTPDestination delegate, final WebSocketRegistry registry)
+            throws IOException {
+        super(delegate.getBus(), registry, new EndpointInfo(), delegate.getPath(), false);
+        this.delegate = delegate;
+        this.cproviderFactory = new WebSocketContinuationFactory(registry);
+    }
+
+    @Override
+    public void shutdown() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setMessageObserver(final MessageObserver observer) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return LOG;
+    }
+
+    @Override
+    public void invoke(final ServletConfig config, final ServletContext context, final HttpServletRequest req,
+            final HttpServletResponse resp) throws IOException {
+        // eager create the message to ensure we set our continuation for @Suspended
+        Message inMessage = retrieveFromContinuation(req);
+        if (inMessage == null) {
+            inMessage = new MessageImpl();
+
+            final ExchangeImpl exchange = new ExchangeImpl();
+            exchange.setInMessage(inMessage);
+            setupMessage(inMessage, config, context, req, resp);
+
+            exchange.setSession(new HTTPSession(req));
+            MessageImpl.class.cast(inMessage).setDestination(this);
+        }
+
+        delegate.invoke(config, context, req, resp);
+    }
+
+    // delegate all other methods to delegate field
+}</code></pre>
+
+<p>The only trick here is to set the <em>cproviderFactory</em>&nbsp;into the constructor. The continuation factory is really straight forward:</p>
+
+<pre>
+<code class="language-java">public class WebSocketContinuationFactory implements ContinuationProviderFactory {
+    private static final String KEY = WebSocketContinuationFactory.class.getName();
+
+    private final WebSocketRegistry registry;
+
+    public WebSocketContinuationFactory(final WebSocketRegistry registry) {
+        this.registry = registry;
+    }
+
+    @Override
+    public ContinuationProvider createContinuationProvider(final Message inMessage, final HttpServletRequest req,
+            final HttpServletResponse resp) {
+        return new WebSocketContinuation(inMessage, req, resp, registry);
+    }
+
+    @Override
+    public Message retrieveFromContinuation(final HttpServletRequest req) {
+        return Message.class.cast(req.getAttribute(KEY));
+    }
+}</code></pre>
+
+<p>And finally our continuation implementation is really mapped on the servlet flavor since in the websocket environment we don&#39;t need anything else:</p>
+
+<pre>
+<code class="language-java">public class WebSocketContinuation implements ContinuationProvider, Continuation {
+    private final Message message;
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
+    private final WebSocketRegistry registry;
+    private final ContinuationCallback callback;
+    private Object object;
+    private boolean resumed;
+    private boolean pending;
+    private boolean isNew;
+
+    public WebSocketContinuation(final Message message, final HttpServletRequest request, final HttpServletResponse response,
+            final WebSocketRegistry registry) {
+        this.message = message;
+        this.request = request;
+        this.response = response;
+        this.registry = registry;
+        this.request.setAttribute(AbstractHTTPDestination.CXF_CONTINUATION_MESSAGE, message.getExchange().getInMessage());
+        this.callback = message.getExchange().get(ContinuationCallback.class);
+    }
+
+    @Override
+    public Continuation getContinuation() {
+        return this;
+    }
+
+    @Override
+    public void complete() {
+        message.getExchange().getInMessage().remove(AbstractHTTPDestination.CXF_CONTINUATION_MESSAGE);
+        if (callback != null) {
+            final Exception ex = message.getExchange().get(Exception.class);
+            if (ex == null) {
+                callback.onComplete();
+            } else {
+                callback.onError(ex);
+            }
+        }
+        try {
+            response.getWriter().close();
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public boolean suspend(final long timeout) {
+        isNew = false;
+        resumed = false;
+        pending = true;
+        message.getExchange().getInMessage().getInterceptorChain().suspend();
+        return true;
+    }
+
+    @Override
+    public void resume() {
+        resumed = true;
+        try {
+            registry.controller.invoke(request, response);
+        } catch (final ServletException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public void reset() {
+        pending = false;
+        resumed = false;
+        isNew = false;
+        object = null;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+
+    @Override
+    public boolean isPending() {
+        return pending;
+    }
+
+    @Override
+    public boolean isResumed() {
+        return resumed;
+    }
+
+    @Override
+    public Object getObject() {
+        return object;
+    }
+
+    @Override
+    public void setObject(final Object o) {
+        object = o;
+    }
+}</code></pre>
+
+<p>Finally to wire it to the websocket deployment - and complete our&nbsp;<em>ServletContextListener</em>&nbsp;- we convert each endpoint to a websocket deployment using our&nbsp;<em>JAXRSEndpoint</em>:</p>
+
+<pre>
+<code class="language-java">oris.map(ori -&gt; {
+    final String uri = ori.getClassResourceInfo().getURITemplate().getValue() + ori.getURITemplate().getValue();
+    return ServerEndpointConfig.Builder
+            .create(
+               Endpoint.class,
+               "/websocket" + version + "/" + String.valueOf(ori.getHttpMethod()).toLowerCase(ENGLISH) + uri)
+            .configurator(new ServerEndpointConfig.Configurator() {
+
+                @Override
+                public &lt;T&gt; T getEndpointInstance(final Class&lt;T&gt; clazz) throws InstantiationException {
+                    final Map&lt;String, List&lt;String&gt;&gt; headers = new HashMap&lt;&gt;();
+                    if (!ori.getProduceTypes().isEmpty()) {
+                        headers.put(HttpHeaders.CONTENT_TYPE,
+                                singletonList(ori.getProduceTypes().iterator().next().toString()));
+                    }
+                    if (!ori.getConsumeTypes().isEmpty()) {
+                        headers.put(HttpHeaders.ACCEPT,
+                                singletonList(ori.getConsumeTypes().iterator().next().toString()));
+                    }
+                    return (T) new JAXRSEndpoint(appBase, controller, servletContext, ori.getHttpMethod(), uri, headers);
+                }
+            }).build();
+}).sorted(Comparator.comparing(ServerEndpointConfig::getPath))
+.peek(e -&gt; log.info("Deploying WebSocket(path={})", e.getPath())).forEach(config -&gt; {
+    try {
+        container.addEndpoint(config);
+    } catch (final DeploymentException e) {
+        throw new IllegalStateException(e);
+    }
+})</code></pre>
+
+<p>This code is pretty simple once you entered into it:</p>
+
+<ul>
+	<li>each endpoint is mapped to a websocket endpoint using this uri pattern:&nbsp;<em>/websocket/vX/&lt;http method&gt;/&lt;endpoint path&gt;</em></li>
+	<li>each endpoint uses<em> JAXRSEndpoint</em></li>
+	<li>the consumes/produces headers are forced (optional)</li>
+	<li>finally the endpoint config is deployed using&nbsp;<em>addEndpoint</em>&nbsp;method of the ServerC<em>ontainer</em></li>
+</ul>
+
+<p>Tip: the&nbsp;<em>peek</em>&nbsp;call logs the path to list all the deployed endpoints, it is quite appreciable after some times or if you have some issues doing a test/client.</p>
+
+<p>&nbsp;</p>
+
+<p>This code is not the most sexy you can find out there but it works, allows to use JAX-RS programming model but websocket communications. It however enables you to use the message formatting you want (we use a text based format but you could use json/xml/binary/custom formats) and to reuse the same connection for any endpoint since we rely on the destination header of the request to route the message in the servlet controller in our message handler.</p>
+
+<p>&nbsp;</p>
+
+<p>The nice thing about such a solution is that you get a super efficient and performant implementation with a very clean and strong programming model (JAX-RS which uses the command based pattern).</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//sirona-jmx-mbeans-web.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//beam-jsr223.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

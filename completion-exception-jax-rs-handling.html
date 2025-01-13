@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CompletionException and JAX-RS handling</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,181 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="completion-exception-jax-rs-handling-html-container" class="container page-content completion-exception-jax-rs-handling-html is-blog">
+                        <div class="page-header">
+                <h1>CompletionException and JAX-RS handling</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-03-27</span>, <span class="metadata-readingtime">4 min and 8 sec read</span></p>
+</div>
+<p>Since Java 8 and its <em>CompletionStage/CompletionFuture</em>&nbsp;API, it is more and more common to write asynchronous code using these promise-like API. However it can sometimes lead to some unexpected behavior.</p>
+
+<p>One example is when you write a kind of proxy for a microservice or just connect multiple microservices together using JAX-RS client API.</p>
+
+<p>Very high level, it looks like that kind of endpoint:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+@Path("my-proxy")
+public class MyProxy {
+    @Inject // 1
+    private WebTarget target; // @produces in another bean
+
+    @GET // 2
+    @Produces(APPLICATION_JSON)
+    public CompletionStage&lt;MyProxyResult&gt; getResult() { // 3
+        return target.path("real-endpoint")
+                 .request(APPLICATION_JSON_TYPE)
+                 .rx() // 4
+                 .get(MyResult.class)
+                 .thenApply(this::mapToProxyResult); // 5
+    }
+}</code></pre>
+
+<ol>
+	<li>For this example we assume the&nbsp;<em>WebTarget</em>&nbsp;instance was created from a&nbsp;<em>Client</em>&nbsp;but is produced in another CDI bean. Note that the client was set with a custom <em>Ex</em><em>ecutorService</em>&nbsp;instance to ensure asynchronous calls will work as expected and not fallback on the forkjoin common pool,</li>
+	<li>The endpoint which will proxy a service in another instance,</li>
+	<li>We return a&nbsp;<em>CompletionStage</em>&nbsp;since JAX-RS now support it and it enables us to integrate well for asynchronous call. Concretely the implementation will wait the processing to be done before sending back the response to the client without holding the HTTP thread,</li>
+	<li><em>rx()</em>&nbsp;call enables us to become asynchronous and to get a&nbsp;<em>CompletionStage</em>&nbsp;as result of our invocation,</li>
+	<li>Finally we map the response from the server to something specific to the proxy, it can be a passthrough as well as a complete rewrite of the payload (useful to handle migration/versions for instance).</li>
+</ol>
+
+<p>The client part is generally fine and if a&nbsp;<em>WebApplicationException </em>or&nbsp;<em>ProcessingException</em>&nbsp;is thrown, the implementation will wire&nbsp;it&nbsp;to the caller. Same applies to your custom code in then stages (step 5).</p>
+
+<p>To understand let&#39;s get back to&nbsp;<em>CompletionFuture</em>&nbsp;usage.</p>
+
+<pre>
+<code class="language-java">final CompletableFuture&lt;String&gt; future = new CompletableFuture&lt;&gt;();
+future.completeExceptionally(new IllegalStateException("oops"));
+future.handle((r, t) -&gt; {
+    t.printStackTrace();
+    return r;
+});</code></pre>
+
+<p>If you run that code - which is synchronous cause we handle the future once it is completed - then you will see the exception directly:</p>
+
+<pre>
+<code>java.lang.IllegalStateException: oops
+	at Main.main(Main.java:7)</code></pre>
+
+<p>However, if you move to a&nbsp;<em>CompletionStage</em>&nbsp;factory method like&nbsp;<em>runAsync</em>&nbsp;or&nbsp;<em>SupplyAsync</em>&nbsp;then you will see something else. Let&#39;s modify our source to:</p>
+
+<pre>
+<code class="language-java">final CompletableFuture&lt;Void&gt; future = CompletableFuture.runAsync(() -&gt; {
+    throw new IllegalStateException("oops");
+});
+future.handle((r, t) -&gt; {
+    t.printStackTrace();
+    return r;
+});</code></pre>
+
+<p>It should do exactly the same as our previous code...except that if you run it then you get:</p>
+
+<pre>
+<code>java.util.concurrent.CompletionException: java.lang.IllegalStateException: oops
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:273)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:280)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1629)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1618)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: java.lang.IllegalStateException: oops
+	at Main.lambda$main$0(Main.java:7)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1626)
+	... 5 more</code></pre>
+
+<p>The exception has been wrapped into a&nbsp;<em>CompletionException. </em>We will not enter into the details but the rational behind that is to distinguish between an expected and unexpected error in the API. Here the runnable was note expected to fail so the wrapper enables to know it was during the execuition and not that the future was completed exceptionally &quot;manually&quot; as in the first snippet. Concretely it calls&nbsp;<em>CompletableFuture#completeThrowable(java.lang.Throwable)</em>&nbsp;instead of&nbsp;<em>completeExceptionally(t)</em>.</p>
+
+<p>This means that if an implementation of a JAX-RS client uses these methods - and several do like CXF - then our proxy can get&nbsp;<em>CompletionException&nbsp;</em>&nbsp;wrapping the actual client exception which means our previous code will have an unexpected exception handling.</p>
+
+<p>The nice thing about writing a proxy using JAX-RS on both the server and client side is that the client will throw&nbsp;<em>WebApplicationException&nbsp;</em>&nbsp;in case of errors which means the exception handling of the server will propagate the exception properly most of the time. This is a lot of code to not write which is quite nice.</p>
+
+<p>That said, in case of&nbsp;<em>rx()</em>&nbsp;usage in the proxy this is no more true since you can get a&nbsp;<em>CompletionException</em>.</p>
+
+<p>To solve it the simplest - and not breaking change if your implementation fixes it - is to add an <em>ExceptionMapper&nbsp;</em>for the&nbsp;<em>CompletionException</em>. This one will unwrap the cause and delegates to JAX-RS runtime through&nbsp;<em>Providers</em>&nbsp;context instance the cause handling:</p>
+
+<pre>
+<code class="language-java">@Provider // 1
+@Dependent
+public class CompletionExceptionExceptionMapper implements ExceptionMapper&lt;CompletionException&gt; { // 2
+    @Context // 3
+    private Providers providers;
+
+    @Override
+    public Response toResponse(final CompletionException exception) {
+        final Throwable cause = exception.getCause();
+        if (cause != null) { // 4
+            final Class type = cause.getClass();
+            return providers.getExceptionMapper(type).toResponse(cause); // 5
+        }
+        // 6
+        return Response.serverError()
+                       // optional: .entity(new UnexpectedError(exception.getMessage()))
+                       .build();
+    }
+}
+</code></pre>
+
+<ol>
+	<li>We register our provider to be automatically added to the application,</li>
+	<li>We implement&nbsp;<em>ExceptionMapper&lt;CompletionException&gt;</em>&nbsp;to handle&nbsp;<em>CompletionExceptions</em>&nbsp;only,</li>
+	<li>We inject the JAX-RS<em>&nbsp;Providers</em>&nbsp;which will enable us to get back another&nbsp;<em>ExceptionMapper,</em></li>
+	<li>If the completion exception has a cause then we will use it to create the response,</li>
+	<li>In this last case we fully delegate the response mapping to the exception mapper more specific to the exception type,</li>
+	<li>If there is no cause - quite unlikely - then we just send back a HTTP 500 - optionally with some message - to the client.</li>
+</ol>
+
+<p>With this simple exception mapper the client will get back the expected error and not a 500 for a HTTP 400 or 404 - for instance - which would have been the case without that mapper.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//compile-java-crest-cli-application-with-graalvm-prepare-faas.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//asciidoctor-pdf-watermark-except-on-title-page.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

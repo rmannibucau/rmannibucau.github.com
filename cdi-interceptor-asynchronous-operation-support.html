@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI interceptors and asynchronous operations</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,188 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-interceptor-asynchronous-operation-support-html-container" class="container page-content cdi-interceptor-asynchronous-operation-support-html is-blog">
+                        <div class="page-header">
+                <h1>CDI interceptors and asynchronous operations</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-09-05</span>, <span class="metadata-readingtime">3 min and 58 sec read</span></p>
+</div>
+<p>CDI interceptors are a great way to enrich some beans with more or less complicated logic without polluting the business code. Most common and used examples are related to security validation, transaction handling, logging/tracking, etc...</p>
+
+<p>Here is how their implementation can be summarized:</p>
+
+<pre>
+<code class="language-java">@MyInterceptorBinding
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
+public class MyInterceptor implements Serializable {
+    @AroundInvoke
+    public Object around(final InvocationContext context) throws Exception {
+        doSomethingBeforeInvocation();
+        try {
+            return context.proceed();
+        } finally {
+            doSomethingAfterInvocation();
+        }
+    }
+}
+</code></pre>
+
+<p>This works great but has one issue: it assumes the context execution is synchronous which is more and more unlikely while we start to use in our code java 8&nbsp;<em>Streams&nbsp;</em>and&nbsp;<em>CompletableFutures</em>.</p>
+
+<p>Let&#39;s take the simple case of a logger: we want to log with the interceptor binding&nbsp;<em>@Log</em>&nbsp;that we are entering in a method and exiting this method logic. What is important here is the last part of that sentence &quot;method logic&quot;. If you think of an asynchronous execution, you want to log the computation is done and not that you quit the method which would be quite immediate.</p>
+
+<p>Let&#39;s assume we have a <em>InterceptorBase</em>&nbsp;class which abstract the before/after handling:</p>
+
+<pre>
+<code class="language-java">public abstract class InterceptorBase&lt;T&gt; implements Serializable {
+    protected abstract T before(InvocationContext invocationContext);
+
+    protected abstract void after(T state, Object result, Throwable exception);
+
+    @AroundInvoke
+    public Object around(final InvocationContext context) throws Exception {
+        final T state = before(context);
+        Throwable exception = null;
+        Object result = null;
+        try {
+            result = context.proceed();
+            return result;
+        } catch (final Throwable error) {
+            exception = error;
+            throw error;
+        } finally {
+            after(state, result, exception);
+        }
+    }
+}</code></pre>
+
+<p>Then our logging implementation can look like:</p>
+
+<pre>
+<code class="language-java">@Log
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
+public class LogInterceptor extends InterceptorBase&lt;Logger&gt; {
+    @Override
+    protected Logger before(final InvocationContext invocationContext) {
+        final Logger logger = Logger.getLogger(invocationContext.getMethod().toGenericString());
+        logger.info("Before " + invocationContext.getMethod().toGenericString());
+        return logger;
+    }
+
+    @Override
+    protected void after(final Logger state, final Object result, final Throwable exception) {
+        if (exception != null) {
+            state.log(Level.SEVERE, String.valueOf(result), exception);
+        } else {
+            state.info(String.valueOf(result));
+        }
+    }
+}</code></pre>
+
+<p>This will work fine for a synchronous implementation but not an asynchronous one or even one returning a stream since it will not execute the stream flow but just prepare it.</p>
+
+<p>To handle those cases you need to integrate with the returned value. And listen for the actual completion. For a <em>Stream</em>&nbsp;you can enrich it with a&nbsp;<em>peek()</em>&nbsp;which would transparently be called when executed or even wrap the stream itself in a custom implementation/proxy if you need to guarantee the execution in any case (<em>peek</em> can be bypassed if there is an error). To illustrate this post I&#39;ll use&nbsp;<em>CompletionStage/CompletableFuture</em>&nbsp;API which is surely easier to understand and more common in microservices architectures. Idea here is to add a step after the completion handling the success/error with our&nbsp;<em>after()</em>&nbsp;hook. For that we just check if the result is a&nbsp;<em>CompletionStage </em>and if so register a&nbsp;<em>handle</em>&nbsp;method and we return the enriched&nbsp;<em>CompletionStage</em>. This way the flow would be:</p>
+
+<ol>
+	<li>use completion stage handling</li>
+	<li>intercpetor after handling</li>
+	<li>caller handling</li>
+</ol>
+
+<p>It just exactly does what we want: execute code after the logic is done.</p>
+
+<p>Here is on possible implementation:</p>
+
+<pre>
+<code class="language-java">public abstract class InterceptorBase&lt;T&gt; implements Serializable {
+    protected abstract T before(InvocationContext invocationContext);
+
+    protected abstract void after(T state, Object result, Throwable exception);
+
+    @AroundInvoke
+    public Object around(final InvocationContext context) throws Exception {
+        final T state = before(context);
+        boolean async = false;
+        Throwable exception = null;
+        Object returnValue = null;
+        try {
+            returnValue = context.proceed();
+            async = CompletionStage.class.isInstance(returnValue);
+            if (async) {
+                final CompletionStage&lt;?&gt; result = CompletionStage.class.cast(returnValue);
+                return result.handle((o, throwable) -&gt; {
+                    after(state, o, throwable);
+                    return o;
+                });
+            }
+            return returnValue;
+        } catch (final Throwable error) {
+            exception = error;
+            throw error;
+        } finally {
+            if (!async) {
+                after(state, returnValue, exception);
+            }
+        }
+    }
+}</code></pre>
+
+<p>There is not much tricks except the&nbsp;<em>async</em>&nbsp;flag to handle both synchronous methods and asynchronous methods (marked by returning a&nbsp;<em>CompletionStage</em>) but it opens a lot of features implementable with interceptors and numbers of integrations doable this standard way.</p>
+
+<p>What is interesting here is to see that the new API don&#39;t break the old&nbsp;one and that we don&#39;t need to forget the way we were implementating implementations before the reactive/microservice erea. We just need to make it evolving a bit.</p>
+
+<p>The last trick to handle with this pattern is how to replace <em>ThreadLocal</em>&nbsp;which were often abused by the past. This is a bit out of topic for this post but assuming you can decorate the thread pool you submit tasks to this is quite easy to do since you get the hook to get the state before changing of context/thread and to propagate it before running the submitted task. The tip I&#39;ll give in this post will be that Java EE, through its EE concurrency API, provides listeners enabling you to do it.</p>
+
+<p>Happy asynchronism ;).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//openshift-metawerx-migration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-packaging-production.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Configure Java Util Logging (JUL) to use a more production/docker ready pattern using SimpleFormatter</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,100 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jul-production-ready-pattern-with-simpleformatter-html-container" class="container page-content jul-production-ready-pattern-with-simpleformatter-html is-blog">
+                        <div class="page-header">
+                <h1>Configure Java Util Logging (JUL) to use a more production/docker ready pattern using SimpleFormatter</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-09-29</span>, <span class="metadata-readingtime">2 min and 3 sec read</span></p>
+</div>
+<p>Java Util Logging (JUL) is often criticized but it is a solid logging framework and, even if you will probably read the opposite, it is as fast as any fashion framework (as soon as you tune the handlers). Its main drawback is to be globally configured in several places (a lot of the config comes from the JVM when not integrated specifically to your environment like Apache Tomcat does) but its big advantages is that it is the default impl for a lot of Java libraries and it can easily unify logging in an application (using slf4j-jdk14 or so).</p>
+
+<p>In docker erea, you will likely use the&nbsp;<em>ConsoleHandler</em>&nbsp;which output the logs on stderr by default (with very few efforts you can log on stdout but it does not help much in terms of deployments in general) and using&nbsp;<em>SimpleFormatter</em>&nbsp;default format, the output will likely look like:</p>
+
+<pre>
+<code>sept. 28, 2020 4:35:04 PM org.apache.karaf.main.Main launch
+INFOS: All initial bundles installed and set to start</code></pre>
+
+<p>One issue with this output is that it uses two lines (so it is not that nice to grok to send the log events to a log aggregator like kibana) and that the date is hard to parse. It would be so nice if it could be:</p>
+
+<pre>
+<code>2020-09-28T14:28:50Z [INFO] [org.apache.karaf.main.Main launch] All initial bundles installed and set to start</code></pre>
+
+<p>This is exactly the same content but:</p>
+
+<ol>
+	<li>It uses a single line</li>
+	<li>Log level, source (class + method) are wrapped in square brackets (so trivial to parse)</li>
+	<li>Order of the fields is a bit different</li>
+</ol>
+
+<p>To achieve this output, you only have to know that&nbsp;<em>SimpleFormatter</em>&nbsp;is configurable through a system property called&nbsp;<em>java.util.logging.SimpleFormatter.format</em>. It uses&nbsp;<em>String.format</em>&nbsp;- or&nbsp;<em>java.util.Formatter</em>&nbsp;- syntax.</p>
+
+<p>Previous line was output using this configuration:</p>
+
+<pre>
+<code>'-Djava.util.logging.SimpleFormatter.format=%1$tFT%1$tTZ [%4$s] [%2$s] %5$s%6$s%n'</code></pre>
+
+<p>Note: the simple quotes are there to avoid UNIx interpolation, depending where you configure that, you can omit them.</p>
+
+<p>This configuration hardcoded the timezone but if you replace the two first patterns by a&nbsp;<em>toString()</em>&nbsp;pattern you will get the direct&nbsp;<em>ZonedDateTime</em>&nbsp;output containing the right timezone:</p>
+
+<pre>
+<code>'-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] [%2$s] %5$s%6$s%n'</code></pre>
+
+<p>With this line the log now looks like:</p>
+
+<pre>
+<code>2020-09-28T14:28:50Z[GMT] [INFO] [org.apache.karaf.main.Main launch] All initial bundles installed and set to start</code></pre>
+
+<p>Note: if the date offset is the same as the zone, the&nbsp;<em>[GMT]</em>&nbsp;string will not appear. This is configurable on the JVM too.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jib-docker-layer-file-filtering.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//skip-cdi-extension-with-apache-openwebbeans.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

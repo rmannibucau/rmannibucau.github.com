@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Hibernate: why my relationship doesn&#8217;t update?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,130 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="hibernate-collection-update-html-container" class="container page-content hibernate-collection-update-html is-blog">
+                        <div class="page-header">
+                <h1>Hibernate: why my relationship doesn&#8217;t update?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-04-25</span>, <span class="metadata-readingtime">2 min and 53 sec read</span></p>
+</div>
+<p>Hibernate is probably the most used JPA implementation but has sometimes some surprising behavior. One I hit recently was the relationship collection update. If you don&#39;t reuse the collection hibernate gives you it will not update the collection and consider it as a new one which can lead to weird result in the database depending your mapping.</p>
+
+<p>This is quite frustrating when you map some web service (like a JSON payload in a JAX-RS endpoint) incoming data to your JPA model, typically this will not work:</p>
+
+<pre>
+<code class="language-java">json post(json) {
+    jpa = find(json);
+    jpa.setRelationship(json.getRelationship().map(this::map).collect(toList()));
+    return ...;
+}</code></pre>
+
+<p>This is a common pattern in JSON-&gt;persistence layer but it recreates a collection for relationships and assumes the persistence layer will be able to persist the new properly. If hibernate already has a collection it needs this instance to do the &quot;diff&quot; correctly. If you replace it,&nbsp;in the best case it will just fail to persist the root entity but&nbsp;in the worse case it will persist unexpected results.</p>
+
+<p>To solve that you need to ensure you never override an hibernate collection if already there.</p>
+
+<p>Here is a helper function which makes it easier to map a Set (but it is easy to interpolate for List):</p>
+
+<pre>
+<code class="language-java">&lt;JPA, JSON&gt; Set&lt;JPA&gt; mapSet(Set&lt;JPA&gt; jpas, Collection&lt;JSON&gt; jsons,
+                                           Function&lt;JPA, String&gt; jpaGetId, Function&lt;JSON, String&gt; jsonGetId,
+                                           Function&lt;JSON, JPA&gt; mapper) {
+    // 1
+    final Set&lt;JPA&gt; aggregator = jpas == null ? new HashSet&lt;&gt;() : jpas;
+    final Collection&lt;JSON&gt; nullsafeJsons = ofNullable(jsons).orElse(emptySet());
+    // 2
+    final Map&lt;String, JSON&gt; idToKeep = nullsafeJsons.stream()
+            .filter(j -&gt; jsonGetId.apply(j) != null)
+            .collect(toMap(jsonGetId, identity()));
+    // 3
+    aggregator.removeIf(jpa -&gt; !idToKeep.containsKey(jpaGetId.apply(jpa)));
+    // 4
+    aggregator.forEach(j -&gt; mapper.apply(idToKeep.get(jpaGetId.apply(j))));
+    // 5
+    aggregator.addAll(nullsafeJsons.stream().map(mapper).filter(j -&gt; {
+        final String id = jpaGetId.apply(j);
+        return id == null || !idToKeep.containsKey(id);
+    }).collect(toSet()));
+    return aggregator;
+}</code></pre>
+
+<p>The key points here are:</p>
+
+<ol>
+	<li>get the list of the entities in the collection (aggregator).</li>
+	<li>extract the identifiers of the entities in the set (from JSON payload). Note&nbsp;the usage of a Function makes it quite easy to avoid reflection (which would have been the java 7 implementation probably).</li>
+	<li>remove from the JPA collection the entities no more in the set (based on the id)</li>
+	<li>update all transitive entities (if there is a cascade update for instance)</li>
+	<li>add all entities not already in the set to the collection</li>
+</ol>
+
+<p>This code still assumes the mapper does a findOrCreate kind of logic. Here is an example:</p>
+
+<pre>
+<code class="language-java">private JPA map(JSON payload) {
+    final JPA model = ofNullable(payload.getId())
+            .map(id -&gt; entityManager.find(JPA.class, id))
+            .orElseGet(() -&gt; {
+                final JPA m = new JPA();
+                entityManager.persist(m);
+                return m;
+            });
+    model.setName(payload.getName());
+    model.setDescription(payload.getDescription());
+    return model;
+}</code></pre>
+
+<p>One small optimization of this code - if you have huge collections - is to fetch all entities by id at onces with a contains instead of a simple find(). It would make sense if you can add relationship entities by batch.</p>
+
+<p>There are surely more efficient ways to do the overall update but this one works not bad and is probably easy enough to understand the issue and the path to solve it.</p>
+
+<p>In any case what this post you remind you is: never forget to ensure your mapping works as expected and your usage is consistent with the implementation you use.</p>
+
+<p>If you are curious of why hibernate behaves this way you can have a look to&nbsp;<em>org.hibernate.collection.internal.AbstractPersistentCollection</em>&nbsp;which tracks the state and operations related to the relationship.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomcat-rewrite-url.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomcat-built-in-concurrent-limit-solution.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

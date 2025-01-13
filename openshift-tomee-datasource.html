@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Openshift DataSource and TomEE</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,132 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="openshift-tomee-datasource-html-container" class="container page-content openshift-tomee-datasource-html is-blog">
+                        <div class="page-header">
+                <h1>Openshift DataSource and TomEE</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-06-16</span>, <span class="metadata-readingtime">2 min and 40 sec read</span></p>
+</div>
+<p>Openshift is a great, easy and free way to get a Java hosting nowadays. It can provide you a VM with Java 8, and with just one more click you will get MySQL or PostgreSQL setup as well.</p>
+
+<p>Then to integrate it with your preferred server, you need to rely on environment variables. For MySQL, the tomee.xml TomEE configuration will look like:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;tomee&gt;
+  &lt;Resource id="MySQL" aliases="jdbc/mypu1,jdbc/pu2" type="DataSource"&gt;
+    JdbcDriver = com.mysql.jdbc.Driver
+    JdbcUrl = jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}
+    UserName = ${OPENSHIFT_MYSQL_DB_USERNAME}
+    Password = ${OPENSHIFT_MYSQL_DB_PASSWORD}
+    # standard rest of the configuration (eviction etc)
+  &lt;/Resource&gt;
+&lt;/tomee&gt;</code></pre>
+
+<p>Before seeing that it is probably not the best way to do so for the coming TomEE 7.0.1, let see the features we rely on:</p>
+
+<ul>
+	<li>
+	<p>Aliases: allows to redefine a list (comma separated value) of names for this particular resource. This is great because if you have 2 wars with a persistence unit each but using the same MySQL database, then you can share the pool even if both persistence-unit don&rsquo;t have the same jta-datasource value.</p>
+	</li>
+	<li>
+	<p>${X}: TomEE interpolates by default using system properties and environment variables.</p>
+	</li>
+</ul>
+
+<h2>TomEE 7.0.1 Openshift resources</h2>
+
+<p>TomEE comes with a feature called PropertiesResourceProvider. It is actually an interface that will provide, for a resource, the properties you will not need to declare in the resource.</p>
+
+<p>That&rsquo;s how the Openshift integration is done. Two implementations have been done, one for MySQL and one for PostgreSQL. This means that once the datasources is added to your application in openshift console, you can declare in your tomee the datasource with the following code:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;tomee&gt;
+  &lt;Resource id="MySQL" aliases="jdbc/mypu1,jdbc/pu2" type="DataSource" properties-provider=”openshift:mysql”&gt;
+    # standard rest of the configuration (eviction etc)
+  &lt;/Resource&gt;
+&lt;/tomee&gt;</code></pre>
+
+<p>Minimallisticly you can make it this way:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;tomee&gt;
+  &lt;Resource id="MySQL"
+            type="DataSource"
+            properties-provider=”openshift:mysql” /&gt;
+&lt;/tomee&gt;</code></pre>
+
+<p>But I would still encourage you to tune the size of the pool and the eviction (the provider will fill the validation query, so just set the eviction interval and that eviction is active - TestWhileIdle for instance):</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;tomee&gt;
+  &lt;Resource id="MySQL" properties-provider=”openshift:mysql”  type="DataSource"&gt;
+    ValidationInterval = 30000
+    NumTestsPerEvictionRun = 5
+    TimeBetweenEvictionRuns = 30 seconds
+    TestWhileIdle = true
+    MaxActive = 200
+  &lt;/Resource&gt;
+&lt;/tomee&gt;
+</code></pre>
+
+<p>Of course if you use PostgreSQL replace &ldquo;openshift:mysql&rdquo; by &ldquo;openshift:postgresql&rdquo;.</p>
+
+<h2>Conclusion</h2>
+
+<p>PropertiesResourceProvider is a great way to get rid of the boilerplate of the configuration of any application resources. This however doesn&rsquo;t prevent you from adding configurations to resources for the part the provider doesn&rsquo;t handle.</p>
+
+<p>Note that one provider can be set globally in conf/system.properties and can allow to integrate with any enterprise configuration system to read the configuration from somewhere else. The application still has then the control on the import (or not) of the resources (not declaring a resource will not trigger any loading).</p>
+
+<p>If you rely on Openshift (or Heroku which has its own provider) for more than one application, you will appreciate not having to remember how to configure your resources or having to ssh on the machines to check environment variables to setup new applications!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//barcelone-conference-javaee-angular2.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//background-to-foreground-color.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

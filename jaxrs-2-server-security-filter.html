@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JAX-RS 2: server security filter</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,277 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jaxrs-2-server-security-filter-html-container" class="container page-content jaxrs-2-server-security-filter-html is-blog">
+                        <div class="page-header">
+                <h1>JAX-RS 2: server security filter</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-04-18</span>, <span class="metadata-readingtime">6 min and 3 sec read</span></p>
+</div>
+<p>JAX-RS 2 added to the specification a lot of missing components in 1.0 version like request/response filters for the server and client.</p>
+
+<p>These ones are really helpful for all transversal concerns like the most famous one: the security.</p>
+
+<p>Let&#39;s see how to setup Basic security (the &quot;authorization&quot; scheme name) with this new API.</p>
+
+<p>Before digging in JAX-RS API let&#39;s keep in mind you can still use a plain Servlet filter to secure JAX-RS endpoints....so why using a specific component? To get more specific information on the underlying endpoint without playing with a lot of configuration or path detection.</p>
+
+<p>Here is an example:</p>
+
+<ul>
+	<li>I have 2 endpoints /login and /loginformation</li>
+	<li>/loginformation should be executed in a logged context and willr eturn the user data (name, displayname etc...)</li>
+	<li>/login will obviously log the user in so is executed in an anonymous context</li>
+</ul>
+
+<p>A filter will need this kind of logic (pseudo code):</p>
+
+<pre>
+<code class="language-java">doFilter(req, resp, chain) {
+    if (!isLogin(req)) {
+        doLogin();
+    }
+    chain.doFiltre(req, resp);
+}</code></pre>
+
+<p>This code is not a big deal until you implement <em>isLogin()</em>:</p>
+
+<pre>
+<code class="language-java">isLogin(request) {
+    String path = request.getRequestURI().substring(request.getContextPath().length());
+    return "/login".equals(path);
+}</code></pre>
+
+<p>In plain words: you will quickly need to do some advanced path matching to exclude the anonymous endpoints from the secured ones.</p>
+
+<p>Now assume you want to go one step further and want to secure all endpoints not having&nbsp;<em>@HeaderParam(&quot;Authorization&quot;)</em>&nbsp;or <em>@Anonymous</em>&nbsp;cause by convention your anonymous endpoints will have this header...then you are stucked cause Servlet layer does have it.</p>
+
+<p>That&#39;s where the JAX-RS layer is very useful and makes this kind of logic really smooth.</p>
+
+<p>To do that we&#39;ll use a&nbsp;<em>DynamicFeature</em>. A quick reminder is a&nbsp;<em>Feature</em>&nbsp;is a registration hook in JAX-RS runtime. The dynamic part means you will get endpoint metadata at registration part. Here is the signature:</p>
+
+<pre>
+<code class="language-java">public interface DynamicFeature {
+    void configure(ResourceInfo resourceInfo, FeatureContext context);
+}</code></pre>
+
+<p>The&nbsp;<em>ResourceInfo</em>&nbsp;will give you access to the endpoint <em>Method</em> and <em>Class. </em>In most containers you can use injections in your instance and as any provider you can mark it&nbsp;<em>@Provider</em>&nbsp;to automatically add it to your runtime:</p>
+
+<pre>
+<code class="language-java">@Provider
+@Dependent
+public class BasicFeature implements DynamicFeature {
+  @Inject
+  private MyService service;
+
+  @Override
+  public void configure(final ResourceInfo resourceInfo, final FeatureContext context) {
+    if (LoginEndpoint.class.isAssignableFrom(resourceInfo.getResourceClass()) ||
+       resourceInfo.getResourceMethod().isAnnotationPresent(Anonymous.class)) {
+       return;
+    }
+    // ...
+  }
+}</code></pre>
+
+<p>In this snippet you can see that the filtering logic is easier cause based on the actual java code which is the JAX-RS natural language.</p>
+
+<p>Now how to handle basic login? Login should happen before the execution to execute the method in a logged context so we&#39;ll use a&nbsp;<em>ContainerRequestFilter</em>&nbsp;responsible to read the&nbsp;<em>Authorization</em>&nbsp;header and log the user in. Since we can get injection in our feature the filter can inherit from it (either being a nested class or&nbsp;by its constructor). This means you can reuse your business logic.</p>
+
+<p>Here is a potential <em>BasicFilter</em> implementation:</p>
+
+<pre>
+<code class="language-java">public class BasicFilter implements ContainerRequestFilter {
+  @Override
+  public void filter(final ContainerRequestContext requestContext) throws IOException {
+    final String authorization = requestContext.getHeaderString("Authorization");
+    if (authorization == null) {
+      requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("{\"error\":\"missing_authorization_header\"}").build());
+      return;
+    }
+    if (!authorization.toLowerCase(Locale.ENGLISH).startsWith("basic ")) {
+      requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("{\"error\":\"invalid_authorization_scheme\"}").build());
+      return;
+    }
+
+    final String credentials = new String(Base64.getDecoder().decode(authorization.substring("basic ".length())), StandardCharsets.UTF_8);
+    final int sep = credentials.indexOf(':');
+    if (sep &gt; 0) {
+      final String user = credentials.substring(0, sep);
+      final String password = credentials.substring(sep + 1, credentials.length());
+      final User user = findUser(Account.class, user);
+      if (user == null || !matches(password, user.getPassword())) {
+        requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("{\"error\":\"invalid_credentials\"}").build());
+        return;
+      }
+
+      requestContext.setSecurityContext(new CustomSecurityContext(user));
+    } else {
+      requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("{\"error\":\"invalid_authorization_header_value\"}").build());
+    }
+  }
+}</code></pre>
+
+<p>What&#39;s important there:</p>
+
+<ul>
+	<li>if the login is invalid we&nbsp;<em>abort</em>&nbsp;the request and return directly a <em>UNAUTHORIZED</em>&nbsp;(HTTP 401) response.</li>
+	<li><em>findUser()</em>&nbsp;and <em>matches()</em>&nbsp;are &quot;abstracted&quot; methods in this snippet using any injection allowing to find a user and validating a password (with a salt/hash etc...)</li>
+	<li>in the snippet JSON errors are sent using plain string but you can pass an object and rely on JAX-RS serialization</li>
+	<li>the most important part will be to set the&nbsp;<em>SecurityContext</em>&nbsp;based on the user which will allow in resource to inject the context with&nbsp;<em>@Context</em>&nbsp;and use it to validate the user:</li>
+</ul>
+
+<pre>
+<code class="language-java">@GET
+public User get(@Context SecurityContext ctx) {
+    if (!ctx.isUserInRole("user:read")) {
+        throw new WebApplicationException(Status.FORBIDDEN);
+    }
+    return ...;
+}</code></pre>
+
+<p>You can even use it with interceptors or other JAX-RS component (since you sort them with priorities) to control the security based on any annotation (like&nbsp;<em>@RolesAllowed</em>).</p>
+
+<p>Now we have our filter and our feature, let&#39;s ensure our feature register our filter and makes it active:</p>
+
+<ul>
+</ul>
+
+<pre>
+<code class="language-java">@Provider
+@Dependent
+public class BasicFeature implements DynamicFeature {
+    @Inject
+    private MySecurityService service;
+
+    @Override
+    public void configure(final ResourceInfo resourceInfo, final FeatureContext context) {
+        if (!isSecured(resourceInfo)) {
+            return;
+        }
+        context.register(new BasicFilter(service), Priorities.AUTHENTICATION);
+    }
+}</code></pre>
+
+<p>You can also ignore the priority parameter when registering the filter but you will need to use @Priority on the filter itself to ensure it is registered at the right place in the filter chain.</p>
+
+<p>Finally how to implement the&nbsp;<em>SecurityContext?</em>&nbsp;this part depends your user model but here is a proposal:</p>
+
+<pre>
+<code class="language-java">class PrincipalImpl implements Principal {
+  private final String name;
+
+  private PrincipalImpl(final String username) {
+    this.name = username;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+}
+
+private static class AccountSecurityContext implements SecurityContext {
+  private final User account;
+  private final SecurityContext securityContext;
+  private Principal principal;
+
+  private AccountSecurityContext(final Account account, final SecurityContext securityContext) {
+    this.account = account;
+    this.securityContext = securityContext;
+  }
+
+  @Override
+  public Principal getUserPrincipal() {
+    return principal == null ? (principal = new PrincipalImpl(account.getUsername())) : principal;
+  }
+
+  @Override
+  public boolean isUserInRole(final String role) {
+    return account.getPermissions().contains(role);
+  }
+
+  @Override
+  public boolean isSecure() {
+     return securityContext.isSecure();
+  }
+
+  @Override
+  public String getAuthenticationScheme() {
+     return SecurityContext.BASIC_AUTH;
+  }
+}</code></pre>
+
+<p>This implementation assumes the user model owns the permissions/roles but this is actually quite common. The only trick there is to delegate the&nbsp;<em>isSecure()</em>&nbsp;(which says if you use https or not) to the runtime framework to avoid to handle it yourself. Side note on that is if you don&#39;t use this method you don&#39;t really care and can hardcode true/false.</p>
+
+<p>And here we are, we have:</p>
+
+<ul>
+	<li>a feature registered by the container thanks to&nbsp;<em>@Provider</em>&nbsp;scanning (otherwise register the feature manually when creating the server if you disabled scanning)</li>
+	<li>a filter handling basic authentication and overriding the security context to make it available to the rest of the runtime</li>
+</ul>
+
+<p>To open a bit the topic next steps can be to have some contextual security validation. If you re-read the post we mainly treated of the authentication but not much of the authorization. One interesting follow up is to have a filter just after our basic one validating the user has the permissions to invoke the resource endpoint contextually. Here is a sample of API allowing to do that using the same mecanism we dealt with in this post:</p>
+
+<pre>
+<code class="language-java">@GET
+@Path("{id}")
+
+@ValidateAccess(resource = "sensitivedata", identifier = "id")
+
+public SomeData get(@PathParam("id") String id) {
+    return ...;
+}</code></pre>
+
+<p>This kind of API (<em>@ValidateAccess</em>) will allow you to check in an <em>AuthorizationFilter</em>&nbsp;added after the basic one that you have the permission&nbsp;<em>sensitivedata:{id}</em>&nbsp;with the identifier being dynamic. It is very handy to allow only administrators and the user itself to access his data (kind of multi-tenant logic if you want).</p>
+
+<p>Last note will be that this post was about Basic handling because it is easy and the most known mecanism but it is easy to interpolate it to JWT validation or any security mecanism. The hooks are the exact same, just the filter implementation differs a bit.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomcat-built-in-concurrent-limit-solution.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jaxrs-cxf-disable-stacktrace.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Integrate 3rd party library with CDI, part 3: use CDI IoC instead of the library one</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="integrate-third-party-library-cdi-ioc-html-container" class="container page-content integrate-third-party-library-cdi-ioc-html is-blog">
+                        <div class="page-header">
+                <h1>Integrate 3rd party library with CDI, part 3: use CDI IoC instead of the library one</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-16</span>, <span class="metadata-readingtime">9 min and 30 sec read</span></p>
+</div>
+<p>Let&#39;s take the Shiro web case: what do you need to have it running and usable?</p>
+
+<ul>
+	<li><em>ShiroFilter</em>&nbsp;in place to be able
+
+	<ul>
+		<li>to secure URLs</li>
+		<li>to initialize the context (Shiro is sadly ThreadLocal based)</li>
+	</ul>
+	</li>
+	<li>A&nbsp;<em>SecurityManager</em>&nbsp;available somehow to the shiro filter</li>
+</ul>
+
+<h2>Add the filter</h2>
+
+<p>Let&#39;s make this part simple: how to autoconfigure Shiro filter? The answer is easy since Servlet 3.0: a&nbsp;<em>ServletContainerInitialier:</em></p>
+
+<pre>
+<code class="language-java">public class ShiroSetup implements ServletContainerInitializer {
+  @Override
+  public void onStartup(final Set&lt;Class&lt;?&gt;&gt; set, final ServletContext servletContext) throws ServletException {
+    final FilterRegistration.Dynamic filter = servletContext.addFilter("shiro", CdiShiroFilter.class);
+    filter.setAsyncSupported(true);
+    filter.addMappingForUrlPatterns(
+        EnumSet.allOf(DispatcherType.class), false,
+        ofNullable(servletContext.getInitParameter("shiro-cdi.mapping")).orElse("/*"));
+  }
+}</code></pre>
+
+<p>This simple intiializer will just add a filter matching all urls (we support some overriding mapping through an init parameter in web.xml but that&#39;s a detail for that post).</p>
+
+<p>Now we need this&nbsp;<em>CdiShiroFilter</em>.</p>
+
+<h2>CdiShiroFilter: bind Shiro to the requests</h2>
+
+<p>Before seeing how to integrate Shiro and CDI by itself, we need the filter to be active. Shiro already provides its own filter:&nbsp;<em>ShiroFilter</em>&nbsp;and expects the user to switch in web.xml the environment (the&nbsp;<em>SecurityManager&nbsp;</em>factory) to get the setup right. To decrease this configuration we&#39;ll create the&nbsp;<em>SecurityManager&nbsp;</em>in our&nbsp;<em>CdiShiroFilter</em>&nbsp;and reuse Shiro logic to ensure it still works. Concretely it means we need to bridge the&nbsp;<em>EnvironmentLoader</em>&nbsp;to our filter. If we don&#39;t do that then we&#39;ll need to declare a listener in our initializer (this works but makes the configuration even more complicated):</p>
+
+<pre>
+<code class="language-java">public class CdiShiroFilter extends EnvironmentLoader implements Filter {
+    private ShiroFilter filter;
+    private SecurityManager securityManager;
+    private ServletContext servletContext;
+
+    @Override
+    public void init(final FilterConfig filterConfig) throws ServletException {
+        filter = new ShiroFilter();
+        servletContext = filterConfig.getServletContext();
+        initEnvironment(servletContext);
+        filter.init(filterConfig);
+    }
+
+    @Override
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
+        filter.doFilter(servletRequest, servletResponse, filterChain);
+    }
+
+    @Override
+    public void destroy() {
+        filter.destroy();
+        destroyEnvironment(servletContext);
+    }
+}</code></pre>
+
+<p>This filter works (assuming you have a&nbsp;<em>SecurityManager</em>) but will likely not be valid for asynchronous requests. To make it possible to use&nbsp;<em>AsyncContext</em>&nbsp;from Servlet 3, we need to wrap the request.</p>
+
+<p>Before sharing the code doing that, let&#39;s assume we have an&nbsp;<em>AsyncContextWrapper&nbsp;</em>&nbsp;just delegating to an instance of&nbsp;<em>AsyncContext</em>&nbsp;(no additional logic):</p>
+
+<pre>
+<code class="language-java">public class AsyncContextWrapper implements AsyncContext {
+    private final AsyncContext delegate;
+
+    public AsyncContextWrapper(final AsyncContext asyncContext) {
+        delegate = asyncContext;
+    }
+
+    @Override
+    public ServletRequest getRequest() {
+        return delegate.getRequest();
+    }
+
+    @Override
+    public ServletResponse getResponse() {
+        return delegate.getResponse();
+    }
+
+    @Override
+    public boolean hasOriginalRequestAndResponse() {
+        return delegate.hasOriginalRequestAndResponse();
+    }
+
+    @Override
+    public void dispatch() {
+        delegate.dispatch();
+    }
+
+    @Override
+    public void dispatch(final String s) {
+        delegate.dispatch(s);
+    }
+
+    @Override
+    public void dispatch(final ServletContext servletContext, final String s) {
+        delegate.dispatch(servletContext, s);
+    }
+
+    @Override
+    public void complete() {
+        delegate.complete();
+    }
+
+    @Override
+    public void start(final Runnable runnable) {
+        delegate.start(runnable);
+    }
+
+    @Override
+    public void addListener(final AsyncListener asyncListener) {
+        delegate.addListener(asyncListener);
+    }
+
+    @Override
+    public void addListener(final AsyncListener asyncListener, final ServletRequest servletRequest, final ServletResponse servletResponse) {
+        delegate.addListener(asyncListener, servletRequest, servletResponse);
+    }
+
+    @Override
+    public &lt;T extends AsyncListener&gt; T createListener(final Class&lt;T&gt; aClass) throws ServletException {
+        return delegate.createListener(aClass);
+    }
+
+    @Override
+    public void setTimeout(final long l) {
+        delegate.setTimeout(l);
+    }
+
+    @Override
+    public long getTimeout() {
+        return delegate.getTimeout();
+    }
+}</code></pre>
+
+<p>The only method we need to override there is&nbsp;<em>start(Runnable)</em>. This one will use a Servlet thread to execute the task but if you use a custom thread pool (EE concurrency utilities?) then we&#39;ll use an&nbsp;<em>AsyncListener</em>&nbsp;to propagate the security context which is the only goal there:</p>
+
+<pre>
+<code class="language-java">@Override
+public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
+    filter.doFilter(new HttpServletRequestWrapper(HttpServletRequest.class.cast(servletRequest)) {
+        @Override
+        public AsyncContext startAsync() throws IllegalStateException {
+            return propagate(super.startAsync());
+        }
+
+        @Override
+        public AsyncContext startAsync(final ServletRequest servletRequest, final ServletResponse servletResponse) throws IllegalStateException {
+            return propagate(super.startAsync(servletRequest, servletResponse));
+        }
+
+        private AsyncContext propagate(final AsyncContext asyncContext) {
+            final Subject subject = ThreadContext.getSubject();
+            final SubjectThreadState state = new SubjectThreadState(subject);
+            asyncContext.addListener(new AsyncListener() {
+                @Override
+                public void onComplete(final AsyncEvent asyncEvent) throws IOException {
+                    state.restore();
+                }
+
+                @Override
+                public void onTimeout(final AsyncEvent asyncEvent) throws IOException {
+                    state.restore();
+                }
+
+                @Override
+                public void onError(final AsyncEvent asyncEvent) throws IOException {
+                    state.restore();
+                }
+
+                @Override
+                public void onStartAsync(final AsyncEvent asyncEvent) throws IOException {
+                    asyncEvent.getAsyncContext().addListener(this);
+                    state.bind();
+                }
+            });
+            return new AsyncContextWrapper(asyncContext) {
+                @Override
+                public void start(final Runnable runnable) {
+                    super.start(subject.associateWith(runnable));
+                }
+            };
+        }
+    }, servletResponse, filterChain);
+}</code></pre>
+
+<p>With Shiro the usage of&nbsp;<em>SubjectThreadState</em>&nbsp;makes it quite smooth. You can also see in this snippet how we reused our&nbsp;<em>AsyncContextWrapper</em>&nbsp;to make the actual logic more obvious (we could have done it in the wrapper but it would have been harder to identify the Shiro related code).</p>
+
+<p>Now we have all we need to run except our&nbsp;<em>SecurityManager</em>.</p>
+
+<h2>Create the SecurityManager with CDI</h2>
+
+<p>Creating the security manager is just a matter of getting a set of defined instances and wire them altogether. The challenge with CDI&nbsp;is to know when they are provided (the user created them) or we need to create a default or just let Shiro create a default.</p>
+
+<p>Here the trick will be to inject all instances and select the present ones. There are two ways to do it:</p>
+
+<ul>
+	<li>inject an&nbsp;<em>Instance</em></li>
+	<li>do a programmatic lookup from the <em>BeanManager</em></li>
+</ul>
+
+<p>We&#39;ll use the first one but note the second one is probably easier for a framework:</p>
+
+<pre>
+<code class="language-java">public class CdiShiroFilter extends EnvironmentLoader implements Filter {
+    private SecurityManager securityManager;
+
+    @Inject
+    private Instance&lt;WebSecurityManager&gt; manager;
+
+    @Inject
+    private Instance&lt;Realm&gt; realm;
+
+    @Inject
+    private Instance&lt;Authenticator&gt; authenticator;
+
+    @Inject
+    private Instance&lt;Authorizer&gt; authorizer;
+
+    @Inject
+    private Instance&lt;CacheManager&gt; cacheManager;
+
+    @Inject
+    private Instance&lt;EventBus&gt; eventBus;
+
+    @Inject
+    private Instance&lt;SubjectDAO&gt; subjectDAO;
+
+    @Inject
+    private Instance&lt;SubjectFactory&gt; subjectFactory;
+
+    @Inject
+    private Instance&lt;SessionManager&gt; sessionManager;
+
+    @Inject
+    private Instance&lt;FilterChainResolver&gt; filterChainResolver;
+
+    @Inject
+    private Instance&lt;RememberMeManager&gt; rememberMeManager;
+
+    @Inject
+    private Event&lt;WebEnvironment&gt; environmentEvent;
+
+    @Inject
+    private ShiroExtension extension;
+
+    @Override
+    protected WebEnvironment createEnvironment(final ServletContext sc) {
+        final DefaultWebEnvironment environment = new DefaultWebEnvironment();
+        securityManager = configureManager(!extension.isSecurityManager() ? extension.newSecurityManager() : manager.get());
+        environment.setSecurityManager(securityManager);
+        if (environment.getFilterChainResolver() == null &amp;&amp; !filterChainResolver.isUnsatisfied()) {
+            environment.setFilterChainResolver(filterChainResolver.get());
+        }
+        environmentEvent.fire(environment); // to customize it
+        return environment;
+    }
+
+    // here we use that philosophy: if set it was configured in the security manager producer otherwise use the produced value if there
+    private SecurityManager configureManager(final SecurityManager manager) {
+        if (!DefaultWebSecurityManager.class.isInstance(manager)) {
+            return manager;
+        }
+        final DefaultWebSecurityManager mgr = DefaultWebSecurityManager.class.cast(manager);
+        if ((mgr.getRealms() == null || mgr.getRealms().isEmpty()) &amp;&amp; !realm.isUnsatisfied()) {
+            mgr.setRealms(stream(realm.spliterator(), false).collect(toList()));
+        }
+        if (mgr.getAuthenticator() == null &amp;&amp; !authenticator.isUnsatisfied()) {
+            mgr.setAuthenticator(authenticator.get());
+        }
+        if (mgr.getAuthorizer() == null &amp;&amp; !authorizer.isUnsatisfied()) {
+            mgr.setAuthorizer(authorizer.get());
+        }
+        if (mgr.getCacheManager() == null &amp;&amp; !cacheManager.isUnsatisfied()) {
+            mgr.setCacheManager(cacheManager.get());
+        }
+        if (mgr.getEventBus() == null &amp;&amp; !eventBus.isUnsatisfied()) {
+            mgr.setEventBus(eventBus.get());
+        }
+        if (mgr.getSubjectDAO() == null &amp;&amp; !subjectDAO.isUnsatisfied()) {
+            mgr.setSubjectDAO(subjectDAO.get());
+        }
+        if (mgr.getSubjectFactory() == null &amp;&amp; !subjectFactory.isUnsatisfied()) {
+            mgr.setSubjectFactory(subjectFactory.get());
+        } else if (mgr.getSubjectFactory() == null) {
+            mgr.setSubjectFactory(new DefaultWebSubjectFactory());
+        }
+        if (mgr.getSessionManager() == null &amp;&amp; !sessionManager.isUnsatisfied()) {
+            mgr.setSessionManager(sessionManager.get());
+        }
+        if (mgr.getRememberMeManager() == null &amp;&amp; !rememberMeManager.isUnsatisfied()) {
+            mgr.setRememberMeManager(rememberMeManager.get());
+        }
+        return manager;
+    }
+}</code></pre>
+
+<p>It probably looks a bit complicated but here is the atomic code:</p>
+
+<pre>
+<code class="language-java">@Inject
+Instance&lt;Something&gt; something;
+
+
+if (mgr.getSomething() == null &amp;&amp; !something.isUnsatisfied()) {
+  mgr.setSomething(something.get());
+}</code></pre>
+
+<ul>
+	<li>we inject the type we need</li>
+	<li>if the value is not already set (we don&#39;t override what the user already did!) and we have a CDI bean matching this type then we set it</li>
+</ul>
+
+<p>Note: you can see for realms we do exactly the same but since you can have multiple realms we convert&nbsp;<em>Instance</em>&nbsp;to a list since it is iterable.</p>
+
+<p>This logic is great but it requires a root instance, to get the root instance we use the same trick but you probably saw we relied on an extension. Why not using&nbsp;<em>Instance</em>?</p>
+
+<p>The answer is simple: we want to be able to inject the&nbsp;<em>SecurityManager</em>&nbsp;so if there is no security manager bean then we need to add a security manager bean (I&#39;ll not detail this part but you can do it easily with DeltaSpike <em>BeanBuilder</em>&nbsp;for instance). This part is done during CDI bootstrap so&nbsp;<em>Instance</em>&nbsp;will always have at least one <em>Bean</em>. To avoid to mess up user produced&nbsp;<em>SecurityManager</em>&nbsp;we capture in the extension if we have or not a user&nbsp;<em>SecurityManager</em>&nbsp;and if not we add a custom one through the extension. It looks like that:</p>
+
+<pre>
+<code class="language-java">public class ShiroExtension implements Extension {
+    private boolean securityManager;
+    private SecurityManagerBean bean;
+
+    void hasSecurityManager(@Observes final ProcessBean&lt;SecurityManager&gt; securityManagerProcessBean) {
+        securityManager = securityManager || !SecurityManagerBean.class.isInstance(securityManagerProcessBean.getBean());
+    }
+
+    void addSecurityManagerIfNeeded(@Observes final AfterBeanDiscovery afterBeanDiscovery) {
+        if (securityManager) {
+            return;
+        }
+        bean = new SecurityManagerBean();
+        afterBeanDiscovery.addBean(bean);
+    }
+
+    public boolean isSecurityManager() {
+        return securityManager;
+    }
+
+    public SecurityManager newSecurityManager() {
+        final WebSecurityManager manager = new DefaultWebSecurityManager();
+        bean.initSecurityManagerBean(manager);
+        return manager;
+    }
+}
+</code></pre>
+
+<p>This way our initialization supports default and user managers and user can after that point&nbsp;use:</p>
+
+<pre>
+<code class="language-java">@Inject
+private SecurityManager manager;</code></pre>
+
+<p>Just for completeness here is the bean implementation but it has nothing original:</p>
+
+<pre>
+<code class="language-java">import com.github.rmannibucau.shiro.literal.AnyLiteral;
+import com.github.rmannibucau.shiro.literal.DefaultLiteral;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.web.mgt.WebSecurityManager;
+
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.InjectionPoint;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
+
+public class SecurityManagerBean implements Bean&lt;WebSecurityManager&gt; {
+    private final Set&lt;Type&gt; types = new HashSet&lt;&gt;(asList(WebSecurityManager.class, SecurityManager.class, Object.class));
+    private final Set&lt;Annotation&gt; qualifiers = new HashSet&lt;&gt;(asList(new DefaultLiteral(), new AnyLiteral()));
+    private WebSecurityManager manager;
+
+    public void initSecurityManagerBean(final WebSecurityManager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public Set&lt;InjectionPoint&gt; getInjectionPoints() {
+        return emptySet();
+    }
+
+    @Override
+    public Class&lt;?&gt; getBeanClass() {
+        return WebSecurityManager.class;
+    }
+
+    @Override
+    public boolean isNullable() {
+        return false;
+    }
+
+    @Override
+    public WebSecurityManager create(final CreationalContext&lt;WebSecurityManager&gt; context) {
+        return manager;
+    }
+
+    @Override
+    public void destroy(final WebSecurityManager instance, final CreationalContext&lt;WebSecurityManager&gt; context) {
+        // no-op
+    }
+
+    @Override
+    public Set&lt;Type&gt; getTypes() {
+        return types;
+    }
+
+    @Override
+    public Set&lt;Annotation&gt; getQualifiers() {
+        return qualifiers;
+    }
+
+    @Override // avoid proxies
+    public Class&lt;? extends Annotation&gt; getScope() {
+        return Dependent.class;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public Set&lt;Class&lt;? extends Annotation&gt;&gt; getStereotypes() {
+        return emptySet();
+    }
+
+    @Override
+    public boolean isAlternative() {
+        return false;
+    }
+}
+</code></pre>
+
+<h2>Don&#39;t forget the cases you forgot</h2>
+
+<p>You can see if you analyze more the initialization that the&nbsp;<em>createEnvironment()</em>&nbsp;method fires an event with the environment (and therefore the security manager). This is not needed by itself but if you forgot one setter or if the framework evolves but not your library it allows end users to observe this event and still customize the instance.</p>
+
+<h2>Produce the instances with the right scope</h2>
+
+<p>The last challenge Shiro has is the&nbsp;<em>Subject</em>&nbsp;&quot;producing&quot;. This instance is the entry point to login, logout, get user information&nbsp;etc...In CDI you likely want it this way:</p>
+
+<pre>
+<code class="language-java">@Inject
+private Subject subject;</code></pre>
+
+<p>Issue is this instance is bound to a thread. In a standard web application&nbsp;<em>@RequestScoped</em>&nbsp;works but for all other cases it doesn&#39;t even if Shiro context is well initialized. To solve that the trick I used was to always reevaluate the&nbsp;<em>Subject</em>&nbsp;through a proxy:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class SubjectProducer {
+    @Produces
+    public Subject subject(final SecurityManager manager) {
+        return Subject.class.cast(Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(),
+                new Class&lt;?&gt;[]{WebSubject.class},
+                (proxy, method, args) -&gt; {
+                    try {
+                        final Subject subject = ThreadContext.getSubject();
+                        return method.invoke(subject, args);
+                    } catch (final InvocationTargetException ite) {
+                        throw ite.getCause();
+                    }
+                }));
+    }
+}</code></pre>
+
+<p>This code will return a global&nbsp;<em>Subject</em>&nbsp;(can be&nbsp;<em>@ApplicationScoped too</em>) but uses Shiro instance each time through&nbsp;<em>ThreadContext</em>&nbsp;accessor.</p>
+
+<p>The limitation of such a code is to not loop, ie don&#39;t bind in Shiro <em>ThreadContext</em>&nbsp;the proxy otherwise you&#39;ll likely get a stackoverflow but since all this setup is hidden in the filter you don&#39;t need and it shouldn&#39;t happen. If you really need just use the <em>ThreadContext</em>&nbsp;instead of the injection (but it would be unlikely).</p>
+
+<h2>Conclusion</h2>
+
+<p>Integrating with CDI a library IoC leads to creating root entities of that framework relying on CDI. There are a lot of ways to do it and sometimes you need to mix them:</p>
+
+<ul>
+	<li>just grab root entities and assume they are intitialized</li>
+	<li>initialize well known nested instances from&nbsp;<em>Instance</em>&nbsp;or programmatic lookups after having created manually the root instance</li>
+	<li>rarely needed but you can also have a kind of visitor pattern to initialize nested instances too (useful when internals are not CDI friendly by default)</li>
+</ul>
+
+<p>It is also re-thinking the configuration to be less &quot;custom&quot; and in files but more &quot;in the code&quot; to ensure users fully control it and can override it as simply as a bean or CDI component.</p>
+
+<p>Finally it is ensuring you can inject what you produced (the&nbsp;<em>SecurityManager&nbsp;</em>in our sample).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cxf-and-swagger-integration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//integrate-third-party-library-cdi-interceptors.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

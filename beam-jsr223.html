@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Apache Beam and JSR233 support or how to inject java transforms!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,109 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="beam-jsr223-html-container" class="container page-content beam-jsr223-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Beam and JSR233 support or how to inject java transforms!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-11-03</span>, <span class="metadata-readingtime">3 min and 28 sec read</span></p>
+</div>
+<p><a href="https://beam.apache.org/" target="_blank">Apache Beam</a> is a big data project intending to abstract big data environment. You can see it as a JavaEE API for Big Data. Concretely the overall idea is to write your pipeline (flow) and be able to execute it on Spark, Flink, Dataflow, .... without changing the code.</p>
+
+<p>High level it is based on I/O and transformations. A transformation is an element taking 1-N inputs and creating 0-M outputs in the flow.</p>
+
+<p>There are several default transformations but in most cases you will need some dynamism at some point and this is where the JSR 223 - a.k.a. scripting specification - enters into the game. This JSR which is part of the JVM provides a way to run a scripting language on the JVM. This is typically what Jython uses for Python, JRuby for ruby, Nashorn for javascript, etc...</p>
+
+<p>Integrating this JSR with beam will allow to make the pipeline configurable and load the script which will convert some inputs to some outputs dynamically.</p>
+
+<p>The easiest to implement a JSR 223 transform is to do a <em>DoFn</em>&nbsp;which will provide you the needed hooks:</p>
+
+<ul>
+	<li>pre-compilation of the script for good performances</li>
+	<li>execution of the script per element of the&nbsp;<em>PCollection</em>&nbsp;(the input dataset representation in beam)</li>
+</ul>
+
+<p>Here is what a pipeline can look like:</p>
+
+<pre>
+<code class="language-java">PipelineOptions options = PipelineOptionsFactory.create(); &lt;1&gt;
+Pipeline p = Pipeline.create(options); &lt;2&gt;
+
+p.apply(TextIO.read().from("fo://somewhere")) &lt;3&gt;
+    .apply(new Scripting&lt;String, Integer&gt;() {} &lt;4&gt;
+        .withLanguage("js")
+        .withScript("context.output(context.element().length());"))
+    .apply(TextIO.write().to("example")); &lt;5&gt;
+
+p.run(); &lt;6&gt;</code></pre>
+
+<p>After having created a pipeline configuration (1) and a pipeline (2) we can create our flow. This example read data from files (3) and then execute this&nbsp;<em>Scripting</em>&nbsp;transformation (4) and finally writes the output to other files (5). The last step of the code (this can be a <em>main(String[])</em>) is to run (6) the pipeline which will execute it on the environment you selected (by your dependencies). Will typically be Spark or&nbsp;Flink for instance.</p>
+
+<p>In previous example the&nbsp;<em>Scripting</em>&nbsp;transform has three&nbsp;interesting points:</p>
+
+<ul>
+	<li>its configuration is based on the script language, this is because the JSR223 supports any language and also the script to pass to the transform the code to inject</li>
+	<li>it uses subclassing (<em>{}</em>) because beam uses&nbsp;<em>Coder</em>&nbsp;to be able to pass the records between the transformation and potentially determine their type. If you don&#39;t subclass the&nbsp;<em>Scripting</em>&nbsp;transform you it can&#39;t determine the type of the record and implicitly lookup the coder to use. The alternative is to set the coder to use on the pipeline at that point.</li>
+	<li>the script uses a&nbsp;<em>context</em>&nbsp;which is an implicit binding/variable which exactly matches the&nbsp;<em>ProcessContext</em>&nbsp;of beam which allows to get access to inputs (<em>element()</em>) and to produce outputs.</li>
+</ul>
+
+<p>In term of implementation if 100% relies on the java&nbsp;<em>ScriptEngine</em>&nbsp;and the only trick is to check if the engine is&nbsp;<em>Compilable</em>&nbsp;to precompile the script and get better performances. You can find a complete implementation on my <a href="https://github.com/rmannibucau/beam-jsr223/blob/master/src/main/java/com/github/rmannibucau/beam/jsr223/Scripting.java" target="_blank">github</a>.</p>
+
+<p>This is a very good step but most of the languages will be interpreted and not as fast as desired. To make it faster we can write a custom engine which supports....java :).</p>
+
+<p>This is what does the&nbsp;<a href="https://github.com/rmannibucau/beam-jsr223/blob/master/src/main/java/com/github/rmannibucau/beam/jsr223/java/JavaEngine.java#L49" target="_blank"><em>JavaEngine</em></a>&nbsp;of the same project which will create an&nbsp;<em>CompiledScript&nbsp;</em>&nbsp;implementation injecting the <em>context</em>&nbsp;we talked about earlier before the script passed to the transform and then will compile it using java&nbsp;<em>Compiler</em>&nbsp;API (this assumes you run with a JDK). Once the class loaded in a temporary classloader - to ensure we can drop it once used by the component - we just delegate the logic to the built&nbsp;<em>CompiledScript</em>.</p>
+
+<p>The trick here is to ensure the code compiles since it requires the context to be typed for the main input/output. To do that we reuse the subclassing trick which allows to determine the transform input/output type then we set the types on the engine which can then type the context just before the injected code and let the script rely on a typed&nbsp;<em>ProcessContext</em>.</p>
+
+<p>With that little hack you can now write your pipeline and inject java code you load when building the pipeline which allows to create big data jobs very dynamically!</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cxf-jaxrs-websocket.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-2.0-request-scope-controller.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

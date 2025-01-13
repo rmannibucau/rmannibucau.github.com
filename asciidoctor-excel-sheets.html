@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Asciidoctor and excel sheets</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,155 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="asciidoctor-excel-sheets-html-container" class="container page-content asciidoctor-excel-sheets-html is-blog">
+                        <div class="page-header">
+                <h1>Asciidoctor and excel sheets</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-06-20</span>, <span class="metadata-readingtime">2 min and 31 sec read</span></p>
+</div>
+<p>Today I got an interesting problem with asciidoctor: how to handle dynamic tables. Let me explain my issue: I have a table which is a kind of abacus, in short, the last column is computed from the 6 previous ones.</p>
+
+<p>Here is a sample:</p>
+
+<pre>
+<code>|===
+|A|B|SUM
+|1|2|3
+|3|4|7
+|===</code></pre>
+
+<p>For this table, it is very tempting to do:</p>
+
+<pre>
+<code>|===
+|A|B|SUM
+|1|2|=A+B
+|3|4|=A+B
+|===</code></pre>
+
+<p>But with asciidoctor this is not possible out of the box.</p>
+
+<p>However, I&#39;m sure you already thought about using Excel or OpenOffice Calc to do the CSV file, export it and include it in the table. This works but you need to export it in your build or manually to ensure your document reflect the accurate value.</p>
+
+<p>To solve that you can write a simple extension. I did it in Java but you can do it in plain ruby as easily.</p>
+
+<p>The first step is to grab an excel library able to read the excel file, I picked Apache POI:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+  &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+  &lt;version&gt;4.1.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Then, you just write an asciidoctor block macro reading the file and converting it to a plain CSV (or DSV) table:</p>
+
+<pre>
+<code class="language-java">@Name("excel") // &lt;1&gt;
+@Contexts(Contexts.OPEN)
+@ContentModel(ContentModel.COMPOUND)
+public class ExcelTableMacro extends BlockProcessor {
+    @Override
+    public Object process(final StructuralNode parent, final Reader target, final Map&lt;String, Object&gt; attributes) {
+        try (final XSSFWorkbook wb = new XSSFWorkbook(new File(target.readLine().replace("{partialsdir}", String.valueOf(parent.getDocument().getAttribute("partialsdir"))))) ){ // &lt;2&gt;
+            // &lt;3&gt;
+            final DataFormatter formatter = new DataFormatter();
+            final FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+            // &lt;4&gt;
+            final String sheetName = String.class.cast(attributes.get("sheet"));
+            final Sheet sheet = sheetName == null ? wb.iterator().next() : wb.getSheet(sheetName);
+            // &lt;5&gt;
+            final String tableContent = StreamSupport.stream(sheet.spliterator(), false)
+                    .map(row -&gt; StreamSupport.stream(row.spliterator(), false)
+                            .map(cell -&gt; formatter.formatCellValue(cell, evaluator))
+                            .collect(joining(";")))
+                    .collect(joining("\n"));
+            // &lt;6&gt;
+            parseContent(parent, asList(("" +
+                    "[opts=header,format=dsv,separator=;]\n" +
+                    "|===\n" +
+                    tableContent + '\n' +
+                    "|===\n" +
+                    "\n").split("\n")));
+            return null;
+        } catch (final IOException | InvalidFormatException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}</code></pre>
+
+<ol>
+	<li>We name our block&nbsp;<em>excel</em>&nbsp;- see the next snippet,</li>
+	<li>We open the excel file reading its location in the body of our block - see next snippet. Note we handle partialsdir option to be able to use relative paths,</li>
+	<li>We reate a formatter and evalutaor - from POI - which enables us to evaluate formula and render them already computed,</li>
+	<li>We extract from the block attributes the name of the sheet to render (optional, the first one is used if not set),</li>
+	<li>We iterate over each row and each cell of each row to render the value thanks the formatter and evaluator and we format it as a DSV (separator = ;),</li>
+	<li>Finally we create a plain asciidoctor table and call parseContent to replace our original block with this content.</li>
+</ol>
+
+<p>To make this extension available we just have to call on Asciidoctor instance the register method:</p>
+
+<pre>
+<code class="language-java">registry.block(new ExcelTableMacro());</code></pre>
+
+<p>Now we are ready to import our excel as a table with such snippet:</p>
+
+<pre>
+<code>= Sample
+
+Here are the data:
+
+[excel]
+--
+{partialsdir}/data/demo.xslx
+--</code></pre>
+
+<p>Better than maintaining multiple files no?</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//replace-maven-surefire-plugin-by-junit-platform-maven-plugin.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//asciidoctor-block-macro-extension-and-subblocks.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

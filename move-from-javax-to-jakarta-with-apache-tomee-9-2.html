@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Move from javax to jakarta (Part 2): customize your dependencies</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,165 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="move-from-javax-to-jakarta-with-apache-tomee-9-2-html-container" class="container page-content move-from-javax-to-jakarta-with-apache-tomee-9-2-html is-blog">
+                        <div class="page-header">
+                <h1>Move from javax to jakarta (Part 2): customize your dependencies</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-01-07</span>, <span class="metadata-readingtime">4 min and 51 sec read</span></p>
+</div>
+<p>In previous post, we customized a TomEE 9 instance to be even more jakarta. In this post we will check how to handle our javax dependencies.</p>
+
+<p>At that point, we have a TomEE &quot;super jakarta ready&quot; but it does not mean all applications will run fine. The most common pitfall is the (unexpected/undetected) usage of a javax library.</p>
+
+<p>Let&#39;s take a simple example: you have a JSF application and use one of the mainstream JSF libraries (Primefaces - jakarta version is coming but not yet available, bootfaces, omnifaces in javax version - a jakarta version exists). In this case, you likely depend on two kind of API these libraries provide:</p>
+
+<ul>
+	<li>Some custom classes (com.library package, no javax/jakarta),</li>
+	<li>Some templates/xhtml/jsp so still no explicit jakarta import.</li>
+</ul>
+
+<p>Note: it is the case even of simpler libraries like bean validation or so, you can use a&nbsp;<em>@CustomValidation</em>&nbsp;annotation from&nbsp;<em>com.library</em>&nbsp;package and you don&#39;t always know if it uses javax or jakarta and a search does not find any javax usage.</p>
+
+<p>So this means you can depend on javax without knowing it by a simple search (a complex one would go through all your stack code but it is a bit more complex to do right).</p>
+
+<p>In practise, you often have a doubt and when you start you starts to see weird errors:</p>
+
+<pre>
+<code>Skipping deployment of Class class com.github.rmannibucau.MyJsfController due to a NoClassDefFoundError:Lorg/library/JsfApi</code></pre>
+
+<p>It can even be more brutal ClassNotFoundException (previous one is a warning). But at the end, the application does not work as expected even if well coded with jakarta imports and deployed in a TomEE 9 fully jakarta friendly.</p>
+
+<p>The issue is that the library the application uses imports some javax classes and since they are not there the class can&#39;t be loaded and since the class can&#39;t be loaded your own class can&#39;t as well or fails at runtime depending the case.</p>
+
+<p>Once understood, the solution is trivial, no? Just update. Well, in practise it is not always that trivial:</p>
+
+<ul>
+	<li>The library is not yet released in jakarta flavor</li>
+	<li>The library exists in jakarta flavor but broke some API or didn&#39;t port some API so the application can&#39;t migrate like that</li>
+	<li>Your project has some version policy preventing you to migrate.</li>
+</ul>
+
+<p>So we are done, we are sticked to javax....not really. Several open source project created javax to jakarta migration tools. I&#39;ll not detail them all but the one hosted at <a href="https://github.com/apache/tomcat-jakartaee-migration" target="_blank">Tomcat</a> is quite interesting and easy to use. Last releases is the 0.1.0 and works generally well but I would recommend you to either use the 0.1.1-SNAPSHOT or wait for the next release (or ask for it on tomcat list ;)) since it brings some fixes which impact Primefaces.</p>
+
+<p>All these tools rewrite the code using javax to use jakarta. The main difference is about the implementation and setup. The common setups are:</p>
+
+<ul>
+	<li>A CLI (Tomcat migration tool use a CLI oriented solution): either a standalone program or a plugin for Ant/Maven/Gradle.</li>
+	<li>A javaagent: adding a javaagent on your JVM the migration can be done on the fly, it slows down the startup but works well.</li>
+	<li>A ClassLoader ClassFileTransformer: very close to the javaagent but enables to set it only on the webapp classloader it can enable to host multiple applications with different configuration and get overall a faster startup with a finer configuration. It can also be set up automatically at container level instead of having to be done on the JVM.</li>
+</ul>
+
+<p>So in our case we will use Tomcat migration tool. It is provided either as a CLI or Ant task. The Ant task can be executed with Maven/Gradle but there is actually no real point since the CLI too and is easy to setup with&nbsp;<em>exec-maven-plugin</em>:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+	&lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;3.0.0&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt; &lt;!-- 1 --&gt;
+			&lt;id&gt;migrate-primefaces&lt;/id&gt;
+			&lt;phase&gt;none&lt;/phase&gt; &lt;!-- 2 --&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;java&lt;/goal&gt;
+			&lt;/goals&gt;
+			&lt;configuration&gt;
+                &lt;!-- 3 --&gt;
+				&lt;mainClass&gt;org.apache.tomcat.jakartaee.MigrationCLI&lt;/mainClass&gt;
+				&lt;arguments&gt;
+					&lt;argument&gt;-profile=EE&lt;/argument&gt; &lt;!-- 4 --&gt;
+                    &lt;!-- 5 --&gt;
+					&lt;argument&gt;${project.build.directory}/tomee/standalone/webapps/ROOT/WEB-INF/lib/primefaces-7.0.jar&lt;/argument&gt;
+					&lt;argument&gt;${project.build.directory}/tomee/standalone/webapps/ROOT/WEB-INF/lib/primefaces-7.0.jar&lt;/argument&gt;
+				&lt;/arguments&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;configuration&gt; &lt;!-- 6 --&gt;
+		&lt;includePluginDependencies&gt;true&lt;/includePluginDependencies&gt;
+		&lt;includeProjectDependencies&gt;false&lt;/includeProjectDependencies&gt;
+	&lt;/configuration&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt; &lt;!-- 7 --&gt;
+			&lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;
+			&lt;artifactId&gt;jakartaee-migration&lt;/artifactId&gt;
+			&lt;version&gt;0.1.1-SNAPSHOT&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+&lt;/plugin&gt;</code></pre>
+
+<ol>
+	<li>We define one execution per library to migrate,</li>
+	<li>We can bind this automatically or not to a phase, here we will execute it on the library in TomEE standalone instance so we will do it explicitly from the command line, so no automatic execution,</li>
+	<li>We set the main class of the migration tool,</li>
+	<li>We set the migration profile. For now Tomcat tool has two, one for tomcat stack only and one for EE which is the one we need there,</li>
+	<li>We set the library source and target path. Since we want to rewrite the library the TomEE plugin copied from the war plugin build, we set the same location and tomcat migration tool will rewrite the file in place,</li>
+	<li>In terms of dependencies we don&#39;t want our execution use project classpath but we need to add the tomcat migration tool in the classpath so we will do it though plugin dependencies,</li>
+	<li>Because of 6 we add tomcat migration tool there.</li>
+</ol>
+
+<p>TIP: you can do the same kind of rewriting using maven-shade-plugin, using its relocation, it just requires some more tuning and another module to do the relocation properly. This option is very interesting if you build a stack and not just a final application.</p>
+
+<p>Now if we execute:</p>
+
+<pre>
+<code class="language-bash">mvn exec:java@migrate-primefaces</code></pre>
+
+<p>You will see this output:</p>
+
+<pre>
+<code class="language-bash">[INFO] --- exec-maven-plugin:3.0.0:java (migrate-primefaces) @ app ---
+Performing migration from source [/project/target/tomee/standalone/webapps/ROOT/WEB-INF/lib/primefaces-7.0.jar] to destination [/opt/rmannibucau/dev/KMI/target/tomee/standalone/webapps/ROOT/WEB-INF/lib/primefaces-7.0.jar] with Jakarta EE specification profile [EE]
+Migrating archive [primefaces-7.0.jar]
+Migration completed successfully [true] in [1,002] milliseconds
+</code></pre>
+
+<p>Which means the jar was migrated to jakarta. If you go in&nbsp;<em>target/tomee/standalone&nbsp;</em>(don&#39;t forget in previous post we tuned the default tomee distribution folder)<em>, </em>you can run&nbsp;<em>./bin/catalina.sh run</em> which will start your primefaces application which should now work as expected.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//move-from-javax-to-jakarta-with-apache-tomee-9-3.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//move-from-javax-to-jakarta-with-apache-tomee-9-1.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

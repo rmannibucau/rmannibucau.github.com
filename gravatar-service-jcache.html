@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Simple service to get gravatar avatars</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,166 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="gravatar-service-jcache-html-container" class="container page-content gravatar-service-jcache-html is-blog">
+                        <div class="page-header">
+                <h1>Simple service to get gravatar avatars</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-03</span>, <span class="metadata-readingtime">4 min and 10 sec read</span></p>
+</div>
+<p><a href="gravatar.com/" target="_blank">Gravatar</a> is a wordpress service allowing you to get an avatar URL from an email. If the person is not registered or doesn&#39;t have set up an avatar yet you will get a default one.</p>
+
+<p>The strength of gravatar logic is to let you compute the URL from the email and avoid you to do any request to get the user profile or equivalent like most of these services.</p>
+
+<p>Concretely it means you get an avatar management which is &quot;local&quot; on your server. Cons of that logic is, of course, you rely on an external website so gravatar.com needs to be accessible from your application (client side). But this is generally not a blocker.</p>
+
+<h2>Write a Java Gravatar Service</h2>
+
+<p>Gravatar logic is simple: take the mail, lowercase it, hash it with a MD5 and use the hexa representation of this. Then just use this value as a placeholder in the gravatar url.</p>
+
+<p>This is the basic usage. You can also configure some behaviors like the icon size (avoid some css or client configuration and optimize the bandwidth if you have a list of avatars on your page) and&nbsp;the default icon (what to show if you the user doesn&#39;t have a gravatar - an identicon (generated from the mail), retro icon (generated from the mail), default gravatar one etc...).</p>
+
+<p>These parameters are just query parameters in the gravatar url like&nbsp;<em>size</em>&nbsp;for the size and&nbsp;<em>d&nbsp;</em>&nbsp;for the default icon (note you can use&nbsp;<em>404&nbsp;</em>&nbsp;to get a HTTP response with a status code of 404 is missing).</p>
+
+<p>Concretely a service in java will look like:</p>
+
+<pre>
+<code class="language-java">import org.apache.deltaspike.core.api.config.ConfigProperty;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+@ApplicationScoped
+public class GravatarService {
+    @Inject
+    @ConfigProperty(name = "app.gravatar.url", defaultValue = "https://www.gravatar.com/avatar/%s?d=%s&amp;size=%d")
+    private String url;
+
+    @Inject
+    @ConfigProperty(name = "app.gravatar.icon.default", defaultValue = "identicon")
+    private String defaultIconType;
+
+    @Inject
+    @ConfigProperty(name = "app.gravatar.size.default", defaultValue = "40")
+    private Integer defaultSize;
+
+    public String computeGravatarUrl(String mail, int size, String defaultType) {
+        return String.format(
+            url,
+            hash(mail),
+            defaultType == null ? defaultIconType : defaultType,
+            size &gt; 0 ? size : defaultSize);
+    }
+
+    private String hash(String mail) {
+        try {
+            final MessageDigest md = MessageDigest.getInstance("MD5");
+            final byte[] array = md.digest(mail.getBytes("CP1252"));
+            final StringBuilder sb = new StringBuilder();
+            for (final byte b : array) {
+                sb.append(Integer.toHexString((b &amp; 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (final NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+}
+
+</code></pre>
+
+<p>Using this kind of service (replace deltaspike by&nbsp;<em>@Value</em>&nbsp;and you almost get the spring equivalent) will allow you to get a gravatar url for any mail, in any size and with any default.</p>
+
+<p>The logic is really just about computing the hash representing the user in the URL and replacing it in a template.</p>
+
+<h3>Caching or not caching?</h3>
+
+<p>You would be using a remote service to get the avatar URL you would probably add JCache to cache the avatar url:</p>
+
+<pre>
+<code class="language-java">import org.apache.deltaspike.core.api.config.ConfigProperty;
+
+import javax.cache.annotation.CacheDefaults;
+import javax.cache.annotation.CacheResult;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+@ApplicationScoped
+@CacheDefaults(cacheName = "com.github.rmannibucau.gravatar")
+public class GravatarService {
+    // config as before
+
+    @CacheResult
+    public String computeGravatarUrl(final String mail, final int size, final String defaultType) {
+        // as before
+    }
+}
+
+</code></pre>
+
+<p>The only difference is to <em>@CacheResult</em>&nbsp;and use the default key - composed of all parameters - to ensure a same mail can get different size and defaults depending the context.</p>
+
+<p>Does it worth it?</p>
+
+<p>If you run it you will get a 0ms execution for all computation so your service is fast....but if you remove the caching you will get a 0ms execution too since MD5 is a very fast computation, in particular on small string like mails.</p>
+
+<p>Conlusion is you don&#39;t need any caching for gravatar which makes it even simple. Because even if the code to cache the result is easy to use, it implies you need to handle your cache: which size, do you evict data and if so on which criteria? etc... All these questions are not needed in practise for such a computation so it doesn&#39;t worth to use any cache there until you add some logic in the computation like email retrieval from a database for instance (if you pass <em>username</em>&nbsp;instead of <em>mail</em>&nbsp;to the method).</p>
+
+<h2>Conclusion</h2>
+
+<p>Gravatar provides a ready to use and very fast way to give an avatar to your application users. It doesn&#39;t require any caching and is really smooth to implement (in any language actually).</p>
+
+<p>However keep in mind this relies on a public website so you can need to revise this choice is you write an internal application. Common fallbacks for such applications are to reuse an internal github, jira, or any company wide user management. This last case can however imply to use some caching to avoid to issue some request for each user and each page. A common alternative will be to build a local (your application) user profile copying the avatar url and checking it from time to time, but this is likely the same as using JCache with a <em>CacheLoader/CacheWriter</em>&nbsp;but in a more custom way ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//daemon-batch-tomcat.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-external-process-management.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

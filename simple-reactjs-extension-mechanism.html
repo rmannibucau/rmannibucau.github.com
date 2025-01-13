@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>A Simple React.JS extension mechanism</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="simple-reactjs-extension-mechanism-html-container" class="container page-content simple-reactjs-extension-mechanism-html is-blog">
+                        <div class="page-header">
+                <h1>A Simple React.JS extension mechanism</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-06-02</span>, <span class="metadata-readingtime">8 min and 58 sec read</span></p>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+On backend side, extending an application is as easy as reading some file (for script languages - Node.JS, PHP, Ruby, Python, &#8230;&#8203;) or loading some registration for others (Java with its well known <code>ServiceLoader</code>, C#, C, C++, &#8230;&#8203;).
+However, on frontend side, it is always more complicated. Let see one simple option to provide some extension mechanism for a React.JS application.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_spa_extension_issue">The SPA extension issue</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Single Page Application (S.P.A.) development changed a lot last years.
+We can now use server side rendering, use the same technology to do static website generation, lazy load components etc&#8230;&#8203;
+However it is generally still about using a webpack build, i.e. a "put it all together".</p>
+</div>
+<div class="paragraph">
+<p>By itself it is not a big deal but in practise it means that adding an extension is hard because once you managed to inject your script in the html (which is the first step), you have to find how to reuse the application components and here you can realize:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>They are no more there (dropped at minification time because not used),</p>
+</li>
+<li>
+<p>Their names changed,</p>
+</li>
+<li>
+<p>You don&#8217;t have a reference to plug yourself in the application.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_make_your_application_to_be_extensible">Make your application to be extensible</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_inject_your_custom_script_into_the_spa_index_html">Inject your custom script into the SPA index.html</h3>
+<div class="paragraph">
+<p>The first step to make a SPA extensible is to enable to inject a custom javascript file.
+The related question is where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before the application "main" script?</p>
+</li>
+<li>
+<p>After the application "main" script?</p>
+</li>
+<li>
+<p>Before all scripts?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In general, you will want to inject it before the main script, i.e. before the application starts, but after the libraries are loaded.
+This will enable you to register your extension and let the main launcher use it directly and not have to reload itself once started when your extension script is loaded.</p>
+</div>
+<div class="paragraph">
+<p>There are multiple ways to do it but overall the idea will be to rewrite the index.html using a proxy - likely the same hosting and serving your extension script.</p>
+</div>
+<div class="paragraph">
+<p>Just to illustrate it, here is a Java flavor - but a plain HTTPd works well too;):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@WebFilter(urlPatterns = {"/", "/home", "/page1", "/help", "/extensions/*"}) <i class="conum" data-value="1"></i><b>(1)</b>
+public class FrontendRouter extends HttpServlet { <i class="conum" data-value="2"></i><b>(2)</b>
+    private byte[] indexHtmlBytes;
+
+    @Override
+    public void init(final ServletConfig config) {
+        final var extensionScript = System.getenv("APP_EXTENSION_SCRIPT"); <i class="conum" data-value="3"></i><b>(3)</b>
+
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        final var out = new ByteArrayOutputStream();
+        try (final var in = config.getServletContext().getClassLoader()
+                .getResourceAsStream("META-INF/resources/index.html")) {
+            requireNonNull(in, "didn't find index.html").transferTo(out);
+        } catch (final IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+        indexHtmlBytes = rewrite(out.toString(StandardCharsets.UTF_8)); <i class="conum" data-value="5"></i><b>(5)</b>
+    }
+
+    @Override // note: in a real impl ETag would be handled
+    public void doGet(final HttpServletRequest servletRequest, final HttpServletResponse servletResponse) throws IOException {
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        servletResponse.setBufferSize(indexHtmlBytes.length);
+        servletResponse.setContentType("text/html");
+        try (final var out = servletResponse.getOutputStream()) {
+            out.write(indexHtmlBytes);
+        }
+    }
+
+    private byte[] rewrite(final String indexHtml) { <i class="conum" data-value="7"></i><b>(7)</b>
+        final var js = configuration.getFrontendExtensionsJs();
+        if (js != null &amp;&amp; !js.isBlank()) {
+            final int start = indexHtml.indexOf("&lt;script src=\"/static/js/main.");
+            if (start &lt; 0) {
+                throw new IllegalArgumentException("Unexpected html");
+            }
+            return (indexHtml.substring(0, start) +
+                    "&lt;script src=\"" + js + "\"&gt;&lt;/script&gt;" +
+                    indexHtml.substring(start)).getBytes(StandardCharsets.UTF_8);
+        }
+        return indexHtml.getBytes(StandardCharsets.UTF_8);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We bind the filter on all frontend routes (<code>react-router</code> routes). A small trick there is to enable upfront and <code>/extensions/*</code> route the extensions will be able to use without having to hack the filter or add another one,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We use a <code>HttpServlet</code> which will server the <code>index.html</code> - already rewritten. Note that in complete implementation <code>ETag</code> and other caching headers will need to be handled but it will not drastically change the behavior (we only speak of the <code>index.html</code> there),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We read which custom extension script to use - here from the environment but any configuration mechanism is fine,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>We load from the classpath - can be from web resources - the <code>index.html</code> in memory,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>We rewrite the <code>index.html</code> to inject our custom script in it,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The <code>doGet</code> implementation simply serve the rewritten <code>index.html</code>, nothing more,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The rewrite logic of the <code>index.html</code> is as simple as finding the last <code>&lt;script&gt;</code> injected by webpack - it is the case if you use <code>react-scripts</code> - and append before it our custom script.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extension_points_registration">Extension points registration</h3>
+<div class="paragraph">
+<p>The next step is to add extensions points to the SPA.
+It has two aspects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The extension point itself (for example: "you can decorate the id of the table of the view V"),</p>
+</li>
+<li>
+<p>The extension point registration (i.e. how to inject this extension point from the previously injected script).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the registration the simplest is to enable to use a global object the application will use.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+if you care about it being hardcoded, ensure to make it configurable, ie instead of using <code>myExtension</code> you will use <code>props.extensionGlobalVariableName</code> value.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To do it, the idea is to register on <code>window</code> an object with a known name (like <code>myExtension</code>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+it is highly recommended to ensure the name is unique so something like <code>&lt;organization&gt;&lt;ProjectName&gt;Extensions</code> is not that bad.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then the extension variable will take the shape the application uses.</p>
+</div>
+<div class="paragraph">
+<p>Personally to ensure there is a single global variable I tend to make it an object with attributes as extension points:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">window.githubRmannibucauSampleAppExtensions = {
+    extensionPoint1: ...,
+    extensionPoint2: ...,
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_extension_points_in_your_application">Add extension points in your application</h3>
+<div class="paragraph">
+<p>Then the application must be modified to read this variable and use the extension points.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take an example to illustrate this part: we want to enable an user to decorate the <code>id</code> field value of a <code>Detail</code> page.</p>
+</div>
+<div class="paragraph">
+<p>Original view can look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">function Detail(props) {
+  return (
+    &lt;Text&gt;{props.data.id}&lt;/Text&gt;
+  );
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the extension can look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">window.githubRmannibucauSampleAppExtensions = {
+    decorateDetailId: function (id) {...},
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The modified flavor will look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">function Detail(props) {
+  const decorator = (window.githubRmannibucauSampleAppExtensions || {}).decorateDetailId; <i class="conum" data-value="1"></i><b>(1)</b>
+  if (!decorator) { <i class="conum" data-value="2"></i><b>(2)</b>
+    return (
+      &lt;Text&gt;{props.data.id}&lt;/Text&gt;
+    );
+  }
+  return (
+    &lt;Text&gt;{decorator(props.data.id)}&lt;/Text&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+  );
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We read the <code>decorateDetailId</code> extension point,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If there is no extension point we return the same view than before,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If extension point exists we call it to wrap the <code>id</code> value.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This works but is not very convenient, in particular when to do in all views.
+To make it smoother we will create an <code>extensions.js</code> file which will ensure the extension object always exists and all extension points too:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const exts = {
+    <i class="conum" data-value="1"></i><b>(1)</b>
+    decorateDetailId: v =&gt; v,
+    <i class="conum" data-value="2"></i><b>(2)</b>
+    ...(window.githubRmannibucauSampleAppExtensions || {}),
+};
+
+export default exts;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We set all extension points defaults (a single one here but do it for all extension points),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We merge with the actual extension points which will override the defaults.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now we can import the extension object in our component and use it more simply:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import extensions from './extensions'; <i class="conum" data-value="1"></i><b>(1)</b>
+
+function Detail(props) {
+  return (
+    &lt;Text&gt;{extensions.decorateDetailId(props.data.id)}&lt;/Text&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  );
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We import our extension registry instance,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We always call the extension - default being an identity implementation.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>At this stage we already have a working extension but we miss something key to make it useful: be able to reuse the same component libraries than the application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_make_the_extension_points_libraries_aware">Make the extension points libraries aware</h3>
+<div class="paragraph">
+<p>To make the extension points libraries aware, we will need to bind/inject the libraries we consider as part of our API/stack in the extension points.</p>
+</div>
+<div class="paragraph">
+<p>There are multiple options there:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pass them all as parameters to the extension points - works well when you don&#8217;t have a lot of extension points and they are rarely all implemented at the same time,</p>
+</li>
+<li>
+<p>Pass them to a factory method.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So the first step is to import your library stack.
+It is often a matter of importing <code>*</code> of your dependencies or a set of components you want to re-export:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import React from 'react';
+import * as router from 'react-router-dom';
+import * as antd from 'antd';
+import { myHook } from '../hooks/useJsonRpc';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can pass <code>React</code>, <code>router</code>, <code>antd</code>, <code>myHook</code>, &#8230;&#8203; as extension point parameters (or wrapped in an object).</p>
+</div>
+<div class="paragraph">
+<p>To do that you can simply modify your <code>extensions.js</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// previous imports
+
+// exts declaration as before
+
+const registry = { React, router, antd, myHook };
+const extensions = {
+    decorateDetailId: id =&gt; exts.decorateDetailId(id, registry),
+};
+
+export default extensions;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this simple trick, your <code>decorateDetailId</code> can access the stack your selected (key one being <code>React</code> and your main component library like <code>antd</code> here).</p>
+</div>
+<div class="paragraph">
+<p>If you prefer the factory option - because you have a lot of extension points - it will require to modify a bit the registration - or test if the extension point is a <code>function</code> or an <code>object</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">window.githubRmannibucauSampleAppExtensions = function (registry) {
+  return {
+    decorateDetailId: function (id) {...},
+  };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This small change makes the extension a function which takes the registry as parameter and can therefore use it in extension points later on so no need to add this decorator (<code>extension</code>) in <code>extension.js</code>, you just need to call the function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// same imports
+
+const registry = { React, router, antd, myHook };
+const exts = {
+    // defaults
+    decorateDetailId: v =&gt; v,
+    // user/extensions
+    ...(window.githubRmannibucauSampleAppExtensions || function (){return {};})(registry),
+};
+
+export default exts;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extension_implementation_example">Extension implementation example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Assuming you used previous extension point setup, here is how to add react components with this mecanism:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">window.githubRmannibucauSampleAppExtensions = {
+  decorateDetailId: function (id, registry) {
+    var React = registry.React;
+    var router = registry.router;
+    return React.createElement('span', null, [
+      React.createElement(router.Link, { to: { pathname: '/extensions/custom/' + id } }, 'Custom Link To ' + id),
+    ]);
+  },
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This small decorator will replace the <code>id</code> value by a link to a <code>/extensions/custom/:id</code> page.</p>
+</div>
+<div class="paragraph">
+<p>This is where it becomes very interesting.
+If you design - as we often do - you routes as a structure and not as something hardcoded:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const routes = [
+    {
+        path: '/',
+        exact: true,
+        component: Home,
+    },
+    {
+        path: '/help',
+        component: Help,
+    },
+];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then it becomes easy to import the extension registry and add extension routes (<code>/extensions/custom</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import extensions from './extensions';
+
+const routes = [
+    {
+        path: '/',
+        exact: true,
+        component: Home,
+    },
+    {
+        path: '/help',
+        component: Help,
+    },
+    ...(extensions.routes || function () {return [];})(),
+];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this simple modification you can add <code>routes</code> in your extension registration and add your custom pages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">window.githubRmannibucauSampleAppExtensions = {
+    routes: function (registry) {
+        var React = registry.React;
+        var e = React.createElement;
+
+        // Custom component
+        function Custom() {
+            return e('div', { className: 'custom' }, [
+                e('div', null, '...'),
+            ]);
+        }
+
+        return [
+            {
+                path: '/extensions/custom',
+                component: Custom,
+            },
+        ];
+    },
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This enables you to implement custom components and register them as routes in the final application :).</p>
+</div>
+<div class="paragraph">
+<p>The last tip about this extension mecanism is that if you find the <code>React.createElement</code> a bit heavy and hard to write - it can be for advanced cases, you can still rely on a JSX build (with webpack potentially) to write these components.
+It will just need to rely on the injected <code>React</code> and libraries instead of the default ones but since JSX is not bound to <code>React</code> but is fully customizable it is not something crazy to do ;).</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//openjpa-jakarta-tips.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-request-context-controller-correct-usage.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

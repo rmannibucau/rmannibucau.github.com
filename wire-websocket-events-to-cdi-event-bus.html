@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Wire websocket events to CDI event bus</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="wire-websocket-events-to-cdi-event-bus-html-container" class="container page-content wire-websocket-events-to-cdi-event-bus-html is-blog">
+                        <div class="page-header">
+                <h1>Wire websocket events to CDI event bus</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-05-11</span>, <span class="metadata-readingtime">11 min and 24 sec read</span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_wiring_websocket_events_to_an_event_bus">Why wiring websocket events to an event bus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are multiple reasons to do that but the most common one is to ensure you are transport independent.
+Concretely it will enable several things:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch the transport layer (move from Websocket to HTTP, or to Kafka or to any other transport) keeping the same core code,</p>
+</li>
+<li>
+<p>Test more easily your "commands" - without requiring a websocket server in all tests,</p>
+</li>
+<li>
+<p>Reuse very easily your commands,</p>
+</li>
+<li>
+<p>Think and design/split your code more accurately without mixing concerns more naturally.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_do_it">How to do it?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are multiple technical solutions to do and this post will just go through one option, the goal being to give you some hints/pointers about how to do it.</p>
+</div>
+<div class="sect2">
+<h3 id="_1_define_a_protocol">1: define a protocol</h3>
+<div class="paragraph">
+<p>The first step is to define a "command" protocol, you can reuse <a href="https://stomp.github.io/" target="_blank" rel="noopener">STOMP</a> or, my preference, use a JSON based protocol like JSON-RPC.
+The important part being to be able to define a "request" object shape with an identifier representing the command to execute and a "response" shape defining if the call was successful or failed and attach the related data in its content.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example using <a href="https://www.jsonrpc.org/" target="_blank" rel="noopener">JSON-RPC</a>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"jsonrpc":"2.0","method":"my-method","id":1,"params":{...}}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"jsonrpc":"2.0","id":1,"result":{...}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want a protocol really generic, you can just define the request as a JSON value and the response as a JSON value too.
+This is the option we will take in this post but note that you can use a more structured protocol if needed which would enabled you to add transversal features later (like logging errors if you know how to inspect the response shape to detect it is an error or not).</p>
+</div>
+<div class="paragraph">
+<p>With such request/command model, a java binding can use <a href="https://javaee.github.io/jsonp/" target="_blank" rel="noopener">JSON-P</a> <code>JsonStructure</code> directly.
+To also enable a command oriented pattern we will enforce the JSON-schema of the incoming object:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If it is an object, it must have an <code>method</code> attribute representing the command name (same as for JSON-RPC).
+Other attributes can be command specific.</p>
+</li>
+<li>
+<p>If it is an array, each item must be an object matching the object schema (previous point).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the array case will be ignored from now on since it is mainly about doing a loop in the on message callback.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_define_your_websocket_endpoint">2: Define your websocket endpoint</h3>
+<div class="paragraph">
+<p>There are multiple pattern to define the websocket endpoint, you can use a single endpoint "à la RPC" or multiple passing the command name in the url (<code>/ws/&lt;command id&gt;</code> for example).</p>
+</div>
+<div class="paragraph">
+<p>Here we will use <code>javax</code>/<code>jakarta</code> API and just define a RPC like endpoint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Log
+@ServerEndpoint("/ws/rpc")
+public class CommandWebSocket {
+    @OnOpen
+    public void onOpen(final Session session) {
+        logger.finest(() -&gt; "Creating session # " + session.getId());
+    }
+
+    @OnClose
+    public void onClose(final Session session, final CloseReason closeReason) {
+        logger.finest(() -&gt; "Closing session #" + session.getId() + " (" + closeReason.getCloseCode() + ", " + closeReason.getReasonPhrase() + ")");
+    }
+
+    @OnError
+    public void onError(final Session session, final Throwable throwable) {
+        logger.log(SEVERE, throwable, () -&gt; "An error occurred on session #" + session.getId() + ": " + throwable.getMessage());
+    }
+
+    @OnMessage
+    public void onMessage(final String command, final Session session) {
+        logger.finest(() -&gt; "Command received on session # " + session.getId() + ": " + command);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This endpoint does nothing except logging the events coming from the websocket connection (<code>Session</code>) but at least we can connect to it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_decode_the_command_and_encode_the_response">3: Decode the command and encode the response</h3>
+<div class="paragraph">
+<p>We decided - once again for this post - to use <code>JsonStructure</code> as request/response format so we will enable our <code>@OnMessage</code> to read it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@OnMessage
+public void onMessage(final JsonStructure command, final Session session) {
+    logger.finest(() -&gt; "Command received on session # " + session.getId() + ": " + command);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To do that we will set a decoder on our endpoint.
+You can implement your own - just ensure to reuse the same <code>JsonReaderFactory</code> for all endpoints if possible - or reuse <a href="https://johnzon.apache.org/" target="_blank" rel="noopener">Apache Johnzon</a> one adding the dependency <code>johnzon-websocket</code> (optionally with classifire <code>jakarta</code> if you don&#8217;t use <code>javax</code> package):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+@ServerEndpoint(value = "/ws/rpc", decoders = JsrStructureDecoder.class)
+public class CommandWebSocket {
+    // ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Simply specifying <code>JsrStructureDecoder</code> enables us to get <code>JsonStructure</code> injected into our <code>@OnMessage</code> callback.</p>
+</div>
+<div class="paragraph">
+<p>Similarly we can set an encoder if the application sends <code>JsonStructure</code> instances through the <code>Session</code> - using <code>jakarta.websocket.RemoteEndpoint.Async#sendObject(java.lang.Object)</code> for example.
+It will use the encoder to convert the <code>JsonStructure</code> to a JSON (and <code>byte[]</code>) sent over the wire:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+@ServerEndpoint(
+    value = "/ws/rpc",
+    decoders = JsrStructureDecoder.class,
+    encoders = JsrStructureEncoder.class)
+public class CommandWebSocket {
+    // ...
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+you can specify multiple decoders/encoders if relevant and/or you can use Apache Johnzon <code>JsonbTextDecoder</code>/<code>JsonbTextEncoder</code> to be able to use <a href="https://javaee.github.io/jsonb-spec/">JSON-B</a> to directly map on POJO (or even Java records with Johnzon).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_integrate_with_the_event_bus">4: Integrate with the event bus</h3>
+<div class="paragraph">
+<p>Now we have a websocket endpoint, an input/output model and (de)serialization mecanism setup, we need to implement our processing (<code>@OnMessage</code> callback).</p>
+</div>
+<div class="paragraph">
+<p>The idea will be to get a CDI <code>Event</code> instance to be able to send an event with the current command.
+There are several choices to do there:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>What is the type of event to send? <code>JsonStructure</code> works but it quite generic and could conflict with another part of the application so we will likely want to create a <code>CommandEvent</code> or equivalent solution,</p>
+</li>
+<li>
+<p>Does the <code>CommandEvent</code> exposes the <code>Session</code> - making this implementation less transport agnostic but more powerful - or does the event abstract it either by handling the response itself or after the bus propagation in the websocket endpoint,</p>
+</li>
+<li>
+<p>How does command handler selection is selected?</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="_4_1_command_event">4.1: command event</h4>
+<div class="paragraph">
+<p>Since our requests have a <code>method</code> attribute we can modelize our <code>CommandEvent</code> like that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public record CommandEvent(
+        String method, <i class="conum" data-value="1"></i><b>(1)</b>
+        JsonObject command) <i class="conum" data-value="2"></i><b>(2)</b>
+{}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The method extracted from the incoming JSON,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The raw incoming method to let the command handler read any additional information (<code>params</code> if using JSON-RPC style commands).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+this example uses a <code>record</code> but a plain <code>class</code> would work too.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However this solution does not bring much compared to the <code>JsonObject</code> since it contains exactly the same information.
+To make it more CDI friendly, we will use a qualifier which will bind the method name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Qualifier
+@Target(PARAMETER)
+@Retention(RUNTIME)
+public @interface Command {
+    /**
+     * @return the name of the command.
+     */
+    String value();
+
+    /**
+    * Just the literal usable by programmatic extension/code to represent {@code @Command("xxx")}.
+    */
+    class Literal extends AnnotationLiteral&lt;Command&gt; implements Command {
+        private final String name;
+        public Literal(final String name) {  this.name = name;  }
+        @Override  public String value() {  return name;  }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can represent a command by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Its payload (<code>JsonObject</code>),</p>
+</li>
+<li>
+<p>Its qualifier (<code>@Command("&lt;name&gt;")</code>).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_2_get_the_event_bus">4.2: Get the event bus</h4>
+<div class="paragraph">
+<p>If your endpoint is a CDI bean - or managed by your IoC - you can directly inject the event into your websocket endpoint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Dependent
+@ServerEndpoint(value = "/ws/rpc", decoders = JohnzonTextDecoder.class, encoders = JohnzonTextEncoder.class)
+public class CommandWebSocket {
+    @Inject <i class="conum" data-value="1"></i><b>(1)</b>
+    private Event&lt;JsonObject&gt; commandEvent;
+
+    @OnMessage
+    public void onMessage(final JsonStruture request, final Session session) {
+        switch (request.getValueType()) { <i class="conum" data-value="2"></i><b>(2)</b>
+            case OBJECT:
+                commandEvent
+                    .select(new Command.Literal(request.asJsonObject().getString("method"))) <i class="conum" data-value="3"></i><b>(3)</b>
+                    .fire(request); <i class="conum" data-value="4"></i><b>(4)</b>
+                break;
+            case ARRAY:
+                request.asJsonArray().forEach(it -&gt; onMessage(it, session));
+                break;
+            default:
+                onError(session, new IllegalAccessException("unsupported command: " + request));
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>In the managed case we can directly inject the event into the endpoint instance,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>When we get the message we check its type and handle it accordingly,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We extract the command method and refine the default event (which is not qualified with <code>@Command("&#8230;&#8203;")</code>) to bind it to the command name,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Now we have an event type (<code>JsonObject</code>) associated to its name (<code>@Command</code>) we fire the event.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+this snippet uses a synchronous <code>fire</code> which means observers will use <code>@Observes</code> in the rest of this post but using <code>fireAsync</code> enables to use <code>@ObservesAsync</code> and have an asynchronous event firing.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For the unmanaged case - i.e. you can&#8217;t inject the <code>Event</code> into endpoint instance, you can look it up with <code>CDI.current()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ServerEndpoint(value = "/ws/rpc", decoders = JohnzonTextDecoder.class, encoders = JohnzonTextEncoder.class)
+public class CommandWebSocket {
+    private Event&lt;JsonObject&gt; commandEvent;
+
+    @OnOpen
+    public void onOpen(final Session session) {
+        commandEvent = CDI.current()
+            .getBeanManager()
+            .getEvent()
+            .select(JsonObject.class);
+    }
+
+    // rest stays the same
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_3_provide_a_way_to_the_handlers_to_send_back_messages_to_the_caller">4.3: Provide a way to the handler(s) to send back messages to the caller</h4>
+<div class="paragraph">
+<p>This will work and enable beans to get the requests but not to send back a response.
+There are multiple options to solve that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provide the <code>Session</code> in the event payload which would move from <code>JsonObject</code> to a <code>CommandEvent</code> having a shape containing both the request and session`{command,session}`,</p>
+</li>
+<li>
+<p>Abstract the <code>Session</code> in a <code>CommandEvent</code> adding a <code>sendResponse(JsonValue)</code>,</p>
+</li>
+<li>
+<p>Create a <code>CommandEvent</code> which can store one or multiple responses (depending the case you want to handle): <code>class CommandEvent {command, setResponse(JsonStructure)}</code> for example.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The last option seems the most accurate since it matches the request/response pattern we spoke about originally and keep the the transport decoupled.</p>
+</div>
+<div class="paragraph">
+<p>So we create a <code>CommandEvent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Getter
+@RequiredArgsConstructor
+public class CommandEvent {
+    private final JsonObject command; <i class="conum" data-value="1"></i><b>(1)</b>
+    private JsonStructure response; <i class="conum" data-value="2"></i><b>(2)</b>
+
+    public synchronized void setResponse(JsonStructure response) { <i class="conum" data-value="3"></i><b>(3)</b>
+        if (this.response != null) { <i class="conum" data-value="4"></i><b>(4)</b>
+            throw new IllegalArgumentException("Response already set");
+        }
+        this.response = response;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We propagate the command to let the handler read any needed data,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We enable the event to store the response,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We don&#8217;t know upfront if the event will not be used concurrently - passed from observers to other processors, so we must ensure response setter is synchronized or equivalent,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Since we can get multiple handlers for the same command - until you write a CDI extension checking it can&#8217;t happen, we prevent it in the setter.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now we have a new event we just move our <code>Event&lt;&gt;</code> to this type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ServerEndpoint(value = "/ws/rpc", decoders = JohnzonTextDecoder.class, encoders = JohnzonTextEncoder.class)
+public class CommandWebSocket {
+    @Inject
+    private Event&lt;CommandEvent&gt; commandEvent;
+
+    @OnMessage
+    public void onMessage(final JsonStruture request, final Session session) {
+        commandEvent
+            .select(new Command.Literal(request.asJsonObject().getString("method")))
+            .fire(new CommandEvent(request.asJsonObject()));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last missing piece is to send back to the caller the response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@OnMessage
+public void onMessage(final JsonStruture request, final Session session) {
+    final var event = new CommandEvent(request.asJsonObject());
+    commandEvent
+        .select(new Command.Literal(request.asJsonObject().getString("method")))
+        .fire(event);
+    if (event.getResponse() != null) { <i class="conum" data-value="1"></i><b>(1)</b>
+        try {
+            session.getBasicRemote() <i class="conum" data-value="2"></i><b>(2)</b>
+                .sendObject(event.getResponse()); <i class="conum" data-value="3"></i><b>(3)</b>
+        } catch (final IOException | EncodeException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If there is a response only we will send it back,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We use basic (synchronous) remote API but using the async API would work too,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We send directly our response (<code>JsonStructure</code>) which will be mapped to the output stream using the encoder we set up earlier.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+this is a synchronous implementation but it can become completely reactive using <code>CompletionStage</code> from <code>Event#fireAsync</code> and <code>getAsyncRemote</code>.
+The only trick to take care is to ensure to add to the <code>CommandEvent</code> a method <code>addSynchronization(CompletionStage)</code> which will enable to await for the end of the processing of the message.
+Here what it can look like in pseudo code:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Getter
+@RequiredArgsConstructor
+public class CommandEvent {
+    // same as before
+
+    private Collection&lt;CompletableFuture&lt;?&gt;&gt; synchronizations = new ArrayList&lt;&gt;();
+
+    public synchronized void registerSynchronization(CompletionStage&lt;?&gt; promise) {
+        this.synchronizations.add(promise.toCompletableFuture());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@OnMessage
+public void onMessage(final JsonStruture request, final Session session) {
+    commandEvent
+        .select(new Command.Literal(request.asJsonObject().getString("method")))
+        .fireAsync(new CommandEvent(request.asJsonObject()), notificationOptions)
+        .thenCompose(event -&gt; event.getSynchronizations().isEmpty() ?
+            completedFuture(event) :
+            // if there is any synchronization await them all then propagate back the event (with the response)
+            CompletableFuture.allOf(event.getSynchronizations().toArray(new CompletableFuture[0]))
+                .thenApply(ignored -&gt; event))
+        .thenAccept(event -&gt; {
+            if (event.getResponse() != null) {
+                try {
+                    session.getAyncRemote().sendObject(event.getResponse(), result -&gt; {
+                        if (!result.isOk()) {
+                            throw new IllegalStateException(result.getException());
+                        }
+                    });
+                } catch (final IOException | EncodeException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+ensure to use a custom <code>notificationOptions</code> instance from a thread pool and not the default one which uses the ForkJoin common pool which almost never work in any real application.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_implement_handlers">5: implement handlers</h3>
+<div class="paragraph">
+<p>Now the most interesting part: how to implement a handler of one command.
+With previous setup it is as easy as implementing an observer of a <code>CommandEvent</code> with the qualifier of the command name the handler handles:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped <i class="conum" data-value="1"></i><b>(1)</b>
+public class MyCommandHandler {
+    public void onMyCommand(
+            @Observes <i class="conum" data-value="2"></i><b>(2)</b>
+            @Command("my-command") <i class="conum" data-value="3"></i><b>(3)</b>
+            final CommandEvent event) <i class="conum" data-value="4"></i><b>(4)</b>
+    {
+        event.setResponse(execute(event.getCommand())); <i class="conum" data-value="5"></i><b>(5)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The bean must be a valid CDI bean with a scope available in the websocket context,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We used <code>fire</code> so we only support <code>@Observes</code>,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>This method only handles <code>my-command</code> request,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The event (<code>CommandEvent</code> type is important to match the event firing side) which enables to get access to all request data.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In other words you can add as much method/classes you want to handle each commands.
+These observers are automatically called by the websocket <code>fire</code> part but can also be called programmaticlly directly which means they became super easy to test:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Cdi
+class MyCommandHandler {
+    @Inject
+    private MyCommandHandler handler;
+
+    @Test
+    void test() {
+        final var event = new CommandEvent(
+                Json.createObjectBuilder()/* add all needed attributes by the test */.build());
+        handle.onMyCommand(event);
+        assertNotNull(event.getResponse());
+        assertEquals("xxx", event.getResponse().getString("value"));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+indeed it is good to also test the websocket setup is working but respecting the contract it is not needed for all handlers saving a lot of time and complexity in tests.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This post explored how to wire a websocket endpoint to CDI bus but it also went through multiple options to do it and some design points.
+Once it is set up it really opens a lot of doors and speeds up your development when working with websockets.
+It is really adapted to a lot of modern applications and API even if not used a lot yet.
+One tip is that you shouldn&#8217;t hesitate to enable JSON-B and not only JSON-P as in this post since you will then be able to use command specific objects quite easily.</p>
+</div>
+<div class="paragraph">
+<p>Last trick is that this pattern also enables to use very easily all your commands through any transport as mentionned&#8230;&#8203;.even a command line interface (CLI) application so don&#8217;t hesitate to use it ;).</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-request-context-controller-correct-usage.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomcat-meecrowave-websocket-gettingstarted.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

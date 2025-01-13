@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Don&#8217;t be shy, visualize your JPA model!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="visualize-jpa-model-graph-html-container" class="container page-content visualize-jpa-model-graph-html is-blog">
+                        <div class="page-header">
+                <h1>Don&#8217;t be shy, visualize your JPA model!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-10-18</span>, <span class="metadata-readingtime">5 min and 49 sec read</span></p>
+</div>
+<p>JPA 2 (2.0 actually) introduced Metamodel class. Even if still generally hidden in libraries this is a very nice addition allowing end users to code against the JPA graph without having to parse (again since JPA does it) the model.</p>
+
+<p>It has a lot of usages for libraries but one nice feature you can create leveraging this is the visualization of your entity graph. This is something easy to add to your application and which could be generic if considered util&nbsp;(a bit like the h2 servlet we add to see the database in dev).</p>
+
+<p>But wait, why would I need that? I can browse the object tree in my IDE, no? Yes and no. First you need to assume your IDE does and therefore in a team assume everyone has the right plugin or is able to quickly browse the model in the IDE. Can be true but still assume a lot and not that friendly.</p>
+
+<p>Ok, but I can reverse the code or database to see that, no? Yes you can...assuming what is running is exactly what is there. For the database the model can have changed but we rarely completly the model for legacy applications for instance or just cause it would be too costly in term of SLA. Reversing the code has the same pitfall: do you assume all entities of the project/libraries are in the same persistence unit? Can be true...or not. So generally being able to check against the runtime is not a bad idea.</p>
+
+<p>Ok so how do we start?</p>
+
+<h2>Build your own graph</h2>
+
+<p>First thing to do is to get an <em>EntityManager</em>. This is generally as simple as an injection in a class:</p>
+
+<pre>
+<code class="language-java">public class AEEService {
+  @PersistenceContext
+  private EntityManager em;
+}</code></pre>
+
+<p>Or if you use CDI/Spring:</p>
+
+<pre>
+<code class="language-java">public class ANotReallyEEService {
+  @Inject
+  private EntityManager em;
+}</code></pre>
+
+<p>Side note: if in the last case you don&#39;t manage to get an entity manager this way or with a qualifier, I would recommand you to ensure you can later on cause it is generally a criteria showing the application is not well set up.</p>
+
+<p>Now we have the entity manager we need to get the metamodel. JPA did it the simple way:</p>
+
+<pre>
+<code class="language-java">Metamodel model = em.getMetamodel();</code></pre>
+
+<p>Ok so we have the model so we just need to convert it to something we can draw. The model is a graph (not a tree in general) so we need to represent a graph. There are multiple ways to do so but one easy is to represent a graph as a set of nodes and edges.</p>
+
+<p>So let&#39;s create our domain:</p>
+
+<pre>
+<code class="language-java">// @Data is the lombok one to avoid boilerplate in the snippets
+
+@Data
+public class Node {
+    private final String name;
+}
+
+@Data
+public class Edge {
+    private final String from;
+    private final String to;
+    private final String name;
+}
+
+
+@Data
+public class Graph {
+    private final Collection&lt;Node&gt; nodes;
+    private final Collection&lt;Edge&gt; edges;
+}
+
+</code></pre>
+
+<p>And finally we need to populate the model (<em>Graph</em>) from the metamodel. To do so we just browse the entities, add them all as node and finally browse the relationships (associations or collections depending if you are on the &quot;1&quot; or &quot;n&quot; side) and add these ones as edges:</p>
+
+<pre>
+<code class="language-java">public Graph from(final Metamodel jpa) {
+    return new Graph(
+            jpa.getEntities().stream()
+                    .map(EntityType::getName)
+                    .map(Node::new)
+                    .collect(toList()),
+            jpa.getEntities().stream()
+                    .map(this::visitEntity)
+                    .flatMap(Collection::stream)
+                    .collect(toSet()));
+}</code></pre>
+
+<p>Don&#39;t be abused by the stream syntax, this is really just an iteration to extract entity names and relationships (in visitEntity). This last part is the hardest probably (but keep calm it is not a big headache). It needs to browse all attributes and extract the associations and collections. Then depending the type of relationship it needs to extract the right entity name (or basic if not an entity-entity relationship like a Map&lt;String, String&gt;):</p>
+
+<pre>
+<code class="language-java">private Set&lt;Edge&gt; visitEntity(final Type&lt;?&gt; type) {
+    if (!EntityType.class.isInstance(type)) {
+        return Collections.emptySet();
+    }
+    final EntityType&lt;?&gt; e = EntityType.class.cast(type);
+    return e.getDeclaredAttributes().stream()
+            .filter(a -&gt; a.isCollection() || a.isAssociation())
+            .map(a -&gt; {
+                // extract the relationship type
+                final Type aType = a.isCollection() ?
+                    PluralAttribute.class.cast(a).getElementType() :
+                    SingularAttribute.class.cast(a).getType();
+
+                // extract target type (alias of the entity if possible or java type)
+                final String to = EntityType.class.isInstance(aType) ?
+                    EntityType.class.cast(aType).getName() :
+                    aType.getJavaType().getName();
+
+                // build the edge finally
+                return new Edge(e.getName(), to, a.getName());
+            })
+            .collect(toSet());
+}</code></pre>
+
+<p>With that code you have your own graph representation of the JPA model.</p>
+
+<h2>Visualize your graph</h2>
+
+<p>I&#39;ll skip the step to build a JAX-RS resource exposing this Graph object (was one of the reason why we didn&#39;t return directly the JPA metamodel, the behavior would be highly not portable, desired or expected).</p>
+
+<p>Now I assume you exposed&nbsp;<em>Graph</em>&nbsp;as JSON, then you just need to import any javascript library able to build a graph. Personnally I like <a href="https://www.graphdracula.net/">Dracula</a> cause it is simple. All you need to do is to import <a href="https://dmitrybaranovskiy.github.io/raphael/">raphael</a>, dracula and map your&nbsp;<em>Graph</em>&nbsp;to Dracula graph;</p>
+
+<pre>
+<code class="language-javascript">&lt;html&gt;
+  &lt;body&gt;
+    &lt;div id="canvas"&gt;&lt;/div&gt;
+    &lt;script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/graphdracula/1.0.3/dracula.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      (function () {
+        $.getJSON("api/model/jpa", function(graph) {
+          var g = new Dracula.Graph();
+          graph.nodes.forEach(function (node) {
+            g.addNode(node.name);
+          });
+          graph.edges.forEach(function (edge) {
+            g.addEdge(edge.from, edge.to, {directed: true});
+          });
+
+          var layouter = new Dracula.Layout.Spring(g);
+          layouter.layout();
+
+          var renderer = new Dracula.Renderer.Raphael(document.getElementById('canvas'), g, 400, 300);
+          renderer.draw();
+        });
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>In previous snippet I imported jQuery too to do the ajax call but generally you will use your js framework (like Angular $http for instance). Then, once we have the graph, we just convert it to a Dracula.Graph and render it in a div of our choice (in real project we would also not select the div by id but it is highly dependent on the framework so for the snippet by id was fine).</p>
+
+<p>For a blog, where a post has an author and some comments, it will show something like:</p>
+
+<p><img alt="" src="data:image/png;base64,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" style="height:299px; margin-bottom:0px; margin-left:0px; margin-right:0px; margin-top:0px; width:420px" /></p>
+
+<p>Of course this is just a start but I hope you will be tempted to investigate Metamodel API, it really does worth it.</p>
+
+<p>On the solution presented in this post, we can add the following features which would make it a complete solution:</p>
+
+<ul>
+	<li>on click on an entity you can show the list of attributes (not only relationships) with their type and highlight the identifier of each entity, everything is in the metamodel</li>
+	<li>The graph can represent more nicely the direction of the relationships (this is the case in this sample but not really visible due to the default style)</li>
+	<li>The graph could be a complete UML (or Merise) model</li>
+	<li>An awesome feature you can do with JPA is to link this graph to queries to browse the model is a highly user friendly manner!</li>
+</ul>
+
+<p>Today is the big data time and one challenge is to browse its data. If you think about it, JPA offers an awesome way to be able to browse your data and discover an unknown application and can maybe offers what our future API will be. Don&#39;t forget that whatever data you handle, you just need to ensure you can &quot;see&quot; it ;)!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jsonb-list-map.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-embedded-args-cli.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

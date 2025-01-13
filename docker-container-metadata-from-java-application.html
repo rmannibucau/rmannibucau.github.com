@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Get docker container metadata from an embed Java application</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,259 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="docker-container-metadata-from-java-application-html-container" class="container page-content docker-container-metadata-from-java-application-html is-blog">
+                        <div class="page-header">
+                <h1>Get docker container metadata from an embed Java application</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-07-04</span>, <span class="metadata-readingtime">6 min and 4 sec read</span></p>
+</div>
+<p>Docker manages containers but it is not uncommon to need to extract from a running container its own metadata - <em>ImageID</em>, <em>Ports</em>, <em>Names..</em>. One common use case is to add these metadata in log messages or use some instance specific value as a seed for a random generator. Another interesting use case for a docker-compose usage is to grab the ports of the other containers and just autoconfigure the whole services without any user action even when ports are changed.</p>
+
+<p>Several libraries enable to do it but they often bring some dependencies you can not desire? For instance, log4j2 integration can bring&nbsp;jackson which can trigger conflicts in your own application and would defeat the enhancements you want to bring to your logs.</p>
+
+<p>So is it a lost fight? Actually not. The only real hard requirement you have is to be able to read a UNix socket. Once you are able to do it, then you can handle in plain Java (and control your dependencies) the retrieval of the metadata.</p>
+
+<p>To read a UNix socket from java there are multiple libraries, one of the easiest to use is ipcsocket:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.scala-sbt.ipcsocket&lt;/groupId&gt;
+  &lt;artifactId&gt;ipcsocket&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>It transitively brings&nbsp;<em>jna</em>&nbsp;and&nbsp;<em>jna-platform</em>&nbsp;for the native integration with the OS. Once there, opening a UNix socket is as easy as a standard Java&nbsp;<em>Socket</em>&nbsp;and you just need to replace the default type by&nbsp;<em>UnixDomainSocket</em>.</p>
+
+<p>To read the docker socket you need to mount it when launching your image, it can typically be done with this command:</p>
+
+<pre>
+<code class="language-bash">docker run \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  rmannibucau/docker-meta-demo:1.0.0</code></pre>
+
+<p>At that point, you have access to docker socket from within your container and have a way to read a UNix socket:</p>
+
+<pre>
+<code class="language-java">public class Meta {
+    public void onStart() throws Exception {
+        final String socketLocation = args.length &lt; 1 ? "/var/run/docker.sock" : args[0];
+        try (final Socket socket = new UnixDomainSocket(socketLocation)) {
+            // ....
+        }
+    }
+}
+</code></pre>
+
+<p>Now we have the socket we can communicate on it through (almost) HTTP protocol. We can&nbsp;hack a HTTP client to use a custom&nbsp;<em>SocketFactory</em>&nbsp;but since the data we manipulate are simple, let&#39;s just parse the response ourself.</p>
+
+<p>What we want to do, is to issue a&nbsp;<em>GET</em>&nbsp;on&nbsp;<em>/containers/json</em>&nbsp;endpoint to get the list of running containers in JSON.</p>
+
+<p>The HTTP request will therefore looks like:</p>
+
+<pre>
+<code class="language-java">private static String get(final String path) {
+    return "GET " + path + " HTTP/1.1\r\n" +
+            "Host: whatever\r\n" +
+            "User-Agent: java-unix-socket-client/1.0\r\n" +
+            "Accept: */*\r\n" +
+            "\r\n";
+}</code></pre>
+
+<p>This is a plain standard HTTP GET request except we specify a host which is actually not used - but needed to ensure the request is valid.</p>
+
+<p>Side note: if you use Java 13 already, this can be simplified using raw literal syntax instead of concatenation.</p>
+
+<p>Then to send the request, we just write it on the socket:</p>
+
+<pre>
+<code class="language-java">try (final OutputStream os = socket.getOutputStream()) {
+  os.write(get("/containers/json").getBytes(StandardCharsets.UTF_8));
+}</code></pre>
+
+<p>At that point, the Docker daemon responds to the request through the socket so we have to parse the output as a HTTP request. Here is what the content&nbsp;looks like:</p>
+
+<pre>
+<code class="language-http">HTTP/1.1 200 OK
+Api-Version: 1.38
+Content-Type: application/json
+Docker-Experimental: false
+Ostype: linux
+Server: Docker/18.06.3-ce (linux)
+Date: Tue, 02 Jul 2019 17:10:47 GMT
+Content-Length: 927
+
+&lt;the response payload&gt;</code></pre>
+
+<p>So to parse it we need to read the first line, check it is a 200, then extract from the headers the&nbsp;<em>Content-Length</em>&nbsp;and read the payload to parse it. There are multiple ways to do it but here is one which is not too complicated:</p>
+
+<pre>
+<code class="language-java">try (final BufferedReader response = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+    String line;
+    long len = -1;
+    while ((line = response.readLine()) != null) {
+        if (line.toLowerCase(ENGLISH).startsWith("content-length:")) {
+            len = Long.parseLong(line.substring("content-length:".length()).trim());
+        } else if (line.toLowerCase(ENGLISH).startsWith("HTTP/1.1 ")) {
+            if (Integer.parseInt(line.split(" ")[1]) != 200) {
+                throw new IllegalArgumentException("Invalid status: " + line);
+            }
+        }  else if (line.toLowerCase(ENGLISH).startsWith("content-type:")) {
+            if (!line.contains("json")) {
+                throw new IllegalArgumentException("Invalid content type: " + line);
+            }
+        } else if (line.isEmpty()) {
+            if (len &lt; 0) {
+                throw new IllegalStateException("No response length found");
+            }
+            doReadResponse(response, len)
+            break;
+        }
+    }
+}</code></pre>
+
+<p>In other workds, we read each line of the response, we match the expected lines (response line and&nbsp;content type) and we get get an empty line it means we found the delimiter line before the payload so the rest is the payload.</p>
+
+<p>And here is the &quot;take care&quot; point of this option, it is very tempting to just read the end of the socket stream to extract the whole payload, but actually it wouldn&#39;t work since the socket is reusable to issue another command so you must absolutely respect the&nbsp;<em>Content-Length</em>&nbsp;- this is why we extracted it. To do that I use a custom&nbsp;<em>InputStream</em>&nbsp;implementation counting the number of read bytes:</p>
+
+<pre>
+<code class="language-java">public class LimitedReader extends Reader {
+    private final Reader delegate;
+    private long remaning;
+
+    public LimitedReader(final Reader response, final long len) {
+        this.delegate = response;
+        this.remaning = len;
+    }
+
+    @Override
+    public int read(final char[] cbuf) throws IOException {
+        if (remaning &gt; 0) {
+            remaning--;
+            return delegate.read();
+        }
+        return -1;
+    }
+
+    @Override
+    public int read(final char[] cbuf, final int off, final int len) throws IOException {
+        if (remaning &lt;= 0) {
+            return -1;
+        }
+        final int toRead = (int) Math.min(remaning, len);
+        remaning -= toRead;
+        return delegate.read(cbuf, off, toRead);
+    }
+
+    @Override
+    public void close() {
+        // no-op, don't close delegate
+    }
+}</code></pre>
+
+<p>Once we have that class we can implement&nbsp;<em>doReadResponse(response, len)</em>&nbsp;the way which fits our application to extract the data. In the context of this post, and aligned on my development stack, I will use JSON-P to do that:</p>
+
+<pre>
+<code class="language-java">private static void doReadResponse(final Reader response, final long len) {
+    try (final JsonReader jsonReader = Json.createReader(new LimitedReader(response, len))) {
+        final JsonArray containers = jsonReader.readArray();
+        // todo: use containers
+    }
+}</code></pre>
+
+<p>At that stage, you extracted all the running containers - by default the endpoint we called ignores not running containers - but you are not guaranteed it is the container you are running the code from.</p>
+
+<p>To filter out the container you are running from you can use its image - assuming you don&#39;t run twice the same image:</p>
+
+<pre>
+<code class="language-java">final String imageName = "rmannibucau/docker-meta-demo:1.0.0";
+final JsonObject container = containers.stream()
+    .map(JsonValue::asJsonObject)
+    .filter(it -&gt; imageName.equals(it.getString("Image")))
+    .findFirst()
+    .orElseThrow(() -&gt; new IllegalStateException("Didn't find myself in " + containers));</code></pre>
+
+<p>In the cases it is not enough, Docker will bind the hostname from the container id (smaller string) so you can use this algorithm:</p>
+
+<pre>
+<code class="language-java">final JsonObject container = containers.stream()
+  .map(JsonValue::asJsonObject)
+  .filter(it -&gt; it.getString("Id").startsWith(hostName))
+  .findFirst()
+  .orElseThrow(() -&gt; new IllegalStateException("Didn't find myself in " + containers));</code></pre>
+
+<p>You can also fallback on the IP of the instance as well:</p>
+
+<pre>
+<code class="language-java">final String lo;
+try {
+    lo = InetAddress.getLocalHost().getHostAddress();
+} catch (final UnknownHostException e) {
+    throw new IllegalStateException("No hostname", e);
+}
+final JsonObject container = containers.stream()
+  .map(JsonValue::asJsonObject)
+  .filter(it -&gt; lo.equals(
+           it.getJsonObject("NetworkSettings")
+             .getJsonObject("Networks")
+             .getJsonObject("bridge")
+             .getString("IPAddress")))
+  .findFirst()
+  .orElseThrow(() -&gt; new IllegalStateException("Didn't find myself in " + containers));</code></pre>
+
+<p>Tip: it is not forbidden to chain the strategies in an&nbsp;<em>orElseGet</em>&nbsp;and even add your own fallbacks - like using an environment variable ;).</p>
+
+<p>In any case, at that stage you extracted a model of your container (as a&nbsp;<em>JsonObject</em>) and can extract and propagate the values you need in your application.</p>
+
+<p>Note that for several values you don&#39;t need a&nbsp;<em>JsonParser</em>&nbsp;at all but it is quite common to have one in your application so don&#39;t hesitate to reuse it.</p>
+
+<p>Happy dockerization!</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jaxrs-json-query-parameter-converter.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//okta-jaxrs-cdi-microprofile-authorization-code-flow.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

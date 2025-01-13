@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Take care of java Streams with floats!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,153 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="java-stream-float-widening-html-container" class="container page-content java-stream-float-widening-html is-blog">
+                        <div class="page-header">
+                <h1>Take care of java Streams with floats!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-07-11</span>, <span class="metadata-readingtime">3 min read</span></p>
+</div>
+<p>Streams are a very powerful way to express a computation. It is natural to desire to use them for arithmetical computations and actually quite convenient but the float/double rounding implied in such a transformation can mess up your result.</p>
+
+<p>Side note: in this post I&#39;ll speak of float -&gt; double conversion but you can hit the same issue with double, it is just not a bit less natural to fall into this other trap.</p>
+
+<p>To illustrate this issue we&#39;ll assume we have some&nbsp;<em>Account</em>&nbsp;with a&nbsp;<em>balance</em>&nbsp;and youwewant to sum up the balances of a user to get its global balance. This can look like:</p>
+
+<pre>
+<code class="language-java">public class Account {
+    private float balance;
+
+    public Account(final float balance) {
+        this.balance = balance;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+}</code></pre>
+
+<p>Indeed in real life you would get a name, account number etc but we don&#39;t need that for this post ;).</p>
+
+<p>Assuming you loaded all the user accounts in an array (a collection would work too and covers JPA cases):</p>
+
+<pre>
+<code class="language-java">final Account[] values = new Account[]{
+  new Account(1.f),
+  new Account(1.1f)
+};</code></pre>
+
+<p>Then you would do the sum using this kind of stream:</p>
+
+<pre>
+<code class="language-java">double sum = Stream.of(values)
+  .mapToDouble(Account::getBalance)
+  .sum();</code></pre>
+
+<p>This looks natural no? Actually not that much because we used&nbsp;<em>mapToDouble </em>even if our <em>balance</em>s are&nbsp;<em>float</em>s. Why? Because stream&nbsp;doesn&#39;t provide a&nbsp;<em>mapToFloat</em>.</p>
+
+<p>Now if you check that sum you would get:</p>
+
+<pre>
+<code>2.100000023841858</code></pre>
+
+<p>Hmm, so 1 + 1.1 &gt; 2.1....not sure our math teacher would enjoy that result.</p>
+
+<p>Then you want to check it and you do the sum manually for this case:</p>
+
+<pre>
+<code class="language-java">values[0].getBalance() + values[1].getBalance()</code></pre>
+
+<p>And here you get 2.1...what&#39;s wrong?</p>
+
+<p>The double conversion is the one responsible of this error, you can verify it with these 2 simple lines:</p>
+
+<pre>
+<code class="language-java">System.out.println(1.1f + 1.d);
+System.out.println(1.1f + 1.f);</code></pre>
+
+<p>Output is:</p>
+
+<pre>
+<code class="language-java">2.100000023841858
+2.1</code></pre>
+
+<p>If there is a conversion of a float to a double, the float if &quot;corrupted&quot; and therefore the result of the operation (here we use a sum but it can be any of the primitive operations).</p>
+
+<p>Even weirder is if you cast the float in&nbsp;<em>Number</em>&nbsp;to call&nbsp;<em>doubleValue()</em>, you will still get this error...<em>Float</em>&nbsp;wrapper doesn&#39;t handle the conversion properly even if&nbsp;<em>sun.misc</em>&nbsp;has all it needs to do it :(.</p>
+
+<p>This kind of conversion to a wider type is called &quot;widening primitive conversion&quot;.</p>
+
+<p>Side note: the opposite exists and is naturally named &quot;narrowing&quot; instead of &quot;widening&quot;.</p>
+
+<p>How to solve it? There are mainly 3&nbsp;options:</p>
+
+<ul>
+	<li>convert floats to string then get a double</li>
+</ul>
+
+<pre>
+<code class="language-java">float myfloat = 1.1f;
+double value = new BigDecimal(Number.class.cast(myfloat).toString()).doubleValue();
+
+// alternative
+double value = Double.parseDouble(Number.class.cast(myfloat).toString());</code></pre>
+
+<p>The trick here is to use a&nbsp;<em>BigDecimal</em>&nbsp;and not just the number&nbsp;<em>doubleValue() </em>since the <em>float </em>would be converted in&nbsp;<em>Float&nbsp;</em>as&nbsp;<em>Number</em>&nbsp;and then would just use a cast which was proven being wrong.</p>
+
+<ul>
+	<li>use only floats or only doubles (means if you want to use streams you will use only doubles)</li>
+	<li>use some binary mask magic to force the right part of the double &quot;structure&quot; to be 0 if the value has a decimal part (take care structure is not linear as for int/long, it uses the concept of mantissa)</li>
+	<li>don&#39;t use floats/doubles</li>
+</ul>
+
+<p>More generally if you do some serious computation, using&nbsp;<em>BigDecimal</em>&nbsp;is saner but as streams (and like streams) it doesn&#39;t have a float flavor/constructor so you still need to use the&nbsp;string constructor to not loose any precision.</p>
+
+<p>In any case, I hope this post convinced you to test with not too trivial values any computation you do and make you think about your flow instead of blindly following stream fluent API ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-se-api.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-2-programmatic-observers.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

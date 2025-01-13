@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Java Logging Framework</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="java-logging-framework-html-container" class="container page-content java-logging-framework-html is-blog">
+                        <div class="page-header">
+                <h1>Java Logging Framework</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-12-13</span>, <span class="metadata-readingtime">20 min and 6 sec read</span></p>
+</div>
+<div class="paragraph">
+<p>Yesterday, I got an interesting exchange about Logging in Java ecosystem and, even if I did my choice years ago, I think it can be worth a post to explain how I decided a solution on this topic.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_logging_when_we_speak_about_java">What is logging when we speak about Java?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It can sound obvious but what is the goal of a logging library/framework for a Java developer?</p>
+</div>
+<div class="paragraph">
+<p>The overall goal is to write a message and get it output somewhere else configured elsewhere so we can say that:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Logging goal is to decouple the message producing side from the message consuming side.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Concretely a Java developer wants to be able to do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final var logger = getLoggerSomehow("....");
+logger.message("text or other info");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And with some "magic" from the logging library/framework you will get <code>text or other info</code> in a file, <code>stdout</code>, a Kafka topic, &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>This is the big picture to keep in mind: Java code only (almost ;)) cares about producing side!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_information_in_a_log_message">What information in a log message?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The information contained in a log message/record are generally:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The message itself - what the developer wants to share,</p>
+</li>
+<li>
+<p>The level: is this message important or not. The most common levels being <code>DEBUG</code>/<code>FINEST</code>, <code>INFO</code>,<code>WARNING</code>, <code>ERROR</code> (from the lowest to the most important),</p>
+</li>
+<li>
+<p>The source of the log message (which class, which method, which line - you don&#8217;t always have all the details),</p>
+</li>
+<li>
+<p>The date the message was created,</p>
+</li>
+<li>
+<p>Optionally the source thread,</p>
+</li>
+<li>
+<p>Optionally an exception/error associated to the record,</p>
+</li>
+<li>
+<p>Optionally a map associated to the record (MDC, NDC).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+indeed you can add as much data as you want but these ones are the common ones across most frameworks.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_logging_when_we_speak_about_environments">What is logging when we speak about environments?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each environment will get its own constraints. It is the same for logging.
+Concretely there are some big families of logging "configuration" but what is important is that we move in this part from the producing side to the consumer side.</p>
+</div>
+<div class="paragraph">
+<p>Concretely the dev environment will mainly issue to <code>stdout</code>/<code>stderr</code> in a human readable format (ex: <code>&lt;date&gt; [&lt;level&gt;] &lt;message&gt;&lt;exception&gt;</code>), the prod environment will send the log record to a Kafka topic in some environment or more likely log in JSON to be captured by Kubernetes/Docker common logging driver or, on premises, you will log on a file with rotation (one file per day for example).</p>
+</div>
+<div class="paragraph">
+<p>Here we start to identify two needs which makes the logging framework configured for an environment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The physical output (file, topic, HTTP, directly to a collector or Elasticsearch, &#8230;&#8203;),</p>
+</li>
+<li>
+<p>The format (human, JSON, could be binary like protobuf etc&#8230;&#8203;) of the messages.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging_libraries_in_java_as_of_today">Logging libraries in Java as of today</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Logging libraries are quire common from Java Commons Logging to Log4j2 but some are dead so we can consider the mainstream ones are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Platform Logging API and Service (<code>System.Logger</code>): it is one provided by the JVM itself, all applications have it (but read the rest of the post before using it),</p>
+</li>
+<li>
+<p>Java Util Logging (JUL): it is the one provided by the JVM itself, all applications have it,</p>
+</li>
+<li>
+<p>Log4j2: it is the natural replacement for the historically first solution Log4j. It is a very powerful implementations with integration with most outputs of the nowdays ecosystem,</p>
+</li>
+<li>
+<p>Logback: a pure implementation of SLF4J API which is not as powerful as Log4j2 but quite close in practise.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_vs_implementations">API vs implementations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An <em>API</em> defines the classes/methods an integrator/developer can use to interact with a library.</p>
+</div>
+<div class="paragraph">
+<p>An <em>Implementation</em>, sometimes called <em>provider</em> defines the code behind an API.</p>
+</div>
+<div class="paragraph">
+<p>In logging the most known example is <em>SLF4J</em>. SLF4J is mainly an API (<code>slf4j-api</code> module) and <em>Logback</em> is one of its implementation.</p>
+</div>
+<div class="paragraph">
+<p>Concretely it means that when you do <code>org.slf4j.LoggerFactory.getLogger(Class)</code> there is a mecanism to lookup a <code>LoggerFactory</code> implementation (Logback one for example) which will then give you a <code>Logger</code> implementation (letsay <code>LogbackLogger</code> to illustrate).</p>
+</div>
+<div class="paragraph">
+<p>To enable an implementation to be provided, an API always provides an extension point which enables the implementation to be picked and used behind the API.</p>
+</div>
+<div class="paragraph">
+<p>Here the status of the previous libraries regarding API/implementation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Platform Logging API and Service (<code>System.Logger</code>): it is an API + a JUL and console implementation. You can plug an implementation with <code>java.lang.System$LoggerFinder</code> SPI (you extend this class and register it with <code>module-info</code> - <code>provides java.lang.System.LoggerFinder with com.app.MyLogFinder;</code> or <code>META-INF/services/java.lang.System$LoggerFinder</code> resource). It uses JUL as implementation if <code>java.logging</code> java module is enabled else it uses a plain console logger. The API entry point is <code>System.getLogger</code>,</p>
+</li>
+<li>
+<p>Java Util Logging (JUL): it is an implementation and an API. The entry point is <code>Logger.getLogger</code> and the extension point to plug any custom logic is the <code>java.util.logging.LogManager</code>. You can extend this class to implement whatever logic you need and set it as <code>java.util.logging.manager</code> system property to take it into account,</p>
+</li>
+<li>
+<p>Log4j2: it provides, since version 2, an API and an implementation so it can be the primary API or not. Note that it integrates with JUL providing a log manager and SLF4J providing a binding.</p>
+</li>
+<li>
+<p>Logback: it is just an implementation of SLF4J API, you shouldn&#8217;t use its classes on producer side and you interact with the producer side thanks its configuration files or classes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_selecting_a_logging_library">Selecting a logging library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each time you need to choose a library there is rarely a "good" answer, all libraries of this post are good and the choice can depends from your case but I want to highlight a few criteria to help you think about the topic.</p>
+</div>
+<div class="sect2">
+<h3 id="_is_the_configuration_global_or_local">Is the configuration global or local?</h3>
+<div class="paragraph">
+<p>This difference is mainly between built-in JVM solutions versus pure external libraries.</p>
+</div>
+<div class="paragraph">
+<p>For <em>Platform Logging API and Service</em> and <em>Java Util Logging</em>, you need to be able to put the implementation you use at JVM level (either a system property or a SPI in the JVM <strong>classpath</strong>, not a subclassloader).</p>
+</div>
+<div class="paragraph">
+<p>For <code>log4j2</code> and <code>slf4j</code> you need to put the implementation with the classloader loading the API&#8230;&#8203;ok let me explain this one.
+If you have a flat classpath you are back to the previous case, nothing crazy.
+If you are in OSGi, one bundle will provide the API and, until you use a specific mechanism like a whiteboard, this bundle will load the implementation so this bundle must be able to find your implementation.
+In a JavaEE/JakartaEE container you have the JVM classpath then often a container classloader and finally your application classloader(s) so depending which classloader loads the API you use, you can put the implementation in the same loader or not.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s dig in this last case which is quite representative of this criteria: if the container provides SLF4J-API and does not let the application override it - it is not only about children fist since SLF4J also uses resource directly and not only class loading, then you will use the implementation - binding for SLF4J - of you container even if you put another one in your war.
+Now the opposite is true as well: if you want to put in your container SLF4J-API + logback to configure everything at container level, then you can&#8217;t if your container enables the application to override it and not configure this behavior.</p>
+</div>
+<div class="paragraph">
+<p>This represents this first criteria: do you want to control your logs from:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The JVM,</p>
+</li>
+<li>
+<p>The container,</p>
+</li>
+<li>
+<p>The application (ex: you deploy in a managed Apache Tomcat you don&#8217;t control and want to control your logs).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+these days we mainly deploy docker containers so in this case we control the JVM so I tend to think this criteria will slowly disappear and make all library equivalent even if the mecanism is different.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_do_you_jlinknative_graalify_your_library">Do you jlink/native-graalify your library?</h3>
+<div class="paragraph">
+<p>If you want to use JLink, you must have a compatible library, ie with a (working) <code>module-info</code>. All the mentioned libraries have it but <code>slf4j</code> integration with JPMS (module platform of Java - JLink to make it short) is not yet mainstream and well integrated.
+Log4j2 has <code>module-info</code> but part of it can not work - dependencies mainly - so no guarantee until you test or just use log4j2 itself.</p>
+</div>
+<div class="paragraph">
+<p>Indeed the JVM solutions work with JLink.</p>
+</div>
+<div class="paragraph">
+<p>For <a href="https://www.graalvm.org/">GraalVM</a> native-image - the binary enabling to convert Java bytecode to a native binary to get a lighter and faster application, it is the same kind of story.
+Integrating with native-image is quite some work and the design of Log4j2 kills it - a lot of it is static or instructions are not GraalVM friendly so if you want to use it you must do a lot of custom codes - substitutions.
+Logback has some working setup but it is based on workarounds as well.
+JUL is not perfect too since by default it is not reconfigurable but some custom log managers are - like <a href="https://yupiik.github.io/yupiik-logging/">Yupiik Logging</a>.</p>
+</div>
+<div class="paragraph">
+<p>So if you intend to do a custom packaging or native binary (for docker for ex ;)) of your application, JUL clearly wins the game.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_platform_logging_api_and_service_vs_jul">Platform Logging API and Service vs JUL</h3>
+<div class="paragraph">
+<p>There are two solutions in the JVM? Seriously?</p>
+</div>
+<div class="paragraph">
+<p>Yes and actually in Log4j/logback you can find 2 as well if you look well.</p>
+</div>
+<div class="paragraph">
+<p>Long story short, the issue is: how to log anything while you are setting up the logging?</p>
+</div>
+<div class="paragraph">
+<p>This is what the <a href="https://openjdk.java.net/jeps/264">platform API</a> solves.</p>
+</div>
+<div class="paragraph">
+<p>Indeed, some applications can use it - I&#8217;m thinking to javaagent which shouldn&#8217;t trigger JUL initialization too early for example - and technically speaking any application can but it is not designed as a full logging library so you will miss concepts and fluentness in the API itself.</p>
+</div>
+<div class="paragraph">
+<p>The conclusion is - in the JVM context: if you write a super light bootstrap library for Java then use the <em>Platform Logging API and Service</em>, else use <em>JUL</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lazy_evaluation_to_keep_correct_performances">Lazy evaluation to keep correct performances</h3>
+<div class="paragraph">
+<p>A common need in the logging area is to keep a low overhead.
+Typically if I do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">logger.debug("id=" + id + ", message=" + message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I will evaluate the concatenation and create an overhead I don&#8217;t need if the debug level is not kept by the logger chain (output/consumers).</p>
+</div>
+<div class="paragraph">
+<p>A common workaround is to wrap it in a <code>isLoggeable</code> kind of call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">if (logger.isDebugEnabled()) {
+    logger.debug("id=" + id + ", message=" + message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But it makes the code more verbose.</p>
+</div>
+<div class="paragraph">
+<p>To solve that, frameworks created some alternatives.
+Historical framework use interpolations (SLF4J, Log4j2):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">logger.debug("id={}, message={}", id, message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will pass the pattern + values and evaluate it lazily if the message is logged.</p>
+</div>
+<div class="paragraph">
+<p>JUL provided, thanks to Java 8 new API, a very interesting alternative using <code>Supplier</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">logger.debug(() -&gt; "id=" + id + ", message=" + message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using a lazy provider of the message this makes the code:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Easier to write (no need to recall you have to use <code>{}</code> or <code>{0}</code> or anything else),</p>
+</li>
+<li>
+<p>More efficient: you code exactly the direct interpolation without any parsing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So here JUL wins IMHO.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_available_outputs">Available outputs</h3>
+<div class="paragraph">
+<p>With all its appenders, <a href="https://logging.apache.org/log4j/2.x/manual/appenders.html">Log4j2</a> is likely the most complete framework in terms of integration.
+You can compare to <a href="http://logback.qos.ch/manual/appenders.html">Logback</a> ones if you want.</p>
+</div>
+<div class="paragraph">
+<p>JUL has mainly only stderr/stdout, file and socket outputs by defaults but it can be complemented by some custom or libraries like <a href="https://yupiik.github.io/yupiik-logging/jul-integration.html">Yupiik Logging</a> to get more power.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+having a lot of integration is great but not bringing a lot of dependencies to get them is great too because it will reduce your security work (CVE monitoring) and integration work in terms of conflicts.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Just looking like that you will make Log4j2 winning but I&#8217;d like to emphasise the fact you should only care about what you need so if you don&#8217;t care about Kafka appender/handler, then don&#8217;t consider it as a criteria.
+Personally I only care about container case so (rotating) file + stdout/stderr outputs are the only ones I want so all are equivalent - using Yupiik Logging for JUL case.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dockerkubernetes_friendly">Docker/Kubernetes friendly</h3>
+<div class="paragraph">
+<p>In a docker environment we mainly want to be able to log as JSON on stdout/stderr - small bonus there being to be able to log errors on stderr and other levels on stdout.</p>
+</div>
+<div class="paragraph">
+<p>All libraries support that case but the stack is not always the same.</p>
+</div>
+<div class="paragraph">
+<p>Log4j2 has some native JSON encoding (plain string manipulation) but it does not make the output very JSON friendly you so end up using the jackson integration quite quickly.</p>
+</div>
+<div class="paragraph">
+<p>Logback relies on a contrib using jackson as well (it is an external integration).</p>
+</div>
+<div class="paragraph">
+<p>JUL does not have anything built-in but Yupiik Logging brings a JSON-B (javax and jakarta) integration to get it.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+in all cases, writing a custom formatter/encoder is quite trivial so it is always possible to go through a custom implementation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Regarding the stderr/stdout point, each output/appender/handler is generally linked to a single stream but Yupiik Logging enables to redirect the log records depending the level on stdout or stderr.</p>
+</div>
+<div class="paragraph">
+<p>So overall I think this criteria is met by all libraries.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mdc">MDC</h3>
+<div class="paragraph">
+<p>MDC (or NDC to be more advanced) are a way to pass some context to the formatter/encoder to let some additional data be used.</p>
+</div>
+<div class="paragraph">
+<p>Concretely it behaves - and is often implemented as - a <code>ThreadLocal</code> passed to the formatter to let you use a pattern extracting some data from this local "map".</p>
+</div>
+<div class="paragraph">
+<p>JUL is the only one without this concept but it is trivial to use a custom formatter - potentially wrapping an existing formatter to reuse what exists - to add this capability.</p>
+</div>
+<div class="paragraph">
+<p>So for this criteria Log4j2 and Logback are a bit better but I would not weight a lot this criteria but more use it as a decision one if everything else is equal.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_size">Size</h3>
+<div class="paragraph">
+<p>The size of any library s important at some point - keep in mind docker images are downloaded on pods or dev machines for example.</p>
+</div>
+<div class="paragraph">
+<p>Log4j2 is about 2M, logback is about 500k and JUL is 0 since in the JVM (another cached layer of you docker image and there anyway even if not used by your application).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+if you use any integration like Kafka or JSON you must add the related dependencies, can become some dozen of megas quite quickly.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So here JUL wins even if 2M is ok-ish.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_additional_library_or_not">Additional library or not</h3>
+<div class="paragraph">
+<p>Is the solution you pick a built-in solution or not is important, and indeed only JUL meets the fact it is built in.</p>
+</div>
+<div class="paragraph">
+<p>For your application it is not a big criteria but do you write a dependency free application? Likely not.</p>
+</div>
+<div class="paragraph">
+<p>As far as you have some library doing some logging, you must ensure all your application logging is unified and go to the same location.</p>
+</div>
+<div class="paragraph">
+<p>Concretely if you pick logback you must ensure that JUL logs go to SLF4j, that log4j2 logs go to SLF4j, that JBoss Logging (another facade) goes to SLF4j, etc&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>There are several cases there to decide.</p>
+</div>
+<div class="sect3">
+<h4 id="_application">Application</h4>
+<div class="paragraph">
+<p>If you see your application as a grape of libraries, you have different strategies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What is the most used API in the libraries I use?</p>
+</li>
+<li>
+<p>What is the most easily "bridge-able" output?</p>
+</li>
+<li>
+<p>(worse case) I have to use library X because my company enforces libraries instead of specifications/formats &#8594; no real choice ;).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_library">Library</h4>
+<div class="paragraph">
+<p>If you are writing a library now the choice is different what is the least impacting choice with the minimum requirements (minimum required features)?
+Here the answer is often JUL because it is built-in and it will never impose anything on user code/stack which is very very important for a smooth integration.
+Any other choice - including SLF4j - will impact the user and forces him to learn your library + something else (like to import a SLF4j binding for example) which is a drawback for a library.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_container">Container</h4>
+<div class="paragraph">
+<p>Finally, there is the container case, ie an application containing applications (Apache Tomcat, Apache TomEE, Apache Karaf, Wildfly, Payara, &#8230;&#8203;).
+Here the challenge is to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enable the container to log properly,</p>
+</li>
+<li>
+<p>Enable applications to log as expected (if an application picked SLF4j to use its configuration - or not as we saw before depending if the logging is considered as a service provided by the application or container),</p>
+</li>
+<li>
+<p>Enable to identify the log of each part of what is in the JVM (container, application, library, provided service etc&#8230;&#8203;) and configure each of them properly - often thanks a logger but you can want to configure different a particular logger per application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All these challenges are always solved in containers and not in libraries since it depends the "model" of the container but here are some examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Apache Tomcat created Tomcat JULi which is a thin wrapper on top of JUL which enables to</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Plug another backend if needed behind JUL API (like Log4j2) if needed,</p>
+</li>
+<li>
+<p>Configure JUL per application (classloader) differently even for the same logger name (thanks a prefix mecanism).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Apache Karaf uses Pax Logging to configure all known logging libraries in an unified way making all the logs going to the same actual backend - even OSGi log services.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You have the same kind of solutions in libraries, for example Log4j2 or Logback have contextual/classloader based configuration which means each classloader can get its own logging configuration but it has some drawback:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It uses a single strategy (parent first or child first),</p>
+</li>
+<li>
+<p>It is per classloader so if you have an Enterprise ARchive (ear) then it is not per application</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is one of the reason it is often done in containers.</p>
+</div>
+<div class="paragraph">
+<p>Now the model of the container is very important there, if the container leaks it classloader (like Apache Tomcat leaks its <code>common.loader</code> to the deployed webapps for example), then it must not be any library which can conflict with the applications (so it must be JUL by default or use an isolation mechanism which is not Tomcat native but doable).
+If the container is OSGi related it is a bit different since you are dynamically wired but if you take Pax Logging, it enforces the API versions to be able to handle the configuration properly which has some drawbacks and prevents you to use some new features for example, in particular when libraries are breaking some features.</p>
+</div>
+<div class="paragraph">
+<p>So overall, the best choice for a container is to use JUL and provide a custom <code>LogManager</code> (logger factory) which will read the configuration as needed (in the application and the container to merge both are needed).</p>
+</div>
+<div class="paragraph">
+<p>If your container can not be pure and only use JUL - like Apache TomEE which relies on some dependencies which are SLF4j oriented as library - you must also patch all your classloaders to handle SLF4j to let the application/container decide if it uses the container or application SLF4j binding which is not always trivial to do properly and often can require additional configuration.</p>
+</div>
+<div class="paragraph">
+<p>So for a container JUL is the best choice until it is fully isolated - like OSGi - where the best is likely to deploy native bundles but will require a lot of configuration work to unify the outputs/configuration - this is why Pax Logging is often used/recommended instead even if it has some limitations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_performance">Performance</h3>
+<div class="paragraph">
+<p>Logging overhead must stay acceptable.
+Once we said that we said nothing :).
+The overall point is that you shouldn&#8217;t pay as much as your business logic for logging, we often reference &#8656; 5% in terms of ratio even if it is not a strict limit.</p>
+</div>
+<div class="paragraph">
+<p>When logging to stdout/stderr or their virtual equivalent (in docker it is not the tty of your machine so it is a bit faster) the performances are close and mainly depends the formatters/encoders you are using.
+But when logging to a file, Log4j2 and Logback are generally faster but for JUL you can implement you own handler or use your container one (Apache TomEE provides one which has rotation support and is quite fast, Apache Tomcat also provides one which is not bad with rotation support).
+Worse case for JUL you can use a library like Yupiik Logging which has a good file handler/appender which can replace the one of the JVM.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes we get the reference of asynchonous loggers or appenders. Here Log4j2 is likely the best but you must also ensure to understand what it means:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It will process the log message partially not synchronously compared to the code execution</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It means you can loose message whatever you think in <strong>all</strong> cases - you said disruptor?,</p>
+</li>
+<li>
+<p>It means you push the load associated to the logging in another chunk of threads instead of dispatching it on all applications threads.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This last point is very very tempting but it also means you will prevent some application code execution from application unrelated code so the application behavior can become less stable/predictable in some cases&#8230;&#8203;.and don&#8217;t even think to reduce the priority of these threads until you don&#8217;t care of the logs which means you should just not log if so ;).</p>
+</div>
+<div class="paragraph">
+<p>So personally I think that asynchronous loggers are not a killer feature but more a workaround for wrongly designed handlers.
+Concretely there are cases it is interesting:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Files: fill a buffer before writing on disk - like databases do,</p>
+</li>
+<li>
+<p>Remote/Socket/HTTP: if you send payloads to a log aggregator through the network it is interesting to handle a buffer with retries and potentially disk dump to not loose all data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>But this is an implementation of the appender/handler, not a feature moved to loggers.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;ll not mention a winner there because, in my opinion, all are fine in synchronous mode while the configuration is done properly - ie don&#8217;t use default JUL file handler for example.
+Log4j2 and logback have, indeed, interesting asynchronous wrapper but it is quite trivial to do for JUL too in &lt; 100 LoC and they generally tend to show some issue elsewhere but there are rare case it can be a criteria (clearly not for web application or batches but more for some daemon).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_word_on_bridges">A word on bridges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I don&#8217;t want to enter into details, but it is important to note that almost all frameworks - and more particularly the ones I spoke in this post - are bridgeable which means if you use SLF4j API you can log on JUL backend, the opposite as well and with Log4j2 too.
+It is generally just a library to add in the right classloader and some configuration to do in some case (not always).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This post is already long, and I didn&#8217;t share much code snippets - a real logging report/analyzis can be a 50 pages report! - but I hope it will make you think differently about logging from now on.</p>
+</div>
+<div class="paragraph">
+<p>As any choice it is a compromise of criteria which means you pick what is important for you and evaluate against it the libraries.</p>
+</div>
+<div class="paragraph">
+<p>Personally I can summarize my vision of logging frameworks in Java as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All can be used as an API - so not a criteria,</p>
+</li>
+<li>
+<p>All can be used to log on files and stdout/stderr - so not a criteria,</p>
+</li>
+<li>
+<p>All are configurable (pattern) - so not a criteria,</p>
+</li>
+<li>
+<p>All are usable in any application - so not a criteria,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Note there that I don&#8217;t care of the managed container case anymore but if you do, use it as a criteria.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>JUL is the lighter and likely the most common one/only all can agree on since it is in the JVM,</p>
+</li>
+<li>
+<p>Performances are generally good for all cases (yes, even JUL can handle &gt; 100kmessages/s in synchronous mode!),</p>
+</li>
+<li>
+<p>All can have a MDC like feature even if not always a direct MDC API - and do you need it?</p>
+</li>
+<li>
+<p>JUL is the only one which is dependency free but until you use a huge integration core are generally light even if Log4j2 is the biggest.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Here we can note that whatever you do, you have to handle the security issues (CVE) for JUL since it is in the JVM but if you use another one you must handle others too like the Log4j2 "0-day" one.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So since ~8 years my choice is for JUL even if it has some drawbacks but the recent releases of Java solved most of them. The only remaining one is to not be configurable from the JVM itself but as we saw with the <code>System.getLogger</code> API there are some reason for that and its advantages are really huge in practise so it is not a bad choice even if we often read wrong information about it over blog posts.
+Docker erea also dropped most of these drawbacks since you own the JVM in docker so it is likely time to invest a bit more in JUL and maybe abandon historical logging frameworks which will enforce you to do more work without any real gain from a business or performance point of view.
+It is even more true for libraries or container writers but it stays true at application level.</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//docker-compose-java-healthcheck.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//github-action-output-communicate-between-steps.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

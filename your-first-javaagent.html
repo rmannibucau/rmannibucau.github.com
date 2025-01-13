@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Your first javaagent</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="your-first-javaagent-html-container" class="container page-content your-first-javaagent-html is-blog">
+                        <div class="page-header">
+                <h1>Your first javaagent</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-05-22</span>, <span class="metadata-readingtime">15 min and 23 sec read</span></p>
+</div>
+<p>The JVM is a great&nbsp;platform, it provides anything you need to write applications but also to instrument them. There are multiple ways to do that, and generally your IoC framework does that but the most generic way to instrument any code - including the JVM itself - is to write a javaagent.</p>
+
+<h2>What does it look like?</h2>
+
+<p>If you never used a javaagent here is what its user interface looks like:</p>
+
+<pre>
+<code class="language-java">java \
+  -javaagent:/path/to/agent.jar \
+  -cp *.jar \
+  the.main.ClassName</code></pre>
+
+<p>It is a standard java command but we added a&nbsp;<em>-javaagent</em>&nbsp;option. You can even use multiple agents at once now and they will be executed in the order they are defined:</p>
+
+<pre>
+<code class="language-java">java \
+  -javaagent:/path/to/agent1.jar \
+  -javaagent:/path/to/agent2.jar \
+  -cp *.jar \
+  the.main.ClassName</code></pre>
+
+<h2>What is a javaagent?</h2>
+
+<p>A javaagent can be seen as a callback before the main. There are actually two way to &quot;attach&quot; - link to the JVM -&nbsp;a javaagent:</p>
+
+<ol>
+	<li>Before the actual application entry point (main) is executed,</li>
+	<li>Once the application starts using the programmatic API.</li>
+</ol>
+
+<p>Both options are pretty much the same in terms of API but the previous samples using the&nbsp;<em>java</em>&nbsp;option&nbsp;<em>-javaagent</em>&nbsp;will trigger the first case automatically. The last option can be interesting for frameworks but is a bit less powerful because you don&#39;t know what was executed before your agent runs and therefore it can happen you run too late to actually let your agent be useful. Typically, if you want to change the way a class behaves but the class is already loaded, you will need to reload the class changing its code. It is doable but has some limitations (think in terms of class relationships) and therefore is less reliable.</p>
+
+<p>Side note: this post is not about the reloadable javaagent but this is actually a feature of the JVM.</p>
+
+<p>If you want to see in a very trivial mode what a javaagent is, you can modelize it this way - note this is just pseudo code to help you understand and will likely not compile:</p>
+
+<pre>
+<code class="language-java">public class Main {
+  public static void main(String... args) {
+    runAgent(getAgentArgs(), getJVM());
+    runApplication(args);
+  }
+}</code></pre>
+
+<p>This snippet shows that the agent is intended to run before the actual application code, has its own configuration (the agent args are not the JVM args) and has access to some part of the JVM.</p>
+
+<h2>When using a javaagent?</h2>
+
+<p>A javaagent being a callback in the JVM, it has a lot of usages. However the two most known cases are:</p>
+
+<ul>
+	<li>Changing the executed bytecode of the classes to add monitoring data - tracing, metrics, ..., debugging information etc....</li>
+	<li>Starting a server not directly linked to the JVM - for monitoring purposes. Prometheus was, for instance, using this implementation coupled with JMX as a fallback in cases the application is not able to expose a prometheus exporter directly. In this case, it is recommended to use a shutdown hook to stop the server properly - and potentially flush some data if it requires some communication with a third party remote server.</li>
+</ul>
+
+<p>If you take JavaEE/JakartaEE, everything is based on either a contract (interface, class) or annotations, so a javaagent could read your application code and replace&nbsp;it by the actual &quot;implementation&quot;. You can see it as a &quot;runtime generation&quot; or &quot;bytecode generation&quot; (by opposition to source generation).</p>
+
+<p>Similarly, most monitoring framework will instrument your code to add metrics or tracing on methods and render the result in a UI enabling you to profile the application easily. Java Mission Control, the APM included now in the JVM, is doing that for instance.</p>
+
+<p>Another example of bytecode instrumentation is JaCoCo which is used to estimate the code coverage of your test suite. JaCoCo is enabled by bytecode instrumentation - and generally using its javaagent even if in some cases it does not like in Arquillian case. The additional code will check methods - instructions actually -&nbsp;are ran during the test suite or not enabling to report which part of the source code is not tested.</p>
+
+<p>So at the end, even if the usages are pretty different, you still end up either modifying the executed code or just using the lifecycle of the agent to start/stop some feature.</p>
+
+<h2>How to write a javaagent?</h2>
+
+<p>As mentionned before, an agent can be attached - configured to be started&nbsp; - to the JVM either before the main entry point or after. In the first case it is called &quot;pre main&quot; and in the last case it is called &quot;agent main&quot;. Both cases have their own entrypoint/callback which looks like a main but with a different signature:</p>
+
+<ol>
+	<li>First parameter is the agent arguments,</li>
+	<li>Second parameter is the&nbsp;<em>Instrumentation</em>&nbsp;instance of the JVM.</li>
+</ol>
+
+<p>Let&#39;s write a first javaagent. To start we need a class, let&#39;s call it <em>MyAgent</em>. It is a normal java class. We will add a&nbsp;<em>premain</em>&nbsp;method with the two mentionned parameters:</p>
+
+<pre>
+<code class="language-java">public class MyAgent {
+    public void premain(final String agentArgs, final Instrumentation instrumentation) {
+        // starting the agent
+    }
+}</code></pre>
+
+<p>To activate the javaagent you must configure it in the&nbsp;<em>META-INF/MANIFEST.MF</em>&nbsp;- exactly as your main sets up&nbsp;<em>Main-Class</em>&nbsp;entry:</p>
+
+<pre>
+<code class="language-http">Premain-Class: com.company.MyAgent</code></pre>
+
+<p>If you prefer to attach the agent programmatically you will need&nbsp;<em>Agent-Class</em>&nbsp;entry and the&nbsp;<em>agentmain</em>&nbsp;method:</p>
+
+<pre>
+<code class="language-java">public class MyAgent {
+    public void agentmain(final String agentArgs, final Instrumentation instrumentation) {
+        // starting the agent
+    }
+}</code></pre>
+
+<pre>
+<code class="language-http">Agent-Class: com.company.MyAgent</code></pre>
+
+<p>However, in this last case, you will not use&nbsp;<em>-javaagent</em>&nbsp;option but some code to attach your agent:</p>
+
+<pre>
+<code class="language-java">import com.sun.tools.attach.VirtualMachine;
+
+// in some class
+final String agentJar = "/path/to/agent.jar"; // can be found from the classloader if present
+final String pid = ProcessHandle.current().pid(); // java 9, if you run on java 8 use ManagementFactory.getRuntimeMXBean().getName().split('@')[0]
+
+VirtualMachine.attach(pid).loadAgent(agentJar);</code></pre>
+
+<p>Two points are interesting in this snippet:</p>
+
+<ol>
+	<li>The attach API is in com.sun namespace and will likely be done by reflection since some JVM can not provide it,</li>
+	<li>The attach API - last line - is quite simple but it depends on the PID and agent path. As mentionned in the comment, there is now a standard API to get the PID but if you run in java 8 there is an undocumented workaround to use. Getting the agent path is also doable if the agent is in the classpath (you get the agent class resource - so MyAgent.class.replace(&#39;.&#39;,&#39;/&#39;) + &quot;.class&quot; - and then unwrap the URL to get back the file path.</li>
+</ol>
+
+<p>FInally, to be complete on the way to configure a javaagent, there are two other manifest entries you can be interested in:</p>
+
+<pre>
+<code class="language-http">Can-Redefine-Classes: true
+Can-Retransform-Classes: true</code></pre>
+
+<p>These two options will enable to mutate a class definition at runtime (rechanging the bytecode and redefining&nbsp; the class at runtime). However if you rely on that feature, ensure to fully understand what it means. In practise, it is rarely needed except for hot reloading solutions.</p>
+
+<h2>How to configure a javaagent</h2>
+
+<p>In previous part we saw that the agent entry point gets args. However we said these args are not the JVM args so where are they coming from? From the javaagent line itself. Javaagent args can be passed after the javaagent path and the separator&nbsp;<em>=</em>. All the string after this separator is passed to the agent entry point and the agent interpretes its completely freely. In other words, you can pass properties, JSON, YAML, plain string etc...</p>
+
+<p>Here are some example:</p>
+
+<pre>
+<code class="language-bash">-javaagent:/path/agent.jar=somestring
+-javaagent:/path/agent.jar=key1=val1|key2=val2|....
+-javaagent:/path/agent.jar={"foo":"bar","dummy":0}</code></pre>
+
+<p>There is no standard there so it mainly depends on the way you will parse it and the configuration you expose. However note that the javaagent classes are generally visible from the application so to avoid conflicts you either must shade them or just avoid to use dependencies when possible.</p>
+
+<h2>Javaagent sample</h2>
+
+<p>To illustrate what can do a javaagent I will write a simple javaagent which takes as parameter a whitelist and a blacklist of classes and will throw in the static block of&nbsp;any class matching this set an exception.</p>
+
+<p>What can it be used for? Prevent some class you don&#39;t control to be loaded without the usage of a Security Manager which has other side effects on other parts of the application - not only the classloading.</p>
+
+<p>The first thing for this implementation is to parse the parameters since we need to handle a blacklist and a whitelist. We will use the following format:</p>
+
+<pre>
+<code class="language-bash">arg1=val1|arg2=val2</code></pre>
+
+<p>To parse this kind string we can use this code:</p>
+
+<pre>
+<code class="language-java">private static Map&lt;String, String&gt; parseArgs(final String agentArgs) {
+  return Stream.of(agentArgs.split("\\|"))
+    .map(String::trim)
+    .filter(it -&gt; !it.isEmpty())
+    .map(it -&gt; {
+      final int eq = it.indexOf("=");
+      if (eq &gt; 0) {
+        return new AbstractMap.SimpleEntry&lt;&gt;(it.substring(0, eq), it.substring(eq + 1));
+      }
+      return new AbstractMap.SimpleEntry&lt;&gt;(it, "true");
+    })
+    .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
+}</code></pre>
+
+<p>This code simply splits the args (on |) then split each pairs to create a map <em>Entry</em>&nbsp;and finally we aggregate all parameters in a map. At this point we can get a&nbsp;<em>Map&lt;String, String&gt;</em>&nbsp;representing the parameters which is more than enough to start.</p>
+
+<p>Then we need to convert two parameters (<em>include</em>&nbsp;for the whitelist and <em>exclude</em>&nbsp;for the blacklist) to a list of <em>String</em>&nbsp;of list of&nbsp;Predicate&lt;String&gt; - the predicate enabling to handle more than just a direct exact value:</p>
+
+<pre>
+<code class="language-java">private Collection&lt;Predicate&lt;String&gt;&gt; toPredicateCollection(final String raw) {
+  return raw == null ? emptySet() : Stream.of(raw.split(","))
+    .map(String::trim)
+    .filter(it -&gt; !it.isEmpty())
+    .map(v -&gt; (Predicate&lt;String&gt;) n -&gt; n.startsWith(v))
+    .collect(toSet());
+}</code></pre>
+
+<p>This is a trivial implementation but you can find a more complex - justifying the predicate usage - on my <a href="https://github.com/rmannibucau/filtering-agent/blob/master/src/main/java/com/github/rmannibucau/javaagent/filtering/FilteringTransformer.java#L62" target="_blank">github</a>.</p>
+
+<p>I will not detail how to deal with the include-exclude or exclude-include preference here (i.e. what happens when both conditions are not exclusive) but this is generally solved with another parameter forcing a winner when it happens. Here, we will implement the&nbsp;<em>isHandled</em>&nbsp;logic with this code:</p>
+
+<pre>
+<code class="language-java">private Predicate&lt;String&gt; isHandledPredicate(final Map&lt;String, String&gt; parsedArgs) {
+  final Collection&lt;Predicate&lt;String&gt;&gt; exclude = toPredicateCollection(parsedArgs.get("exclude"));
+  final Collection&lt;Predicate&lt;String&gt;&gt; include = toPredicateCollection(parsedArgs.get("include"));
+  return (Predicate&lt;String&gt;) name -&gt; {
+    return include.stream().anyMatch(it -&gt; it.test(name)) || exclude.stream().noneMatch(it -&gt; it.test(name));
+  };
+}</code></pre>
+
+<p>Now we know how to detect the classes we must instrument to make their loading fail, let&#39;s write the magic class which will do the bytecode replacement. This is done through the second parameter of the javaagent, the&nbsp;<em>Instrumentation</em>. It enables to add/remove&nbsp;<em>ClassFileTransformer</em>&nbsp;which are called each time a class is loaded and provide a way to replace the class bytecode before the&nbsp;<em>Class</em>&nbsp;object is actually defined.</p>
+
+<p>Warning: at this point you can think you can throw an exception in the transformer and don&#39;t need to change the class bytecode at all. However a failing transformer is ignored by the JVM so it would just slow down class loading if you do it this way.</p>
+
+<p>Here is the signature of the&nbsp;<em>ClassFileTranformer</em>:</p>
+
+<pre>
+<code class="language-java">public byte[] transform(final ClassLoader loader, final String className,
+                        final Class&lt;?&gt; classBeingRedefined, final ProtectionDomain protectionDomain,
+                        final byte[] classfileBuffer) throws IllegalClassFormatException;</code></pre>
+
+<p>As you can see, the interesting parameters are for us the&nbsp;<em>className</em>&nbsp;which is actually the class name in resource format so org.foo.Bar will be represented as&nbsp;<em>org/foo/Bar</em>&nbsp;and the&nbsp;<em>classfileBuffer</em>&nbsp;which is the class bytecode before its loading. The returned instance is the bytecode to load. This is why a&nbsp;<em>ClassFileTransformer</em>&nbsp;enable to change the bytecode on the fly.</p>
+
+<p>Warning: if it fine to change all the bodies of a class but take a lot of careness if you start changing the shape of the class (method, signatures, ....) because some frameworks - typically the ones using a claspath scanner like JavaEE specifications, Spring, ... - are checking the class shape from its resource and not only from a reflection point of view, at least partially.</p>
+
+<p>At this point the question for us is: how to change the bytecode to make the static block failing. There are multiple options. You can, indeed, return an almost static <em>byte[]</em>&nbsp;- almost being the classname which must be adjusted. However a cleaner solution is to visit the bytecode, if there is already a static block, change it to throw an exception, and if there is no static block, add one throwing an exception.</p>
+
+<p>This implementation option enables me to introduce asm library - which can be replaced by any bytecode library. ASM can be added to any project with the dependency: org.ow2.asm:asm:jar:7.1<em>. </em>It provides a&nbsp;<em>ClassReader</em>&nbsp;which enables to visit a class thanks to a&nbsp;<em>ClassVisitor</em>&nbsp;and a&nbsp;<em>ClassWriter</em>&nbsp;which enables to write a class. The standard pattern here is to visit the class, depending some trigger (static block for us) force some code generation and replace the input buffer by the writer one. Here is a skeleton doing that:</p>
+
+<pre>
+<code class="language-java">final ClassReader reader = new ClassReader(classfileBuffer);
+final ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
+reader.accept(new MyClassVisitor(ASM7, writer), ClassReader.SKIP_FRAMES);
+return writer.toByteArray();</code></pre>
+
+<p>This is a very minimal skeleton, in most implementation the reader is extended to avoid some class analysis issue:</p>
+
+<pre>
+<code class="language-java">new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES) {
+  @Override
+  protected String getCommonSuperClass(final String type1, final String type2) {
+    Class&lt;?&gt; c, d;
+    try {
+      c = findClass(loader, type1.replace('/', '.'));
+      d = findClass(loader, type2.replace('/', '.'));
+    } catch (final Exception e) {
+      throw new RuntimeException(e.toString());
+    } catch (final ClassCircularityError e) {
+      return "java/lang/Object";
+    }
+    if (c.isAssignableFrom(d)) {
+      return type1;
+    }
+    if (d.isAssignableFrom(c)) {
+      return type2;
+    }
+    if (c.isInterface() || d.isInterface()) {
+      return "java/lang/Object";
+    }
+    do {
+      c = c.getSuperclass();
+    } while (!c.isAssignableFrom(d));
+    return c.getName().replace('.', '/');
+  }
+
+
+  private Class&lt;?&gt; findClass(final ClassLoader tccl, final String name) throws ClassNotFoundException {
+    try {
+      return className.equals(name) ? Object.class : Class.forName(name, false, tccl);
+    } catch (final ClassNotFoundException e) {
+      return Class.forName(className, false, getClass().getClassLoader());
+    }
+  }
+}
+</code></pre>
+
+<p>This common implementation handled the inheritance links between classes more properly. The complexity can come for framework having to load the classes to analyze them before instrumenting them - check out the forName in previous code - which can lead to loading classes before instrumenting them with current JVM handling of the transformers.</p>
+
+<p>Now how to know we have or not a static block. In the bytecode the static block is a specific method named&nbsp;<em>&lt;clinit&gt;</em>&nbsp;- for class initialization. So we can visit all method and if there is one called this way then we know we have a static block:</p>
+
+<pre>
+<code class="language-java">new ClassVisitor(ASM7, writer) {
+  private boolean hasStaticInit = false;
+
+  @Override
+  public MethodVisitor visitMethod(final int access, final String name, final String descriptor,
+                                   final String signature, final String[] exceptions) {
+    final MethodVisitor visitor = super.visitMethod(access, name, descriptor, signature, exceptions);
+    if ("&lt;clinit&gt;".equals(name)) {
+      hasStaticInit = true;
+      throwException(visitor);
+      return null;
+    }
+    return visitor;
+  }
+
+  @Override
+  public void visitEnd() {
+    if (!hasStaticInit) {
+      throwException(super.visitMethod(ACC_STATIC, "&lt;clinit&gt;", "()V", null, null));
+    }
+    super.visitEnd();
+  }
+}, ClassReader.SKIP_FRAMES);</code></pre>
+
+<p>This snippet exactly does that, when it visits a&nbsp;<em>&lt;clinit&gt;</em>&nbsp;method, it generates a specific body (<em>throwException</em>) and tracks it was generated (<em>hasStaticInit</em>&nbsp;boolean) and if it was not visited after all the methods (<em>visitEnd</em>) then it enforces the class to get this method which is static (<em>ACC_STATIC</em>) and has no parameter and returns void (<em>()V</em>&nbsp;descriptor).</p>
+
+<p>Now how to generate the body -&nbsp;<em>throwException</em>&nbsp;method? The code to generate the line:</p>
+
+<pre>
+<code class="language-java">throw new IllegalStateException("Forbidden class '" + classname + "')</code></pre>
+
+<p>Is - except the concatenation is precomputed:</p>
+
+<pre>
+<code class="language-java">visitor.visitCode();
+visitor.visitTypeInsn(NEW, "java/lang/IllegalStateException");
+visitor.visitInsn(DUP);
+visitor.visitLdcInsn("Forbidden class '" + fqn + "'");
+visitor.visitMethodInsn(INVOKESPECIAL, "java/lang/IllegalStateException", "&lt;init&gt;", "(Ljava/lang/String;)V", false);
+visitor.visitInsn(ATHROW);
+visitor.visitMaxs(0, 0);
+visitor.visitEnd();</code></pre>
+
+<p>It can looks complicated because it manipulates the stack, splits one like java code in multiple operations and goes through operations we don&#39;t see in java sources (visitMaxs(0,0) which will trigger frame computation since we created the writer - visitor in this snippet - in <em>COMPUTE_FRAMES</em> mode).</p>
+
+<p>There is however a trick to generate such statements:&nbsp;<em>ASMifier. </em>This is a class provided by ASM which has a main taking class (.class, the bytecode file, not java one) as parameter. When executed it will dump the code to generate with a writer the class you passed as parameter. So if you write a class with the code you want to generate - or almost it - then it is generally trivial to adapt it. However you can need to take care to the way the stack is built when going generic and if you need to handle generic return types - the instruction can change.</p>
+
+<p>Tip: if it looks too complicated, you can have a look to some libraries like ByteBuddy which try to encapsulate the bytecode manipulation and expose a simpler user API. Depending the task you do it is worth it or not so give it a try if you doubt.</p>
+
+<p>So at that time we have our transformer:</p>
+
+<pre>
+<code class="language-java">class FilteringTransformer implements ClassFileTransformer {
+    private final Predicate&lt;String&gt; matcher;
+
+    FilteringTransformer(final Map&lt;String, String&gt; configuration) {
+        matcher = name -&gt; /* code shared earlier */;
+    }
+
+    @Override
+    public byte[] transform(final ClassLoader loader, final String className,
+                            final Class&lt;?&gt; classBeingRedefined, final ProtectionDomain protectionDomain,
+                            final byte[] classfileBuffer) throws IllegalClassFormatException {
+        if (className == null || matcher == null) {
+            return classfileBuffer;
+        }
+        final String fqn = className.replace('/', '.'); // use fqn instead of resource name
+        if (matcher.test(fqn)) {
+            final ClassReader reader = new ClassReader(classfileBuffer);
+            final ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES) {
+                @Override
+                protected String getCommonSuperClass(final String type1, final String type2) {
+                    // code as before
+                }
+            };
+            reader.accept(new ClassVisitor(ASM7, writer) {
+                // previous code
+            }, ClassReader.SKIP_FRAMES);
+            return writer.toByteArray();
+        }
+        return classfileBuffer;
+    }
+}</code></pre>
+
+<p>Once you have a transformer you can add it to the JVM runtime through&nbsp;<em>Instrumentation</em>&nbsp;in our <em>premain</em>&nbsp;callback and using the injected agent configuration:</p>
+
+<pre>
+<code class="language-java">public static void premain(final String agentArgs, final Instrumentation instrumentation) {
+  final Map&lt;String, String&gt; config = parseArgs(agentArgs);
+  instrumentation.addTransformer(new FilteringTransformer(config));
+}</code></pre>
+
+<p>Now if you create a jar from that code - don&#39;t forget the&nbsp;<em>MANIFEST.MF</em>&nbsp;- and add it on a JVM you will be able to make any class loading fail.</p>
+
+<p>The last step is to shade ASM in our agent to have a single jar to add on the JVM - and avoid to use&nbsp;<em>Instrumentation</em>&nbsp;API to enrich the JVM classpath which can have side effects. Personally I use Maven shade plugin but any solution will work while it supports relocation - changing packages:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+  &lt;version&gt;3.2.1&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;shade&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;createSourcesJar&gt;true&lt;/createSourcesJar&gt;
+    &lt;shadedArtifactAttached&gt;true&lt;/shadedArtifactAttached&gt;
+    &lt;shadedClassifierName&gt;shaded&lt;/shadedClassifierName&gt;
+    &lt;createDependencyReducedPom&gt;true&lt;/createDependencyReducedPom&gt;
+    &lt;dependencyReducedPomLocation&gt;${project.build.directory}/reduced-pom.xml&lt;/dependencyReducedPomLocation&gt;
+    &lt;relocations&gt;
+      &lt;relocation&gt;
+        &lt;pattern&gt;org.objectweb.asm&lt;/pattern&gt;
+        &lt;shadedPattern&gt;${project.groupId}.__shaded__.asm&lt;/shadedPattern&gt;
+      &lt;/relocation&gt;
+    &lt;/relocations&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>This will create a&nbsp;<em>-shaded</em>&nbsp;jar containing ASM and enabling you to run this artifact as javaagent without any dependency issue.</p>
+
+<p>Side note: the relocation is trivial to do with ASM since it provides visitor primitives to do that very easily, if you are interested, and now you know the ASM base API, have a look to their&nbsp;<em>ClassRemapper</em>.</p>
+
+<p>Finally, here is an usage example to prevent maven to run:</p>
+
+<pre>
+<code class="language-bash">MAVEN_OPTS=-javaagent:myagent.jar=include=org.apache.maven.cli.MavenCli mvn compile</code></pre>
+
+<p>This will prevent Maven cli main to load and therefore to run. In current state the failure will not be very &quot;sexy&quot; but since you now own all the JVM bytecode you can fix that without my help ;).</p>
+
+<h2>Conclusion</h2>
+
+<p>What is important to keep in mind here is that writing a javaagent is probably not the easiest task you can have to do in your java developer life. However it is a really helpful solution to instrument a JVM/application you don&#39;t own but need to work on. It can enable to extract precious information from the application without having to redeliver it and even enable to add all the production needs - metrics, tracing, authentication, ... - without having to care in dev in an almost unified way!</p>
+
+<p>Don&#39;t abuse it but don&#39;t be scared to use it.</p>
+
+<p>The example I used in this post is available on github in my <a href="https://github.com/rmannibucau/filtering-agent/" target="_blank">filtering-agent</a> repository.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//extensible-classpath-jib-docker-image.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-se-api-junit5-extension.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

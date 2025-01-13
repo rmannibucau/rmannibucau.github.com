@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Get started with CDI standalone API</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="cdi-se-api-html-container" class="container page-content cdi-se-api-html is-blog">
+                        <div class="page-header">
+                <h1>Get started with CDI standalone API</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-07-18</span>, <span class="metadata-readingtime">6 min and 41 sec read</span></p>
+</div>
+<p>CDI brings a new standalone API, the intent is to make more portable the writing of standalone applications.</p>
+
+<p>Why would you use CDI in a standalone application? Because it is common for a lot of use cases actually:</p>
+
+<ul>
+	<li>batch: if you use JBatch it will enable you to write standard code and handle the bootstraping smoothly</li>
+	<li>cli: for common line interface&nbsp;programs it is common to use CDI as IoC/backbone and the SE API allows to bridge it without any specific internal API</li>
+	<li>others: the limitation here is only the scope of your program, if you do something very specific or small, CDI SE API will be a good fit but if you build a JAX-RS server for instance you would need to wire a lot of options in a specific way which maybe means you need to look for a more &quot;standard&quot; (de facto) solution like <a href="http://tomee.apache.org/advanced/tomee-embedded/" target="_blank">tomee embedded</a> or the excellent <a href="http://openwebbeans.apache.org/meecrowave/meecrowave-core/cli.html" target="_blank">meecrowave</a>&nbsp;to avoid to have to manage the cost of options maintenance having direct implications on the deployments</li>
+</ul>
+
+<h2>Dependencies</h2>
+
+<pre>
+<code class="language-xml">&lt;dependencies&gt;
+  &lt;!- spec dependencies --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-jcdi_2.0_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-el_2.2_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.0.4&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-annotation_1.3_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-atinject_1.0_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.geronimo.specs&lt;/groupId&gt;
+    &lt;artifactId&gt;geronimo-interceptor_1.2_spec&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+
+  &lt;!-- implementation (openwebbeans here, meecrowave-core would work too) --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.openwebbeans&lt;/groupId&gt;
+    &lt;artifactId&gt;openwebbeans-se&lt;/artifactId&gt;
+    &lt;version&gt;${openwebbeans2.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<p>Nothing crazy here, just the JavaEE dependencies required by CDI and the implementation we want (openwebbeans or weld in general).</p>
+
+<h2>For the impatients</h2>
+
+<p>Once your project is setup you just need to use the brand new SE API. As for many EE specification you go through a loader layer which will give you transparently an implementation instance. In CDI SE case it will load a&nbsp;<em>SeContainerInitializer</em>&nbsp;which will then enable you to configure the container you want (like a builder) and then allow you to instantiate the container through its&nbsp;<em>intiialize</em>&nbsp;method:</p>
+
+<pre>
+<code class="language-java">try (final SeContainer container = SeContainerInitializer.newInstance().initialize()) {
+    // be creative here
+}</code></pre>
+
+<p>Indeed&nbsp;<em>SeContainer</em>&nbsp;is&nbsp;<em>AutoCloseable</em>&nbsp;but it is also an&nbsp;<em>Instance</em>&nbsp;which allows you to use it to lookup any application instance. It is rarely what you use to code the full business of your application but often a good entry point to link the main to the CDI managed instances:</p>
+
+<pre>
+<code class="language-java">try (final SeContainer container = SeContainerInitializer.newInstance().initialize()) {
+    container.select(MyService.class).run(args);
+}</code></pre>
+
+<p><em>SeContainer</em>&nbsp;has two other methods, one to get the&nbsp;<em>BeanManager</em>&nbsp;and one to know if the container is still running. The first one can be useful to integrate with 3rd party libraries and the last one is intended to be used if your container is passed through some deeper layers of your application. I would recommand to not use this one outside the main itself since it would couple the way you launch your application to the implementation making it hard to migrate to a more standard deployment.</p>
+
+<h2>Going further in CDI SE API investigation</h2>
+
+<p>If you investigate&nbsp;<em>SeContainerInitializer </em>API, you will realize the container behavior is quite configurable which is quite nice compared to a &quot;EE CDI&quot; where the configuration is limited to&nbsp;<em>beans.xml</em>&nbsp;one and is mainly related to scanning exclusions.</p>
+
+<p>What the initializer will enable you to configure is:</p>
+
+<ul>
+	<li>the scanning: which classes/packages are considered as scanned</li>
+	<li>the extensions: which extensions are active</li>
+	<li>the beans.xml configuration for the standalone beans (active interceptors,&nbsp;decorators, alternatives ...)</li>
+	<li>which classloader is used for the application (to create proxies etc)</li>
+	<li>you can also completely disable the default implicit scanning to just use the previous methods to fully control the CDI context</li>
+</ul>
+
+<p>Here is an example:</p>
+
+<pre>
+<code class="language-java">try (final SeContainer container = SeContainerInitializer.newInstance()
+        .disableDiscovery()
+        .addPackages(true, MyApplication.class.getPackage())
+        .setClassLoader(new ThrowableAwayClassLoader())
+        .addExtensions(new MyRepositoryExtension())
+        .initialize()) {
+    container.select(MyService.class).run(args);
+}</code></pre>
+
+<p>As you can see it gives you a lot of control of what the container does. It is also a nice - even if a bit surprising - way to have a feature toggle implementatino since you can add/remove extensions dependeing the program arguments.</p>
+
+<h2>Going further in CDI SE API usage</h2>
+
+<p>One direct implementation of the extension configuration is the ability to pass extension instance. It sounds nothing but it means you can get your extension configured from your main directly and make them dynamic from the command line. Here is an example using args4j library:</p>
+
+<pre>
+<code class="language-java">public class Main {
+    @Option(name = "-web", usage = "active web endpoints")
+    private boolean web;
+
+    @Option(name = "-socket", usage = "active socket endpoints")
+    private boolean socket;
+
+    public static void main(String[] args) {
+        final Main config = new Main();
+        final CmdLineParser parser = new CmdLineParser(config, ParserProperties.defaults().withUsageWidth(80));
+        try {
+            parser.parseArgument(args);
+
+            try (final SeContainer container = SeContainerInitializer.newInstance()
+                    .addExtensions(new Extension() {
+                        void deployWebEndpoints(@Observes final AfterDeploymentValidation afterDeploymentValidation) {
+                            if (config.web) {
+                                // do the work related to this
+                            }
+                            if (config.socket) {
+                                // do the work related to this
+                            }
+                        }
+                    })
+                    .initialize()) {
+
+            }
+        } catch (final CmdLineException e) {
+            parser.printUsage(System.err);
+        }
+    }
+}</code></pre>
+
+<p>This example can be rewritten without doing the switch logic in the extension but just in the container bootstraping but if you want a more dynamic deployment based on application beans (<em>ProcessAnnotatedType</em>&nbsp;or&nbsp;<em>ProcessBean</em>) then this code style is really efficient.</p>
+
+<p>Another smooth use case is to activate or not the monitoring and wrap some beans to add them a&nbsp;<em>@Monitoring</em>&nbsp;annotation:</p>
+
+<pre>
+<code class="language-java">public class Main {
+    @Option(name = "-monitoring", usage = "active monitoring")
+    private boolean monitoring;
+
+    @Option(name = "-monitoring-package", usage = "filter monitored packages when monitoring=true")
+    private String monitoringPackage;
+
+    public static void main(String[] args) {
+        final Main config = new Main();
+        final CmdLineParser parser = new CmdLineParser(config, ParserProperties.defaults().withUsageWidth(80));
+        try {
+            parser.parseArgument(args);
+
+            try (final SeContainer container = SeContainerInitializer.newInstance()
+                    .addExtensions(new Extension() {
+                        &lt;T&gt; void activateMonitoring(@Observes final ProcessBeanAttributes&lt;T&gt; pba) {
+                            if (config.monitoring &amp;&amp; AnnotatedType.class.isInstance(pba.getAnnotated()) &amp;&amp;
+                                    AnnotatedType.class.cast(pba.getAnnotated()).getJavaClass().getName().startsWith(config.monitoringPackage)) {
+                                pba.setBeanAttributes(
+                                    pba.configureBeanAttributes()
+                                        .addQualifier(new MonitoringLiteral()));
+                            }
+                        }
+                    })
+                    .initialize()) {
+
+            }
+        } catch (final CmdLineException e) {
+            parser.printUsage(System.err);
+        }
+    }
+}</code></pre>
+
+<p>Here you see how the new&nbsp;<em>Configurator</em>&nbsp;(builder) API helps to mutate a CDI model to convert it to a new one (<em>configureBeanAttributes()</em>). Mixed with the anonymous <em>Extension</em>&nbsp;it is a real enabler to makes the application dynamic, allowing to activate very easily debug mode.</p>
+
+<p>I&#39;ll stop here with the use case examples but another one which is as trivial to implement with such a setup is the addition of some beans. For instance, if you use CXF JAX-RS CDI module you would be able to add any Feature pretty easily, like the logging one to see the request/response pairs just with a CLI flag.</p>
+
+<h2>Pre-Conclusion</h2>
+
+<p>CDI SE API is not something changing the way you will code applications, you should ensure to keep your application code the same as today and &quot;portable&quot; on CDI 1.2 applications for maintenance reasons but it will enable to make the deliverables more production ready and portable. Advantages are important for all the small utilities we have to write while working around a big application but less impacting for others kind of deliverable which would benefit more from a already built-in solution. As always it is this plain old question of the trade-off you have to define before picking a solution ;).</p>
+
+<h2>Real Conclusion</h2>
+
+<p>Pre-Conclusion was assuming &quot;full&quot; containers can&#39;t implement CDI SE API. Meecrowave - which is not a full container but already have enough configuration to make it part of that category in the context of that post - implemented the CDI SE API. This means you can use the SE API with meecrowave and it got the nice idea to forward all CDI SE properties (<em>addProperty</em>) to its own configuration. This just means you can use SE API and still have the full strength of Meecrowave. Extending this logic, TomEE embedded flavor could also do it - as it did for&nbsp;<em>EJBContainer</em>&nbsp;and therefore you can just see CDI SE API as a way to control what you put in your full container.</p>
+
+<p>If you step back one second you will quickly realize it is one more step to a convergence of the java ecosystem. Originally - and very caricaturally - EE was scanning and spring was declaring but now both are able to work in both modes which just enables any user of any stack to cover pretty much the same scope in term of application category making the end user having both a smooth experience but also able to get the full control.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-2-events-sync-async.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-stream-float-widening.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

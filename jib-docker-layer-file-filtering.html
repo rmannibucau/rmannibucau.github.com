@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JIB: how to filter files added to docker layers</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,140 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jib-docker-layer-file-filtering-html-container" class="container page-content jib-docker-layer-file-filtering-html is-blog">
+                        <div class="page-header">
+                <h1>JIB: how to filter files added to docker layers</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-10-06</span>, <span class="metadata-readingtime">2 min and 9 sec read</span></p>
+</div>
+<p><a href="https://github.com/GoogleContainerTools/jib/" target="_blank">JIB</a>&nbsp;is a great tool to create Docker/OCI images in plain Java. Since a few versions, it got some extension API and the official JIB extension - used as a demo - enables to filter the files added to layer.</p>
+
+<p>The most common use case is to build a distribution - Apache Karaf, Apache TomEE, Wildfly, .... - and want to add it to a docker image. You have a phase creating the distribution in a folder then you add this folder through JIB...but you need to add the &quot;build&quot; module jar to the docker image (in&nbsp;<em>classpath/</em>&nbsp;folder) which is fully useless most of the time.</p>
+
+<p>To solve that, you can now configure the filter extension and request to drop the <em>classpath/</em> folder:</p>
+
+<pre>
+<code class="language-xml">  &lt;plugin&gt; &lt;!-- 1 --&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+    &lt;configuration&gt;
+      &lt;skipIfEmpty&gt;false&lt;/skipIfEmpty&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+    &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+    &lt;executions&gt;
+      &lt;execution&gt;
+        &lt;id&gt;build&lt;/id&gt;
+        &lt;phase&gt;none&lt;/phase&gt; &lt;!-- 2 --&gt;
+        &lt;configuration&gt;
+          &lt;containerizingMode&gt;packaged&lt;/containerizingMode&gt; &lt;!-- 3 --&gt;
+          &lt;extraDirectories&gt;
+            &lt;paths&gt; &lt;!-- 4 --&gt;
+              &lt;path&gt;${project.build.directory}/distribution&lt;/path&gt;
+            &lt;/paths&gt;
+          &lt;/extraDirectories&gt;
+          &lt;from&gt;
+            &lt;image&gt;...&lt;/image&gt;
+          &lt;/from&gt;
+          &lt;to&gt;
+            &lt;image&gt;...&lt;/image&gt;
+          &lt;/to&gt;
+          &lt;container&gt;
+            &lt;appRoot&gt;${image.workdir}&lt;/appRoot&gt;
+            &lt;workingDirectory&gt;${image.workdir}&lt;/workingDirectory&gt;
+            &lt;!-- ... --&gt;
+          &lt;/container&gt;
+          &lt;pluginExtensions&gt;
+            &lt;pluginExtension&gt; &lt;!-- 5 --&gt;
+              &lt;implementation&gt;com.google.cloud.tools.jib.maven.extension.layerfilter.JibLayerFilterExtension
+              &lt;/implementation&gt;
+              &lt;configuration implementation="com.google.cloud.tools.jib.maven.extension.layerfilter.Configuration"&gt;
+                &lt;filters&gt;
+                  &lt;filter&gt; &lt;!-- 6 --&gt;
+                    &lt;glob&gt;${image.workdir}/classpath/*&lt;/glob&gt;
+                  &lt;/filter&gt;
+                &lt;/filters&gt;
+              &lt;/configuration&gt;
+            &lt;/pluginExtension&gt;
+          &lt;/pluginExtensions&gt;
+        &lt;/configuration&gt;
+      &lt;/execution&gt;
+    &lt;/executions&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt; &lt;!-- 7 --&gt;
+        &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+        &lt;artifactId&gt;jib-layer-filter-extension-maven&lt;/artifactId&gt;
+        &lt;version&gt;0.1.0&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/plugin&gt;
+</code></pre>
+
+<ol>
+	<li>We enable maven to build the jar of current module even if empty (if relevant),</li>
+	<li>We don&#39;t bind the docker creation in the main build - if you want to do so, you can replace&nbsp;<em>none</em>&nbsp;by&nbsp;<em>package</em>&nbsp;for example,</li>
+	<li>Thanks to 1., we can configure jib in&nbsp;<em>packaged</em>&nbsp;mode and avoid it to fail to add module files because the module is empty,</li>
+	<li>We add the distribution folder we prepared with another plugin (<em>karaf:assembly</em>,&nbsp;<em>tomee:build</em>),</li>
+	<li>We add the filter extension, this looks like a simple IoC configuration (thanks Maven/plexus ;)),</li>
+	<li>We configure the filter extension to remove the&nbsp;<em>classpath/</em>&nbsp;directory - note it matches container root folder configuration,</li>
+	<li>Finally, for the filter extension to work we must add the extension to the plugin dependency.</li>
+</ol>
+
+<p>Now, we just need to run the following command to get our &quot;folder based&quot; docker image containing exactly what we want:</p>
+
+<pre>
+<code class="language-bash">mvn package jib:dockerBuild@build</code></pre>
+
+<p>Indeed, this has the drawback to require to know what is in the docker image, whereas JIB seems to not require it, but as soon as you build a custom assembly/distribution, it must be the case anyway so at the end, it just makes JIB compatible with distribution based images and not only opiniated flat classpath images :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-karaf-custom-distribution-patch-configuration-from-the-pom.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jul-production-ready-pattern-with-simpleformatter.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

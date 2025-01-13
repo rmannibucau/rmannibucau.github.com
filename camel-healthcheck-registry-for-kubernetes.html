@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Camel: set up kubernetes healthcheck endpoints</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,259 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="camel-healthcheck-registry-for-kubernetes-html-container" class="container page-content camel-healthcheck-registry-for-kubernetes-html is-blog">
+                        <div class="page-header">
+                <h1>Camel: set up kubernetes healthcheck endpoints</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-11-03</span>, <span class="metadata-readingtime">4 min and 7 sec read</span></p>
+</div>
+<p>Camel 3 was a big step forward to a more modern development model. Except Spring Boot integration, it also provides Kubernetes like integration like health checks which enables to create liveness and readyness probe endpoints. Let see how to set it up.</p>
+
+<p>To set up camel healthcheck registry you must:</p>
+
+<ul>
+	<li>Add to camel context a health check registry</li>
+	<li>Create a healthcheck registry</li>
+	<li>(optionally) Register the route health check repository if you want the route healthchecks</li>
+	<li>Bind liveness and readyness to endpoints</li>
+</ul>
+
+<h2>Create a camel healthcheck registry</h2>
+
+<p>The first step is to ensure you have camel-health dependency:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-health&lt;/artifactId&gt;
+  &lt;version&gt;${camel.version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Then you can instantiate a registry and bind it to the context:</p>
+
+<pre>
+<code class="language-java">final var checkRegistry = new DefaultHealthCheckRegistry();
+checkRegistry.register(new RoutesHealthCheckRepository());
+camelContext.setExtension(HealthCheckRegistry.class, checkRegistry);</code></pre>
+
+<p>This will enable you to use&nbsp;<em>HealthCheckHelper</em>&nbsp;which provides&nbsp;<em>invokeReadiness</em>&nbsp;and&nbsp;<em>invokeLiveness</em>&nbsp;endpoints which return the list of healthcheck results.</p>
+
+<p>Tip: you can register custom&nbsp;<em>HealthCheck</em>&nbsp;if you want to enrich them with custom ones (datasource check for example) but previous code, thanks to <em>RoutesHealthCheckRepository</em>, will create one healthcheck per route.</p>
+
+<h2>Bind the healthchecks</h2>
+
+<p>There are multiple options to bind the healthchecks over HTTP. The simplest is likely to wire the healthchecks to existing endpoint. It can be the case if you run a Microprofile server. In such a case, you can add&nbsp;<em>camel-microprofile-health</em>&nbsp;module and wire the camel checks to microprofile endpoint automatically. However it is not that common and consistent to use a business oriented stack for a camel/orchestration/ESB oriented middleware.</p>
+
+<p>The other nice option is to use&nbsp;<em>camel-servlet</em>&nbsp;- or any other camel &quot;HTTP&quot; module. With this option, the idea is to register two routes (one for liveness and one for readyness) and to return the check status when all is fine and a HTTP 503 (or any status notifying kubernetes/docker-compose/...) the check failed.</p>
+
+<p>Here what it can look like with&nbsp;<em>camel-servlet</em>&nbsp;and&nbsp;<em>camel-rest</em>&nbsp;modules:</p>
+
+<pre>
+<code class="language-java">api.get("/api/health/ready")
+        .id("app.health.readiness")
+        .route()
+        .setHeader(CONTENT_TYPE, constant("application/json"))
+        .process(exchange -&gt; setHealthCheckResult(exchange, HealthCheckHelper.invokeReadiness(getContext())));
+
+api.get("/api/health/live")
+        .id("app.health.liveness")
+        .route()
+        .setHeader(CONTENT_TYPE, constant("application/json"))
+        .process(exchange -&gt; setHealthCheckResult(exchange, HealthCheckHelper.invokeLiveness(getContext())));</code></pre>
+
+<p>Nothing crazy, the content type is forced to use JSON and we use&nbsp;<em>setHealthCheckResult</em>&nbsp;utility to convert the list of health check result we get for each endpoint to the right HTTP status in <em>camel-rest</em>&nbsp;and set the payload to return to the caller.</p>
+
+<p>Here is one implementation of the utility method:</p>
+
+<pre>
+<code class="language-java">private void setHealthCheckResult(final Exchange exchange,
+                                 final Collection&lt;HealthCheck.Result&gt; results) {
+    if (results.stream().anyMatch(it -&gt; it.getState() != HealthCheck.State.UP)) { // &lt;1&gt;
+        exchange.getMessage().setHeader(HTTP_RESPONSE_CODE, 503);
+    }
+    exchange.getMessage().setBody(results); // &lt;2&gt;
+}</code></pre>
+
+<ul>
+	<li>If any check result is not&nbsp;<em>UP</em>&nbsp;then we consider the overall status of the application is down and we set the response status to 503,</li>
+	<li>We set the returned payload to the list of results (works well thanks the POJO-like model of&nbsp;<em>Result</em>). note that the payload does not have to be the results, it can be empty or wrapped in an aggregating payload (<em>{globalStatus,results}</em>) as in Microprofile Health specification. This is more for human beings than any automotion so ensure to create the body which works the best for you.</li>
+</ul>
+
+<h2>Result</h2>
+
+<p>Running, and calling the live endpoint, you will get something like that:</p>
+
+<pre>
+<code class="language-json">[
+   {
+      "check":{
+         "configuration":{
+            "enabled":true,
+            "failureThreshold":0,
+            "interval":0
+         },
+         "group":"camel",
+         "id":"route:app.health.readiness",
+         "liveness":false,
+         "metaData":{
+            "invocation.count":1,
+            "invocation.attempt.time":"2020-11-02T11:30:46.761982+01:00[Europe/Paris]",
+            "check.id":"route:app.health.readiness",
+            "invocation.time":"2020-11-02T11:30:46.761982+01:00[Europe/Paris]",
+            "check.group":"camel",
+            "failure.count":0
+         }
+      },
+      "details":{
+         "route.id":"app.health.readiness",
+         "invocation.count":1,
+         "route.context.name":"app-camel-context",
+         "invocation.time":"2020-11-02T11:30:46.761982+01:00[Europe/Paris]",
+         "route.status":"Started",
+         "failure.count":0
+      },
+      "state":"UP"
+   },
+   {
+      "check":{
+         "configuration":{
+            "enabled":true,
+            "failureThreshold":0,
+            "interval":0
+         },
+         "group":"camel",
+         "id":"route:app.health.liveness",
+         "liveness":false,
+         "metaData":{
+            "invocation.count":1,
+            "invocation.attempt.time":"2020-11-02T11:30:46.76289+01:00[Europe/Paris]",
+            "check.id":"route:app.health.liveness",
+            "invocation.time":"2020-11-02T11:30:46.76289+01:00[Europe/Paris]",
+            "check.group":"camel",
+            "failure.count":0
+         }
+      },
+      "details":{
+         "route.id":"app.health.liveness",
+         "invocation.count":1,
+         "route.context.name":"app-camel-context",
+         "invocation.time":"2020-11-02T11:30:46.76289+01:00[Europe/Paris]",
+         "route.status":"Started",
+         "failure.count":0
+      },
+      "state":"UP"
+   },
+   {
+      "check":{
+         "configuration":{
+            "enabled":true,
+            "failureThreshold":0,
+            "interval":0
+         },
+         "group":"camel",
+         "id":"route:app.api.test",
+         "liveness":false,
+         "metaData":{
+            "invocation.count":1,
+            "invocation.attempt.time":"2020-11-02T11:30:46.762987+01:00[Europe/Paris]",
+            "check.id":"route:app.api.test",
+            "invocation.time":"2020-11-02T11:30:46.762987+01:00[Europe/Paris]",
+            "check.group":"camel",
+            "failure.count":0
+         }
+      },
+      "details":{
+         "route.id":"app.api.test",
+         "invocation.count":1,
+         "route.context.name":"app-camel-context",
+         "invocation.time":"2020-11-02T11:30:46.762987+01:00[Europe/Paris]",
+         "route.status":"Started",
+         "failure.count":0
+      },
+      "state":"UP"
+   }
+]</code></pre>
+
+<p>You can now set it up in your Kubernetes spec:</p>
+
+<pre>
+<code class="language-objectivec">apiVersion: v1
+kind: Pod # would work the same for a deployment
+metadata:
+  labels:
+    app: demo-camel-health
+  name: demo-camel-health
+spec:
+  containers:
+  - name: demo-camel-health
+    image: demo-camel-health:latest
+    livenessProbe:
+      httpGet:
+        path: /api/health/live
+        port: 8080
+      initialDelaySeconds: 3
+      periodSeconds: 3
+    readinessProbe
+      httpGet:
+        path: /api/health/ready
+        port: 8080
+      initialDelaySeconds: 3
+      periodSeconds: 3</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>It is quite important to set up proper healthchecks in your application. Camel does not do it automatically out of the box but it also enables you to control where it is deployed.</p>
+
+<p>In plain old bare metal deployments, you still use health checks to monitor your application but often want to bind them on a &quot;localhost&quot; server whereas your main application/gateway will bind another host (monitoring concern vs business one). With such a solution it is trivial to bind the health checks on another server than the business one.</p>
+
+<p>When running Apache Camel in Spring Boot or a Microprofile server, it is also better to align Camel health report to the stack monitoring and this is what does Camel Microprofile Health integration module for example.</p>
+
+<p>So at the end, no excuse to not know if your application is up and runnning or not and potentially to have an orchestrator (k8s) to respawn it when down&nbsp;;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//faster-hazelcast-startup-in-tests.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//angular-ng-10-configure-your-routes.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

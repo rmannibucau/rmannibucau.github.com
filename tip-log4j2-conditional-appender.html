@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Log4j2: how to get a conditional appender without any code</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,128 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tip-log4j2-conditional-appender-html-container" class="container page-content tip-log4j2-conditional-appender-html is-blog">
+                        <div class="page-header">
+                <h1>Log4j2: how to get a conditional appender without any code</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-01-16</span>, <span class="metadata-readingtime">2 min and 41 sec read</span></p>
+</div>
+<p>Log4j2 does not have a conditional feature so if you need to use an appender depending on some environment variable or system property it does not look that trivial. However, <strong>log4j2</strong> hides a feature making it not that hard to implement.</p>
+
+<p>If log4j2 does not have conditions, it has what is called a <u><a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#RoutingAppender" target="_blank">routing</a></u> appender which, once well configured, can be used as a <strong>conditional appender</strong>.</p>
+
+<p>First, let&#39;s illustrate this need by an example - likely easier than real life use case which will switch between kafka appender, the console and rolling files but this is enough to get the idea. Our use case will be to switch between <em>System.out</em>&nbsp;and&nbsp;<em>System.err</em>&nbsp;without configuring the&nbsp;<em>target</em>&nbsp;of the&nbsp;<em>Console&nbsp;</em>&nbsp;appender dynamically (which would be simpler). Hardcoding an appender to&nbsp;<em>System.err</em>&nbsp;and another one to&nbsp;<em>System.out</em>&nbsp;will simulate we have two different appenders (let say a file and a console or a file and kafka).</p>
+
+<p>A high level configuration can be:</p>
+
+<pre>
+<code class="language-xml">&lt;Configuration status="INFO"&gt;
+  &lt;Appenders&gt;
+    &lt;Console name="ConsoleOut" target="SYSTEM_OUT" /&gt;
+    &lt;Console name="ConsoleErr" target="SYSTEM_ERR" /&gt;
+
+    &lt;!-- something missing --&gt;
+  &lt;/Appenders&gt;
+
+  &lt;Loggers&gt;
+    &lt;Root level="INFO"&gt;
+      &lt;AppenderRef ref="?????" /&gt;
+    &lt;/Root&gt;
+  &lt;/Loggers&gt;
+&lt;/Configuration&gt;</code></pre>
+
+<p>This configuration has a&nbsp;<em>ConsoleOut</em>&nbsp;appender logging on&nbsp;<em>System.out</em>&nbsp;and its sibling&nbsp;<em>ConsoleErr</em>&nbsp;logging on&nbsp;<em>System.err</em>. Then we just need to be able to switch between both and reference the right appender in our logger(s) - concretely we want an appender selecting one of the two console ones instead of the comment &#39;something missing&#39; and we want to put that appender name instead of the &#39;?????&#39; in the ref of our root logger.</p>
+
+<p>To do that we will use the environment variable&nbsp;<em>STREAM_TO_USE</em>&nbsp;which will take the value&nbsp;<em>OUT&nbsp;</em>or&nbsp;<em>ERR</em>&nbsp;to switch between both appenders. The routing appender evaluates a pattern which, thanks to <strong>log4j2 placeholding support</strong>, can be an environment variable with a default. Then the pattern allows to select the&nbsp;<em>Route</em>&nbsp;to use to actually log the log event. In other words, <strong>the router (or routing appender)</strong> behaves as a proxy in front of other appenders :).</p>
+
+<p>Here is how we can configure it for our use case:</p>
+
+<pre>
+<code class="language-xml">&lt;Routing name="Router"&gt;
+  &lt;Routes pattern="$${env:STREAM_TO_USE:-OUT}"&gt;
+    &lt;Route ref="ConsoleOut" key="OUT" /&gt;
+    &lt;Route ref="ConsoleErr" key="ERR" /&gt;
+  &lt;/Routes&gt;
+&lt;/Routing&gt;</code></pre>
+
+<p>The&nbsp;<em>$${env:STREAM_TO_USE:-OUT}</em>&nbsp;syntax is may not be obvious if you are not used to log4j2 but it can be split like that:</p>
+
+<ol>
+	<li><em>$${....}</em>: it is an escaped placeholder to avoid a too early evaluation, in this&nbsp;case, keep in mind it&nbsp;behaves&nbsp;as a placeholder,</li>
+	<li><em>env:xxxx</em>&nbsp;it enables to point to the&nbsp;<em>xxxx</em>&nbsp;environment variable (the&nbsp;<em>xxxx</em>&nbsp;variable is evaluated in the namespace&nbsp;<em>env</em>&nbsp;which holds the environment variables),</li>
+	<li><em>:-xxxx</em>&nbsp;is not a smiley but the default syntax (inherited from bash), it means that if the variable is not set the value will be&nbsp;<em>xxxx</em></li>
+</ol>
+
+<p>So at the end, to get our feature, we can use that <strong>log4j2 configuration</strong>:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;Configuration status="INFO"&gt;
+  &lt;Appenders&gt;
+    &lt;Console name="ConsoleOut" target="SYSTEM_OUT" /&gt;
+    &lt;Console name="ConsoleErr" target="SYSTEM_ERR" /&gt;
+
+    &lt;Routing name="Router"&gt;
+      &lt;Routes pattern="$${env:STREAM_TO_USE:-OUT}"&gt;
+        &lt;Route ref="ConsoleOut" key="OUT" /&gt;
+        &lt;Route ref="ConsoleErr" key="ERR" /&gt;
+      &lt;/Routes&gt;
+    &lt;/Routing&gt;
+  &lt;/Appenders&gt;
+
+  &lt;Loggers&gt;
+    &lt;Root level="INFO"&gt;
+      &lt;AppenderRef ref="Router" /&gt;
+    &lt;/Root&gt;
+  &lt;/Loggers&gt;
+&lt;/Configuration&gt;</code></pre>
+
+<p>With this configuration, you have a <strong>conditional appender</strong> using the environment variable&nbsp;<em>STREAM_TO_USE</em>&nbsp;to <strong>switch between two appenders</strong>. Wasn&#39;t that hard after all ;)</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jlink-java-application-image-before-putting-into-docker-part-1-of-3.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cdi-proxy-interceptor-support-with-interceptionfactory.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

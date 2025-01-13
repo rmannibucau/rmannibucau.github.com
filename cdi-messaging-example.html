@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CDI Messaging Example</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="cdi-messaging-example-html-container" class="container page-content cdi-messaging-example-html is-blog">
+                        <div class="page-header">
+                <h1>CDI Messaging Example</h1>
+            </div>
+            <div class="page-content-body">
+                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2022-08-18</span>, <span class="metadata-readingtime">8 min and 39 sec read</span></p>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+Messaging is more and more used in our applications.
+You probably saw Kafka or Pulsar popping up.
+But it has some challenges at dev and maintenance time so let see how we can integrate it in a CDI application.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_common_challenges">The common challenges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The common challenges with messaging you can face are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Testing: mocking Kafka is not always trivial even if <a href="https://www.testcontainers.org/modules/kafka/">testcontainers</a> helps (at the cost of test execution),</p>
+</li>
+<li>
+<p>Migration: this is not because you start with one broker than you will keep it (you started with Kafka because it is hype but you need some more transactional constraints so went back to JMS for example or your company bought Pulsar etc&#8230;&#8203;),</p>
+</li>
+<li>
+<p>You can need to run with multiple brokers (if you deploy in multiple environments, AWS/Azure/&#8230;&#8203;, you can use the managed service and a different bus per env).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_solutions">The solution(s)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The idea when you face such issues is generally to abstract the backend.
+Rephrased it means that when your application will <code>read</code> or <code>write</code> from/to a broker, it will actually do it through an application abstraction and then something in the application will handle it from/to the broker.</p>
+</div>
+<div class="sect2">
+<h3 id="_microprofile_reactive_messaging">Microprofile Reactive Messaging</h3>
+<div class="paragraph">
+<p>An example of such an implementation is <a href="https://github.com/eclipse/microprofile-reactive-messaging">Microprofile Reactive Messaging</a>.</p>
+</div>
+<div class="paragraph">
+<p>With this specification, when you read/write you actually use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+@Channel("my-outgoing-topic")
+private Emitter&lt;String&gt; emitter;
+
+@Incoming("my-ingoing-topic")
+public void consume(final String message) {
+  emitter.send(process(message));
+  emitter.complete();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_custom_abstraction">The custom abstraction</h3>
+<div class="paragraph">
+<p>Microprofile Reactive Messaging works but has some pitfalls you can desire to avoid as an application maintainer:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>you can not always use it without efforts depending your stack (javax/jakarta migration can be an issue, using a custom container or environment - cloud - can be another one, &#8230;&#8203;)</p>
+</li>
+<li>
+<p>you can not desire part of the (dependency) stack (<code>reactivestreams</code> which has now equivalent in the JRE, <code>vertx-context</code> or <code>mutiny</code> stacks, &#8230;&#8203;)</p>
+</li>
+<li>
+<p>due to the past instability of Microprofile you can not desire to depend on it</p>
+</li>
+<li>
+<p>there is not a variety of implementations (you will end up using <a href="https://github.com/smallrye/smallrye-reactive-messaging">Smallrye</a>)</p>
+</li>
+<li>
+<p>connectors (the implementations behind <code>read</code>/<code>write</code> primitives) can miss some configuration or integration you need</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you can&#8217;t use it, it does not mean you cannot abstract the primitives.
+There are a ton of solutions to do it - even doing something close to Microprofile Reactive Messaging - but one solution I like is to use the CDI bus event.</p>
+</div>
+<div class="paragraph">
+<p>Long story short, you will design an <code>In</code> and an <code>Out</code> message and <code>@Observes</code>/<code>fire</code> it over the CDI event bus.
+This then means, that sending a message is firing an event and listening for incoming messages is observing an event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+private Event&lt;Out&gt; sender;
+
+public void onMessage(@Observes final In message) {
+    sender.fire(process(message));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>In</code> (resp. <code>Out</code>) messages contain the right abstraction to send to the underlying(s) backend(s).
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public record Out( <i class="conum" data-value="1"></i><b>(1)</b>
+        Integer partition, Long timestamp, <i class="conum" data-value="2"></i><b>(2)</b>
+        Map&lt;String, byte[]&gt; headers, Object key, Object value, <i class="conum" data-value="3"></i><b>(3)</b>
+        CompletableFuture&lt;Void&gt; completion) { <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The message can be a <code>record</code> or a plain <code>class</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The kafka oriented metadata (<code>partition</code>, <code>timestamp</code>) are optional but are generally mappable on any backend (even JMS with some semantic extension),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The message itself is represented by headers, a key and a value - which can be typed if needed,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>An optional <code>CompletionFuture</code> enables the observer (actual backend producer) to notify the caller when the message is ack.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>In</code> message is more or less the same but <code>completion</code> can be implicit is the message is well processed for example.</p>
+</div>
+<div class="paragraph">
+<p>What is important there is to have an abstraction which does not depend on your backend (no Kafka import for ex.).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+if you handle multiple channels/topics, you must choose if you reuse the same message shapes (type) and make it specific with a <code>@Qualifier</code> (for example <code>@Topic("name")</code>) or if you type each message differently.
+Both options have pros and cons.
+We will prefer to use <code>@Topic</code> qualifier when the code stays quite technical but not too verbose and without more abstraction and a strong typing only (<code>SendOrder</code>/<code>ReceivedOrder</code> types) when the semantic is more important in the code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>At that stage we have a way to send and listen to messages but nothing plugged behind.</p>
+</div>
+<div class="paragraph">
+<p>The job then, is to implement an <code>@Observer</code> for each type (or type+qualifier if you used <code>@Topic</code> qualifier) of sent message which will actually send it to the backend
+and for each incoming data, a backend consumer which will fire an event per message.</p>
+</div>
+<div class="paragraph">
+<p>Here is a light example for kafka - some robustness should be added but it is out of scope of this post:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyKafkaProducer {
+    private Producer&lt;JsonValue, JsonValue&gt; producer;
+    private String topic;
+
+    @PostConstruct
+    private void init() { <i class="conum" data-value="1"></i><b>(1)</b>
+        producer = createKafkaProducer(); // standard creation
+        topic = getTopicName(); // from conf generally
+    }
+
+    public void onMessage(@Observes final Out message) { <i class="conum" data-value="2"></i><b>(2)</b>
+        final var record = new ProducerRecord&lt;&gt;(
+            topic, message.partition(), message.timestamp(),
+            message.key(), message.value());
+        if (message.headers() != null) {
+            message.headers().forEach(record.headers()::add);
+        }
+        if (message.completion() == null) { <i class="conum" data-value="3"></i><b>(3)</b>
+            producer.send(record);
+        } else {
+            producer.send(record, new NotifyOnCompletion(message.completion()));
+        }
+    }
+
+    private record NotifyOnCompletion(CompletableFuture&lt;OutgoingMessage.Completion&gt; promise) implements Callback {
+        @Override
+        public void onCompletion(final RecordMetadata metadata, final Exception exception) {
+            if (exception  != null) {
+                promise.completeExceptionally(exception);
+            } else {
+                promise.complete(new OutgoingMessage.Completion(metadata.partition(), metadata.offset(), metadata.timestamp()));
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>When the bean is initialized, we create a kafka producer and read the topic name to send records to from the application configuration,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We observe messages to send created from the application (note that you can adjust it with <code>@Topic</code> or a more precise type - <code>SendOrder</code> - if needed, see previous note),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Depending if the ack must be pushed back to the caller we forward it or not thanks a kafka producer <code>Callback</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The consuming side is exactly the symmetric:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Log
+@ApplicationScoped
+public class MyKafkaConsumer {
+    private Consumer&lt;?, ?&gt; consumer;
+    private AtomicBoolean running;
+    private ExecutorService pool;
+    private ExecutorService appPool;
+
+    public void forceStart(@Observes @Intialized(ApplicationScoped.class) final Object start) { <i class="conum" data-value="1"></i><b>(1)</b>
+        // force the instance to start when the app begins
+    }
+
+    @PostConstruct
+    private void onConstruct() {
+        <i class="conum" data-value="2"></i><b>(2)</b>
+        final var observerMethods = beanManager.resolveObserverMethods(new In(0, 0, 0, null, null, null));
+        if (observerMethods.isEmpty()) {
+            return;
+        }
+
+        <i class="conum" data-value="3"></i><b>(3)</b>
+        consumer = newKafkaConsumer();
+        consumer.subscribe(List.of(getTopic()));
+
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        final var pool = Executors.newFixedThreadPool(Math.max(1, getPollerThreadNumber()), new ThreadFactory() {
+            private final AtomicInteger counter = new AtomicInteger();
+
+            @Override
+            public Thread newThread(final Runnable r) {
+                return new Thread(r, "kafka-" + conf.topic() + "-consumer-poll-" + counter.incrementAndGet());
+            }
+        });
+        final var appPool = Executors.newFixedThreadPool(Math.max(1, getProcessorThreadNumber()), new ThreadFactory() {
+            private final AtomicInteger counter = new AtomicInteger();
+
+            @Override
+            public Thread newThread(final Runnable r) {
+                return new Thread(r, "kafka-" + conf.topic() + "-consumer-process-" + counter.incrementAndGet());
+            }
+        });
+
+        final java.util.function.Consumer&lt;In&gt; invoke = i -&gt; { <i class="conum" data-value="5"></i><b>(5)</b>
+            for (final var m: observerMethods) {
+                m.notify(i);
+            }
+        };
+
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        final var running = new AtomicBoolean(true);
+        final var pollTimeout = Duration.ofMillis(100);
+        while (running.get()) {
+            try {
+                final var records = consumer.poll(pollTimeout);
+                for (final var record: records) {
+                    appPool.execute(() -&gt; invoke.accept(new In( <i class="conum" data-value="7"></i><b>(7)</b>
+                        record.partition(),
+                        record.offset(),
+                        record.timestamp(),
+                        StreamSupport.stream(record.headers().spliterator(), false)
+                            .collect(toMap(Header::key, Header::value, (a, b) -&gt; a)),
+                        record.key(),
+                        record.value())));
+                }
+            } catch (final RuntimeException re) {
+                log.log(SEVERE, re, re::getMessage);
+            }
+        }
+
+        return consumer;
+    }
+
+    @PreDestroy
+    private void onDestroy() { <i class="conum" data-value="8"></i><b>(8)</b>
+        running.set(false);
+        consumer.close();
+        pool.shutdown();
+        appPool.shutdown();
+        try {
+            if (!pool.awaitTermination(1, TimeUnit.MINUTES) || !appPool.awaitTermination(1, TimeUnit.MINUTES)) {
+                log.warning(() -&gt; "Can't stop " + conf.topic() + " consumer in 1mn, giving up");
+            }
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ensure the instance starts listening when the application is deployed/starts,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Resolve the observers of the related event (<code>@Topic</code> + <code>In</code> OR <code>ReceiveOrder</code> as per the previous note),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Create a consumer and subscribe to the configured topic,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Create thread pools to listen for messages and to process messages,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Create a handler for messages (we just forward to listeners),</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Start the event loop and processing of incoming messages,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Create an <code>In</code> representation of messages and forward it to application observes,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>At the end of the application, destroy the consumer and stop started threads.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+if you have multiple incoming/outgoing channels, most of this code can go in a <code>KafkaService</code> and be reused since the only change would be the concurrency if you start multiple consumers, the producer/consumer properties and topic names.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So what we did there is a very light abstraction thanks CDI bus for all our external events and a connector composed of an observer (produce side) and a Kafka consumer which sends CDI event for the consumer side.</p>
+</div>
+<div class="sect3">
+<h4 id="_switch_of_connector">Switch of connector</h4>
+<div class="paragraph">
+<p>In previous part we implemented a Kafka connector so it should be very hard for you now to implement a JMS or even a mock/in-memory connector.
+The question then is: how to control which one is in use?</p>
+</div>
+<div class="paragraph">
+<p>There are several options there:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Make a toggle in the application configuration which will be read in Kafka code (<code>if (notKafka()) {return;}</code> kind of pattern) - I&#8217;m not a big fan of this one,</p>
+</li>
+<li>
+<p>Make a toggle which is read from a CDI extension which will <code>veto()</code> the connectors not in used - this one works well but requires a toggle,</p>
+</li>
+<li>
+<p>Make the code modular, ie extract Kafka integration in a kafka module and not deploy it when you don&#8217;t need it. This option is likely the simplest for the end application since it will not require any additional configuration and the packaging is sufficient there,</p>
+</li>
+<li>
+<p>Not always the most sexy but a very efficient way is to exclude the packages/classes you don&#8217;t want to deploy using <code>&lt;scan&gt;</code> section of your module <code>beans.xml</code> - this can be conditional with a system property for example.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advantages_of_this_technic">Advantages of this technic</h4>
+<div class="paragraph">
+<p>Indeed, there, you will implement yourself the connector - but to be honest, it is generally not the hardest part since client libraries are often high level - see reactive kafka for example.</p>
+</div>
+<div class="paragraph">
+<p>However, the advantages are quite huge:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You choose your programming model and it will by design integrate well with your stack and libraries,</p>
+</li>
+<li>
+<p>You don&#8217;t depend on what the connector library you picked supports in terms of configuration and features,</p>
+</li>
+<li>
+<p>You are the owner of the code and libraries evolutions,</p>
+</li>
+<li>
+<p>You depend on less libraries (so less potential CVE and upgrade work ;)).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_which_solution_to_choose">Which solution to choose?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As always there is no silver bullet, both options are quite good and both will work well.
+The choice will mainly be a compromise between your team knowledge - if you have qualified people don&#8217;t hesitate and go with option 2 else option 1 can be saner - and the cost you accept to pay in time to maintain the solution.</p>
+</div>
+</div>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//gitea-asciidoctor.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//simple-bash-cli-for-automotion.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

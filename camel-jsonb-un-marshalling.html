@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Camel and JSON-B (un)marshalling</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,192 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="camel-jsonb-un-marshalling-html-container" class="container page-content camel-jsonb-un-marshalling-html is-blog">
+                        <div class="page-header">
+                <h1>Camel and JSON-B (un)marshalling</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-12-19</span>, <span class="metadata-readingtime">3 min and 50 sec read</span></p>
+</div>
+<p><strong>Apache Camel</strong> is likely the most powerful <strong>open source integration solution</strong> you can find out on the market. It enables you to create very simply &quot;routes&quot; which are literally integration pipelines. However in current version it does not integrate natively with JSON-B (the &quot;javax&quot; JSON-Java binding).</p>
+
+<p>The main reason you will want <strong>to integrate with JSON-B</strong> , instead of using one of the existing JSON integrations Camel has, is to reuse some existing model developped in JSON-B or just to drop some dependencies you don&#39;t want and slim down your deployment.</p>
+
+<p>As a quick reminder, Camel design is based on exchanges which have an in and out payloads (generally the in payload is propagated to the out one and at the next stage the out becomes the in side). Each step of a route will process the exchange to create a new one - or propagate the incoming one. In this context, a particular type of processing is the (un)marshalling. This is why Camel has a particular abstraction for that concern. Thanks to a registry of <em>DataFormat</em>s, Camel can serialize and deserialize any payload very easily.</p>
+
+<p>Before showing you a potential implementation, please note that we will also give an alias to our implementation thanks to the API&nbsp;<em>DataFormatName</em>&nbsp;and enable to manage a dedicated JSON-B instance thanks to&nbsp;<em>ServiceSupport</em>&nbsp;which will enable us to release the instance when the&nbsp;<em>CamelContext</em>&nbsp;will be closed. Here is the <strong>implementation of the JSON-B DataFormat</strong>:</p>
+
+<pre>
+<code class="language-java">package com.github.rmannibucau.camel.jsonb;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+import javax.json.JsonObject;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.model.dataformat.JsonDataFormat;
+import org.apache.camel.spi.DataFormat;
+import org.apache.camel.spi.DataFormatName;
+import org.apache.camel.support.ServiceSupport;
+
+public class JsonbDataFormat extends ServiceSupport implements DataFormat, DataFormatName {
+    public static final String UNMARSHALLING_TYPE_HEADER = JsonDataFormat.class.getName() + ".type";
+
+    private final Jsonb jsonb;
+    private final boolean closeJsonb;
+    private final ConcurrentMap&lt;String, Class&lt;?&gt;&gt; models = new ConcurrentHashMap&lt;&gt;();
+
+    // &lt;1&gt;
+    private JsonbDataFormat(final Jsonb jsonb, final boolean closeJsonb) {
+        this.jsonb = jsonb;
+        this.closeJsonb = closeJsonb;
+    }
+
+    // &lt;2&gt;
+    public JsonbDataFormat(final Jsonb jsonb) {
+        this(jsonb, false);
+    }
+
+    // &lt;3&gt;
+    public JsonbDataFormat() {
+        this(JsonbBuilder.create(), true);
+    }
+
+    @Override
+    protected void doStart() {
+        // no-op
+    }
+
+    // &lt;4&gt;
+    @Override
+    protected void doStop() throws Exception {
+        if (closeJsonb) {
+            jsonb.close();
+        }
+    }
+
+    // &lt;5&gt;
+    @Override
+    public String getDataFormatName() {
+        return "jsonb";
+    }
+
+    // &lt;6&gt;
+    @Override
+    public void marshal(final Exchange exchange, final Object graph, final OutputStream stream) {
+        jsonb.toJson(graph, stream);
+    }
+
+    // &lt;6&gt;
+    @Override
+    public Object unmarshal(final Exchange exchange, final InputStream stream) {
+        return jsonb.fromJson(stream, getModel(exchange));
+    }
+
+    // &lt;7&gt;
+    private Class&lt;?&gt; getModel(final Exchange exchange) {
+        final String typeName = exchange.getIn().getHeader(UNMARSHALLING_TYPE_HEADER, String.class);
+        if (typeName == null) { // default
+            return JsonObject.class;
+        }
+        return models.computeIfAbsent(typeName, k -&gt; {
+            try {
+                return Thread.currentThread().getContextClassLoader().loadClass(k);
+            } catch (final ClassNotFoundException e) {
+                throw new IllegalArgumentException(e);
+            }
+        });
+    }
+}
+</code></pre>
+
+<ol>
+	<li>This internal constructor enables us to initialize the JSON-B instance but also to store if we must manage it (close it) or if it is provided by the user and not be closed by the data format instance,</li>
+	<li>this constructor can be used by the user to inject its own instance of JSON-B, this is common when the deployment also has some rest endpoints using another instance (memory optimization) or to customize the instance with specific type adapters or configuration (null etc),</li>
+	<li>this is the <strong>default constructor</strong> used when the default JSON-B modelling can be used, we will see very soon how it is also used by the default camel integration,</li>
+	<li>we use the <em>ServiceSupport#doStop</em>&nbsp;to close the JSON-B instance when needed,</li>
+	<li>we name the data format &quot;jsonb&quot; to enable us to use this string instead of the class in our routes,</li>
+	<li>we map the (un)marshalling of JSON-B in camel data format API,</li>
+	<li>finally, to unmarshall a model, JSON-B requires a <em>Class</em>&nbsp;and to pass it we use a camel header (<em>UNMARSHALLING_TYPE_HEADER</em>) we defined in our data format which can be set to specify the type to use, if not set we will default on&nbsp;<em>JsonObject</em>.</li>
+</ol>
+
+<p>At that point, the format is usable but is not implicitly usable. To make it usable automatically - with our default constructor - by Camel without requiring to register the instance in the camel registry, we will <strong>put its class name in a file</strong> called&nbsp;<em>META-INF/services/org/apache/camel/dataformat/jsonb</em>:</p>
+
+<pre>
+<code class="language-bash">class=com.github.rmannibucau.camel.jsonb.JsonbDataFormat
+</code></pre>
+
+<p>With this, Camel will look this format, as a fallback with &quot;jsonb&quot; format will be requested and not found in the Camel registry.</p>
+
+<p>From now on, we can unmarshall a payload in a route as simply as this:</p>
+
+<pre>
+<code class="language-java">from("rest:get:/hello")
+    .id("unmarshall_route")
+    .setHeader(JsonbDataFormat.UNMARSHALLING_TYPE_HEADER, constant(MyEntity.class.getName()))
+    .unmarshal("jsonb")
+    .to("jpa:" + MyEntity.class.getName());</code></pre>
+
+<p>And do the opposite even simpler:</p>
+
+<pre>
+<code class="language-java">from("jpa:" + MyEntity.class.getName() + "?consumer.namedQuery=MyEntity.findAll")
+    .id("marshall_route")
+    .marshall("jsonb")
+    .to("rest:post:/send-list");</code></pre>
+
+<p>Simple and enables you <strong>to not redevelop an existing mapping/binding</strong> :)</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//camel-cdi-meecrowave-http-proxy.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-beam-2.9.0-spark-runner-upgrade.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Faster startup of hazelcast in tests</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,180 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="faster-hazelcast-startup-in-tests-html-container" class="container page-content faster-hazelcast-startup-in-tests-html is-blog">
+                        <div class="page-header">
+                <h1>Faster startup of hazelcast in tests</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-11-10</span>, <span class="metadata-readingtime">2 min and 46 sec read</span></p>
+</div>
+<p>Hazelcast offers great distributed structures as well as a great computing grid solution for java applications (or not ;)). However, it default startup is quite slow and uses multicast. Even if you can make the port random and the cluster specific to your test to kind of isolate the concurrent runs, it still adds latency in your dev flow. Let see how to reduce it.</p>
+
+<p>The trick to reduce hazelcast startup time is to use an &quot;embedded discovery strategy&quot;. In other words, we will drop the join feature for tests using a single instance.</p>
+
+<p>The first step is to implement a mock of&nbsp;<em>DiscoveryStrategyFactory</em>&nbsp;and&nbsp;<em>DiscoveryStrategy</em>. It can be as simple as this class:</p>
+
+<pre>
+<code class="language-java">public class LocalDiscoveryStrategy implements DiscoveryStrategyFactory, DiscoveryStrategy {
+    @Override
+    public Class&lt;? extends DiscoveryStrategy&gt; getDiscoveryStrategyType() {
+        return LocalDiscoveryStrategy.class;
+    }
+
+    @Override
+    public DiscoveryStrategy newDiscoveryStrategy(final DiscoveryNode discoveryNode, final ILogger logger,
+                                                  final Map&lt;String, Comparable&gt; properties) {
+        return this;
+    }
+
+    @Override
+    public Collection&lt;PropertyDefinition&gt; getConfigurationProperties() {
+        return emptyList();
+    }
+
+    @Override
+    public void start() {
+        // no-op
+    }
+
+    @Override
+    public Iterable&lt;DiscoveryNode&gt; discoverNodes() {
+        return emptyList();
+    }
+
+    @Override
+    public void destroy() {
+        // no-op
+    }
+
+    @Override
+    public PartitionGroupStrategy getPartitionGroupStrategy() {
+        return null;
+    }
+
+    @Override
+    public Map&lt;String, String&gt; discoverLocalMetadata() {
+        return emptyMap();
+    }
+}</code></pre>
+
+<p>Then, we must register it to let hazelcast find it so we add its fully qualified name in <em>META-INF/services/com.hazelcast.spi.discovery.DiscoveryStrategyFactory</em>.</p>
+
+<p>Finally we create a&nbsp;<em>hazelcast.xml</em>&nbsp;disabling multicasting and using this discovery stategy with no wait before join:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;hazelcast xmlns="http://www.hazelcast.com/schema/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+            http://www.hazelcast.com/schema/config
+            http://www.hazelcast.com/schema/config/hazelcast-config-4.1.xsd"&gt;
+  &lt;cluster-name&gt;test&lt;/cluster-name&gt;
+  &lt;instance-name&gt;test-1&lt;/instance-name&gt;
+  &lt;properties&gt; &lt;!-- 1 --&gt;
+    &lt;property name="hazelcast.discovery.enabled"&gt;true&lt;/property&gt;
+    &lt;property name="hazelcast.wait.seconds.before.join"&gt;0&lt;/property&gt;
+  &lt;/properties&gt;
+  &lt;network&gt;
+    &lt;port&gt;0&lt;/port&gt; &lt;!-- 2 --&gt;
+    &lt;join&gt;
+      &lt;auto-detection/&gt; &lt;!-- 3 --&gt;
+      &lt;multicast enabled="false" /&gt; &lt;!-- 4 --&gt;
+      &lt;discovery-strategies&gt; &lt;!-- 5 --&gt;
+        &lt;discovery-strategy enabled="true"
+                            class="com.rmannibucau.github.hazelcast.test.LocalDiscoveryStrategy" /&gt;
+      &lt;/discovery-strategies&gt;
+    &lt;/join&gt;
+  &lt;/network&gt;
+  &lt;cp-subsystem&gt; &lt;!-- 6 --&gt;
+    &lt;cp-member-count&gt;3&lt;/cp-member-count&gt;
+  &lt;/cp-subsystem&gt;
+&lt;/hazelcast&gt;
+</code></pre>
+
+<ol>
+	<li>We enable, through properties, custom discovery of members&nbsp;and disable the waiting time before join call (see hazelcast joiner).</li>
+	<li>We use a random port since for test it is ok to use any available port (setting 0 means random on java socket).</li>
+	<li>We must enable auto detection to use our discovery strategy.</li>
+	<li>We disable multicast otherwise hazelcast will use it.</li>
+	<li>We define our custom strategy.</li>
+	<li>Not required for this blog post but defining 3 for cp-subsystem member count enables to get rid of some warnings during startup.</li>
+</ol>
+
+<p>With that the hazelcast startup is reduced significantly (-2s on my machine) and makes testing and retesting way simpler, in particular during development iterations where you run tests quite often to check your changes.</p>
+
+<p>Another alternative - but hazelcast considers it is an &quot;error&quot; (it logs a warning) - is to disable port auto-increment and disable autodetection, this will be even faster than previous option -&nbsp; but believe me it is about us so not sure you see the difference in practise.</p>
+
+<p>Here is the hazelcast.xml for that last option:</p>
+
+<pre>
+<code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;hazelcast xmlns="http://www.hazelcast.com/schema/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+            http://www.hazelcast.com/schema/config
+            http://www.hazelcast.com/schema/config/hazelcast-config-4.1.xsd"&gt;
+  &lt;cluster-name&gt;test&lt;/cluster-name&gt;
+  &lt;instance-name&gt;test-1&lt;/instance-name&gt;
+  &lt;network&gt; &lt;!-- all happens there --&gt;
+    &lt;port auto-increment="false"&gt;0&lt;/port&gt;
+    &lt;join&gt;
+      &lt;auto-detection enabled="false"/&gt;
+    &lt;/join&gt;
+  &lt;/network&gt;
+  &lt;cp-subsystem&gt;
+    &lt;cp-member-count&gt;3&lt;/cp-member-count&gt;
+  &lt;/cp-subsystem&gt;
+&lt;/hazelcast&gt;
+</code></pre>
+
+<p>The choice between both options mainly depends if you accept the warnings in the logs or not and if you want to code or not a custom discovery strategy.</p>
+
+<p>Last point: all this post blog was done with hazelcast 4.1 (hope it is simpler/integrated in future versions ;)).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-oauth2-pkce.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//camel-healthcheck-registry-for-kubernetes.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Extend Meecrowave CLI to get a EE cli</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,176 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="meecrowave-custom-cli-html-container" class="container page-content meecrowave-custom-cli-html is-blog">
+                        <div class="page-header">
+                <h1>Extend Meecrowave CLI to get a EE cli</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-06-13</span>, <span class="metadata-readingtime">4 min and 1 sec read</span></p>
+</div>
+<p><a href="http://openwebbeans.apache.org/meecrowave/" target="_blank">Meecrowave</a> is a light CDI/JAX-RS server which makes it very efficient to implement any application. In coming release it will get a&nbsp;smoother extension point for your command line interface (CLI).</p>
+
+<p>Why would I use it for a CLI? If you missed it you can have a look to&nbsp;<a href="https://rmannibucau.metawerx.net/#/post/daemon-batch-tomcat" target="_blank">Should you run your daemon/batch in Tomcat?</a>&nbsp;but it can also be fancy for demo or just development: the server starts and you have a small CLI to provision some data etc...</p>
+
+<p>The old way was to use the <a href="http://openwebbeans.apache.org/meecrowave/meecrowave-core/configuration.html" target="_blank">programmatic API</a> of Meecrowave but it also meant you were loosing the default <a href="http://openwebbeans.apache.org/meecrowave/meecrowave-core/cli.html" target="_blank">CLI</a> of meecrowave and therefore you needed to own all that configuration :(.</p>
+
+<p>Since 0.3.1 you can just inherit it!</p>
+
+<p>All you have to do is to inherit from the default Meecrowave CLI and override the <em>doWait()&nbsp;</em>method to implement your own CLI:</p>
+
+<pre>
+<code class="language-java">public class MyCli extends Cli {
+    private MyCli(final String[] args) {
+        super(args);
+    }
+
+    @Override
+    protected void doWait(final Meecrowave meecrowave, final CommandLine line) {
+        System.out.println("Started");
+    }
+
+    public static void main(String[] args) {
+        new MyCli(args).run();
+    }
+}</code></pre>
+
+<p>In this snippet the server will start, log <em>Started</em>&nbsp;and&nbsp;stop since&nbsp;<em>doWait()</em>&nbsp;is intended to wait for the end of the application. If you think about the CLI usage, it matches exactly the exit flow, other commands just need to loop until&nbsp;<em>exit</em>&nbsp;is entered :).</p>
+
+<p>The other nice thing about this is you can access the command line. It would be pointless if we would just get the meecrowave options but since meecrowave CLI options were already extensible it allows you to access your custom one and just merge the meecrowave and your application options in a single consistent set of options.</p>
+
+<p>To add custom options just create a class implementing&nbsp;<em>org.apache.meecrowave.runner.Cli.Options </em>(it doesn&#39;t require any method, it is just a marker to load the class), register it with a&nbsp;standard SPI mecanism (META-INF/services/org.apache.meecrowave.runner.Cli$Options should contain the qualified name of your option class) and decorate option fields with&nbsp;<em>@CliOption</em>. Here is an example:</p>
+
+<pre>
+<code class="language-java">public class MyOptions implements Options {
+    @CliOption(name = "my-option", description = "Support nice option for my blog")
+    private String option;
+}</code></pre>
+
+<p>With that class registered your can just add to your main parameters something like:</p>
+
+<pre>
+<code>--my-option blog</code></pre>
+
+<p>Therefore your <em>doWait()</em>&nbsp;can now be:</p>
+
+<pre>
+<code class="language-java">@Override
+public void doWait(final Meecrowave meecrowave, final CommandLine line) {
+    System.out.println("Started with option: " + line.getOptionValue("my-option"));
+}</code></pre>
+
+<p>At that point we can implement a custom CLI and access main parameters, what we miss is the actual CLI implementation.</p>
+
+<p>Overall idea is to implement:</p>
+
+<pre>
+<code class="language-java">@Override
+public void doWait(final Meecrowave meecrowave, final CommandLine line) {
+    String command;
+    while ((command = nextCommand()) != null) {
+        execute(command);
+    }
+}</code></pre>
+
+<p>Then the way to read commands and execute them is up to you. There are tons of frameworks and I&#39;ll not detail them all but I&#39;d like to mention that using classpath deployment of meecrowave you can map commands on....CDI beans :). It means you can map commands on your repositories, access directly your entity manager or any part of your application. This is very powerful!</p>
+
+<p>Personally I use this stack:</p>
+
+<ul>
+	<li>line reading; jline</li>
+	<li>conversion of the line to a command (String -&gt; String[]): a CommandLineTokenzer, idea has this <a href="https://github.com/JetBrains/intellij-community/blob/master/platform/util/src/com/intellij/execution/configurations/CommandLineTokenizer.java" target="_blank">one</a> for instance</li>
+	<li>execution: depends the application but tomitribe-crest or jcommander are very nice once integrated with CDI for the command execution.</li>
+</ul>
+
+<p>Indeed if you have a few commands you can just use the&nbsp;<em>CommandLine</em>&nbsp;and don&#39;t need much more.</p>
+
+<p>Last point before letting you implement your own CLI: it can be interesting to reverse the pattern and just fire the command as a CDI event and let observers handle it or not:</p>
+
+<pre>
+<code class="language-java">@Override
+public void doWait(final Meecrowave meecrowave, final CommandLine line) {
+    String command;
+    while ((command = nextCommand()) != null) {
+        CDI.current().getBeanManager()
+           .fireEvent(new CommandEvent(toStringArray(command)));
+    }
+}</code></pre>
+
+<p>A more advanced option would be to extract the first argument to match a qualifier:</p>
+
+<pre>
+<code class="language-java">@Override
+public void doWait(final Meecrowave meecrowave, final CommandLine line) {
+    String command;
+    while ((command = nextCommand()) != null) {
+        final String[] args = toStringArray(command);
+        if (args.length == 0) {
+            continue;
+        }
+        CDI.current().getBeanManager()
+           .fireEvent(new CommandEvent(args), new CommandLiteral(args[0]));
+    }
+}</code></pre>
+
+<p>This allows to implement the commands as:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ListCommand {
+    public void execute(@Observes @Command("list") final CommandEvent event) {
+       // do the list logic
+    }
+}</code></pre>
+
+<p>Very nice thing about that solution is you don&#39;t need to register the commands but commands are registered by themself and each command can parse the arguments in a different way if needed.</p>
+
+<p>To be complete this pattern would only need in the event a <em>wasExecuted</em>&nbsp;flag to be able to log it was ignored from the Cli which is important to report to the user even if desired as behavior.</p>
+
+<p>Happy tooling!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cxf-search-extension.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//minified-javascript-warning.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

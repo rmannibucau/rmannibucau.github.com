@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to decorate a Java stream?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,180 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="java-stream-decorator-html-container" class="container page-content java-stream-decorator-html is-blog">
+                        <div class="page-header">
+                <h1>How to decorate a Java stream?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-12-06</span>, <span class="metadata-readingtime">3 min and 48 sec read</span></p>
+</div>
+<p>Java 8 and its Stream API brings a lot of fluentness to Java world. Its lazy evaluation (only when a leaf is called like a collector) is very powerful and makes composability of the application logic smooth and efficient.</p>
+
+<p>However Stream API is not perfect and it misses a few features, in particular the ability to decorate streams. What could it be used for? be able to add a feature whatever leaf is called after. Since the stream is lazy evaluated, all the chain elements will be invoked at that moment. We can see it with the following example:</p>
+
+<pre>
+<code class="language-java">return Stream.of("a", "b").map(this::mapString).collect(toList());</code></pre>
+
+<p>The string mapping (<em>mapString</em>) will be executed in the context of the collection (<em>toList()</em>). This means that if you inject a &quot;context&quot; into the collection you inject a context for the full stream.</p>
+
+<p>Consequently if you return a <em>Stream</em>&nbsp;or compose&nbsp;<em>Streams</em>&nbsp;to create another one you can want to inject a final context as well. This is very useful in EE context where you can desire to force a&nbsp;<em>ClassLoader</em>, some&nbsp;security context, or any caller context at the intermediate steps time.</p>
+
+<p>Looking at the API you can have a hope with the&nbsp;<em>onClose(Runnable)</em>&nbsp;method but this one is actually only called on&nbsp;<em>close()</em>&nbsp;invocation...which is never called in practise.</p>
+
+<p>To solve that you can write a <em>Stream</em>&nbsp;facade which will take a&nbsp;<em>Runnable</em>&nbsp;or better a&nbsp;<em>Consumer&lt;Runnable&gt;</em>&nbsp;which will be able to setup the context and reset it after the collection. It can be implemented through multiple ways but the most portable - in particular to handle Java 8 and Java 9 is to use a Java proxy. Therefore all the logic will be defined into an&nbsp;<em>InvocationHandler</em>.</p>
+
+<p>The logic can be summarized as such:</p>
+
+<ul>
+	<li>If the returned instance is a stream (<em>BaseStream</em>&nbsp;to include primitive streams too) then just invoke the method and propagate the hook to the returned instance - i.e. re-decorate the returned instance.</li>
+	<li>Else, it is a leaf invocation, so wrap the invocation through the&nbsp;<em>Consumer</em>.</li>
+</ul>
+
+<p>In practise it can be implemented as such:</p>
+
+<pre>
+<code class="language-java">import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.BaseStream;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+
+public class StreamDecorator implements InvocationHandler {
+    private final BaseStream delegate;
+    private final Consumer&lt;Runnable&gt; leafDecorator;
+
+    private StreamDecorator(final BaseStream delegate, final Consumer&lt;Runnable&gt; leafDecorator) {
+        this.delegate = delegate;
+        this.leafDecorator = leafDecorator;
+    }
+
+    // if method is iterator() or splitIterator() the behavior is likely not the hoped exact one but ok for us
+    @Override
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        try {
+            final boolean stream = BaseStream.class.isAssignableFrom(method.getReturnType());
+            final Object result = stream ? method.invoke(delegate, args) : wrap(() -&gt; {
+                try {
+                    return method.invoke(delegate, args);
+                } catch (final IllegalAccessException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (final InvocationTargetException e) {
+                    throw new IllegalArgumentException(e.getTargetException());
+                }
+            });
+            if (stream) {
+                if (Stream.class.isInstance(result)) {
+                    return decorate(Stream.class.cast(result), Stream.class, leafDecorator);
+                }
+                if (IntStream.class.isInstance(result)) {
+                    return decorate(IntStream.class.cast(result), IntStream.class, leafDecorator);
+                }
+                if (LongStream.class.isInstance(result)) {
+                    return decorate(LongStream.class.cast(result), LongStream.class, leafDecorator);
+                }
+                if (DoubleStream.class.isInstance(result)) {
+                    return decorate(DoubleStream.class.cast(result), DoubleStream.class, leafDecorator);
+                }
+            }
+            return result;
+        } catch (final InvocationTargetException ite) {
+            throw ite.getTargetException();
+        }
+    }
+
+    private &lt;V&gt; V wrap(final Supplier&lt;V&gt; supplier) {
+        final AtomicReference&lt;V&gt; ref = new AtomicReference&lt;&gt;();
+        leafDecorator.accept(() -&gt; ref.set(supplier.get()));
+        return ref.get();
+    }
+
+    public static &lt;T&gt; Stream&lt;T&gt; decorate(final Stream&lt;T&gt; delegate, final Consumer&lt;Runnable&gt; wrapper) {
+        return decorate(delegate, Stream.class, wrapper);
+    }
+
+    private static &lt;T, S extends BaseStream&lt;T, ?&gt;&gt; S decorate(final S delegate, final Class&lt;S&gt; type,
+                                                              final Consumer&lt;Runnable&gt; wrapper) {
+        return (S) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class&lt;?&gt;[] { type },
+                new StreamDecorator(delegate, wrapper));
+    }
+}
+</code></pre>
+
+<p>Then you can use that decorator factory with any stream:</p>
+
+<pre>
+<code class="language-java">Stream&lt;String&gt; stream = Stream.of("a", "b"); // &lt;1&gt;
+Consumer&lt;Runnable&gt; decorator = collector -&gt; { // &lt;2&gt;
+    System.out.println("Before");
+    collector.run();
+    System.out.println("After");
+};
+// &lt;3&gt;
+List&lt;String&gt; collect = StreamDecorator.decorate(stream, decorator)
+        .collect(toList());</code></pre>
+
+<ol>
+	<li>We create a stream - can be anything</li>
+	<li>We create a consumer of&nbsp;<em>Runnable</em>, the runnable being the leaf invocation (collect, ...)</li>
+	<li>We wrap our stream and associate it with the decorator and finally we call a leaf (<em>collect(toList())</em>) but we could call any&nbsp;<em>Stream</em>&nbsp;method after the decoration</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>This decorator implementation is quite simple but really allows you to go further in the lazyness and propagation of the <em>Streams&nbsp;</em>&nbsp;into your API. Now you can return a wrapped stream which will enforce a context during the evaluation without having to do it in all your intermediate steps (filters, mappers, ...). This makes the <em>Stream&nbsp;</em>based development easier and less intrusive in your code enabling more composability of stream subparts.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//meecrowave-local-maven-server.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//sirona-jmx-mbeans-web.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

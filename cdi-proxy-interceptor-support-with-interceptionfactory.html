@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CDI: how to implement a proxy (interface based API) supporting interceptors</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,219 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cdi-proxy-interceptor-support-with-interceptionfactory-html-container" class="container page-content cdi-proxy-interceptor-support-with-interceptionfactory-html is-blog">
+                        <div class="page-header">
+                <h1>CDI: how to implement a proxy (interface based API) supporting interceptors</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-01-09</span>, <span class="metadata-readingtime">5 min and 58 sec read</span></p>
+</div>
+<p>Until <strong>CDI 2.0</strong>, it was not trivial to implement an extension based on proxies and keep interceptors support. Almost each time it meant to reimplement the interceptor chain handling or use a <strong>library like Apache DeltaSpike</strong> and <strong>partial bean binding feature</strong>. Since CDI 2.0, this has been fixed, even if it requires some tip to make it simple.</p>
+
+<h2>What is an interface based API in CDI land?</h2>
+
+<p>Before seeing how to do it, here is a quick example of the API and the kind of target this post is about:</p>
+
+<pre>
+<code class="language-java">@AutoHandled
+public interface MyService {
+    @HandledWith(....)
+    SomeResult doProcess(...);
+}</code></pre>
+
+<p>The&nbsp;<em>@AutoHandled</em>&nbsp;is just a marker to detect the interfaces to &quot;auto implement&quot; by a CDI extension. This means you would be able to use it as simple as:</p>
+
+<pre>
+<code class="language-java">@Inject
+private MyService service;
+
+public void someMethod() {
+    service.doProcess();
+}</code></pre>
+
+<p>In other words: the implementation is transparent for the consumers.</p>
+
+<p>The&nbsp;<em>@HandledWith</em>&nbsp;is an optional configuration for the &quot;auto implementation&quot; which allows to specify more precisely that with only the return type, method name and parameters the behavior to bind to the methods.</p>
+
+<p>So what did change in CDI 2.0? In short: the&nbsp;<em>InterceptionFactory</em>&nbsp;API was released. However this is not as straight forward as expected. Why? Because this <strong>API does not accept a java lang proxy as input</strong> - for no real technical reason but this is specified, so respected by Weld and OpenWebBeans.</p>
+
+<h2>The naive implementation and its pitfall</h2>
+
+<p>I&#39;ll not detail the whole implementation here but until CDI 2.0 the common implementation was to capture the interfaces to implement and then, for each one of them, <strong>add a custom bean in the CDI context</strong> which was creating an instance <strong>using a java lang proxy</strong>:</p>
+
+<pre>
+<code class="language-java">public MyExtension implements Extension {
+    private final Collection&lt;Class&lt;?&gt;&gt; toImplement = new ArrayList&lt;&gt;();
+
+    void findTypes(@Observes @WithAnnotations(AutoHandled.class) final ProcessAnnotatedType&lt;?&gt; pat) {
+        toImplement.add(pat.getAnnotatedType().getJavaClass());
+    }
+
+    void addImpls(@Observes final AfterBeanDiscovery abd, final BeanManager beanManager) {
+        toImplement.forEach(type -&gt; {
+            abd.addBean()
+               .id("MyHandler#" + type.getName())
+               .scope(ApplicationScoped.class)
+               .types(type, Object.class)
+               .beanClass(type)
+               .qualifiers(Default.Literal.INSTANCE, Any.Literal.INSTANCE)
+               .createWith(ctx -&gt; {
+                   return Proxy.newProxyInstance(
+                       Thread.currentThread().getContextClassLoader()
+                       new Class&lt;?&gt;[]{type},
+                       new MyHandler());
+               });
+        });
+    }
+}</code></pre>
+
+<p>This simple implementation does exactly what we described, catch all types to implement and proxy a proxy for each of them. Indeed we don&#39;t detail&nbsp;<em>MyHandler</em>&nbsp;logic which is an&nbsp;<em>InvocationHandler</em>&nbsp;which does what the auto implementation is supposed to do.</p>
+
+<p>The issue of that implementation is that if you add interceptors on the interface they are just ignored.</p>
+
+<h2>InterceptionFactory to the rescue</h2>
+
+<p>The <strong><em>InterceptionFactory</em></strong>&nbsp;sounds like the best option to solve it. You can grab an instance from the&nbsp;<strong><em>BeanManager</em></strong>:</p>
+
+<pre>
+<code class="language-java">InterceptionFactory&lt;T&gt; factory = beanManager.createInterceptionFactory(
+  creationalContext, typeToIntercept);</code></pre>
+
+<p>Then, once you got an instance of the factory, you can configure it with the interceptors you want and create the proxied instance delegating to the actual instance - our proxy here:</p>
+
+<pre>
+<code class="language-java">// 1
+factory.configure()
+  .add(new AnnotationLiteral&lt;MyInterceptor&gt;() {});
+// 2
+factory.ignoreFinalMethods();
+// 3
+return factory.createInterceptedInstance(proxiedInstance);</code></pre>
+
+<ol>
+	<li>We configure the factory to add explicitly some interceptor (indeed you can add multiple, add some on some methods only etc...). This is not required as, by default it, will use the&nbsp;<em>AnnotatedType</em>&nbsp;associated to the&nbsp;<em>Class</em>&nbsp;you passed to create the instance so if this one already has the interceptors we are good.</li>
+	<li>We ignore final methods - if any - in the interception (this is not compatible and it doesn&#39;t hurt to call the method in general). Note however, this is optional for interface based implementation.</li>
+	<li>Finally, we create an intercepted instance based on an instance.</li>
+</ol>
+
+<p>This looks awesome but will fail with a proxy in the last step because the proxy can&#39;t be subclassed - it does not have a default constructor - and CDI does not handle this kind of instance and does not respect to proxy other API than the instance passed as last parameter (but it could technically). However this is what we will apply to solve it.</p>
+
+<h2>CDI interface based API with interceptor: the solution</h2>
+
+<p>At the moment we can <strong>create an instance of our bean</strong>, we can add interceptor on an instance but we can&#39;t put them together. Is there no solution at all? Indeed there is one - otherwise this post wouldn&#39;t be that useful.</p>
+
+<p>The idea is to modify a little how we implement our bean. To do that you need to think about <strong>what is a java lang proxy?</strong> Technically it is just a way to <strong>intercept method calls</strong>, right? This is also on what JavaEE was based until CDI.</p>
+
+<p>All the trick is there: intercept. You can implement your bean with a plain CDI interceptor instead of an&nbsp;<em>InvocationHandler</em>. The question is then: on which instance? If the interceptor replaces an invocation handler it does not need any delegate instance so&nbsp;<em>null</em>&nbsp;sounds like a good option.</p>
+
+<p>With the&nbsp;<em>InterceptionFactory</em>&nbsp;we can bind our internal interceptor automatically and therefore have a bean. The only issue is that this factory does not accept&nbsp;<em>null</em>&nbsp;as instance as well. The workaround is simple: let CDI generate an instance for us. If you &quot;normal-scope&quot; your&nbsp;<em>null</em>&nbsp;instance (making it&nbsp;<em>@ApplicationScoped</em>) for instance, CDI will have to lazy generate the instance of the bean by design and therefore when you will lookup this instance it will proxy you a proxy matching the API you want. In other words: you just got an instance which will <strong>be compatible with the&nbsp;<em>InterceptionFactory</em></strong>.</p>
+
+<p>The last trick is to <strong>add two beans instead of one</strong>: the first one will be our fake instance, using&nbsp;<em>null</em>&nbsp;as actual delegate - but which will never be called, and the second is the actual injectable instance which will have all the interceptors, including the &quot;implementation&quot; one.</p>
+
+<p>To distiguish both, the easiest way is to add to the first one the&nbsp;<em>@Internal</em>&nbsp;qualifier. Then, this is just a matter of putting it all together: the first instance has the&nbsp;<em>@Internal</em>&nbsp;qualifier, the second one looks up the first instance and creates it using the&nbsp;<em>InterceptionFactory</em>:</p>
+
+<pre>
+<code class="language-java">public MyExtension implements Extension {
+    private final Collection&lt;Class&lt;?&gt;&gt; toImplement = new HashSet&lt;&gt;();
+
+    void findTypes(@Observes @WithAnnotations(AutoHandled.class) final ProcessAnnotatedType&lt;?&gt; pat) {
+        toImplement.add(pat.getAnnotatedType().getJavaClass());
+    }
+
+    void addImpls(@Observes final AfterBeanDiscovery abd, final BeanManager beanManager) {
+        toImplement.forEach(type -&gt; {
+            // the fake instance which is just there to ask CDI to give us
+            // an instance with the right "shape"
+            abd.addBean()
+               .id("autohandled#" + type.getName())
+               .scope(ApplicationScoped.class)
+               .types(type, Object.class)
+               .beanClass(type)
+               .qualifiers(Internal.LITERAL)
+               .createWith(ctx -&gt; null); // faked, we will never actually use that
+
+            // the actual instance with interceptors
+            abd.addBean()
+               .id("autohandled#" + type.getName())
+               .scope(ApplicationScoped.class)
+               .types(type, Object.class)
+               .beanClass(type)
+               .qualifiers(Default.Literal.INSTANCE, Any.Literal.INSTANCE)
+               .createWith(ctx -&gt; {
+                   // lookup fake instance
+                   final Object delegate = beanManager.getReference(
+                           beanManager.resolve(beanManager.getBeans(type, Internal.LITERAL)),
+                           type,
+                           beanManager.createCreationalContext(null));
+
+                   // create the factory instance
+                   final InterceptionFactory factory = beanManager.createInterceptionFactory(ctx, Class.class.cast(delegate.getClass()));
+                   // bind our implementation
+                   factory.configure().add(new AnnotationLiteral&lt;AutoImplementationInterceptor&gt;() {});
+                   // create the intercepted instance
+                   return factory.ignoreFinalMethods().createInterceptedInstance(delegate);
+               });
+        });
+    }
+
+    @Target(TYPE)
+    @Retention(RUNTIME)
+    public @interface Internal {
+        Annotation LITERAL = new AnnotationLiteral&lt;Internal&gt;() {};
+    }
+}</code></pre>
+
+<h2>Limitations and warnings</h2>
+
+<p>At that point we solved the original issue and didn&#39;t have to resolve ourself the interceptors nor to <strong>implement the interceptor chain</strong>. However this implementation only works with CDI 2.0 implementation and the 2.0.10 version of OpenWebBeans. So if you need to support it for older versions, you will still need <strong>to either ignore the interceptors or implement it the old way.</strong></p>
+
+<p>Nonetheless, CDI&nbsp;<em>InterceptionFactory</em> is a very good move of the specification to something simpler and powerful which just needs a few adjustment to be even more friendly.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tip-log4j2-conditional-appender.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-beam-initialization-destruction-task.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

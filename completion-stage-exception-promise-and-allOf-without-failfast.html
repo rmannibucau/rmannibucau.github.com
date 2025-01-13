@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CompletionStage pitfalls, going further</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="completion-stage-exception-promise-and-all-of-without-failfast-html-container" class="container page-content completion-stage-exception-promise-and-all-of-without-failfast-html is-blog">
+                        <div class="page-header">
+                <h1>CompletionStage pitfalls, going further</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-05-15</span>, <span class="metadata-readingtime">6 min and 10 sec read</span></p>
+</div>
+<p>CompletionStage/CompletionFuture are great API to orchestrate multiple systems (in the cloud erea it is really the way to go) but Java missed some basic features when they created it.</p>
+
+<p>The first one is&nbsp;<em>exceptionallyCompose</em> or <em>handleCompose</em>. Behind these weird names is hidden the ability to return another completion stage when handling exceptions.&nbsp;</p>
+
+<p>The second one is the ability to choose to fail fast or not when using <em>CompletionFuture.allOf</em>. If you use concurrent calls and need all result states to be able to clean up resources you don&#39;t want the default fail fast behavior which will make you leak some of this state. A quite explicit example is the usage of a cloud SDK (like amazon one), if you create instances and fail fast, you will not be able to clean up some instances and AWS will not forget to bill it ;).</p>
+
+<h2>Chain exception handling reactively</h2>
+
+<p>To understand that need let&#39;s first see what a completion stage chain can look like:</p>
+
+<pre>
+<code class="language-java">CompletionStage&lt;Result&gt; stage = createStage();
+stage
+  .thenCompose(result1 -&gt; doRemoteCall(result1)) // 1
+  .thenCompose(result2 -&gt; doAnotherRemoteCall(result2))</code></pre>
+
+<ol>
+	<li>Here the current stage will be concatenated with the&nbsp;<em>doRemoteCall</em>&nbsp;stage which means, as the caller I see a single stage representing the last result. It is a kind of&nbsp;<em>flatMap</em>&nbsp;for <em>CompletionStages</em>.</li>
+</ol>
+
+<p>It is a common need, right?</p>
+
+<p>Now if you want to handle errors you have two main options, either you use <em>exceptionally</em>:</p>
+
+<pre>
+<code class="language-java">CompletionStage&lt;Result&gt; stage = createStage();
+stage
+  .exceptionally(error -&gt; getFallbackResult())</code></pre>
+
+<p>or directly through handle:</p>
+
+<pre>
+<code class="language-java">CompletionStage&lt;Result&gt; stage = createStage();
+stage
+  .handle((result, error) -&gt; error != null ? getFallbackResult() : result)</code></pre>
+
+<p>Side note: indeed you can throw another exception to wrap the&nbsp;<em>error</em>&nbsp;but here I just want to show the fallback case.</p>
+
+<p>As you can see both options return the completion stage result, so you can&#39;t use that to do a retry for example or - the case I encountered - cleanup resources through some remote calls which return a completion stage and awaiting for them to complete before actually returning.</p>
+
+<p>In pseudo code I would like to do that:</p>
+
+<pre>
+<code class="language-java">CompletionStage&lt;Result&gt; stage = createStage();
+return stage
+  .exceptionallyCompose(error -&gt; {
+     log.error(error);
+     return cleanupResources();
+  });</code></pre>
+
+<p>With&nbsp;<em>cleanupResources</em>&nbsp;something like this method signature:</p>
+
+<pre>
+<code class="language-java">public CompletionStage&lt;ResourceIds&gt; cleanupResources();</code></pre>
+
+<h2>Don&#39;t fail fast when exception N stages</h2>
+
+<p>Assuming you start N tasks and want to synchronize the result of all of them to execute another task, you can be tempted to use&nbsp;<em>CompletionFuture.allOf</em>. But this one will fail fast and return early if one of the future failed.</p>
+
+<p>This means you will miss some state of other promise if you want to do some cleanup. Indeed you can then subscribe to each of the promise but it kind of defeat the usage of&nbsp;<em>allOf</em>.</p>
+
+<p>Add to that previous point that the exception handling can&#39;t be reactive and the API becomes quite complex to orchestrate services.</p>
+
+<h2>Aggregate results and use a state flag</h2>
+
+<p>To solve that my proposal - until the JVM enriches its API - is to use an aggregator (<em>Collector</em>) and combine the results with a reducer.</p>
+
+<p>Instead of starting from an array of futures, you start from a stream (or collection in practise), then you&nbsp;<em>reduce</em>&nbsp;them in a custom aggregator which will have its own promise facade you will use instead of <em>allOff.</em></p>
+
+<p>Concretely instead of doing:</p>
+
+<pre>
+<code class="language-java">CompletionFuture&lt;?&gt;[] futures = getFutures();
+return CompletionFuture.allOf(futures);</code></pre>
+
+<p>You will do:</p>
+
+<pre>
+<code class="language-java">List&lt;CompletionFuture&lt;?&gt;&gt; futures = getFutures();
+return dependencies.stream()
+  .reduce(new Aggregator&lt;Result, List&lt;Result&gt;&gt;(futures.size(), toList()), // 1
+          Aggregator::handle, Aggregator::merge)
+  .asPromise();</code></pre>
+
+<ol>
+	<li>The aggregator takes a number of task to await and a collector to merge the results (here just appending them thanks the Collector.<em>toList()&nbsp;</em>collector).</li>
+</ol>
+
+<p>It looks a bit more complicated but then:</p>
+
+<ul>
+	<li>The promise has the aggregated result, no need to go through futures to read it,</li>
+	<li>You are sure all promises are done when chain tasks to this stage,</li>
+	<li>You can ensure it returns a boolean &quot;failed/success&quot; and let you chain an error handling returning another stage</li>
+</ul>
+
+<p>Concretely here is what can be the chain once complete:</p>
+
+<pre>
+<code class="language-java">?List&lt;CompletionFuture&lt;?&gt;&gt; futures = getFutures();
+return dependencies.stream()
+  .reduce(new Aggregator&lt;Result, List&lt;Result&gt;&gt;(futures.size(), toList()),
+          Aggregator::handle, Aggregator::merge)
+  .asNotFaillingPromise()
+  .thenCompose(result -&gt; {
+    if (result.isSuccess()) return handleResult(result.getValue()); // 1
+    return cleanupResources(); // 2
+  });
+
+?</code></pre>
+
+<ol>
+	<li>We can test if all the calls suceeded and then get the aggregated result to continue the processing chain,</li>
+	<li>If at least one call failed we can cleanup everything returning another stage</li>
+</ol>
+
+<p>In terms of implementation, a simple flavor can be:</p>
+
+<pre>
+<code class="language-java">@Slf4j
+public class Aggregator&lt;T, A, R&gt; {
+    private final int total;
+    private final AtomicInteger remaning;
+    private final Collector&lt;T, A, R&gt; collector;
+    private final Collection&lt;Throwable&gt; errors = new ArrayList&lt;&gt;();
+    private final CompletableFuture&lt;R&gt; promise = new CompletableFuture&lt;&gt;();
+    private volatile A aggregator;
+
+    public Aggregator(final int remaning, final Collector&lt;T, A, R&gt; collector) {
+        this.total = remaning;
+        this.remaning = new AtomicInteger(remaning);
+        this.collector = collector;
+        this.aggregator = collector.supplier().get();
+    }
+
+    public void onSuccess(final T value) {
+        synchronized (this) {
+            collector.accumulator().accept(aggregator, value);
+        }
+        onValue();
+    }
+
+    public void onFailure(final Throwable value) {
+        log.error(value.getMessage(), value);
+        synchronized (this) {
+            errors.add(value);
+        }
+        onValue();
+    }
+
+    public Aggregator&lt;T, A, R&gt; handle(final CompletionStage&lt;T&gt; promise) {
+        promise.handle(this::handle);
+        return this;
+    }
+
+    public T handle(final T result, final Throwable error) {
+        if (error != null) {
+            onFailure(error);
+        } else {
+            onSuccess(result);
+        }
+        return result;
+    }
+
+    public synchronized Aggregator&lt;T, A, R&gt; merge(final Aggregator&lt;T, A, R&gt; other) {
+        remaning.addAndGet(total - other.remaning.get());
+        other.errors.forEach(this::onFailure);
+        aggregator = collector.combiner().apply(aggregator, other.aggregator);
+        return this;
+    }
+
+    private void onValue() {
+        if (remaning.decrementAndGet() != 0) {
+            return;
+        }
+        // no more need to synchronize, all concurrency is done there
+        if (!errors.isEmpty()) {
+            final IllegalStateException exception = new IllegalStateException("Invalid execution");
+            errors.forEach(exception::addSuppressed);
+            promise.completeExceptionally(exception);
+        }
+        promise.complete(collector.finisher().apply(aggregator));
+    }
+
+    public CompletionStage&lt;R&gt; asPromise() {
+        return promise;
+    }
+
+    /**
+     * Replaces the standard completion stage by wrapping the actual result in a wrapper object containing the execution status (failed or not).
+     * It enables to handle failures and chain it with another CompletionStage while the JVM does not have an exceptionallyCompose like method.
+     *
+     * @return a promise always succeeding holding the actual state (sucess/failure) of the execution.
+     */
+    public CompletionStage&lt;Result&lt;R&gt;&gt; asSafePromise() {
+        final CompletableFuture&lt;Result&lt;R&gt;&gt; out = new CompletableFuture&lt;&gt;();
+        promise.handle((result, error) -&gt; out.complete(new Result&lt;&gt;(result, null)));
+        return out;
+    }
+
+    @Getter
+    @AllArgsConstructor(access = PRIVATE)
+    public static class Result&lt;R&gt; {
+        private final R value;
+        private final Throwable error;
+
+        public boolean isSuccess() {
+            return value != null;
+        }
+    }
+
+    public static class Simple&lt;T, R&gt; extends Aggregator&lt;T, Object, R&gt; {
+        public &lt;A&gt; Simple(final int remaning, final Collector&lt;T, A, R&gt; collector) {
+            super(remaning, (Collector&lt;T, Object, R&gt;) collector);
+        }
+
+        public synchronized Simple&lt;T, R&gt; merge(final Aggregator.Simple&lt;T, R&gt; other) {
+            super.merge(other);
+            return this;
+        }
+
+        @Override
+        public Aggregator.Simple&lt;T, R&gt; handle(final CompletionStage&lt;T&gt; promise) {
+            super.handle(promise);
+            return this;
+        }
+    }
+}
+</code></pre>
+
+<p>This implementation really just wraps a&nbsp;<em>Collector</em>&nbsp;implementation and makes its handle&nbsp;<em>CompletionStage</em>&nbsp;friendly. Indeed, you can achieve the save implementing a custom collector wrapping another one (like&nbsp;<em>groupingBy</em>&nbsp;does for example).</p>
+
+<p>With this implementation you will use&nbsp;<em>Aggregator.Simple</em>&nbsp;instead of just&nbsp;<em>Aggregator</em>&nbsp;(mainly to keep a fluent API with generics).</p>
+
+<p>Our previous chain, therefore, becomes:</p>
+
+<pre>
+<code class="language-java">??List&lt;CompletionFuture&lt;?&gt;&gt; futures = getFutures();
+return dependencies.stream()
+  .reduce(new Aggregator.Simple&lt;Result, List&lt;Result&gt;&gt;(futures.size(), toList()),
+          Aggregator.Simple::handle, Aggregator.Simple::merge)
+  .asSafePromise()
+  .thenCompose(result -&gt; {
+    if (result.isSuccess()) return handleResult(result.getValue());
+    return cleanupResources();
+  });
+</code></pre>
+
+<p>Here we are, we can ensure we really await all promises are done to execute some code, we can chain an error handling process returning a stage/promise too and we can aggregate the result of each task on the fly without having to do it in a completely custom &quot;per application&quot; fashion linking manually tasks and merging logic.</p>
+
+<p>When the usage of&nbsp;<em>CompletionStage</em>&nbsp;is not &quot;local&quot; in your application, this really clean up the overall code and enables to have a &quot;standard&quot; way to build orchestration chains and the class enabling it is not complex or huge so it really worth doing it IMHO.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//java-class-data-sharing-docker-startup.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//asciidoctor-search-index-creation.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

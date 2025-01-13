@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Set a good creation time when building a docker image with jib</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,123 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="docker-image-and-jib-creation-time-html-container" class="container page-content docker-image-and-jib-creation-time-html is-blog">
+                        <div class="page-header">
+                <h1>Set a good creation time when building a docker image with jib</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-03-11</span>, <span class="metadata-readingtime">1 min and 55 sec read</span></p>
+</div>
+<p><a href="https://github.com/GoogleContainerTools/jib/" target="_blank">Jib</a> maven plugin (or gradle task) is really great to create Docker images in your build but by default it has only two potential values for its creation time (the date the image was created at):</p>
+
+<ul>
+	<li><em>EPOCH</em> which is more or less the date 0 for a java program (so if you build today your image will already be 50 years old since we start in 1970 ;)),</li>
+	<li><em>USE_CURRENT_TIMESTAMP</em> which means use &quot;now&quot;</li>
+</ul>
+
+<p>For files, it is almost the same, either&nbsp;<em>EPOCH_PLUS_SECOND </em>(epoch + 1s since<em> EPOCH </em>was buggy in some cases) or a constant date.</p>
+
+<p>Using&nbsp;<em>EPOCH</em>&nbsp;defaults is mainly to ensure the reproducibility of the builds...however it breaks several use cases like the last modified date for web jars for examples.</p>
+
+<p>To solve that, you can explicitly set the value of the creation time and file last modification time. For maven plugin, it is just a matter of setting two attributes of the container configuration:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+  &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;${jib-plugin.version}&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;!-- ... --&gt;
+    &lt;container&gt;
+      &lt;filesModificationTime&gt;${image.lastmodified}&lt;/filesModificationTime&gt;
+      &lt;creationTime&gt;${image.creation}&lt;/creationTime&gt;
+    &lt;/container&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>The question is now: what would be a good value to set for each of these properties? Enforcing to use &quot;now&quot; is not bad but breaks the reproducibility of the build which is not that great.</p>
+
+<p>If your project is managed by a SCM, a good value can be the last commit date. It keeps the reproducibility of the build and still let the last modified date be modified when there is a change.</p>
+
+<p>Since most projects are using git these days, there is already a good plugin to grab git metadata: <em>git-commit-id-plugin</em>.</p>
+
+<p>To setup this plugin and enable to grab last commit time you can just add to your pom:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;pl.project13.maven&lt;/groupId&gt;
+  &lt;artifactId&gt;git-commit-id-plugin&lt;/artifactId&gt;
+  &lt;version&gt;4.0.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;get-the-git-infos&lt;/id&gt;
+      &lt;phase&gt;initialize&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;revision&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;generateGitPropertiesFile&gt;false&lt;/generateGitPropertiesFile&gt;
+    &lt;dateFormat&gt;yyyy-MM-dd'T'HH:mm:ss'Z'&lt;/dateFormat&gt;
+    &lt;dateFormatTimeZone&gt;GMT&lt;/dateFormatTimeZone&gt;
+    &lt;includeOnlyProperties&gt;
+      &lt;includeOnlyProperty&gt;^git.commit.time$&lt;/includeOnlyProperty&gt;
+    &lt;/includeOnlyProperties&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>Then you can just use the variable&nbsp;<em>git.commit.time</em>&nbsp;in jib configuration:</p>
+
+<pre>
+<code class="language-xml">&lt;creationTime&gt;${git.commit.time}&lt;/creationTime&gt;
+&lt;filesModificationTime&gt;${git.commit.time}&lt;/filesModificationTime&gt;</code></pre>
+
+<p>Now your image will have the correct time for your files and creation date!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//bitly-jaxrs-client-v3-to-v4-api-migration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//log4j2-error-log-event-on-stderr.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Camel CDI in a TomEE Fat Jar</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,266 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="camel-cdi-fatjar-html-container" class="container page-content camel-cdi-fatjar-html is-blog">
+                        <div class="page-header">
+                <h1>Camel CDI in a TomEE Fat Jar</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-09-27</span>, <span class="metadata-readingtime">4 min and 8 sec read</span></p>
+</div>
+<p>Camel in an insanely powerful integration library and camel-cdi module brings CDI integration to this world making it easy to write any integration pipeline with all the tooling you already use for your other applications.</p>
+
+<p>Packaging it as a war can be problematic for this layer cause you can desire to give control as an application configuration over the connector(s) (http pool/connection) cause it is part of the integration layer if camel is used to build a HTTP proxy for instance. In such a case providing yourself a main() can make sense to expose a consistent and unique configuration (and not split the configuration between your application and the container).</p>
+
+<p>To make it possible to use camel+cdi+http a nice way is to rely on TomEE. Let see how!</p>
+
+<h2>Build a HTTP route with camel</h2>
+
+<p>Camel can be used as a HTTP proxy. There are several implementation of the HTTP transport but let&#39;s use the Servlet one which is the most portable and common one. For that you just define a rest() endpoint in a RouteBuilder:</p>
+
+<pre>
+<code class="language-java">import org.apache.camel.builder.RouteBuilder;
+
+public class DemoRouteBuilder extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+        restConfiguration().component("servlet");
+
+        rest("/demo")
+                .get().route()
+                    // .... a normal route
+                    .endRest();
+    }
+}
+</code></pre>
+
+<p>Important points are:</p>
+
+<ul>
+	<li>you require camel to use servlet transport using restConfiguration() DSL</li>
+	<li>you can bind an endpoint (/demo for us) to a route which would do anything based on the incoming request (manipulating payload, headers etc...)</li>
+</ul>
+
+<p>If you run this simple route builder it will miss the servlet component by default, to activate it you need a web.xml and since I&#39;m not that a fan of web.xml let&#39;s write a ServletContainerInitializer which will allow to get rid of the XML and even support some configuration since that&#39;s pure java:</p>
+
+<pre>
+<code class="language-java">import org.apache.camel.component.servlet.CamelHttpTransportServlet;
+
+import javax.servlet.ServletContainerInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+import java.util.Set;
+
+public class ServletRegistrar implements ServletContainerInitializer {
+    @Override
+    public void onStartup(final Set&lt;Class&lt;?&gt;&gt; c, final ServletContext ctx) throws ServletException {
+        final ServletRegistration.Dynamic camelServlet = ctx.addServlet("CamelServlet", CamelHttpTransportServlet.class);
+        camelServlet.setLoadOnStartup(1);
+        camelServlet.setAsyncSupported(true);
+        camelServlet.setInitParameter("async", "true");
+        camelServlet.addMapping("/*");
+    }
+}
+</code></pre>
+
+<p>To let this initializer work you need to add the qualified class name of this ServletRegistrar in META-INF/services/javax.servlet.ServletContainerInitializer</p>
+
+<p>Last note: to have it working you need the module:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-servlet&lt;/artifactId&gt;
+  &lt;version&gt;${camel.version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<h2>Activate the route automatically with CDI</h2>
+
+<p>Now we have almost everything and to activate our route by simple declaration (scanning) we&#39;ll add the camel-cdi module:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-cdi&lt;/artifactId&gt;
+  &lt;version&gt;${camel.version}&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
+      &lt;artifactId&gt;*&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Then we just need to decorate our route with @ContextName:</p>
+
+<pre>
+<code class="language-java">import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.cdi.ContextName;
+
+@ApplicationScoped
+@ContextName("demo")
+public class DemoRouteBuilder extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+        restConfiguration().component("servlet");
+
+        rest("/demo")
+                .get().route()
+                    // ...
+                    .endRest();
+    }
+}
+</code></pre>
+
+<p>But we can go further and reuse CDI components (@Inject!) directly in the route:</p>
+
+<pre>
+<code class="language-java">import com.github.rmannibucau.camel.cdi.processor.ReverseProcessor;
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.cdi.ContextName;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+@ApplicationScoped
+@ContextName("demo")
+public class DemoRouteBuilder extends RouteBuilder {
+    @Inject
+    private ReverseProcessor reverseProcessor;
+
+    @Override
+    public void configure() throws Exception {
+        restConfiguration().component("servlet");
+
+        rest("/demo")
+                .get().route()
+                    .transform().constant("em desrever lemac")
+                    .process(reverseProcessor)
+                    .endRest();
+    }
+}
+</code></pre>
+
+<p>Here you can see that we rely on a processor which is a CDI bean! This opens a lot of door and integration with your business logic and auditing capabilities.</p>
+
+<h2>Package it as a Fat Jar</h2>
+
+<p>Then to package it as a fat jar we just need to use maven-shade-plugin (or shadowjar for gradle) and define the right transformers. Most of them will be related to TomEE (you can see it in previous posts) but camel will also need to merge TypeConverter resources:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.4.3&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;shade&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+        &lt;dependencyReducedPomLocation&gt;${project.build.directory}/reduced-pom.xml&lt;/dependencyReducedPomLocation&gt;
+        &lt;transformers&gt;
+          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
+            &lt;mainClass&gt;org.apache.tomee.embedded.FatApp&lt;/mainClass&gt;
+          &lt;/transformer&gt;
+          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"&gt;
+            &lt;resource&gt;META-INF/cxf/bus-extensions.txt&lt;/resource&gt;
+          &lt;/transformer&gt;
+          &lt;transformer implementation="org.apache.openwebbeans.maven.shade.OpenWebBeansPropertiesTransformer" /&gt;
+          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/&gt;
+          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"&gt;
+            &lt;resource&gt;META-INF/services/org/apache/camel/TypeConverter&lt;/resource&gt;
+          &lt;/transformer&gt;
+        &lt;/transformers&gt;
+        &lt;filters&gt;
+          &lt;filter&gt;
+            &lt;artifact&gt;*:*&lt;/artifact&gt;
+            &lt;excludes&gt;
+              &lt;exclude&gt;META-INF/faces-config.xml&lt;/exclude&gt;
+              &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;
+              &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;
+              &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;
+            &lt;/excludes&gt;
+          &lt;/filter&gt;
+        &lt;/filters&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.openwebbeans&lt;/groupId&gt;
+      &lt;artifactId&gt;openwebbeans-maven&lt;/artifactId&gt;
+      &lt;version&gt;1.7.0&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>With this main (FatApp is coming with TomEE 7.0.2) you can run your application with:</p>
+
+<pre>
+<code>java -jar target/myapp.jar</code></pre>
+
+<p>Then to test your application just go on&nbsp;</p>
+
+<pre>
+<code>http://localhost:8080/demo</code></pre>
+
+<p>And you should see the output payload you coded in the rest route.</p>
+
+<p>Reusing FatApp main you can customize TomEE with all TomEE properties but the nice thing with a main like that is you can wrap it (or tomee embedded Main directly if you prefer) to use your own configuration format which will enable you for instance to run your application with:</p>
+
+<pre>
+<code>java -jar myapp.jar --configuration=my-camel-proxy.yml</code></pre>
+
+<p>and this my-camel-proxy.yml would get all the configuration of camel, the business logic, the integration logic and the container configuration as well which would make it easier to configure and tune for your deployers since you can center it on the route needs instead of letting it be &quot;up to&quot; the operation team.</p>
+
+<p>TIP: of course it also means using tomee-embedded-maven-plugin or tomee-embedded gradle plugin can enable you to test easily in development your camel-cdi routes ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//tomee-embedded-improvement-7.0.2.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//java-vs-typescript-tweeter-message-length-computation.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

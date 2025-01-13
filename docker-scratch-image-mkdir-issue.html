@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Docker SCRATCH base image mkdir issue</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,149 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="docker-scratch-image-mkdir-issue-html-container" class="container page-content docker-scratch-image-mkdir-issue-html is-blog">
+                        <div class="page-header">
+                <h1>Docker SCRATCH base image mkdir issue</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-09-17</span>, <span class="metadata-readingtime">2 min and 46 sec read</span></p>
+</div>
+<div class="paragraph">
+<p>Recently I wanted to create a docker image with Java 17.
+Since it is a very recent version, only a few images are available and it is not the smallest ones.
+To keep a light base image I created one using alpine as a builder image and <code>SCRATCH</code> as a base image for the final one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">ARG DISTRIBUTION=zulu17.28.13-ca-jre17.0.0-linux_musl_x64
+
+<i class="conum" data-value="1"></i><b>(1)</b>
+FROM alpine:3.14 as builder
+ARG DISTRIBUTION
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+RUN wget --quiet "https://cdn.azul.com/zulu/bin/${DISTRIBUTION}.tar.gz" &amp;&amp; \
+    mkdir -p /opt/jre &amp;&amp; \
+    tar xf "${DISTRIBUTION}.tar.gz" --strip 1 -C /opt/jre
+
+<i class="conum" data-value="2"></i><b>(2)</b>
+FROM scratch
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' JAVA_HOME=/opt/jre
+ENV PATH="/opt/jre/bin:${PATH}"
+COPY --from=builder /lib/ld-musl-x86_64.so.1 /lib/ld-musl-x86_64.so.1
+COPY --from=builder /lib/libz.so.1 /lib/libz.so.1
+COPY --from=builder /opt/jre /opt/jre
+CMD [ "/opt/jre/bin/java", "--version" ]</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The builder image just downloads and unpack the JRE in <code>/opt/jre</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The final image copies from the builder image the JRE, indeed, but also musl and libz (its dependencies).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This docker image works very well but when starting to run real applications I got weird issues:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">java.io.IOException: Can't create temporary file /tmp/foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This happent in a Kubernetes deployment so was not that easy to debug.
+So I created a local version of the image, ran it and it really failed.</p>
+</div>
+<div class="paragraph">
+<p>Investigating I realized the <code>/tmp</code> folder was not existing so the default of the JVM was not working.
+Instead of setting <code>java.io.tmpdir</code>, I decided to add the folder in the image (empty).
+This enabled to move forward and run part of the applications but not the one using subfolders in <code>/tmp</code> and more important, not the ones running in Kubernetes without the same user than the one in the docker container (likely user <code>0</code>, ie <code>root</code> using a <code>COPY</code> to create <code>/tmp</code>.
+You can <code>COPY --chown</code> to force a particular user but it just moves the problem since you don&#8217;t always know which one will be used for sub-images or Kubernetes deployments.</p>
+</div>
+<div class="paragraph">
+<p>At that stage, I was thinking the issue was with Java so I digged into the source code and for Unix implementaton you end up on a native code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c hljs" data-lang="c">#include &lt;stat/stat.h&gt;
+
+...
+
+mkdir(path, 0777);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check I wrote a quick C++ <code>main</code> just trying to create a not existing folder with the previous setup - not the expected user - and it failed indeed, so the issue is really in the base image, not Java platform.</p>
+</div>
+<div class="paragraph">
+<p>A quick and efficient fix is to change the final image to use <code>alpine</code> too:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM alpine:3.14
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' JAVA_HOME=/opt/jre
+ENV PATH="/opt/jre/bin:${PATH}"
+COPY --from=builder /opt/jre /opt/jre
+CMD [ "/opt/jre/bin/java", "--version" ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This simpler version - no need to copy libs since they are there in the base image - works perfectly.
+Indeed, it adds a layer to my final image (<code>alpine:3.14</code>) but I don&#8217;t have to worry about the fact the application creates or not temporary files.
+The added size is a few megs so it is really worth starting from a real distribution rather than <code>SCRATCH</code> until you are sure no temporary files are created.</p>
+</div>
+<div class="paragraph">
+<p>Last point is I hit that for Java applications, but it is true for all languages indeed so don&#8217;t think that because you Graalified, JLinked your Java application or because you use Go, C++, NodeJS that you can&#8217;t hit it ;).</p>
+</div>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//github-action-output-communicate-between-steps.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//openjpa-jakarta-tips.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

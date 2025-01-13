@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>How to select the best coder for your data with Apache Beam</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="apache-beam-coder-selection-html-container" class="container page-content apache-beam-coder-selection-html is-blog">
+                        <div class="page-header">
+                <h1>How to select the best coder for your data with Apache Beam</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-bigdata"><span class="icon"><i class="fa fa-fa fa-database"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-09-19</span>, <span class="metadata-readingtime">7 min and 12 sec read</span></p>
+</div>
+<p><strong>Apache Beam has a <em>Coder</em>&nbsp;abstraction</strong> to (de)serialize your data.</p>
+
+<p>This enables you to write your pipelines without caring about the serialization but at some point you will need to care if your pipeline relies on it a lot (if you have several (re)shuffles, aggregation etc).</p>
+
+<p>In general, you can bench using some pre-extraction or random data but the best is to <strong>test with your real pipeline data</strong>. But this requires to <strong>run the same pipeline multiple times</strong>, which also means you must make sure you have the <strong>same environment</strong> and only the coder changes.</p>
+
+<p>To mitigate a bit this generally random point, I use a&nbsp;<strong><em>MultipleCodersCoder</em></strong>. Except the name is fun, this coder allows to run at the same time multiple coders during (de|en)coding times and register each duration and payload size in a memory registry.</p>
+
+<p><strong>High level</strong>, this is just a coder delegating to another coder for the main flow but using&nbsp;<em>encode</em>/<em>decode</em>&nbsp;methods as hooks to run other coder processing. The advantage is that it <strong>runs almost at the same time for all coders</strong> which allows to compare them more than doing multiple runs. This coder is very slow compared to only one of them but the goal is just to <strong>reuse the real pipeline data</strong> to get some comparison metrics, not to have actual figures to be able to compare to your SLA.</p>
+
+<p><strong>In terms of implementation</strong>, the coder takes one&nbsp;<em>mainCoder</em>&nbsp;which is the one used in the pipeline and a map of&nbsp;<em>evaluatedCoders</em>&nbsp;which are the monitored ones. The key of the map is just to give a human name to the coder (and potentially you can compare the same coder tuned with different settings so the coder class is not always relevant as a reporting key). The value is the coder instance.</p>
+
+<p>The base of our coder will be:</p>
+
+<pre>
+<code class="language-java">package com.github.rmannibucau.describeit.coder;
+
+import static java.util.stream.Collectors.toMap;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.beam.sdk.coders.Coder;
+import org.apache.beam.vendor.guava.v20.com.google.common.io.ByteStreams;
+
+public class MultipleCodersCoder&lt;T&gt; extends Coder&lt;T&gt; {
+    private final Coder&lt;T&gt; mainCoder;
+    private final Map&lt;String, Coder&lt;T&gt;&gt; coders;
+    private final int defaultEncodeBufferSize;
+
+    public MultipleCodersCoder(final Coder&lt;T&gt; mainCoder,
+                               final Map&lt;String, Coder&lt;T&gt;&gt; evaluatedCoders) {
+        this(mainCoder, evaluatedCoders, 8192);
+    }
+
+    public MultipleCodersCoder(final Coder&lt;T&gt; mainCoder,
+                               final Map&lt;String, Coder&lt;T&gt;&gt; evaluatedCoders,
+                               final int defaultEncodeBufferSize) {
+        this.mainCoder = mainCoder;
+        this.coders = evaluatedCoders;
+        this.defaultEncodeBufferSize = defaultEncodeBufferSize;
+    }
+
+    @Override
+    public void encode(final T value, final OutputStream outStream) throws IOException {
+        mainCoder.encode(value, outStream);
+    }
+
+    @Override
+    public T decode(final InputStream inStream) throws IOException {
+        final byte[] bytes = ByteStreams.toByteArray(inStream);
+        return mainCoder.decode(new ByteArrayInputStream(bytes));
+    }
+
+    @Override
+    public List&lt;? extends Coder&lt;?&gt;&gt; getCoderArguments() {
+        return mainCoder.getCoderArguments();
+    }
+
+    @Override
+    public void verifyDeterministic() throws NonDeterministicException {
+        mainCoder.verifyDeterministic();
+    }
+}
+</code></pre>
+
+<p>This one is just a delegate coder except the&nbsp;<em>decode</em>&nbsp;which <strong>loads the stream into memory before decoding it</strong>. You will quickly see why.</p>
+
+<p>Before we <strong>measure our coders performances</strong> we must have a registry. To keep it simple we will just create a singleton (even with static storage everywhere) which will collect each iteration of encode or decode methods:</p>
+
+<pre>
+<code class="language-java">public class MetricsRegistry {
+    private static final Collection&lt;Map&lt;String, Measure&gt;&gt; ENCODES = new ArrayList&lt;&gt;();
+    private static final Collection&lt;Map&lt;String, Measure&gt;&gt; DECODES = new ArrayList&lt;&gt;();
+
+    private MetricsRegistry() {
+        // no-op
+    }
+
+    static void addDecode(final Map&lt;String, Measure&gt; measures) {
+        synchronized (DECODES) {
+            DECODES.add(measures);
+        }
+    }
+
+    static void addEncode(final Map&lt;String, Measure&gt; measures) {
+        synchronized (ENCODES) {
+            ENCODES.add(measures);
+        }
+    }
+
+    public static Collection&lt;Map&lt;String, Measure&gt;&gt; getEncode() {
+        synchronized (ENCODES) {
+            return new ArrayList&lt;&gt;(ENCODES);
+        }
+    }
+
+    public static Collection&lt;Map&lt;String, Measure&gt;&gt; getDecode() {
+        synchronized (DECODES) {
+            return new ArrayList&lt;&gt;(DECODES);
+        }
+    }
+
+    public static void writeAsCsv(final Collection&lt;Map&lt;String, Measure&gt;&gt; data, final File output) throws IOException {
+        if (data.isEmpty()) {
+            throw new IllegalArgumentException("No data to write");
+        }
+        final Collection&lt;String&gt; titles = data.iterator().next().keySet().stream().sorted().collect(toList());
+        ofNullable(output.getParentFile()).ifPresent(File::mkdirs);
+        try (final PrintWriter out = new PrintWriter(new FileWriter(output))) {
+            // headers
+            out.println(Stream.concat(
+                titles.stream().map(it -&gt; it + " (ns)"),
+                titles.stream().map(it -&gt; it + " (b)")
+            ).collect(joining(";")));
+
+            // data
+            data.forEach(line -&gt; out.println(Stream.concat(
+                titles.stream().map(it -&gt; line.get(it).duration),
+                titles.stream().map(it -&gt; line.get(it).size)
+            ).map(String::valueOf).collect(joining(";"))));
+        }
+    }
+
+    public static void reset() {
+        synchronized (DECODES) {
+            DECODES.clear();
+        }
+        synchronized (ENCODES) {
+            ENCODES.clear();
+        }
+    }
+
+    static class Measure {
+        private final long duration;
+        private final long size;
+
+        Measure(final long duration, final long size) {
+            this.duration = duration;
+            this.size = size;
+        }
+
+        public long getDuration() {
+            return duration;
+        }
+
+        public long getSize() {
+            return size;
+        }
+
+        @Override
+        public String toString() {
+            return "Measure{duration=" + duration + ", size=" + size + '}';
+        }
+    }
+}</code></pre>
+
+<p>Now we can <strong>measure the performance</strong> for each&nbsp;<em>evaluatedCoder</em>&nbsp;:</p>
+
+<pre>
+<code class="language-java">@Override
+public void encode(final T value, final OutputStream outStream) throws IOException {
+    MetricsRegistry.addEncode(coders.entrySet().stream()
+        .collect(toMap(Map.Entry::getKey, entry -&gt; createEncodeMeasure(value, entry.getValue()))));
+    mainCoder.encode(value, outStream);
+}
+
+private MetricsRegistry.Measure createEncodeMeasure(final T data, final Coder&lt;T&gt; coder) {
+    final ByteArrayOutputStream stream = new ByteArrayOutputStream(defaultEncodeBufferSize);
+    final long start = System.nanoTime();
+    try {
+        coder.encode(data, stream);
+    } catch (final IOException e) {
+        throw new IllegalStateException("coder shouldn't fail", e);
+    }
+    final long end = System.nanoTime();
+    return new MetricsRegistry.Measure(end - start, stream.toByteArray().length);
+}</code></pre>
+
+<p>Before writing the main flow output, we capture each coder data and then add them into the registry.</p>
+
+<p>The decoding side is pretty much the same except <strong>a little trick</strong>: you must first encode the data since the main stream is likely using another coder logic:</p>
+
+<pre>
+<code class="language-java">@Override
+public T decode(final InputStream inStream) throws IOException {
+    final byte[] bytes = ByteStreams.toByteArray(inStream);
+    final T decode = mainCoder.decode(new ByteArrayInputStream(bytes));
+    MetricsRegistry.addDecode(coders.entrySet().stream()
+        .collect(toMap(Map.Entry::getKey, entry -&gt; {
+            final Coder&lt;T&gt; evaluatedCoder = entry.getValue();
+            final ByteArrayOutputStream outStream = new ByteArrayOutputStream(defaultEncodeBufferSize);
+            try {
+                evaluatedCoder.encode(decode, outStream);
+            } catch (final IOException e) {
+                throw new IllegalStateException(e);
+            }
+            final byte[] coderBytes = outStream.toByteArray();
+            return createDecodeMeasure(coderBytes.length, new ByteArrayInputStream(coderBytes), evaluatedCoder);
+        })));
+    return decode;
+}
+
+private MetricsRegistry.Measure createDecodeMeasure(final long length, final InputStream stream, final Coder&lt;T&gt; coder) {
+    final long start = System.nanoTime();
+    try {
+        coder.decode(stream);
+    } catch (final IOException e) {
+        throw new IllegalStateException("coder shouldn't fail", e);
+    }
+    final long end = System.nanoTime();
+    return new MetricsRegistry.Measure(end - start, length);
+}</code></pre>
+
+<p>&nbsp;Now you can set this coder on a&nbsp;<em>PCollection</em>:</p>
+
+<pre>
+<code class="language-java">.apply("SomeStep", new MyRowStep())
+  .setCoder(createEvaluationCoder(schema));
+
+// ...
+
+private static Coder&lt;Row&gt; createEvaluationCoder(final Schema schema) {
+    final HashMap&lt;String, Coder&lt;Row&gt;&gt; evaluatedCoders = new HashMap&lt;&gt;();
+    evaluatedCoders.put("some-step_serializable", SerializableCoder.of(Row.class));
+    evaluatedCoders.put("some-step_beam-row", RowCoder.of(schema));
+    return new MultipleCodersCoder&lt;&gt;(RowCoder.of(schema), evaluatedCoders);
+}</code></pre>
+
+<p>Now your pipeline is ready and <strong>your measure points are set </strong>(don&#39;t forget you can change the keys to mark the step measures and have multiple step measures in the same execution), you can run the pipeline with the direct runner and <strong>add this code at the end of the execution</strong> :</p>
+
+<pre>
+<code class="language-java">MetricsRegistry.writeAsCsv(
+  MetricsRegistry.getDecode(), new File("target/metrics_decode.csv"));
+MetricsRegistry.writeAsCsv(
+  MetricsRegistry.getEncode(), new File("target/metrics_encode.csv"));</code></pre>
+
+<p>This will create two files with the captured data.</p>
+
+<p><u><strong>Tip:</strong></u> this solution works only with a <strong>local execution</strong>&nbsp;(direct runner, spark local, flink local, ...) but it is easy to add a step at the end of the pipeline which aggregates all local data and dump them in another storage if you want to do it in a cluster. That said, the local execution should be enough to <strong>compare</strong>&nbsp;coders (not to have precise values). Also, it is encouraged to run the pipeline once on a medium sized dataset and then only activate the metrics <strong>to make sure the JVM is &quot;hot&quot;</strong>. This is why the metrics registry has a <strong><em>reset</em> method</strong>.</p>
+
+<p>The two files are more or less the same in terms of structure (only values change):</p>
+
+<pre>
+<code class="language-ruby">some-step_beam-row (ns);some-step_serializable (ns);some-step_beam-row (b);some-step_serializable (b)
+88366930;1258035;12;1447
+102216064;172889;18;1453
+27641;129995;12;1442
+27778;111890;12;1447
+25315;130656;18;1448
+12979;76494;18;1453
+19258;100247;18;1453
+19471;95238;18;1453
+18994;103645;12;1447
+21862;101490;12;1447
+19112;92646;12;1442
+18631;4269115;18;1448
+30745;153819;18;1448
+24528;100428;12;1442
+30788;107798;18;1448
+18316;76217;18;1448
+19067;92164;18;1448
+29138;111405;18;1448
+14728;77548;18;1448
+22048;94300;18;1448
+28918;86020;12;1442
+13412;71022;12;1442
+23397;101131;12;1442
+20484;106320;12;1442
+19952;76387;12;1442
+38191;99783;12;1442
+</code></pre>
+
+<p>From now on, you can use any data processor - including beam itself if you are in a joking mood, to extract statistics about these raw data. What&#39;s more, you can compute the statictics on the fly but having raw data will allow you to remove singular points and compute the aggregate in different ways.</p>
+
+<p>Here is a sample report from these data:</p>
+
+<table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<thead>
+		<tr>
+			<th scope="col">&nbsp;</th>
+			<th scope="col">Beam Row (duration, ns)</th>
+			<th scope="col">Serializable (duration, ns)</th>
+			<th scope="col">Beam Row (size, b)</th>
+			<th scope="col">Serializable (size, b)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Min</strong></td>
+			<td>12 979</td>
+			<td>71 022</td>
+			<td>12</td>
+			<td>1442</td>
+		</tr>
+		<tr>
+			<td><strong>Max</strong></td>
+			<td>102 216 064</td>
+			<td>4 269 115</td>
+			<td>18</td>
+			<td>1453</td>
+		</tr>
+		<tr>
+			<td><strong>Average</strong></td>
+			<td>7 351 067</td>
+			<td>307 564</td>
+			<td>15</td>
+			<td>1446</td>
+		</tr>
+		<tr>
+			<td><strong>Median</strong></td>
+			<td>21 955</td>
+			<td>100 779</td>
+			<td>15</td>
+			<td>1447</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Even <strong>this simple use case</strong> with a very simple and flat structure is surprising: <strong>java serialization</strong> is, as expected,&nbsp;more verbose than <strong>beam row serialization</strong> but it can be&nbsp;way faster by itself (i.e. in memory, not on the wire where you will need to compute the throughput based on the size). Don&#39;t take these conclusion too seriously though, the measure dataset was not very big and diversity of the data was not accurate. What is important and why I&#39;m sharing this table, is more <strong>to show how to process the previous data</strong> to be able to exploit them and <strong>decide which serialization to use</strong>.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/big-data/page-1.html">Big Data</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//did-you-think-about-closing-your-java-stream.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-beam-row-structure-to-avro-indexedrecord.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

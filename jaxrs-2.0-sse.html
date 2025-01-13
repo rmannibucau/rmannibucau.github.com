@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JAX-RS 2.0 and SSE?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,195 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jaxrs-2-0-sse-html-container" class="container page-content jaxrs-2-0-sse-html is-blog">
+                        <div class="page-header">
+                <h1>JAX-RS 2.0 and SSE?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-12-06</span>, <span class="metadata-readingtime">5 min read</span></p>
+</div>
+<p>JAX-RS 2.1 will introduce Server Sent Events support but do you know you can already do it with JAX-RS 2.0?</p>
+
+<h2>Server Sent Events?</h2>
+
+<p>Server sent events is a solution to sent data from the server to the client (often a javascript one since it has built in support) but not the opposite. Now we have websocket what&#39;s the point? It uses plain HTTP so no issues with proxies!</p>
+
+<p>The usage is globally to define with the client a protocol. The format is simple and can be advanced with message type etc but to keep this post simple we&#39;ll just use a plain list of messages (and assume javascript can detect which kind of message we send based on the format - it is not that rare actually).</p>
+
+<h2>Format</h2>
+
+<p>We need to send the&nbsp;<em>Content-Type</em>&nbsp;header with the value&nbsp;<em>text/event-stream</em>&nbsp;to start, then each line (message) will look like;</p>
+
+<pre>
+<code>data:&lt;the message&gt;
+
+</code></pre>
+
+<p>Not obvious in previous snippet but you need two end&nbsp;of lines after the message (\n\n).</p>
+
+<p>The message format is not part of the SSE format so it is common to use json:</p>
+
+<pre>
+<code>data:{"command":"show-news","value":[{"title":"Java rocks", "content":"SSE are great"}]}
+
+</code></pre>
+
+<h2>JAX-RS 2.0 implementation</h2>
+
+<p>Most of JAX-RS implementations will buffer the response to capture the status code, headers or do some other advanced stuff with the response. This doesn&#39;t help our SSE implementation cause we need to flush each message to send it to the client.</p>
+
+<p>To solve this issue we need to use the response instance not wrapped by&nbsp;the JAX-RS implementation. For that multiple solutions:</p>
+
+<ul>
+	<li>Use a custom filter and set the request as attribute and retrieve it in your JAX-RS endpoint</li>
+	<li>Use some internals of your JAX-RS provider to get the original response.</li>
+	<li>...</li>
+</ul>
+
+<p>Wait, we&#39;ll use the&nbsp;<em>HttpServletResponse</em>&nbsp;so why using JAX-RS at all? Because it still gives us:</p>
+
+<ul>
+	<li>a nice routing (<em>@Path</em>)</li>
+	<li>serialization support (<em>Providers</em>)</li>
+	<li>parameter parsing (<em>PathParameter, @QueryParam, @HeaderParam, ...)</em></li>
+</ul>
+
+<p>Here is the skeleton of our implementation:</p>
+
+<pre>
+<code class="language-java">@GET
+@Path("invoke/stream")
+@Produces("text/event-stream")
+public void invokeScenario(
+        @Suspended final AsyncResponse asyncResponse,
+        @Context final Providers providers,
+        @Context final HttpServletRequest httpServletRequest) {
+
+    // 1.
+    final MultivaluedHashMap&lt;String, Object&gt; fakeHttpHeaders = new MultivaluedHashMap&lt;&gt;();
+    final Annotation[] annotations = new Annotation[0];
+
+    // 2.
+    final MessageBodyWriter&lt;Content&gt; writerResponse = providers.getMessageBodyWriter(
+                Content.class, Content.class,
+                annotations, APPLICATION_JSON_TYPE);
+
+    // 3.
+    final HttpServletResponse httpServletResponse = HttpServletResponse.class.cast(httpServletRequest.getAttribute("original.response"));
+
+    // 4.
+    httpServletResponse.setHeader("Content-Type", "text/event-stream");
+    try {
+        httpServletResponse.flushBuffer();
+    } catch (final IOException e) {
+        throw new IllegalStateException(e);
+    }
+
+    // 5.
+    final ServletOutputStream out;
+    try {
+        out = httpServletResponse.getOutputStream();
+    } catch (final IOException e) {
+        throw new IllegalStateException(e);
+    }
+
+    // 6.
+    executorService.submit(() -&gt; {
+        try {
+           try {
+               Content content;
+               // 7.
+               while ((content = getNextContent()) != null) { // this block is the one to repeat for all messages
+                   // 8.
+                   out.write("data:".getBytes());
+                   writerResponse.writeTo(content, Content.class, Content.class, annotations, APPLICATION_JSON_TYPE, fakeHttpHeaders, out);
+                   out.write("\n\n".getBytes());
+                   out.flush();
+               }
+           } catch (final IOException e) {
+               throw new IllegalStateException(e);
+            } finally {
+                try { // 9.
+                    asyncResponse.resume("");
+                } catch (final RuntimeException re) {
+                    // no-op: not that important
+                }
+            }
+        });
+    }</code></pre>
+
+<p>Comments on that code are:</p>
+
+<ol>
+	<li>some values we could use as constants, just a technical part without any knowledge</li>
+	<li>we extract the json mapper from jax-rs provider, this can be replaced by a&nbsp;<em>new ObjectMapper()</em>&nbsp;if you use jackson or&nbsp;<em>new MapperBuilder().build()</em>&nbsp;with johnzon - or jsonb if you already upgraded ;)</li>
+	<li>we get back the not wrapped response instance</li>
+	<li>we set the <em>Content-Type</em>&nbsp;to let the client know we will use SSE (could be done in thread 6.)</li>
+	<li>we keep a reference on the output stream to avoid to do it each time (optional)</li>
+	<li>we run the actual feed (stream) in a dedicated thread to not block http pool (this can use a&nbsp;<em>ManagedExecutorService</em>)</li>
+	<li>this loop is responsible to retrieve events one by one, you can multithread this but ensure to synchronize on the <em>out</em> instance otherwise you will not write respecting the format on the output stream</li>
+	<li>this block writes a single chunk/message</li>
+	<li>we finally request to JAX-RS 2.0 to resume the request (= finish it)</li>
+</ol>
+
+<h2>Going further</h2>
+
+<p>This code works (assuming you fill the small abstraction like how to retrieve the feed) but can be enhance. What is happening if the client closes? In previous case you will likely get an exception and quit which is ok - even if a 500 is not the cleanest way. However if you multithread a long running task then you can get troubles. To avoid it, and since the client can&#39;t say &quot;I&#39;m leaving&quot; with SSE, I recommand you to wrap the writing operation and catch <em>IOExceptions</em>&nbsp;and count them. After some count to define (2 or 3 should work not bad with multithreading) then you consider the client left and stop the processing with a flag you added (<em>AtomicBoolean </em>works very well for that).</p>
+
+<p>The nice parts of that implementation are:</p>
+
+<ul>
+	<li>you reuse a lot of JAX-RS 2.0 - including the serialization - which avoids you to reinvent the wheel and keep the code small</li>
+	<li>it uses asynchronous request processing (<em>AsyncResponse</em>). This is not mandatory but makes long running task better handled for the HTTP container</li>
+	<li>It will work with JAX-RS 2.1 as well so will not require to rewrite the method when upgrading</li>
+	<li>We can still use JAX-RS!</li>
+</ul>
+
+<p>This last point is important cause you probably notice the sample is not secured. It is common to see sample not on security not using any security but when you will want to secure this endpoint you will realize SSE requires&nbsp;<em>GET </em>and it is hard to pass header parameter portably in the browser (from&nbsp;<em>EventSource</em>). To solve that you can encode the security token and pass it as a query parameter. JAX-RS makes this very easy and its integration with CDI or Spring will makes the validation of the token quite trivial at the beggining of the method. Last tip on this topic: you can write a&nbsp;<em>POST</em>&nbsp;endpoint returning you a ciphered version of the security token the SSE endpoint can decipher before validating the token. This allows to not rely on a almost clear token in the url which would end up in the access logs. Instead of that you will get a ciphered token which is not usable without the cipher secret :).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//build-war-npm.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomcat-servlet-3.0-async-timeout.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

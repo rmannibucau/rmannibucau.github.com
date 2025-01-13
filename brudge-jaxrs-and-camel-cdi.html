@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Bridge JAX-RS and Camel CDI</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,205 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="brudge-jaxrs-and-camel-cdi-html-container" class="container page-content brudge-jaxrs-and-camel-cdi-html is-blog">
+                        <div class="page-header">
+                <h1>Bridge JAX-RS and Camel CDI</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-04-04</span>, <span class="metadata-readingtime">3 min and 53 sec read</span></p>
+</div>
+<p>Camel is a wonderful toolkit to build proxies or advanced integration chains. On another side JAX-RS is a great way to express an HTTP API (or REST API with some more work). Both can be integrated in various ways like:</p>
+
+<ul>
+	<li>using a camel HTTP component (rest, servlet, ...)</li>
+	<li>sending JAX-RS inputs to camel</li>
+</ul>
+
+<p>In this post we&#39;ll see how to do the last option, ie keep our rest layer standard and just wire the invocation to a camel route.</p>
+
+<p>What&#39;s the goal? Benefit from the very strong power of camel without having to do a new setup for our HTTP layer. Said otherwise: keep our development classical and still inherit from all the calel component and chaining.</p>
+
+<h2>Define a JAX-RS enpoint</h2>
+
+<p>Our goal is to reuse all common JAX-RS backbone so our endpoint would look like:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+@Path("greet")
+@Produces(MediaType.TEXT_PLAIN)
+public static class GreeterEndpoint {
+    @GET
+    @Path("hi")
+    public String sayHi(@QueryParam("name") String name) {
+        return /*some camel magic */;
+    }
+}</code></pre>
+
+<h2>Define Camel CDI chain</h2>
+
+<p>What should our camel chain (our route) do? Take the input passed from the rest endpoint (the name there) and convert it to the greeting message: &quot;hi ${name}&quot;.</p>
+
+<p>Here is a potential solution:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public static class GreeterRoute extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+        from("direct:chain")
+                .routeId("greeter")
+                .setBody().simple("Hi ${body}");
+    }
+}</code></pre>
+
+<p>So we read a request from a direct queue (seda would have worked too) and we set the output (body) to &quot;Hi ${body}&quot; which will use the current body (so our rest input) as placeholder. Since we&#39;ll pass the name as body of the route it will output what we are expecting.</p>
+
+<p>Side note: naming the route (<em>routeId</em>) is a good practise, in particular if you monitor your routes - otherwise no real way to know who is who quickly.</p>
+
+<h2>Bridge Camel and JAX-RS layers</h2>
+
+<p>To bridge both layers we use one of the most powerful camel component for external framework integration, the<em>&nbsp;org.apache.camel.ProducerTemplate</em>. Since we are using camel-cdi we can just inject it in our rest CDI bean and then it enables us to access the <em>requestBody</em>&nbsp;method which sends a payload as body and can return the output of the route as returned value:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+@Path("greet")
+@Produces(MediaType.TEXT_PLAIN)
+public class GreeterEndpoint {
+    @Inject
+    @EndpointInject(uri = "direct:chain")
+    private ProducerTemplate camel;
+
+    @GET
+    @Path("hi")
+    public String sayHi(@QueryParam("name") String name) {
+        return camel.requestBody((Object) name, String.class);
+    }
+}</code></pre>
+
+<ul>
+	<li>then injection relies on camel&nbsp;<em>@EndpointInject</em>&nbsp;to reference which endpoint will be used in the underlying camel context (the cdi one there). It is not mandatory and you can actually pass the value as parameter of another <em>requestBody</em> method (with 3 parameters).</li>
+	<li>we need to cast the name as an object to choose the method we want cause there is another signature &nbsp;conflicting using a String which expects the endpoint uri as first parameter. Don&#39;t worry, in real life you would pass an object anyway ;)</li>
+	<li>Finally we request the body output of the route as a String (second parameter). It either matches the actual output or you can rely on camel converters to build this instance which is pretty elegant.</li>
+</ul>
+
+<h2>Test the sample</h2>
+
+<p>If you want to test this sample just add camel-cdi and a jaxrs runtime and copy the provided classes. If you want to use Apache Meecrowawe here what it can look like:</p>
+
+<pre>
+<code class="language-xml">&lt;!-- maven dependencies --&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-cdi&lt;/artifactId&gt;
+    &lt;version&gt;2.18.2&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.meecrowave&lt;/groupId&gt;
+    &lt;artifactId&gt;meecrowave-core&lt;/artifactId&gt;
+    &lt;version&gt;0.3.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<pre>
+<code class="language-java">package com.github.rmannibucau.camel.demo;
+
+import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.meecrowave.Meecrowave;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+public class Runner {
+    public static void main(final String[] args) {
+        new Meecrowave().bake().await();
+    }
+
+    @ApplicationScoped
+    public static class Builder extends RouteBuilder {
+        @Override
+        public void configure() throws Exception {
+            from("direct:chain")
+                    .routeId("greeter")
+                    .setBody().simple("Hi ${body}");
+        }
+    }
+
+    @ApplicationScoped
+    @Path("greet")
+    @Produces(MediaType.TEXT_PLAIN)
+    public static class Api {
+        @Inject
+        @EndpointInject(uri = "direct:chain")
+        private ProducerTemplate camel;
+
+        @GET
+        @Path("hi")
+        public String sayHi(@QueryParam("name") String name) {
+            return camel.requestBody((Object) name, String.class);
+        }
+    }
+}
+</code></pre>
+
+<p>Then just hit:&nbsp;<a href="http://localhost:8080/greet/hi?name=test" target="_blank">http://localhost:8080/greet/hi?name=test</a></p>
+
+<h2>Conclusion</h2>
+
+<p>Thanks to all the utility classes around the camel context (ProducerTemplate, java proxy etc...) it is very easy to integrate camel with any library. When it comes to HTTP layer it can be easier to integrate camel with your own endpoints if you have some HTTP work to do (around headers or validation for instance) than reusing camel rest integration and configuring the whole stack to be align on the one you already have in your container (like bean validation + json in a EE server for example).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jaxrs-cxf-disable-stacktrace.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-tomee-artemis.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

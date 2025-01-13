@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Rotating logs on TomEE without any library</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,137 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tomee-rotating-logs-html-container" class="container page-content tomee-rotating-logs-html is-blog">
+                        <div class="page-header">
+                <h1>Rotating logs on TomEE without any library</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-08-16</span>, <span class="metadata-readingtime">4 min and 51 sec read</span></p>
+</div>
+<p>Any application produces logs and actually several kind of logs.&nbsp;Container, framework, business code&nbsp;rely on that to communicate basic information to the user (developers, operation teams, etc...). Aggregated or not in a central collector (Elasticsearch/fluentd, Splunk, Syslog...) this will produce by nature a several amount of data you want to control a minimum.</p>
+
+<p>Most of frameworks provide a solution for that need (Log4j2, Logback, ...) but Java Util Logging - JUL or the built-in java logging solution used by Tomcat and TomEE by default - &nbsp;is pretty raw on that area. Tomcat JULi (think layer on top of JUL) provides a first step allowing to rotate files per day with its FileHandler implementation but it doesn&#39;t allow to let the application run without caring of the size used by the logs. In other words whatever the config is you will get a &quot;full disk error&quot; someday.</p>
+
+<p>Without replacing the need of advanced frameworks like Log4j2 for applications relying a lot on logs for audit purpose or other very very verbose needs, TomEE provides a LocalFileHandler JUL handler (appender in log4j semantic) which adds the ability to rotate log files by day but also by size and to archive &quot;old&quot; logs before deleting them after another period.</p>
+
+<p>In practise it means you will allocate a max size to each log file, a duration defining how many time you want to keep these plain text logs and a duration you want to keep them compressed (in gzip or zip format).</p>
+
+<h2>Set LocalFileHandler up!</h2>
+
+<p>The configuration is pretty straight forward when you are used to Tomcat JULi one:</p>
+
+<pre>
+<code class="language-javascript">handlers = 1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler
+level = INFO
+
+.handlers = 1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler
+.level = INFO
+
+org.apache.catalina.core.ContainerBase.[Catalina].[localhost].level = WARNING
+org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers = 1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler
+
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.filenamePattern = ${catalina.base}/logs/catalina.%s.%03d.log
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.encoding = UTF-8
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.dateCheckInterval = 1 second
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.limit = 50 Mega
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.archiveOlderThan = 30 days
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.purgeOlderThan = 30 days
+1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler.level = INFO
+</code></pre>
+
+<p>The first two lines defien the handlers and default level to set up, the next two (which are the same but with the keys prefixed by a dot) defines the same but only for the root logger.</p>
+
+<p>Then the next two lines ([Catalina].[localhost]) defines the handlers associated to the Host in server.xml, you can also define it by webapp and logging will respect Tomcat hierarchy (the one you can see in server.xml).</p>
+
+<p>Until now we only defined level/handlers pairs for several elements of the server (loggers, Host, Context...). Once it is done you need to configure each handler to redirect the log records to the actual handler properly.</p>
+
+<p>Before digging how to configure LocalFileHandler, keep in mind Tomcat uses a hack to support multiple configurations for the same handler. By default a handler uses its classname as key prefix which means you can&#39;t define twice the same handler which is quite limiting. To workaround that tomcat allows you to prefix the classname by a string starting with a number (<em>1main </em>in previous snippet) and will use this prefix concatenated to the classname as handler identifier instead of the classname only. In clear&nbsp;<em>org.apache.tomee.jul.handler.rotating.LocalFileHandler</em> becomes <em>1main.org.apache.tomee.jul.handler.rotating.LocalFileHandler</em>&nbsp;in term of configuration. To allows to define the same handler multiple times with different configuration.</p>
+
+<p>Now we understand&nbsp;how the configuration can be read let see what is actually done:</p>
+
+<ul>
+	<li>filenamePattern defines where the log files are created, it can use system properties (tomcat one, you can set them up in setenv.[sh|bat]) or reuse Tomcat provided ones like catalina.base. It is the absolute file path and can use two patterns: the date (yyyy-mm-dd format) and the rotation index (starting at 0 for the first file of the day). It reuses java String.format syntax, that&#39;s why date uses %s and index %d (%03d enforces to use 3 digits).</li>
+	<li>limit is the size limit per file</li>
+	<li>archiveOlderThan is the duration limit before archiving a log file</li>
+	<li>purgeOlderThan is the duration limit before deleting an archive (note it starts when archived and not when created)</li>
+</ul>
+
+<p>In term of more common configuration you can set the encoding, a filter, a formatter.</p>
+
+<p>If you need a more advanced tuning you can configure too these properties:</p>
+
+<ul>
+	<li>dateCheckInterval: how often the date string is updated, default is 5 seconds. This is the period you accept your log file to be outdated (ie you can log in day N 5 seconds of log data of the day N+1)</li>
+	<li>bufferSize: buffer used before writing to the actual file (depending the OS allows to speed up the logging), default is -1 which means it is not used</li>
+	<li>archiveDirectory: where to store compressed logs (default to ${catalina.base}/logs/archives)</li>
+	<li>archiveFormat: gzip or zip depending the archives you want, default is gzip</li>
+	<li>compressionLevel: for zip only the zip compression level (default -1)</li>
+	<li>formatterLocale and formatterLocale: only used when no formatter is set, it relies on a String.format which allows you to configure the log format directly on the handler, default is:</li>
+</ul>
+
+<pre>
+<code>%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS %1$Tp %2$s%n%4$s: %5$s%6$s%n</code></pre>
+
+<p>which output something like;</p>
+
+<pre>
+<code>august 13, 2016 6:38:33 PM null
+INFOS: message</code></pre>
+
+<h2>Limitations</h2>
+
+<p>This handler works very well in most of the cases but note two important things to consider before using it for something else than container/framework logs:</p>
+
+<ul>
+	<li>Rotation is done only when a log record arrives. In other terms you will not rotate if you don&#39;t log anything for days. Not a big deal but knowing it avoids to not understand why you have day N and day N+7 log files only if you restart the server once a week.</li>
+	<li>Nothing controls the full disk space allocated to logs in this handler. This is one potential enhancement: adding a <em>maxLogFilePerDay </em>forcing some deletion or archiving but this has some more strategy implication so it is not yet there. It means you can still get a &quot;full disk error&quot; with this handler even if it is more unlikely than with default implementations cause archiving once well configured will already save a lot of space.</li>
+</ul>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//angular2-rc4-rc5-migration.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomcat-tomee-log4j2-setup.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

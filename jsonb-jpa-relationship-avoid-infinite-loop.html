@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>JSON-B and JPA, how to solve serialization loop issue</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,223 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="jsonb-jpa-relationship-avoid-infinite-loop-html-container" class="container page-content jsonb-jpa-relationship-avoid-infinite-loop-html is-blog">
+                        <div class="page-header">
+                <h1>JSON-B and JPA, how to solve serialization loop issue</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-01-26</span>, <span class="metadata-readingtime">5 min and 36 sec read</span></p>
+</div>
+<p>JPA and JSON-B are great solutions to have a vendor independent code and write very quickly a persistence layer serves through HTTP (through Servlet or JAX-RS layer). However, JPA tends to create object cycles in its mapping and therefore, without careness, JSON-B will just fail with an infinite loop (stack overflow exception).</p>
+
+<p>To see how to solve that, let&#39;s take an example:</p>
+
+<pre>
+<code class="language-java">@Data
+@Entity
+public class Root {
+    @Id
+    private String id;
+    private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "root")
+    private List&lt;Link&gt; links;
+}</code></pre>
+
+<pre>
+<code class="language-java">@Entity
+public class Link {
+    @Id
+    private String id;
+    private String name;
+
+    @ManyToOne
+    private Root root;
+}</code></pre>
+
+<p>These two entities define a graph: root has a list of links but - and this is the common issue between JPA and any (de)serializer - the link has a reference to the root instance.</p>
+
+<p>So if you want to serialize it you should skip the root in link instances (since it is the same than the enclosing one anyway).</p>
+
+<p>There are multiple ways to do that:</p>
+
+<ul>
+	<li>set it to null - if you pick this one, ensure to not persist the null which would break the relationship,</li>
+	<li>add&nbsp;<em>@JsonbTransient</em>&nbsp;on the nested relationship,</li>
+	<li>don&#39;t serialize the entity but a DTO with the model you want (for example the nested Root instance becomes a String hosting the id of the enclosing instance).</li>
+</ul>
+
+<p>This last option is very tempting and generally works but then, if you serialize a link alone (assume you have a RESTful API, it can do PUT /api/link/linkId), then you look the relationship and will need to add it as a query parameter or so to compensate it, not that RESTful or friendly.</p>
+
+<p>So at the end, the nicest solution is to replace the nested entities by another representation which will often be the identifier only - but can be a light representation in some case with the human name but not the full description for example.</p>
+
+<p>This solution must also be done with another constraint: do it only when needed. Concretely, if I serialize a Link as root entity, I keep nested Root entity in the model and if not I will replace it by an identifier. This means it is not the type which is serialized differently but the property.</p>
+
+<p>To be very concrete, here is the serialization we want of a root entity (assuming there are two links):</p>
+
+<pre>
+<code class="language-json">{
+  "id":"root-id",
+  "links":["link-id-1","link-id-2"],
+  "name":"root"
+}</code></pre>
+
+<p>And here is the serialization of the link directly:</p>
+
+<pre>
+<code class="language-json">{
+  "id":"link-id-id",
+  "name":"link-1",
+  "root": {
+    "id":"root-id",
+    "links":["link-id-1","link-id-2"],
+    "name":"root"
+  }
+}</code></pre>
+
+<p>Way more consistent for an API, right?</p>
+
+<p>The solution to do that is to implement either custom JSON-B serializers/deserializers or adapters. The first ones are the most powerful but the lowest level and last one are very easy to implement but are both ways (serialization and deserialization) - which is fine here since we want both sides to work. So for this case we will pick the adapters.</p>
+
+<p>In Root entity, we will specify the adapter we&#39;ll write on the list of links to ensure it got transformed to the list of id:</p>
+
+<pre>
+<code class="language-java">@JsonbTypeAdapter(LinkListAdapter.class)
+@OneToMany(fetch = FetchType.EAGER, mappedBy = "root")
+private List&lt;Link&gt; links;</code></pre>
+
+<p>All the &quot;magic&quot; will happen in&nbsp;<em>LinkListAdapter</em>&nbsp;which will be responsible to:</p>
+
+<ul>
+	<li>serialize the List&lt;Link&gt;&nbsp;to a List&lt;String&gt;,</li>
+	<li>deserialize the List&lt;String&gt; (identifiers) to the List&lt;Link&gt; (for the runtime)</li>
+</ul>
+
+<p>Tip: there are a ton of strategies there, several can combine a threadlocal/request scoped bean which will pass some request context like query parameters to the adapter to customize the deserialization behavior to speed up things. We will not cover it in this post but note it is possible to do way more.</p>
+
+<p>So overall, our adapter will look like:</p>
+
+<pre>
+<code class="language-java">public class LinkListAdapter implements JsonbAdapter&lt;List&lt;Link&gt;, List&lt;String&gt;&gt; {
+    @Override
+    public List&lt;String&gt; adaptToJson(final List&lt;Link&gt; list) {
+        return /*todo*/;
+    }
+
+    @Override
+    public List&lt;Link&gt; adaptFromJson(final List&lt;String&gt; list) {
+        return /*todo*/
+    }
+}
+</code></pre>
+
+<p>Converting a list of entity to a list of identifier is trivial and can be done with this code:</p>
+
+<pre>
+<code class="language-java">return list.stream().map(Link::getId).collect(toList());</code></pre>
+
+<p>The opposite is harder since you need to select all entities with an id in the list. Using an&nbsp;<em>EntityManager</em>, it looks like:</p>
+
+<pre>
+<code class="language-java">final EntityManager em = getEntityManager();
+final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+final CriteriaQuery&lt;Link&gt; query = criteriaBuilder.createQuery(Link.class);
+final Root&lt;Link&gt; root = query.from(Link.class);
+final CriteriaQuery&lt;Link&gt; fullQuery = query.where(root.get("id").in(list));
+return em.createQuery(fullQuery).getResultList();</code></pre>
+
+<p>But how to get an entity manager? Here again you have multiple options but overall it is about having access to the current entity manager of the application. With CDI/Spring it will often look like a simple injection - scopes doing the work:</p>
+
+<pre>
+<code class="language-java">public class LinkListAdapter implements JsonbAdapter&lt;List&lt;Link&gt;, List&lt;String&gt;&gt; {
+    @Inject // @PersistenceContext etc...depending your app
+    @Unit(name="myapp") // using meecrowave-jpa for example
+    private EntityManager em;
+
+    @Override
+    public List&lt;String&gt; adaptToJson(final List&lt;Link&gt; list) {
+        return list.stream().map(Link::getId).collect(toList());
+    }
+
+    @Override
+    public List&lt;Link&gt; adaptFromJson(final List&lt;String&gt; list) {
+        final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        final CriteriaQuery&lt;Link&gt; query = criteriaBuilder.createQuery(Link.class);
+        final Root&lt;Link&gt; root = query.from(Link.class);
+        final CriteriaQuery&lt;Link&gt; fullQuery = query.where(root.get("id").in(list));
+        return em.createQuery(fullQuery).getResultList();
+    }
+}
+</code></pre>
+
+<p>Important: a more production friendly implementation will also check all identifiers where loaded or will fail with an optimistic lock exception or so to avoid inconsistencies - but this is not related to JSON-B/JPA link, more to the functional of your endpoints.</p>
+
+<p>If we summarize, we did these steps:</p>
+
+<ul>
+	<li>Write an adapter to convert a list of entities to their identifiers (and the opposite, load a list of entities from their identifiers),</li>
+	<li>Set this adapter on the relationship field of the entity.</li>
+</ul>
+
+<p>With these two steps, we can use JPA entities from the backend to the frontend of your application very smoothly. Last note is that you will often also implement unary adapter (not always for list) but the logic is really the same, just the deserialization is simpler since it is a plain <em>em.find</em>.</p>
+
+<p>Final note is that this solution has a small pitfall: it breaks all the tooling around your endpoints like Swagger/OpenAPI generators will see the entities so you will need to give them another model or map the model manually to align on the actual implementation.</p>
+
+<p>The choice between this solution and having a real DTO layer you map is mainly around:</p>
+
+<ul>
+	<li>Speed of development - if you do a quick PoC it is more than enough,</li>
+	<li>The ecosystem you use (if you don&#39;t use swagger and friends then you don&#39;t really care),</li>
+	<li>Maintenance cost and evolutivity of the database model and endpoint contract (if database moves faster than the HTTP layer it is not relevant to push entities there).</li>
+</ul>
+
+<p>So as usual, it is not because you can that you should but this enables some simple microservices or migration microservices (the service you write to glue 2 versions of another application for example) to be done very quickly and simply.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//mvnd-rolling-window-size.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//move-from-javax-to-jakarta-with-apache-tomee-9-3.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

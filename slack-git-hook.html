@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Automotion, git hooks and Slack example.</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,116 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="slack-git-hook-html-container" class="container page-content slack-git-hook-html is-blog">
+                        <div class="page-header">
+                <h1>Automotion, git hooks and Slack example.</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-other"><span class="icon"><i class="fa fa-fa fa-random"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-06-27</span>, <span class="metadata-readingtime">3 min and 19 sec read</span></p>
+</div>
+<p>When you work commonly with slack you can use the git integration to get the list of commits but you can also just rely on webhooks if you need more informations.</p>
+
+<p>Since Slack also supports <a href="https://api.slack.com/incoming-webhooks" target="_blank">incoming webhooks</a> you just have to define one - you need to be an administrator to do so. It will basically give you an URL you can post messages to.</p>
+
+<p>Globally using curl syntax we want to execute:</p>
+
+<pre>
+<code class="language-bash">curl -s \
+  -d "payload={\"channel\": \"#slackchannel\", \"text\": \"Hello slack\"}" \
+  "https://hooks.slack.com/services/XXX/YYY/ZZZ"</code></pre>
+
+<p>The question then is how to link it to git? Git also provides hooks to most of actions. If you don&#39;t know them just list files in&nbsp;<em>.git/hooks/</em>&nbsp;folder of your clone. You have one for most of git phases (<em>pre-push</em>,&nbsp;<em>post-commit</em>&nbsp;etc...).</p>
+
+<p>Just edit the one you want to execute an action at the corresponding time. In our case we want to send a message when committing - but it is doable when pushing as well. To match commit time we&#39;ll edit&nbsp;<em>.git/hooks/post-commit</em>.&nbsp;</p>
+
+<p>Now it sounds obvious we will just execute our curl command in this file, the slack url and channel parameters are easy to replace but what about the text? Sending&nbsp;<em>Hello</em>&nbsp;each time we commit wouldn&#39;t help much ;).</p>
+
+<p>Here the trick is to rely on git to get the last commit message well formatted and just use it as text:</p>
+
+<pre>
+<code class="language-bash">#!/bin/sh
+msg=$(git log -n 1 HEAD --format=format:%s%n%b)
+text=$(echo "$msg" | sed 's/"/\"/g' | sed "s/'/\'/g")
+curl -s \
+  -d "payload={\"channel\": \"#slackchannel\", \"text\": \"$text\"}" \
+  "https://hooks.slack.com/services/XXX/YYY/ZZZ"</code></pre>
+
+<p>With this hook configured, each time you will commit it will send a message on slack with your commit message. You kind of bridge your local git changelog to slack.</p>
+
+<p>Of course for that simple use case there are automotion already but if you add some more logic you can enable a lot of use cases which can be useful like:</p>
+
+<ul>
+	<li>&quot;i add an awesome feature cc @myColleague&quot;, direct ping from the commit line!</li>
+	<li>&quot;i add an awesome feature #logJIRA&quot;, direct jira creation from the git context!</li>
+	<li>&quot;i update the configuration repository and ##redeploy&quot;, kind of continuous deployment but user controlled - this case if of course when operation team uses a git repository to store the configuration</li>
+	<li>&quot;i add this feature and #mail @myboss&quot;</li>
+	<li>...</li>
+</ul>
+
+<p>You now have a way to execute anything based on git actions.</p>
+
+<p>Now, and because this post is also about slack, you probably know or guessed that there are <a href="https://api.slack.com/custom-integrations/outgoing-webhooks" target="_blank">outgoing webhooks</a> since we used the &quot;incoming&quot; one. This means you can create a kind of slack bot pretty easily and makes this awesome integration bidirectional:</p>
+
+<ul>
+	<li>from slack you can trigger a git tagging</li>
+	<li>from slack you can trigger deployments</li>
+	<li>from slack you can grab your production logs</li>
+	<li>etc....</li>
+</ul>
+
+<p>Are these kind of integrations important? Indeed you should define the way you want to work first but having a centralized way to trigger actions is very efficient and avoids to loose time which is important when it comes to production - in development it is less impacting.</p>
+
+<p>What are the alternatives? We are effectively building a command based solution so naturally you can think to slack but it then misses a small thing...a server to ensure it is bidirectional. Next self hosted and open source solution can use IRC but the UI is not nice enough for all cases - in particular when it comes to grabbing logs from a server and log some output :s. I didn&#39;t investigated it completely but gitter looks a potential nice alternative.</p>
+
+<p>What should you keep of this post: we are in a world where easiness is the keyword (you can order a boat from your phone!) so ensure to match this lifestyle evolution in your everyday work making all small action taking a few minutes N times per day automated and hurtless.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/other/page-1.html">Other</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//cdi-2-programmatic-observers.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cxf-search-extension.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

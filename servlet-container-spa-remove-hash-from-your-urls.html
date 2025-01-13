@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Ensure your Servlet container supports dropping the hash from your SPA</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,147 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="servlet-container-spa-remove-hash-from-your-urls-html-container" class="container page-content servlet-container-spa-remove-hash-from-your-urls-html is-blog">
+                        <div class="page-header">
+                <h1>Ensure your Servlet container supports dropping the hash from your SPA</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2018-08-22</span>, <span class="metadata-readingtime">4 min and 6 sec read</span></p>
+</div>
+<p>Single Page Applications (S.P.A.) often use a hash as default marker for its routing. Typically you can get this kind of URLs:</p>
+
+<ul>
+	<li><em>/#/post/1234</em></li>
+	<li><em>/#/user/1234</em></li>
+	<li><em>/#/users</em></li>
+	<li>etc...</li>
+</ul>
+
+<p>This works great but has some pitfalls:</p>
+
+<ul>
+	<li>Some users don&#39;t like it because it &quot;pollutes&quot; the URL</li>
+	<li>Google is now able to index properly SPA (without the need of server side rendering for a lot of cases) but if you use a sitemap or so the # will mark the fragment and therefore will be ignored of the URL representation server side which means all the sample paths of the previous bullet list will all lead to the same endpoint:<em> / </em>or <em>/index.html</em> in general.</li>
+</ul>
+
+<p>To solve that, the routers generally allow&nbsp;you to switch to a routing not relying on the hash. In Angular 4-6&nbsp; you can switch of&nbsp;<em>LocationStrategy</em>&nbsp;(between the <em>Path</em>&nbsp;and&nbsp;<em>Hash</em>&nbsp;ones) using the toggle&nbsp;<em>useHash</em>:</p>
+
+<pre>
+<code class="language-javascript">RouterModule.forRoot(routes, { useHash: false })</code></pre>
+
+<p>Note that this is since several versions the default in Angular so you don&#39;t need to set the <em>useHash</em>&nbsp;toggle normally to use the HTML5 navigation (with pushState).</p>
+
+<p>Indeed this change (whatever technology you use) will impact the application at a few levels:</p>
+
+<ul>
+	<li>In general you will need to ensure you set your application&nbsp;<em>&lt;base/&gt;</em>&nbsp;in your&nbsp;<em>&lt;head/&gt;</em>&nbsp;tag. This is to let the application know how to build relative urls since it can&#39;t use the hash anymore as a marker to deduce it. If you migrate from a hash based application to a path based one, this is something you can need to add since it is not mandatory for hash based routing.</li>
+	<li>Your urls will need to be pseudo-absolute in your client: when using the hash routing, all urls are relative to the same endpoint (let say&nbsp;<em>/index.html</em>) but with the path based routing you can be on&nbsp;<em>/user/1</em>&nbsp;or&nbsp;<em>/admin/user/1</em>&nbsp;and call the same API (server) endpoint&nbsp;<em>/api/user/1</em>&nbsp;to grab the user data. In the hash case you will just use&nbsp;<em>api/user/1</em>&nbsp;but in the path case you will need to ensure to use&nbsp;<em>/api/user/1</em>&nbsp;if you have a base of&nbsp;<em>/</em>.</li>
+	<li>Finally your backend will need to ensure the client side path redirects to the index.html. There are multiple ways to do it (map all of them with a&nbsp;<em>jsp-file</em>&nbsp;and servlet pattern in your <em>web.xml </em>or<em>&nbsp;ServletContainerInitializer</em>&nbsp;is a simple one) but it is common to put all that logic in a single place and this is the solution we&#39;ll detail.</li>
+</ul>
+
+<p>Before digging into the way to redirect to the client side paths to the right resource, let&#39;s note that some applications can need some more adjustments if you use the hash based urls in your logic (like adding links in your API payloads).</p>
+
+<p>The solution I generally use to redirect the client side paths to the right resource is a servlet filter. It has the advantage to be a very simple code and keep in a single place (compared to the web.xml solution which requires to duplicate a lot the default servlet mapping). The overall idea is to filter by path the incoming url and redirect on the entry point of your SPA. To get the path you generally just need to drop the webapp context to the request uri and the application entry point is generally the index.xml.</p>
+
+<p>Here is an implementation for the previous urls:</p>
+
+<pre>
+<code class="language-java">@WebFilter(asyncSupported = true, urlPatterns = "/*")
+public class SpaRouterFilter implements Filter {
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        final HttpServletRequest httpServletRequest = HttpServletRequest.class.cast(request);
+        final String uri = httpServletRequest.getRequestURI().substring(httpServletRequest.getContextPath().length());
+        if (isClientPath(uri)) {
+            chain.doFilter(new HttpServletRequestWrapper(httpServletRequest) {
+                @Override
+                public String getServletPath() {
+                    return "/index.html"; // &lt;1&gt;
+                }
+            }, response);
+            return;
+        }
+        chain.doFilter(request, response);
+    }
+
+    private boolean isClientPath(final String uri) { // &lt;2&gt;
+        return uri.startsWith("/user")
+               uri.startsWith("/post/")
+               uri.startsWith("/admin/");
+    }
+}</code></pre>
+
+<ol>
+	<li>overriding the servlet path will be enough to remap current request to the entry point of the javascript application</li>
+	<li>this method filters by prefix the client urls, a more advanced version could parse a <em>routes.json</em>&nbsp;file to extract them at build time but generally there are not a ton of paths to map so this solution is still not bad like that.</li>
+</ol>
+
+<p>You will have noted that this solution maps the filter on all urls. This is good if you make the&nbsp;<em>isClientPath</em>&nbsp;configurable but if you hardcode as in previous example the paths, you can just be more precise and move the path configuration to the servlet mapping:</p>
+
+<pre>
+<code class="language-java">@WebFilter(asyncSupported = true, urlPatterns = { "/post/*", "/user/*", "/admin/*" })
+public class UrlRewriting implements Filter {
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        final HttpServletRequest httpServletRequest = HttpServletRequest.class.cast(request);
+        final String uri = httpServletRequest.getRequestURI().substring(httpServletRequest.getContextPath().length());
+        chain.doFilter(new HttpServletRequestWrapper(httpServletRequest) {
+            @Override
+            public String getServletPath() {
+                return "/index.html";
+            }
+        }, response);
+    }
+}
+</code></pre>
+
+<p>Here we are, with that filter you are able to serve your client router urls transparently and avoid the ugly HTTP 404 you get without :).</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//maven-dependencies-locations.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//tomee-microprofile-2.0.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

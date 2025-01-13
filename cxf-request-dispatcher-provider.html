@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>CXF RequestDispatcherProvider: a taste of MVC specification today</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,186 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cxf-request-dispatcher-provider-html-container" class="container page-content cxf-request-dispatcher-provider-html is-blog">
+                        <div class="page-header">
+                <h1>CXF RequestDispatcherProvider: a taste of MVC specification today</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-01-17</span>, <span class="metadata-readingtime">3 min and 56 sec read</span></p>
+</div>
+<p>MVC specification will bring a JAX-RS based MVC server framework with JavaEE 8 but if you already use CXF you can do more or less the same based on&nbsp;<em>RequestDispatcherProvider</em>&nbsp;class.</p>
+
+<p>It is a&nbsp;<em>@Provider</em>&nbsp;(<em>MessageBodyWriter&nbsp;</em>actually) &nbsp;you can use to route a JAX-RS endpoint to a view. The nice thing is you have some actual flexibility:</p>
+
+<ul>
+	<li>configure the associated view (it supports multiple views and if the condition is not enough you can use multiple instance of&nbsp;<em>RequestDispatcherProvider</em>)</li>
+	<li>configure the associated name of the model (the name in the template of the returned data)</li>
+	<li>base the view on an enum</li>
+	<li>...</li>
+</ul>
+
+<p>Let&#39;s see a simple example and how you can use it just after having read this post!</p>
+
+<h2>The JAX-RS endpoint</h2>
+
+<p>First we need a JAX-RS endpoint with a model, let&#39;s take this trivial one:</p>
+
+<pre>
+<code class="language-java">@Path("hello")
+@ApplicationScoped
+public class HelloController {
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public World hi(@QueryParam("name") @DefaultValue("world") final String name) {
+        return new World(name);
+    }
+
+    public static class World {
+        private String name; // getter
+    }
+}
+</code></pre>
+
+<p>Really a simple endpoint creating a &quot;name holder&quot; (<em>World</em>&nbsp;model) which can vary depending the query parameter&nbsp;<em>name</em>.</p>
+
+<h2>The view</h2>
+
+<p>Then we want to show some nice HTML with our model so we&#39;ll use a JSP (most servers will support it but you can use really any web framework you want until you can access the request attributes):</p>
+
+<pre>
+<code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;name: ${world.name}&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Nothing crazy there, just a plain HTML page accessing the request attribute&nbsp;<em>${world.name}</em>&nbsp;which is supposed to be based on our&nbsp;<em>World</em>&nbsp;model.</p>
+
+<h2>The Controller-View glue: RequestDispatcherProvider</h2>
+
+<p>Now we need to ensure our controller (JAX-RS endpoint) and our view can be linked together. This is the role of the provider CXF gives you for free.</p>
+
+<p>To configure and activate it, we&#39;ll put it in singletons of the JAX-RS application we&#39;ll use:</p>
+
+<pre>
+<code class="language-java">@Dependent
+@ApplicationPath("rs")
+public class HelloApplication extends Application {
+    private final Set&lt;Class&lt;?&gt;&gt; classes = singleton(HelloController.class);
+    private final Set&lt;Object&gt; singletons = singleton(newDispatcher());
+
+    private RequestDispatcherProvider newDispatcher() {
+        final RequestDispatcherProvider dispatcherProvider = new RequestDispatcherProvider();
+        dispatcherProvider.setClassResources(new HashMap&lt;String, String&gt;() {{ // allow to handle view per type
+            put(HelloController.World.class.getName(), "/hello.jsp");
+        }});
+        dispatcherProvider.setBeanNames(new HashMap&lt;String, String&gt;() {{
+            put(HelloController.World.class.getName(), "world");
+        }});
+        dispatcherProvider.setLogRedirects(Boolean.FALSE.toString());
+        return dispatcherProvider;
+    }
+
+    @Override
+    public Set&lt;Class&lt;?&gt;&gt; getClasses() {
+        return classes;
+    }
+
+    @Override
+    public Set&lt;Object&gt; getSingletons() {
+        return singletons;
+    }
+}
+</code></pre>
+
+<p>The configuration can be extracted (opeenjb-jar.xml for TomEE typically) or done this way but the important parts to keep are:</p>
+
+<ul>
+	<li>log redirects: this option allows to log each time you use that provider, personally I prefer to not be polluted by logs for normal cases so i switch it off</li>
+	<li>bean names: this is how CXF will set the request attribute holding the value returned by your endpoint, there are multiple strategy but default one is to use the class simple name. Setting a map&nbsp;<em>fully qualified class name -&gt; attribute name</em>&nbsp;allows to have nicer names in the view.</li>
+	<li>class resources: this is the mapping between classes and views. Concretely you associated to a class a view.</li>
+</ul>
+
+<p>There are really a lot of configuration you can desire like:</p>
+
+<ul>
+	<li>include resource: do you use an include or forward to build the response (= how the view is handled)</li>
+	<li>scope: where the attribute is set, ie the request or session (default to request)</li>
+	<li>and a lot more parameters to lookup differently the resources</li>
+</ul>
+
+<p>The previous snippet is more than enough for our us, we can even make it simpler since we have a single model and view and CXF has shortcuts for that case.</p>
+
+<h2>Run it</h2>
+
+<p>I bypassed some part of the packaging in previous parts but depending which server you use it can be different but overall points are:</p>
+
+<ul>
+	<li>the views will be in <em>webapp/</em>&nbsp;(as a web resource or in WEB-INF) if you use a .war or in META-INF/resources if you use a fatjar or servlet 3.0&nbsp;features</li>
+	<li>if you run a very lightweight container like Apache Meecrowave you will not get jsp by default and need to add <em>tomcat-jasper</em> dependency and for version 0.2.0 (not next ones) this&nbsp;<em>ServletContainerInitializer (</em>but then you run the main org.apache.meecrowave.runner.Cli directly without any other packaging):</li>
+</ul>
+
+<pre>
+<code class="language-java">// don't forget the META-INF/services/javax.servlet.ServletContainerInitializer file
+public class Customizer implements ServletContainerInitializer {
+    @Override
+    public void onStartup(Set&lt;Class&lt;?&gt;&gt; set, ServletContext servletContext) {
+        servletContext.addServlet("jsp", JspServlet.class).addMapping("*.jsp");
+    }
+}</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Today&#39;s world is really about single page applications but for rather backend applications with small frontend needs it is still overkill and requires some knowledge you don&#39;t want to invest any time in.</p>
+
+<p>When these applications are JAX-RS based, it is very very handy to use this kind of solution which allows to get a ui based on its standard architecture in less than 5mn!</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jaxrs-client-maintain-session.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//servlet-jaas-bridge.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

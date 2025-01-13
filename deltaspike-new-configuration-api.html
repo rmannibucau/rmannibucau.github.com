@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>DeltaSpike: new Configuration API!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,142 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="deltaspike-new-configuration-api-html-container" class="container page-content deltaspike-new-configuration-api-html is-blog">
+                        <div class="page-header">
+                <h1>DeltaSpike: new Configuration API!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2016-11-17</span>, <span class="metadata-readingtime">2 min and 56 sec read</span></p>
+</div>
+<p>DeltaSpike configuration is a de facto standard for &quot;EE&quot;/CDI configuration API. It provides a nice &quot;source&quot; abstraction allowing to integrate the configuration loading from any kind of company or user specific storage.</p>
+
+<p>Until the last release the API was looking like:</p>
+
+<pre>
+<code class="language-java">@Inject
+@ConfigProperty(name = "my.url", defaultValue = "http://server.com")
+private String url;</code></pre>
+
+<p>Or</p>
+
+<pre>
+<code class="language-java">URL url = ConfigResolver.resolve("my.url")
+                .as(URL.class, new URLConverter())
+                .cacheFor(TimeUnit.SECONDS, 30)
+                .getValue();</code></pre>
+
+<p>It works great but not always very smooth for end users:&nbsp;<em>ConfigResolver</em>&nbsp;is powerful but&nbsp;direct injection is smoother. However this last one didn&#39;t enable&nbsp;to use the caching feature (avoiding to read the configuration for each access but leep updating it from time to time) and the converter feature.</p>
+
+<p>With 1.8.0 it got enhanced significantly!</p>
+
+<h2>ConfigProperty got converters!</h2>
+
+<p>Now it is valid to do:</p>
+
+<pre>
+<code class="language-java">?@Inject
+@ConfigProperty(name = "my.url", converter = MyUrlConverter.class)
+private URL url;</code></pre>
+
+<p>And the bonus is&nbsp;<em>MyUrlConverter</em>&nbsp;can be a normal scoped bean (often an&nbsp;<em>@ApplicationScoped</em>&nbsp;instance).</p>
+
+<h2>Interface based configuration</h2>
+
+<p>The other new configuration is to support to create on the fly configuration Bean based on interfaces:</p>
+
+<pre>
+<code class="language-java">@Configuration
+public interface MyAppConfig {
+    @ConfigProperty(name = "my.app.url", converter = MyUrlConverter.class)
+    URL url();
+
+    @ConfigProperty(name = "my.app.retries", defaultValue = "2")
+    int retries();
+}</code></pre>
+
+<p>Nice thing with this new API are:</p>
+
+<ul>
+	<li>it supports primitives compared to direct injections which can&#39;t use primitive due to CDI limitations</li>
+	<li>it fully reuses the standard&nbsp;<em>@ConfigProperty</em>&nbsp;features (including converters)</li>
+	<li>it design the configuration as a bean which makes the maintenance and configuration extraction easier for end users (if you do some living documentation on your configuration you will enjoy it!)</li>
+	<li>not visible in previous snippet but it supports prefixing of all keys (see next sample)</li>
+	<li>it supports caching (see next snippet)</li>
+</ul>
+
+<p>Completely configured you can do:</p>
+
+<pre>
+<code class="language-java">@Configuration(prefix = "my.app", cacheFor = 30, cacheUnit = TimeUnit.SECONDS)
+public interface MyAppConfig {
+    @ConfigProperty(name = "url", converter = MyUrlConverter.class)
+    URL url();
+
+    @ConfigProperty(name = "retries", defaultValue = "2")
+    int retries();
+}</code></pre>
+
+<p>And the usage? Simply:</p>
+
+<pre>
+<code class="language-java">@Inject
+private MyAppConfig appConfig;</code></pre>
+
+<h2>CDI sources and filters</h2>
+
+<p>Until recently&nbsp;<em>ConfigSource</em>&nbsp;(entries providers) and&nbsp;<em>ConfigFilter</em>&nbsp;(how to decrypt/tranform values) were not taken from CDI context and therefore were not CDI beans. Most of the time they were taken from the plain Java SE <em>ServiceLoader</em>&nbsp;and just plain java classes. Sometimes it is hard to use or enforce you to rely on BeanProvider (and some trick cause of boot lifecycle) to be able to bridge to your business code and a JPA repository for instance.</p>
+
+<p>Now you can decorate a&nbsp;<em>ConfigSource</em>&nbsp;with&nbsp;<em>@Source</em>&nbsp;and a&nbsp;<em>ConfigFilter</em>&nbsp;with&nbsp;<em>@Filter</em>&nbsp;to automatically add the related normal scoped CDI beans once CDI is started (means they will not be active for&nbsp;<em>Extension</em>&nbsp;configuration but for the whole application configuration it will). This can look like a limitation but actually most of the time that&#39;s what we do and the&nbsp;<em>Extension</em>&nbsp;configuration is often just a kind of &quot;hardcoded&quot; configuration you can consider as an internal of the application so it is not that impacting to not rely on an advanced source to read it - at least it is acceptable.</p>
+
+<h2>Conclusion</h2>
+
+<p>Even if globally just syntax sugar, these new features makes DeltaSpike configuration far more efficient and smoother to use and the end user code is now easier to maintain. There are still a lot of potential enhancements like defaulting keys in the interface based configuration, defining the sources in this same interface, defining with java 8 an event to react on configuration reloading etc... but it already enables a lot of use cases for a cheap investment in term of API so don&#39;t hesitate to test it.</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//hazelcast-cdi.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//webpack-scp-plugin.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

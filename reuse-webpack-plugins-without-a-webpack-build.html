@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Reuse Webpack plugins without a webpack build</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,206 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="reuse-webpack-plugins-without-a-webpack-build-html-container" class="container page-content reuse-webpack-plugins-without-a-webpack-build-html is-blog">
+                        <div class="page-header">
+                <h1>Reuse Webpack plugins without a webpack build</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-frontend"><span class="icon"><i class="fa fa-fab fa-js"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-04-04</span>, <span class="metadata-readingtime">4 min and 19 sec read</span></p>
+</div>
+<p>Webpack ecosystem is likely the richest for the frontend development today (even ng of Angular 9 or react-script use it).</p>
+
+<p>However, sometimes, they encapsulate some logic which can be neat to reuse outside of a webpack build. To illustrate it, you can take the example of an Angular 9&nbsp;<strong>library</strong>&nbsp;which uses ng-packgr. It relies on&nbsp;<em>rollup</em>&nbsp;instead of webpack for the build and is not that extensible today. However, if you want to chain features it would be a pain to create a webpack build for what is already well done with rollup.</p>
+
+<p>To illustrate the reuse of a webpack plugin without webpack, i will try to compress assets created with rollup (with ng-packagr for example) and create&nbsp;gz/br&nbsp;archives&nbsp; from the output assets using webpack&nbsp;<em>CompressionPlugin</em>.</p>
+
+<p>The plugin configuration itself is quite common for anyone familiar with webpack. What we want to run is:</p>
+
+<pre>
+<code class="language-javascript">const plugins = [
+    new CompressionPlugin({
+        test: compressedAssets,
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        compressionOptions: {level: 9},
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: false,
+    }),
+    new CompressionPlugin({
+        test: compressedAssets,
+        filename: '[path].br[query]',
+        algorithm: 'brotliCompress',
+        compressionOptions: {level: 11},
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: false,
+    }),
+];</code></pre>
+
+<p>Now the question is how to execute them without webpack? The answer is pretty straight forward if you ask yourself what does webpack do? Webpack is a chain of plugins (built-in or not). it can be seen as an event bus. So all the work is to extract the contract <em>CompressionPlugin</em>&nbsp;relies on and mock it.</p>
+
+<p><em>CompressionPlugin</em>&nbsp;takes a map of assets as input and enrich this map from the compressed assets. An asset is put in a javascript object (&quot;map&quot; behavior) and its value is mainly a&nbsp;<em>source</em>&nbsp;function loading the content of the asset as a Buffer (or some other &quot;content&quot; types we don&#39;t care here).</p>
+
+<p>So our first step is to create this asset map. Using node built-in library it can look like:</p>
+
+<pre>
+<code class="language-javascript">const folder = 'path/to/dist';
+const compressedAssets = /\.(js|css)$/;
+
+if (!fs.existsSync(folder)) {
+    console.error('no folder ', folder);
+    return;
+}
+
+function listFiles(from) { // 1
+    const assets = {};
+    const files = fs.readdirSync(from);
+    for (var i = 0; i &lt; files.length; i++) {
+        const filename = path.join(from, files[i]);
+        const stat = fs.lstatSync(filename);
+        if (stat.isDirectory()) { // 2
+            return {
+                ...assets,
+                ...listFiles(filename),
+            };
+        } else if (compressedAssets.test(filename)) { // 3
+            assets[filename] = { // 4
+                source: () =&gt; {
+                    return fs.readFileSync(filename, 'utf8');
+                },
+            };
+        }
+    }
+    return assets;
+}
+const assets = listFiles(folder); // 5</code></pre>
+
+<ol>
+	<li>&nbsp;We create a function listing nested files from a folder,</li>
+	<li>If we encounter a directory, we call recursively the function merging current and recursive results,</li>
+	<li>If it is a regular file, we ensure it matches on of the patterns of the files we want to compress,</li>
+	<li>If it matches, we create a fake asset with a&nbsp;<em>source</em>&nbsp;function just reading the file with&nbsp;<em>fs</em>,</li>
+	<li>Finally we call this function on the folder we want to process to initialize the list of assets.</li>
+</ol>
+
+<p>Now we have the input data for our plugin, we must simulate the webpack lifecycle used by <em>CompressionPlugin</em>.</p>
+
+<p>First a plugin must be&nbsp;applied (calling its&nbsp;<em>apply</em>&nbsp;function) on webpack compiler. Then&nbsp;<em>CompressionPlugin</em>&nbsp;reads from the compiler the&nbsp;<em>outputPath </em>(our folder), and the <em>tapAsync </em>emit hook (which enables to process produced assets). This callback gives two parameters to&nbsp;<em>CompressionPlugin</em>, first one is the plugin spec (name) which is not used and second one which is a callback of the plugin, to call with a&nbsp;<em>compilation</em>.</p>
+
+<p>A&nbsp;<em>compilation</em>&nbsp;is just an object with the&nbsp;<em>asset</em>&nbsp;object and a list of errors.</p>
+
+<p>Complicated? let&#39;s see what it looks like in terms of code:</p>
+
+<pre>
+<code class="language-javascript">async function doCompress(assets) {
+    return new Promise((resolve, reject) =&gt; {
+        let done = 0;
+        plugins.forEach(plugin =&gt; {
+            plugin.apply({ // 1
+                outputPath: folder,
+                hooks: {
+                    emit: {
+                        tapAsync: function (pluginDscIgnored, fn) {
+                            const compilation = { // 2
+                                assets,
+                                errors: [],
+                            }
+                            fn(compilation, () =&gt; { // 3
+                                if (++done === plugins.length) {
+                                    if (compilation.errors.length === 0) {
+                                        resolve();
+                                    } else {
+                                        reject(compilation.errors);
+                                    }
+                                }
+                            });
+                        },
+                    },
+                },
+            });
+        });
+    });
+}</code></pre>
+
+<ol>
+	<li>We fake the compiler argument with all entries the plugin uses,</li>
+	<li>We fake a compilation result by populating it from the scan we just did manually,</li>
+	<li>We finally call the plugin itself.</li>
+</ol>
+
+<p>Note that webpack being callback based, it is convenient to wrap it in a&nbsp;<em>Promise</em>.</p>
+
+<p>Finally, we just need to call our <em>doCompress</em>&nbsp;function, do a diff between assets before and after, and dump all assets added by&nbsp;<em>doCompress</em>&nbsp;on the disk:</p>
+
+<pre>
+<code class="language-javascript">const originals = Object.keys(assets); // 1
+doCompress(assets) // 2
+    .then(r =&gt; {
+        Object.keys(assets)
+            .filter(k =&gt; originals.indexOf(k) &lt; 0) // 3
+            .forEach(k =&gt; { // 4
+                console.log(`Creating ${k}`);
+                fs.writeFileSync(k, assets[k].source());
+            });
+        return r;
+    })
+    .catch(r =&gt; console.log(`Compression failed: ${r}`));</code></pre>
+
+<ol>
+	<li>We save the list of assets we have before the processing to be able to diff after,</li>
+	<li>We call our compression function,</li>
+	<li>We extract all new assets (archives),</li>
+	<li>We dump all new assets on the disk.</li>
+</ol>
+
+<p>And here we are, we use <em>CompressionPlugin</em>&nbsp;without a webpack pipeline :).</p>
+
+<p>This small trick enables to add some webpack goodness in not webpack based builds quite easily. The only pitfall is that the plugin contract is rarely explicit and you must read the sources to find it, but maybe a day webpack would provide it in a normalized way.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/frontend/page-1.html">Frontend</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//groovy-script-docker-tags-and-size.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//bitly-jaxrs-client-v3-to-v4-api-migration.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

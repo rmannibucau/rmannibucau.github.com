@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apache Meecrowave and PKCE (OAuth2)</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An opiniated IT blogging.">
+    <meta name="author" content="Romain Manni-Bucau">
+    <meta name="generator" content="Yupiik Minisite Generator">
+    
+    <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/css/asciidoctor.min.css" integrity="sha512-kI7tn5cuEg16kMeXnYmg8rEJPxbxzEM7Gsr191iQdLDevFBLXPCSU9aZWSVuP61tMZWU3nBAR1cJ7SmXnOGLZw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <style>
+        :root {
+            /* YUPIIK colors (from dark to light) */
+            --yupiik-site-green: #46F72F;
+            --yupiik-site-purple: #D858FF;
+            --yupiik-site-blue-light: #02ABEA;
+            --yupiik-site-blue-dark: #056EBB;
+            --yupiik-site-grey-light: #F4F4F4;
+            --yupiik-site-grey-dark: #212121;
+
+            --yupiik-blue1: var(--yupiik-site-blue-dark);
+            --yupiik-blue2: var(--yupiik-site-blue-dark);
+            --yupiik-blue3: var(--yupiik-site-blue-dark);
+
+            --yupiik-color-white: #fff;
+            --yupiik-color-black: #000;
+
+            --yupiik-color-gray-0: var(--yupiik-color-white);
+            --yupiik-color-gray-100: #f5f6f7;
+            --yupiik-color-gray-200: #ebedf0;
+            --yupiik-color-gray-300: #dadde1;
+            --yupiik-color-gray-400: #ccd0d5;
+            --yupiik-color-gray-500: #bec3c9;
+            --yupiik-color-gray-600: #8d949e;
+            --yupiik-color-gray-700: #606770;
+            --yupiik-color-gray-800: #444950;
+            --yupiik-color-gray-900: #1c1e21;
+            --yupiik-color-gray-1000: var(--yupiik-color-black);
+
+            --yupiik-color-emphasis-0: var(--yupiik-color-gray-0);
+            --yupiik-color-emphasis-100: var(--yupiik-color-gray-100);
+            --yupiik-color-emphasis-200: var(--yupiik-color-gray-200);
+            --yupiik-color-emphasis-300: var(--yupiik-color-gray-300);
+            --yupiik-color-emphasis-400: var(--yupiik-color-gray-400);
+            --yupiik-color-emphasis-500: var(--yupiik-color-gray-500);
+            --yupiik-color-emphasis-600: var(--yupiik-color-gray-600);
+            --yupiik-color-emphasis-700: var(--yupiik-color-gray-700);
+            --yupiik-color-emphasis-800: var(--yupiik-color-gray-800);
+            --yupiik-color-emphasis-900: var(--yupiik-color-gray-900);
+            --yupiik-color-emphasis-1000: var(--yupiik-color-gray-1000);
+            --yupiik-color-content: var(--yupiik-color-emphasis-900);
+
+            --yupiik-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            --yupiik-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            --yupiik-font-size-base: 100%;
+
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+            --yupiik-font-weight-light: 300;
+            --yupiik-font-weight-normal: 400;
+            --yupiik-font-weight-semibold: 500;
+            --yupiik-font-weight-bold: 700;
+
+            --yupiik-font-weight-base: var(--yupiik-font-weight-normal);
+            --yupiik-line-height-base: 1.65;
+
+            --yupiik-global-spacing: 1rem;
+            --yupiik-spacing-vertical: var(--yupiik-global-spacing);
+            --yupiik-spacing-horizontal: var(--yupiik-global-spacing);
+
+            --yupiik-h1-font-size: 2rem;
+            --yupiik-h2-font-size: 1.5rem;
+            --yupiik-h3-font-size: 1.25rem;
+            --yupiik-h4-font-size: 1rem;
+            --yupiik-h5-font-size: 0.875rem;
+            --yupiik-h6-font-size: 0.85rem;
+
+            --yupiik-heading-color: var(--yupiik-blue1);
+            --yupiik-heading-margin-top: 0;
+            --yupiik-heading-margin-bottom: var(--yupiik-spacing-vertical);
+            --yupiik-heading-font-family: var(--yupiik-font-family-base);
+            --yupiik-heading-font-weight: var(--yupiik-font-weight-bold);
+            --yupiik-heading-line-height: 1.25;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
+    <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
+</head>
+<body class="blog">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a title="Home" class="navbar-brand" href="https://rmannibucau.github.io//index.html">
+	                <img class="logo-icon mr-2" src="/images/logo.png" alt="logo">
+	                <span class="logo-text">RManniBucau <span class="text-alt">Blog</span></span></a></div>
+                </div>
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					
+					<li class="list-inline-item"><a title="Search" id="search-button" href="#" data-toggle="modal" data-target="#searchModal"><i data-toggle="tooltip" data-placement="top" title="Search" class="fas fa-search"></i></a></li>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a title="Blog" href="https://rmannibucau.github.io//blog/"><i class="fa fa-blog fa-fw"></i></a></li>
+						<li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+		            </ul>
+	            </div>
+            </div>
+        </div>
+    </header>
+	<div class="page">
+
+        <div id="meecrowave-oauth2-pkce-html-container" class="container page-content meecrowave-oauth2-pkce-html is-blog">
+                        <div class="page-header">
+                <h1>Apache Meecrowave and PKCE (OAuth2)</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2020-11-17</span>, <span class="metadata-readingtime">7 min and 27 sec read</span></p>
+</div>
+<p>Apache Meecrowave is a light CDI+JAXRS+JSON container based on an Apache stack (Tomcat, OpenWebBeans, Johnzon, CXF and Log4j2). It also brings some interesting extensions like a proxy and an OAuth2 modules. This last one is based on CXF OAuth2 services. Until 1.2.9 it was not supporting PKCE flow without some customizations which were not always trivial. The comin 1.2.10 solves that and it is now a matter of configuration. Let see how to set it up.</p>
+
+<p>To setup PKCE flow it is mainly a configuration matter. This post will use the programmatic approach but the CLI/meecrowave.properties/.... approaches are working too. Also note that this post will use the JWT approach for the flow (vs the identifier one) which means the deployments will be really stateless enabling a better scalability in general.</p>
+
+<h2>PKCE flow</h2>
+
+<p>The PKCE flow is composed of these steps (more details at <a href="https://www.oauth.com/oauth2-servers/pkce/authorization-request/" target="_blank">oauth.com</a>):</p>
+
+<ol>
+	<li>Trigger an authentication on authorize endpoint sending a code_challenge (+ its method which specifies if it is a plain string or a digested one), redirect uri, and client id. The response_type is&nbsp;<em>code</em>&nbsp;as in authorization_code flow since PKCE is an extension of this flow designed for SPA and mobile applications.</li>
+	<li>If needed (ie not already logged), this endpoint will redirect you on another page to actually log in (enter your credentials). Once done you will submit a form with some of the previous informations (client_id, redirect_uri, often a state to forward from previous endpoint, ...).</li>
+	<li>Finally, you are redirected back on the original application with a query parameter &quot;code&quot; containing a value enabling you to call token endpoint to obtain an access token and finally call protected resources.</li>
+</ol>
+
+<h2>Meecrowave OAuth2 setup</h2>
+
+<p>Meecrowave OAuth2 module requires a set of properties to be configured in PKCE mode:</p>
+
+<pre>
+<code class="language-java">final var properties = new Properties();
+properties.setProperty("oauth2-use-jwt-format-for-access-token", "true"); // 1
+properties.setProperty("oauth2-jwt-issuer", "myissuer"); // 2
+properties.setProperty("oauth2-authorization-code-support", "true"); // 3
+properties.setProperty("oauth2-forward-role-as-jwt-claims", "true"); // 4
+properties.setProperty("oauth2-support-public-client", "true"); // 5
+properties.setProperty("oauth2-use-s256-code-challenge", "true"); // 6
+properties.setProperty("oauth2.cxf.rs.security.keystore.type", "jks"); // 7
+properties.setProperty("oauth2.cxf.rs.security.keystore.password", keystorePwd); // 8
+properties.setProperty("oauth2.cxf.rs.security.keystore.alias", "oauth2"); // 9
+properties.setProperty("oauth2.cxf.rs.security.keystore.file", "/path/to/keystore.jks"); // 10
+properties.setProperty("oauth2.cxf.rs.security.key.password", keystorePwd); // 11
+
+mwConfiguration.setProperties(properties); // 12</code></pre>
+
+<ol>
+	<li>Configure Meecowave OAuth2 to use JWT tokens</li>
+	<li>Set the issuer to use by default</li>
+	<li>Enable authorization_code flow (it is not enabled by default for applications using pasword/refresh only flows)</li>
+	<li>(optional) forward principal roles to the jwt (enables to test it in an UI or so to toggle features visually too)</li>
+	<li>(optional) depends how clients are provisionned but this enables to not require the client_secret in the flow</li>
+	<li>Current CXF version only supports a single challenge type (plain or S256), here we force the S256 mode</li>
+	<li>Set the type of keystore containing the key/certificate for the JWT signing/verifying steps</li>
+	<li>Set the keystore password</li>
+	<li>Set the keystore alias containing the JWT key</li>
+	<li>Set the keystore path</li>
+	<li>Set the key password for the JWT key</li>
+	<li>Finally set these properties on Meecrowave configuration</li>
+</ol>
+
+<p>TIP: you can read more about meecrowave CLI or programmatic configuration on the official <a href="https://openwebbeans.apache.org/meecrowave/components.html" target="_blank">website</a>.</p>
+
+<p>To generate a keystore with a valid key you can use Bouncycastle -&nbsp;bcpkix-jdk15on -&nbsp;(or any tool but this one enables to do it programmatically which is quite nice for tests):</p>
+
+<pre>
+<code class="language-java">private void createKeystore(final Path keystore, final String pwd) throws Exception {
+    CryptoUtils.installBouncyCastleProvider();
+
+    final var ks = KeyStore.getInstance("JKS");
+    ks.load(null, pwd.toCharArray());
+
+    final KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+    kpg.initialize(2048);
+
+    final KeyPair kp = kpg.generateKeyPair();
+
+    final var name = new org.bouncycastle.asn1.x500.X500Name("cn=whatever");
+    final var subPubKeyInfo = SubjectPublicKeyInfo.getInstance(kp.getPublic().getEncoded());
+    final Date start = new Date();
+    final Date until = Date.from(LocalDate.now().plus(365, ChronoUnit.DAYS).atStartOfDay().toInstant(ZoneOffset.UTC));
+    final var builder = new X509v3CertificateBuilder(name, new BigInteger(10, new SecureRandom()), start, until, name, subPubKeyInfo);
+    final var signer = new JcaContentSignerBuilder("SHA256WithRSA").setProvider("BC").build(kp.getPrivate());
+    final var holder = builder.build(signer);
+
+    final var cert = new JcaX509CertificateConverter().setProvider("BC").getCertificate(holder);
+
+    ks.setKeyEntry("oauth2", kp.getPrivate(), pwd.toCharArray(), new Certificate[]{cert});
+
+    Files.createDirectories(keystore.getParent());
+    try (final OutputStream os = Files.newOutputStream(keystore)) {
+        ks.store(os, pwd.toCharArray());
+    }
+}</code></pre>
+
+<p>Now, OAuth2 part is set up but we miss the authentication setup. Meecrowave supports two kind of authentications:</p>
+
+<ul>
+	<li>JAAS - on the JVM</li>
+	<li>Servlet/Tomcat realm</li>
+</ul>
+
+<p>We will use the last one which is simpler to setup since it only requires to configure tomcat.</p>
+
+<p>Still in programmatic mode we can configure an in memory realm through Meecrowave configuration directly - but you can also configure a real custom realm if you need to for production:</p>
+
+<pre>
+<code class="language-java">configuration.setUsers(Map.of("user1", "password1"));
+configuration.setRoles(Map.of("user1", "adminrole"));</code></pre>
+
+<p>Tip: you can put as much users you want in the maps.</p>
+
+<p>Now our realm is setup, we must enable an authenticator on the application. The simplest is basic and it can be enabled this way:</p>
+
+<pre>
+<code class="language-java">configuration.setLoginConfig(
+  new Meecrowave.LoginConfigBuilder()
+    .realmName("My App")
+     .basic());</code></pre>
+
+<p>Lastly, with this setup, we must force the second flow call (the form submit with the username/password) to be authenticated (to go through the authenticator). Using basic authenticator, the username/password will go through the Authorization header but this is a detail of this simple setup, using another one it will go through other parts of the HTTP request:</p>
+
+<pre>
+<code class="language-java">configuration.setSecurityConstraints(List.of(new Meecrowave.SecurityConstaintBuilder()
+        .authConstraint(true)
+        .addAuthRole("**")
+        .addCollection("secured", "/oauth2/authorize/decision")));</code></pre>
+
+<p>Now we are all almost good to log in on our server but we miss an OAuth2 client!</p>
+
+<p>Note: once again, all this programmatic configuration can be done through the CLI or properties without any line of code!</p>
+
+<h2>Create a client</h2>
+
+<p>To work, previous setup must be able to retrieve a client. A client is more or less the configuration for one flow.</p>
+
+<p>Meecrowave OAuth2 supports multiple modes but the two mains are JCache and JPA. By default JCache will be used so to store a client - potentially hardcoded if you include the OAuth2 module as part of your application, you just need to put it in the map CXF uses to read the clients.</p>
+
+<p>Here is a code doing that:</p>
+
+<pre>
+<code class="language-java">Cache&lt;String, Client&gt; cache;
+
+// 1
+final var provider = Caching.getCachingProvider();
+final CacheManager cacheManager;
+try { // these parameters must match the ones used by CXF, it matches the configuration of jcache providers in oauth2 module
+      // see http://openwebbeans.apache.org/meecrowave/meecrowave-oauth2/index.html and --oauth2-jcache-config
+    cacheManager = provider.getCacheManager(
+            provider.getDefaultClassLoader().getResource("default-oauth2.jcs").toURI(),
+            provider.getDefaultClassLoader(),
+            provider.getDefaultProperties());
+} catch (final URISyntaxException e) {
+    throw new IllegalStateException(e);
+}
+
+
+// 2
+try {
+    cache = cacheManager
+            .createCache(JCacheCodeDataProvider.CLIENT_CACHE_KEY, new MutableConfiguration&lt;String, Client&gt;()
+                    .setTypes(String.class, org.apache.cxf.rs.security.oauth2.common.Client.class)
+                    .setStoreByValue(true));
+} catch (final RuntimeException re) {
+    cache = cacheManager.getCache(JCacheCodeDataProvider.CLIENT_CACHE_KEY, String.class, org.apache.cxf.rs.security.oauth2.common.Client.class);
+}
+
+// 3
+final Client value = new Client("c1", null, true);
+value.setConfidential(false); // 4
+value.setRedirectUris(singletonList("http://localhost:1234/redirected")); // 5
+cache.put("c1", value); // 6</code></pre>
+
+<ol>
+	<li>we lookup the cache manager, here it must use the same configuration than the CXF setup so ensure to match the configuration you used or defaults (as in the previous snippet)</li>
+	<li>lookup cxf client cache (create if not exist pattern)</li>
+	<li>create a client defining its name, enforcing a null client_secret (otherwise PKCE flow will fail without passing the secret)</li>
+	<li>Set this client as public (if part of the application it is simpler and require less parameters in the authentication dance),</li>
+	<li>Set the expected redirect URi you will use in the flow</li>
+	<li>Finally store the client in the cache</li>
+</ol>
+
+<p>TIP: you can also set a cache loader on the cache (during startup, before CXF is initialized) and therefore read the client from a database (SQL or NoSQL) or a file.</p>
+
+<h2>Test the server</h2>
+
+<p>Previous setup - including hardcoded users - can be tested with the following code:</p>
+
+<pre>
+<code class="language-java">final int httpPort = configuration.getHttpPort();
+
+final var client = ClientBuilder.newClient()
+        .property(Message.MAINTAIN_SESSION, true)
+        .register(new OAuthJSONProvider());
+final var digest = MessageDigest.getInstance("SHA-256");
+final var codeVerifier = UUID.randomUUID().toString();
+digest.update(codeVerifier.getBytes(StandardCharsets.UTF_8));
+
+try {
+    final var target = client.target("http://localhost:" + httpPort);
+
+    // 1
+    final var authorization = target
+            .path("oauth2/authorize")
+            .queryParam(OAuthConstants.GRANT_TYPE, OAuthConstants.AUTHORIZATION_CODE_GRANT)
+            .queryParam(OAuthConstants.RESPONSE_TYPE, OAuthConstants.CODE_RESPONSE_TYPE)
+            .queryParam(OAuthConstants.CLIENT_ID, "c1")
+            .queryParam(OAuthConstants.AUTHORIZATION_CODE_CHALLENGE, Base64.getUrlEncoder().withoutPadding().encodeToString(digest.digest()))
+            .queryParam(OAuthConstants.AUTHORIZATION_CODE_CHALLENGE_METHOD, "S256")
+            .queryParam(OAuthConstants.REDIRECT_URI, "http://localhost:" + httpPort + "/redirected")
+            .request(APPLICATION_JSON_TYPE)
+            .get();
+    assertEquals(Response.Status.OK.getStatusCode(), authorization.getStatus(), () -&gt; authorization.getHeaderString("Location"));
+    final var data = authorization.readEntity(OAuthAuthorizationData.class);
+
+    // 2
+    final var decision = target
+            .path("oauth2/authorize/decision")
+            .request(APPLICATION_JSON_TYPE)
+            .cookie(authorization.getCookies().get("JSESSIONID"))// 3
+            .header(HttpHeaders.AUTHORIZATION, "Basic " + Base64.getEncoder().encodeToString("test:testpwd".getBytes(StandardCharsets.UTF_8))) // 4
+            .post(entity(new Form()
+                    .param(OAuthConstants.AUTHORIZATION_DECISION_KEY, "allow") // 5
+                    .param(OAuthConstants.SESSION_AUTHENTICITY_TOKEN, data.getAuthenticityToken()) // 5
+                    .param(OAuthConstants.CLIENT_ID, "c1")
+                    .param(OAuthConstants.REDIRECT_URI, "http://localhost:" + httpPort + "/redirected"), APPLICATION_FORM_URLENCODED_TYPE));
+    assertEquals(Response.Status.SEE_OTHER.getStatusCode(), decision.getStatus());
+    assertTrue(decision.getLocation().toASCIIString().startsWith("http://localhost:" + httpPort + "/redirected?code="), decision.getLocation().toASCIIString()); // 6
+
+    // 7
+    final var token = target
+            .path("oauth2/token")
+            .request(APPLICATION_JSON_TYPE)
+            .post(entity(new Form()
+                    .param(OAuthConstants.GRANT_TYPE, OAuthConstants.AUTHORIZATION_CODE_GRANT)
+                    .param(OAuthConstants.CODE_RESPONSE_TYPE, decision.getLocation().getRawQuery().substring("code=".length()))
+                    .param(OAuthConstants.REDIRECT_URI, "http://localhost:" + httpPort + "/redirected")
+                    .param(OAuthConstants.CLIENT_ID, "c1")
+                    .param(OAuthConstants.AUTHORIZATION_CODE_VERIFIER, codeVerifier), APPLICATION_FORM_URLENCODED_TYPE), ClientAccessToken.class);
+    assertNotNull(token);
+} finally {
+    client.close();
+}</code></pre>
+
+<ol>
+	<li>Trigger the authorization, you can see the requested parameters and the endpoint path</li>
+	<li>Previous call redirected us on the login page, let&#39;s submit the decision in phase #2</li>
+	<li>We forward the session - cases CXF stores data in it</li>
+	<li>We submit our credentials to let the authenticator log us in</li>
+	<li>CXF uses these two parameters to ensure the call source/authenticity</li>
+	<li>Finally we are redirected on the original application (thanks redirect_uri) and can extract the code from the final URI</li>
+	<li>Now we have the code we can call the token endpoint to get the access token passing the code verifier we used originally (sent as challenge form) to validate it comes from us and nobody stole our code.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>As always the security is not a trivial topic but Meecrowave OAuth2 makes OAuth2 easier to get and really light to run. it enables to have an OAuth2 server or embed it in your application avoiding to have to maintain the code but also yet another deployment with no real reason when the OAuth2 server is dedicated to it and scalability does not require to split it.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//kubernetes-http-probe-broken-pipe.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//faster-hazelcast-startup-in-tests.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
+            </div>
+        </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
+    </div>
+    </div>
+    <footer class="footer pb-5">
+	    <div class="text-center">
+		    <ul class="social-list list-unstyled">
+                <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rmannibucau/"><i title="LinkedIn" class="fab fa-linkedin fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.github.com/rmannibucau"><i title="Github" class="fab fa-github fa-fw"></i></a></li>
+              <li class="list-inline-item"><a target="_blank" href="http://www.yupiik.com/"><img class="yupiik-logo" title="Yupiik" src="/images/yupiik.png"></img></a></li>
+              <li class="list-inline-item"><a target="_blank" href="https://www.javacodegeeks.com/"><img class="yupiik-logo" title="Java Code Geeks" alt="Java Code Geeks" src="https://cdn.javacodegeeks.com/wp-content/uploads/2012/12/JavaCodeGeek_Badge.png"></img></a></li>
+	        </ul>
+            <small class="copyright">RManniBucau &copy;</small>
+	    </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false;" class="form-inline">
+          <div class="form-group">
+            <label for="searchInput"><b>Search: </b></label>
+            <input class="form-control" id="searchInput" placeholder="Enter search text and hit enter...">
+          </div>
+        </form>
+        <div class="search-hits"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js" integrity="sha512-d00ajEME7cZhepRqSIVsQVGDJBdZlfHyQLNC6tZXYKTG7iwcF8nhlFuppanz8hYgXr8VvlfKh4gLC25ud3c90A==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/bash.min.js" integrity="sha512-Hg0ufGEvn0AuzKMU0psJ1iH238iUN6THh7EI0CfA0n1sd3yu6PYet4SaDMpgzN9L1yQHxfB3yc5ezw3PwolIfA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/json.min.js" integrity="sha512-37sW1XqaJmseHAGNg4N4Y01u6g2do6LZL8tsziiL5CMXGy04Th65OXROw2jeDeXLo5+4Fsx7pmhEJJw77htBFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/languages/dockerfile.min.js" integrity="sha512-eRNl3ty7GOJPBN53nxLgtSSj2rkYj5/W0Vg0MFQBw8xAoILeT6byOogENHHCRRvHil4pKQ/HbgeJ5DOwQK3SJA==" crossorigin="anonymous"></script>
+    <script>if (!(window.minisite || {}).skipHighlightJs) { hljs.highlightAll();
+function addCopyButtons(clipboard) {
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+  var button = document.createElement('button');  button.className = 'copy-code-button';  button.type = 'button';  button.innerText = 'Copy';  button.addEventListener('click', function () {   clipboard.writeText(codeBlock.innerText).then(function () {   button.blur();   button.innerText = 'Copied!';   setTimeout(function () { button.innerText = 'Copy'; }, 2000); }, function (error) { button.innerText = 'Error'; });  });  var pre = codeBlock.parentNode;  if (pre.parentNode.classList.contains('highlight')) {   var highlight = pre.parentNode; highlight.parentNode.insertBefore(button, highlight);  } else { pre.parentNode.insertBefore(button, pre); } });}
+if (navigator && navigator.clipboard) { addCopyButtons(navigator.clipboard);} else { var script = document.createElement('script'); script.src = '//cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js'; script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94='; script.crossOrigin = 'anonymous'; script.onload = function() {addCopyButtons(clipboard);}; document.body.appendChild(script);} }</script>
+    <script src="https://rmannibucau.github.io//js/minisite.js?v=1.0.0-SNAPSHOT"></script>
+    <script>$('.page-content-body').generatedNavMenu();</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSY7SF5JMX"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-XSY7SF5JMX');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.3/fuse.min.js" integrity="sha512-neoBxVNv0UMXjoilAYGxfWrSsW6iAVclx7vQKdPJ9Peet1bM5YQjU0aIB8LtH8iNPa+pAyMZprBBw2ZQ/Q1LjQ==" crossorigin="anonymous"></script>
+
+</body>
+</html>

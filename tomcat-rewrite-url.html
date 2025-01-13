@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Tomcat: rewrite your urls without any library!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,252 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="tomcat-rewrite-url-html-container" class="container page-content tomcat-rewrite-url-html is-blog">
+                        <div class="page-header">
+                <h1>Tomcat: rewrite your urls without any library!</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-05-02</span>, <span class="metadata-readingtime">5 min and 8 sec read</span></p>
+</div>
+<p>Rewriting application URLs is quite common. This is due to a lot of causes like specification evolution (/api sould now be /api/v1), environment marking (/api becoming /prod/api or /preprod/api) etc...</p>
+
+<p>The common point of these needs is generally it happens outside the application/development cycle.</p>
+
+<p>Most of the time it is solved by the proxy layer - ngnix, httpd, ... - but Tomcat (so TomEE and Meecrowave) supports out of the box a&nbsp;<em>RewriteValve</em>&nbsp;allowing to fulfill these needs very quickly without any other need.</p>
+
+<h2>The (tomcat) rewrite syntax</h2>
+
+<p>The overall idea is to configure some httpd like rules in a&nbsp;<em>rewrite.config</em>&nbsp;located in your war in&nbsp;<em>WEB-INF</em>&nbsp;folder or your host configuration folder in tomcat&nbsp;<em>conf</em>/&nbsp;folder. It allows mainly local remapping or urls or plain HTTP redirections.</p>
+
+<p>Here is an example of a HTTP redirection (/google/foo to https://google.com/search?q=foo):</p>
+
+<pre>
+<code>RewriteRule  ^/google/(.*)$  https://google.com/search?q=$1 [R,NE]</code></pre>
+
+<p>And here is a local redirection (/local/foo to /api/foo):</p>
+
+<pre>
+<code>RewriteRule  ^/local/(.*)$   /api/$1 [L,NE]</code></pre>
+
+<p>It also supports some condition on hosts/headers/...For instance if you only want to redirect when request happens on localhost you can do:</p>
+
+<pre>
+<code>RewriteCond  %{REMOTE_HOST}  ^127.0.0.1$
+RewriteRule  ^/local/(.*)$   /api/$1 [L,NE]
+</code></pre>
+
+<p>Etc...</p>
+
+<p>I&#39;ll not detail all the syntax but you can find most of it at&nbsp;<a href="https://tomcat.apache.org/tomcat-9.0-doc/rewrite.html" target="_blank">https://tomcat.apache.org/tomcat-9.0-doc/rewrite.html</a>.</p>
+
+<p>Now we quickly saw how we can use it let&#39;s see how to configure the valve.</p>
+
+<h2>Set up RewriteValve</h2>
+
+<p>This is as easy as setting up a standard tomcat valve but ensure to configure it on the container you put the configuration in. Concretely if you put the configuration in&nbsp;<em>WEB-INF</em>&nbsp;ensure to configure it on your <em>Context</em>&nbsp;either through&nbsp;<em>server.xml</em>&nbsp;or&nbsp;<em>context.xml:</em></p>
+
+<pre>
+<code class="language-xml">&lt;Valve className="org.apache.catalina.valves.rewrite.RewriteValve" /&gt;</code></pre>
+
+<p>This is simple but enforces you to reuse this <em>rewrite.config</em>&nbsp;file.</p>
+
+<h2>Hot reload support with Meecrowave</h2>
+
+<p>You can go a bit further coding a bit around the valve. Typically with Meecrowave you can read the config from where you want (including some database) and just set it directly on the valve:</p>
+
+<pre>
+<code class="language-java">public class ProxyCustomizer implements Meecrowave.ConfigurationCustomizer, Cli.Options {
+    @CliOption(name = "proxy-configuration", description = "Where to read the proxy rules from")
+    private File proxyConfiguration = new File("src/main/resources/proxy.rewrite");
+
+    @Override
+    public void accept(final Meecrowave.Builder builder) {
+        // 1
+        final ProxyCustomizer extension = builder.getExtension(ProxyCustomizer.class);
+
+        // 2
+        final String conf;
+        try {
+            conf = Files.readAllLines(extension.proxyConfiguration.toPath()).stream()
+                    .collect(Collectors.joining("\n"));
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
+        }
+
+        // 3
+        final RewriteValve proxy = new RewriteValve() {
+            @Override
+            protected synchronized void startInternal() throws LifecycleException {
+                super.startInternal();
+                try {
+                    setConfiguration(conf);
+                } catch (final Exception e) {
+                    throw new LifecycleException(e);
+                }
+            }
+        };
+
+        // 4
+        builder.instanceCustomizer(tomcat -&gt; tomcat.getHost().getPipeline().addValve(proxy));
+    }
+}</code></pre>
+
+<ol>
+	<li>this is a meecrowave way to get back our proxy configuration, you can replace it by any way fitting your case</li>
+	<li>we read all the file we configured, idea there is to have all the rules in memory in&nbsp;<em>conf</em>&nbsp;variable</li>
+	<li>we extend the valve to set our configuration programmatically through&nbsp;<em>setConfiguration()</em></li>
+	<li>we add our valve to the host programmatically</li>
+</ol>
+
+<p>Tip: this was done using a configuration customizer of Meecrowave but you can also do it at runtime. The only trick will be to ensure you didnt get any request yet cause the&nbsp;<em>setConfiguration()</em>&nbsp;method is not thread safe. If you manage to make it thread safe (protexting the valve with a lock for instance) you can even update the configuration at runtime getting a dynamic local proxy!</p>
+
+<p>Here is a thread safe version:</p>
+
+<pre>
+<code class="language-java">final RewriteValve proxy = new RewriteValve() {
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+
+    @Override
+    public void invoke(final Request request, final Response response) throws IOException, ServletException {
+        final Lock lock = this.lock.readLock();
+        lock.lock();
+        try {
+            super.invoke(request, response);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Override
+    public void setConfiguration(final String configuration) throws Exception {
+        final Lock lock = this.lock.writeLock();
+        lock.lock();
+        try {
+            super.setConfiguration(configuration);
+        } finally {
+            lock.unlock();
+        }
+    }
+};</code></pre>
+
+<p>And here how to update it through a scheduled task for instance:</p>
+
+<pre>
+<code class="language-java">@ApplicationScoped
+public class ProxyUpdater {
+    private Runnable shutdownHook;
+
+    // 1
+    @Inject
+    private Meecrowave.Builder config;
+
+    //2
+    public void init(@Observes @Initialized(ApplicationScoped.class) final ServletContext servletContext) {
+        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        final ScheduledFuture&lt;?&gt; task = scheduledExecutorService.scheduleAtFixedRate(this::update, 0, 5, TimeUnit.MINUTES);
+        shutdownHook = () -&gt; {
+            task.cancel(true);
+            scheduledExecutorService.shutdownNow();
+        };
+    }
+
+    @PostConstruct
+    private void stop() {
+        ofNullable(shutdownHook).ifPresent(Runnable::run);
+    }
+
+    // 3
+    private void update() {
+        try {
+            config.getExtension(ProxyCustomizer.class).getProxy().setConfiguration(loadConfiguration());
+        } catch (Exception e) {
+            // log etc...
+        }
+    }
+
+    private String loadConfiguration() {
+        return null; // read from sb
+    }
+}
+</code></pre>
+
+<ol>
+	<li>to update regularly the configuration we need to have access to the valve, here the trick is to store the previous valve instance in a meecrowave extension and read it from the extension, any alternative can work like reading it from JMX or using a Tomcat listener to capture it. This one has the advantage to stay simple but relies on Meecrowave configuration/extension API.</li>
+	<li>we create a task execute each 5mn. Quick side note is using a runnable as shutdown task is a pattern enabled by Java 8 which makes code easier to write and handle for such needs IMHO.</li>
+	<li>we implement the actual reload and get the valve instance (<em>getProxy()</em>) and re-set the configuration.</li>
+</ol>
+
+<p>Concretely our customize now looks like:</p>
+
+<pre>
+<code class="language-java">public class ProxyCustomizer implements Meecrowave.ConfigurationCustomizer, Cli.Options {
+    @CliOption(name = "proxy-configuration", description = "Where to read the proxy rules from")
+    private File proxyConfiguration = new File("src/main/resources/proxy.rewrite");
+
+    private RewriteValve proxy;
+
+    @Override
+    public void accept(final Meecrowave.Builder builder) {
+        final ProxyCustomizer extension = builder.getExtension(ProxyCustomizer.class);
+        extension.proxy = new RewriteValve() {
+            // as before
+        };
+
+        builder.instanceCustomizer(tomcat -&gt; tomcat.getHost().getPipeline().addValve(extension.proxy));
+    }
+
+    public RewriteValve getProxy() {
+        return proxy;
+    }
+}</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Even if Tomcat RewriteValve will not replace your httpd for multiple reasons, it can be a smooth way to solve small deployment mapping issues we hit from time to time when going in preprod/prod environments and doesn&#39;t require any intermediate layer/proxy or knowledge. Being java based, it is very simple to extend it to something more powerful and with a little bit of effort you can even redefine the parsing rules to match some custom needs. The main missing feature to make of it a real proxy is the remote proxying support (it is a TODO in the code) but for such a need it is easy to import camel and implement it based on camel instead of the RewriteValve which would need another library like httpclient to do it properly.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jaxrs-response-filter.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//hibernate-collection-update.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

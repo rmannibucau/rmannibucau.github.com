@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>GraalVM and logs with Yupiik LogManager: JUL and bindings (SLF4J, &#8230;&#8203;)</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,159 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="graalvm-jul-slf4j-logging-html-container" class="container page-content graalvm-jul-slf4j-logging-html is-blog">
+                        <div class="page-header">
+                <h1>GraalVM and logs with Yupiik LogManager: JUL and bindings (SLF4J, &#8230;&#8203;)</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2021-02-09</span>, <span class="metadata-readingtime">5 min and 9 sec read</span></p>
+</div>
+<p><a href="https://www.graalvm.org/reference-manual/native-image/" target="_blank">GraalVM</a>&nbsp;native-image enables to convert a Java application to a native binary making it generally faster to start and using less memory. However, it still hits a common issue: logging framework handling.</p>
+
+<p>As a quick reminder, Java logging has a few options and the &quot;game&quot; is generally to combine them to have an unified output:</p>
+
+<ul>
+	<li>JUL which stands for Java Util Logging, is built-in in the JVM and provides most of you need as a logging API but the default implementations are sometimes limited, like the FileHandler (appender if you are used to Log4j terminology) which is not optimized or has an awesome rotation strategy.</li>
+	<li>SLF4J which is mainly a &quot;nicer&quot; API (was pre java 1.8 and Suppliers&nbsp;time ;)). Its default implementation is logback but Log4j2 implements it as well for example. It has &quot;bindings&quot; (implementations)&nbsp; for most frameworks (JUL as known as slf4j-jdk14, log4j 1 or 2, ....).</li>
+	<li>Commons-logging: quite historical try to unify logging API, it is now way less used by new/recent apps/libraries.</li>
+</ul>
+
+<p>What is important to understand with GraalVM native-image is that during the compilation to a native binary, the static blocks are kind of captured in the binary so it means the configuration of these static blocks are generally done at build time....and unluckily for us loggers are generally...static :(.</p>
+
+<p>But it is not the worse, the LogManager (central instance managing the configuration whatever its name is in the different frameworks), is always static - no real strong reason to be honest since it does not make it faster and leads to context issues with the well known &quot;by classloader&quot; workarounds but it makes the API way easier to define since everything can be static then.</p>
+
+<p>This is more or less explain in the documentation of JUL integration in GraalVM:&nbsp;<a href="https://www.graalvm.org/reference-manual/native-image/Logging/" target="_blank">https://www.graalvm.org/reference-manual/native-image/Logging/</a>. But long story short: if you use static loggers they are configured at build time in general which is a big deal since most of the frameworks will use static loggers and you don&#39;t want to fork/patch with svm them all. But of course, you can take care of it.</p>
+
+<p>Note: in this post we will use Geronimo <a href="http://geronimo.apache.org/arthur/" target="_blank">Arthur</a>&nbsp;to illustrate the native-image builds but it is usable with the plain command line too, it is just less convenient ;).</p>
+
+<h2>Ensure JUL static loggers are reconfigurable</h2>
+
+<p>To solve that issue, we created at Yupiik, a JUL&nbsp;<em>LogManager</em>&nbsp;which is reconfigurable at runtime, even under a GraalVM binary. The project is called&nbsp;<a href="https://yupiik.github.io/yupiik-logging/" target="_blank"><em>yupiik-logging</em></a>. High level it is mainly about ensuring the log manager uses a delegate which is lazyly initialized.</p>
+
+<p>The project has some other nice stuff like some more advanced handlers for Kubernetes/Docker world but I will speak about it later.</p>
+
+<p>For this GraalVM focused post, what we want is to ensure that the native-image command uses this Yupiik <em>LogManager </em>and see how to configure this at runtime.</p>
+
+<p>The first step to use it is to set&nbsp;<strong>at build time</strong>&nbsp;the log manager:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt; &lt;!-- mvn package arthur:native-image --&gt;
+  &lt;groupId&gt;org.apache.geronimo.arthur&lt;/groupId&gt;
+  &lt;artifactId&gt;arthur-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.0.1&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;graalVersion&gt;20.3.0.r11&lt;/graalVersion&gt;
+    &lt;main&gt;com.company.MyMain&lt;/main&gt;
+    &lt;customOptions&gt; &lt;!-- 1 --&gt;
+      &lt;customOption&gt;-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager&lt;/customOption&gt;
+    &lt;/customOptions&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<ol>
+	<li>Thanks to the custom options of the plugin - or system properties of native-image command - we can force the build to use&nbsp;<em>YupiikLogManager</em>.</li>
+</ol>
+
+<p>This small setting will enable to force the JVM to use this log manager later on - in the native binary.</p>
+
+<p>Then, once compiled, you can either use a properties configuration file like with any plain JUL setup, or just use system properties. For example:</p>
+
+<pre>
+<code class="language-bash">./my-binary \
+  -D.level=INFO \ &lt;1&gt;
+  -D.handlers=io.yupiik.logging.jul.handler.StandardHandler \ &lt;2&gt;
+  -Dio.yupiik.logging.jul.handler.StandardHandler.formatter=json \ &lt;3&gt;
+  -Dcom.company.core.level=FINEST \ &lt;4&gt;
+  -Dio.yupiik.logging.jul.handler.StandardHandler.level=FINEST &lt;5&gt;</code></pre>
+
+<ol>
+	<li>Default log level is INFO,</li>
+	<li>Default handler is standard one (more or less console handler but logging all until INFO level on stdout and higher levels - until SEVERE - on stderr),</li>
+	<li>We force the handler to use&nbsp;<em>json</em>&nbsp;formatter - this is an alias of the library for the fully qualified name - which enables to log in JSON format for cloud environments,</li>
+	<li>We set one of our application logger in debug mode (FINEST level),</li>
+	<li>We enable FINEST log records on our handler to be able to se logs of the custom logger in debug mode (otherwise it would default on INFO).</li>
+</ol>
+
+<p>Simple no? No need of any configuration file, system properties are enough and all is reconfigured at runtime&nbsp;:).</p>
+
+<h2>Make SLF4J use JUL</h2>
+
+<p>Now the next common issue with GraalVM logging is SLF4J. Almost no binding are GraalVM friendly except jboss-logging - used in Quarkus for example - which can be too much for what you want to achieve (in particular when building for docker where the logging is generally very simple).</p>
+
+<p>Now we have a JUL integration for GraalVM, we can use&nbsp;<em>slf4j-jdk14</em>&nbsp;and our logs will go to JUL and will enable us to configure them at runtime too, even if the application uses SLF4J.</p>
+
+<p>There is however a small trick: you must ensure SLF4J is properly initialized at build time to have it working.</p>
+
+<p>The easiest with Arthur is to use the SLF4J extension - it requires to either exclude other bindings you can use in plain JVM mode by configuration or to directly use the JUL binding. Then just import the SLF4J knight and it is enough:</p>
+
+<pre>
+<code class="language-xml">&lt;plugin&gt; &lt;!-- mvn [package] -Parthur arthur:native-image -e --&gt;
+  &lt;groupId&gt;org.apache.geronimo.arthur&lt;/groupId&gt;
+  &lt;artifactId&gt;arthur-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.0.1&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;graalVersion&gt;20.3.0.r11&lt;/graalVersion&gt;
+    &lt;main&gt;com.app.YourMain&lt;/main&gt;
+    &lt;graalExtensions&gt; &lt;!-- here is the trick --&gt;
+      &lt;graalExtension&gt;slf4j&lt;/graalExtension&gt;
+    &lt;/graalExtensions&gt;
+    &lt;customOptions&gt; &lt;!-- as before --&gt;
+      &lt;customOption&gt;-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager&lt;/customOption&gt;
+    &lt;/customOptions&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+
+<p>This simple extension does all the work. If you prefer to use&nbsp;<em>native-image</em>&nbsp;command line, you will have to replace it by forcing the build to initialize at build time these classes:&nbsp;org.slf4j.impl.JDK14LoggerAdapter,&nbsp;org.slf4j.impl.StaticLoggerBinder and&nbsp;org.slf4j.LoggerFactory.</p>
+
+<h2>Conclusion</h2>
+
+<p>In this post we saw how to use JUL and SLF4J with GraalVM and keep all loggers and handlers reconfigurable at runtime in the final binary. This means that you don&#39;t need to rebuild a binary to change your logging configuration which is a big plus compared to the out of the box GraalVM build.</p>
+
+<p>I hope GraalVM native-image gets such a feature out of the box soon but in the mean time, don&#39;t be blocked to create native binaries and move to 2021 ;).</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//apache-meecrowave-access-log.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//maven-shade-plugin-cdi-beans-xml.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

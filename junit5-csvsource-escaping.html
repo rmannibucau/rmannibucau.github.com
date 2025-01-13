@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Junit5, @CsvSource and escaping</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,150 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="junit5-csvsource-escaping-html-container" class="container page-content junit5-csvsource-escaping-html is-blog">
+                        <div class="page-header">
+                <h1>Junit5, @CsvSource and escaping</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-03-06</span>, <span class="metadata-readingtime">3 min and 4 sec read</span></p>
+</div>
+<p>JUnit 5 API brings as a first citizen templatized tests. Compared to JUnit 4 it has multiple flavors to match simple,&nbsp;powerful and advanced cases as smoothly as possible. Part of that revamping is the&nbsp;<em>@CsvSource</em>&nbsp;API. However this simplification brings for the intermediate case a new challenge: the escaping!</p>
+
+<p>To illustrate it, I will use a case I met recently: JSON data type. High level I want to write a parameterized test where I provide to the test method the input (JSON), the result state (true to mean it was matched, false otherwise) and the expected outputs in case of matching.</p>
+
+<p>Here is the table of the scenarii I want to test:</p>
+
+<table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td><strong>Input</strong></td>
+			<td><strong>Matching result</strong></td>
+			<td><strong>Type output</strong></td>
+			<td><strong>Data output</strong></td>
+		</tr>
+		<tr>
+			<td>{&quot;type&quot;: &quot;STATE&quot;, &quot;value&quot;: {}}</td>
+			<td>true</td>
+			<td>STATE</td>
+			<td>{}</td>
+		</tr>
+		<tr>
+			<td>{&quot;type&quot;: &quot;RECORD&quot;, &quot;record&quot;: {&quot;name&quot;:&quot;foo&quot;}}</td>
+			<td>true</td>
+			<td>RECORD</td>
+			<td>[&quot;name&quot;:&quot;foo&quot;}</td>
+		</tr>
+		<tr>
+			<td>dddesdd</td>
+			<td>false</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>The test can therefore be written like that in JUnit 5:</p>
+
+<pre>
+<code class="language-java">@ParameterizedTest
+@CsvSource({
+        // matching
+        "{\"type\": \"STATE\", \"value\": {}},true,STATE,{}",
+        "{\"type\": \"RECORD\", \"record\": {\"name\": \"foo\"}},true,RECORD,{\"name\":\"foo\"}",
+        // no matching
+        "dddesdd,false,,,,"
+})
+void matches(final String line, final boolean isMatched,
+             final String type, final String data) throws IOException {
+    final Optional&lt;Matching&gt; matching = doMatches(line); // tested impl
+    assertEquals(isMatched, matching.isPresent());
+    if (!isMatched) {
+        return; // nothing to match since it didn't match
+    }
+
+    final Matching result = matching.orElseThrow(IllegalArgumentException::new);
+    assertEquals(type, result.getType());
+    assertEquals(data, result.getData());
+}</code></pre>
+
+<p>This implementation is a 1-1 from the previous table mapped to the JUnit 5 API. However it does not work. The reason is as simple as the JSON contains &quot;,&quot; which is the CSV separator. A trivial way to solve it is to move to a&nbsp;<em>@MethodSource</em>&nbsp;and return exactly the structure you want but it breaks a bit the binding of the test and data since you will need two methods for the same test. Another solution which is more relevant for this case is to switch the delimit to something not contained in the test data. Here we can use the &quot;|&quot; for instance:</p>
+
+<pre>
+<code class="language-java">@CsvSource(value = {
+        // matching
+        "{\"type\": \"STATE\", \"value\": {}}|true|STATE|{}",
+        "{\"type\": \"RECORD\", \"record\": {\"name\": \"foo\"}}|true|RECORD|{\"name\":\"foo\"}",
+        // no matching
+        "dddesdd|false||||"
+}, delimiter = '|')</code></pre>
+
+<p>This simple modification will enable the CSV parser of JUnit 5 (univocity one which is shaded in JUnit 5 artifacts) to parse properly our strings and inject the right values in our test method.</p>
+
+<p>You can use the same trick for string literals (quoted strings), the escape character is &quot;&#39;&quot; - simple quote - but this one&nbsp;is currently hardcoded so don&#39;t try to change it. You can wonder why previous example works if the quote escape character is &quot;&#39;&quot; and my JSON only contains java string escaping and not &quot;&#39;\&quot;&quot;? This is because the default (hardcoded here again) CSV string character is &quot;&#39;&quot; as well. In other words you can use that:</p>
+
+<pre>
+<code class="language-java">'This is a string with, separator','this is ''another'' one',this one is,split</code></pre>
+
+<p>To actually map this data table:</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td>This is a string with, separator</td>
+			<td>this is &#39;another&#39; one</td>
+			<td>this one is</td>
+			<td>split</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Here we are, we managed to put JSON in a <em>@CsvSource </em>and saw how to inject almost any t-uples primitives through a parameterized test of JUnit 5. This really enables to concentrate on test data, limiting a lot the boilerplate to write to create such tests which is key to have a good quality. It is then trivial to enrich that with production cases and debug them very simply and quickly.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jsonp-google-httpclient.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//jlink-your-java-image-before-putting-it-into-docker-part-3-of-3.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

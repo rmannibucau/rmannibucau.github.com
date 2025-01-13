@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to use CXF Search extension and JPA</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,184 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="cxf-search-extension-html-container" class="container page-content cxf-search-extension-html is-blog">
+                        <div class="page-header">
+                <h1>How to use CXF Search extension and JPA</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-06-15</span>, <span class="metadata-readingtime">3 min and 51 sec read</span></p>
+</div>
+<p>CXF is well known for being a JAXWS and JAXRS implementation but it comes with a complete ecosystem. Some part of it are complete products like Fediz but others are just libraries making the development easier.</p>
+
+<p>One of these libraries is cxf search. It allows to convert a http query parameter in a backend query.</p>
+
+<p>Here is the example we&#39;ll use in this post: we have users, a user is an id, a name and an age. Here is a sample dataset:</p>
+
+<pre>
+<code class="language-json">[
+  {
+    age: 39,
+    id: 2,
+    name: "Matthew"
+  },
+  {
+    age: 30,
+    id: 1,
+    name: "Romain"
+  }
+]</code></pre>
+
+<p>What cxf search will allows us is to convert automatically this request:</p>
+
+<pre>
+<code>GET http://localhost:8080/find?_search=name==Romain</code></pre>
+
+<p>To</p>
+
+<pre>
+<code class="language-json">[
+  {
+    age: 30,
+    id: 1,
+    name: "Romain"
+  }
+]</code></pre>
+
+<p>or&nbsp;</p>
+
+<pre>
+<code>GET http://localhost:8080/find?_search=name==Romain;age==25</code></pre>
+
+<p>to</p>
+
+<pre>
+<code class="language-json">[
+]</code></pre>
+
+<p>The syntax support is configurable, I&#39;ll not detail everything here but you can use any query parameter instead of the&nbsp;<em>_search</em>&nbsp;default one to build the backend query, you can control if you want to manage the encoding, which time format you use, define aliases for nested properties of your model graph etc... For this post I&#39;ll keep the default syntax (<em>_search</em>&nbsp;or&nbsp;<em>_s</em>&nbsp;query parameter but it is common to use&nbsp;<em>q</em>&nbsp;or&nbsp;<em>query</em>&nbsp;as alias).</p>
+
+<p>Now we know what we want to do and the question is how?</p>
+
+<p>Overall goal is:</p>
+
+<pre>
+<code class="language-java">@GET
+@Produces(MediaType.APPLICATION_JSON)
+public List&lt;User&gt; find(/*params to get the query*/) {
+    // parse the query and return the list of matching users
+}</code></pre>
+
+<p>Side note: in real life you would wrap the list in a&nbsp;<em>Page</em>&nbsp;wrapper and handle pagination but once we&#39;ll be at the end of this post it would be as easy as adding the wrapper and calling another method so I&#39;ll not add it now to try to keep it simple.</p>
+
+<p>Question is how to parse the query? Do I need to implement a language? Do I need to map this language on JPA then?</p>
+
+<p>This is the purpose of cxf search (except it handles more than just JPA).</p>
+
+<p>First let&#39;s add the right dependency to get cxf search:</p>
+
+<pre>
+<code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+  &lt;artifactId&gt;cxf-rt-rs-extension-search&lt;/artifactId&gt;
+  &lt;version&gt;3.1.11&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+<p>Cxf search relies on a&nbsp;<em>SearchContext</em>&nbsp;which is just a&nbsp;<em>ContextProvider</em>&nbsp;so we need to register it as&nbsp;<em>@Provider</em>. You can either register&nbsp;<em>org.apache.cxf.jaxrs.ext.search.SearchContextProvider</em>&nbsp;or (like in meecrowave context) make it scanned:</p>
+
+<pre>
+<code class="language-java">@Provider
+@Dependent
+public class SearchProvider extends SearchContextProvider
+             implements ContextProvider&lt;SearchContext&gt; {
+}</code></pre>
+
+<p>Now we can inject as a&nbsp;<em>@Context</em>&nbsp;the&nbsp;<em>SearchContext</em>. This class will allow us to build a&nbsp;Condition which represents the parsed query and then, using a visitor pattern, to build our query.</p>
+
+<p>CXF being really nice it also provides a JPA visitor ready to build your query (actually 2, one being criteria builder oriented but we&#39;ll not detail this one here).</p>
+
+<p>The only thing to take care is if there is or not a query, if not you would get null as condition and need to fallback on a custom query (plain find all probably).</p>
+
+<p>Here is one potential implementation:</p>
+
+<pre>
+<code class="language-java">@GET
+@Produces(MediaType.APPLICATION_JSON)
+public List&lt;User&gt; find(@Context final SearchContext searchContext) {
+    final JPATypedQueryVisitor&lt;User&gt; builder = new JPATypedQueryVisitor&lt;User&gt;(em, User.class);
+    final SearchCondition&lt;User&gt; condition = searchContext.getCondition(User.class);
+    if (condition != null) {
+        condition.accept(builder);
+        return builder.getQuery().getResultList();
+    }
+    return em.createQuery("select u from User u order by u.name", User.class).getResultList();
+}</code></pre>
+
+<p>Not that hard right? That is all we need (the fallback would likely need a named query to be more elegant but this is already functional).</p>
+
+<p>Now we can hit that endpoint and previous sample requests will behave as expected.</p>
+
+<p>I spoke earlier of using a&nbsp;<em>Page</em>&nbsp;wrapper, in this case we&#39;ll use the criteria builder visitor which will provide a&nbsp;<em>count()</em>&nbsp;method making the pagination quite easy to handle:</p>
+
+<pre>
+<code class="language-java">@GET
+@Produces(MediaType.APPLICATION_JSON)
+public List&lt;User&gt; find(@Context final SearchContext searchContext) {
+    final JPACriteriaQueryVisitor&lt;User, Long&gt; builder = new JPACriteriaQueryVisitor&lt;User, Long&gt;(em, User.class, Long.class);
+    final SearchCondition&lt;User&gt; condition = searchContext.getCondition(User.class);
+    if (condition != null) {
+        condition.accept(builder);
+        return new Page(builder.getTypedQuery().getResultList(), builder.count());
+    }
+    return new Page(...2 named queries: findAll and countAll...);
+}</code></pre>
+
+<p>And here we are :).</p>
+
+<p>Why is it nice to use this&nbsp;<em>SearchContext</em>&nbsp;as a standard? First because it already handles the &quot;query language&quot; for you, no need to invent a new one. Secondly because it is portable accross backends: CXF provides implementations for lucene, LDAP, HBase,... and allows to extend it to custom backends easily. This means if you provide several microservices you will get a unified API and your consumers will not need to learn a new syntax each time which is quite important for your service acceptance. A nice to have point is also that it speeds up prototyping a lot and allows to expose the full power of your condition classes (which don&#39;t need to be an entity BTW) without having to spend time doing it yourself.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//slack-git-hook.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//meecrowave-custom-cli.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

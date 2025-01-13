@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>How to customize a docker image with Testcontainers</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,212 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="testcontainers-customized-image-html-container" class="container page-content testcontainers-customized-image-html is-blog">
+                        <div class="page-header">
+                <h1>How to customize a docker image with Testcontainers</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2019-11-08</span>, <span class="metadata-readingtime">6 min and 8 sec read</span></p>
+</div>
+<p><a href="https://www.testcontainers.org/" target="_blank">Testcontainers</a>&nbsp;is a great testing tool which enables you to rely on Docker containers to execute your tests. You can use it to get a service (Redis, Postgresql, ....) or directly run your application from a container. Lastly, it is well integrated to JUnit 5 so you get all the testing goodness of that environment :).</p>
+
+<p>However there is a small pitall - not inherent to the library but more a testing need: it does not support out of the box container caching.</p>
+
+<p>Let me take my example to detail that use case. I need to test a Maven plugin in a container because it runs a native command - GraalVM native-image build to be very explicit. Therefore I need to ensure I&#39;m running on a supported architecture and not on the host one to avoid a complex test setup. I don&#39;t want to use a custom image but only &quot;official&quot; ones so I picked&nbsp;<em>maven:3.6.2-jdk-8-slim</em>&nbsp;one as base. However, this image is not sufficient for GraalVM since it misses <em>gcc</em>&nbsp;and <em>libc-dev</em>&nbsp;for example. The fix is trivial, run&nbsp;<em>apt update &amp;&amp; apt install -y gcc libc6-dev zlib1g-dev</em>. However, this command is quick slow and is executed each time the maven container is created.</p>
+
+<p>The obvious fix is to create a local&nbsp;<em>Dockerfile</em>&nbsp;with this&nbsp;<em>RUN</em>&nbsp;command, build it and replace the official maven image by my custom one. But then,&nbsp;I can&#39;t share the project anymore with my project mates.</p>
+
+<p>So, is the only option to push the image on a public repository and not respect the will to not rely on unofficial images which can be corrupted easily?</p>
+
+<p>Not realy. Testcontainers hides an awesome utility in its toolbox: <em>ImageFromDockerfile</em>.</p>
+
+<p>This class enables to build an image from an in memory docker file (or not) and optionally to clean the image once the JVM exists if desired. This means we can create an image on the fly if it does not exists and let the user select if he wants to cache it or delete it once the tests are done. In other words: for people not desiring to keep the cache it will behave almost as before and for others it will avoid the initialization cost of the image :).</p>
+
+<p>Now the concept is clear, let see how to do it. There are two main steps:</p>
+
+<ol>
+	<li>Check the image exists</li>
+	<li>Build the image if missing</li>
+</ol>
+
+<h2>Check the image was already created</h2>
+
+<p>To do that, we can reuse the docker client testcontainers comes with. The only small trick here is to ensure to tag the image properly and not just use&nbsp;<em>latest</em>&nbsp;which will not evolve properly in time if you start to get branches.</p>
+
+<p>Personally I decided to inherit from the base image tag, for instance I would use <em>company/project/maven-test:3.6.2-jdk-8-slim&nbsp;</em>because I use as base image&nbsp;<em>maven:3.6.2-jdk-8-slim.</em>&nbsp;Now if the base image changes in a branch I still have the right cache an the build stays as reproducible as possible - for a docker based one - and will not depend on the developer cache state.</p>
+
+<p>Then the check of the image existance is built-in in the docker client image and is as simple as:</p>
+
+<pre>
+<code class="language-java">// 1
+final String fromImage = System.getProperty("project.container.baseimage", "maven:3.6.2-jdk-8-slim");
+final String tag = fromImage.split(":")[1];
+final String targetImage = "apache/geronimo/arthur/maven-test-base:" + tag;
+
+final DockerClient client = DockerClientFactory.instance().client(); // 2
+try {
+    if (!client.listImagesCmd().withImageNameFilter(targetImage).exec().isEmpty()) { // 3
+        log.info("Found '{}' image, reusing it", targetImage);
+        return targetImage;
+    }
+
+    // 4: todo
+} catch (final InterruptedException ie) {
+    Thread.currentThread().interrupt();
+    throw new IllegalStateException(ie);
+} catch (final ExecutionException e) {
+    throw new IllegalStateException(e);
+}</code></pre>
+
+<ol>
+	<li>We create the tag name based on the reference image,</li>
+	<li>We create a default docker client</li>
+	<li>We use the docker client to check if the image is already built</li>
+	<li>There we will create the image if it does not already exist.</li>
+</ol>
+
+<h2>Create the test image and cache it</h2>
+
+<p>To create an image you have multiple options, the raw idea here, since we have docker client, is to create a client&nbsp;<em>buildImageCmd</em>. However, testcontainers provides a nice wrapper to that command allowing to use an in memory docker file with a great builder DSL.</p>
+
+<p>Therefore, the todo of previous snippet (point 4) can easily be implemented using&nbsp;<em>ImageFromDockerfile</em>&nbsp;class:</p>
+
+<pre>
+<code class="language-java">return new ImageFromDockerfile( // 1
+          targetImage,
+          Boolean.getBoolean("company.project.container.deleteOnExit")) // 2
+        .withDockerfileFromBuilder(builder -&gt;
+            builder.from(fromImage) // 3
+                   .run("apt update &amp;&amp; apt install -y gcc libc6-dev zlib1g-dev") // 4
+                   .label("company.project.environment", "integration-tests") // 5
+        .get(); // 6</code></pre>
+
+<ol>
+	<li>We create an&nbsp;<em>ImageFromDockerfile</em>&nbsp;instance specifying our target image,</li>
+	<li>We ensure user will be able to configure if the image is cached or not (don&#39;t forget to wire the system property in surefire or your test executor),</li>
+	<li>In the Dockerfile builder we specify our base image (official maven one here),</li>
+	<li>We add to the builder the customizations we want (here the gcc installation),</li>
+	<li>Don&#39;t forget to mark the image for a simpler management (here a label marking the environment),</li>
+	<li>And finally we request the image to be built, the returned value is the imageId so fits perfectly our previous logic which returns the image to use.</li>
+</ol>
+
+<h2>Use it with testcontainers</h2>
+
+<p>Integrating with testcontainers is doable through multiple flavors but the simplest will be to create a custom container. Here is a class doing it:</p>
+
+<pre>
+<code class="language-java">public class MavenContainer extends GenericContainer&lt;MavenContainer&gt; {
+    public MavenContainer() {
+        super(findImage()); // 1
+        setWorkingDirectory("/opt/company/project/integration-test"); // 2
+        setCommand("sleep", "infinity"); // 3
+        withFileSystemBind(System.getProperty("company.project.m2.repository"), "/root/.m2/repository"); // 4
+        setNetworkMode(System.getProperty("company.project.container.maven.network", "host")); // 5
+    }
+
+    private static String findImage() { // 6
+        return Optional.of(System.getProperty("company.project.container.maven.image", "auto"))
+                .filter(it -&gt; !"auto".equals(it))
+                .orElseGet(MavenContainer::getOrCreateAutoBaseImage);
+    }
+
+
+    private static String getOrCreateAutoBaseImage() { // 7
+        // ...
+    }
+}</code></pre>
+
+<ol>
+	<li>We create a container from a base image,</li>
+	<li>We ensure the working directory is known, which enables tests to copy files in the directory in a deterministic way,</li>
+	<li>We set a default command which does nothing - will enable the container to be used on demand, ie tests will call&nbsp;<em>container.execInContainer(command)</em>,</li>
+	<li>We mount our local repository in the image container to ensure maven reuses our cache and avoids to download plugins and dependencies at each run,</li>
+	<li>We set the network mode to&nbsp;<em>host</em>&nbsp;to ensure tests can start mock servers usable from the container (like a SSH or FTP server for example),</li>
+	<li>We let the base image be configurable through a system property which only triggers our custom image creation by default, this enables to test custom images very easily by just switching a system property,</li>
+	<li>the&nbsp;<em>getOrCreateAutoBaseImage</em>&nbsp;will host the logic we saw in the two previous part.</li>
+</ol>
+
+<p>Now we have our container, we just need to write our test:</p>
+
+<pre>
+<code class="language-java">@Testcontainers // 1
+class MavenTest {
+    @Container // 2
+    private static final MavenContainer MVN = new MavenContainer();
+
+    @Test
+    void doTest() {
+        MVN.copyFileToContainer( // 3
+            MountableFile.forHostPath(Paths.get("..../pom.xml"),
+            Paths.get(MVN.getWorkingDirectory())resolve("pom.xml"), target);
+
+        // 4
+        final ExecResult build = mvn.execInContainer("mvn", "-e", "package");
+        assertEquals(0, build.getExitCode());
+
+        // 5
+        MVN.execInContainer("rm", "-rf", "pom.xml", "target");
+    }
+}
+</code></pre>
+
+<ol>
+	<li>We mark our test as being a testcontainers test,</li>
+	<li>We define our container and let - through the annotation - testcontainers managing its lifecycle,</li>
+	<li>We copy some pom into the container for this particular test,</li>
+	<li>We execute the tested maven command and assert its output (exit code here but stdout/stderr are available in&nbsp;<em>ExecResult</em>&nbsp;too),</li>
+	<li>We clean up the container (which enables us to reuse the instance without restarting it for this test.</li>
+</ol>
+
+<p>And here we are, we have a custom container, prepared for our test but not recomputed each time we run the test and we can test native behavior or the portability of our execution.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//graalvm-native-image-custom-options-in-custom-features.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//apache-geronimo-arthur.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">

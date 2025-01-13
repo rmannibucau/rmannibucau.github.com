@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>Java 8 Streams and error handling?</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An opiniated IT blogging.">
-    <meta name="author" content="Yupiik Minisite Generator">
+    <meta name="author" content="Romain Manni-Bucau">
     <meta name="generator" content="Yupiik Minisite Generator">
-    <meta name="keywords" content="RManniBucau Blog">
-
+    
     <link rel="shortcut icon" href="https://rmannibucau.github.io//images/favicon.png">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
@@ -101,7 +100,7 @@
     <link rel="stylesheet" href="/css/blog.css?v=1.0.0-SNAPSHOT">
     <link id="theme-style" rel="stylesheet" href="https://rmannibucau.github.io//css/theme.css?v=1.0.0-SNAPSHOT">
 </head>
-<body>
+<body class="blog">
     <header class="header fixed-top">
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -127,93 +126,111 @@
     </header>
 	<div class="page">
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-heading mx-auto">RManniBucau Blog</h1>
-            <div class="page-intro mx-auto">An opiniated IT blogging.</div>
-            <div class="docs-overview py-5">
-                <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-javaeemicroprofile">
-                                        <i class="fab fa-java"></i>
-                                    </span>
-                                    <span class="card-title-text">Java/EE/Microprofile</span>
-                                </h4>
-                                <div class="card-text">
-                                    Java related posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-frontend">
-                                        <i class="fab fa-js"></i>
-                                    </span>
-                                    <span class="card-title-text">Frontend</span>
-                                </h4>
-                                <div class="card-text">
-                                    Frontend development.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/frontend/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-bigdata">
-                                        <i class="fa fa-database"></i>
-                                    </span>
-                                    <span class="card-title-text">Big Data</span>
-                                </h4>
-                                <div class="card-text">
-                                    Big Data technology.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/big-data/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-other">
-                                        <i class="fa fa-random"></i>
-                                    </span>
-                                    <span class="card-title-text">Other</span>
-                                </h4>
-                                <div class="card-text">
-                                    All other posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/category/other/page-1.html"></a>
-                            </div>
-                        </div>
-                    </div>                    <div class="col-12 col-lg-4 py-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">
-                                    <span class="theme-icon-holder card-icon-holder mr-2 category-default">
-                                        <i class="fa fa-blog"></i>
-                                    </span>
-                                    <span class="card-title-text">Blog</span>
-                                </h4>
-                                <div class="card-text">
-                                    All posts.
-                                </div>
-                                <a title="Blog" class="card-link-mask" href="https://rmannibucau.github.io//blog/index.html"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="java-stream-error-handling-html-container" class="container page-content java-stream-error-handling-html is-blog">
+                        <div class="page-header">
+                <h1>Java 8 Streams and error handling?</h1>
+            </div>
+            <div class="page-content-body">
+                <div class="paragraph metadata">
+<p><span class="mr-2 category-javaeemicroprofile"><span class="icon"><i class="fa fa-fab fa-java"></i></span></span>, <span class="metadata-authors"><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></span>, <span class="metadata-published">2017-02-23</span>, <span class="metadata-readingtime">2 min read</span></p>
+</div>
+<p>Java 8 Streams quickly become your best friend but for serious programs you will need some error handling. Streams are not that designed for that and you can quickly use a library to solve that (functional) need like RxJava but for simple applications or small use cases you can desire to avoid to import an external library.</p>
+
+<p>There are multiple ways to solve it not fully relying on the stream but an external state but this is not that elegant in general.</p>
+
+<p>To solve it I used a small class which is my returned payload and added a few stream helper method in there.</p>
+
+<p>To summarize the use case, it is the processing of N items from their identifier and the output is a list of &quot;succeed&quot; identifiers and a list of &quot;failed&quot; identifiers:</p>
+
+<pre>
+<code class="language-java">public class Status {
+    // out state, + getters
+    private Collection&lt;String&gt; succeed = new ArrayList&lt;&gt;();
+    private Collection&lt;String&gt; failed = new ArrayList&lt;&gt;();
+
+    public void onItem(final String id, final Consumer&lt;String&gt; delete) {
+        try {
+            delete.accept(id);
+            succeed.add(id);
+        } catch (final RuntimeException re) {
+            failed.add(id); // in real life store some error message too
+        }
+    }
+
+    public static Status combine(final Status s1, final Status s2) {
+        if (s1 == null) {
+            return s2;
+        }
+        ofNullable(s2.succeed).ifPresent(f -&gt; s1.succeed.addAll(s2.succeed));
+        ofNullable(s2.failed).ifPresent(f -&gt; s1.failed.addAll(s2.failed));
+        return s1;
+    }
+}</code></pre>
+
+<p>Nothing crazy for a java developer:</p>
+
+<ul>
+	<li>the state (attributes) is composed of both list of successful item&nbsp;identifiers and failed ones</li>
+	<li>we have an <em>onItem()</em> delegating the processing of the current identifier to another &quot;method&quot; (<em>Consumer</em>) and handling the success/failure adding the id to the right list</li>
+	<li>and finally&nbsp;<em>combine()</em>&nbsp;is merging together two status in one</li>
+</ul>
+
+<p>Now we have these helpers, the whole trick consists to wrap the lambdas in the&nbsp;<em>onItem()</em>&nbsp;method and if you use parallel streams (or need smething to put in the combiner of&nbsp;<em>collect()</em>&nbsp;then you can rely on the&nbsp;<em>combine()</em>&nbsp;method):</p>
+
+<pre>
+<code class="language-java">@POST
+public Status work(final Input input) {
+    return input.getIds().stream()
+        .collect(
+            Status::new,
+            (status, id) -&gt; status.onItem(id, this::doWork),
+            Status::combine);
+}</code></pre>
+
+<p>Of course this works well for the&nbsp;<em>collect()</em>&nbsp;case and you will likely need to have an&nbsp;<em>onItem()</em>&nbsp;using a&nbsp;<em>Function&lt;&gt;</em>&nbsp;instead of a&nbsp;<em>Consumer&lt;&gt;</em>&nbsp;to handle the&nbsp;<em>map()</em>&nbsp;case but idea is exactly the same: put the state in the <em>Stream&nbsp;</em>and merge it after if needed - that is where <em>collect()</em>&nbsp;is nice since it allows to limit the number of object created in that process.</p>
+                
+
+
+<div class="paragraph blog-categories">
+<p>From the same author:<p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/author/romain-manni-bucau/page-1.html">Romain Manni-Bucau</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="paragraph blog-categories">
+<p>In the same category:</p>
+</div>
+<div class="ulist blog-links blog-categories">
+<ul>
+<li><p><a href="https://rmannibucau.github.io//blog/category/java-e-e-microprofile/page-1.html">Java/EE/Microprofile</a></p></li></ul>
+</div>
+
+
+
+
+
+<div class="ulist blog-links">
+<ul>
+<li class="blog-link-previous"><p><a href="https://rmannibucau.github.io//jms-microprofile-meecrowave-artemis.html">Previous</a></p></li>
+<li class="blog-link-all"><p><a href="https://rmannibucau.github.io//blog/index.html">All posts</a></p></li>
+<li class="blog-link-next"><p><a href="https://rmannibucau.github.io//cxf-and-swagger-integration.html">Next</a></p></li>
+</ul>
+</div>
+
+
+                
             </div>
         </div>
+    <div class="page-navigation-right">
+        <h3>Navigation</h3>
+        <nav class="generated-nav-menu"></nav>
     </div>
-    
     </div>
     <footer class="footer pb-5">
 	    <div class="text-center">
